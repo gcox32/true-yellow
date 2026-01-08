@@ -52,11 +52,14 @@ CheckPikachuFollowingPlayer::
 	ret
 
 SpawnPikachu::
+SpawnMisty::
+SpawnBrock::
+; Unified follower spawn handler - dispatches to appropriate function in banked code
 	ld a, [hl]
 	dec a
 	swap a
 	ldh [hTilePlayerStandingOn], a
-	homecall SpawnPikachu_
+	homecall SpawnFollower_
 	ret
 
 Pikachu_IsInArray::

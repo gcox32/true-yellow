@@ -66,3 +66,13 @@ _PalletTownPlayersHouseSignText::
 _PalletTownRivalsHouseSignText::
 	text "<RIVAL>'s house "
 	done
+
+_PalletTownMistyJoinsText::
+	text "MISTY: Hey there!"
+	line "I heard you got"
+	cont "a #DEX!"
+
+	para "Mind if I tag"
+	line "along? I want to"
+	cont "see new #MON!"
+	done

@@ -27,8 +27,12 @@ _UpdateSprites::
 	ldh a, [hCurrentSpriteOffset]
 	and a
 	jp z, UpdatePlayerSprite
-	cp $f0 ; pikachu
+	cp $f0 ; pikachu (slot 15)
 	jp z, SpawnPikachu
+	cp $e0 ; brock (slot 14)
+	jp z, SpawnBrock
+	cp $d0 ; misty (slot 13)
+	jp z, SpawnMisty
 	ld a, [hl]
 
 UpdateNonPlayerSprite:

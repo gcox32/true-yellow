@@ -103,10 +103,13 @@ wSpriteStateData1::
 ; - E
 ; - F
 wSpritePlayerStateData1::  spritestatedata1 wSpritePlayerStateData1 ; player is struct 0
-; wSprite01StateData1 - wSprite14StateData1
-FOR n, 1, NUM_SPRITESTATEDATA_STRUCTS - 1
+; wSprite01StateData1 - wSprite12StateData1 (map NPCs)
+FOR n, 1, 13
 wSprite{02d:n}StateData1:: spritestatedata1 wSprite{02d:n}StateData1
 ENDR
+; Chain follower sprite state data (reserved slots)
+wSpriteMistyStateData1::   spritestatedata1 wSpriteMistyStateData1   ; misty is struct 13
+wSpriteBrockStateData1::   spritestatedata1 wSpriteBrockStateData1   ; brock is struct 14
 wSpritePikachuStateData1:: spritestatedata1 wSpritePikachuStateData1 ; pikachu is struct 15
 
 ; more data for all sprites on the current map
@@ -130,10 +133,13 @@ wSpriteStateData2::
 ; - E: sprite image base offset (in video ram, player always has value 1, used to compute sprite image index)
 ; - F
 wSpritePlayerStateData2::  spritestatedata2 wSpritePlayerStateData2 ; player is struct 0
-; wSprite01StateData2 - wSprite14StateData2
-FOR n, 1, NUM_SPRITESTATEDATA_STRUCTS - 1
+; wSprite01StateData2 - wSprite12StateData2 (map NPCs)
+FOR n, 1, 13
 wSprite{02d:n}StateData2:: spritestatedata2 wSprite{02d:n}StateData2
 ENDR
+; Chain follower sprite state data (reserved slots)
+wSpriteMistyStateData2::   spritestatedata2 wSpriteMistyStateData2   ; misty is struct 13
+wSpriteBrockStateData2::   spritestatedata2 wSpriteBrockStateData2   ; brock is struct 14
 wSpritePikachuStateData2:: spritestatedata2 wSpritePikachuStateData2 ; pikachu is struct 15
 
 ; The high byte of a pointer to anywhere within wSpriteStateData1 can be incremented
@@ -2067,10 +2073,23 @@ wd472:: db
 wd474:: db
 	ds 4
 wd479:: db
-	ds 24
+
+; Chain Follower variables (using unnamed padding space)
+wFollowerStateStart::
+; Misty (follows Pikachu)
+wMistyOverworldStateFlags:: db
+wMistyFollowCommandBufferSize:: db
+wMistyFollowCommandBuffer:: ds 4  ; 6 bytes total
+; Brock (follows Misty)
+wBrockOverworldStateFlags:: db
+wBrockFollowCommandBufferSize:: db
+wBrockFollowCommandBuffer:: ds 4  ; 6 bytes total
+wFollowerStateEnd::
+	ds 12 ; remaining padding (24 - 12 = 12)
+
 wd492:: db
 	ds 1
-wSurfingMinigameHiScore:: dw ; little-endian BCD
+wSurfingMinigameHiScore:: dw ; little-endian BCD (restored to original)
 	ds 1
 wPrinterSettings:: db
 wUnknownSerialFlag_d499:: db

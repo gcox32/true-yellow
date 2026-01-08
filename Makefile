@@ -1,6 +1,5 @@
 roms := \
-	pokeyellow.gbc \
-	pokeyellow_debug.gbc
+	pokeyellow.gbc
 patches := \
 	pokeyellow.patch
 

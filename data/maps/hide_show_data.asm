@@ -578,5 +578,7 @@ BluesHouseHSCopy: ; unreferenced
 	db BLUES_HOUSE, BLUESHOUSE_DAISY1,   SHOW
 	db BLUES_HOUSE, BLUESHOUSE_DAISY2,   HIDE
 	db BLUES_HOUSE, BLUESHOUSE_TOWN_MAP, SHOW
+; Chain follower spawn points
+	db PALLET_TOWN, PALLETTOWN_MISTY, HIDE ; shown after EVENT_GOT_POKEDEX
 	assert_table_length NUM_HS_OBJECTS
 	db -1, 1, SHOW ; end

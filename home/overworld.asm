@@ -228,7 +228,7 @@ OverworldLoopLessDelay::
 .noCollision
 	ld a, $08
 	ld [wWalkCounter], a
-	callfar Func_fcc08
+	callfar Func_fcc08 ; also calls AppendMistyFollowCommand and AppendBrockFollowCommand
 	jr .moveAhead2
 
 .moveAhead

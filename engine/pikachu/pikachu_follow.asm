@@ -1263,12 +1263,16 @@ Func_fcc08::
 	call Func_fcc42
 	ret c
 	call AppendPikachuFollowCommandToBuffer
+	call AppendMistyFollowCommand
+	call AppendBrockFollowCommand
 	ret
 
 .asm_fcc1b
 	call Func_fcc64
 	ret c
 	call AppendPikachuFollowCommandToBuffer
+	call AppendMistyFollowCommand
+	call AppendBrockFollowCommand
 	ret
 
 Func_fcc23:

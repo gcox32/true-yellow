@@ -3,6 +3,16 @@ PalletTown_Script:
 	jr z, .next
 	SetEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS
 .next
+	; Show Misty after getting pokedex (if not already following)
+	CheckEvent EVENT_GOT_POKEDEX
+	jr z, .skipMisty
+	CheckEvent EVENT_MISTY_FOLLOWING_PLAYER
+	jr nz, .skipMisty
+	; Pokedex obtained but Misty not yet following - show her
+	ld a, HS_PALLET_TOWN_MISTY
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+.skipMisty
 	call EnableAutoTextBoxDrawing
 	ld hl, PalletTown_ScriptPointers
 	ld a, [wPalletTownCurScript]
@@ -224,6 +234,7 @@ PalletTown_TextPointers:
 	dw_const PalletTownOakText,              TEXT_PALLETTOWN_OAK
 	dw_const PalletTownGirlText,             TEXT_PALLETTOWN_GIRL
 	dw_const PalletTownFisherText,           TEXT_PALLETTOWN_FISHER
+	dw_const PalletTownMistyText,            TEXT_PALLETTOWN_MISTY
 	dw_const PalletTownOaksLabSignText,      TEXT_PALLETTOWN_OAKSLAB_SIGN
 	dw_const PalletTownSignText,             TEXT_PALLETTOWN_SIGN
 	dw_const PalletTownPlayersHouseSignText, TEXT_PALLETTOWN_PLAYERSHOUSE_SIGN
@@ -313,4 +324,21 @@ PalletTownPlayersHouseSignText:
 
 PalletTownRivalsHouseSignText:
 	text_far _PalletTownRivalsHouseSignText
+	text_end
+
+PalletTownMistyText:
+	text_asm
+	; Set the event flag so Misty follows from now on
+	SetEvent EVENT_MISTY_FOLLOWING_PLAYER
+	; Hide this NPC object (she becomes a follower sprite instead)
+	ld a, HS_PALLET_TOWN_MISTY
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	; Display text
+	ld hl, .MistyJoinsText
+	call PrintText
+	jp TextScriptEnd
+
+.MistyJoinsText:
+	text_far _PalletTownMistyJoinsText
 	text_end
