@@ -12,7 +12,25 @@ PalletTown_Script:
 	ld a, HS_PALLET_TOWN_MISTY
 	ld [wMissableObjectIndex], a
 	predef ShowObject
+	; Check if player is at trigger coord (runs before any script state)
+	ld hl, .MistyInteractionCoords
+	call ArePlayerCoordsInArray
+	jr nc, .skipMisty
+	; Player is at trigger coordinate - start Misty interaction
+	xor a
+	ldh [hJoyHeld], a
+	ld a, PAD_CTRL_PAD
+	ld [wJoyIgnore], a
+	ld a, PLAYER_DIR_RIGHT
+	ld [wPlayerMovingDirection], a
+	ld a, SCRIPT_PALLETTOWN_MISTY_INTERACTION
+	ld [wPalletTownCurScript], a
+	jr .runScript  ; continue to execute the script, don't return early
+.MistyInteractionCoords
+	dbmapcoord 10, 2  ; Player steps on 10,2 to trigger (Misty is at 11,2)
+	db -1 ; end
 .skipMisty
+.runScript
 	call EnableAutoTextBoxDrawing
 	ld hl, PalletTown_ScriptPointers
 	ld a, [wPalletTownCurScript]
@@ -30,8 +48,10 @@ PalletTown_ScriptPointers:
 	dw_const PalletTownPlayerFollowsOakScript,     SCRIPT_PALLETTOWN_PLAYER_FOLLOWS_OAK
 	dw_const PalletTownDaisyScript,                SCRIPT_PALLETTOWN_DAISY
 	dw_const PalletTownNoopScript,                 SCRIPT_PALLETTOWN_NOOP
+	dw_const PalletTownMistyInteractionScript,     SCRIPT_PALLETTOWN_MISTY_INTERACTION
 
 PalletTownDefaultScript:
+	; Oak intro check (only runs in default script state, before EVENT_FOLLOWED_OAK_INTO_LAB)
 	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB
 	ret nz
 	ld a, [wYCoord]
@@ -326,19 +346,49 @@ PalletTownRivalsHouseSignText:
 	text_far _PalletTownRivalsHouseSignText
 	text_end
 
+PalletTownMistyInteractionScript:
+	; Face player toward Misty
+	ld a, PLAYER_DIR_RIGHT
+	ld [wPlayerMovingDirection], a
+	; Display text (the text handler does the event/hide/initialize)
+	ld a, TEXT_PALLETTOWN_MISTY
+	ldh [hTextID], a
+	call DisplayTextID
+	; Return to default script
+	xor a
+	ld [wJoyIgnore], a
+	ld a, SCRIPT_PALLETTOWN_DEFAULT
+	ld [wPalletTownCurScript], a
+	ret
+
 PalletTownMistyText:
 	text_asm
-	; Set the event flag so Misty follows from now on
+	; This is the fallback text interaction (when talking directly to Misty)
+	; Check if already following
+	CheckEvent EVENT_MISTY_FOLLOWING_PLAYER
+	jr nz, .alreadyFollowing
+	; Display text first (NPC stays visible during dialogue)
+	ld hl, .MistyJoinsText
+	call PrintText
+	; Now set the event flag so Misty follows from now on
 	SetEvent EVENT_MISTY_FOLLOWING_PLAYER
 	; Hide this NPC object (she becomes a follower sprite instead)
 	ld a, HS_PALLET_TOWN_MISTY
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	; Display text
-	ld hl, .MistyJoinsText
+	; Initialize Misty's follower sprite state
+	farcall InitializeMistyFollower
+	jp TextScriptEnd
+
+.alreadyFollowing
+	ld hl, .MistyAlreadyFollowingText
 	call PrintText
 	jp TextScriptEnd
 
 .MistyJoinsText:
 	text_far _PalletTownMistyJoinsText
+	text_end
+
+.MistyAlreadyFollowingText:
+	text_far _PalletTownMistyAlreadyFollowingText
 	text_end

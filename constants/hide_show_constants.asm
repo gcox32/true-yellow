@@ -7,7 +7,8 @@ DEF SHOW EQU $15
 
 	const_def
 	const HS_PALLET_TOWN_OAK               ; 00
-	const HS_LYING_OLD_MAN                 ; 01
+	const HS_PALLET_TOWN_MISTY             ; 01
+	const HS_LYING_OLD_MAN                 ; 02
 	const HS_OLD_MAN_1                     ; 02
 	const HS_OLD_MAN_2                     ; 03
 	const HS_MUSEUM_GUY                    ; 04
@@ -245,5 +246,4 @@ DEF SHOW EQU $15
 	const HS_DAISY_SITTING_COPY            ; EC
 	const HS_DAISY_WALKING_COPY            ; ED
 	const HS_TOWN_MAP_COPY                 ; EE
-	const HS_PALLET_TOWN_MISTY             ; EF
 DEF NUM_HS_OBJECTS EQU const_value

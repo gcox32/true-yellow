@@ -76,3 +76,9 @@ _PalletTownMistyJoinsText::
 	line "along? I want to"
 	cont "see new #MON!"
 	done
+
+_PalletTownMistyAlreadyFollowingText::
+	text "MISTY: I'm already"
+	line "following you!"
+	cont "Let's go!"
+	done

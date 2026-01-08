@@ -35,20 +35,19 @@ ShouldMistySpawn::
 	bit 7, a
 	jr nz, .hide
 
-	; Check event flag
+	; Check event flag (use full 16-bit offset since event is at $9F0)
 	ld hl, wEventFlags
-	ld a, LOW(EVENT_MISTY_FOLLOWING_PLAYER / 8)
-	ld e, a
-	ld d, 0
+	ld de, EVENT_MISTY_FOLLOWING_PLAYER / 8
 	add hl, de
 	ld a, [hl]
 	bit EVENT_MISTY_FOLLOWING_PLAYER % 8, a
 	jr z, .hide
 
 	; Check if Pikachu is spawned (movement status != 0)
-	ld a, [wSpritePikachuStateData1MovementStatus]
-	and a
-	jr z, .hide
+	; TEMPORARILY DISABLED for debugging - uncomment when working
+	; ld a, [wSpritePikachuStateData1MovementStatus]
+	; and a
+	; jr z, .hide
 
 	; Check if not biking/surfing
 	ld a, [wWalkBikeSurfState]
@@ -852,6 +851,68 @@ ComputeBrockFollowCommand:
 .onTop
 	; Already on target
 	scf
+	ret
+
+; =====================================
+; MISTY INITIALIZATION (called from script)
+; =====================================
+
+InitializeMistyFollower::
+; Called when Misty first starts following - clears state and initializes position
+	; Clear state flags (ensures spawn conditions can pass)
+	xor a
+	ld [wMistyOverworldStateFlags], a
+
+	; Clear StateData1 (16 bytes) - note: StateData1 and StateData2 are NOT contiguous
+	ld hl, wSpriteMistyStateData1
+	ld bc, $10
+	xor a
+	call FillMemory
+
+	; Clear StateData2 (16 bytes) - in separate memory page
+	ld hl, wSpriteMistyStateData2
+	ld bc, $10
+	xor a
+	call FillMemory
+
+	; Set sprite picture ID
+	ld a, SPRITE_BRUNETTE_GIRL
+	ld [wSpriteMistyStateData1PictureID], a
+	ld [wSpriteMistyStateData2PictureID], a
+
+	; Set VRAM slot (ImageBaseOffset) - required for sprite to be processed
+	ld a, $3  ; Misty is in VRAM slot 3 (after player=1, pikachu=2)
+	ld [wSpriteMistyStateData2ImageBaseOffset], a
+
+	; Set image index to $ff (will be updated on first spawn)
+	ld a, $ff
+	ld [wSpriteMistyStateData1ImageIndex], a
+
+	; Clear movement status (will be set by InitializeMistyPosition)
+	xor a
+	ld [wSpriteMistyStateData1MovementStatus], a
+
+	; Clear command buffer
+	call ClearMistyFollowCommandBuffer
+
+	; Initialize position (behind Pikachu)
+	call InitializeMistyPosition
+
+	; Set initial image index (same calculation as UpdatePikachuWalkingSprite)
+	; ImageIndex = (ImageBaseOffset - 1) << 4 | FacingDirection | AnimFrameCounter
+	ld a, [wSpriteMistyStateData2ImageBaseOffset]
+	dec a
+	swap a  ; shift left by 4 bits
+	and $f0  ; mask to upper 4 bits
+	ld b, a
+	ld a, [wSpriteMistyStateData1FacingDirection]
+	or b
+	ld [wSpriteMistyStateData1ImageIndex], a
+
+	; Clear anim frame counter
+	xor a
+	ld [wSpriteMistyStateData1AnimFrameCounter], a
+
 	ret
 
 ; =====================================
