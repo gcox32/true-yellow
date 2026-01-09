@@ -338,11 +338,17 @@ UpdateMistyIdleState:
 	ret
 
 .noCommand
-	; Stay in idle, update screen position
+	; Stay in idle, update screen position and facing direction
 	push bc
 	ld bc, wSpriteMistyStateData1
 	farcall InitializeSpriteScreenPosition
 	pop bc
+	
+	; Update facing direction based on position relative to Pikachu
+	call ComputeMistyFacingDirection
+	
+	; Update sprite image index
+	call UpdateMistyWalkingSprite
 	ret
 
 ; =====================================
@@ -402,18 +408,26 @@ UpdateMistyWalking:
 
 	; Walk complete - update map position and return to idle
 	call UpdateMistyMapPosition
-	ld a, 1
-	ld [wSpriteMistyStateData1MovementStatus], a
-
+	
 	; Clear step vectors
 	xor a
 	ld [wSpriteMistyStateData1 + SPRITESTATEDATA1_YSTEPVECTOR], a
 	ld [wSpriteMistyStateData1 + SPRITESTATEDATA1_XSTEPVECTOR], a
+	
+	; Recompute facing direction based on position relative to Pikachu
+	call ComputeMistyFacingDirection
+	
+	; Return to idle state
+	ld a, 1
+	ld [wSpriteMistyStateData1MovementStatus], a
 	ret
 
 .continueWalk
 	; Update screen position during walk
 	call UpdateMistyScreenPosition
+	
+	; Update sprite image index during walk
+	call UpdateMistyWalkingSprite
 	ret
 
 ; =====================================
@@ -567,16 +581,15 @@ UpdateBrockMapPosition:
 ; =====================================
 
 UpdateMistyScreenPosition:
-	; Update Y pixel position
+	; Update Y pixel position (2 pixels per frame)
 	ld a, [wSpriteMistyStateData1 + SPRITESTATEDATA1_YSTEPVECTOR]
-	ld b, a
 	add a ; double for 2 pixels per frame
 	ld b, a
 	ld a, [wSpriteMistyStateData1 + SPRITESTATEDATA1_YPIXELS]
 	add b
 	ld [wSpriteMistyStateData1 + SPRITESTATEDATA1_YPIXELS], a
 
-	; Update X pixel position
+	; Update X pixel position (2 pixels per frame)
 	ld a, [wSpriteMistyStateData1 + SPRITESTATEDATA1_XSTEPVECTOR]
 	add a ; double for 2 pixels per frame
 	ld b, a
@@ -800,6 +813,97 @@ ComputeMistyFollowCommand:
 .onTop
 	; Already on target
 	scf
+	ret
+
+; =====================================
+; MISTY FACING DIRECTION COMPUTATION
+; =====================================
+
+ComputeMistyFacingDirection:
+; Compute facing direction based on Misty's position relative to Pikachu
+; Similar to ComputePikachuFacingDirection but for Misty following Pikachu
+	; Check if there's a command in the buffer
+	ld a, [wMistyFollowCommandBufferSize]
+	cp $ff
+	jr z, .checkPosition
+	and a
+	jr z, .checkPosition
+	
+	; Get the next command and use it to determine facing
+	call GetMistyFollowCommand
+	and a
+	jr z, .checkPosition
+	dec a
+	and $3  ; mask to 0-3 (directions)
+	add a   ; * 2
+	add a   ; * 4 (facing direction offset)
+	jr .setFacing
+
+.checkPosition
+	; No command - compute facing based on relative position
+	; Compare Y coordinates
+	ld a, [wSpritePikachuStateData2MapY]
+	ld b, a
+	ld a, [wSpriteMistyStateData2MapY]
+	cp b
+	jr z, .checkX
+	jr c, .mistyAbovePikachu
+	
+	; Misty is below Pikachu - face up
+	ld a, SPRITE_FACING_UP
+	jr .setFacing
+
+.mistyAbovePikachu
+	; Misty is above Pikachu - face down
+	ld a, SPRITE_FACING_DOWN
+	jr .setFacing
+
+.checkX
+	; Y coords equal - check X
+	ld a, [wSpritePikachuStateData2MapX]
+	ld b, a
+	ld a, [wSpriteMistyStateData2MapX]
+	cp b
+	jr z, .copyPikachuFacing
+	jr c, .mistyLeftOfPikachu
+	
+	; Misty is right of Pikachu - face left
+	ld a, SPRITE_FACING_LEFT
+	jr .setFacing
+
+.mistyLeftOfPikachu
+	; Misty is left of Pikachu - face right
+	ld a, SPRITE_FACING_RIGHT
+	jr .setFacing
+
+.copyPikachuFacing
+	; On same tile - copy Pikachu's facing direction
+	ld a, [wSpritePikachuStateData1FacingDirection]
+
+.setFacing
+	ld [wSpriteMistyStateData1FacingDirection], a
+	ret
+
+; =====================================
+; MISTY WALKING SPRITE UPDATE
+; =====================================
+
+UpdateMistyWalkingSprite:
+; Update sprite image index based on facing direction and animation frame
+; Similar to UpdatePikachuWalkingSprite
+	ld a, [wSpriteMistyStateData2ImageBaseOffset]
+	dec a
+	swap a  ; shift left by 4 bits
+	and $f0  ; mask to upper 4 bits
+	ld b, a
+	ld a, [wSpriteMistyStateData1FacingDirection]
+	or b
+	ld b, a
+	
+	; Add animation frame counter
+	ld a, [wSpriteMistyStateData1AnimFrameCounter]
+	or b
+	ld [wSpriteMistyStateData1ImageIndex], a
 	ret
 
 ; =====================================
