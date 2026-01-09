@@ -23,6 +23,12 @@ PalletTown_Script:
 	ld [wJoyIgnore], a
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
+	; Turn Misty to face left (toward player)
+	ld a, SPRITE_FACING_LEFT
+	ldh [hSpriteFacingDirection], a
+	ld a, PALLETTOWN_MISTY
+	ldh [hSpriteIndex], a
+	call SetSpriteFacingDirectionAndDelay
 	ld a, SCRIPT_PALLETTOWN_MISTY_INTERACTION
 	ld [wPalletTownCurScript], a
 	jr .runScript  ; continue to execute the script, don't return early
