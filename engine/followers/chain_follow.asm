@@ -642,18 +642,27 @@ AppendMistyFollowCommand::
 	call ComputeMistyFollowCommand
 	ret c ; No movement needed
 
-	; Append to buffer
+	; Append to buffer (a = command 1-4)
+	; Buffer size: $ff=empty, 0=1 cmd, 1=2 cmds, 2=3 cmds, 3=4 cmds (full)
 	ld hl, wMistyFollowCommandBufferSize
-	ld b, [hl]
-	inc b
-	cp 4 ; Buffer full check (minimal size to save WRAM)
-	ret nc
-	ld [hl], b
-	ld e, b
+	ld c, a ; save command in c
+	ld a, [hl]
+	cp $ff ; empty?
+	jr z, .addFirst
+	cp 3 ; full? (size 3 = 4 commands)
+	ret nc ; return if full
+	inc a
+	ld [hl], a ; save new size
+	jr .storeCommand
+.addFirst
+	xor a ; size = 0 for first command
+	ld [hl], a
+.storeCommand
+	ld e, a
 	ld d, 0
 	ld hl, wMistyFollowCommandBuffer
 	add hl, de
-	ld [hl], a
+	ld [hl], c ; store command
 	ret
 
 GetMistyFollowCommand:
@@ -714,18 +723,27 @@ AppendBrockFollowCommand::
 	call ComputeBrockFollowCommand
 	ret c ; No movement needed
 
-	; Append to buffer
+	; Append to buffer (a = command 1-4)
+	; Buffer size: $ff=empty, 0=1 cmd, 1=2 cmds, 2=3 cmds, 3=4 cmds (full)
 	ld hl, wBrockFollowCommandBufferSize
-	ld b, [hl]
-	inc b
-	cp 4 ; Buffer full check (minimal size to save WRAM)
-	ret nc
-	ld [hl], b
-	ld e, b
+	ld c, a ; save command in c
+	ld a, [hl]
+	cp $ff ; empty?
+	jr z, .addFirst
+	cp 3 ; full? (size 3 = 4 commands)
+	ret nc ; return if full
+	inc a
+	ld [hl], a ; save new size
+	jr .storeCommand
+.addFirst
+	xor a ; size = 0 for first command
+	ld [hl], a
+.storeCommand
+	ld e, a
 	ld d, 0
 	ld hl, wBrockFollowCommandBuffer
 	add hl, de
-	ld [hl], a
+	ld [hl], c ; store command
 	ret
 
 GetBrockFollowCommand:
