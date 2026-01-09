@@ -77,6 +77,8 @@ SpriteSheetPointerTable:
 	overworld_sprite ChanseySprite, 12          ; SPRITE_CHANSEY
 	overworld_sprite JessieSprite, 12           ; SPRITE_JESSIE
 	overworld_sprite JamesSprite, 12            ; SPRITE_JAMES
+	overworld_sprite MistySprite, 12            ; SPRITE_MISTY
+	overworld_sprite BrockSprite, 12            ; SPRITE_BROCK
 	overworld_sprite PokeBallSprite, 4          ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4            ; SPRITE_FOSSIL
 	overworld_sprite BoulderSprite, 4           ; SPRITE_BOULDER

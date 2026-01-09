@@ -187,7 +187,7 @@ SpawnBrock_::
 InitializeMistyPosition:
 	; Place Misty one tile behind Pikachu
 	; First ensure PictureID and ImageBaseOffset are set (required for sprite to be processed)
-	ld a, SPRITE_BRUNETTE_GIRL
+	ld a, SPRITE_MISTY
 	ld [wSpriteMistyStateData1PictureID], a
 	ld [wSpriteMistyStateData2PictureID], a
 	
@@ -268,7 +268,7 @@ InitializeMistyPosition:
 InitializeBrockPosition:
 	; Place Brock one tile behind Misty
 	; First ensure PictureID and ImageBaseOffset are set (required for sprite to be processed)
-	ld a, SPRITE_HIKER
+	ld a, SPRITE_BROCK
 	ld [wSpriteBrockStateData1PictureID], a
 	ld [wSpriteBrockStateData2PictureID], a
 	
@@ -1353,7 +1353,7 @@ InitializeMistyFollower::
 	call FillMemory
 
 	; Set sprite picture ID
-	ld a, SPRITE_BRUNETTE_GIRL
+	ld a, SPRITE_MISTY
 	ld [wSpriteMistyStateData1PictureID], a
 	ld [wSpriteMistyStateData2PictureID], a
 

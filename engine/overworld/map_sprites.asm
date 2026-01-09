@@ -47,7 +47,7 @@ InitOutsideMapSprites:
 	; Force Pikachu and Misty sprites into first two slots for followers
 	ld a, SPRITE_PIKACHU
 	ld [wSpriteSet], a
-	ld a, SPRITE_BRUNETTE_GIRL
+	ld a, SPRITE_MISTY
 	ld [wSpriteSet + 1], a
 	call LoadMapSpriteTilePatterns
 .skipLoadingSpriteSet
@@ -70,7 +70,7 @@ LoadSpriteSetFromMapHeader:
 	call FillMemory
 	ld a, SPRITE_PIKACHU ; load Pikachu separately
 	ld [wSpriteSet], a
-	ld a, SPRITE_BRUNETTE_GIRL ; load Misty's sprite for chain follower
+	ld a, SPRITE_MISTY ; load Misty's sprite for chain follower
 	ld [wSpriteSet + 1], a
 	ld hl, wSprite01StateData1
 	ld a, 14
