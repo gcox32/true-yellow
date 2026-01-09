@@ -2079,13 +2079,13 @@ wFollowerStateStart::
 ; Misty (follows Pikachu)
 wMistyOverworldStateFlags:: db
 wMistyFollowCommandBufferSize:: db
-wMistyFollowCommandBuffer:: ds 4  ; 6 bytes total
+wMistyFollowCommandBuffer:: ds 8  ; 10 bytes total
 ; Brock (follows Misty)
 wBrockOverworldStateFlags:: db
 wBrockFollowCommandBufferSize:: db
-wBrockFollowCommandBuffer:: ds 4  ; 6 bytes total
+wBrockFollowCommandBuffer:: ds 8  ; 10 bytes total
 wFollowerStateEnd::
-	ds 12 ; remaining padding (24 - 12 = 12)
+	ds 4 ; remaining padding (24 - 20 = 4)
 
 wd492:: db
 	ds 1

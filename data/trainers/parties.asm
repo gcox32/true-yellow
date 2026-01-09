@@ -652,7 +652,8 @@ BrunoData:
 	db $FF, 53, ONIX, 55, HITMONCHAN, 55, HITMONLEE, 56, ONIX, 58, MACHAMP, 0
 
 BrockData:
-	db $FF, 10, GEODUDE, 12, ONIX, 0
+	; db $FF, 10, GEODUDE, 12, ONIX, 0
+	db $FF, 2, PIDGEY, 0 ; temp for testing
 
 MistyData:
 	db $FF, 18, STARYU, 21, STARMIE, 0
