@@ -2,8 +2,10 @@ PewterGym_Script:
 	ld hl, wCurrentMapScriptFlags
 	bit BIT_CUR_MAP_LOADED_2, [hl]
 	res BIT_CUR_MAP_LOADED_2, [hl]
-	call nz, .LoadNames
-	call nz, .CheckHideBrock
+	jr z, .skipMapLoadInit
+	call .LoadNames
+	call .CheckHideBrock
+.skipMapLoadInit
 	call EnableAutoTextBoxDrawing
 	ld hl, PewterGymTrainerHeaders
 	ld de, PewterGym_ScriptPointers
