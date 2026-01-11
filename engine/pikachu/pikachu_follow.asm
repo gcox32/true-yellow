@@ -1255,6 +1255,16 @@ CheckAbsoluteValueLessThan2:
 	ret
 
 Func_fcc08::
+	; Record player's current position to trail (for Misty/Brock followers)
+	; Must do this before player moves, so their current position becomes trail history
+	ld a, [wYCoord]
+	add 4
+	ld b, a
+	ld a, [wXCoord]
+	add 4
+	ld c, a
+	call RecordPlayerPositionToTrail
+
 	call Func_fcc23
 	ret nc
 	ld a, [wMovementFlags]
@@ -1263,16 +1273,12 @@ Func_fcc08::
 	call Func_fcc42
 	ret c
 	call AppendPikachuFollowCommandToBuffer
-	call AppendMistyFollowCommand
-	call AppendBrockFollowCommand
 	ret
 
 .asm_fcc1b
 	call Func_fcc64
 	ret c
 	call AppendPikachuFollowCommandToBuffer
-	call AppendMistyFollowCommand
-	call AppendBrockFollowCommand
 	ret
 
 Func_fcc23:

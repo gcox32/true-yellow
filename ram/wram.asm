@@ -2076,16 +2076,18 @@ wd479:: db
 
 ; Chain Follower variables (using unnamed padding space)
 wFollowerStateStart::
-; Misty (follows Pikachu)
+; Position Trail Buffer - stores player's past tile positions
+; Followers read from this to know where to walk
+; trail[0] = where player was 1 step ago (Pikachu's target)
+; trail[1] = where player was 2 steps ago (Misty's target)
+; trail[2] = where player was 3 steps ago (Brock's target)
+wPositionTrailY:: ds 4  ; Y coordinates (map Y + 4)
+wPositionTrailX:: ds 4  ; X coordinates (map X + 4)
+; Follower state flags
 wMistyOverworldStateFlags:: db
-wMistyFollowCommandBufferSize:: db
-wMistyFollowCommandBuffer:: ds 8  ; 10 bytes total
-; Brock (follows Misty)
 wBrockOverworldStateFlags:: db
-wBrockFollowCommandBufferSize:: db
-wBrockFollowCommandBuffer:: ds 8  ; 10 bytes total
 wFollowerStateEnd::
-	ds 4 ; remaining padding (24 - 20 = 4)
+	ds 14 ; remaining padding (24 - 10 = 14)
 
 wd492:: db
 	ds 1

@@ -1,5 +1,6 @@
 ; Chain Follower System - Misty and Brock
-; Misty follows Pikachu, Brock follows Misty
+; Uses Position Trail approach: stores where player WAS for the last N steps
+; Pikachu targets trail[0], Misty targets trail[1], Brock targets trail[2]
 
 ; =====================================
 ; UNIFIED SPAWN DISPATCHER
@@ -13,6 +14,113 @@ SpawnFollower_::
 	cp $e0 ; brock (slot 14)
 	jp z, SpawnBrock_
 	jp SpawnMisty_ ; misty (slot 13)
+
+; =====================================
+; POSITION TRAIL MANAGEMENT
+; =====================================
+; The position trail stores where the player WAS for the last 4 steps.
+; When player moves, we shift the trail and record their previous position.
+; Each follower targets a specific offset in the trail.
+
+RecordPlayerPositionToTrail::
+; Called when player completes a step - shifts trail and records previous position
+; Should be called BEFORE player position is updated, or with the old position
+; Input: b = old Y position (map coords + 4), c = old X position (map coords + 4)
+	; Shift trail entries: [3] <- [2] <- [1] <- [0]
+	ld a, [wPositionTrailY + 2]
+	ld [wPositionTrailY + 3], a
+	ld a, [wPositionTrailX + 2]
+	ld [wPositionTrailX + 3], a
+
+	ld a, [wPositionTrailY + 1]
+	ld [wPositionTrailY + 2], a
+	ld a, [wPositionTrailX + 1]
+	ld [wPositionTrailX + 2], a
+
+	ld a, [wPositionTrailY + 0]
+	ld [wPositionTrailY + 1], a
+	ld a, [wPositionTrailX + 0]
+	ld [wPositionTrailX + 1], a
+
+	; Store new position at trail[0]
+	ld a, b
+	ld [wPositionTrailY + 0], a
+	ld a, c
+	ld [wPositionTrailX + 0], a
+	ret
+
+InitializePositionTrail::
+; Initialize trail with positions behind the player
+; Creates a line of positions extending behind player based on facing direction
+	; Get player's current position
+	ld a, [wYCoord]
+	add 4
+	ld b, a
+	ld a, [wXCoord]
+	add 4
+	ld c, a
+
+	; Get player's facing direction to determine trail direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	ld d, a  ; save facing direction
+
+	; Fill trail[0] through trail[3] with positions behind player
+	; Each position is one step further behind
+
+	; trail[0] = 1 step behind player (Pikachu's target)
+	call .computeBehindPosition
+	ld a, b
+	ld [wPositionTrailY + 0], a
+	ld a, c
+	ld [wPositionTrailX + 0], a
+
+	; trail[1] = 2 steps behind player (Misty's target)
+	call .computeBehindPosition
+	ld a, b
+	ld [wPositionTrailY + 1], a
+	ld a, c
+	ld [wPositionTrailX + 1], a
+
+	; trail[2] = 3 steps behind player (Brock's target)
+	call .computeBehindPosition
+	ld a, b
+	ld [wPositionTrailY + 2], a
+	ld a, c
+	ld [wPositionTrailX + 2], a
+
+	; trail[3] = 4 steps behind player (spare)
+	call .computeBehindPosition
+	ld a, b
+	ld [wPositionTrailY + 3], a
+	ld a, c
+	ld [wPositionTrailX + 3], a
+	ret
+
+.computeBehindPosition:
+; Compute position one step behind current (b,c) based on facing direction d
+; Modifies b,c to be the position behind
+	ld a, d
+	and a ; SPRITE_FACING_DOWN
+	jr z, .behindDown
+	cp SPRITE_FACING_UP
+	jr z, .behindUp
+	cp SPRITE_FACING_LEFT
+	jr z, .behindLeft
+	; SPRITE_FACING_RIGHT - behind is to the left
+	dec c
+	ret
+.behindDown
+	; Facing down - behind is above (Y-1)
+	dec b
+	ret
+.behindUp
+	; Facing up - behind is below (Y+1)
+	inc b
+	ret
+.behindLeft
+	; Facing left - behind is to the right (X+1)
+	inc c
+	ret
 
 ; =====================================
 ; MISTY FOLLOWER LOGIC
@@ -119,6 +227,8 @@ SpawnMisty_::
 	and a
 	jr nz, .alreadySpawned
 
+	; Fresh spawn (e.g. new map) - reinitialize position trail first
+	call InitializePositionTrail
 	; Initialize Misty's spawn position (behind Pikachu)
 	call InitializeMistyPosition
 
@@ -185,70 +295,37 @@ SpawnBrock_::
 ; =====================================
 
 InitializeMistyPosition:
-	; Place Misty one tile behind Pikachu
+	; Place Misty at trail[1] position (2 steps behind player)
 	; First ensure PictureID and ImageBaseOffset are set (required for sprite to be processed)
 	ld a, SPRITE_MISTY
 	ld [wSpriteMistyStateData1PictureID], a
 	ld [wSpriteMistyStateData2PictureID], a
-	
+
 	; Set VRAM slot (ImageBaseOffset) - required for sprite to be processed
 	ld a, $3  ; Misty is in VRAM slot 3 (after player=1, pikachu=2)
 	ld [wSpriteMistyStateData2ImageBaseOffset], a
-	
-	; Get Pikachu's position
-	ld a, [wSpritePikachuStateData2MapY]
-	ld b, a
-	ld a, [wSpritePikachuStateData2MapX]
-	ld c, a
 
-	; Get Pikachu's facing direction to determine offset
-	ld a, [wSpritePikachuStateData1FacingDirection]
-	and a ; SPRITE_FACING_DOWN
-	jr z, .placeAbove
-	cp SPRITE_FACING_UP
-	jr z, .placeBelow
-	cp SPRITE_FACING_LEFT
-	jr z, .placeRight
-	; SPRITE_FACING_RIGHT - place left
-	dec c
-	jr .setPosition
-
-.placeAbove
-	dec b
-	jr .setPosition
-
-.placeBelow
-	inc b
-	jr .setPosition
-
-.placeRight
-	inc c
-
-.setPosition
-	; Set Misty's position
-	ld a, b
+	; Get position from trail[1] (Misty's target)
+	ld a, [wPositionTrailY + 1]
 	ld [wSpriteMistyStateData2MapY], a
-	ld a, c
+	ld a, [wPositionTrailX + 1]
 	ld [wSpriteMistyStateData2MapX], a
 
 	; Set movement status to 1 (ready)
 	ld a, 1
 	ld [wSpriteMistyStateData1MovementStatus], a
 
-	; Copy Pikachu's facing direction
-	ld a, [wSpritePikachuStateData1FacingDirection]
+	; Copy player's facing direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	ld [wSpriteMistyStateData1FacingDirection], a
-
-	; Clear command buffer
-	call ClearMistyFollowCommandBuffer
 
 	; Initialize screen position
 	push bc
 	ld bc, wSpriteMistyStateData1
 	farcall InitializeSpriteScreenPosition
 	pop bc
-	
-	; Set initial image index (same calculation as UpdatePikachuWalkingSprite)
+
+	; Set initial image index
 	; ImageIndex = (ImageBaseOffset - 1) << 4 | FacingDirection | AnimFrameCounter
 	ld a, [wSpriteMistyStateData2ImageBaseOffset]
 	dec a
@@ -258,7 +335,7 @@ InitializeMistyPosition:
 	ld a, [wSpriteMistyStateData1FacingDirection]
 	or b
 	ld [wSpriteMistyStateData1ImageIndex], a
-	
+
 	ret
 
 ; =====================================
@@ -266,73 +343,37 @@ InitializeMistyPosition:
 ; =====================================
 
 InitializeBrockPosition:
-	; Place Brock one tile behind Misty
+	; Place Brock at trail[2] position (3 steps behind player)
 	; First ensure PictureID and ImageBaseOffset are set (required for sprite to be processed)
 	ld a, SPRITE_BROCK
 	ld [wSpriteBrockStateData1PictureID], a
 	ld [wSpriteBrockStateData2PictureID], a
-	
+
 	; Set VRAM slot (ImageBaseOffset) - required for sprite to be processed
-	; Note: Brock would need a VRAM slot, but since we don't have one reserved yet,
-	; we'll use a slot that's available. For now, we'll need to add Brock to the sprite set.
-	; TODO: Add Brock's sprite to sprite sets and assign proper VRAM slot
-	ld a, $4  ; Temporary VRAM slot (will need proper assignment)
+	ld a, $4  ; Brock is in VRAM slot 4 (after player=1, pikachu=2, misty=3)
 	ld [wSpriteBrockStateData2ImageBaseOffset], a
-	
-	; Get Misty's position
-	ld a, [wSpriteMistyStateData2MapY]
-	ld b, a
-	ld a, [wSpriteMistyStateData2MapX]
-	ld c, a
 
-	; Get Misty's facing direction to determine offset
-	ld a, [wSpriteMistyStateData1FacingDirection]
-	and a ; SPRITE_FACING_DOWN
-	jr z, .placeAbove
-	cp SPRITE_FACING_UP
-	jr z, .placeBelow
-	cp SPRITE_FACING_LEFT
-	jr z, .placeRight
-	; SPRITE_FACING_RIGHT - place left
-	dec c
-	jr .setPosition
-
-.placeAbove
-	dec b
-	jr .setPosition
-
-.placeBelow
-	inc b
-	jr .setPosition
-
-.placeRight
-	inc c
-
-.setPosition
-	; Set Brock's position
-	ld a, b
+	; Get position from trail[2] (Brock's target)
+	ld a, [wPositionTrailY + 2]
 	ld [wSpriteBrockStateData2MapY], a
-	ld a, c
+	ld a, [wPositionTrailX + 2]
 	ld [wSpriteBrockStateData2MapX], a
 
 	; Set movement status to 1 (ready)
 	ld a, 1
 	ld [wSpriteBrockStateData1MovementStatus], a
 
-	; Copy Misty's facing direction
-	ld a, [wSpriteMistyStateData1FacingDirection]
+	; Copy player's facing direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	ld [wSpriteBrockStateData1FacingDirection], a
-
-	; Clear command buffer
-	call ClearBrockFollowCommandBuffer
 
 	; Initialize screen position
 	push bc
 	ld bc, wSpriteBrockStateData1
 	farcall InitializeSpriteScreenPosition
 	pop bc
-	
-	; Set initial image index (same calculation as UpdatePikachuWalkingSprite)
+
+	; Set initial image index
 	; ImageIndex = (ImageBaseOffset - 1) << 4 | FacingDirection | AnimFrameCounter
 	ld a, [wSpriteBrockStateData2ImageBaseOffset]
 	dec a
@@ -342,7 +383,7 @@ InitializeBrockPosition:
 	ld a, [wSpriteBrockStateData1FacingDirection]
 	or b
 	ld [wSpriteBrockStateData1ImageIndex], a
-	
+
 	ret
 
 ; =====================================
@@ -350,87 +391,107 @@ InitializeBrockPosition:
 ; =====================================
 
 UpdateMistyIdleState:
-; Check buffer first (synchronized with player/Pikachu movement)
-; Fall back to real-time computation if buffer empty
-	; Check if there's a command in the buffer
-	ld a, [wMistyFollowCommandBufferSize]
-	cp $ff
-	jr z, .computeRealTime  ; Buffer empty, compute now
+; Check if Misty needs to move toward her trail target (trail[1])
+; Compare current position to target, move if different
+	; Get target position from trail[1]
+	ld a, [wPositionTrailY + 1]
+	ld b, a  ; b = target Y
+	ld a, [wPositionTrailX + 1]
+	ld c, a  ; c = target X
 
-	; Get command from buffer
-	ld hl, wMistyFollowCommandBuffer
-	ld a, [hl]
-	ld b, a  ; Save command
+	; Get Misty's current position
+	ld a, [wSpriteMistyStateData2MapY]
+	ld d, a  ; d = current Y
+	ld a, [wSpriteMistyStateData2MapX]
+	ld e, a  ; e = current X
 
-	; Clear buffer
-	ld hl, wMistyFollowCommandBufferSize
-	ld [hl], $ff
+	; Compare Y coordinates
+	ld a, d
+	cp b
+	jr z, .checkX
+	jr c, .moveDown   ; current Y < target Y, need to move down
+	jr .moveUp        ; current Y > target Y, need to move up
 
-	; Use the buffered command
-	ld a, b
-	jr .processCommand
+.checkX
+	; Y coordinates match, check X
+	ld a, e
+	cp c
+	jr z, .atTarget   ; both match, at target
+	jr c, .moveRight  ; current X < target X, need to move right
+	jr .moveLeft      ; current X > target X, need to move left
 
-.computeRealTime
-	; No buffered command - compute direction now (fallback)
-	call ComputeMistyFollowCommand
-	jr c, .noMovementNeeded  ; carry = already at target
+.moveDown
+	ld a, SPRITE_FACING_DOWN
+	jr .startWalk
+.moveUp
+	ld a, SPRITE_FACING_UP
+	jr .startWalk
+.moveLeft
+	ld a, SPRITE_FACING_LEFT
+	jr .startWalk
+.moveRight
+	ld a, SPRITE_FACING_RIGHT
 
-.processCommand
-
-	; Process movement command (1-4 = normal, 5-8 = fast)
-	ld b, a  ; save command
-	dec a    ; 0-7
-	cp 4
-	jr c, .normalSpeed
-
-	; Fast movement (command 5-8)
-	sub 4    ; convert 5-8 to 0-3 (direction)
-	add a    ; * 2
-	add a    ; * 4 (facing direction offset)
+.startWalk
+	; Set facing direction
 	ld [wSpriteMistyStateData1FacingDirection], a
 
-	; Set movement status to 5 (fast walking)
+	; Calculate Manhattan distance to decide speed
+	; d=current Y, e=current X, b=target Y, c=target X (still in registers)
+	push bc
+	; |target.Y - current.Y|
+	ld a, b
+	sub d
+	jr nc, .yPosMisty
+	cpl
+	inc a
+.yPosMisty
+	ld h, a  ; h = |Y distance|
+	; |target.X - current.X|
+	ld a, c
+	sub e
+	jr nc, .xPosMisty
+	cpl
+	inc a
+.xPosMisty
+	add h  ; a = Manhattan distance
+	pop bc
+
+	; If distance >= 2, use fast walking (status 5, 4 frames)
+	cp 2
+	jr c, .normalWalkMisty
+
+	; Fast walking
 	ld a, 5
 	ld [wSpriteMistyStateData1MovementStatus], a
-
-	; Set walk animation counter (4 frames = faster)
 	ld a, 4
 	ld [wSpriteMistyStateData2WalkAnimationCounter], a
+	jr .doStepMisty
 
-	; Set step vectors based on direction
-	call SetMistyStepVector
-	ret
-
-.normalSpeed
-	; Normal movement (command 1-4)
-	; a is already 0-3
-	add a    ; * 2
-	add a    ; * 4 (facing direction offset)
-	ld [wSpriteMistyStateData1FacingDirection], a
-
-	; Set movement status to 3 (walking)
+.normalWalkMisty
+	; Normal walking (status 3, 8 frames)
 	ld a, 3
 	ld [wSpriteMistyStateData1MovementStatus], a
-
-	; Set walk animation counter (8 frames = normal)
 	ld a, 8
 	ld [wSpriteMistyStateData2WalkAnimationCounter], a
 
+.doStepMisty
 	; Set step vectors based on direction
 	call SetMistyStepVector
+
+	; Update sprite
+	call UpdateMistyWalkingSprite
 	ret
 
-.noMovementNeeded
-	; Stay in idle, update screen position and facing direction
+.atTarget
+	; Already at target position, stay idle
+	; Update screen position in case of scrolling
 	push bc
 	ld bc, wSpriteMistyStateData1
 	farcall InitializeSpriteScreenPosition
 	pop bc
 
-	; Update facing direction based on position relative to Pikachu
-	call ComputeMistyFacingDirection
-
-	; Update sprite image index
+	; Update sprite image
 	call UpdateMistyWalkingSprite
 	ret
 
@@ -439,82 +500,108 @@ UpdateMistyIdleState:
 ; =====================================
 
 UpdateBrockIdleState:
-; Check buffer first (synchronized with player/Pikachu movement)
-; Fall back to real-time computation if buffer empty
-	; Check if there's a command in the buffer
-	ld a, [wBrockFollowCommandBufferSize]
-	cp $ff
-	jr z, .computeRealTime  ; Buffer empty, compute now
+; Check if Brock needs to move toward his trail target (trail[2])
+; Compare current position to target, move if different
+	; Get target position from trail[2]
+	ld a, [wPositionTrailY + 2]
+	ld b, a  ; b = target Y
+	ld a, [wPositionTrailX + 2]
+	ld c, a  ; c = target X
 
-	; Get command from buffer
-	ld hl, wBrockFollowCommandBuffer
-	ld a, [hl]
-	ld b, a  ; Save command
+	; Get Brock's current position
+	ld a, [wSpriteBrockStateData2MapY]
+	ld d, a  ; d = current Y
+	ld a, [wSpriteBrockStateData2MapX]
+	ld e, a  ; e = current X
 
-	; Clear buffer
-	ld hl, wBrockFollowCommandBufferSize
-	ld [hl], $ff
+	; Compare Y coordinates
+	ld a, d
+	cp b
+	jr z, .checkX
+	jr c, .moveDown   ; current Y < target Y, need to move down
+	jr .moveUp        ; current Y > target Y, need to move up
 
-	; Use the buffered command
-	ld a, b
-	jr .processCommand
+.checkX
+	; Y coordinates match, check X
+	ld a, e
+	cp c
+	jr z, .atTarget   ; both match, at target
+	jr c, .moveRight  ; current X < target X, need to move right
+	jr .moveLeft      ; current X > target X, need to move left
 
-.computeRealTime
-	; No buffered command - compute direction now (fallback)
-	call ComputeBrockFollowCommand
-	jr c, .noMovementNeeded  ; carry = already at target
+.moveDown
+	ld a, SPRITE_FACING_DOWN
+	jr .startWalk
+.moveUp
+	ld a, SPRITE_FACING_UP
+	jr .startWalk
+.moveLeft
+	ld a, SPRITE_FACING_LEFT
+	jr .startWalk
+.moveRight
+	ld a, SPRITE_FACING_RIGHT
 
-.processCommand
-
-	; Process movement command (1-4 = normal, 5-8 = fast)
-	ld b, a  ; save command
-	dec a    ; 0-7
-	cp 4
-	jr c, .normalSpeed
-
-	; Fast movement (command 5-8)
-	sub 4    ; convert 5-8 to 0-3 (direction)
-	add a    ; * 2
-	add a    ; * 4 (facing direction offset)
+.startWalk
+	; Set facing direction
 	ld [wSpriteBrockStateData1FacingDirection], a
 
-	; Set movement status to 5 (fast walking)
+	; Calculate Manhattan distance to decide speed
+	; d=current Y, e=current X, b=target Y, c=target X (still in registers)
+	push bc
+	; |target.Y - current.Y|
+	ld a, b
+	sub d
+	jr nc, .yPosBrock
+	cpl
+	inc a
+.yPosBrock
+	ld h, a  ; h = |Y distance|
+	; |target.X - current.X|
+	ld a, c
+	sub e
+	jr nc, .xPosBrock
+	cpl
+	inc a
+.xPosBrock
+	add h  ; a = Manhattan distance
+	pop bc
+
+	; If distance >= 2, use fast walking (status 5, 4 frames)
+	cp 2
+	jr c, .normalWalkBrock
+
+	; Fast walking
 	ld a, 5
 	ld [wSpriteBrockStateData1MovementStatus], a
-
-	; Set walk animation counter (4 frames = faster)
 	ld a, 4
 	ld [wSpriteBrockStateData2WalkAnimationCounter], a
+	jr .doStepBrock
 
-	; Set step vectors based on direction
-	call SetBrockStepVector
-	ret
-
-.normalSpeed
-	; Normal movement (command 1-4)
-	; a is already 0-3
-	add a    ; * 2
-	add a    ; * 4 (facing direction offset)
-	ld [wSpriteBrockStateData1FacingDirection], a
-
-	; Set movement status to 3 (walking)
+.normalWalkBrock
+	; Normal walking (status 3, 8 frames)
 	ld a, 3
 	ld [wSpriteBrockStateData1MovementStatus], a
-
-	; Set walk animation counter (8 frames = normal)
 	ld a, 8
 	ld [wSpriteBrockStateData2WalkAnimationCounter], a
 
+.doStepBrock
 	; Set step vectors based on direction
 	call SetBrockStepVector
+
+	; Update sprite
+	call UpdateBrockWalkingSprite
 	ret
 
-.noMovementNeeded
-	; Stay in idle, update screen position
+.atTarget
+	; Already at target position, stay idle
+	; Update screen position in case of scrolling
 	push bc
 	ld bc, wSpriteBrockStateData1
 	farcall InitializeSpriteScreenPosition
 	pop bc
+
+	; Update sprite image
+	call UpdateBrockWalkingSprite
 	ret
 
 ; =====================================
@@ -809,285 +896,10 @@ UpdateBrockScreenPosition:
 	ret
 
 ; =====================================
-; MISTY COMMAND BUFFER MANAGEMENT
+; MISTY FOLLOW COMMAND COMPUTATION (OBSOLETE)
 ; =====================================
-
-ClearMistyFollowCommandBuffer:
-; Clear command buffer - matches Pikachu's approach
-	push bc
-	ld hl, wMistyFollowCommandBufferSize
-	ld [hl], $ff
-	inc hl
-	ld bc, 8  ; 8-byte buffer
-	xor a
-	call FillMemory
-	pop bc
-	ret
-
-AppendMistyFollowCommand::
-; Called when player moves - compute and store command for Misty
-; This runs at the same time as Pikachu's command, keeping them in sync
-	call ShouldMistySpawn
-	ret nc
-
-	; Compute direction from Misty to target tile (behind Pikachu)
-	call ComputeMistyFollowCommand
-	ret c  ; Already at target, no command needed
-
-	; Store command in buffer
-	ld hl, wMistyFollowCommandBuffer
-	ld [hl], a
-	ld hl, wMistyFollowCommandBufferSize
-	ld [hl], 0  ; Size 0 = 1 command
-	ret
-
-GetMistyFollowCommand:
-; Get and consume command from buffer (LIFO - from end)
-; Matches Pikachu's Func_fcc92 approach
-	ld hl, wMistyFollowCommandBufferSize
-	ld a, [hl]
-	cp $ff
-	jr z, .empty
-	and a
-	jr z, .empty
-	dec [hl]
-	ld e, a
-	ld d, 0
-	ld hl, wMistyFollowCommandBuffer
-	add hl, de
-	inc e
-	ld a, $ff
-.shiftLoop
-	ld d, [hl]
-	ld [hld], a
-	ld a, d
-	dec e
-	jr nz, .shiftLoop
-	and a  ; clear carry
-	ret
-
-.empty
-	scf
-	ret
-
-; =====================================
-; BROCK COMMAND BUFFER MANAGEMENT
-; =====================================
-
-ClearBrockFollowCommandBuffer:
-; Clear command buffer - matches Pikachu's approach
-	push bc
-	ld hl, wBrockFollowCommandBufferSize
-	ld [hl], $ff
-	inc hl
-	ld bc, 8  ; 8-byte buffer
-	xor a
-	call FillMemory
-	pop bc
-	ret
-
-AppendBrockFollowCommand::
-; Called when player moves - compute and store command for Brock
-; This runs at the same time as Pikachu's command, keeping them in sync
-	call ShouldBrockSpawn
-	ret nc
-
-	; Compute direction from Brock to target tile (behind Misty)
-	call ComputeBrockFollowCommand
-	ret c  ; Already at target, no command needed
-
-	; Store command in buffer
-	ld hl, wBrockFollowCommandBuffer
-	ld [hl], a
-	ld hl, wBrockFollowCommandBufferSize
-	ld [hl], 0  ; Size 0 = 1 command
-	ret
-
-GetBrockFollowCommand:
-; Get and consume command from buffer (LIFO - from end)
-; Matches Pikachu's Func_fcc92 approach
-	ld hl, wBrockFollowCommandBufferSize
-	ld a, [hl]
-	cp $ff
-	jr z, .empty
-	and a
-	jr z, .empty
-	dec [hl]
-	ld e, a
-	ld d, 0
-	ld hl, wBrockFollowCommandBuffer
-	add hl, de
-	inc e
-	ld a, $ff
-.shiftLoop
-	ld d, [hl]
-	ld [hld], a
-	ld a, d
-	dec e
-	jr nz, .shiftLoop
-	and a  ; clear carry
-	ret
-
-.empty
-	scf
-	ret
-
-; =====================================
-; MISTY FOLLOW COMMAND COMPUTATION
-; =====================================
-
-ComputeMistyFollowCommand:
-; Compute direction from Misty to the tile BEHIND Pikachu
-; Target tile = Pikachu's position offset by opposite of facing direction
-; Returns: a = command (1-4 normal speed, 5-8 fast speed), carry set if no movement needed
-	; First compute target tile (behind Pikachu)
-	call GetMistyTargetTile
-	; Returns: d = target Y, e = target X
-
-	; Compute distance from Misty to target
-	ld a, [wSpriteMistyStateData2MapY]
-	ld b, a
-	ld a, d
-	sub b  ; a = target.Y - Misty.Y
-	ld b, a  ; b = Y distance to target
-
-	ld a, [wSpriteMistyStateData2MapX]
-	ld c, a
-	ld a, e
-	sub c  ; a = target.X - Misty.X
-	ld c, a  ; c = X distance to target
-
-	; Check if already at target
-	ld a, b
-	or c
-	jr z, .onTarget  ; both distances 0 = at target
-
-	; Need to move toward target
-	; Prioritize the axis with greater distance
-	ld a, b
-	call AbsoluteValue
-	ld d, a  ; d = |Y distance|
-	ld a, c
-	call AbsoluteValue
-	ld e, a  ; e = |X distance|
-
-	; Compare distances - move on axis with greater distance
-	ld a, d
-	cp e
-	jr c, .moveX  ; |Y| < |X|, prioritize X
-	jr z, .moveY  ; equal, default to Y (or could check X)
-	; |Y| > |X|, prioritize Y
-
-.moveY
-	ld a, b  ; Y distance
-	and a
-	jr z, .moveX  ; if Y is 0, must move X
-	bit 7, a
-	jr nz, .moveUp  ; negative = target above Misty
-
-	; Target below Misty - move down
-	ld a, d  ; |Y distance|
-	cp 2
-	jr c, .downNormal
-	ld a, 5  ; fast down
-	and a
-	ret
-.downNormal
-	ld a, 1  ; normal down
-	and a
-	ret
-
-.moveUp
-	; Target above Misty - move up
-	ld a, d  ; |Y distance|
-	cp 2
-	jr c, .upNormal
-	ld a, 6  ; fast up
-	and a
-	ret
-.upNormal
-	ld a, 2  ; normal up
-	and a
-	ret
-
-.moveX
-	ld a, c  ; X distance
-	and a
-	jr z, .onTarget  ; if X is also 0, we're at target
-	bit 7, a
-	jr nz, .moveLeft  ; negative = target left of Misty
-
-	; Target right of Misty - move right
-	ld a, e  ; |X distance|
-	cp 2
-	jr c, .rightNormal
-	ld a, 8  ; fast right
-	and a
-	ret
-.rightNormal
-	ld a, 4  ; normal right
-	and a
-	ret
-
-.moveLeft
-	; Target left of Misty - move left
-	ld a, e  ; |X distance|
-	cp 2
-	jr c, .leftNormal
-	ld a, 7  ; fast left
-	and a
-	ret
-.leftNormal
-	ld a, 3  ; normal left
-	and a
-	ret
-
-.onTarget
-	; At target position, no movement needed
-	scf
-	ret
-
-GetMistyTargetTile:
-; Target the tile Pikachu WILL vacate (his current position)
-; But offset by 1 in the direction Pikachu is moving (based on facing)
-; This way Misty stays 1 tile behind even as Pikachu moves
-; Returns: d = target Y, e = target X
-	ld a, [wSpritePikachuStateData2MapY]
-	ld d, a
-	ld a, [wSpritePikachuStateData2MapX]
-	ld e, a
-
-	; Check Pikachu's facing to determine where "behind" is
-	ld a, [wSpritePikachuStateData1FacingDirection]
-	and a  ; SPRITE_FACING_DOWN (0)
-	jr z, .facingDown
-	cp SPRITE_FACING_UP
-	jr z, .facingUp
-	cp SPRITE_FACING_LEFT
-	jr z, .facingLeft
-	; SPRITE_FACING_RIGHT - behind is to the left (X-1)
-	dec e
-	ret
-.facingDown
-	; Behind is above (Y-1)
-	dec d
-	ret
-.facingUp
-	; Behind is below (Y+1)
-	inc d
-	ret
-.facingLeft
-	; Behind is to the right (X+1)
-	inc e
-	ret
-
-AbsoluteValue:
-; Returns absolute value of a
-	bit 7, a
-	ret z  ; already positive
-	cpl
-	inc a
-	ret
+; NOTE: This section is obsolete - we now use the position trail approach.
+; Followers read their target position from wPositionTrailY/X and move toward it.
 
 ; =====================================
 ; MISTY FACING DIRECTION COMPUTATION
@@ -1183,159 +995,14 @@ UpdateBrockWalkingSprite:
 	ret
 
 ; =====================================
-; BROCK FOLLOW COMMAND COMPUTATION
-; =====================================
-
-ComputeBrockFollowCommand:
-; Compute direction from Brock to the tile BEHIND Misty
-; Target tile = Misty's position offset by opposite of facing direction
-; Returns: a = command (1-4 normal speed, 5-8 fast speed), carry set if no movement needed
-	; First compute target tile (behind Misty)
-	call GetBrockTargetTile
-	; Returns: d = target Y, e = target X
-
-	; Compute distance from Brock to target
-	ld a, [wSpriteBrockStateData2MapY]
-	ld b, a
-	ld a, d
-	sub b  ; a = target.Y - Brock.Y
-	ld b, a  ; b = Y distance to target
-
-	ld a, [wSpriteBrockStateData2MapX]
-	ld c, a
-	ld a, e
-	sub c  ; a = target.X - Brock.X
-	ld c, a  ; c = X distance to target
-
-	; Check if already at target
-	ld a, b
-	or c
-	jr z, .onTarget  ; both distances 0 = at target
-
-	; Need to move toward target
-	; Prioritize the axis with greater distance
-	ld a, b
-	call AbsoluteValue
-	ld d, a  ; d = |Y distance|
-	ld a, c
-	call AbsoluteValue
-	ld e, a  ; e = |X distance|
-
-	; Compare distances - move on axis with greater distance
-	ld a, d
-	cp e
-	jr c, .moveX  ; |Y| < |X|, prioritize X
-	jr z, .moveY  ; equal, default to Y
-	; |Y| > |X|, prioritize Y
-
-.moveY
-	ld a, b  ; Y distance
-	and a
-	jr z, .moveX  ; if Y is 0, must move X
-	bit 7, a
-	jr nz, .moveUp  ; negative = target above Brock
-
-	; Target below Brock - move down
-	ld a, d  ; |Y distance|
-	cp 2
-	jr c, .downNormal
-	ld a, 5  ; fast down
-	and a
-	ret
-.downNormal
-	ld a, 1  ; normal down
-	and a
-	ret
-
-.moveUp
-	; Target above Brock - move up
-	ld a, d  ; |Y distance|
-	cp 2
-	jr c, .upNormal
-	ld a, 6  ; fast up
-	and a
-	ret
-.upNormal
-	ld a, 2  ; normal up
-	and a
-	ret
-
-.moveX
-	ld a, c  ; X distance
-	and a
-	jr z, .onTarget  ; if X is also 0, we're at target
-	bit 7, a
-	jr nz, .moveLeft  ; negative = target left of Brock
-
-	; Target right of Brock - move right
-	ld a, e  ; |X distance|
-	cp 2
-	jr c, .rightNormal
-	ld a, 8  ; fast right
-	and a
-	ret
-.rightNormal
-	ld a, 4  ; normal right
-	and a
-	ret
-
-.moveLeft
-	; Target left of Brock - move left
-	ld a, e  ; |X distance|
-	cp 2
-	jr c, .leftNormal
-	ld a, 7  ; fast left
-	and a
-	ret
-.leftNormal
-	ld a, 3  ; normal left
-	and a
-	ret
-
-.onTarget
-	; At target position, no movement needed
-	scf
-	ret
-
-GetBrockTargetTile:
-; Target the tile BEHIND Misty based on her facing direction
-; This keeps Brock 1 tile behind Misty as she moves
-; Returns: d = target Y, e = target X
-	ld a, [wSpriteMistyStateData2MapY]
-	ld d, a
-	ld a, [wSpriteMistyStateData2MapX]
-	ld e, a
-
-	; Check Misty's facing to determine where "behind" is
-	ld a, [wSpriteMistyStateData1FacingDirection]
-	and a  ; SPRITE_FACING_DOWN (0)
-	jr z, .facingDown
-	cp SPRITE_FACING_UP
-	jr z, .facingUp
-	cp SPRITE_FACING_LEFT
-	jr z, .facingLeft
-	; SPRITE_FACING_RIGHT - behind is to the left (X-1)
-	dec e
-	ret
-.facingDown
-	; Behind is above (Y-1)
-	dec d
-	ret
-.facingUp
-	; Behind is below (Y+1)
-	inc d
-	ret
-.facingLeft
-	; Behind is to the right (X+1)
-	inc e
-	ret
-
-; =====================================
 ; MISTY INITIALIZATION (called from script)
 ; =====================================
 
 InitializeMistyFollower::
 ; Called when Misty first starts following - clears state and initializes position
+	; Initialize position trail first (sets up positions for all followers)
+	call InitializePositionTrail
+
 	; Clear state flags (ensures spawn conditions can pass)
 	xor a
 	ld [wMistyOverworldStateFlags], a
@@ -1369,10 +1036,7 @@ InitializeMistyFollower::
 	xor a
 	ld [wSpriteMistyStateData1MovementStatus], a
 
-	; Clear command buffer
-	call ClearMistyFollowCommandBuffer
-
-	; Initialize position (behind Pikachu)
+	; Initialize position from trail
 	call InitializeMistyPosition
 
 	; Set initial image index (same calculation as UpdatePikachuWalkingSprite)
