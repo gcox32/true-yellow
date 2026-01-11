@@ -626,16 +626,13 @@ UpdateMistyWalking:
 	xor a
 	ld [wSpriteMistyStateData1AnimFrameCounter], a
 
-	; Recompute facing direction based on position relative to Pikachu
-	call ComputeMistyFacingDirection
-
 	; Return to idle state
 	ld a, 1
 	ld [wSpriteMistyStateData1MovementStatus], a
 
-	; Update sprite one more time with standing frame
-	call UpdateMistyWalkingSprite
-	ret
+	; Immediately check for next movement (no 1-frame delay)
+	; This prevents the "step, pause, step, pause" pattern
+	jp UpdateMistyIdleState
 
 .continueWalk
 	; Update animation frame counter for walking animation
@@ -695,9 +692,9 @@ UpdateBrockWalking:
 	ld a, 1
 	ld [wSpriteBrockStateData1MovementStatus], a
 
-	; Update sprite with standing frame
-	call UpdateBrockWalkingSprite
-	ret
+	; Immediately check for next movement (no 1-frame delay)
+	; This prevents the "step, pause, step, pause" pattern
+	jp UpdateBrockIdleState
 
 .continueWalk
 	; Update animation frame counter for walking animation
