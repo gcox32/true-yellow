@@ -79,6 +79,9 @@ PewterGymScriptReceiveTM34:
 	; deactivate gym trainers
 	SetEvent EVENT_BEAT_PEWTER_GYM_TRAINER_0
 
+	; Initialize Brock's follower state (he'll appear when both badges are obtained)
+	farcall InitializeBrockFollower
+
 	jp PewterGymResetScripts
 
 PewterGym_TextPointers:

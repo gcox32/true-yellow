@@ -44,11 +44,13 @@ InitOutsideMapSprites:
 	ld de, wSpriteSet
 	ld bc, wSpriteSetID - wSpriteSet
 	call CopyData ; copy it to wSpriteSet
-	; Force Pikachu and Misty sprites into first two slots for followers
+	; Force Pikachu, Misty, and Brock sprites into first three slots for followers
 	ld a, SPRITE_PIKACHU
 	ld [wSpriteSet], a
 	ld a, SPRITE_MISTY
 	ld [wSpriteSet + 1], a
+	ld a, SPRITE_BROCK
+	ld [wSpriteSet + 2], a
 	call LoadMapSpriteTilePatterns
 .skipLoadingSpriteSet
 	call LoadMapSpritesImageBaseOffset
@@ -62,7 +64,7 @@ LoadSpriteSetFromMapHeader:
 ; for a sprite slot, the picture ID for the sprite is looked up within the
 ; sprite set. The index of the picture ID within the sprite set plus two
 ; (since the Red sprite always has the first VRAM tile pattern slot, the
-; Pikachu sprite reserves the second, and Misty's sprite the third) is the
+; Pikachu sprite reserves the second, Misty's sprite the third, and Brock's sprite the fourth) is the
 ; VRAM tile pattern slot.
 	ld hl, wSpriteSet
 	ld bc, wSpriteSetID - wSpriteSet
@@ -72,6 +74,8 @@ LoadSpriteSetFromMapHeader:
 	ld [wSpriteSet], a
 	ld a, SPRITE_MISTY ; load Misty's sprite for chain follower
 	ld [wSpriteSet + 1], a
+	ld a, SPRITE_BROCK ; load Brock's sprite for chain follower
+	ld [wSpriteSet + 2], a
 	ld hl, wSprite01StateData1
 	ld a, 14
 .storeVRAMSlotsLoop
@@ -262,6 +266,8 @@ LoadMapSpritesImageBaseOffset:
 	ld [wSpritePikachuStateData2ImageBaseOffset], a ; vram slot for Pikachu
 	ld a, $3
 	ld [wSpriteMistyStateData2ImageBaseOffset], a ; vram slot for Misty follower
+	ld a, $4
+	ld [wSpriteBrockStateData2ImageBaseOffset], a ; vram slot for Brock follower
 	ld a, $e
 	ld hl, wSprite01StateData1
 .loop

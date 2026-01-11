@@ -175,7 +175,8 @@ ShouldMistySpawn::
 
 ShouldBrockSpawn::
 ; Returns carry if Brock should spawn
-; Conditions: Has Boulder AND Cascade badges, Misty is visible, not biking/surfing
+; Conditions: Has Boulder badge, Pikachu is visible, not biking/surfing
+; If Misty is also following, Brock will follow behind her in the chain
 	; Check if Brock following flag overrides
 	ld a, [wBrockOverworldStateFlags]
 	bit 5, a
@@ -183,14 +184,14 @@ ShouldBrockSpawn::
 	bit 7, a
 	jr nz, .hide
 
-	; Check if has both Boulder and Cascade badges
+	; Check if has Boulder badge (required to have defeated Brock)
 	ld a, [wObtainedBadges]
-	and (1 << BIT_BOULDERBADGE) | (1 << BIT_CASCADEBADGE)
-	cp (1 << BIT_BOULDERBADGE) | (1 << BIT_CASCADEBADGE)
-	jr nz, .hide
+	bit BIT_BOULDERBADGE, a
+	jr z, .hide
 
-	; Check if Misty is spawned (movement status != 0)
-	ld a, [wSpriteMistyStateData1MovementStatus]
+	; Check if Pikachu is spawned (movement status != 0)
+	; Brock can follow Pikachu directly, or Misty if she's also following
+	ld a, [wSpritePikachuStateData1MovementStatus]
 	and a
 	jr z, .hide
 
@@ -270,6 +271,8 @@ SpawnBrock_::
 	and a
 	jr nz, .alreadySpawned
 
+	; Fresh spawn (e.g. new map) - reinitialize position trail first
+	call InitializePositionTrail
 	; Initialize Brock's spawn position (behind Misty)
 	call InitializeBrockPosition
 
@@ -1080,6 +1083,68 @@ InitializeMistyFollower::
 	; Clear anim frame counter
 	xor a
 	ld [wSpriteMistyStateData1AnimFrameCounter], a
+
+	ret
+
+; =====================================
+; BROCK INITIALIZATION (called from script)
+; =====================================
+
+InitializeBrockFollower::
+; Called when Brock first starts following - clears state and initializes position
+	; Initialize position trail first (sets up positions for all followers)
+	call InitializePositionTrail
+
+	; Clear state flags (ensures spawn conditions can pass)
+	xor a
+	ld [wBrockOverworldStateFlags], a
+
+	; Clear StateData1 (16 bytes) - note: StateData1 and StateData2 are NOT contiguous
+	ld hl, wSpriteBrockStateData1
+	ld bc, $10
+	xor a
+	call FillMemory
+
+	; Clear StateData2 (16 bytes) - in separate memory page
+	ld hl, wSpriteBrockStateData2
+	ld bc, $10
+	xor a
+	call FillMemory
+
+	; Set sprite picture ID
+	ld a, SPRITE_BROCK
+	ld [wSpriteBrockStateData1PictureID], a
+	ld [wSpriteBrockStateData2PictureID], a
+
+	; Set VRAM slot (ImageBaseOffset) - required for sprite to be processed
+	ld a, $4  ; Brock is in VRAM slot 4 (after player=1, pikachu=2, misty=3)
+	ld [wSpriteBrockStateData2ImageBaseOffset], a
+
+	; Set image index to $ff (will be updated on first spawn)
+	ld a, $ff
+	ld [wSpriteBrockStateData1ImageIndex], a
+
+	; Clear movement status (will be set by InitializeBrockPosition)
+	xor a
+	ld [wSpriteBrockStateData1MovementStatus], a
+
+	; Initialize position from trail
+	call InitializeBrockPosition
+
+	; Set initial image index (same calculation as UpdatePikachuWalkingSprite)
+	; ImageIndex = (ImageBaseOffset - 1) << 4 | FacingDirection | AnimFrameCounter
+	ld a, [wSpriteBrockStateData2ImageBaseOffset]
+	dec a
+	swap a  ; shift left by 4 bits
+	and $f0  ; mask to upper 4 bits
+	ld b, a
+	ld a, [wSpriteBrockStateData1FacingDirection]
+	or b
+	ld [wSpriteBrockStateData1ImageIndex], a
+
+	; Clear anim frame counter
+	xor a
+	ld [wSpriteBrockStateData1AnimFrameCounter], a
 
 	ret
 
