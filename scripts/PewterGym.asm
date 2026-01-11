@@ -3,6 +3,7 @@ PewterGym_Script:
 	bit BIT_CUR_MAP_LOADED_2, [hl]
 	res BIT_CUR_MAP_LOADED_2, [hl]
 	call nz, .LoadNames
+	call nz, .CheckHideBrock
 	call EnableAutoTextBoxDrawing
 	ld hl, PewterGymTrainerHeaders
 	ld de, PewterGym_ScriptPointers
@@ -22,6 +23,23 @@ PewterGym_Script:
 
 .LeaderName:
 	db "BROCK@"
+
+.CheckHideBrock:
+	; Hide Brock if he's been defeated (he'll appear as follower instead)
+	; PEWTERGYM_BROCK is the first object (object ID 0), which is sprite 1 (offset $10)
+	CheckEvent EVENT_BEAT_BROCK
+	ret z
+	; Clear the sprite's data to prevent it from rendering
+	ld hl, wSprite01StateData1 + SPRITESTATEDATA1_PICTUREID
+	ld [hl], 0 ; clear picture ID (marks sprite slot as unused)
+	ld hl, wSprite01StateData1 + SPRITESTATEDATA1_MOVEMENTSTATUS
+	ld [hl], 0 ; clear movement status
+	ld hl, wSprite01StateData1 + SPRITESTATEDATA1_IMAGEINDEX
+	ld [hl], $ff ; make sprite invisible
+	; Also clear sprite state data 2 fields
+	ld hl, wSprite01StateData2 + SPRITESTATEDATA2_IMAGEBASEOFFSET
+	ld [hl], 0
+	ret
 
 PewterGymResetScripts:
 	xor a
@@ -78,6 +96,19 @@ PewterGymScriptReceiveTM34:
 
 	; deactivate gym trainers
 	SetEvent EVENT_BEAT_PEWTER_GYM_TRAINER_0
+
+	; Hide Brock from the gym (he'll appear as follower instead)
+	; PEWTERGYM_BROCK is the first object (object ID 0), which is sprite 1 (offset $10)
+	; Clear the sprite's data to prevent it from rendering
+	ld hl, wSprite01StateData1 + SPRITESTATEDATA1_PICTUREID
+	ld [hl], 0 ; clear picture ID (marks sprite slot as unused)
+	ld hl, wSprite01StateData1 + SPRITESTATEDATA1_MOVEMENTSTATUS
+	ld [hl], 0 ; clear movement status
+	ld hl, wSprite01StateData1 + SPRITESTATEDATA1_IMAGEINDEX
+	ld [hl], $ff ; make sprite invisible
+	; Also clear sprite state data 2 fields
+	ld hl, wSprite01StateData2 + SPRITESTATEDATA2_IMAGEBASEOFFSET
+	ld [hl], 0
 
 	; Initialize Brock's follower state (he'll appear when both badges are obtained)
 	farcall InitializeBrockFollower
