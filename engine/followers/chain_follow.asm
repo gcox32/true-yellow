@@ -479,6 +479,21 @@ UpdateMistyIdleState:
 	; Set step vectors based on direction
 	call SetMistyStepVector
 
+	; Update screen position immediately on first frame of walking
+	; This prevents the 1-frame delay that accumulates
+	; Check if fast walking (status 5) or normal (status 3)
+	ld a, [wSpriteMistyStateData1MovementStatus]
+	and $7f
+	cp 5
+	jr z, .fastWalkFirstFrame
+	; Normal walk - 2 pixels
+	call UpdateMistyScreenPosition
+	jr .updateSpriteFirstFrame
+.fastWalkFirstFrame
+	; Fast walk - 4 pixels (call twice)
+	call UpdateMistyScreenPosition
+	call UpdateMistyScreenPosition
+.updateSpriteFirstFrame
 	; Update sprite
 	call UpdateMistyWalkingSprite
 	ret
@@ -588,6 +603,21 @@ UpdateBrockIdleState:
 	; Set step vectors based on direction
 	call SetBrockStepVector
 
+	; Update screen position immediately on first frame of walking
+	; This prevents the 1-frame delay that accumulates
+	; Check if fast walking (status 5) or normal (status 3)
+	ld a, [wSpriteBrockStateData1MovementStatus]
+	and $7f
+	cp 5
+	jr z, .fastWalkFirstFrameBrock
+	; Normal walk - 2 pixels
+	call UpdateBrockScreenPosition
+	jr .updateSpriteFirstFrameBrock
+.fastWalkFirstFrameBrock
+	; Fast walk - 4 pixels (call twice)
+	call UpdateBrockScreenPosition
+	call UpdateBrockScreenPosition
+.updateSpriteFirstFrameBrock
 	; Update sprite
 	call UpdateBrockWalkingSprite
 	ret
