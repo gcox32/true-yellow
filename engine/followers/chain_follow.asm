@@ -28,9 +28,9 @@ RecordPlayerPositionToTrail::
 ; Input: b = old Y position (map coords + 4), c = old X position (map coords + 4)
 
 	; If in exit doorway mode (mode >= 2), advance the mode each step
-	; Mode 2 -> 3 after 1st step (still hidden)
-	; Mode 3 -> 4 after 2nd step (Misty can spawn)
-	; Mode 4 -> 0 after 3rd step (Brock can spawn)
+	; Mode 2 -> 3 after 1st step (still hidden, store door position)
+	; Mode 3 -> 4 after 2nd step (Misty can spawn at door)
+	; Mode 4 -> 0 after 3rd step (Brock can spawn at door)
 	; Mode 1 (enter doorway) is not touched here
 	ld a, [wFollowerDoorwayMode]
 	cp 2
@@ -41,6 +41,11 @@ RecordPlayerPositionToTrail::
 	jr z, .exitMode4
 	jr .noModeChange
 .exitMode2
+	; Store the door position (behind player) before advancing mode
+	; This is where Pikachu currently is / where followers should spawn
+	push bc
+	call .storeDoorPosition
+	pop bc
 	ld a, 3
 	ld [wFollowerDoorwayMode], a
 	jr .noModeChange
@@ -74,6 +79,16 @@ RecordPlayerPositionToTrail::
 	ld [wPositionTrailY + 0], a
 	ld a, c
 	ld [wPositionTrailX + 0], a
+	ret
+
+.storeDoorPosition:
+; Store the door tile position for delayed follower spawning
+; Called when mode transitions from 2 to 3 (first step after exiting building)
+; At this moment, Pikachu is still at the door tile, so just use Pikachu's position
+	ld a, [wSpritePikachuStateData2MapY]
+	ld [wExitDoorwayY], a
+	ld a, [wSpritePikachuStateData2MapX]
+	ld [wExitDoorwayX], a
 	ret
 
 InitializePositionTrail::
@@ -412,7 +427,10 @@ SpawnBrock_::
 ; =====================================
 
 InitializeMistyPosition:
-	; Place Misty at trail[1] position (2 steps behind player)
+	; Place Misty at initial position
+	; If exiting building (wExitDoorwayY != 0), spawn at door tile
+	; Otherwise, spawn at trail[1] position (2 steps behind player)
+
 	; First ensure PictureID and ImageBaseOffset are set (required for sprite to be processed)
 	ld a, SPRITE_MISTY
 	ld [wSpriteMistyStateData1PictureID], a
@@ -422,11 +440,22 @@ InitializeMistyPosition:
 	ld a, $3  ; Misty is in VRAM slot 3 (after player=1, pikachu=2)
 	ld [wSpriteMistyStateData2ImageBaseOffset], a
 
+	; Check if we have a stored door position for exit doorway spawning
+	ld a, [wExitDoorwayY]
+	and a
+	jr z, .useTrailPosition
+	; Use stored door position
+	ld [wSpriteMistyStateData2MapY], a
+	ld a, [wExitDoorwayX]
+	ld [wSpriteMistyStateData2MapX], a
+	jr .positionSet
+.useTrailPosition
 	; Get position from trail[1] (Misty's target)
 	ld a, [wPositionTrailY + 1]
 	ld [wSpriteMistyStateData2MapY], a
 	ld a, [wPositionTrailX + 1]
 	ld [wSpriteMistyStateData2MapX], a
+.positionSet
 
 	; Set movement status to 1 (ready)
 	ld a, 1
@@ -460,7 +489,10 @@ InitializeMistyPosition:
 ; =====================================
 
 InitializeBrockPosition:
-	; Place Brock at trail[2] position (3 steps behind player)
+	; Place Brock at initial position
+	; If exiting building (wExitDoorwayY != 0), spawn at door tile then clear it
+	; Otherwise, spawn at trail[2] position (3 steps behind player)
+
 	; First ensure PictureID and ImageBaseOffset are set (required for sprite to be processed)
 	ld a, SPRITE_BROCK
 	ld [wSpriteBrockStateData1PictureID], a
@@ -470,11 +502,26 @@ InitializeBrockPosition:
 	ld a, $4  ; Brock is in VRAM slot 4 (after player=1, pikachu=2, misty=3)
 	ld [wSpriteBrockStateData2ImageBaseOffset], a
 
+	; Check if we have a stored door position for exit doorway spawning
+	ld a, [wExitDoorwayY]
+	and a
+	jr z, .useTrailPositionBrock
+	; Use stored door position
+	ld [wSpriteBrockStateData2MapY], a
+	ld a, [wExitDoorwayX]
+	ld [wSpriteBrockStateData2MapX], a
+	; Clear the exit doorway position (Brock is the last to spawn there)
+	xor a
+	ld [wExitDoorwayY], a
+	ld [wExitDoorwayX], a
+	jr .positionSetBrock
+.useTrailPositionBrock
 	; Get position from trail[2] (Brock's target)
 	ld a, [wPositionTrailY + 2]
 	ld [wSpriteBrockStateData2MapY], a
 	ld a, [wPositionTrailX + 2]
 	ld [wSpriteBrockStateData2MapX], a
+.positionSetBrock
 
 	; Set movement status to 1 (ready)
 	ld a, 1

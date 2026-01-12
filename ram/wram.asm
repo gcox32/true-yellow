@@ -2087,8 +2087,10 @@ wPositionTrailX:: ds 4  ; X coordinates (map X + 4)
 wMistyOverworldStateFlags:: db
 wBrockOverworldStateFlags:: db
 wFollowerDoorwayMode:: db  ; Set to 1 during warp if Pikachu will be right of player (doorway entry)
+wExitDoorwayY:: db  ; Door tile Y position for delayed follower spawning (0 = not set)
+wExitDoorwayX:: db  ; Door tile X position for delayed follower spawning
 wFollowerStateEnd::
-	ds 13 ; remaining padding (24 - 11 = 13)
+	ds 11 ; remaining padding (24 - 13 = 11)
 
 wd492:: db
 	ds 1
