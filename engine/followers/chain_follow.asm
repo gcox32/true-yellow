@@ -1364,10 +1364,15 @@ TalkToMisty:
 	ld [wSpriteMistyStateData1FacingDirection], a
 	call UpdateMistyWalkingSprite
 
+	; Set up text box display
+	call SetupFollowerTextBox
+
 	; Display text
 	ld hl, MistyFollowerText
 	call PrintText
-	ret
+
+	; Close text display
+	jr CleanupFollowerTextBox
 
 TalkToBrock:
 ; Display Brock's follower dialogue
@@ -1377,10 +1382,48 @@ TalkToBrock:
 	ld [wSpriteBrockStateData1FacingDirection], a
 	call UpdateBrockWalkingSprite
 
+	; Set up text box display
+	call SetupFollowerTextBox
+
 	; Display text
 	ld hl, BrockFollowerText
 	call PrintText
-	ret
+
+	; Fall through to CleanupFollowerTextBox
+
+CleanupFollowerTextBox:
+; Cleanup after displaying follower dialogue
+; This is a simplified version of CloseTextDisplay that properly returns
+	; Move the window off the screen
+	ld a, $90
+	ldh [hWY], a
+	call DelayFrame
+	call LoadGBPal
+	; Reload sprite tile patterns (text tiles overwrote them)
+	call InitMapSprites
+	; Clear font loaded flag
+	ld hl, wFontLoaded
+	res BIT_FONT_LOADED, [hl]
+	; Reload player sprite graphics
+	call LoadPlayerSpriteGraphics
+	; Reload the current map view
+	call LoadCurrentMapView
+	jp UpdateSprites
+
+SetupFollowerTextBox:
+; Set up text box for follower dialogue
+; Must be called before PrintText
+	; hTextID must be non-zero for dialogue box (not start menu)
+	ld a, 1
+	ldh [hTextID], a
+	; Don't skip text box drawing
+	xor a
+	ld [wAutoTextBoxDrawingControl], a
+	; Call DisplayTextIDInit to set up text box
+	ld a, BANK(DisplayTextIDInit)
+	ld b, a
+	ld hl, DisplayTextIDInit
+	jp Bankswitch
 
 MistyFollowerText:
 	text_far _MistyFollowerText
