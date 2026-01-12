@@ -1316,3 +1316,76 @@ InitializeBrockFollower::
 
 ; Note: The farcall to InitializeSpriteScreenPosition requires bc to point
 ; to the sprite's StateData1 base address
+
+; =====================================
+; FOLLOWER INTERACTION - TALKING TO MISTY/BROCK
+; =====================================
+
+IsPlayerTalkingToFollowerOrPikachu::
+; Combined check for talking to Pikachu, Misty, or Brock
+; Called from Func_0ffe via jpfar
+	call IsPlayerTalkingToPikachu
+	; Fall through to check followers
+
+IsPlayerTalkingToFollower::
+; Check if player is talking to Misty or Brock follower
+; Called from Func_0ffe after IsPlayerTalkingToPikachu
+; If talking to a follower, displays their text and clears hSpriteIndex/hTextID
+	ld a, [wd435]
+	and a
+	ret z  ; Return if not a follower sprite interaction
+	ldh a, [hSpriteIndex]
+	cp MISTY_FOLLOWER_SPRITE_INDEX
+	jr z, .talkingToMisty
+	cp BROCK_FOLLOWER_SPRITE_INDEX
+	jr z, .talkingToBrock
+	ret
+
+.talkingToMisty
+	call TalkToMisty
+	jr .clearInteraction
+
+.talkingToBrock
+	call TalkToBrock
+
+.clearInteraction
+	; Clear sprite index and text ID to prevent normal text processing
+	xor a
+	ldh [hSpriteIndex], a
+	ldh [hTextID], a
+	ld [wd435], a
+	ret
+
+TalkToMisty:
+; Display Misty's follower dialogue
+	; Make Misty face the player
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	xor $4  ; opposite direction
+	ld [wSpriteMistyStateData1FacingDirection], a
+	call UpdateMistyWalkingSprite
+
+	; Display text
+	ld hl, MistyFollowerText
+	call PrintText
+	ret
+
+TalkToBrock:
+; Display Brock's follower dialogue
+	; Make Brock face the player
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	xor $4  ; opposite direction
+	ld [wSpriteBrockStateData1FacingDirection], a
+	call UpdateBrockWalkingSprite
+
+	; Display text
+	ld hl, BrockFollowerText
+	call PrintText
+	ret
+
+MistyFollowerText:
+	text_far _MistyFollowerText
+	text_end
+
+BrockFollowerText:
+	text_far _BrockFollowerText
+	text_end

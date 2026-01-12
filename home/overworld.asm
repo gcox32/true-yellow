@@ -1165,9 +1165,9 @@ IsSpriteInFrontOfPlayer2::
 	set BIT_FACE_PLAYER, [hl]
 	ld a, e
 	ldh [hSpriteIndex], a
-	ldh a, [hSpriteIndex] ; possible useless read because a already has the value of the read address
-	cp PIKACHU_SPRITE_INDEX
-	jr nz, .dontwritetowd436
+	; Check if sprite is Pikachu (15), Brock (14), or Misty (13) - i.e., >= 13
+	cp MISTY_FOLLOWER_SPRITE_INDEX
+	jr c, .dontwritetowd436
 	ld a, $FF
 	ld [wd435], a
 .dontwritetowd436
@@ -2137,7 +2137,7 @@ IsSpinning::
 	farjp LoadSpinnerArrowTiles ; spin while moving
 
 Func_0ffe::
-	jpfar IsPlayerTalkingToPikachu
+	jpfar IsPlayerTalkingToFollowerOrPikachu
 
 InitSprites::
 	ld a, [hli]

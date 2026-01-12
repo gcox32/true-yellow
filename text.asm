@@ -252,6 +252,7 @@ INCLUDE "text/CeladonCity.asm"
 INCLUDE "text/FuchsiaCity.asm"
 INCLUDE "text/CinnabarIsland.asm"
 INCLUDE "text/SaffronCity.asm"
+INCLUDE "text/Followers.asm"
 
 INCLUDE "data/text/text_9.asm"
 
