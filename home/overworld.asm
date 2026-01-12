@@ -1237,6 +1237,11 @@ CollisionCheckOnLand::
 	ldh a, [hTextID]
 	and a ; was there a sprite collision?
 	jr z, .noSpriteCollision
+	; Check if colliding with a follower - allow walking through them
+	cp BROCK_FOLLOWER_SPRITE_INDEX
+	jr z, .noSpriteCollision
+	cp MISTY_FOLLOWER_SPRITE_INDEX
+	jr z, .noSpriteCollision
 	cp PIKACHU_SPRITE_INDEX
 	jr nz, .collision
 	call CheckPikachuFollowingPlayer

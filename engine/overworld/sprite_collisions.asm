@@ -203,7 +203,7 @@ DetectCollisionBetweenSprites:
 	ldh a, [hCollidingSpriteAdjustedDistance]
 	sub b ; adjust distance using sprite j's direction
 	jr z, .checkXDistance
-	jr nc, .next ; go to next sprite if distance is still positive after both adjustments
+	jp nc, .next ; go to next sprite if distance is still positive after both adjustments
 
 .checkXDistance
 	inc e
@@ -283,8 +283,23 @@ DetectCollisionBetweenSprites:
 	xor a
 	ld [wd433], a
 	ldh a, [hCollidingSpriteOffset]
-	cp $f
-	jr nz, .asm_4cd9
+	swap a  ; convert index to offset ($0e -> $e0)
+	cp $f0  ; Pikachu (slot 15, offset $f0)
+	jr z, .pikachuCollision
+	cp $e0  ; Brock follower (slot 14, offset $e0)
+	jr z, .followerPassthrough
+	cp $d0  ; Misty follower (slot 13, offset $d0)
+	jr z, .followerPassthrough
+	jr .asm_4cd9
+.followerPassthrough
+	; Skip collision blocking for followers (let player walk through them)
+	; Must increment l 3 times to match what Func_4d0a does, so .asm_4cef
+	; writes to the correct fields (0E/0F) instead of collision data (0C/0D)
+	inc l
+	inc l
+	inc l
+	jr .asm_4cef
+.pikachuCollision
 	call Func_4d0a
 	jr .asm_4cef
 .asm_4cd9
