@@ -1371,6 +1371,16 @@ TalkToMisty:
 	ld hl, MistyFollowerText
 	call PrintText
 
+	; Wait for button press (like DisplayTextID does)
+	call WaitForTextScrollButtonPress
+
+	; Hold text open while A button is held
+.holdTextOpen
+	call Joypad
+	ldh a, [hJoyHeld]
+	bit B_PAD_A, a
+	jr nz, .holdTextOpen
+
 	; Close text display
 	jr CleanupFollowerTextBox
 
@@ -1389,26 +1399,59 @@ TalkToBrock:
 	ld hl, BrockFollowerText
 	call PrintText
 
+	; Wait for button press (like DisplayTextID does)
+	call WaitForTextScrollButtonPress
+
+	; Hold text open while A button is held
+.holdTextOpen
+	call Joypad
+	ldh a, [hJoyHeld]
+	bit B_PAD_A, a
+	jr nz, .holdTextOpen
+
 	; Fall through to CleanupFollowerTextBox
 
 CleanupFollowerTextBox:
 ; Cleanup after displaying follower dialogue
-; This is a simplified version of CloseTextDisplay that properly returns
+; This matches CloseTextDisplay but doesn't switch banks (jpfar's Bankswitch handles that)
+; Note: We're called via jpfar, which uses Bankswitch to save/restore the original bank.
+; We should NOT switch banks ourselves - let Bankswitch handle it.
 	; Move the window off the screen
 	ld a, $90
 	ldh [hWY], a
 	call DelayFrame
 	call LoadGBPal
+	; Disable continuous WRAM to VRAM transfer (critical for graphics integrity)
+	xor a
+	ldh [hAutoBGTransferEnabled], a
+	; Restore sprite facing directions to their original values
+	ld hl, wSprite01StateData2OrigFacingDirection
+	ld c, $0f
+	ld de, $10
+.restoreSpriteFacingDirectionLoop
+	ld a, [hl] ; x#SPRITESTATEDATA2_ORIGFACINGDIRECTION
+	dec h
+	ld [hl], a ; [x#SPRITESTATEDATA1_FACINGDIRECTION]
+	inc h
+	add hl, de
+	dec c
+	jr nz, .restoreSpriteFacingDirectionLoop
 	; Reload sprite tile patterns (text tiles overwrote them)
+	; InitMapSprites uses jpfar so it handles its own bank switching
 	call InitMapSprites
 	; Clear font loaded flag
 	ld hl, wFontLoaded
 	res BIT_FONT_LOADED, [hl]
-	; Reload player sprite graphics
-	call LoadPlayerSpriteGraphics
+	; Reload player sprite graphics (unless flying/warping)
+	; LoadPlayerSpriteGraphics is in home bank, accessible from any bank
+	ld a, [wStatusFlags6]
+	bit BIT_FLY_WARP, a
+	call z, LoadPlayerSpriteGraphics
 	; Reload the current map view
+	; LoadCurrentMapView is in home bank, accessible from any bank
 	call LoadCurrentMapView
-	jp UpdateSprites
+	; Return normally - jpfar's Bankswitch will restore the original bank
+	ret
 
 SetupFollowerTextBox:
 ; Set up text box for follower dialogue
