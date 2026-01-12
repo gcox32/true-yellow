@@ -346,12 +346,21 @@ SetPikachuSpawnBackOutside::
 
 .asm_fc6c1
 	ld [wPikachuSpawnState], a
-	; Set follower doorway mode flag if spawn state is 1 (Pikachu right of player)
+	; Set follower doorway mode based on spawn state:
+	; Mode 1: spawn state 1 (Pikachu right of player) - enter doorway
+	; Mode 2: spawn state 3 (Pikachu behind player) - exit doorway, delayed spawn
 	cp 1
-	ld a, 0
-	jr nz, .notDoorwayBack
+	jr z, .doorwayMode1
+	cp 3
+	jr z, .doorwayMode2
+	xor a
+	jr .setMode
+.doorwayMode1
 	ld a, 1
-.notDoorwayBack
+	jr .setMode
+.doorwayMode2
+	ld a, 2
+.setMode
 	ld [wFollowerDoorwayMode], a
 	ret
 

@@ -26,6 +26,33 @@ RecordPlayerPositionToTrail::
 ; Called when player completes a step - shifts trail and records previous position
 ; Should be called BEFORE player position is updated, or with the old position
 ; Input: b = old Y position (map coords + 4), c = old X position (map coords + 4)
+
+	; If in exit doorway mode (mode >= 2), advance the mode each step
+	; Mode 2 -> 3 after 1st step (still hidden)
+	; Mode 3 -> 4 after 2nd step (Misty can spawn)
+	; Mode 4 -> 0 after 3rd step (Brock can spawn)
+	; Mode 1 (enter doorway) is not touched here
+	ld a, [wFollowerDoorwayMode]
+	cp 2
+	jr z, .exitMode2
+	cp 3
+	jr z, .exitMode3
+	cp 4
+	jr z, .exitMode4
+	jr .noModeChange
+.exitMode2
+	ld a, 3
+	ld [wFollowerDoorwayMode], a
+	jr .noModeChange
+.exitMode3
+	ld a, 4
+	ld [wFollowerDoorwayMode], a
+	jr .noModeChange
+.exitMode4
+	xor a
+	ld [wFollowerDoorwayMode], a
+.noModeChange
+
 	; Shift trail entries: [3] <- [2] <- [1] <- [0]
 	ld a, [wPositionTrailY + 2]
 	ld [wPositionTrailY + 3], a
@@ -192,6 +219,13 @@ InitializePositionTrail::
 ShouldMistySpawn::
 ; Returns carry if Misty should spawn
 ; Conditions: EVENT_MISTY_FOLLOWING_PLAYER is set, Pikachu is visible, not biking/surfing
+	; Check if in exit doorway mode 2 or 3 (delayed spawn - waiting for 2 steps)
+	ld a, [wFollowerDoorwayMode]
+	cp 2
+	jr z, .hide  ; Hide Misty in exit mode 2
+	cp 3
+	jr z, .hide  ; Hide Misty in exit mode 3
+
 	; Check if Misty following flag is set
 	ld a, [wMistyOverworldStateFlags]
 	bit 5, a
@@ -247,6 +281,18 @@ ShouldBrockSpawn::
 ; Returns carry if Brock should spawn
 ; Conditions: Has Boulder badge, Pikachu is visible, not biking/surfing
 ; If Misty is also following, Brock will follow behind her in the chain
+	; Check if in exit doorway mode (delayed spawn - wait for 3 steps after exiting)
+	; Mode 2: waiting for 1st step (hide Misty and Brock)
+	; Mode 3: waiting for 2nd step (hide Misty and Brock)
+	; Mode 4: waiting for 3rd step (hide Brock only)
+	ld a, [wFollowerDoorwayMode]
+	cp 2
+	jr z, .hide  ; Hide Brock in exit mode 2
+	cp 3
+	jr z, .hide  ; Hide Brock in exit mode 3
+	cp 4
+	jr z, .hide  ; Hide Brock in exit mode 4
+
 	; Check if Brock following flag overrides
 	ld a, [wBrockOverworldStateFlags]
 	bit 5, a
