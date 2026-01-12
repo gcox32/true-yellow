@@ -2086,8 +2086,9 @@ wPositionTrailX:: ds 4  ; X coordinates (map X + 4)
 ; Follower state flags
 wMistyOverworldStateFlags:: db
 wBrockOverworldStateFlags:: db
+wFollowerDoorwayMode:: db  ; Set to 1 during warp if Pikachu will be right of player (doorway entry)
 wFollowerStateEnd::
-	ds 14 ; remaining padding (24 - 10 = 14)
+	ds 13 ; remaining padding (24 - 11 = 13)
 
 wd492:: db
 	ds 1

@@ -50,8 +50,17 @@ RecordPlayerPositionToTrail::
 	ret
 
 InitializePositionTrail::
-; Initialize trail with positions behind the player
-; Creates a line of positions extending behind player based on facing direction
+; Initialize trail with positions for followers
+; For doorway scenarios (wFollowerDoorwayMode = 1), uses horizontal positioning
+; Otherwise, creates positions behind player based on facing direction
+
+	; Check if doorway scenario (flag set by SetPikachuSpawn* functions)
+	ld a, [wFollowerDoorwayMode]
+	and a
+	jr nz, .doorwayPositioning
+
+.normalPositioning:
+	; Normal positioning - positions behind player based on facing
 	; Get player's current position
 	ld a, [wYCoord]
 	add 4
@@ -94,6 +103,53 @@ InitializePositionTrail::
 	ld [wPositionTrailY + 3], a
 	ld a, c
 	ld [wPositionTrailX + 3], a
+	ret
+
+.doorwayPositioning:
+; Horizontal positioning for doorway entry (entering inside map)
+; Player at (X, Y), Pikachu at (X+1, Y) (right of player)
+; Arrangement: Brock - Player - Pikachu - Misty
+;   trail[0] = (X+1, Y) - Pikachu target (right of player)
+;   trail[1] = (X+2, Y) - Misty target (right of Pikachu)
+;   trail[2] = (X-1, Y) - Brock target (left of player)
+;   trail[3] = (X-2, Y) - spare (further left)
+
+	ld a, [wYCoord]
+	add 4
+	ld b, a  ; Y coord (same for all in horizontal line)
+	ld a, [wXCoord]
+	add 4
+	ld c, a  ; base X coord (player's X)
+
+	; trail[0] = X+1, Y (Pikachu: right of player)
+	ld a, c
+	inc a
+	ld [wPositionTrailX + 0], a
+	ld a, b
+	ld [wPositionTrailY + 0], a
+
+	; trail[1] = X+2, Y (Misty: right of Pikachu)
+	ld a, c
+	inc a
+	inc a
+	ld [wPositionTrailX + 1], a
+	ld a, b
+	ld [wPositionTrailY + 1], a
+
+	; trail[2] = X-1, Y (Brock: left of player)
+	ld a, c
+	dec a
+	ld [wPositionTrailX + 2], a
+	ld a, b
+	ld [wPositionTrailY + 2], a
+
+	; trail[3] = X-2, Y (spare: further left)
+	ld a, c
+	dec a
+	dec a
+	ld [wPositionTrailX + 3], a
+	ld a, b
+	ld [wPositionTrailY + 3], a
 	ret
 
 .computeBehindPosition:
@@ -242,9 +298,8 @@ SpawnMisty_::
 	and a
 	jr nz, .alreadySpawned
 
-	; Fresh spawn (e.g. new map) - reinitialize position trail first
+	; Fresh spawn (e.g. new map) - initialize position trail and Misty's position
 	call InitializePositionTrail
-	; Initialize Misty's spawn position (behind Pikachu)
 	call InitializeMistyPosition
 
 .alreadySpawned
@@ -285,9 +340,8 @@ SpawnBrock_::
 	and a
 	jr nz, .alreadySpawned
 
-	; Fresh spawn (e.g. new map) - reinitialize position trail first
+	; Fresh spawn (e.g. new map) - initialize position trail and Brock's position
 	call InitializePositionTrail
-	; Initialize Brock's spawn position (behind Misty)
 	call InitializeBrockPosition
 
 .alreadySpawned

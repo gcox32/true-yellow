@@ -232,6 +232,13 @@ SetPikachuSpawnOutside::
 	ld a, $3
 .load
 	ld [wPikachuSpawnState], a
+	; Set follower doorway mode flag if spawn state is 1 (Pikachu right of player)
+	cp 1
+	ld a, 0
+	jr nz, .notDoorway
+	ld a, 1
+.notDoorway
+	ld [wFollowerDoorwayMode], a
 	ret
 
 Pointer_fc64b::
@@ -286,6 +293,13 @@ SetPikachuSpawnWarpPad::
 	ld a, $1
 .load_spawn_state
 	ld [wPikachuSpawnState], a
+	; Set follower doorway mode flag if spawn state is 1 (Pikachu right of player)
+	cp 1
+	ld a, 0
+	jr nz, .notDoorwayWarp
+	ld a, 1
+.notDoorwayWarp
+	ld [wFollowerDoorwayMode], a
 	ret
 
 Pointer_fc68e::
@@ -332,6 +346,13 @@ SetPikachuSpawnBackOutside::
 
 .asm_fc6c1
 	ld [wPikachuSpawnState], a
+	; Set follower doorway mode flag if spawn state is 1 (Pikachu right of player)
+	cp 1
+	ld a, 0
+	jr nz, .notDoorwayBack
+	ld a, 1
+.notDoorwayBack
+	ld [wFollowerDoorwayMode], a
 	ret
 
 SetPikachuOverworldStateFlag2::
