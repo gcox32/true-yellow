@@ -2,7 +2,10 @@ CeruleanGym_Script:
 	ld hl, wCurrentMapScriptFlags
 	bit BIT_CUR_MAP_LOADED_2, [hl]
 	res BIT_CUR_MAP_LOADED_2, [hl]
-	call nz, .LoadNames
+	jr z, .skipMapLoadInit
+	call .LoadNames
+	call .CheckHideMisty
+.skipMapLoadInit
 	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanGymTrainerHeaders
 	ld de, CeruleanGym_ScriptPointers
@@ -21,6 +24,23 @@ CeruleanGym_Script:
 
 .LeaderName:
 	db "MISTY@"
+
+.CheckHideMisty:
+	; Hide Misty if she's been defeated (she'll appear as follower instead)
+	; CERULEANGYM_MISTY is the first object (object ID 0), which is sprite 1 (offset $10)
+	CheckEvent EVENT_BEAT_MISTY
+	ret z
+	; Clear the sprite's data to prevent it from rendering
+	ld hl, wSprite01StateData1 + SPRITESTATEDATA1_PICTUREID
+	ld [hl], 0 ; clear picture ID (marks sprite slot as unused)
+	ld hl, wSprite01StateData1 + SPRITESTATEDATA1_MOVEMENTSTATUS
+	ld [hl], 0 ; clear movement status
+	ld hl, wSprite01StateData1 + SPRITESTATEDATA1_IMAGEINDEX
+	ld [hl], $ff ; make sprite invisible
+	; Also clear sprite state data 2 fields
+	ld hl, wSprite01StateData2 + SPRITESTATEDATA2_IMAGEBASEOFFSET
+	ld [hl], 0
+	ret
 
 CeruleanGymResetScripts:
 	xor a ; SCRIPT_CERULEANGYM_DEFAULT
@@ -68,6 +88,22 @@ CeruleanGymReceiveTM11:
 
 	; deactivate gym trainers
 	SetEvents EVENT_BEAT_CERULEAN_GYM_TRAINER_0, EVENT_BEAT_CERULEAN_GYM_TRAINER_1
+
+	; Hide Misty from the gym (she'll appear as follower instead)
+	; CERULEANGYM_MISTY is the first object (object ID 0), which is sprite 1 (offset $10)
+	; Clear the sprite's data to prevent it from rendering
+	ld hl, wSprite01StateData1 + SPRITESTATEDATA1_PICTUREID
+	ld [hl], 0 ; clear picture ID (marks sprite slot as unused)
+	ld hl, wSprite01StateData1 + SPRITESTATEDATA1_MOVEMENTSTATUS
+	ld [hl], 0 ; clear movement status
+	ld hl, wSprite01StateData1 + SPRITESTATEDATA1_IMAGEINDEX
+	ld [hl], $ff ; make sprite invisible
+	; Also clear sprite state data 2 fields
+	ld hl, wSprite01StateData2 + SPRITESTATEDATA2_IMAGEBASEOFFSET
+	ld [hl], 0
+
+	; Initialize Misty's follower state (she'll appear when following flag is set)
+	farcall InitializeMistyFollower
 
 	jp CeruleanGymResetScripts
 

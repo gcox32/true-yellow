@@ -143,6 +143,20 @@ ShouldMistySpawn::
 	bit 7, a
 	jr nz, .hide
 
+	; Special case: If in Cerulean Gym and haven't beaten Misty yet, hide follower
+	; (Misty should be at her gym leader spot instead)
+	ld a, [wCurMap]
+	cp CERULEAN_GYM
+	jr nz, .notCeruleanGym
+	; We're in Cerulean Gym - check if EVENT_BEAT_MISTY is set
+	ld hl, wEventFlags
+	ld de, EVENT_BEAT_MISTY / 8
+	add hl, de
+	ld a, [hl]
+	bit EVENT_BEAT_MISTY % 8, a
+	jr z, .hide ; If not beaten, hide follower (she's at gym leader spot)
+.notCeruleanGym
+
 	; Check event flag (use full 16-bit offset since event is at $9F0)
 	ld hl, wEventFlags
 	ld de, EVENT_MISTY_FOLLOWING_PLAYER / 8

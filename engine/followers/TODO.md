@@ -12,4 +12,4 @@ downstream effects:
 
 feature:
 - [ ] add standard text to interacting with brock or misty follower (future feature, add text based on game progress, current map etc)
-- [ ] cerulean gym event logic: if not EVENT_BEAT_MISTY, when inside cerulean gym, MISTY should be at her normal gym leader spot, waiting to engage in a battle
+- [x] cerulean gym event logic: if not EVENT_BEAT_MISTY, when inside cerulean gym, MISTY should be at her normal gym leader spot, waiting to engage in a battle
