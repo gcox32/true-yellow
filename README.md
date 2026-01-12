@@ -1,29 +1,28 @@
-# Pokémon Yellow [![Build Status][ci-badge]][ci]
+# Pokémon Yellow - Chain Follower System
 
-This is a disassembly of Pokémon Yellow.
+This is a fork of [pret/pokeyellow](https://github.com/pret/pokeyellow) with a chain follower system that allows Misty and Brock to follow the player.
 
-It builds the following ROMs:
+## Follower System
 
-- Pokemon Yellow (UE) [C][!].gbc  `sha1: cc7d03262ebfaf2f06772c1a480c7d9d5f4a38e1`
-- YELLMONS.GB (debug build) `sha1: d44e96eddfbdad633cbe4e6e64915e9e198974b0`
-- Dmgapse0.h08.patch `sha1: f3346a5559d52c296b8feab0cdbbfb0e250ac161`
+The system implements a **position trail** approach where followers target specific positions in the player's movement history:
 
-To set up the repository, see [**INSTALL.md**](INSTALL.md).
+- **Pikachu** follows 1 step behind (trail[0])
+- **Misty** follows 2 steps behind (trail[1]) - requires `EVENT_MISTY_FOLLOWING_PLAYER`
+- **Brock** follows 3 steps behind (trail[2]) - requires Boulder and Cascade badges
 
+### How It Works
 
-## See also
+When the player moves, their previous position is recorded in a trail. Each follower checks their target position in the trail and moves toward it, creating a smooth chain effect. The system eliminates 1-frame delays to keep followers perfectly synchronized.
 
-- [**Wiki**][wiki] (includes [tutorials][tutorials])
-- [**Symbols**][symbols]
-- [**Tools**][tools]
+### Special Behavior
 
-You can find us on [Discord (pret, #pokered)](https://discord.gg/d5dubZ3).
+- **Cerulean Gym**: Follower Misty is hidden when `EVENT_BEAT_MISTY` is not set, allowing gym leader Misty to appear at her spot. After defeating her, gym leader Misty disappears and follower Misty can appear.
+- **Pewter Gym**: Same logic applies to Brock - he disappears from the gym after being defeated.
 
-For other pret projects, see [pret.github.io](https://pret.github.io/).
+## Building
 
-[wiki]: https://github.com/pret/pokeyellow/wiki
-[tutorials]: https://github.com/pret/pokeyellow/wiki/Tutorials
-[symbols]: https://github.com/pret/pokeyellow/tree/symbols
-[tools]: https://github.com/pret/gb-asm-tools
-[ci]: https://github.com/pret/pokeyellow/actions
-[ci-badge]: https://github.com/pret/pokeyellow/actions/workflows/main.yml/badge.svg
+See [INSTALL.md](INSTALL.md) for setup instructions.
+
+## Credits
+
+Based on [pret/pokeyellow](https://github.com/pret/pokeyellow) - a disassembly of Pokémon Yellow.
