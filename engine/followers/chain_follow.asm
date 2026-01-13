@@ -1461,12 +1461,19 @@ ComputeMistyFacingDirection:
 
 UpdateMistyWalkingSprite:
 ; Update sprite image index based on facing direction and animation frame
-; Similar to UpdatePikachuWalkingSprite
+; When spinning (BIT_SPINNING set), copy player's animation instead
 	ld a, [wSpriteMistyStateData2ImageBaseOffset]
 	dec a
 	swap a  ; shift left by 4 bits
 	and $f0  ; mask to upper 4 bits
 	ld b, a
+
+	; Check if player is spinning - if so, copy player's animation
+	ld a, [wMovementFlags]
+	bit BIT_SPINNING, a
+	jr nz, .copyPlayerMisty
+
+	; Normal: use Misty's facing direction
 	ld a, [wSpriteMistyStateData1FacingDirection]
 	or b
 	ld b, a
@@ -1477,23 +1484,47 @@ UpdateMistyWalkingSprite:
 	ld [wSpriteMistyStateData1ImageIndex], a
 	ret
 
+.copyPlayerMisty
+	; Spinning: copy player's lower 4 bits (facing + anim frame)
+	ld a, [wSpritePlayerStateData1ImageIndex]
+	and $f
+	or b
+	ld [wSpriteMistyStateData1ImageIndex], a
+	ret
+
 ; =====================================
 ; BROCK WALKING SPRITE UPDATE
 ; =====================================
 
 UpdateBrockWalkingSprite:
 ; Update sprite image index based on facing direction and animation frame
+; When spinning (BIT_SPINNING set), copy player's animation instead
 	ld a, [wSpriteBrockStateData2ImageBaseOffset]
 	dec a
 	swap a  ; shift left by 4 bits
 	and $f0  ; mask to upper 4 bits
 	ld b, a
+
+	; Check if player is spinning - if so, copy player's animation
+	ld a, [wMovementFlags]
+	bit BIT_SPINNING, a
+	jr nz, .copyPlayerBrock
+
+	; Normal: use Brock's facing direction
 	ld a, [wSpriteBrockStateData1FacingDirection]
 	or b
 	ld b, a
 
 	; Add animation frame counter
 	ld a, [wSpriteBrockStateData1AnimFrameCounter]
+	or b
+	ld [wSpriteBrockStateData1ImageIndex], a
+	ret
+
+.copyPlayerBrock
+	; Spinning: copy player's lower 4 bits (facing + anim frame)
+	ld a, [wSpritePlayerStateData1ImageIndex]
+	and $f
 	or b
 	ld [wSpriteBrockStateData1ImageIndex], a
 	ret
