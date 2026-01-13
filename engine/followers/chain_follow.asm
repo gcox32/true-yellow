@@ -63,22 +63,38 @@ RecordPlayerPositionToTrail::
 	ld [wPositionTrailY + 3], a
 	ld a, [wPositionTrailX + 2]
 	ld [wPositionTrailX + 3], a
+	ld a, [wMovementTypeTrail + 2]
+	ld [wMovementTypeTrail + 3], a
 
 	ld a, [wPositionTrailY + 1]
 	ld [wPositionTrailY + 2], a
 	ld a, [wPositionTrailX + 1]
 	ld [wPositionTrailX + 2], a
+	ld a, [wMovementTypeTrail + 1]
+	ld [wMovementTypeTrail + 2], a
 
 	ld a, [wPositionTrailY + 0]
 	ld [wPositionTrailY + 1], a
 	ld a, [wPositionTrailX + 0]
 	ld [wPositionTrailX + 1], a
+	ld a, [wMovementTypeTrail + 0]
+	ld [wMovementTypeTrail + 1], a
 
 	; Store new position at trail[0]
 	ld a, b
 	ld [wPositionTrailY + 0], a
 	ld a, c
 	ld [wPositionTrailX + 0], a
+
+	; Store movement type at trail[0] (0=walk, 1=jump)
+	; Check if player is doing a ledge jump
+	ld a, [wMovementFlags]
+	bit BIT_LEDGE_OR_FISHING, a
+	ld a, 0
+	jr z, .notJumping
+	ld a, 1
+.notJumping
+	ld [wMovementTypeTrail + 0], a
 	ret
 
 .storeDoorPosition:
@@ -145,6 +161,13 @@ InitializePositionTrail::
 	ld [wPositionTrailY + 3], a
 	ld a, c
 	ld [wPositionTrailX + 3], a
+
+	; Initialize movement type trail to 0 (walk) for all entries
+	xor a
+	ld [wMovementTypeTrail + 0], a
+	ld [wMovementTypeTrail + 1], a
+	ld [wMovementTypeTrail + 2], a
+	ld [wMovementTypeTrail + 3], a
 	ret
 
 .doorwayPositioning:
@@ -192,6 +215,13 @@ InitializePositionTrail::
 	ld [wPositionTrailX + 3], a
 	ld a, b
 	ld [wPositionTrailY + 3], a
+
+	; Initialize movement type trail to 0 (walk) for all entries
+	xor a
+	ld [wMovementTypeTrail + 0], a
+	ld [wMovementTypeTrail + 1], a
+	ld [wMovementTypeTrail + 2], a
+	ld [wMovementTypeTrail + 3], a
 	ret
 
 .computeBehindPosition:
@@ -371,6 +401,8 @@ SpawnMisty_::
 	jr z, .doWalk
 	cp 5
 	jr z, .doWalk
+	cp 6
+	jr z, .doHop
 
 	; Status 0 or 1 - just update and check commands
 	call UpdateMistyIdleState
@@ -378,6 +410,10 @@ SpawnMisty_::
 
 .doWalk
 	call UpdateMistyWalking
+	ret
+
+.doHop
+	call UpdateMistyHopping
 	ret
 
 ; =====================================
@@ -413,6 +449,8 @@ SpawnBrock_::
 	jr z, .doWalk
 	cp 5
 	jr z, .doWalk
+	cp 6
+	jr z, .doHop
 
 	; Status 0 or 1 - just update and check commands
 	call UpdateBrockIdleState
@@ -420,6 +458,10 @@ SpawnBrock_::
 
 .doWalk
 	call UpdateBrockWalking
+	ret
+
+.doHop
+	call UpdateBrockHopping
 	ret
 
 ; =====================================
@@ -600,6 +642,25 @@ UpdateMistyIdleState:
 	; Set facing direction
 	ld [wSpriteMistyStateData1FacingDirection], a
 
+	; Check if this movement should be a hop (ledge jump)
+	ld a, [wMovementTypeTrail + 1]  ; Misty uses trail[1]
+	and a
+	jr z, .normalMoveMisty
+
+	; Start hopping (status 6, 16 frames)
+	ld a, 6
+	ld [wSpriteMistyStateData1MovementStatus], a
+	ld a, 16
+	ld [wSpriteMistyStateData2WalkAnimationCounter], a
+	; Set step vectors based on direction
+	call SetMistyStepVector
+	; First frame of hop - update position
+	call UpdateMistyScreenPosition
+	; Update sprite for first frame
+	call UpdateMistyWalkingSprite
+	ret
+
+.normalMoveMisty
 	; Calculate Manhattan distance to decide speed
 	; d=current Y, e=current X, b=target Y, c=target X (still in registers)
 	push bc
@@ -724,6 +785,25 @@ UpdateBrockIdleState:
 	; Set facing direction
 	ld [wSpriteBrockStateData1FacingDirection], a
 
+	; Check if this movement should be a hop (ledge jump)
+	ld a, [wMovementTypeTrail + 2]  ; Brock uses trail[2]
+	and a
+	jr z, .normalMoveBrock
+
+	; Start hopping (status 6, 16 frames)
+	ld a, 6
+	ld [wSpriteBrockStateData1MovementStatus], a
+	ld a, 16
+	ld [wSpriteBrockStateData2WalkAnimationCounter], a
+	; Set step vectors based on direction
+	call SetBrockStepVector
+	; First frame of hop - update position
+	call UpdateBrockScreenPosition
+	; Update sprite for first frame
+	call UpdateBrockWalkingSprite
+	ret
+
+.normalMoveBrock
 	; Calculate Manhattan distance to decide speed
 	; d=current Y, e=current X, b=target Y, c=target X (still in registers)
 	push bc
@@ -921,6 +1001,239 @@ UpdateBrockWalking:
 	; Update sprite image index during walk
 	call UpdateBrockWalkingSprite
 	ret
+
+; =====================================
+; MISTY HOPPING UPDATE (LEDGE JUMP)
+; =====================================
+
+UpdateMistyHopping:
+	; Decrement hop counter
+	ld hl, wSpriteMistyStateData2WalkAnimationCounter
+	dec [hl]
+	jr nz, .continueHop
+
+	; Hop complete - update map position and return to idle
+	call UpdateMistyMapPosition
+
+	; Clear step vectors
+	xor a
+	ld [wSpriteMistyStateData1 + SPRITESTATEDATA1_YSTEPVECTOR], a
+	ld [wSpriteMistyStateData1 + SPRITESTATEDATA1_XSTEPVECTOR], a
+
+	; Reset animation frame to standing (0)
+	xor a
+	ld [wSpriteMistyStateData1AnimFrameCounter], a
+
+	; Return to idle state
+	ld a, 1
+	ld [wSpriteMistyStateData1MovementStatus], a
+
+	; Immediately check for next movement
+	jp UpdateMistyIdleState
+
+.continueHop
+	; Get current frame index (16 - counter gives 0-15)
+	ld a, [wSpriteMistyStateData2WalkAnimationCounter]
+	ld b, a  ; b = remaining frames
+	ld a, 16
+	sub b    ; a = current frame index (0-15)
+
+	; Get Y offset from hop arc table
+	ld hl, FollowerHopArc
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld c, [hl]  ; c = Y pixel offset for this frame
+
+	; Apply hop arc to Y position
+	; During hop: Y = base Y + arc offset
+	; We need to adjust relative to the previous frame's offset
+	; For simplicity, we'll compute the delta from the previous frame
+
+	; Get previous frame's offset (if frame > 0)
+	ld a, [wSpriteMistyStateData2WalkAnimationCounter]
+	ld b, a
+	ld a, 16
+	sub b    ; a = current frame index
+	and a
+	jr z, .firstHopFrame
+
+	; Get previous frame offset
+	dec a
+	ld hl, FollowerHopArc
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld a, [hl]  ; a = previous Y offset
+	ld b, a
+
+	; Calculate delta: new_offset - old_offset
+	ld a, c
+	sub b    ; a = delta Y offset
+	jr .applyDelta
+
+.firstHopFrame
+	ld a, c  ; first frame, just use the offset directly
+
+.applyDelta
+	; Apply delta to Y pixels (negative = up, positive = down)
+	ld b, a
+	ld a, [wSpriteMistyStateData1 + SPRITESTATEDATA1_YPIXELS]
+	add b
+	ld [wSpriteMistyStateData1 + SPRITESTATEDATA1_YPIXELS], a
+
+	; Update X position (normal movement, 1 pixel per frame)
+	ld a, [wSpriteMistyStateData1 + SPRITESTATEDATA1_XSTEPVECTOR]
+	ld b, a
+	ld a, [wSpriteMistyStateData1 + SPRITESTATEDATA1_XPIXELS]
+	add b
+	ld [wSpriteMistyStateData1 + SPRITESTATEDATA1_XPIXELS], a
+
+	; Also update Y for horizontal movement direction
+	ld a, [wSpriteMistyStateData1 + SPRITESTATEDATA1_YSTEPVECTOR]
+	ld b, a
+	ld a, [wSpriteMistyStateData1 + SPRITESTATEDATA1_YPIXELS]
+	add b
+	ld [wSpriteMistyStateData1 + SPRITESTATEDATA1_YPIXELS], a
+
+	; Update animation frame (use walking animation during hop)
+	ld a, [wSpriteMistyStateData2WalkAnimationCounter]
+	cp 9           ; counter >= 9?
+	ld a, 1        ; first half: walking frame 1
+	jr nc, .setHopFrame
+	ld a, 2        ; second half: walking frame 2
+.setHopFrame
+	ld [wSpriteMistyStateData1AnimFrameCounter], a
+
+	; Update sprite
+	call UpdateMistyWalkingSprite
+	ret
+
+; =====================================
+; BROCK HOPPING UPDATE (LEDGE JUMP)
+; =====================================
+
+UpdateBrockHopping:
+	; Decrement hop counter
+	ld hl, wSpriteBrockStateData2WalkAnimationCounter
+	dec [hl]
+	jr nz, .continueHop
+
+	; Hop complete - update map position and return to idle
+	call UpdateBrockMapPosition
+
+	; Clear step vectors
+	xor a
+	ld [wSpriteBrockStateData1 + SPRITESTATEDATA1_YSTEPVECTOR], a
+	ld [wSpriteBrockStateData1 + SPRITESTATEDATA1_XSTEPVECTOR], a
+
+	; Reset animation frame to standing (0)
+	xor a
+	ld [wSpriteBrockStateData1AnimFrameCounter], a
+
+	; Return to idle state
+	ld a, 1
+	ld [wSpriteBrockStateData1MovementStatus], a
+
+	; Immediately check for next movement
+	jp UpdateBrockIdleState
+
+.continueHop
+	; Get current frame index (16 - counter gives 0-15)
+	ld a, [wSpriteBrockStateData2WalkAnimationCounter]
+	ld b, a  ; b = remaining frames
+	ld a, 16
+	sub b    ; a = current frame index (0-15)
+
+	; Get Y offset from hop arc table
+	ld hl, FollowerHopArc
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld c, [hl]  ; c = Y pixel offset for this frame
+
+	; Get previous frame's offset (if frame > 0)
+	ld a, [wSpriteBrockStateData2WalkAnimationCounter]
+	ld b, a
+	ld a, 16
+	sub b    ; a = current frame index
+	and a
+	jr z, .firstHopFrame
+
+	; Get previous frame offset
+	dec a
+	ld hl, FollowerHopArc
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld a, [hl]  ; a = previous Y offset
+	ld b, a
+
+	; Calculate delta: new_offset - old_offset
+	ld a, c
+	sub b    ; a = delta Y offset
+	jr .applyDelta
+
+.firstHopFrame
+	ld a, c  ; first frame, just use the offset directly
+
+.applyDelta
+	; Apply delta to Y pixels
+	ld b, a
+	ld a, [wSpriteBrockStateData1 + SPRITESTATEDATA1_YPIXELS]
+	add b
+	ld [wSpriteBrockStateData1 + SPRITESTATEDATA1_YPIXELS], a
+
+	; Update X position (normal movement, 1 pixel per frame)
+	ld a, [wSpriteBrockStateData1 + SPRITESTATEDATA1_XSTEPVECTOR]
+	ld b, a
+	ld a, [wSpriteBrockStateData1 + SPRITESTATEDATA1_XPIXELS]
+	add b
+	ld [wSpriteBrockStateData1 + SPRITESTATEDATA1_XPIXELS], a
+
+	; Also update Y for horizontal movement direction
+	ld a, [wSpriteBrockStateData1 + SPRITESTATEDATA1_YSTEPVECTOR]
+	ld b, a
+	ld a, [wSpriteBrockStateData1 + SPRITESTATEDATA1_YPIXELS]
+	add b
+	ld [wSpriteBrockStateData1 + SPRITESTATEDATA1_YPIXELS], a
+
+	; Update animation frame (use walking animation during hop)
+	ld a, [wSpriteBrockStateData2WalkAnimationCounter]
+	cp 9           ; counter >= 9?
+	ld a, 1        ; first half: walking frame 1
+	jr nc, .setHopFrame
+	ld a, 2        ; second half: walking frame 2
+.setHopFrame
+	ld [wSpriteBrockStateData1AnimFrameCounter], a
+
+	; Update sprite
+	call UpdateBrockWalkingSprite
+	ret
+
+; =====================================
+; FOLLOWER HOP ARC TABLE
+; =====================================
+; Y pixel offsets for each frame of a 16-frame hop
+; Negative values = up, positive = down (relative to base)
+; Arc goes: up (peak around frames 4-6), then down
+FollowerHopArc:
+	db  0   ; frame 0: starting position
+	db -2   ; frame 1: going up
+	db -4   ; frame 2
+	db -5   ; frame 3
+	db -6   ; frame 4: near peak
+	db -6   ; frame 5: peak
+	db -6   ; frame 6: peak
+	db -5   ; frame 7: coming down
+	db -4   ; frame 8
+	db -3   ; frame 9
+	db -2   ; frame 10
+	db -1   ; frame 11
+	db  0   ; frame 12: back to ground level
+	db  0   ; frame 13
+	db  0   ; frame 14
+	db  0   ; frame 15: end position
 
 ; =====================================
 ; MISTY STEP VECTOR SETUP

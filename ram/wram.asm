@@ -2089,8 +2089,13 @@ wBrockOverworldStateFlags:: db
 wFollowerDoorwayMode:: db  ; Set to 1 during warp if Pikachu will be right of player (doorway entry)
 wExitDoorwayY:: db  ; Door tile Y position for delayed follower spawning (0 = not set)
 wExitDoorwayX:: db  ; Door tile X position for delayed follower spawning
+; Movement type trail - stores how player moved to each position (0=walk, 1=jump)
+; trail[0] = movement type for 1 step ago (Pikachu)
+; trail[1] = movement type for 2 steps ago (Misty)
+; trail[2] = movement type for 3 steps ago (Brock)
+wMovementTypeTrail:: ds 4
 wFollowerStateEnd::
-	ds 11 ; remaining padding (24 - 13 = 11)
+	ds 7 ; remaining padding (24 - 17 = 7)
 
 wd492:: db
 	ds 1
