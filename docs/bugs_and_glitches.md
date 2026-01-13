@@ -10,14 +10,12 @@ Fixes are written in the `diff` format. If you've used Git before, this should l
 +add green + lines
 ```
 
-
 ## Contents
 
 - [Options menu code fails to clear joypad state on initialization](#options-menu-code-fails-to-clear-joypad-state-on-initialization)
 - [Battle transitions fail to account for scripted battles](#battle-transitions-fail-to-account-for-scripted-battles)
 - [`wPikachuFollowCommandBuffer` can overflow](#wpikachufollowcommandbuffer-can-overflow)
 - [Unexpected Counter damage](#unexpected-counter-damage)
-
 
 ## Options menu code fails to clear joypad state on initialization
 
