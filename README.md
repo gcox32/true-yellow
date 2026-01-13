@@ -39,6 +39,10 @@ The follower system uses a **position trail** approach rather than command mirro
 
 For the full technical breakdown, see [engine/followers/README.md](engine/followers/README.md).
 
+## Versions
+
+To play Yellow with just the follower system implemented and no other aspects touched, checkout the [`legacy`](https://github.com/gcox32/true-yellow/tree/legacy) branch of this repo.
+
 ## Building
 
 See [INSTALL.md](INSTALL.md) for setup instructions.
