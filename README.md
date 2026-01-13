@@ -1,23 +1,43 @@
-# Pokémon Yellow - Chain Follower System
+# True Yellow
 
-This is a fork of [pret/pokeyellow](https://github.com/pret/pokeyellow) with a chain follower system that allows Misty and Brock to follow the player.
+_Pokemon Yellow Version: Special Pikachu Edition_ was Nintendo's attempt to build on the groundwork of the first generation games, still beholden to the hardware constraints of their time. Their goal was to squash the obvious bugs and, more ambitiously, mirror the anime to some degree. Pokemon True Yellow attempts to take the baton and run farther, finding novel ways to emulate the anime even more. The key feature: an extended **chain follower** system. Misty wants her bike back--she'll be following you on your journey until she gets it (she'll never get it.) Brock defeated and his deadbeat father actually came home? He'll be right behind you.
 
-## Follower System
+This is a fork of [pret/pokeyellow](https://github.com/pret/pokeyellow).
 
-The system implements a **position trail** approach where followers target specific positions in the player's movement history:
+## The Chain Follower System
 
-- **Pikachu** follows 1 step behind (trail[0])
-- **Misty** follows 2 steps behind (trail[1]) - requires `EVENT_MISTY_FOLLOWING_PLAYER`
-- **Brock** follows 3 steps behind (trail[2]) - requires Boulder and Cascade badges
+The signature feature of True Yellow is the chain follower system. After defeating gym leaders, they join you on your journey, creating a party that walks together through the overworld:
 
-### How It Works
+```
+[Brock] -> [Misty] -> [Pikachu] -> [You]
+```
 
-When the player moves, their previous position is recorded in a trail. Each follower checks their target position in the trail and moves toward it, creating a smooth chain effect. The system eliminates 1-frame delays to keep followers perfectly synchronized.
+### Your Growing Party
 
-### Special Behavior
+- **Pikachu** - Your starter, always 1 step behind you
+- **Misty** - Joins after you get your Pokedex from Oak
+- **Brock** - Joins after earning the Boulder Badge, follows 3 steps behind
 
-- **Cerulean Gym**: Follower Misty is hidden when `EVENT_BEAT_MISTY` is not set, allowing gym leader Misty to appear at her spot. After defeating her, gym leader Misty disappears and follower Misty can appear.
-- **Pewter Gym**: Same logic applies to Brock - he disappears from the gym after being defeated.
+### Seamless Integration
+
+The followers behave naturally in every situation:
+
+- **Walking**: Followers form a smooth chain, speeding up to catch you if they fall behind
+- **Ledge jumping**: Each follower hops the ledge in sequence with a satisfying arc
+- **Spinning tiles**: The whole party spins together in sync
+- **Doorways**: Followers arrange intelligently when entering/exiting buildings
+- **Surfing & Biking**: Followers wait for you and rejoin when you return to walking
+- **Talking**: Press A to chat with your companions
+
+### Gym Leader Logic
+
+The system handles the "two Mistys" problem elegantly - when you enter Cerulean Gym before defeating Misty, your follower Misty is hidden so the gym leader can appear at her spot. After the battle, the gym leader disappears and your companion Misty can reappear. Same logic applies to Brock in Pewter Gym.
+
+## Technical Details
+
+The follower system uses a **position trail** approach rather than command mirroring. When you move, your previous position is recorded in a trail buffer. Each follower walks toward their target position in that history, creating fluid synchronized movement without the 1-frame delays that plague simpler implementations.
+
+For the full technical breakdown, see [engine/followers/README.md](engine/followers/README.md).
 
 ## Building
 
@@ -25,4 +45,4 @@ See [INSTALL.md](INSTALL.md) for setup instructions.
 
 ## Credits
 
-Based on [pret/pokeyellow](https://github.com/pret/pokeyellow) - a disassembly of Pokémon Yellow.
+Based on [pret/pokeyellow](https://github.com/pret/pokeyellow) - a disassembly of Pokemon Yellow.

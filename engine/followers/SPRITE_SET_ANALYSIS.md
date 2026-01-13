@@ -4,6 +4,8 @@
 Add SPRITE_MISTY to slot 1 and SPRITE_BROCK to slot 2 of each sprite set.
 This requires removing 2 sprites from each set to stay within the 11-slot limit.
 
+The overworld sprite sets can be found in `data/maps/sprite_sets.asm` and each map's object in `data/maps/objects/`. (note: only outdoor maps needed to be handled as indoor maps loaded in NPCs differently)
+
 ## Format
 - Slot 0: PIKACHU (keep)
 - Slot 1: MISTY (new)
@@ -25,14 +27,7 @@ PIKACHU, BLUE, YOUNGSTER, BRUNETTE_GIRL, FISHER, COOLTRAINER_M, GAMBLER, OAK, GI
 
 **NOT used:** BRUNETTE_GIRL, COOLTRAINER_M, POKE_BALL
 
-**WARNING:** SWIMMER(5) and MISTY(1) are used but NOT in set - maps need fixing!
-
-**Recommendation - REMOVE:** `BRUNETTE_GIRL`, `COOLTRAINER_M`
-
-**New set:**
-```
-PIKACHU, MISTY, BROCK, YOUNGSTER, FISHER, GAMBLER, OAK, GIRL, BLUE, POKE_BALL, GAMBLER_ASLEEP
-```
+**WARNING:** SWIMMER(5) and MISTY(1) are used but NOT in set - map may need fixing?
 
 **Maps to audit:** Check where SWIMMER is used (likely Route21?) - need to replace with different sprite or change map
 
@@ -50,15 +45,9 @@ PIKACHU, YOUNGSTER, ROCKET, SUPER_NERD, HIKER, BLUE, OFFICER_JENNY, COOLTRAINER_
 
 **NOT used:** UNUSED_GAMBLER_ASLEEP_2
 
-**Recommendation - REMOVE:** `UNUSED_GAMBLER_ASLEEP_2`, `BLUE` (only 1 use - can replace with another sprite)
-
-**New set:**
-```
-PIKACHU, MISTY, BROCK, YOUNGSTER, ROCKET, SUPER_NERD, HIKER, OFFICER_JENNY, COOLTRAINER_F, POKE_BALL, COOLTRAINER_M
-```
 Note: COOLTRAINER_M moved to still sprite slot since heavily used
 
-**Maps to audit:** Find the 1 BLUE usage and replace
+**Maps to audit:** Cerulean City
 
 ---
 
@@ -73,13 +62,6 @@ PIKACHU, LITTLE_GIRL, GIRL, SUPER_NERD, HIKER, GAMBLER, MONSTER, COOLTRAINER_F, 
 **Actually used in LavenderTown:** LITTLE_GIRL(1), COOLTRAINER_M(1), SUPER_NERD(1)
 
 **NOT used (in LavenderTown):** GIRL, HIKER, GAMBLER, MONSTER, COOLTRAINER_F, POKE_BALL, UNUSED_GAMBLER_ASLEEP_2
-
-**Recommendation - REMOVE:** `UNUSED_GAMBLER_ASLEEP_2`, `GIRL` (check Route10 first!)
-
-**New set:**
-```
-PIKACHU, MISTY, BROCK, LITTLE_GIRL, SUPER_NERD, HIKER, GAMBLER, MONSTER, COOLTRAINER_F, POKE_BALL, COOLTRAINER_M
-```
 
 **Maps to audit:** Check Route10 for GIRL usage before removing
 
@@ -97,13 +79,6 @@ PIKACHU, OFFICER_JENNY, SUPER_NERD, YOUNGSTER, GAMBLER, MONSTER, SAILOR, COOLTRA
 
 **NOT used:** SUPER_NERD, YOUNGSTER, COOLTRAINER_M, POKE_BALL, UNUSED_GAMBLER_ASLEEP_2
 
-**Recommendation - REMOVE:** `UNUSED_GAMBLER_ASLEEP_2`, `SUPER_NERD` (check Route6/11 first!)
-
-**New set:**
-```
-PIKACHU, MISTY, BROCK, OFFICER_JENNY, YOUNGSTER, GAMBLER, MONSTER, SAILOR, COOLTRAINER_F, POKE_BALL, COOLTRAINER_M
-```
-
 **Maps to audit:** Check Route6, Route11 for SUPER_NERD usage
 
 ---
@@ -119,13 +94,6 @@ PIKACHU, LITTLE_GIRL, LITTLE_BOY, GIRL, FISHER, MIDDLE_AGED_MAN, GRAMPS, MONSTER
 **Actually used:** FISHER(1), GIRL(1), GRAMPS(3), LITTLE_GIRL(1), MONSTER(1), ROCKET(2)
 
 **NOT used:** LITTLE_BOY, MIDDLE_AGED_MAN, POKE_BALL, SNORLAX
-
-**Recommendation - REMOVE:** `LITTLE_BOY`, `MIDDLE_AGED_MAN`
-
-**New set:**
-```
-PIKACHU, MISTY, BROCK, LITTLE_GIRL, GIRL, FISHER, GRAMPS, MONSTER, ROCKET, POKE_BALL, SNORLAX
-```
 
 **Maps to audit:** Check Route7, Route16 for LITTLE_BOY/MIDDLE_AGED_MAN usage
 
@@ -143,13 +111,6 @@ PIKACHU, ROCKET, SCIENTIST, SILPH_WORKER_M, SILPH_WORKER_F, GENTLEMAN, BIRD, ROC
 
 **NOT used:** COOLTRAINER_M, POKE_BALL, UNUSED_GAMBLER_ASLEEP_2
 
-**Recommendation - REMOVE:** `UNUSED_GAMBLER_ASLEEP_2`, `COOLTRAINER_M`
-
-**New set:**
-```
-PIKACHU, MISTY, BROCK, ROCKET, SCIENTIST, SILPH_WORKER_M, SILPH_WORKER_F, GENTLEMAN, BIRD, POKE_BALL, ROCKER
-```
-
 **Maps to audit:** Check Route5, Route7, Route8 for COOLTRAINER_M usage
 
 ---
@@ -165,13 +126,6 @@ PIKACHU, GYM_GUIDE, MONSTER, BLUE, COOLTRAINER_F, COOLTRAINER_M, SWIMMER, GUARD,
 **Actually used:** GUARD(5), SWIMMER(2)
 
 **NOT used:** GYM_GUIDE, MONSTER, BLUE, COOLTRAINER_F, COOLTRAINER_M, GAMBLER, POKE_BALL, UNUSED_GAMBLER_ASLEEP_2
-
-**Recommendation - REMOVE:** `UNUSED_GAMBLER_ASLEEP_2`, `GYM_GUIDE` (or MONSTER, BLUE, etc.)
-
-**New set:**
-```
-PIKACHU, MISTY, BROCK, MONSTER, BLUE, COOLTRAINER_F, COOLTRAINER_M, SWIMMER, GUARD, POKE_BALL, GAMBLER
-```
 
 **Maps to audit:** Minimal - very few sprites used
 
@@ -189,12 +143,9 @@ PIKACHU, COOLTRAINER_M, CHANSEY, FISHER, GAMBLER, MONSTER, SEEL, SWIMMER, YOUNGS
 
 **PROBLEM:** This set is FULL. Must remove 2 actually-used sprites.
 
-**Recommendation - REMOVE:** `SEEL` (1 use), `CHANSEY` (1 use) - can replace these NPCs with different sprites
+Note: unfortunately, Fuchsia City is full of unique sprites because of the area in front of the Safari Zone, and there's no clean way to keep that feel _and_ add two followers. Unless I come up with a novel solution, two of the Pokemon enclosures had to get cut.
 
-**New set:**
-```
-PIKACHU, MISTY, BROCK, COOLTRAINER_M, FISHER, GAMBLER, MONSTER, SWIMMER, YOUNGSTER, POKE_BALL, FOSSIL
-```
+Second note: we should be sure to come back and edit the text on a sign or something to pay homage to the removed Lapras and Chansey (they were set free?)
 
 **Maps to audit:** Find and replace the SEEL and CHANSEY NPCs in FuchsiaCity
 
@@ -212,13 +163,6 @@ PIKACHU, BIKER, SUPER_NERD, MIDDLE_AGED_MAN, COOLTRAINER_F, COOLTRAINER_M, BEAUT
 
 **NOT used:** SUPER_NERD, MIDDLE_AGED_MAN, FISHER, ROCKER, POKE_BALL, SNORLAX
 
-**Recommendation - REMOVE:** `SUPER_NERD`, `MIDDLE_AGED_MAN`
-
-**New set:**
-```
-PIKACHU, MISTY, BROCK, BIKER, COOLTRAINER_F, COOLTRAINER_M, BEAUTY, FISHER, ROCKER, POKE_BALL, SNORLAX
-```
-
 **Maps to audit:** Check Route12, Route15 for SUPER_NERD/MIDDLE_AGED_MAN usage
 
 ---
@@ -233,14 +177,9 @@ PIKACHU, BIKER, COOLTRAINER_M, SILPH_WORKER_M, FISHER, ROCKER, HIKER, GAMBLER, M
 
 **Actually used in Route17:** BIKER(10) - that's it!
 
+Note: because there are so few unique overworld sprites in this set, there's some cool potential here to add misty and brock bike sprites, specifically for cycling road.
+
 **NOT used:** COOLTRAINER_M, SILPH_WORKER_M, FISHER, ROCKER, HIKER, GAMBLER, MIDDLE_AGED_MAN, POKE_BALL, SNORLAX
-
-**Recommendation - REMOVE:** `SILPH_WORKER_M`, `MIDDLE_AGED_MAN` (least likely to be used elsewhere)
-
-**New set:**
-```
-PIKACHU, MISTY, BROCK, BIKER, COOLTRAINER_M, FISHER, ROCKER, HIKER, GAMBLER, POKE_BALL, SNORLAX
-```
 
 **Maps to audit:** Check Route16, Route18 for removed sprite usage
 
@@ -281,20 +220,8 @@ If COOLTRAINER_M is removed from both, Route6 NPCs need sprite changes.
 | Route18 | COOLTRAINER_M | CYCLING_ROAD / FUCHSIA |
 | Route20 | COOLTRAINER_M, SWIMMER | PALLET_VIRIDIAN / FUCHSIA |
 
-## Updated Recommendations Based on Split Routes
-
-**SPRITESET_VERMILION** - Keep SUPER_NERD (used in Route11)
-- Remove: `UNUSED_GAMBLER_ASLEEP_2`, `COOLTRAINER_M` instead
-
-**SPRITESET_LAVENDER** - Keep SUPER_NERD (used in Route8, Route10, Route12)
-- Remove: `UNUSED_GAMBLER_ASLEEP_2`, `MONSTER` instead (check if MONSTER used anywhere)
-
-**SPRITESET_SILENCE_BRIDGE** - Keep SUPER_NERD (used in Route11, Route12)
-- Remove: `ROCKER`, `MIDDLE_AGED_MAN` instead
-
 ---
 
 ## Known Issues to Fix
 
 1. **SPRITESET_PALLET_VIRIDIAN**: Uses SWIMMER(5) which is NOT in the set - these maps are already broken or using wrong sprites
-2. **SPRITESET_FUCHSIA**: All sprites are used - MUST replace SEEL and CHANSEY NPCs with different sprites
