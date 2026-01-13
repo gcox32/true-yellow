@@ -7,11 +7,11 @@ FuchsiaCity_TextPointers:
 	dw_const FuchsiaCityGamblerText,         TEXT_FUCHSIACITY_GAMBLER
 	dw_const FuchsiaCityErikText,            TEXT_FUCHSIACITY_ERIK
 	dw_const FuchsiaCityYoungster2Text,      TEXT_FUCHSIACITY_YOUNGSTER2
-	dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_CHANSEY
+	; dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_CHANSEY
 	dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_VOLTORB
 	dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_KANGASKHAN
 	dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_SLOWPOKE
-	dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_LAPRAS
+	; dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_LAPRAS
 	dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_FOSSIL
 	dw_const FuchsiaCitySignText,            TEXT_FUCHSIACITY_SIGN1
 	dw_const FuchsiaCitySignText,            TEXT_FUCHSIACITY_SIGN2
@@ -21,11 +21,11 @@ FuchsiaCity_TextPointers:
 	dw_const FuchsiaCityWardensHomeSignText, TEXT_FUCHSIACITY_WARDENS_HOME_SIGN
 	dw_const FuchsiaCitySafariZoneSignText,  TEXT_FUCHSIACITY_SAFARI_ZONE_SIGN
 	dw_const FuchsiaCityGymSignText,         TEXT_FUCHSIACITY_GYM_SIGN
-	dw_const FuchsiaCityChanseySignText,     TEXT_FUCHSIACITY_CHANSEY_SIGN
+	; dw_const FuchsiaCityChanseySignText,     TEXT_FUCHSIACITY_CHANSEY_SIGN
 	dw_const FuchsiaCityVoltorbSignText,     TEXT_FUCHSIACITY_VOLTORB_SIGN
 	dw_const FuchsiaCityKangaskhanSignText,  TEXT_FUCHSIACITY_KANGASKHAN_SIGN
 	dw_const FuchsiaCitySlowpokeSignText,    TEXT_FUCHSIACITY_SLOWPOKE_SIGN
-	dw_const FuchsiaCityLaprasSignText,      TEXT_FUCHSIACITY_LAPRAS_SIGN
+	; dw_const FuchsiaCityLaprasSignText,      TEXT_FUCHSIACITY_LAPRAS_SIGN
 	dw_const FuchsiaCityFossilSignText,      TEXT_FUCHSIACITY_FOSSIL_SIGN
 
 FuchsiaCityYoungster1Text:
