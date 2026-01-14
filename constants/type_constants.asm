@@ -8,7 +8,7 @@ DEF PHYSICAL EQU const_value
 	const POISON       ; $03
 	const GROUND       ; $04
 	const ROCK         ; $05
-	const BIRD         ; $06
+	const TYPELESS     ; $06 converted from BIRD
 	const BUG          ; $07
 	const GHOST        ; $08
 

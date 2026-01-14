@@ -169,7 +169,7 @@ A simple table, found in `/data/moves/moves.asm`, defines each move's correspond
 | SUPER_FANG | SUPER_FANG_EFFECT | 1 | NORMAL | 95 | 10 | accuracy changed from 90 to 95 |
 | SLASH | NO_ADDITIONAL_EFFECT | 70 | NORMAL | 100 | 20 |
 | SUBSTITUTE | SUBSTITUTE_EFFECT | 0 | NORMAL | 100 | 10 |
-| STRUGGLE | RECOIL_EFFECT | 50 | NORMAL | 100 | 10 |
+| STRUGGLE | RECOIL_EFFECT | 50 | NORMAL | 100 | 10 | type changed from NORMAL to TYPELESS |
 ## Animations
 
 ## Effects
