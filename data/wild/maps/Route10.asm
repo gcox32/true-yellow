@@ -7,7 +7,7 @@ Route10WildMons:
 	db 17, NIDORAN_M
 	db 17, NIDORAN_F
 	db 22, MAGNEMITE
-	db 20, RATICATE
+	db 20, CUBONE
 	db 16, MACHOP
 	db 18, MACHOP
 	end_grass_wildmons

@@ -13,3 +13,6 @@ Downstream issues:
 
 Continuity efforts:
 - [x] cerulean gym event logic: if not EVENT_BEAT_MISTY, when inside cerulean gym, MISTY should be at her normal gym leader spot, waiting to engage in a battle
+
+Known bugs:
+- [ ] Misty overworld sprite flashes with cursor from open TownMap (she should be hidden)
