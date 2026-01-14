@@ -167,11 +167,11 @@ Moves:
 	move FURY_SWIPES,  TWO_TO_FIVE_ATTACKS_EFFECT,  20, NORMAL,        85, 15 ; power changed from 18 to 20, accuracy changed from 80 to 85
 	move BONEMERANG,   ATTACK_TWICE_EFFECT,         50, GROUND,        90, 10
 	move REST,         HEAL_EFFECT,                  0, NORMAL,       100, 10 ; type changed from PSYCHIC_TYPE to NORMAL
-	move ROCK_SLIDE,   NO_ADDITIONAL_EFFECT,        90, ROCK,          90, 10 ; power changed from 75 to 90
+	move ROCK_SLIDE,   FLINCH_SIDE_EFFECT2,         90, ROCK,          90, 10 ; power changed from 75 to 90, added FLINCH_SIDE_EFFECT2 effect
 	move HYPER_FANG,   FLINCH_SIDE_EFFECT1,         80, NORMAL,        90, 15
 	move SHARPEN,      ATTACK_UP1_EFFECT,            0, NORMAL,       100, 30
 	move CONVERSION,   CONVERSION_EFFECT,            0, NORMAL,       100, 30
-	move TRI_ATTACK,   NO_ADDITIONAL_EFFECT,        80, NORMAL,       100, 10
+	move TRI_ATTACK,   TRIATTACK_EFFECT,            80, NORMAL,       100, 10 ; effect changed from NO_ADDITIONAL_EFFECT to TRIATTACK_EFFECT
 	move SUPER_FANG,   SUPER_FANG_EFFECT,            1, NORMAL,        95, 10 ; accuracy changed from 90 to 95
 	move SLASH,        NO_ADDITIONAL_EFFECT,        70, NORMAL,       100, 20
 	move SUBSTITUTE,   SUBSTITUTE_EFFECT,            0, NORMAL,       100, 10

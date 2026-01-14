@@ -161,15 +161,17 @@ A simple table, found in `/data/moves/moves.asm`, defines each move's correspond
 | FURY_SWIPES | TWO_TO_FIVE_ATTACKS_EFFECT | 20 | NORMAL | 85 | 15 | power changed from 18 to 20, accuracy changed from 80 to 85 |
 | BONEMERANG | ATTACK_TWICE_EFFECT | 50 | GROUND | 90 | 10 |
 | REST | HEAL_EFFECT | 0 | NORMAL | 100 | 10 | type changed from PSYCHIC_TYPE to NORMAL |
-| ROCK_SLIDE | NO_ADDITIONAL_EFFECT | 90 | ROCK | 90 | 10 | power changed from 75 to 90 |
+| ROCK_SLIDE | FLINCH_SIDE_EFFECT2 | 90 | ROCK | 90 | 10 | power changed from 75 to 90 |
 | HYPER_FANG | FLINCH_SIDE_EFFECT1 | 80 | NORMAL | 90 | 15 |
 | SHARPEN | ATTACK_UP1_EFFECT | 0 | NORMAL | 100 | 30 |
 | CONVERSION | CONVERSION_EFFECT | 0 | NORMAL | 100 | 30 |
-| TRI_ATTACK | NO_ADDITIONAL_EFFECT | 80 | NORMAL | 100 | 10 |
+| TRI_ATTACK | NO_ADDITIONAL_EFFECT | 80 | NORMAL | 100 | 10 | TRIATTACK_EFFECT added |
 | SUPER_FANG | SUPER_FANG_EFFECT | 1 | NORMAL | 95 | 10 | accuracy changed from 90 to 95 |
 | SLASH | NO_ADDITIONAL_EFFECT | 70 | NORMAL | 100 | 20 |
 | SUBSTITUTE | SUBSTITUTE_EFFECT | 0 | NORMAL | 100 | 10 |
 | STRUGGLE | RECOIL_EFFECT | 50 | NORMAL | 100 | 10 | type changed from NORMAL to TYPELESS |
+
 ## Animations
 
 ## Effects
+- new dope effect for `TRI_ATTACK`
