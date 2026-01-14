@@ -51,7 +51,7 @@ A simple table, found in `/data/moves/moves.asm`, defines each move's correspond
 | BITE | FLINCH_SIDE_EFFECT1 | 50 | NORMAL | 100 | 25 | power changed from 60 to 50 |
 | GROWL | ATTACK_DOWN1_EFFECT | 0 | NORMAL | 100 | 40 |
 | ROAR | SWITCH_AND_TELEPORT_EFFECT | 0 | NORMAL | 100 | 20 |
-| SING | SLEEP_EFFECT | 0 | NORMAL | 55 | 15 |
+| SING | SLEEP_EFFECT | 0 | NORMAL | 70 | 15 | accuracy changed from 55 to 70 |
 | SUPERSONIC | CONFUSION_EFFECT | 0 | NORMAL | 55 | 20 |
 | SONICBOOM | SPECIAL_DAMAGE_EFFECT | 1 | FLYING | 90 | 20 |
 | DISABLE | DISABLE_EFFECT | 0 | NORMAL | 85 | 20 | accuracy changed from 55 to 85 |
