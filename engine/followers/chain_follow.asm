@@ -264,6 +264,11 @@ InitializePositionTrail::
 ShouldMistySpawn::
 ; Returns carry if Misty should spawn
 ; Conditions: EVENT_MISTY_FOLLOWING_PLAYER is set, Pikachu is visible, not biking/surfing
+	; Hide followers when menus/text boxes are open (BIT_FONT_LOADED set)
+	ld a, [wFontLoaded]
+	bit BIT_FONT_LOADED, a
+	jr nz, .hide
+
 	; Check if in exit doorway mode 2 or 3 (delayed spawn - waiting for 2 steps)
 	ld a, [wFollowerDoorwayMode]
 	cp 2
@@ -326,6 +331,11 @@ ShouldBrockSpawn::
 ; Returns carry if Brock should spawn
 ; Conditions: Has Boulder badge, Pikachu is visible, not biking/surfing
 ; If Misty is also following, Brock will follow behind her in the chain
+	; Hide followers when menus/text boxes are open (BIT_FONT_LOADED set)
+	ld a, [wFontLoaded]
+	bit BIT_FONT_LOADED, a
+	jr nz, .hide
+
 	; Check if in exit doorway mode (delayed spawn - wait for 3 steps after exiting)
 	; Mode 2: waiting for 1st step (hide Misty and Brock)
 	; Mode 3: waiting for 2nd step (hide Misty and Brock)
@@ -352,9 +362,10 @@ ShouldBrockSpawn::
 
 	; Check if Pikachu is spawned (movement status != 0)
 	; Brock can follow Pikachu directly, or Misty if she's also following
-	ld a, [wSpritePikachuStateData1MovementStatus]
-	and a
-	jr z, .hide
+	; TEMPORARILY DISABLED
+	; ld a, [wSpritePikachuStateData1MovementStatus]
+	; and a
+	; jr z, .hide
 
 	; Check if not biking/surfing
 	ld a, [wWalkBikeSurfState]
@@ -490,6 +501,11 @@ InitializeMistyPosition:
 	ld [wSpriteMistyStateData2MapY], a
 	ld a, [wExitDoorwayX]
 	ld [wSpriteMistyStateData2MapX], a
+	; Clear exit doorway position so it's not reused on subsequent map loads
+	; (Brock's init also clears this, but if Brock isn't following, we need to clear it here)
+	xor a
+	ld [wExitDoorwayY], a
+	ld [wExitDoorwayX], a
 	jr .positionSet
 .useTrailPosition
 	; Get position from trail[1] (Misty's target)

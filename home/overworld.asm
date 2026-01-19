@@ -649,6 +649,10 @@ CheckMapConnections::
 	set 4, [hl]
 	ld a, $2
 	ld [wPikachuSpawnState], a
+	; Reset follower movement status so they reinitialize with fresh trail positions
+	xor a
+	ld [wSpriteMistyStateData1MovementStatus], a
+	ld [wSpriteBrockStateData1MovementStatus], a
 	call LoadMapHeader
 	call PlayDefaultMusicFadeOutCurrent
 	ld b, SET_PAL_OVERWORLD

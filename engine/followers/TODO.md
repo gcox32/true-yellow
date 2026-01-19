@@ -6,6 +6,8 @@ Visual bugs:
 - [x] followers should disappear when we surf
 - [x] followers should disappear when we bike (future feature, get followers on their own bikes)
 - [x] followers should not disappear when we fish
+- [x] misty and brock both appear in front of menu screens; misty also appears in front of the town map, blinking along with the map's cursor
+- [x] misty leaves our chain and then comes back in line when we switch maps (outdoors); this _appears_ to only be a problem when the chain is just player, pikachu, misty (i.e. before we add brock)
 
 Downstream issues:
 - [x] handle sprites overflow: now that we have 2 more sprites for every map, we need to edit all possible sprites for any particular map. this may mean going through, map by map, and removing sprite objects that do not meaningfully affect gameplay
@@ -15,4 +17,4 @@ Continuity efforts:
 - [x] cerulean gym event logic: if not EVENT_BEAT_MISTY, when inside cerulean gym, MISTY should be at her normal gym leader spot, waiting to engage in a battle
 
 Known bugs:
-- [ ] Misty overworld sprite flashes with cursor from open TownMap (she should be hidden)
+- [x] Misty overworld sprite flashes with cursor from open TownMap (she should be hidden)
