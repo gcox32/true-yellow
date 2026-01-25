@@ -10,11 +10,15 @@ TypeNames:
 	dw .Typeless
 	dw .Bug
 	dw .Ghost
+	dw .Crystal
+	dw .Ground ; bonemerang type
 
 REPT UNUSED_TYPES_END - UNUSED_TYPES
 	dw .Normal
 ENDR
-
+	dw .Tri
+	dw .Floating
+	dw .Magma
 	dw .Fire
 	dw .Water
 	dw .Grass
@@ -37,7 +41,11 @@ ENDR
 .Ice:      db "ICE@"
 .Ground:   db "GROUND@"
 .Rock:     db "ROCK@"
-.Typeless: db "TYPELESS@"
+.Typeless: db "NONE@"
 .Bug:      db "BUG@"
 .Ghost:    db "GHOST@"
 .Dragon:   db "DRAGON@"
+.Tri:      db "TRI@"
+.Crystal:  db "CRYSTAL@"
+.Floating: db "FLOATING@"
+.Magma:    db "MAGMA@"
