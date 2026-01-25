@@ -1,5 +1,5 @@
 Route11WildMons:
-	def_grass_wildmons 15 ; encounter rate
+	def_grass_wildmons 40 ; encounter rate
 	db 16, PIDGEY
 	db 15, RATTATA
 	db 18, SPEAROW
@@ -8,8 +8,8 @@ Route11WildMons:
 	db 17, ODDISH
 	db 18, BELLSPROUT
 	db 20, PIDGEOTTO
-	db 19, DROWZEE
-	db 17, SCYTHER
+	db 19, SCYTHER
+	db 17, TAUROS
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

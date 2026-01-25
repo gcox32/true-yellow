@@ -1,15 +1,15 @@
 Route12WildMons:
-	def_grass_wildmons 15 ; encounter rate
-	db 25, ODDISH
-	db 25, BELLSPROUT
-	db 28, PIDGEY
-	db 28, PIDGEOTTO
-	db 27, SLOWPOKE
+	def_grass_wildmons 40 ; encounter rate
+	db 25, EKANS
+	db 25, EXEGGCUTE
+	db 28, EXEGGCUTE
+	db 28, FARFETCHD
+	db 27, PIDGEOTTO
 	db 27, WEEPINBELL
 	db 29, GLOOM
-	db 26, FARFETCHD
+	db 26, ARBOK
 	db 29, FARFETCHD
-	db 31, FARFETCHD
+	db 31, EXEGGUTOR
 	end_grass_wildmons
 
 	def_water_wildmons 3 ; encounter rate

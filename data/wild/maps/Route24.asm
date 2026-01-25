@@ -1,16 +1,26 @@
 Route24WildMons:
-	def_grass_wildmons 25 ; encounter rate
-	db 12, ODDISH
-	db 12, BELLSPROUT
-	db 13, PIDGEY
-	db 14, ODDISH
-	db 14, BELLSPROUT
-	db 15, PIDGEY
-	db 13, VENONAT
-	db 16, VENONAT
-	db 17, PIDGEY
-	db 17, PIDGEOTTO
+	def_grass_wildmons 30 ; encounter rate
+	db  7, PIDGEY
+	db  8, STARYU
+	db 12, ABRA
+	db 12, KRABBY
+	db 13, KRABBY
+	db 10, ABRA
+	db 14, KRABBY
+	db 13, STARYU
+	db  8, SQUIRTLE
+	db 12, LICKITUNG
 	end_grass_wildmons
 
-	def_water_wildmons 0 ; encounter rate
+	def_water_wildmons 4 ; encounter rate
+	db 32, GOLDEEN
+	db 30, POLIWAG
+	db 28, POLIWHIRL
+	db 30, SEAKING
+	db 31, PSYDUCK
+	db 30, SEAKING
+	db 35, GOLDUCK
+	db 25, POLIWHIRL
+	db 32, GOLDUCK
+	db 36, GOLDUCK
 	end_water_wildmons
