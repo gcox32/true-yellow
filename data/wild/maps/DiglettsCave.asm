@@ -7,9 +7,9 @@ DiglettsCaveWildMons:
 	db 16, DIGLETT
 	db 15, DIGLETT
 	db 21, DIGLETT
-	db 22, DIGLETT
 	db 29, DUGTRIO
 	db 31, DUGTRIO
+	db 31, ONIX
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

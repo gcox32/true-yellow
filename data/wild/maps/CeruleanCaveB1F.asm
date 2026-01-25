@@ -1,16 +1,26 @@
 CeruleanCaveB1FWildMons:
-	def_grass_wildmons 25 ; encounter rate
-	db 54, GOLBAT
-	db 59, GOLBAT
-	db 55, GRAVELER
-	db 52, RHYHORN
-	db 62, RHYDON
-	db 60, DITTO
-	db 56, CHANSEY
-	db 65, DITTO
-	db 55, LICKITUNG
-	db 50, LICKITUNG
+	def_grass_wildmons 10 ; encounter rate
+	db 80, CHANSEY
+	db 85, CHANSEY
+	db 80, CHANSEY
+	db 85, CHANSEY
+	db 90, CHANSEY
+	db 100, CHANSEY
+	db 100, CHANSEY
+	db 90, CHANSEY
+	db 80, CLEFABLE
+	db 85, CLEFABLE
 	end_grass_wildmons
 
-	def_water_wildmons 0 ; encounter rate
+	def_water_wildmons 7 ; encounter rate
+	db 60, BLASTOISE
+	db 65, BLASTOISE
+	db 65, GYARADOS
+	db 64, GYARADOS
+	db 66, GYARADOS
+	db 65, GYARADOS
+	db 55, LAPRAS
+	db 65, LAPRAS
+	db 58, LAPRAS
+	db 59, LAPRAS
 	end_water_wildmons

@@ -6,7 +6,7 @@ WildDataPointers:
 	dw NothingWildMons         ; CERULEAN_CITY
 	dw NothingWildMons         ; LAVENDER_TOWN
 	dw NothingWildMons         ; VERMILION_CITY
-	dw NothingWildMons         ; CELADON_CITY
+	dw CeladonCityWildMons     ; CELADON_CITY
 	dw NothingWildMons         ; FUCHSIA_CITY
 	dw NothingWildMons         ; CINNABAR_ISLAND
 	dw NothingWildMons         ; INDIGO_PLATEAU
@@ -324,3 +324,4 @@ INCLUDE "data/wild/maps/VictoryRoad3F.asm"
 INCLUDE "data/wild/maps/VictoryRoad1F.asm"
 INCLUDE "data/wild/maps/DiglettsCave.asm"
 INCLUDE "data/wild/maps/FuchsiaGym.asm" ; added for Voltorbs in Fuchsia Gym
+INCLUDE "data/wild/maps/CeladonCity.asm" ; added Grimers in Celadon City water
