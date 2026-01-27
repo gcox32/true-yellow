@@ -8,6 +8,7 @@ Visual bugs:
 - [x] followers should not disappear when we fish
 - [x] misty and brock both appear in front of menu screens; misty also appears in front of the town map, blinking along with the map's cursor
 - [x] misty leaves our chain and then comes back in line when we switch maps (outdoors); this _appears_ to only be a problem when the chain is just player, pikachu, misty (i.e. before we add brock)
+- [x] followers should appear "mixed" with the grass when walking through the grass, like pikachu and player
 
 Downstream issues:
 - [x] handle sprites overflow: now that we have 2 more sprites for every map, we need to edit all possible sprites for any particular map. this may mean going through, map by map, and removing sprite objects that do not meaningfully affect gameplay
@@ -19,4 +20,4 @@ Continuity efforts:
 
 Known bugs:
 - [x] Misty overworld sprite flashes with cursor from open TownMap (she should be hidden)
-- [ ] followers disappear and re-initialize during any text: they should persist but stand _beneath_ text boxes
+- [ ] followers disappear and re-initialize during any text: they should persist but stand _beneath_ text boxes (this proved to be a limitation of the rendering methods)

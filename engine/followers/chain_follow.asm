@@ -530,6 +530,8 @@ InitializeMistyPosition:
 	or b
 	ld [wSpriteMistyStateData1ImageIndex], a
 
+	; Update grass priority
+	call UpdateMistyGrassPriority
 	ret
 
 ; =====================================
@@ -596,6 +598,8 @@ InitializeBrockPosition:
 	or b
 	ld [wSpriteBrockStateData1ImageIndex], a
 
+	; Update grass priority
+	call UpdateBrockGrassPriority
 	ret
 
 ; =====================================
@@ -736,6 +740,9 @@ UpdateMistyIdleState:
 	ld bc, wSpriteMistyStateData1
 	farcall InitializeSpriteScreenPosition
 	pop bc
+
+	; Update grass priority in case of scrolling onto/off grass
+	call UpdateMistyGrassPriority
 
 	; Update sprite image
 	call UpdateMistyWalkingSprite
@@ -880,6 +887,9 @@ UpdateBrockIdleState:
 	farcall InitializeSpriteScreenPosition
 	pop bc
 
+	; Update grass priority in case of scrolling onto/off grass
+	call UpdateBrockGrassPriority
+
 	; Update sprite image
 	call UpdateBrockWalkingSprite
 	ret
@@ -896,6 +906,9 @@ UpdateMistyWalking:
 
 	; Walk complete - update map position and return to idle
 	call UpdateMistyMapPosition
+
+	; Update grass priority based on new position
+	call UpdateMistyGrassPriority
 
 	; Clear step vectors
 	xor a
@@ -959,6 +972,9 @@ UpdateBrockWalking:
 	; Walk complete - update map position and return to idle
 	call UpdateBrockMapPosition
 
+	; Update grass priority based on new position
+	call UpdateBrockGrassPriority
+
 	; Clear step vectors
 	xor a
 	ld [wSpriteBrockStateData1 + SPRITESTATEDATA1_YSTEPVECTOR], a
@@ -1020,6 +1036,9 @@ UpdateMistyHopping:
 
 	; Hop complete - update map position and return to idle
 	call UpdateMistyMapPosition
+
+	; Update grass priority based on new position
+	call UpdateMistyGrassPriority
 
 	; Clear step vectors
 	xor a
@@ -1127,6 +1146,9 @@ UpdateBrockHopping:
 
 	; Hop complete - update map position and return to idle
 	call UpdateBrockMapPosition
+
+	; Update grass priority based on new position
+	call UpdateBrockGrassPriority
 
 	; Clear step vectors
 	xor a
@@ -1825,3 +1847,88 @@ MistyFollowerText:
 BrockFollowerText:
 	text_far _BrockFollowerText
 	text_end
+
+; =====================================
+; GRASS PRIORITY UPDATES
+; =====================================
+; These routines check if a follower is standing on a grass tile and set
+; their GrassPriority field accordingly. This makes the grass overlay
+; the bottom half of their sprite, matching player/Pikachu behavior.
+
+UpdateMistyGrassPriority:
+; Check if Misty is standing on grass and update her GrassPriority field
+	; Get Misty's current tile from screen position
+	; Y pixel position -> row offset
+	ld a, [wSpriteMistyStateData1 + SPRITESTATEDATA1_YPIXELS]
+	add $4                ; center offset
+	and $f0               ; align to tile
+	srl a                 ; divide by 2 (result is row * 8)
+	ld c, a
+	ld b, $0
+
+	; X pixel position -> column offset
+	ld a, [wSpriteMistyStateData1 + SPRITESTATEDATA1_XPIXELS]
+	add $2                ; center offset
+	srl a
+	srl a
+	srl a                 ; divide by 8 (result is column)
+	add SCREEN_WIDTH      ; add screen width offset
+	ld d, 0
+	ld e, a
+
+	; Calculate tile address in wTileMap
+	ld hl, wTileMap
+REPT 5
+	add hl, bc            ; add row offset 5 times (row * 8 * 5 = row * 40 = row * SCREEN_WIDTH * 2)
+ENDR
+	add hl, de            ; add column offset
+	ld e, [hl]            ; e = tile at Misty's position
+
+	; Compare to grass tile
+	ld a, [wGrassTile]
+	cp e
+	ld a, $0
+	jr nz, .notOnGrassMisty
+	ld a, OAM_PRIO        ; $80 - set priority bit to draw behind BG
+.notOnGrassMisty
+	ld [wSpriteMistyStateData2GrassPriority], a
+	ret
+
+UpdateBrockGrassPriority:
+; Check if Brock is standing on grass and update his GrassPriority field
+	; Get Brock's current tile from screen position
+	; Y pixel position -> row offset
+	ld a, [wSpriteBrockStateData1 + SPRITESTATEDATA1_YPIXELS]
+	add $4                ; center offset
+	and $f0               ; align to tile
+	srl a                 ; divide by 2 (result is row * 8)
+	ld c, a
+	ld b, $0
+
+	; X pixel position -> column offset
+	ld a, [wSpriteBrockStateData1 + SPRITESTATEDATA1_XPIXELS]
+	add $2                ; center offset
+	srl a
+	srl a
+	srl a                 ; divide by 8 (result is column)
+	add SCREEN_WIDTH      ; add screen width offset
+	ld d, 0
+	ld e, a
+
+	; Calculate tile address in wTileMap
+	ld hl, wTileMap
+REPT 5
+	add hl, bc            ; add row offset 5 times (row * 8 * 5 = row * 40 = row * SCREEN_WIDTH * 2)
+ENDR
+	add hl, de            ; add column offset
+	ld e, [hl]            ; e = tile at Brock's position
+
+	; Compare to grass tile
+	ld a, [wGrassTile]
+	cp e
+	ld a, $0
+	jr nz, .notOnGrassBrock
+	ld a, OAM_PRIO        ; $80 - set priority bit to draw behind BG
+.notOnGrassBrock
+	ld [wSpriteBrockStateData2GrassPriority], a
+	ret
