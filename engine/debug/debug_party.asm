@@ -13,9 +13,15 @@ SetDebugNewGameParty: ; unreferenced except in _DEBUG
 	jr .loop
 
 DebugNewGameParty: ; unreferenced except in _DEBUG
-	db SNORLAX, 80
-	db PERSIAN, 80
-	db JIGGLYPUFF, 15
+	; Exeggutor is the only debug party member shared with Red, Green, and Japanese Blue.
+	; "Tsunekazu Ishihara: Exeggutor is my favorite. That's because I was
+	; always using this character while I was debugging the program."
+	; From https://web.archive.org/web/20000607152840/http://pocket.ign.com/news/14973.html
+	db EXEGGUTOR, 80
+	db FLOATING_WEEZING, 80
+	db FLOATING_MAGNETON, 80
+	db HARDENED_ONIX, 99
+	db ARMORED_MEWTWO, 99
 	db STARTER_PIKACHU, 5
 	db -1 ; end
 

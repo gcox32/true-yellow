@@ -38,7 +38,7 @@
 	const PINSIR             ; $1D
 	const TANGELA            ; $1E
 	const_skip               ; $1F
-	const_skip               ; $20
+	const_skip               ; $20 ; enhanced lickitung
 	const GROWLITHE          ; $21
 	const ONIX               ; $22
 	const FEAROW             ; $23
@@ -62,7 +62,7 @@
 	const ELECTABUZZ         ; $35
 	const MAGNETON           ; $36
 	const KOFFING            ; $37
-	const_skip               ; $38
+	const FLOATING_MAGNETON  ; $38 ; added floating magneton
 	const MANKEY             ; $39
 	const SEEL               ; $3A
 	const DIGLETT            ; $3B
@@ -73,7 +73,7 @@
 	const FARFETCHD          ; $40
 	const VENONAT            ; $41
 	const DRAGONITE          ; $42
-	const_skip               ; $43
+	const_skip               ; $43 ; enhanced farfetch'd
 	const_skip               ; $44
 	const_skip               ; $45
 	const DODUO              ; $46
@@ -152,7 +152,7 @@
 	const WEEZING            ; $8F
 	const PERSIAN            ; $90
 	const MAROWAK            ; $91
-	const_skip               ; $92
+	const FLOATING_WEEZING   ; $92 ; added floating weezing
 	const HAUNTER            ; $93
 	const ABRA               ; $94
 	const ALAKAZAM           ; $95
@@ -178,16 +178,16 @@
 	const GEODUDE            ; $A9
 	const PORYGON            ; $AA
 	const AERODACTYL         ; $AB
-	const_skip               ; $AC
+	const HARDENED_ONIX     ; $AC ; added hardened onix
 	const MAGNEMITE          ; $AD
-	const_skip               ; $AE
+	const ARMORED_MEWTWO     ; $AE ; added armored mewtwo
 	const_skip               ; $AF
 	const CHARMANDER         ; $B0
 	const SQUIRTLE           ; $B1
 	const CHARMELEON         ; $B2
 	const WARTORTLE          ; $B3
 	const CHARIZARD          ; $B4
-	const_skip               ; $B5
+	const MISSINGNO          ; $B5 ; added real missingno
 	const FOSSIL_KABUTOPS    ; $B6
 	const FOSSIL_AERODACTYL  ; $B7
 	const MON_GHOST          ; $B8

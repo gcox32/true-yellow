@@ -30,7 +30,7 @@ PokedexOrder:
 	db DEX_BLASTOISE
 	db DEX_PINSIR
 	db DEX_TANGELA
-	db 0 ; MISSINGNO.
+	db 0 ; MISSINGNO. ; spirit torched
 	db 0 ; MISSINGNO.
 	db DEX_GROWLITHE
 	db DEX_ONIX
@@ -49,13 +49,13 @@ PokedexOrder:
 	db DEX_PSYDUCK
 	db DEX_DROWZEE
 	db DEX_GOLEM
-	db 0 ; MISSINGNO.
+	db 0 ; MISSINGNO. ; spirit irradiated
 	db DEX_MAGMAR
-	db 0 ; MISSINGNO.
+	db 0 ; MISSINGNO. ; volcanic magmar
 	db DEX_ELECTABUZZ
 	db DEX_MAGNETON
 	db DEX_KOFFING
-	db 0 ; MISSINGNO.
+	db DEX_MAGNETON ; floating magneton
 	db DEX_MANKEY
 	db DEX_SEEL
 	db DEX_DIGLETT
@@ -85,7 +85,7 @@ PokedexOrder:
 	db DEX_NINETALES
 	db DEX_PIKACHU
 	db DEX_RAICHU
-	db 0 ; MISSINGNO.
+	db 0 ; MISSINGNO. ; spirit chunky
 	db 0 ; MISSINGNO.
 	db DEX_DRATINI
 	db DEX_DRAGONAIR
@@ -93,7 +93,7 @@ PokedexOrder:
 	db DEX_KABUTOPS
 	db DEX_HORSEA
 	db DEX_SEADRA
-	db 0 ; MISSINGNO.
+	db 0 ; MISSINGNO. ; winter dragonair
 	db 0 ; MISSINGNO.
 	db DEX_SANDSHREW
 	db DEX_SANDSLASH
@@ -114,7 +114,7 @@ PokedexOrder:
 	db DEX_WEEDLE
 	db DEX_KAKUNA
 	db DEX_BEEDRILL
-	db 0 ; MISSINGNO.
+	db 0 ; MISSINGNO. ; spirit painless
 	db DEX_DODRIO
 	db DEX_PRIMEAPE
 	db DEX_DUGTRIO
@@ -133,7 +133,7 @@ PokedexOrder:
 	db DEX_MEWTWO
 	db DEX_SNORLAX
 	db DEX_MAGIKARP
-	db 0 ; MISSINGNO.
+	db 0 ; MISSINGNO. ; spirit the maw
 	db 0 ; MISSINGNO.
 	db DEX_MUK
 	db 0 ; MISSINGNO.
@@ -145,7 +145,7 @@ PokedexOrder:
 	db DEX_WEEZING
 	db DEX_PERSIAN
 	db DEX_MAROWAK
-	db 0 ; MISSINGNO.
+	db DEX_WEEZING ; floating weezing
 	db DEX_HAUNTER
 	db DEX_ABRA
 	db DEX_ALAKAZAM
@@ -171,16 +171,16 @@ PokedexOrder:
 	db DEX_GEODUDE
 	db DEX_PORYGON
 	db DEX_AERODACTYL
-	db 0 ; MISSINGNO.
+	db DEX_ONIX ; Hardened onix
 	db DEX_MAGNEMITE
-	db 0 ; MISSINGNO.
-	db 0 ; MISSINGNO.
+	db DEX_MEWTWO ; Armored Mewtwo
+	db 0 ; MISSINGNO. ; powered haunter
 	db DEX_CHARMANDER
 	db DEX_SQUIRTLE
 	db DEX_CHARMELEON
 	db DEX_WARTORTLE
 	db DEX_CHARIZARD
-	db 0 ; MISSINGNO.
+	db DEX_MISSINGNO ; real missingno
 	db 0 ; MISSINGNO.
 	db 0 ; MISSINGNO.
 	db 0 ; MISSINGNO.

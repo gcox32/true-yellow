@@ -152,3 +152,10 @@ INCLUDE "data/pokemon/base_stats/dragonite.asm"
 INCLUDE "data/pokemon/base_stats/mewtwo.asm"
 INCLUDE "data/pokemon/base_stats/mew.asm"
 	assert_table_length NUM_POKEMON
+
+NonDexMonsBaseStats::
+INCLUDE "data/pokemon/base_stats/missingno.asm"
+INCLUDE "data/pokemon/base_stats/armored_mewtwo.asm"
+INCLUDE "data/pokemon/base_stats/hardened_onix.asm"
+INCLUDE "data/pokemon/base_stats/floating_magneton.asm"
+INCLUDE "data/pokemon/base_stats/floating_weezing.asm"

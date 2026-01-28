@@ -380,3 +380,20 @@ SECTION "Pics 7", ROMX
 RedPicBack::       INCBIN "gfx/player/redb.pic"
 OldManPicBack::    INCBIN "gfx/battle/oldmanb.pic"
 ProfOakPicBack::   INCBIN "gfx/battle/prof.oakb.pic"
+
+; new
+MissingnoPicFront::    INCBIN "gfx/pokemon/front/missingno.pic"
+MissingnoPicBackSW::   INCBIN "gfx/pokemon/back_sw/missingnob.pic"
+MissingnoPicBack::     INCBIN "gfx/pokemon/back/missingnob.pic"
+
+ArmoredMewtwoPicBack::    INCBIN "gfx/pokemon/back/armored_mewtwob.pic"
+ArmoredMewtwoPicFront:: INCBIN "gfx/pokemon/front/armored_mewtwo.pic"
+ArmoredMewtwoPicBackSW:: INCBIN "gfx/pokemon/back_sw/armored_mewtwob.pic"
+ArmoredMewtwoPicFrontAlt:: INCBIN "gfx/pokemon/front_alt/armored_mewtwo.pic"
+
+OnixPicBackSW::       INCBIN "gfx/pokemon/back_sw/onixb.pic"
+OnixPicFrontAlt::     INCBIN "gfx/pokemon/front_alt/onix.pic"
+
+WeezingPicBackSW::     INCBIN "gfx/pokemon/back_sw/weezingb.pic"
+
+MagnetonPicBackSW::   INCBIN "gfx/pokemon/back_sw/magnetonb.pic"
