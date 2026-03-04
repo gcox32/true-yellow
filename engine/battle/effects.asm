@@ -1687,6 +1687,61 @@ ConversionEffect:
 HazeEffect:
 	jpfar HazeEffect_
 
+GrowthEffect:
+	lb bc, SPECIAL_UP1_EFFECT, GROWTH_EFFECT
+	call GetSpecialPointers
+	jr WithdrawGrowthEffect
+
+WithdrawGrowthEffect:
+	push bc
+	ld a, [wHPBarType]
+	push af
+	push de
+	push hl
+	ld a, 3
+	ld [wHPBarType], a
+	callfar HealEffect_
+	ld a, [wHPBarType]
+	cp 3 ; if wHPBarType was unchanged the heal process failed
+	pop hl
+	pop de
+	jr z, .done
+	call IsStatMaxed
+	jr c, .done
+.continue
+	pop af
+	ld [wHPBarType], a
+	;values for the enemy's turn
+	ld de, wPlayerMoveEffect
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .next
+	; values for the player's turn
+	ld de, wEnemyMoveEffect
+.next
+	pop bc
+	ld a, b
+	ld [de], a
+	push bc
+	push de
+	SetFlag FLAG_SKIP_STAT_ANIMATION
+	call StatModifierUpEffect ; stat modifier raising function
+	ResetFlag FLAG_SKIP_STAT_ANIMATION
+	pop de
+	pop bc
+	ld a, c
+	ld [de], a
+	ret
+.done
+	pop af
+	ld [wHPBarType], a
+	pop bc
+	ret
+
+WithdrawEffect:
+	lb bc, DEFENSE_UP1_EFFECT, WITHDRAW_EFFECT
+	call GetDefensePointers
+
 HealEffect:
 	jpfar HealEffect_
 

@@ -23,7 +23,7 @@ Moves:
 	move SCRATCH,      NO_ADDITIONAL_EFFECT,        40, NORMAL,       100, 35
 	move VICEGRIP,     NO_ADDITIONAL_EFFECT,        55, NORMAL,       100, 30
 	move GUILLOTINE,   OHKO_EFFECT,                  1, BUG,           50,  5 ; type changed from NORMAL to BUG, accuracy changed from 30 to 50
-	move RAZOR_WIND,   CHARGE_EFFECT,               80, FLYING,       100, 10 ; type changed from NORMAL to FLYING, accuracy changed from 75 to 100
+	move RAZOR_WIND,   NO_ADDITIONAL_EFFECT,        90, FLYING,       100, 10 ; type changed from NORMAL to FLYING, accuracy changed from 75 to 100
 	move SWORDS_DANCE, ATTACK_UP2_EFFECT,            0, NORMAL,       100, 30
 	move CUT,          NO_ADDITIONAL_EFFECT,        50, BUG,           95, 30 ; type changed from NORMAL to BUG
 	move GUST,         NO_ADDITIONAL_EFFECT,        40, FLYING,       100, 35 ; type changed from NORMAL to FLYING
@@ -31,7 +31,7 @@ Moves:
 	move WHIRLWIND,    SWITCH_AND_TELEPORT_EFFECT,   0, FLYING,        85, 20 ; type changed from NORMAL to FLYING
 	move FLY,          FLY_EFFECT,                  70, FLYING,        95, 15
 	move BIND,         TRAPPING_EFFECT,             15, NORMAL,        85, 20 ; accuracy changed from 75 to 85
-	move SLAM,         FLINCH_SIDE_EFFECT1,         80, DRAGON,        95, 20 ; type changed from NORMAL to DRAGON, accuracy changed from 75 to 95; added FLINCH_SIDE_EFFECT1 effect
+	move SLAM,         POISON_SIDE_EFFECT1,         80, POISON,        95, 20 ; type changed from NORMAL to POISON, now FILTHY SLAM
 	move VINE_WHIP,    NO_ADDITIONAL_EFFECT,        35, GRASS,        100, 20 ; pp changed from 10 to 20
 	move STOMP,        FLINCH_SIDE_EFFECT2,         65, NORMAL,       100, 20
 	move DOUBLE_KICK,  ATTACK_TWICE_EFFECT,         40, FIGHTING,     100, 30 ; power changed from 30 to 40
@@ -66,7 +66,7 @@ Moves:
 	move FLAMETHROWER, BURN_SIDE_EFFECT1,           95, FIRE,         100, 15
 	move MIST,         MIST_EFFECT,                  0, WATER,        100, 30 ; type changed from ICE to WATER
 	move WATER_GUN,    NO_ADDITIONAL_EFFECT,        40, WATER,        100, 25
-	move HYDRO_PUMP,   NO_ADDITIONAL_EFFECT,       120, WATER,         90,  5 ; accuracy changed from 80 to 90
+	move HYDRO_PUMP,   NO_ADDITIONAL_EFFECT,       120, WATER,         90, 10 ; accuracy changed from 80 to 90, more pp bc blastoise wants to use it
 	move SURF,         NO_ADDITIONAL_EFFECT,        95, WATER,        100, 15
 	move ICE_BEAM,     FREEZE_SIDE_EFFECT1,         95, ICE,          100, 10
 	move BLIZZARD,     FREEZE_SIDE_EFFECT1,        120, ICE,           90,  5
@@ -84,7 +84,7 @@ Moves:
 	move ABSORB,       DRAIN_HP_EFFECT,             30, GRASS,        100, 25 ; power changed from 20 to 30
 	move MEGA_DRAIN,   DRAIN_HP_EFFECT,             60, GRASS,        100, 20 ; power changed from 40 to 60, pp changed from 10 to 20
 	move LEECH_SEED,   LEECH_SEED_EFFECT,            0, GRASS,         90, 20 ; pp changed from 10 to 20
-	move GROWTH,       SPECIAL_UP1_EFFECT,           0, NORMAL,       100, 30 ; pp changed from 40 to 30
+	move GROWTH,       GROWTH_EFFECT,                0, GRASS,        100, 10 ; new effect
 	move RAZOR_LEAF,   NO_ADDITIONAL_EFFECT,        55, GRASS,         95, 25
 	move SOLARBEAM,    BURN_SIDE_EFFECT1,          110, GRASS,        100, 10 ; remove the charge in favor of a burn
 	move POISONPOWDER, POISON_EFFECT,                0, POISON,        85, 20 ; accuracy changed from 75 to 85, pp changed from 35 to 20
@@ -120,7 +120,7 @@ Moves:
 	move MINIMIZE,     EVASION_UP1_EFFECT,           0, NORMAL,       100, 20
 	move SMOKESCREEN,  ACCURACY_DOWN1_EFFECT,        0, POISON,       100, 20 ; type changed from NORMAL to POISON
 	move CONFUSE_RAY,  CONFUSION_EFFECT,             0, GHOST,        100, 10
-	move WITHDRAW,     DEFENSE_UP1_EFFECT,           0, WATER,        100, 30
+	move WITHDRAW,     WITHDRAW_EFFECT,              0, WATER,        100, 10
 	move DEFENSE_CURL, DEFENSE_UP1_EFFECT,           0, NORMAL,       100, 30 ; pp changed from 40 to 30
 	move BARRIER,      DEFENSE_UP2_EFFECT,           0, PSYCHIC_TYPE, 100, 30
 	move LIGHT_SCREEN, LIGHT_SCREEN_EFFECT,          0, PSYCHIC_TYPE, 100, 30
@@ -153,7 +153,7 @@ Moves:
 	move BARRAGE,      TWO_TO_FIVE_ATTACKS_EFFECT,  20, GRASS,         85, 20 ; power changed from 15 to 20, type changed from NORMAL to GRASS
 	move LEECH_LIFE,   DRAIN_HP_EFFECT,             50, BUG,          100, 15 ; power changed from 20 to 50
 	move LOVELY_KISS,  SLEEP_EFFECT,                 0, NORMAL,        85, 10 ; accuracy changed from 75 to 85
-	move SKY_ATTACK,   CHARGE_EFFECT,              150, FLYING,       100,  5 ; power changed from 140 to 150, accuracy changed from 90 to 100
+	move SKY_ATTACK,   RECOIL_EFFECT,              120, FLYING,       100,  5 ; power changed from 140 to 120, accuracy changed from 90 to 100, recoil now
 	move TRANSFORM,    TRANSFORM_EFFECT,             0, NORMAL,       100, 10 ; now priority move
 	move BUBBLE,       SPEED_DOWN_SIDE_EFFECT,      20, WATER,        100, 30
 	move DIZZY_PUNCH,  NO_ADDITIONAL_EFFECT,        70, NORMAL,       100, 10
