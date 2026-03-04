@@ -794,6 +794,10 @@ DEF INDIGO_PLATEAU_EVENTS_END EQU const_value - 1
 	const_next $9F0
 	const EVENT_MISTY_FOLLOWING_PLAYER
 
+; flag needed for double stat boost effects
+DEF FLAG_SKIPPED_STAT_MODIFIER EQU const_value
+DEF FLAG_SKIP_STAT_ANIMATION EQU const_value
+
 ; End of events
 	const_next $A00
 DEF NUM_EVENTS EQU const_value

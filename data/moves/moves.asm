@@ -14,7 +14,7 @@ Moves:
 	move POUND,        NO_ADDITIONAL_EFFECT,        40, NORMAL,       100, 35
 	move KARATE_CHOP,  NO_ADDITIONAL_EFFECT,        50, FIGHTING,     100, 25 ; type changed from NORMAL to FIGHTING
 	move DOUBLESLAP,   TWO_TO_FIVE_ATTACKS_EFFECT,  15, NORMAL,        95, 10 ; accuracy changed from 85 to 95
-	move COMET_PUNCH,  TWO_TO_FIVE_ATTACKS_EFFECT,  18, FIGHTING,      90, 15 ; type changed from NORMAL to FIGHTING, accuracy changed from 85 to 90
+	move COMET_PUNCH,  NO_ADDITIONAL_EFFECT,        60, FIGHTING,     100, 15 ; priority move
 	move MEGA_PUNCH,   NO_ADDITIONAL_EFFECT,        80, NORMAL,        95, 20 ; accuracy changed from 85 to 95
 	move PAY_DAY,      PAY_DAY_EFFECT,              40, NORMAL,       100, 20
 	move FIRE_PUNCH,   BURN_SIDE_EFFECT1,           65, FIRE,         100, 15 ; power changed from 75 to 65
@@ -27,7 +27,7 @@ Moves:
 	move SWORDS_DANCE, ATTACK_UP2_EFFECT,            0, NORMAL,       100, 30
 	move CUT,          NO_ADDITIONAL_EFFECT,        50, BUG,           95, 30 ; type changed from NORMAL to BUG
 	move GUST,         NO_ADDITIONAL_EFFECT,        40, FLYING,       100, 35 ; type changed from NORMAL to FLYING
-	move WING_ATTACK,  NO_ADDITIONAL_EFFECT,        60, FLYING,       100, 35 ; power changed from 35 to 60
+	move WING_ATTACK,  NO_ADDITIONAL_EFFECT,        50, FLYING,       100, 35 ; priority move
 	move WHIRLWIND,    SWITCH_AND_TELEPORT_EFFECT,   0, FLYING,        85, 20 ; type changed from NORMAL to FLYING
 	move FLY,          FLY_EFFECT,                  70, FLYING,        95, 15
 	move BIND,         TRAPPING_EFFECT,             15, NORMAL,        85, 20 ; accuracy changed from 75 to 85
@@ -47,7 +47,7 @@ Moves:
 	move BODY_SLAM,    PARALYZE_SIDE_EFFECT2,       85, NORMAL,       100, 15
 	move WRAP,         TRAPPING_EFFECT,             15, NORMAL,        85, 20
 	move TAKE_DOWN,    RECOIL_EFFECT,               90, NORMAL,        95, 20 ; accuracy changed from 85 to 95
-	move THRASH,       THRASH_PETAL_DANCE_EFFECT,   90, DRAGON,       100, 20 ; type changed from NORMAL to DRAGON
+	move THRASH,       THRASH_PETAL_DANCE_EFFECT,   90, NORMAL,       100, 20 ; type changed from NORMAL to DRAGON
 	move DOUBLE_EDGE,  RECOIL_EFFECT,              100, NORMAL,       100, 15
 	move TAIL_WHIP,    DEFENSE_DOWN1_EFFECT,         0, NORMAL,       100, 30
 	move POISON_STING, POISON_SIDE_EFFECT1,         15, POISON,       100, 35
@@ -59,7 +59,7 @@ Moves:
 	move ROAR,         SWITCH_AND_TELEPORT_EFFECT,   0, NORMAL,       100, 20
 	move SING,         SLEEP_EFFECT,                 0, NORMAL,        70, 15 ; accuracy changed from 55 to 70
 	move SUPERSONIC,   CONFUSION_EFFECT,             0, NORMAL,        55, 20
-	move SONICBOOM,    SPECIAL_DAMAGE_EFFECT,        1, FLYING,        90, 20
+	move SONICBOOM,    FLINCH_SIDE_EFFECT1,          1, FLYING,       100, 15 ; priority move, set damage still
 	move DISABLE,      DISABLE_EFFECT,               0, NORMAL,        85, 20 ; accuracy changed from 55 to 85
 	move ACID,         DEFENSE_DOWN_SIDE_EFFECT,    40, POISON,       100, 30
 	move EMBER,        BURN_SIDE_EFFECT1,           40, FIRE,         100, 25
@@ -86,13 +86,13 @@ Moves:
 	move LEECH_SEED,   LEECH_SEED_EFFECT,            0, GRASS,         90, 20 ; pp changed from 10 to 20
 	move GROWTH,       SPECIAL_UP1_EFFECT,           0, NORMAL,       100, 30 ; pp changed from 40 to 30
 	move RAZOR_LEAF,   NO_ADDITIONAL_EFFECT,        55, GRASS,         95, 25
-	move SOLARBEAM,    CHARGE_EFFECT,              150, GRASS,        100, 10 ; power changed from 120 to 150
+	move SOLARBEAM,    BURN_SIDE_EFFECT1,          110, GRASS,        100, 10 ; remove the charge in favor of a burn
 	move POISONPOWDER, POISON_EFFECT,                0, POISON,        85, 20 ; accuracy changed from 75 to 85, pp changed from 35 to 20
 	move STUN_SPORE,   PARALYZE_EFFECT,              0, GRASS,         85, 20 ; accuracy changed from 75 to 85, pp changed from 30 to 20
 	move SLEEP_POWDER, SLEEP_EFFECT,                 0, GRASS,         75, 15
-	move PETAL_DANCE,  THRASH_PETAL_DANCE_EFFECT,   90, GRASS,        100, 20 ; power changed from 70 to 90
+	move PETAL_DANCE,  THRASH_PETAL_DANCE_EFFECT,  100, GRASS,        100, 20 ; power changed from 70 to 100
 	move STRING_SHOT,  SPEED_DOWN1_EFFECT,           0, BUG,           95, 25 ; pp changed from 40 to 25
-	move DRAGON_RAGE,  SPECIAL_DAMAGE_EFFECT,        1, DRAGON,       100, 10
+	move DRAGON_RAGE,  NO_ADDITIONAL_EFFECT,        80, DRAGON,       100, 20
 	move FIRE_SPIN,    TRAPPING_EFFECT,             15, FIRE,          85, 15 ; accuracy changed from 70 to 85
 	move THUNDERSHOCK, PARALYZE_SIDE_EFFECT1,       40, ELECTRIC,     100, 30
 	move THUNDERBOLT,  PARALYZE_SIDE_EFFECT1,       95, ELECTRIC,     100, 15
@@ -106,12 +106,12 @@ Moves:
 	move CONFUSION,    CONFUSION_SIDE_EFFECT,       50, PSYCHIC_TYPE, 100, 25
 	move PSYCHIC_M,    SPECIAL_DOWN_SIDE_EFFECT,    90, PSYCHIC_TYPE, 100, 10
 	move HYPNOSIS,     SLEEP_EFFECT,                 0, PSYCHIC_TYPE,  70, 20 ; accuracy changed from 60 to 70
-	move MEDITATE,     ATTACK_UP1_EFFECT,            0, PSYCHIC_TYPE, 100, 30 ; pp changed from 40 to 30
+	move MEDITATE,     ATTACK_SPECIAL_SPEED_UP1,     0, PSYCHIC_TYPE, 100, 10 ; new effect and pp reduced to 10
 	move AGILITY,      SPEED_UP2_EFFECT,             0, PSYCHIC_TYPE, 100, 20 ; pp changed from 30 to 20
 	move QUICK_ATTACK, NO_ADDITIONAL_EFFECT,        40, NORMAL,       100, 30
-	move RAGE,         RAGE_EFFECT,                 20, NORMAL,       100, 20
+	move RAGE,         ATTACK_UP_SIDE_EFFECT,       60, DRAGON,       100, 20 ; new effect
 	move TELEPORT,     SWITCH_AND_TELEPORT_EFFECT,   0, PSYCHIC_TYPE, 100, 10
-	move NIGHT_SHADE,  SPECIAL_DAMAGE_EFFECT,        0, GHOST,        100, 15
+	move NIGHT_SHADE,  NO_ADDITIONAL_EFFECT,        65, GHOST,        100, 20 ; now a normal GHOST type move
 	move MIMIC,        MIMIC_EFFECT,                 0, NORMAL,       100, 10
 	move SCREECH,      DEFENSE_DOWN2_EFFECT,         0, NORMAL,        85, 30 ; pp changed from 40 to 30
 	move DOUBLE_TEAM,  EVASION_UP1_EFFECT,           0, NORMAL,       100, 15
@@ -126,21 +126,21 @@ Moves:
 	move LIGHT_SCREEN, LIGHT_SCREEN_EFFECT,          0, PSYCHIC_TYPE, 100, 30
 	move HAZE,         HAZE_EFFECT,                  0, POISON,       100, 30 ; type changed from ICE to POISON
 	move REFLECT,      REFLECT_EFFECT,               0, PSYCHIC_TYPE, 100, 20
-	move FOCUS_ENERGY, FOCUS_ENERGY_EFFECT,          0, FIGHTING,     100, 30 ; type changed from NORMAL to FIGHTING
-	move BIDE,         BIDE_EFFECT,                  0, NORMAL,       100, 10
+	move FOCUS_ENERGY, FOCUS_ENERGY_EFFECT,          0, ELECTRIC,     100, 30 ; type changed from NORMAL to ELECTRIC
+	move BIDE,         ATTACK_DEFENSE_UP1_EFFECT,    0, NORMAL,       100, 10 ; new effect + atk + def
 	move METRONOME,    METRONOME_EFFECT,             0, NORMAL,       100, 10
 	move MIRROR_MOVE,  MIRROR_MOVE_EFFECT,           0, FLYING,       100, 20
-	move SELFDESTRUCT, EXPLODE_EFFECT,             130, NORMAL,       100,  5
+	move SELFDESTRUCT, EXPLODE_RECOIL_EFFECT,      140, FIRE,         100,  5 ; high recoil normally, original instant defeat effect and 250 power / half defense at low health.
 	move EGG_BOMB,     NO_ADDITIONAL_EFFECT,       100, FLYING,        90, 10 ; accuracy changed from 75 to 90, type changed from NORMAL to FLYING
 	move LICK,         PARALYZE_SIDE_EFFECT2,       30, GHOST,        100, 30 ; power changed from 20 to 30
 	move SMOG,         POISON_SIDE_EFFECT2,         30, POISON,        85, 20 ; power changed from 20 to 30, accuracy changed from 70 to 85
 	move SLUDGE,       POISON_SIDE_EFFECT2,         65, POISON,       100, 20
 	move BONE_CLUB,    FLINCH_SIDE_EFFECT1,         65, GROUND,       100, 20 ; accuracy changed from 85 to 100
 	move FIRE_BLAST,   BURN_SIDE_EFFECT2,          120, FIRE,          85,  5
-	move WATERFALL,    NO_ADDITIONAL_EFFECT,        80, WATER,        100, 15
+	move WATERFALL,    FLINCH_SIDE_EFFECT2,         80, WATER,        100, 15 ; add flinching side effect
 	move CLAMP,        TRAPPING_EFFECT,             35, WATER,         85, 10 ; accuracy changed from 75 to 85
-	move SWIFT,        SWIFT_EFFECT,                60, NORMAL,       100, 20
-	move SKULL_BASH,   CHARGE_EFFECT,              100, NORMAL,       100, 15
+	move SWIFT,        SWIFT_EFFECT,                60, ICE,          100, 20 ; priority move (and ICE)
+	move SKULL_BASH,   JUMP_KICK_EFFECT,           100, NORMAL,       100, 15
 	move SPIKE_CANNON, TWO_TO_FIVE_ATTACKS_EFFECT,  20, NORMAL,       100, 15
 	move CONSTRICT,    SPEED_DOWN_SIDE_EFFECT,      40, NORMAL,       100, 30 ; power changed from 10 to 40, pp changed from 35 to 30
 	move AMNESIA,      SPECIAL_UP2_EFFECT,           0, PSYCHIC_TYPE, 100, 20
@@ -149,29 +149,29 @@ Moves:
 	move HI_JUMP_KICK, JUMP_KICK_EFFECT,            85, FIGHTING,      90, 20
 	move GLARE,        PARALYZE_EFFECT,              0, NORMAL,        85, 30 ; accuracy changed from 75 to 85
 	move DREAM_EATER,  DREAM_EATER_EFFECT,         100, GHOST,        100, 15 ; type changed from PSYCHIC_TYPE to GHOST
-	move POISON_GAS,   POISON_EFFECT,                0, POISON,        85, 20 ; accuracy changed from 55 to 85, pp changed from 40 to 20
+	move POISON_GAS,   POISON_SIDE_EFFECT1,         40, POISON,       100, 20 ; high critical hit ratio
 	move BARRAGE,      TWO_TO_FIVE_ATTACKS_EFFECT,  20, GRASS,         85, 20 ; power changed from 15 to 20, type changed from NORMAL to GRASS
-	move LEECH_LIFE,   DRAIN_HP_EFFECT,             40, BUG,          100, 15 ; power changed from 20 to 40
+	move LEECH_LIFE,   DRAIN_HP_EFFECT,             50, BUG,          100, 15 ; power changed from 20 to 50
 	move LOVELY_KISS,  SLEEP_EFFECT,                 0, NORMAL,        85, 10 ; accuracy changed from 75 to 85
 	move SKY_ATTACK,   CHARGE_EFFECT,              150, FLYING,       100,  5 ; power changed from 140 to 150, accuracy changed from 90 to 100
-	move TRANSFORM,    TRANSFORM_EFFECT,             0, NORMAL,       100, 10
+	move TRANSFORM,    TRANSFORM_EFFECT,             0, NORMAL,       100, 10 ; now priority move
 	move BUBBLE,       SPEED_DOWN_SIDE_EFFECT,      20, WATER,        100, 30
 	move DIZZY_PUNCH,  NO_ADDITIONAL_EFFECT,        70, NORMAL,       100, 10
 	move SPORE,        SLEEP_EFFECT,                 0, GRASS,        100, 15
-	move FLASH,        ACCURACY_DOWN1_EFFECT,        0, NORMAL,       100, 20 ; accuracy changed from 70 to 100
-	move PSYWAVE,      SPECIAL_DAMAGE_EFFECT,        1, PSYCHIC_TYPE, 100, 15 ; accuracy changed from 80 to 100
+	move FLASH,        FLINCH_SIDE_EFFECT1,         60, ELECTRIC,     100, 15 ; now priority move
+	move PSYWAVE,      SPECIAL_DOWN_SIDE_EFFECT,    30, PSYCHIC_TYPE, 100, 20 ; now a normal weak PSYCHIC type move
 	move SPLASH,       SPLASH_EFFECT,                0, WATER,        100, 10 ; type changed from NORMAL to WATER, pp changed from 40 to 10
 	move ACID_ARMOR,   DEFENSE_UP2_EFFECT,           0, POISON,       100, 20 ; pp changed from 40 to 20
 	move CRABHAMMER,   NO_ADDITIONAL_EFFECT,        90, WATER,         85, 10
-	move EXPLOSION,    EXPLODE_EFFECT,             170, NORMAL,       100,  5
+	move EXPLOSION,    EXPLODE_RECOIL_EFFECT,      140, ROCK,         100,  5 ; now explode recoil effect
 	move FURY_SWIPES,  TWO_TO_FIVE_ATTACKS_EFFECT,  20, NORMAL,        85, 15 ; power changed from 18 to 20, accuracy changed from 80 to 85
 	move BONEMERANG,   ATTACK_TWICE_EFFECT,         50, GROUND,        90, 10
 	move REST,         HEAL_EFFECT,                  0, NORMAL,       100, 10 ; type changed from PSYCHIC_TYPE to NORMAL
 	move ROCK_SLIDE,   FLINCH_SIDE_EFFECT2,         90, ROCK,          90, 10 ; power changed from 75 to 90, added FLINCH_SIDE_EFFECT2 effect
 	move HYPER_FANG,   FLINCH_SIDE_EFFECT1,         80, NORMAL,        90, 15
-	move SHARPEN,      ATTACK_UP1_EFFECT,            0, NORMAL,       100, 30
+	move SHARPEN,      ATTACK_ACCURACY_UP1_EFFECT,   0, NORMAL,       100, 30 ; new effect
 	move CONVERSION,   CONVERSION_EFFECT,            0, NORMAL,       100, 30
-	move TRI_ATTACK,   TRIATTACK_EFFECT,            80, NORMAL,       100, 10 ; effect changed from NO_ADDITIONAL_EFFECT to TRIATTACK_EFFECT
+	move TRI_ATTACK,   TRI_ATTACK_EFFECT,            80, NORMAL,      100, 10 ; effect changed from NO_ADDITIONAL_EFFECT to TRI_ATTACK_EFFECT
 	move SUPER_FANG,   SUPER_FANG_EFFECT,            1, NORMAL,        95, 10 ; accuracy changed from 90 to 95
 	move SLASH,        NO_ADDITIONAL_EFFECT,        70, NORMAL,       100, 20
 	move SUBSTITUTE,   SUBSTITUTE_EFFECT,            0, NORMAL,       100, 10

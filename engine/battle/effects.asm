@@ -212,32 +212,37 @@ FreezeBurnParalyzeEffect:
 	ld a, [wEnemyMonStatus]
 	and a
 	jp nz, CheckDefrost ; can't inflict status if opponent is already statused
+
+;;;;;;;;;; PureRGBnote: CHANGED: ADDED: tweak how some moves behave when applying burn/freeze/paralyze status
+
+	ld a, [wPlayerMoveNum]
+	cp SOLARBEAM
+	ld b, FIRE ; NEW: solarbeam can't burn fire types
+	jr z, .doComparison1
+
 	ld a, [wPlayerMoveType]
+	cp NORMAL ; NEW: body slam can apply status to any pokemon type
+	jr z, .skipTypeComparison1
+	cp BUG ; NEW: vicegrip can apply status to any pokemon type
+	jr z, .skipTypeComparison1
 	ld b, a
+.doComparison1
+;;;;;;;;;;
 	ld a, [wEnemyMonType1]
 	cp b ; do target type 1 and move type match?
-	ret z  ; return if they match (an ice move can't freeze an ice-type, body slam can't paralyze a normal-type, etc.)
+	ret z  ; return if they match (an ice move can't freeze an ice-type etc.)
 	ld a, [wEnemyMonType2]
 	cp b ; do target type 2 and move type match?
 	ret z  ; return if they match
+.skipTypeComparison1
 	ld a, [wPlayerMoveEffect]
-	cp FREEZE_SIDE_EFFECT2 ; more stadium stuff
-	jr nz, .asm_3f2c7
-	ld a, [wUnknownSerialFlag_d499]
-	and a
-	ld a, FREEZE_SIDE_EFFECT1
-	ld b, 30 percent + 1
-	jr z, .regular_effectiveness
-	ld b, 10 percent + 1
-	jr .regular_effectiveness
-.asm_3f2c7
 	cp PARALYZE_SIDE_EFFECT1 + 1
 	ld b, 10 percent + 1
 	jr c, .regular_effectiveness
 ; extra effectiveness
 	ld b, 30 percent + 1
 	ASSERT PARALYZE_SIDE_EFFECT2 - PARALYZE_SIDE_EFFECT1 == BURN_SIDE_EFFECT2 - BURN_SIDE_EFFECT1
-	ASSERT PARALYZE_SIDE_EFFECT2 - PARALYZE_SIDE_EFFECT1 == FREEZE_SIDE_EFFECT2 - FREEZE_SIDE_EFFECT1
+	ASSERT PARALYZE_SIDE_EFFECT2 - PARALYZE_SIDE_EFFECT1 == SPEED_UP_SIDE_EFFECT - FREEZE_SIDE_EFFECT1
 	sub PARALYZE_SIDE_EFFECT2 - PARALYZE_SIDE_EFFECT1 ; treat extra effective as regular from now on
 .regular_effectiveness
 	push af
@@ -277,25 +282,29 @@ FreezeBurnParalyzeEffect:
 	ld a, [wBattleMonStatus] ; mostly same as above with addresses swapped for opponent
 	and a
 	jp nz, CheckDefrost
+
+;;;;;;;;;; PureRGBnote: CHANGED: ADDED: tweak how some moves behave when applying burn/freeze/paralyze status
+	ld a, [wEnemyMoveNum]
+	cp SOLARBEAM
+	ld b, FIRE ; NEW: solarbeam can't burn fire types
+	jr z, .doComparison2
+	
 	ld a, [wEnemyMoveType]
+	cp NORMAL ; NEW: body slam can apply status to any pokemon type
+	jr z, .skipTypeComparison2
+	cp BUG ; NEW: vicegrip can apply status to any pokemon type
+	jr z, .skipTypeComparison2
 	ld b, a
+.doComparison2
+;;;;;;;;;;
 	ld a, [wBattleMonType1]
 	cp b
 	ret z
 	ld a, [wBattleMonType2]
 	cp b
 	ret z
+.skipTypeComparison2
 	ld a, [wEnemyMoveEffect]
-	cp FREEZE_SIDE_EFFECT2 ; more stadium stuff
-	jr nz, .asm_3f341
-	ld a, [wUnknownSerialFlag_d499]
-	and a
-	ld a, FREEZE_SIDE_EFFECT1
-	ld b, 30 percent + 1
-	jr z, .regular_effectiveness2
-	ld b, 10 percent + 1
-	jr .regular_effectiveness2
-.asm_3f341
 	cp PARALYZE_SIDE_EFFECT1 + 1
 	ld b, 10 percent + 1
 	jr c, .regular_effectiveness2
@@ -465,7 +474,174 @@ FireDefrostedText:
 	text_far _FireDefrostedText
 	text_end
 
+; PureRGBnote: ADDED: increases attack, special, and speed as a move effect. Used with Meditate.
+AttackSpecialSpeedUpEffect:
+	SetFlag FLAG_SKIPPED_STAT_MODIFIER
+	;values for the enemy's turn
+	ld de, wPlayerMoveEffect
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .next
+	; values for the player's turn
+	ld de, wEnemyMoveEffect
+.next
+	push de
+	call GetSpecialPointers
+	call IsStatMaxed
+	pop de
+	jr c, .nextStat
+	ld a, SPECIAL_UP1_EFFECT
+	call ReplacedStatModifierUpEffect
+.nextStat
+	push de
+	call GetAttackPointers
+	call IsStatMaxed
+	pop de
+	jr c, .nextStat2
+	ld a, ATTACK_UP_SIDE_EFFECT
+	call ReplacedStatModifierUpEffect
+.nextStat2
+	push de
+	call GetSpeedPointers
+	call IsStatMaxed
+	pop de
+	jr c, .done
+	ld a, SPEED_UP_SIDE_EFFECT
+	call ReplacedStatModifierUpEffect
+.done
+	ld a, ATTACK_SPECIAL_SPEED_UP1
+	jr ResetStatModEffectAndAnimationFlag
+
+; PureRGBnote: ADDED: increases both attack and defense as a move effect, used with bide
+AttackDefenseUpEffect:
+	SetFlag FLAG_SKIPPED_STAT_MODIFIER
+	;values for the enemy's turn
+	ld de, wPlayerMoveEffect
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .next
+	; values for the player's turn
+	ld de, wEnemyMoveEffect
+.next
+	push de
+	call GetDefensePointers
+	call IsStatMaxed
+	pop de
+	jr c, .nextStat
+	ld a, DEFENSE_UP1_EFFECT
+	call ReplacedStatModifierUpEffect
+.nextStat
+	push de
+	call GetAttackPointers
+	call IsStatMaxed
+	pop de
+	jr c, .done
+	ld a, ATTACK_UP_SIDE_EFFECT ; we do the side effect for the second stat because it won't run the animation
+	call ReplacedStatModifierUpEffect
+.done
+	ld a, ATTACK_DEFENSE_UP1_EFFECT
+	jr ResetStatModEffectAndAnimationFlag
+
+; PureRGBnote: ADDED: increases both accuracy and attack as a move effect, used with sharpen
+AccuracyAttackUpEffect:
+	SetFlag FLAG_SKIPPED_STAT_MODIFIER
+	;values for the enemy's turn
+	ld de, wPlayerMoveEffect
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .next
+	; values for the player's turn
+	ld de, wEnemyMoveEffect
+.next
+	push de
+	call GetAccuracyPointers
+	ld a, [hl]
+	cp MAX_STAT_LEVEL
+	jr z, .nextStat ; accuracy has no stat associated so only check if at +6
+	ld a, ACCURACY_UP1_EFFECT
+	call ReplacedStatModifierUpEffect
+.nextStat
+	push de
+	call GetAttackPointers
+	call IsStatMaxed
+	pop de
+	jr c, .done
+	ld a, ATTACK_UP_SIDE_EFFECT
+	call ReplacedStatModifierUpEffect
+.done
+	ld a, ATTACK_ACCURACY_UP1_EFFECT
+
+ResetStatModEffectAndAnimationFlag:
+	ld [de], a
+	ResetFlag FLAG_SKIP_STAT_ANIMATION
+	CheckAndResetFlagHL FLAG_SKIPPED_STAT_MODIFIER
+	jp nz, PrintNothingHappenedText
+	ret
+
+ReplacedStatModifierUpEffect:
+	ld [de], a ; we do the side effect for the second stat because it won't run the animation
+	push de
+	call StatModifierUpEffect ; stat modifier raising function
+	pop de
+	SetFlag FLAG_SKIP_STAT_ANIMATION ; for multi stat boosts, we won't do any animation after the first stat boost is done
+	ret
+
+GetDefensePointers:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wBattleMonDefense + 1
+	ld de, wPlayerMonDefenseMod
+	ret z
+	ld hl, wEnemyMonDefense + 1
+	ld de, wEnemyMonDefenseMod
+	ret
+
+GetAccuracyPointers:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wPlayerMonAccuracyMod
+	ret z
+	ld hl, wEnemyMonAccuracyMod
+	ret
+
+GetAttackPointers:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wBattleMonAttack + 1
+	ld de, wPlayerMonAttackMod
+	ret z
+	ld hl, wEnemyMonAttack + 1
+	ld de, wEnemyMonAttackMod
+	ret
+
+GetSpecialPointers:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wBattleMonSpecial + 1
+	ld de, wPlayerMonSpecialMod
+	ret z
+	ld hl, wEnemyMonSpecial + 1
+	ld de, wEnemyMonSpecialMod
+	ret
+
+GetSpeedPointers:
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wBattleMonSpeed + 1
+	ld de, wPlayerMonSpeedMod
+	ret z
+	ld hl, wEnemyMonSpeed + 1
+	ld de, wEnemyMonSpeedMod
+	ret
+
+StatUpSideEffect:
+	SetFlag FLAG_SKIP_STAT_ANIMATION
+	call StatModifierUpEffect
+	ResetFlag FLAG_SKIP_STAT_ANIMATION
+	ret
+
 StatModifierUpEffect:
+	ResetFlag FLAG_SKIPPED_STAT_MODIFIER
 	ld hl, wPlayerMonStatMods
 	ld de, wPlayerMoveEffect
 	ldh a, [hWhoseTurn]
@@ -475,6 +651,19 @@ StatModifierUpEffect:
 	ld de, wEnemyMoveEffect
 .statModifierUpEffect
 	ld a, [de]
+;;;;;;;;;; PureRGBnote: ADDED: need to decide which stat is being modified here and store it so we can apply correct badge boosts if necessary
+; 	push af
+; 	call MapEffectToStat
+; 	ld [wWhatStat], a
+; 	pop af
+; 	call MapSideEffectToStatMod
+; 	cp $ff
+; 	jr nz, .continue
+; .loadDefault
+; 	ld a, [de]
+; .continue
+; 	ld d, a
+;;;;;;;;;;
 	sub ATTACK_UP1_EFFECT
 	cp EVASION_UP1_EFFECT + $3 - ATTACK_UP1_EFFECT ; covers all +1 effects
 	jr c, .incrementStatMod
@@ -485,14 +674,16 @@ StatModifierUpEffect:
 	add hl, bc
 	ld b, [hl]
 	inc b ; increment corresponding stat mod
-	ld a, $d
+	ld a, MAX_STAT_LEVEL
 	cp b ; can't raise stat past +6 ($d or 13)
 	jp c, PrintNothingHappenedText
-	ld a, [de]
+;;;;;;;;;; PureRGBnote: ADDED: need to decide which stat is being modified here and store it so we can apply correct badge boosts if necessary
+	ld a, d ; remapped stat mod
+;;;;;;;;;;
 	cp ATTACK_UP1_EFFECT + $8 ; is it a +2 effect?
 	jr c, .ok
 	inc b ; if so, increment stat mod again
-	ld a, $d
+	ld a, MAX_STAT_LEVEL
 	cp b ; unless it's already +6
 	jr nc, .ok
 	ld b, a
@@ -878,32 +1069,7 @@ INCLUDE "data/battle/stat_mod_names.asm"
 
 INCLUDE "data/battle/stat_modifiers.asm"
 
-BideEffect:
-	ld hl, wPlayerBattleStatus1
-	ld de, wPlayerBideAccumulatedDamage
-	ld bc, wPlayerNumAttacksLeft
-	ldh a, [hWhoseTurn]
-	and a
-	jr z, .bideEffect
-	ld hl, wEnemyBattleStatus1
-	ld de, wEnemyBideAccumulatedDamage
-	ld bc, wEnemyNumAttacksLeft
-.bideEffect
-	set STORING_ENERGY, [hl] ; mon is now using bide
-	xor a
-	ld [de], a
-	inc de
-	ld [de], a
-	ld [wPlayerMoveEffect], a
-	ld [wEnemyMoveEffect], a
-	call BattleRandom
-	and $1
-	inc a
-	inc a
-	ld [bc], a ; set Bide counter to 2 or 3 at random
-	ldh a, [hWhoseTurn]
-	add XSTATITEM_ANIM
-	jp PlayBattleAnimation2
+;BideEffect: ; PureRGBnote: CHANGED: Bide effect switched to a stat buff
 
 ThrashPetalDanceEffect:
 	ld hl, wPlayerBattleStatus1
@@ -1170,41 +1336,40 @@ ChargeMoveEffectText:
 	text_far _ChargeMoveEffectText
 	text_asm
 	ld a, [wChargeMoveNum]
-	cp RAZOR_WIND
-	ld hl, MadeWhirlwindText
-	jr z, .gotText
-	cp SOLARBEAM
-	ld hl, TookInSunlightText
-	jr z, .gotText
-	cp SKULL_BASH
-	ld hl, LoweredItsHeadText
-	jr z, .gotText
-	cp SKY_ATTACK
-	ld hl, SkyAttackGlowingText
-	jr z, .gotText
+	;cp RAZOR_WIND
+	;ld hl, MadeWhirlwindText
+	;ret z
+	;cp SOLARBEAM
+	;ld hl, TookInSunlightText
+	;ret z
+	;cp SKULL_BASH
+	;ld hl, LoweredItsHeadText
+	;ret z
+	;cp SKY_ATTACK
+	;ld hl, SkyAttackGlowingText
+	;ret z
 	cp FLY
 	ld hl, FlewUpHighText
-	jr z, .gotText
+	ret z
 	cp DIG
 	ld hl, DugAHoleText
-.gotText
 	ret
 
-MadeWhirlwindText:
-	text_far _MadeWhirlwindText
-	text_end
+; MadeWhirlwindText:
+; 	text_far _MadeWhirlwindText
+; 	text_end
 
-TookInSunlightText:
-	text_far _TookInSunlightText
-	text_end
+; TookInSunlightText:
+; 	text_far _TookInSunlightText
+; 	text_end
 
-LoweredItsHeadText:
-	text_far _LoweredItsHeadText
-	text_end
+; LoweredItsHeadText:
+; 	text_far _LoweredItsHeadText
+; 	text_end
 
-SkyAttackGlowingText:
-	text_far _SkyAttackGlowingText
-	text_end
+; SkyAttackGlowingText:
+; 	text_far _SkyAttackGlowingText
+; 	text_end
 
 FlewUpHighText:
 	text_far _FlewUpHighText
@@ -1247,6 +1412,12 @@ FocusEnergyEffect:
 
 RecoilEffect:
 	jpfar RecoilEffect_
+
+BigRecoilEffect:
+	jpfar BigRecoilEffect_ ; PureRGBnote: ADDED: recoil effect that does 1/2 of the damage done to the user
+
+ExplodeRecoilEffect:
+	jpfar ExplodeRecoilEffect_ ; PureRGBnote: ADDED: same as bigrecoileffect, but if it misses does 1/4 the health of the user in recoil still
 
 ConfusionSideEffect:
 	call BattleRandom
@@ -1327,15 +1498,15 @@ ClearHyperBeam:
 	pop hl
 	ret
 
-RageEffect:
-	ld hl, wPlayerBattleStatus2
-	ldh a, [hWhoseTurn]
-	and a
-	jr z, .player
-	ld hl, wEnemyBattleStatus2
-.player
-	set USING_RAGE, [hl] ; mon is now in "rage" mode
-	ret
+; RageEffect: ; Rage was changed so we don't need this
+; 	ld hl, wPlayerBattleStatus2
+; 	ldh a, [hWhoseTurn]
+; 	and a
+; 	jr z, .player
+; 	ld hl, wEnemyBattleStatus2
+; .player
+; 	set USING_RAGE, [hl] ; mon is now in "rage" mode
+; 	ret
 
 MimicEffect:
 	ld c, 50
@@ -1634,4 +1805,21 @@ PlayBattleAnimationGotID:
 	pop bc
 	pop de
 	pop hl
+	ret
+
+IsStatMaxed:
+	ld a, [de]
+	cp MAX_STAT_LEVEL ; stat has been maxed out
+	jr z, .maxed
+	ld a, [hld]
+	cp LOW(MAX_STAT_VALUE)
+	jr nz, .notMaxed
+	ld a, [hl]
+	cp HIGH(MAX_STAT_VALUE)
+	jr z, .maxed ; stat has hit 999 and can't be boosted further
+.notMaxed
+	and a
+	ret
+.maxed
+	scf
 	ret

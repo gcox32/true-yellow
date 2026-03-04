@@ -1,25 +1,57 @@
-RecoilEffect_:
+; PureRGBnote: ADDED: same as big recoil effect but if the move missed, still damage the user.
+; Used with explosion/selfdestruct.
+ExplodeRecoilEffect_:
+	ld a, [wMoveMissed]
+	and a
+	jr z, BigRecoilEffect_
+	; if explosion/selfdestruct missed, the recoil will be 1/4 the max health of the user
+	call GetMaxHPIntoDE
+	ld h, d
+	ld l, e
+	call CalculateRecoilDamage ; 1/2 of max HP
+	srl b
+	rr c ; 1/4
+	jr GotRecoilDamage
+
+; PureRGBnote: ADDED: big recoil effect does 50% of the damage inflicted, used with struggle.
+BigRecoilEffect_: 
+	call RecoilEffect_
+	jr GotRecoilDamage
+
+DefaultRecoilEffect_:
+	call RecoilEffect_
+	srl b ; PureRGBnote: CHANGED: recoil effect does 50% by default, so divide that by 2 here to get the original 25% of damage done.
+	rr c
+	jr GotRecoilDamage
+
+GetMaxHPIntoDE:
 	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMoveNum]
-	ld hl, wBattleMonMaxHP
-	jr z, .recoilEffect
+	ld de, wBattleMonMaxHP
+	ret z
 	ld a, [wEnemyMoveNum]
-	ld hl, wEnemyMonMaxHP
+	ld de, wEnemyMonMaxHP
+	ret
+
+RecoilEffect_:
+	ld hl, wDamage 
+CalculateRecoilDamage:
+	call GetMaxHPIntoDE
 .recoilEffect
-	ld d, a
-	ld a, [wDamage]
+	push af
+	ld a, [hli]
 	ld b, a
-	ld a, [wDamage + 1]
-	ld c, a
+	ld c, [hl]
+	ld h, d
+	ld l, e
+	pop af
+	ld d, a
 	srl b
 	rr c
-	ld a, d
-	cp STRUGGLE ; struggle deals 50% recoil damage
-	jr z, .gotRecoilDamage
-	srl b
-	rr c
-.gotRecoilDamage
+	ret
+
+GotRecoilDamage:
 	ld a, b
 	or c
 	jr nz, .updateHP
