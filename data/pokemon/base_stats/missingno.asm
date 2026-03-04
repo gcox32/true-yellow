@@ -4,7 +4,7 @@
 	;   hp  atk  def  spd  spc
 
 	db GHOST, NORMAL ; type
-	db 3 ; catch rate
+	db 25 ; catch rate
 	db 255 ; base exp
 
 	INCBIN "gfx/pokemon/front/missingno.pic", 0, 1 ; sprite dimensions

@@ -1,9 +1,9 @@
 	db DEX_KINGLER ; pokedex id
 
-	db  55, 130, 115,  75,  50
+	db  75, 130, 115,  75,  50
 	;   hp  atk  def  spd  spc
 
-	db WATER, WATER ; type
+	db WATER, GROUND ; type
 	db 60 ; catch rate
 	db 206 ; base exp
 
@@ -16,8 +16,8 @@
 	; tm/hm learnset
 	tmhm SWORDS_DANCE, TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
 	     BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     HYPER_BEAM,   \
-	     RAGE,         MIMIC,        DOUBLE_TEAM,  BIDE,         REST,         \
-	     SUBSTITUTE,   CUT,          SURF,         STRENGTH
+	     EARTHQUAKE,   MIMIC,        DOUBLE_TEAM,  BIDE,         REST,         \
+	     SUBSTITUTE,   CUT,          SURF,         STRENGTH,     DIG
 	; end
 
 	db 0 ; padding

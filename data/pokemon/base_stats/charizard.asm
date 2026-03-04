@@ -1,7 +1,9 @@
 	db DEX_CHARIZARD ; pokedex id
 
-	db  78,  84,  78, 100,  85
+	; db  78,  84,  78, 100, 85 ; (previous)
+	db  78,  94,  78, 110,  95
 	;   hp  atk  def  spd  spc
+
 
 	db FIRE, FLYING ; type
 	db 45 ; catch rate
@@ -19,7 +21,7 @@
 	     SEISMIC_TOSS, RAGE,         DRAGON_RAGE,  EARTHQUAKE,   FISSURE,      \
 	     DIG,          MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         \
 	     FIRE_BLAST,   SWIFT,        SKULL_BASH,   REST,         SUBSTITUTE,   \
-	     CUT,          FLY,          STRENGTH
+	     CUT,          FLY,          STRENGTH,     ROCK_SLIDE
 	; end
 
 	db 0 ; padding

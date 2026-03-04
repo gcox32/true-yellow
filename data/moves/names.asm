@@ -20,7 +20,7 @@ MoveNames::
 	li "WHIRLWIND"
 	li "FLY"
 	li "BIND"
-	li "FILTHY SLAM" ; previously SLAM
+	li "GASTRO ACID" ; previously SLAM
 	li "VINE WHIP"
 	li "STOMP"
 	li "DOUBLE KICK"

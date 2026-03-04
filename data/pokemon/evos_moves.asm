@@ -325,7 +325,7 @@ NidokingEvosMoves:
 	db 14, POISON_STING
 	db 18, FOCUS_ENERGY
 	db 23, THRASH
-	db 25, SLAM ; FILTHY SLAM
+	db 25, SLAM ; GASTRO ACID
 	db 31, HYPER_BEAM
 	db 37, EARTHQUAKE
 	db 42, HORN_DRILL
@@ -389,7 +389,7 @@ LickitungEvosMoves:
 	db 20, LICK
 	db 23, HEADBUTT
 	db 28, DIZZY_PUNCH
-	db 31, SLAM ; FILTHY SLAM
+	db 31, SLAM ; GASTRO ACID
 	db 37, MEDITATE
 	db 42, MEGA_PUNCH
 	db 50, HYPER_BEAM
@@ -420,7 +420,7 @@ GrimerEvosMoves:
 ; Learnset
 	db 14, ACID
 	db 23, MINIMIZE
-	db 26, SLAM ; FILTHY SLAM
+	db 26, SLAM ; GASTRO ACID
 	db 29, BODY_SLAM
 	db 33, ACID_ARMOR
 	db 37, SLUDGE
@@ -438,7 +438,7 @@ GengarEvosMoves:
 	db 24, MEGA_DRAIN
 	db 29, BARRAGE
 	db 33, DREAM_EATER
-	db 41, SLAM ; FILTHY SLAM
+	db 41, SLAM ; GASTRO ACID
 	db 46, ICE_PUNCH
 	db 57, LOVELY_KISS
 	db 0
@@ -465,7 +465,7 @@ NidoqueenEvosMoves:
 	db 14, POISON_STING
 	db 18, BITE
 	db 23, BODY_SLAM
-	db 25, SLAM ; FILTHY SLAM
+	db 25, SLAM ; GASTRO ACID
 	db 43, EARTHQUAKE
 	db 49, DRILL_PECK
 	db 54, FISSURE
@@ -496,7 +496,7 @@ RhyhornEvosMoves:
 	db 19, HORN_ATTACK
 	db 23, HEADBUTT
 	db 27, FURY_ATTACK
-	db 36, SLAM ; FILTHY SLAM
+	db 36, SLAM ; GASTRO ACID
 	db 39, EARTHQUAKE
 	db 42, SKULL_BASH
 	db 47, HARDEN
@@ -539,7 +539,7 @@ MewEvosMoves:
 	db 20, TELEPORT
 	db 30, METRONOME
 	db 40, PSYCHIC_M
-	db 50, SOFTBOILED
+	db 50, RECOVER
 	db 60, GROWTH
 	db 70, DRAGON_RAGE
 	db 80, HYPER_BEAM
@@ -595,7 +595,7 @@ GastlyEvosMoves:
 	db 24, MEGA_DRAIN
 	db 29, BARRAGE
 	db 33, DREAM_EATER
-	db 41, SLAM ; FILTHY SLAM
+	db 41, SLAM ; GASTRO ACID
 	db 57, LOVELY_KISS
 	db 0
 
@@ -663,7 +663,7 @@ TangelaEvosMoves:
 	db 0
 ; Learnset
 	db 14, POISONPOWDER
-	db 18, CONSTRICT
+	db 18, LEECH_SEED
 	db 23, STUN_SPORE
 	db 26, MEGA_DRAIN
 	db 34, AMNESIA
@@ -742,7 +742,7 @@ SlowpokeEvosMoves:
 	db 24, BUBBLEBEAM
 	db 29, PSYBEAM
 	db 32, WITHDRAW
-	db 36, SLAM ; FILTHY SLAM
+	db 36, SLAM ; GASTRO ACID
 	db 41, AMNESIA
 	db 45, PSYCHIC_M
 	db 0
@@ -869,7 +869,7 @@ ArbokEvosMoves:
 	db 17, GLARE
 	db 19, CONSTRICT
 	db 22, MEGA_DRAIN
-	db 26, SLAM ; FILTHY SLAM
+	db 26, SLAM ; GASTRO ACID
 	db 30, WITHDRAW
 	db 33, ACID
 	db 36, LEECH_LIFE
@@ -976,7 +976,7 @@ ElectabuzzEvosMoves:
 	db 28, LIGHT_SCREEN
 	db 30, THUNDERPUNCH
 	db 33, ICE_PUNCH
-	db 37, SLAM ; FILTHY SLAM
+	db 37, SLAM ; GASTRO ACID
 	db 42, FIRE_PUNCH
 	db 47, THUNDER
 	db 54, HYPER_BEAM
@@ -1065,7 +1065,7 @@ DiglettEvosMoves:
 	db 15, FURY_SWIPES
 	db 19, DIG
 	db 24, SAND_ATTACK
-	db 30, SLAM ; FILTHY SLAM
+	db 30, SLAM ; GASTRO ACID
 	db 35, SLASH
 	db 39, EARTHQUAKE
 	db 43, FURY_ATTACK
@@ -1251,7 +1251,7 @@ KrabbyEvosMoves:
 	db 22, GUILLOTINE
 	db 26, HARDEN
 	db 30, SLASH
-	db 35, SLAM ; FILTHY SLAM
+	db 35, SLAM ; GASTRO ACID
 	db 39, CRABHAMMER
 	db 44, EARTHQUAKE
 	db 50, SPIKE_CANNON
@@ -1579,7 +1579,7 @@ EkansEvosMoves:
 	db 17, GLARE
 	db 19, CONSTRICT
 	db 23, MEGA_DRAIN
-	db 26, SLAM ; FILTHY SLAM
+	db 26, SLAM ; GASTRO ACID
 	db 30, WITHDRAW
 	db 33, ACID
 	db 36, LEECH_LIFE
@@ -1707,7 +1707,7 @@ DugtrioEvosMoves:
 	db 15, FURY_SWIPES
 	db 19, DIG
 	db 24, SAND_ATTACK
-	db 30, SLAM ; FILTHY SLAM
+	db 30, SLAM ; GASTRO ACID
 	db 35, SLASH
 	db 39, EARTHQUAKE
 	db 43, FURY_ATTACK
@@ -1882,7 +1882,7 @@ MukEvosMoves:
 ; Learnset
 	db 14, ACID
 	db 23, MINIMIZE
-	db 26, SLAM ; FILTHY SLAM
+	db 26, SLAM ; GASTRO ACID
 	db 29, BODY_SLAM
 	db 33, ACID_ARMOR
 	db 37, SLUDGE
@@ -2007,7 +2007,7 @@ HaunterEvosMoves:
 	db 21, HYPNOSIS
 	db 24, MEGA_DRAIN
 	db 33, DREAM_EATER
-	db 41, SLAM ; FILTHY SLAM
+	db 41, SLAM ; GASTRO ACID
 	db 46, ICE_PUNCH
 	db 57, LOVELY_KISS
 	db 0
@@ -2445,7 +2445,7 @@ BellsproutEvosMoves:
 	db 17, ACID
 	db 19, STUN_SPORE
 	db 22, SLEEP_POWDER
-	db 29, SLAM ; FILTHY SLAM
+	db 29, SLAM ; GASTRO ACID
 	db 35, RAZOR_LEAF
 	db 43, GROWTH
 	db 0
@@ -2460,7 +2460,7 @@ WeepinbellEvosMoves:
 	db 17, ACID
 	db 19, STUN_SPORE
 	db 22, SLEEP_POWDER
-	db 29, SLAM ; FILTHY SLAM
+	db 29, SLAM ; GASTRO ACID
 	db 35, RAZOR_LEAF
 	db 43, GROWTH
 	db 0
@@ -2474,7 +2474,7 @@ VictreebelEvosMoves:
 	db 17, ACID
 	db 19, STUN_SPORE
 	db 22, SLEEP_POWDER
-	db 29, SLAM ; FILTHY SLAM
+	db 29, SLAM ; GASTRO ACID
 	db 35, RAZOR_LEAF
 	db 43, SELFDESTRUCT
 	db 48, GROWTH

@@ -3,7 +3,7 @@
 	db  30, 105,  90,  50,  25
 	;   hp  atk  def  spd  spc
 
-	db WATER, WATER ; type
+	db WATER, GROUND ; type
 	db 225 ; catch rate
 	db 115 ; base exp
 
@@ -17,7 +17,7 @@
 	tmhm SWORDS_DANCE, TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
 	     BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     RAGE,         \
 	     MIMIC,        DOUBLE_TEAM,  BIDE,         REST,         SUBSTITUTE,   \
-	     CUT,          SURF,         STRENGTH
+	     CUT,          SURF,         STRENGTH,     DIG
 	; end
 
 	db 0 ; padding
