@@ -80,7 +80,7 @@ YoungsterData:
 ; Unused
 	db 17, SPEAROW, RATTATA, RATTATA, SPEAROW, 0
 ; Route 9
-	db 30, SANDSHREW, 0 ; Sandshrew kid
+	db 30, SANDSHREW, 0 ; Sandshrew kid, AJ from the show
 
 BugCatcherData:
 ; Viridian Forest
@@ -161,7 +161,7 @@ JrTrainerMData:
 ; Unused
 	db 20, SQUIRTLE, 0
 ; Route 6
-	db 16, SPEAROW, RATICATE, 0
+	db 16, SPEAROW, RATICATE, 0 ; Joe from the show
 ; Unused
 	db 18, DIGLETT, DIGLETT, SANDSHREW, 0
 	db 21, GROWLITHE, CHARMANDER, 0
@@ -178,7 +178,7 @@ JrTrainerFData:
 ; Unused
 	db 16, ODDISH, BELLSPROUT, 0
 ; Route 6
-	db 16, PIDGEY, PIDGEY, PIDGEY, 0
+	db 16, PIDGEY, PIDGEY, PIDGEY, 0 ; Giselle from the show
 ; Unused
 	db 22, BULBASAUR, 0
 ; Route 9

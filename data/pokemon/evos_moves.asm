@@ -648,7 +648,7 @@ PinsirEvosMoves:
 	db 0
 ; Learnset
 	db 19, SEISMIC_TOSS
-	db 24, VICEGRIP
+	db 24, BIND
 	db 27, FOCUS_ENERGY
 	db 30, GUILLOTINE
 	db 33, SPIKE_CANNON

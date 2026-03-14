@@ -324,7 +324,9 @@ BindAnim:
 	db -1 ; end
 
 SlamAnim:
-	battle_anim SLAM, SUBANIM_0_STAR_THRICE, 0, 6
+	battle_anim SLAM, SUBANIM_0_STAR_THRICE, 0, 6 ; replaced with GASTRO ACID
+	; battle_anim SLUDGE, SUBANIM_1_BLOB_TOSS, 1, 6
+	; battle_anim SLUDGE, SUBANIM_1_BLOB_DRIP_ENEMY, 1, 6
 	db -1 ; end
 
 VineWhipAnim:
