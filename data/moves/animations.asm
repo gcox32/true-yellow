@@ -324,9 +324,9 @@ BindAnim:
 	db -1 ; end
 
 SlamAnim:
-	battle_anim SLAM, SUBANIM_0_STAR_THRICE, 0, 6 ; replaced with GASTRO ACID
-	; battle_anim SLUDGE, SUBANIM_1_BLOB_TOSS, 1, 6
-	; battle_anim SLUDGE, SUBANIM_1_BLOB_DRIP_ENEMY, 1, 6
+	; battle_anim SLAM, SUBANIM_0_STAR_THRICE, 0, 6 ; replaced with GASTRO ACID
+	battle_anim SLUDGE, SUBANIM_1_BLOB_TOSS, 1, 6
+	battle_anim SLUDGE, SUBANIM_1_BLOB_DRIP_ENEMY, 1, 6
 	db -1 ; end
 
 VineWhipAnim:
@@ -882,7 +882,10 @@ FocusEnergyAnim:
 	db -1 ; end
 
 BideAnim:
-	battle_anim BIDE, SUBANIM_1_STAR_BIG_MOVING, 1, 6
+	battle_anim REST, SE_SLIDE_MON_DOWN
+	battle_anim REST, SE_SLIDE_MON_DOWN
+	battle_anim REFLECT, SUBANIM_0_CIRCLE_1_SQUARE_CLOSING, 0, 4
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC
 	db -1 ; end
 
 MetronomeAnim:
