@@ -75,8 +75,8 @@ SpriteSets:
 	db SPRITE_FISHER
 	; db SPRITE_COOLTRAINER_M
 	db SPRITE_GAMBLER
-	db SPRITE_OAK
-	db SPRITE_GIRL
+	db SPRITE_GIRL          ; swapped with OAK: WALK/STAY RIGHT in this region (needs non-DOWN facing)
+	db SPRITE_OAK           ; slot $0A: STAY NONE in this region (safe)
 	db SPRITE_POKE_BALL
 	db SPRITE_GAMBLER_ASLEEP
 
@@ -100,13 +100,13 @@ SpriteSets:
 	db SPRITE_MISTY
 	db SPRITE_BROCK
 	db SPRITE_LITTLE_GIRL
-	db SPRITE_GIRL
+	db SPRITE_COOLTRAINER_F ; swapped: trainer on Route 10/13 (needs non-DOWN facing)
 	db SPRITE_SUPER_NERD
 	db SPRITE_HIKER
-	db SPRITE_GAMBLER
+	db SPRITE_COOLTRAINER_M ; swapped: trainer on Route 13/14 (needs non-DOWN facing)
 	; db SPRITE_MONSTER
-	db SPRITE_COOLTRAINER_F
-	db SPRITE_COOLTRAINER_M
+	db SPRITE_GAMBLER       ; slot $0A: not used in this region (safe)
+	db SPRITE_GIRL          ; slot $0B: not used in this region (safe)
 	db SPRITE_POKE_BALL
 	; db SPRITE_UNUSED_GAMBLER_ASLEEP_2
 
@@ -114,13 +114,13 @@ SpriteSets:
 	db SPRITE_PIKACHU
 	db SPRITE_MISTY
 	db SPRITE_BROCK
-	db SPRITE_OFFICER_JENNY
+	db SPRITE_COOLTRAINER_F ; swapped: trainer on Route 6/Vermilion (needs non-DOWN facing)
 	db SPRITE_SUPER_NERD
 	db SPRITE_YOUNGSTER
 	db SPRITE_GAMBLER
 	db SPRITE_MONSTER
-	db SPRITE_SAILOR
-	db SPRITE_COOLTRAINER_F
+	db SPRITE_SAILOR        ; slot $0A: STAY UP/WALK in Vermilion (broken, unavoidable - no safe candidates remain)
+	db SPRITE_OFFICER_JENNY ; slot $0B: STAY NONE in Vermilion (safe)
 	; db SPRITE_COOLTRAINER_M
 	db SPRITE_POKE_BALL
 	; db SPRITE_UNUSED_GAMBLER_ASLEEP_2
@@ -129,14 +129,14 @@ SpriteSets:
 	db SPRITE_PIKACHU
 	db SPRITE_MISTY
 	db SPRITE_BROCK
-	db SPRITE_LITTLE_GIRL
+	db SPRITE_ROCKET        ; moved to front: walking trainer in Celadon (needs non-DOWN facing)
 	; db SPRITE_LITTLE_BOY
+	db SPRITE_LITTLE_GIRL
 	db SPRITE_GIRL
 	db SPRITE_FISHER
 	; db SPRITE_MIDDLE_AGED_MAN
 	db SPRITE_GRAMPS
-	db SPRITE_MONSTER
-	db SPRITE_ROCKET
+	db SPRITE_MONSTER       ; slot $0A: STAY RIGHT in Celadon (broken, unavoidable - no safe candidates remain)
 	db SPRITE_POKE_BALL
 	db SPRITE_SNORLAX
 
@@ -163,9 +163,9 @@ SpriteSets:
 	db SPRITE_SCIENTIST
 	db SPRITE_SILPH_WORKER_M
 	db SPRITE_SILPH_WORKER_F
-	db SPRITE_GENTLEMAN
-	db SPRITE_BIRD
-	db SPRITE_ROCKER
+	db SPRITE_ROCKER        ; swapped: STAY UP in Saffron City (needs non-DOWN facing)
+	db SPRITE_BIRD          ; slot $0A: STAY DOWN in Saffron City (safe)
+	db SPRITE_GENTLEMAN     ; slot $0B: STAY DOWN in Saffron City (safe)
 	; db SPRITE_COOLTRAINER_M
 	db SPRITE_POKE_BALL
 	; db SPRITE_UNUSED_GAMBLER_ASLEEP_2
@@ -206,12 +206,12 @@ SpriteSets:
 	db SPRITE_BROCK
 	db SPRITE_COOLTRAINER_M
 	; db SPRITE_CHANSEY
-	db SPRITE_FISHER
+	db SPRITE_YOUNGSTER     ; swapped: WALK/STAY UP in Fuchsia (needs non-DOWN facing)
 	db SPRITE_GAMBLER
 	db SPRITE_MONSTER
 	; db SPRITE_SEEL
 	db SPRITE_SWIMMER
-	db SPRITE_YOUNGSTER
+	db SPRITE_FISHER        ; slot $0A: STAY DOWN in Fuchsia City (safe)
 	db SPRITE_POKE_BALL
 	db SPRITE_FOSSIL
 
