@@ -498,7 +498,7 @@ AttackSpecialSpeedUpEffect:
 	call IsStatMaxed
 	pop de
 	jr c, .nextStat2
-	ld a, ATTACK_UP_SIDE_EFFECT
+	ld a, ATTACK_UP1_EFFECT
 	call ReplacedStatModifierUpEffect
 .nextStat2
 	push de
@@ -506,7 +506,7 @@ AttackSpecialSpeedUpEffect:
 	call IsStatMaxed
 	pop de
 	jr c, .done
-	ld a, SPEED_UP_SIDE_EFFECT
+	ld a, SPEED_UP1_EFFECT
 	call ReplacedStatModifierUpEffect
 .done
 	ld a, ATTACK_SPECIAL_SPEED_UP1
@@ -536,7 +536,7 @@ AttackDefenseUpEffect:
 	call IsStatMaxed
 	pop de
 	jr c, .done
-	ld a, ATTACK_UP_SIDE_EFFECT ; we do the side effect for the second stat because it won't run the animation
+	ld a, ATTACK_UP1_EFFECT ; FLAG_SKIP_STAT_ANIMATION (set above) handles skipping the animation
 	call ReplacedStatModifierUpEffect
 .done
 	ld a, ATTACK_DEFENSE_UP1_EFFECT
@@ -566,7 +566,7 @@ AccuracyAttackUpEffect:
 	call IsStatMaxed
 	pop de
 	jr c, .done
-	ld a, ATTACK_UP_SIDE_EFFECT
+	ld a, ATTACK_UP1_EFFECT
 	call ReplacedStatModifierUpEffect
 .done
 	ld a, ATTACK_ACCURACY_UP1_EFFECT
