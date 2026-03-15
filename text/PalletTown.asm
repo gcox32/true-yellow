@@ -68,13 +68,11 @@ _PalletTownRivalsHouseSignText::
 	done
 
 _PalletTownMistyJoinsText::
-	text "MISTY: Hey there!"
-	line "I heard you got"
-	cont "a #DEX!"
-
-	para "Mind if I tag"
-	line "along? I want to"
-	cont "see new #MON!"
+	text "MISTY: You're"
+	line "gonna pay for"
+	
+	para "what you did"
+	line "to my bike!"
 	done
 
 _PalletTownMistyAlreadyFollowingText::

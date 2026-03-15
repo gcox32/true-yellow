@@ -42,8 +42,12 @@ _ViridianForestYoungster3AfterBattleText::
 	done
 
 _ViridianForestYoungster4BattleText::
-	text "Hey, wait up!"
-	line "What's the hurry?"
+	text "Greetings. Am I"
+	line "addressing the"
+	cont "#MON trainer"
+
+	para "that comes from"
+	cont "PALLET?"
 	done
 
 _ViridianForestYoungster4EndBattleText::

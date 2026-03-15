@@ -1,22 +1,22 @@
+; I wasn't planning on challenging you until you paid me back for my bike, but this is a good a time as any!
+; If you want that CASCADEBADGE you're gonna have to beat me!
+
 _CeruleanGymMistyPreBattleText::
-	text "Hi, you're a new"
-	line "face!"
+	text "I wasn't"
+	line "planning on"
+	cont "challenging you"
 
-	para "What's your policy"
-	line "on #MON? What"
-	cont "is your approach?"
+	para "until you paid me"
+	line "back for my bike,"
 
-	para "My policy is an"
-	line "all-out offensive"
-	cont "with water-type"
-	cont "#MON!"
+	cont "but this is a"
+	para "good a time"
+	line "as any!"
 
-	para "MISTY, the world-"
-	line "famous beauty, is"
-	cont "your host!"
-
-	para "Are you ready,"
-	line "sweetie?"
+	cont "If you want that"
+	para "CASCADEBADGE you"
+	line "are gonna have"
+	cont "to beat me!"
 	done
 
 _CeruleanGymMistyTM11ExplanationText::

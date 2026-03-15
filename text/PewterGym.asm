@@ -18,24 +18,7 @@ _PewterGymBrockPreBattleText::
 	done
 
 _PewterGymBrockPostBattleAdviceText::
-	text "There are all"
-	line "kinds of trainers"
-	cont "in the world!"
-
-	para "Some raise #MON"
-	line "for fights. Some"
-	cont "see them as pets."
-
-	para "I'm in training to"
-	line "become a #MON"
-	cont "breeder."
-
-	para "If you take your"
-	line "#MON training"
-	cont "seriously, go"
-	cont "visit the GYM in"
-	cont "CERULEAN and test"
-	cont "your abilities!"
+	text "You beat me."
 	done
 
 _PewterGymBrockWaitTakeThisText::
@@ -51,25 +34,50 @@ _PewterGymReceivedTM34Text::
 _TM34ExplanationText::
 	text_start
 
-	para "A TM contains a"
+	para "A <TM> contains a"
 	line "technique that"
 	cont "can be taught to"
 	cont "#MON!"
 
-	para "A TM is good only"
+	para "A <TM> is good only"
 	line "once! So when you"
 	cont "use one to teach"
 	cont "a new technique,"
 	cont "pick the #MON"
 	cont "carefully!"
 
-	para "TM34 contains"
+	para "@"
+	text_ram wStringBuffer
+	text " contains"
 	line "BIDE!"
 
 	para "Your #MON will"
-	line "absorb damage in"
-	cont "battle then pay"
-	cont "it back double!"
+	line "steel itself,"
+	cont "raising ATTACK"
+	cont "and DEFENSE!"
+
+	para "You beat me in a"
+	line "battle and in"
+	cont "kind to all"
+	cont "#MON."
+
+	para "To tell you the"
+	line "truth, I get more"
+	cont "pleasure from"
+	cont "raising #MON"
+	cont "then from making"
+	cont "them battle."
+
+	para "I don't care"
+	line "about being a"
+	cont "great trainer. I"
+	cont "want to become"
+	cont "the world's best"
+	cont "breeder."
+
+	para "I'm going to come"
+	line "with you to"
+	cont "pursue my dream!"
 	done
 
 _PewterGymTM34NoRoomText::
