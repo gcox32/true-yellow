@@ -88,9 +88,9 @@ SpriteSets:
 	db SPRITE_ROCKET
 	db SPRITE_SUPER_NERD
 	db SPRITE_HIKER
-	db SPRITE_BLUE
-	db SPRITE_OFFICER_JENNY
-	db SPRITE_COOLTRAINER_F
+	db SPRITE_COOLTRAINER_F ; swapped with BLUE: CF needs slot $09 (facing), BLUE is always STAY DOWN in this region
+	db SPRITE_OFFICER_JENNY ; slot $0A: always STAY DOWN in this region (safe)
+	db SPRITE_BLUE          ; slot $0B: always STAY DOWN in Cerulean City (safe)
 	; db SPRITE_COOLTRAINER_M
 	db SPRITE_POKE_BALL
 	; db SPRITE_UNUSED_GAMBLER_ASLEEP_2
