@@ -264,6 +264,10 @@ InitializePositionTrail::
 ShouldMistySpawn::
 ; Returns carry if Misty should spawn
 ; Conditions: EVENT_MISTY_FOLLOWING_PLAYER is set, Pikachu is visible, not biking/surfing
+	; Hide during text boxes and menus (mirrors Pikachu's BIT_FONT_LOADED check in pikachu_follow.asm)
+	ld a, [wFontLoaded]
+	bit BIT_FONT_LOADED, a
+	jr nz, .hide
 	; Check if in exit doorway mode 2 or 3 (delayed spawn - waiting for 2 steps)
 	ld a, [wFollowerDoorwayMode]
 	cp 2
@@ -326,6 +330,10 @@ ShouldBrockSpawn::
 ; Returns carry if Brock should spawn
 ; Conditions: Has Boulder badge, Pikachu is visible, not biking/surfing
 ; If Misty is also following, Brock will follow behind her in the chain
+	; Hide during text boxes and menus (mirrors Pikachu's BIT_FONT_LOADED check in pikachu_follow.asm)
+	ld a, [wFontLoaded]
+	bit BIT_FONT_LOADED, a
+	jr nz, .hide
 	; Check if in exit doorway mode (delayed spawn - wait for 3 steps after exiting)
 	; Mode 2: waiting for 1st step (hide Misty and Brock)
 	; Mode 3: waiting for 2nd step (hide Misty and Brock)
