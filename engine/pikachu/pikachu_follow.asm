@@ -232,12 +232,16 @@ SetPikachuSpawnOutside::
 	ld a, $3
 .load
 	ld [wPikachuSpawnState], a
-	; Set follower doorway mode flag if spawn state is 1 (Pikachu right of player)
+	; Set follower doorway mode based on spawn type
+	; Mode 1 = map connection (horizontal positioning)
+	; Mode 2 = building/warp exit (sequential delayed spawning)
 	cp 1
-	ld a, 0
-	jr nz, .notDoorway
+	jr z, .doorwayMode1
+	ld a, 2
+	jr .setDoorwayMode
+.doorwayMode1
 	ld a, 1
-.notDoorway
+.setDoorwayMode
 	ld [wFollowerDoorwayMode], a
 	ret
 

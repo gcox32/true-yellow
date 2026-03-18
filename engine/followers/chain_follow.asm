@@ -388,6 +388,11 @@ SpawnMisty_::
 	; Shouldn't spawn - hide the sprite
 	ld a, $ff
 	ld [wSpriteMistyStateData1ImageIndex], a  ; Set ImageIndex to $ff (offscreen)
+	; Only reset MovementStatus if hiding for reasons other than text box/menu
+	; (preserves position so follower reappears in the right spot when text closes)
+	ld a, [wFontLoaded]
+	bit BIT_FONT_LOADED, a
+	ret nz
 	xor a
 	ld [wSpriteMistyStateData1MovementStatus], a  ; Set MovementStatus to 0
 	ret
@@ -436,6 +441,11 @@ SpawnBrock_::
 	; Shouldn't spawn - hide the sprite
 	ld a, $ff
 	ld [wSpriteBrockStateData1ImageIndex], a  ; Set ImageIndex to $ff (offscreen)
+	; Only reset MovementStatus if hiding for reasons other than text box/menu
+	; (preserves position so follower reappears in the right spot when text closes)
+	ld a, [wFontLoaded]
+	bit BIT_FONT_LOADED, a
+	ret nz
 	xor a
 	ld [wSpriteBrockStateData1MovementStatus], a  ; Set MovementStatus to 0
 	ret
@@ -499,11 +509,7 @@ InitializeMistyPosition:
 	ld [wSpriteMistyStateData2MapY], a
 	ld a, [wExitDoorwayX]
 	ld [wSpriteMistyStateData2MapX], a
-	; Clear exit doorway position so it's not reused on subsequent map loads
-	; (Brock's init also clears this, but if Brock isn't following, we need to clear it here)
-	xor a
-	ld [wExitDoorwayY], a
-	ld [wExitDoorwayX], a
+	; Do NOT clear wExitDoorwayY/X here - Brock's init will use and clear it
 	jr .positionSet
 .useTrailPosition
 	; Get position from trail[1] (Misty's target)
@@ -568,7 +574,7 @@ InitializeBrockPosition:
 	ld [wSpriteBrockStateData2MapY], a
 	ld a, [wExitDoorwayX]
 	ld [wSpriteBrockStateData2MapX], a
-	; Clear the exit doorway position (Brock is the last to spawn there)
+	; Clear the exit doorway position (Brock is always last - clears it for both)
 	xor a
 	ld [wExitDoorwayY], a
 	ld [wExitDoorwayX], a
