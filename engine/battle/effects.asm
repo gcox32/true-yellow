@@ -553,7 +553,6 @@ AccuracyAttackUpEffect:
 	; values for the player's turn
 	ld de, wEnemyMoveEffect
 .next
-	push de
 	call GetAccuracyPointers
 	ld a, [hl]
 	cp MAX_STAT_LEVEL

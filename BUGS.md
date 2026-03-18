@@ -4,3 +4,8 @@
 - [x] Moves cannot be forgotten, are all treated as HMs
 - [x] Girl didn't walk to us on Route before Mt. Moon
 - [x] Misty and Brock sit on top of text; should disappear when text boxes or start menu appears
+- [x] SHARPEN move breaks the game (ATTACK_ACCURACY_UP1); part of bigger issue with 3 new effects that raise multiple stats: AttackSpecialSpeedUpEffect, AccuracyAttackUpEffect, and AttackDefenseUpEffect
+- [x] RIVAL, BLUE, doesn't walk on Cerulean Bridge
+- [ ] follower spawns after text/menu/TOWNMAP render location based on PLAYER facing direction; previous location isn't saved anywhere
+- [ ] followers should render one at a time on a ladder WARP tile, like pikachu, resembling exiting the ladder one at a time in succession
+- [ ] followers disappearing during text and then reappearing is jarring
