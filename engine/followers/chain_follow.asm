@@ -509,7 +509,14 @@ InitializeMistyPosition:
 	ld [wSpriteMistyStateData2MapY], a
 	ld a, [wExitDoorwayX]
 	ld [wSpriteMistyStateData2MapX], a
-	; Do NOT clear wExitDoorwayY/X here - Brock's init will use and clear it
+	; If Brock is not following, clear it here (normally Brock's init clears it,
+	; but if he's not in the chain the stale value breaks Misty on future maps)
+	ld a, [wObtainedBadges]
+	bit BIT_BOULDERBADGE, a
+	jr nz, .positionSet  ; Brock is following, he'll clear it
+	xor a
+	ld [wExitDoorwayY], a
+	ld [wExitDoorwayX], a
 	jr .positionSet
 .useTrailPosition
 	; Get position from trail[1] (Misty's target)
