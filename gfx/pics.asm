@@ -397,3 +397,42 @@ OnixPicFrontAlt::     INCBIN "gfx/pokemon/front_alt/onix.pic"
 WeezingPicBackSW::     INCBIN "gfx/pokemon/back_sw/weezingb.pic"
 
 MagnetonPicBackSW::   INCBIN "gfx/pokemon/back_sw/magnetonb.pic"
+
+GetSpriteBank::
+; Returns the ROM bank containing the sprite for [wCurPartySpecies] in a.
+	ld a, [wCurPartySpecies]
+	ld b, a
+	cp FOSSIL_KABUTOPS
+	ld a, BANK(FossilKabutopsPic)
+	ret z
+	ld a, b
+	cp MISSINGNO
+	jr z, .pics7
+	cp ARMORED_MEWTWO
+	jr z, .pics7
+	cp HARDENED_ONIX
+	jr z, .pics7
+	cp FLOATING_MAGNETON
+	jr z, .pics7
+	cp FLOATING_WEEZING
+	jr z, .pics7
+	cp TANGELA + 1
+	ld a, BANK("Pics 1")
+	ret c
+	ld a, b
+	cp MOLTRES + 1
+	ld a, BANK("Pics 2")
+	ret c
+	ld a, b
+	cp BEEDRILL + 2
+	ld a, BANK("Pics 3")
+	ret c
+	ld a, b
+	cp STARMIE + 1
+	ld a, BANK("Pics 4")
+	ret c
+	ld a, BANK("Pics 5")
+	ret
+.pics7
+	ld a, BANK("Pics 7")
+	ret

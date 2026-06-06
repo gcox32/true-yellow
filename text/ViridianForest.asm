@@ -46,7 +46,7 @@ _ViridianForestYoungster4BattleText::
 	line "addressing the"
 	cont "#MON trainer"
 
-	para "that comes from"
+	cont "that comes from"
 	cont "PALLET?"
 	done
 

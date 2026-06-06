@@ -37,11 +37,12 @@
 	FLASH
 	; end
 
+	db 0 ; padding
 
-	db BANK(ArmoredMewtwoPicFront)
-	db BANK(ArmoredMewtwoPicFrontAlt)
-	db BANK(ArmoredMewtwoPicBack)
-	db BANK(ArmoredMewtwoPicBackSW)
+	; db BANK(ArmoredMewtwoPicFront)
+	; db BANK(ArmoredMewtwoPicFrontAlt)
+	; db BANK(ArmoredMewtwoPicBack)
+	; db BANK(ArmoredMewtwoPicBackSW)
 
-	dw ArmoredMewtwoPicFrontAlt, ArmoredMewtwoPicBack
+	; dw ArmoredMewtwoPicFrontAlt, ArmoredMewtwoPicBack
 
