@@ -5,8 +5,9 @@
 ; Screen tile thresholds for conditional UI hiding (see RENDER_HIDING.md)
 ; screen_tile_Y = follower_mapY - wYCoord  (10x9 tile screen, player at ~row 4)
 ; screen_tile_X = follower_mapX - wXCoord
-DEF TEXT_BOX_TILE_ROW EQU 6  ; bottom 3 rows overlap the text box
-DEF MENU_TILE_COL     EQU 5  ; right 4 cols overlap the start/item menu
+DEF TEXT_BOX_TILE_ROW  EQU 6  ; bottom 3 rows overlap the text box
+DEF MENU_TILE_COL      EQU 5  ; right cols overlap the start menu (MENU_TEMPLATE_10, left edge col 7)
+DEF LIST_MENU_TILE_COL EQU 2  ; right cols overlap the wide list menu (LIST_MENU_BOX, left edge col 4)
 
 ; =====================================
 ; UNIFIED SPAWN DISPATCHER
@@ -288,12 +289,21 @@ ShouldMistySpawn::
 	jr nc, .hide
 	jr .fontNotLoadedMisty
 .checkMenuMisty
-	; Menu: only check X axis
+	; Menu: only check X axis; threshold depends on which box is showing
 	ld hl, wXCoord
 	ld a, [wSpriteMistyStateData2MapX]
 	sub [hl]               ; screen_tile_X; large value = left of player = safe
 	cp 10
 	jr nc, .fontNotLoadedMisty
+	ld b, a                ; save screen_tile_X while we check box type
+	ld a, [wTextBoxID]
+	cp MENU_TEMPLATE_10    ; narrow start menu only gets the relaxed threshold
+	ld a, b                ; restore screen_tile_X (preserves Z flag from cp)
+	jr z, .narrowMenuMisty
+	cp LIST_MENU_TILE_COL  ; any other box (list menu, options, save, etc.) → tight threshold
+	jr nc, .hide
+	jr .fontNotLoadedMisty
+.narrowMenuMisty
 	cp MENU_TILE_COL
 	jr nc, .hide
 .fontNotLoadedMisty
@@ -376,12 +386,21 @@ ShouldBrockSpawn::
 	jr nc, .hide
 	jr .fontNotLoadedBrock
 .checkMenuBrock
-	; Menu: only check X axis
+	; Menu: only check X axis; threshold depends on which box is showing
 	ld hl, wXCoord
 	ld a, [wSpriteBrockStateData2MapX]
 	sub [hl]
 	cp 10
 	jr nc, .fontNotLoadedBrock
+	ld b, a
+	ld a, [wTextBoxID]
+	cp MENU_TEMPLATE_10
+	ld a, b
+	jr z, .narrowMenuBrock
+	cp LIST_MENU_TILE_COL
+	jr nc, .hide
+	jr .fontNotLoadedBrock
+.narrowMenuBrock
 	cp MENU_TILE_COL
 	jr nc, .hide
 .fontNotLoadedBrock
