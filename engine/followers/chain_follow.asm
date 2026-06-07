@@ -2,6 +2,12 @@
 ; Uses Position Trail approach: stores where player WAS for the last N steps
 ; Pikachu targets trail[0], Misty targets trail[1], Brock targets trail[2]
 
+; Screen tile thresholds for conditional UI hiding (see RENDER_HIDING.md)
+; screen_tile_Y = follower_mapY - wYCoord  (10x9 tile screen, player at ~row 4)
+; screen_tile_X = follower_mapX - wXCoord
+DEF TEXT_BOX_TILE_ROW EQU 6  ; bottom 3 rows overlap the text box
+DEF MENU_TILE_COL     EQU 5  ; right 4 cols overlap the start/item menu
+
 ; =====================================
 ; UNIFIED SPAWN DISPATCHER
 ; =====================================
@@ -264,10 +270,33 @@ InitializePositionTrail::
 ShouldMistySpawn::
 ; Returns carry if Misty should spawn
 ; Conditions: EVENT_MISTY_FOLLOWING_PLAYER is set, Pikachu is visible, not biking/surfing
-	; Hide during text boxes and menus (mirrors Pikachu's BIT_FONT_LOADED check in pikachu_follow.asm)
+	; Conditionally hide during text/menus: only if Misty overlaps the UI region
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
-	jr nz, .hide
+	jr z, .fontNotLoadedMisty
+	; hTextID != 0 means text box (bottom); hTextID == 0 means menu (right side)
+	ldh a, [hTextID]
+	and a
+	jr z, .checkMenuMisty
+	; Text box: only check Y axis
+	ld hl, wYCoord
+	ld a, [wSpriteMistyStateData2MapY]
+	sub [hl]               ; screen_tile_Y; large value = above player = safe
+	cp 9
+	jr nc, .fontNotLoadedMisty
+	cp TEXT_BOX_TILE_ROW
+	jr nc, .hide
+	jr .fontNotLoadedMisty
+.checkMenuMisty
+	; Menu: only check X axis
+	ld hl, wXCoord
+	ld a, [wSpriteMistyStateData2MapX]
+	sub [hl]               ; screen_tile_X; large value = left of player = safe
+	cp 10
+	jr nc, .fontNotLoadedMisty
+	cp MENU_TILE_COL
+	jr nc, .hide
+.fontNotLoadedMisty
 	; Check if in exit doorway mode 2 or 3 (delayed spawn - waiting for 2 steps)
 	ld a, [wFollowerDoorwayMode]
 	cp 2
@@ -330,10 +359,32 @@ ShouldBrockSpawn::
 ; Returns carry if Brock should spawn
 ; Conditions: Has Boulder badge, Pikachu is visible, not biking/surfing
 ; If Misty is also following, Brock will follow behind her in the chain
-	; Hide during text boxes and menus (mirrors Pikachu's BIT_FONT_LOADED check in pikachu_follow.asm)
+	; Conditionally hide during text/menus: only if Brock overlaps the UI region
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
-	jr nz, .hide
+	jr z, .fontNotLoadedBrock
+	ldh a, [hTextID]
+	and a
+	jr z, .checkMenuBrock
+	; Text box: only check Y axis
+	ld hl, wYCoord
+	ld a, [wSpriteBrockStateData2MapY]
+	sub [hl]
+	cp 9
+	jr nc, .fontNotLoadedBrock
+	cp TEXT_BOX_TILE_ROW
+	jr nc, .hide
+	jr .fontNotLoadedBrock
+.checkMenuBrock
+	; Menu: only check X axis
+	ld hl, wXCoord
+	ld a, [wSpriteBrockStateData2MapX]
+	sub [hl]
+	cp 10
+	jr nc, .fontNotLoadedBrock
+	cp MENU_TILE_COL
+	jr nc, .hide
+.fontNotLoadedBrock
 	; Check if in exit doorway mode (delayed spawn - wait for 3 steps after exiting)
 	; Mode 2: waiting for 1st step (hide Misty and Brock)
 	; Mode 3: waiting for 2nd step (hide Misty and Brock)

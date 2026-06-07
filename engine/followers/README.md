@@ -367,3 +367,35 @@ Key constraints:
 Potential improvements for future development:
 - Followers riding bikes alongside player
 - Context-aware dialogue based on current map/game progress
+
+## Bugs
+### Followers disappear during render of text/map/menu
+First fix attempt:
+Root cause: In ShouldMistySpawn and ShouldBrockSpawn, there's an early BIT_FONT_LOADED check that returns no-carry (hide), which causes
+  SpawnMisty_/SpawnBrock_ to set ImageIndex
+    = $ff (invisible). This is wrong — regular NPC sprites don't have this check and just get covered by the text box window layer.
+
+    Fix:
+    1. Remove the BIT_FONT_LOADED hide from ShouldMistySpawn and ShouldBrockSpawn
+    2. Simplify the hide path in SpawnMisty_/SpawnBrock_ (no more special font-loaded exception)
+    3. In the already-spawned path, when font IS loaded, freeze the sprite with its standing frame (still tile patterns in the lower VRAM half are intact during text — only
+  walking
+    tile patterns get overwritten)
+
+#### This did not work; the follower appeared on top text/map/menu
+
+Second idea:
+The issue is that with a valid ImageIndex and OAM_PRIO bit 7 = 0, the followers appear over the text box Window layer. The fix needs to make them appear behind it. Let me look
+  at how the grass priority field maps to OAM attributes, since that's the same mechanism needed here
+
+Key insight: PrepareOAMData (the OAM builder, called every VBLANK) reads the sprite state directly - it doesn't call UpdateSprites. The call to farcall
+  InitializeSpriteScreenPosition in my freeze code is actively repositioning followers during text setup, which can push them into the text box area. Without that call, they'd
+  keep their last natural position (which is usually above the text box).
+
+  Let me remove InitializeSpriteScreenPosition from the freeze path — the followers should just freeze at whatever pixel position they were already at:
+
+  The change: when BIT_FONT_LOADED is set, followers freeze with their standing tile (safe from VRAM overwrite) but don't recompute screen position — they stay at
+  wherever they were pixel-wise in the last normal frame. The InitializeSpriteScreenPosition call was the likely culprit, as it recalculated their position from map coordinates
+  during a frame where the camera/scroll state may not reflect the overworld, potentially landing them in the text box area
+
+#### This still did not work; the follower appeared on top text/map/menu

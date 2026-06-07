@@ -12,7 +12,7 @@ Visual bugs:
 
 Downstream issues:
 - [x] handle sprites overflow: now that we have 2 more sprites for every map, we need to edit all possible sprites for any particular map. this may mean going through, map by map, and removing sprite objects that do not meaningfully affect gameplay
-- [ ] Pewter city sprite overflow still
+- [x] Pewter city sprite overflow still
 - [x] add standard text when interacting with brock or misty follower (future feature, add text based on game progress, current map etc)
 
 Continuity efforts:
