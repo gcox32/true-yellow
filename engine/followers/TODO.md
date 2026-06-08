@@ -20,4 +20,4 @@ Continuity efforts:
 
 Known bugs:
 - [x] Misty overworld sprite flashes with cursor from open TownMap (she should be hidden)
-- [ ] followers disappear and re-initialize during any text: they should persist but stand _beneath_ text boxes (this proved to be a limitation of the rendering methods)
+- [x] followers disappear and re-initialize during any text: they should persist but stand _beneath_ text boxes (this proved to be a limitation of the rendering methods)

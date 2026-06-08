@@ -1477,7 +1477,6 @@ EeveeEvosMoves:
 	db EVOLVE_ITEM, WATER_STONE, 1, VAPOREON
 	db 0
 ; Learnset
-	db 6,  SHARPEN
 	db 10, QUICK_ATTACK
 	db 14, BITE
 	db 18, TAKE_DOWN
@@ -1573,7 +1572,6 @@ EkansEvosMoves:
 	db EVOLVE_LEVEL, 22, ARBOK
 	db 0
 ; Learnset
-	db 7, ABSORB
 	db 10, BITE
 	db 13, SMOG
 	db 17, GLARE

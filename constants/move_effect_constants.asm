@@ -76,9 +76,11 @@
 	const SPEED_DOWN_SIDE_EFFECT     ; $46
 	const SPECIAL_DOWN_SIDE_EFFECT   ; $47
 	const TRI_ATTACK_EFFECT          ; $48 added
+	;;; new effects
 	const ATTACK_UP_SIDE_EFFECT      ; $48 ; used in bide, sharpen, submission and meditate
 	const ATTACK_ACCURACY_UP1_EFFECT ; $49 ; used in sharpen
 	const ATTACK_DEFENSE_UP1_EFFECT  ; $4A ; used in bide
+	;;;
 	const CONFUSION_SIDE_EFFECT      ; $4C
 	const TWINEEDLE_EFFECT           ; $4D
 	const ATTACK_SPECIAL_SPEED_UP1   ; $4E ; PureRGBnote: ADDED: new effect, used in meditate

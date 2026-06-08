@@ -650,6 +650,7 @@ StatModifierUpEffect:
 	ld de, wEnemyMoveEffect
 .statModifierUpEffect
 	ld a, [de]
+	ld d, a ; save original effect so the +2 check below gets the effect, not HIGH(wPlayerMoveEffect)
 ;;;;;;;;;; PureRGBnote: ADDED: need to decide which stat is being modified here and store it so we can apply correct badge boosts if necessary
 ; 	push af
 ; 	call MapEffectToStat
@@ -830,8 +831,15 @@ MonsStatsRoseText:
 	jr z, .playerTurn
 	ld a, [wEnemyMoveEffect]
 .playerTurn
+;;;;;;;;;; PureRGBnote: ADDED: these specific effects don't use "greatly rose" text
+	cp ATTACK_UP_SIDE_EFFECT
+	jr z, .rose
+	cp SPEED_UP_SIDE_EFFECT
+	jr z, .rose
+;;;;;;;;;;
 	cp ATTACK_DOWN1_EFFECT
 	ret nc
+.rose
 	ld hl, RoseText
 	ret
 
