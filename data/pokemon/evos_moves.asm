@@ -551,10 +551,11 @@ GyaradosEvosMoves:
 	db 0
 ; Learnset
 	db 20, BITE
-	db 25, DRAGON_RAGE
-	db 32, WATERFALL
-	db 41, HYDRO_PUMP
-	db 52, HYPER_BEAM
+	db 25, THRASH
+	db 32, DRAGON_RAGE
+	db 41, WATERFALL
+	db 50, HYPER_BEAM
+	db 59, HYDRO_PUMP
 	db 0
 
 ShellderEvosMoves:
@@ -692,13 +693,12 @@ OnixEvosMoves:
 	db 0
 ; Learnset
 	db 15, BIND
-	db 17, ROAR
-	db 22, LIGHT_SCREEN
-	db 25, RAGE
-	db 31, MIRROR_MOVE
-	db 33, AMNESIA
-	db 39, TAKE_DOWN
-	db 45, WITHDRAW
+	db 17, DIG
+	db 22, ROAR
+	db 25, ROCK_THROW
+	db 31, EARTHQUAKE
+	db 39, SHARPEN
+	db 45, ROCK_SLIDE
 	db 52, SELFDESTRUCT
 	db 0
 
@@ -1764,12 +1764,12 @@ ButterfreeEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 10, PSYWAVE
-	db 12, LEECH_LIFE
+	db 10, GUST
+	db 12, CONFUSION
 	db 15, POISONPOWDER
 	db 16, STUN_SPORE
 	db 17, SLEEP_POWDER
-	db 20, CONFUSION
+	db 20, LEECH_LIFE
 	db 27, PSYBEAM
 	db 33, WHIRLWIND
 	db 35, PSYCHIC_M

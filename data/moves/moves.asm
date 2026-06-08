@@ -56,12 +56,12 @@ Moves:
 	move LEER,         DEFENSE_DOWN1_EFFECT,         0, NORMAL,       100, 30
 	move BITE,         FLINCH_SIDE_EFFECT1,         50, NORMAL,       100, 25 ; power changed from 60 to 50
 	move GROWL,        ATTACK_DOWN1_EFFECT,          0, NORMAL,       100, 40
-	move ROAR,         SWITCH_AND_TELEPORT_EFFECT,   0, NORMAL,       100, 20
+	move ROAR,         SWITCH_AND_TELEPORT_EFFECT,   0, DRAGON,       100, 20 ; changed type to dragon
 	move SING,         SLEEP_EFFECT,                 0, NORMAL,        70, 15 ; accuracy changed from 55 to 70
 	move SUPERSONIC,   CONFUSION_EFFECT,             0, NORMAL,        55, 20
 	move SONICBOOM,    FLINCH_SIDE_EFFECT1,          1, FLYING,       100, 15 ; priority move, set damage still
 	move DISABLE,      DISABLE_EFFECT,               0, NORMAL,        85, 20 ; accuracy changed from 55 to 85
-	move ACID,         DEFENSE_DOWN_SIDE_EFFECT,    40, POISON,       100, 30
+	move ACID,         BURN_SIDE_EFFECT1,           40, POISON,       100, 30 ; effect changed to burn chance
 	move EMBER,        BURN_SIDE_EFFECT1,           40, FIRE,         100, 25
 	move FLAMETHROWER, BURN_SIDE_EFFECT1,           95, FIRE,         100, 15
 	move MIST,         MIST_EFFECT,                  0, WATER,        100, 30 ; type changed from ICE to WATER
@@ -106,7 +106,7 @@ Moves:
 	move CONFUSION,    CONFUSION_SIDE_EFFECT,       50, PSYCHIC_TYPE, 100, 25
 	move PSYCHIC_M,    SPECIAL_DOWN_SIDE_EFFECT,    90, PSYCHIC_TYPE, 100, 10
 	move HYPNOSIS,     SLEEP_EFFECT,                 0, PSYCHIC_TYPE,  70, 20 ; accuracy changed from 60 to 70
-	move MEDITATE,     ATTACK_SPECIAL_SPEED_UP1,     0, PSYCHIC_TYPE, 100, 10 ; new effect and pp reduced to 10
+	move MEDITATE,     ATTACK_UP1_EFFECT,            0, PSYCHIC_TYPE, 100, 10 ; new effect and pp reduced to 10
 	move AGILITY,      SPEED_UP2_EFFECT,             0, PSYCHIC_TYPE, 100, 20 ; pp changed from 30 to 20
 	move QUICK_ATTACK, NO_ADDITIONAL_EFFECT,        40, NORMAL,       100, 30
 	move RAGE,         ATTACK_UP_SIDE_EFFECT,       60, DRAGON,       100, 20 ; new effect
@@ -121,7 +121,7 @@ Moves:
 	move SMOKESCREEN,  ACCURACY_DOWN1_EFFECT,        0, POISON,       100, 20 ; type changed from NORMAL to POISON
 	move CONFUSE_RAY,  CONFUSION_EFFECT,             0, GHOST,        100, 10
 	move WITHDRAW,     WITHDRAW_EFFECT,              0, WATER,        100, 10
-	move DEFENSE_CURL, DEFENSE_UP1_EFFECT,           0, NORMAL,       100, 30 ; pp changed from 40 to 30
+	move DEFENSE_CURL, DEFENSE_UP1_EFFECT,           0, FIGHTING,     100, 30 ; pp changed from 40 to 30
 	move BARRIER,      DEFENSE_UP2_EFFECT,           0, PSYCHIC_TYPE, 100, 30
 	move LIGHT_SCREEN, LIGHT_SCREEN_EFFECT,          0, PSYCHIC_TYPE, 100, 30
 	move HAZE,         HAZE_EFFECT,                  0, POISON,       100, 30 ; type changed from ICE to POISON

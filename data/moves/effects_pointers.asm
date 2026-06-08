@@ -77,7 +77,7 @@ MoveEffectPointerTable:
 	dw AttackDefenseUpEffect     ; ATTACK_DEFENSE_UP1_EFFECT
 	dw ConfusionSideEffect       ; CONFUSION_SIDE_EFFECT
 	dw TwoToFiveAttacksEffect    ; TWINEEDLE_EFFECT
-	dw AttackSpecialSpeedUpEffect; ATTACK_SPECIAL_SPEED_UP1
+	dw DefenseSpeedUpEffect      ; DEFENSE_SPEED_UP1_EFFECT
 	dw SubstituteEffect          ; SUBSTITUTE_EFFECT
 	dw HyperBeamEffect           ; HYPER_BEAM_EFFECT
 	dw StatUpSideEffect          ; RAGE_EFFECT

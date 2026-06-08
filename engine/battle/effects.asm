@@ -474,8 +474,8 @@ FireDefrostedText:
 	text_far _FireDefrostedText
 	text_end
 
-; PureRGBnote: ADDED: increases attack, special, and speed as a move effect. Used with Meditate.
-AttackSpecialSpeedUpEffect:
+; ADDED: increases defense and speed as a move effect. Used with defense curl.
+DefenseSpeedUpEffect:
 	SetFlag FLAG_SKIPPED_STAT_MODIFIER
 	;values for the enemy's turn
 	ld de, wPlayerMoveEffect
@@ -486,30 +486,22 @@ AttackSpecialSpeedUpEffect:
 	ld de, wEnemyMoveEffect
 .next
 	push de
-	call GetSpecialPointers
+	call GetDefensePointers
 	call IsStatMaxed
 	pop de
 	jr c, .nextStat
-	ld a, SPECIAL_UP1_EFFECT
+	ld a, DEFENSE_UP1_EFFECT
 	call ReplacedStatModifierUpEffect
 .nextStat
 	push de
 	call GetAttackPointers
 	call IsStatMaxed
 	pop de
-	jr c, .nextStat2
-	ld a, ATTACK_UP1_EFFECT
-	call ReplacedStatModifierUpEffect
-.nextStat2
-	push de
-	call GetSpeedPointers
-	call IsStatMaxed
-	pop de
 	jr c, .done
-	ld a, SPEED_UP1_EFFECT
+	ld a, SPEED_UP1_EFFECT ; FLAG_SKIP_STAT_ANIMATION (set above) handles skipping the animation
 	call ReplacedStatModifierUpEffect
 .done
-	ld a, ATTACK_SPECIAL_SPEED_UP1
+	ld a, DEFENSE_SPEED_UP1_EFFECT
 	jr ResetStatModEffectAndAnimationFlag
 
 ; PureRGBnote: ADDED: increases both attack and defense as a move effect, used with bide

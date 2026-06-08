@@ -882,10 +882,9 @@ FocusEnergyAnim:
 	db -1 ; end
 
 BideAnim:
-	battle_anim REST, SE_SLIDE_MON_DOWN
-	battle_anim REST, SE_SLIDE_MON_DOWN
+	battle_anim HARDEN, SE_LIGHT_SCREEN_PALETTE
+	battle_anim NO_MOVE, SUBANIM_0_CIRCLE_1_SQUARE_CLOSING, 1, 6
 	battle_anim REFLECT, SUBANIM_0_CIRCLE_1_SQUARE_CLOSING, 0, 4
-	battle_anim NO_MOVE, SE_SHOW_MON_PIC
 	db -1 ; end
 
 MetronomeAnim:
