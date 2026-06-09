@@ -271,6 +271,10 @@ InitializePositionTrail::
 ShouldMistySpawn::
 ; Returns carry if Misty should spawn
 ; Conditions: EVENT_MISTY_FOLLOWING_PLAYER is set, Pikachu is visible, not biking/surfing
+	; Hide during PC interface (large menu covers entire screen)
+	ld a, [wMiscFlags]
+	bit BIT_USING_GENERIC_PC, a
+	jr nz, .hide
 	; Conditionally hide during text/menus: only if Misty overlaps the UI region
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
@@ -369,6 +373,10 @@ ShouldBrockSpawn::
 ; Returns carry if Brock should spawn
 ; Conditions: Has Boulder badge, Pikachu is visible, not biking/surfing
 ; If Misty is also following, Brock will follow behind her in the chain
+	; Hide during PC interface (large menu covers entire screen)
+	ld a, [wMiscFlags]
+	bit BIT_USING_GENERIC_PC, a
+	jr nz, .hide
 	; Conditionally hide during text/menus: only if Brock overlaps the UI region
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
