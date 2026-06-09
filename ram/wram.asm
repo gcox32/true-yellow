@@ -1838,7 +1838,9 @@ wSavedSpriteScreenX:: db
 wSavedSpriteMapY:: db
 wSavedSpriteMapX:: db
 
-	ds 5
+	ds 4
+
+wWhatStat:: db ; contains the stat currently being modified by a stat changing move (ADDED)
 
 wWhichPrize:: db
 

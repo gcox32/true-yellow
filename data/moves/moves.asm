@@ -121,12 +121,12 @@ Moves:
 	move SMOKESCREEN,  ACCURACY_DOWN1_EFFECT,        0, POISON,       100, 20 ; type changed from NORMAL to POISON
 	move CONFUSE_RAY,  CONFUSION_EFFECT,             0, GHOST,        100, 10
 	move WITHDRAW,     WITHDRAW_EFFECT,              0, WATER,        100, 10
-	move DEFENSE_CURL, DEFENSE_UP1_EFFECT,           0, FIGHTING,     100, 30 ; pp changed from 40 to 30
+	move DEFENSE_CURL, DEFENSE_SPEED_UP1_EFFECT,     0, FIGHTING,     100, 30 ; pp changed from 40 to 30
 	move BARRIER,      DEFENSE_UP2_EFFECT,           0, PSYCHIC_TYPE, 100, 30
 	move LIGHT_SCREEN, LIGHT_SCREEN_EFFECT,          0, PSYCHIC_TYPE, 100, 30
 	move HAZE,         HAZE_EFFECT,                  0, POISON,       100, 30 ; type changed from ICE to POISON
 	move REFLECT,      REFLECT_EFFECT,               0, PSYCHIC_TYPE, 100, 20
-	move FOCUS_ENERGY, FOCUS_ENERGY_EFFECT,          0, ELECTRIC,     100, 30 ; type changed from NORMAL to ELECTRIC
+	move FOCUS_ENERGY, FOCUS_ENERGY_EFFECT,          0, FIGHTING,     100, 30 ; type changed from NORMAL to FIGHTING
 	move BIDE,         ATTACK_DEFENSE_UP1_EFFECT,    0, NORMAL,       100, 10 ; new effect + atk + def
 	move METRONOME,    METRONOME_EFFECT,             0, NORMAL,       100, 10
 	move MIRROR_MOVE,  MIRROR_MOVE_EFFECT,           0, FLYING,       100, 20

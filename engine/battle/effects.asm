@@ -528,7 +528,7 @@ AttackDefenseUpEffect:
 	call IsStatMaxed
 	pop de
 	jr c, .done
-	ld a, ATTACK_UP1_EFFECT ; FLAG_SKIP_STAT_ANIMATION (set above) handles skipping the animation
+	ld a, ATTACK_UP_SIDE_EFFECT ; we do the side effect for the second stat because it won't run the animation
 	call ReplacedStatModifierUpEffect
 .done
 	ld a, ATTACK_DEFENSE_UP1_EFFECT
@@ -644,17 +644,17 @@ StatModifierUpEffect:
 	ld a, [de]
 	ld d, a ; save original effect so the +2 check below gets the effect, not HIGH(wPlayerMoveEffect)
 ;;;;;;;;;; PureRGBnote: ADDED: need to decide which stat is being modified here and store it so we can apply correct badge boosts if necessary
-; 	push af
-; 	call MapEffectToStat
-; 	ld [wWhatStat], a
-; 	pop af
-; 	call MapSideEffectToStatMod
-; 	cp $ff
-; 	jr nz, .continue
-; .loadDefault
-; 	ld a, [de]
-; .continue
-; 	ld d, a
+	push af
+	call MapEffectToStat
+	ld [wWhatStat], a
+	pop af
+	call MapSideEffectToStatMod
+	cp $ff
+	jr nz, .continue
+.loadDefault
+	ld a, d ; d still holds the original effect (ld d, a above), [de] is corrupted
+.continue
+	ld d, a
 ;;;;;;;;;;
 	sub ATTACK_UP1_EFFECT
 	cp EVASION_UP1_EFFECT + $3 - ATTACK_UP1_EFFECT ; covers all +1 effects
@@ -782,6 +782,8 @@ UpdateStatDone:
 	call nz, Bankswitch
 	pop de
 .notMinimize
+	CheckFlag FLAG_SKIP_STAT_ANIMATION
+	jr nz, .applyBadgeBoostsAndStatusPenalties
 	call PlayCurrentMoveAnimation
 	ld a, [de]
 	cp MINIMIZE
@@ -1065,8 +1067,9 @@ PrintStatText:
 	jp CopyData
 
 INCLUDE "data/battle/stat_mod_names.asm"
-
 INCLUDE "data/battle/stat_modifiers.asm"
+INCLUDE "data/battle/stat_mod_stat_mapping.asm" ; ADDED
+
 
 ;BideEffect: ; PureRGBnote: CHANGED: Bide effect switched to a stat buff
 
