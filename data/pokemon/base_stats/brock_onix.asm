@@ -4,7 +4,7 @@
 	db  80,  85, 180,  80,  75
 	;   hp  atk  def  spd  spc
 
-	db CRYSTAL, GROUND ; type
+	db BROCK_TYPE, ROCK ; type
 	db 45 ; catch rate
 	db 108 ; base exp
 

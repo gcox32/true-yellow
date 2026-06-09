@@ -10,7 +10,7 @@ TypeNames:
 	dw .Typeless
 	dw .Bug
 	dw .Ghost
-	dw .Crystal
+	dw .Brock
 	dw .Ground ; bonemerang type
 
 REPT UNUSED_TYPES_END - UNUSED_TYPES
@@ -46,6 +46,6 @@ ENDR
 .Ghost:    db "GHOST@"
 .Dragon:   db "DRAGON@"
 .Tri:      db "TRI@"
-.Crystal:  db "CRYSTAL@"
+.Brock:    db "BROCK@"
 .Floating: db "FLOATING@"
 .Magma:    db "MAGMA@"

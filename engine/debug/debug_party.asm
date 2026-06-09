@@ -20,7 +20,7 @@ DebugNewGameParty: ; unreferenced except in _DEBUG
 	db EXEGGUTOR, 80
 	db FLOATING_WEEZING, 80
 	db FLOATING_MAGNETON, 80
-	db HARDENED_ONIX, 99
+	db BROCK_ONIX, 99
 	db ARMORED_MEWTWO, 99
 	db STARTER_PIKACHU, 5
 	db -1 ; end

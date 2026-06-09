@@ -410,7 +410,7 @@ GetSpriteBank::
 	jr z, .pics7
 	cp ARMORED_MEWTWO
 	jr z, .pics7
-	cp HARDENED_ONIX
+	cp BROCK_ONIX
 	jr z, .pics7
 	cp FLOATING_MAGNETON
 	jr z, .pics7

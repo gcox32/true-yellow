@@ -156,6 +156,6 @@ INCLUDE "data/pokemon/base_stats/mew.asm"
 NonDexMonsBaseStats::
 INCLUDE "data/pokemon/base_stats/missingno.asm"
 INCLUDE "data/pokemon/base_stats/armored_mewtwo.asm"
-INCLUDE "data/pokemon/base_stats/hardened_onix.asm"
+INCLUDE "data/pokemon/base_stats/brock_onix.asm"
 INCLUDE "data/pokemon/base_stats/floating_magneton.asm"
 INCLUDE "data/pokemon/base_stats/floating_weezing.asm"

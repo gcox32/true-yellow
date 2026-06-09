@@ -184,7 +184,7 @@ EvosMovesPointerTable:
 	dw GeodudeEvosMoves
 	dw PorygonEvosMoves
 	dw AerodactylEvosMoves
-	dw HardenedOnixEvosMoves ; hardened onix
+	dw OnixEvosMoves ; brock's onix
 	dw MagnemiteEvosMoves
 	dw MewtwoEvosMoves ; armored mewtwo
 	dw EmptyEvosMoves
@@ -2476,23 +2476,4 @@ VictreebelEvosMoves:
 	db 35, RAZOR_LEAF
 	db 43, SELFDESTRUCT
 	db 48, GROWTH
-	db 0
-
-HardenedOnixEvosMoves:
-; Evolutions
-	db 0
-; Learnset
-	db 15, BIND
-	db 17, ROAR
-	db 19, SCREECH
-	db 22, LIGHT_SCREEN
-	db 25, RAGE
-	db 27, ROCK_SLIDE
-	db 29, CLAMP
-	db 33, AMNESIA
-	db 37, SKULL_BASH
-	db 39, EARTHQUAKE
-	db 42, SPIKE_CANNON
-	db 45, WITHDRAW
-	db 52, SELFDESTRUCT
 	db 0

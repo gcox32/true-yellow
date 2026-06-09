@@ -178,7 +178,7 @@
 	const GEODUDE            ; $A9
 	const PORYGON            ; $AA
 	const AERODACTYL         ; $AB
-	const HARDENED_ONIX     ; $AC ; added hardened onix
+	const BROCK_ONIX         ; $AC ; added brock's onix how is not immune to electric
 	const MAGNEMITE          ; $AD
 	const ARMORED_MEWTWO     ; $AE ; added armored mewtwo
 	const_skip               ; $AF
