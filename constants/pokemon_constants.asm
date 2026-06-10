@@ -181,7 +181,7 @@
 	const BROCK_ONIX         ; $AC ; added brock's onix how is not immune to electric
 	const MAGNEMITE          ; $AD
 	const ARMORED_MEWTWO     ; $AE ; added armored mewtwo
-	const_skip               ; $AF
+	const DONPHAN            ; $AF ; added donphan
 	const CHARMANDER         ; $B0
 	const SQUIRTLE           ; $B1
 	const CHARMELEON         ; $B2

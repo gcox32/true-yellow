@@ -398,6 +398,9 @@ WeezingPicBackSW::     INCBIN "gfx/pokemon/back_sw/weezingb.pic"
 
 MagnetonPicBackSW::   INCBIN "gfx/pokemon/back_sw/magnetonb.pic"
 
+DonphanPicFront:: INCBIN "gfx/pokemon/front/donphan.pic"
+DonphanPicBack:: INCBIN "gfx/pokemon/back/donphanb.pic"
+
 GetSpriteBank::
 ; Returns the ROM bank containing the sprite for [wCurPartySpecies] in a.
 	ld a, [wCurPartySpecies]
@@ -407,6 +410,8 @@ GetSpriteBank::
 	ret z
 	ld a, b
 	cp MISSINGNO
+	jr z, .pics7
+	cp DONPHAN
 	jr z, .pics7
 	cp ARMORED_MEWTWO
 	jr z, .pics7

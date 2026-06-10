@@ -4,3 +4,6 @@
 - [ ] NPC to upgrade your Weezing to Floating Weezing
 - [ ] NPC to upgrade your Magneton to Floating Magneton
 - [x] Swap "Hardened Onix" for "Brock Onix" that is only _resistant_ not immune to Electric
+- [ ] Mark overworld Pokemon as seen in Pokedex when you interact with them (e.g. Slowbro in Cerulean)
+- [ ] Bill's Lighthouse instead of Cottage?
+- [x] Donphan for sure

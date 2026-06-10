@@ -86,7 +86,7 @@ BugCatcherData:
 ; Viridian Forest
 	db 7, CATERPIE, CATERPIE, 0
 	db 6, METAPOD, CATERPIE, METAPOD, 0
-	db 10, PINSIR, METAPOD, 0 ; samurai 
+	db 10, DONPHAN, METAPOD, 0 ; samurai 
 ; Route 3
 	db 10, CATERPIE, WEEDLE, KAKUNA, 0 
 	db 9,  WEEDLE, KAKUNA, RATTATA, VENONAT, METAPOD, 0 

@@ -187,7 +187,7 @@ EvosMovesPointerTable:
 	dw OnixEvosMoves ; brock's onix
 	dw MagnemiteEvosMoves
 	dw MewtwoEvosMoves ; armored mewtwo
-	dw EmptyEvosMoves
+	dw DonphanEvosMoves ; donphan
 	dw CharmanderEvosMoves
 	dw SquirtleEvosMoves
 	dw CharmeleonEvosMoves
@@ -775,12 +775,9 @@ GravelerEvosMoves:
 	db 21, SELFDESTRUCT
 	db 28, ROCK_SLIDE
 	db 31, BARRAGE
-	db 34, GLARE
 	db 39, EARTHQUAKE
 	db 46, EXPLOSION
-	db 52, MEGA_KICK
 	db 60, FISSURE
-	db 65, MIRROR_MOVE
 	db 0
 
 ChanseyEvosMoves:
@@ -941,12 +938,10 @@ GolemEvosMoves:
 	db 21, SELFDESTRUCT
 	db 28, ROCK_SLIDE
 	db 31, BARRAGE
-	db 34, GLARE
 	db 39, EARTHQUAKE
 	db 46, EXPLOSION
-	db 52, MEGA_KICK
+	db 52, MEGA_PUNCH
 	db 60, FISSURE
-	db 65, MIRROR_MOVE
 	db 0
 
 
@@ -1854,6 +1849,20 @@ MewtwoEvosMoves:
 	db 81, AMNESIA
 	db 0
 
+DonphanEvosMoves:
+; Evolutions
+	db 0
+; Learnset
+	db 15, FURY_ATTACK
+	db 20, TAKE_DOWN
+	db 30, EARTHQUAKE
+	db 40, DEFENSE_CURL
+	db 45, DOUBLE_EDGE
+	db 50, ROCK_SLIDE
+	db 55, HYPER_BEAM
+	db 60, FISSURE
+	db 0
+
 SnorlaxEvosMoves:
 ; Evolutions
 	db 0
@@ -2255,12 +2264,9 @@ GeodudeEvosMoves:
 	db 21, SELFDESTRUCT
 	db 28, ROCK_SLIDE
 	db 31, BARRAGE
-	db 34, GLARE
 	db 39, EARTHQUAKE
 	db 46, EXPLOSION
-	db 52, MEGA_KICK
 	db 60, FISSURE
-	db 65, MIRROR_MOVE
 	db 0
 
 PorygonEvosMoves:

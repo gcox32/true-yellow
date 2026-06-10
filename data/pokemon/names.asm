@@ -174,7 +174,7 @@ MonsterNames::
 	db "ONIX@@@@@@"
 	db "MAGNEMITE@"
 	db "MEWTWO@@@@"
-	db "HAUNTER@@@"
+	db "DONPHAN@@@"
 	db "CHARMANDER"
 	db "SQUIRTLE@@"
 	db "CHARMELEON"

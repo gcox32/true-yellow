@@ -175,7 +175,7 @@ PokedexEntryPointers:
 	dw MissingNoDexEntry
 	dw MagnemiteDexEntry
 	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw DonphanDexEntry
 	dw CharmanderDexEntry
 	dw SquirtleDexEntry
 	dw CharmeleonDexEntry
@@ -1176,6 +1176,13 @@ MagnemiteDexEntry:
 	db 1,0
 	dw 130
 	text_far _MagnemiteDexEntry
+	text_end
+
+DonphanDexEntry:
+	db "ARMOR@@"
+	db 3,7
+	dw 265
+	text_far _DonphanDexEntry
 	text_end
 
 CharmanderDexEntry:

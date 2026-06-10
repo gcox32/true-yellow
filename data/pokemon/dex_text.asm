@@ -1506,3 +1506,13 @@ _MewDexEntry::
 	next "fine, delicate"
 	next "hair can be seen"
 	dex
+
+_DonphanDexEntry::
+	text "It attacks by"
+	next "curling up, "
+	next "rolling into "
+	
+	page "its foe. It "
+	next "can blow apart a"
+	next "house in one hit"
+	dex

@@ -180,7 +180,7 @@ CryData::
 	mon_cry SFX_CRY_17, $F3, $C0 ; Brock'S Onix
 	mon_cry SFX_CRY_1C, $80, $60 ; Magnemite
 	mon_cry SFX_CRY_1E, $99, $FF ; Armored Mewtwo (ch8 of this cry gets remapped when it's called)
-	mon_cry SFX_CRY_1C, $30, $40 ; unused haunter cry
+	mon_cry SFX_CRY_04, $00, $80 ; Rhyhorn reused for Donphan
 	mon_cry SFX_CRY_04, $60, $40 ; Charmander
 	mon_cry SFX_CRY_1D, $60, $40 ; Squirtle
 	mon_cry SFX_CRY_04, $20, $40 ; Charmeleon

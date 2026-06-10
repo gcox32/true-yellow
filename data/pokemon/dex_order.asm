@@ -174,7 +174,7 @@ PokedexOrder:
 	db DEX_ONIX ; Brock's onix
 	db DEX_MAGNEMITE
 	db DEX_MEWTWO ; Armored Mewtwo
-	db 0 ; MISSINGNO. ; powered haunter
+	db DEX_DONPHAN ; Donphan
 	db DEX_CHARMANDER
 	db DEX_SQUIRTLE
 	db DEX_CHARMELEON
