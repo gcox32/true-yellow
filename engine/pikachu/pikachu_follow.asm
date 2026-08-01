@@ -297,12 +297,17 @@ SetPikachuSpawnWarpPad::
 	ld a, $1
 .load_spawn_state
 	ld [wPikachuSpawnState], a
-	; Set follower doorway mode flag if spawn state is 1 (Pikachu right of player)
+	; Set follower doorway mode based on spawn state:
+	; spawn state 1 (Pikachu right of player) -> mode 1 (horizontal doorway entry)
+	; spawn state 0 (plain warp, e.g. a ladder) -> mode 2 (delayed sequential
+	; spawn: Misty waits 2 steps, Brock 3, same cascade as exiting a building)
 	cp 1
-	ld a, 0
-	jr nz, .notDoorwayWarp
+	jr z, .doorwayMode1
+	ld a, 2
+	jr .setDoorwayMode
+.doorwayMode1
 	ld a, 1
-.notDoorwayWarp
+.setDoorwayMode
 	ld [wFollowerDoorwayMode], a
 	ret
 
