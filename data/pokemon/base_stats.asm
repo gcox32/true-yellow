@@ -155,8 +155,11 @@ INCLUDE "data/pokemon/base_stats/donphan.asm"
 	assert_table_length NUM_POKEMON
 
 NonDexMonsBaseStats::
+MissingnoBaseStats::
 INCLUDE "data/pokemon/base_stats/missingno.asm"
+ArmoredMewtwoBaseStats::
 INCLUDE "data/pokemon/base_stats/armored_mewtwo.asm"
+BrockOnixBaseStats::
 INCLUDE "data/pokemon/base_stats/brock_onix.asm"
 INCLUDE "data/pokemon/base_stats/floating_magneton.asm"
 INCLUDE "data/pokemon/base_stats/floating_weezing.asm"

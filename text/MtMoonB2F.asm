@@ -52,14 +52,16 @@ _MtMoonB2FSuperNerdTheyreBothMineText::
 	done
 
 _MtMoonB2FSuperNerdOkIllShareText::
-	text "OK!"
-	line "I'll share!"
+	text "Fine!"
+	line "Take them!"
 	prompt
 
-_MtMoonB2fSuperNerdEachTakeOneText::
-	text "We'll each take"
-	line "one!"
-	cont "No being greedy!"
+_MtMoonB2FSuperNerdTakeThemBothText::
+	text "Go on, take"
+	line "them both!"
+
+	para "No hard"
+	line "feelings!"
 	done
 
 _MtMoonB2FSuperNerdTheresAPokemonLabText::
@@ -72,11 +74,6 @@ _MtMoonB2FSuperNerdTheresAPokemonLabText::
 	line "on regenerating"
 	cont "fossils."
 	done
-
-_MtMoonB2FSuperNerdThenThisIsMineText::
-	text "All right. Then"
-	line "this is mine!@"
-	text_end
 
 _MtMoonB2FRocket2BattleText::
 	text "We, TEAM ROCKET,"

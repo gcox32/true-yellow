@@ -9,7 +9,7 @@
 	db 108 ; base exp
 
 	INCBIN "gfx/pokemon/front/onix.pic", 0, 1 ; sprite dimensions
-	dw OnixPicFront, OnixPicBackSW
+	dw OnixPicFrontAlt, OnixPicBackSW
 
 	db TACKLE, HARDEN, GROWL, NO_MOVE ; level 1 learnset
 	db GROWTH_FAST ; growth rate

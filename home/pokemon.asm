@@ -427,6 +427,16 @@ GetMonHeader::
 	ld b, $77 ; size of Aerodactyl fossil sprite
 	cp FOSSIL_AERODACTYL ; Aerodactyl fossil
 	jr z, .specialID
+; these mons have their own base stats entry instead of a real dex slot
+	ld hl, MissingnoBaseStats
+	cp MISSINGNO
+	jr z, .nonDexMon
+	ld hl, ArmoredMewtwoBaseStats
+	cp ARMORED_MEWTWO
+	jr z, .nonDexMon
+	ld hl, BrockOnixBaseStats
+	cp BROCK_ONIX
+	jr z, .nonDexMon
 	predef IndexToPokedex
 	ld a, [wPokedexNum]
 	dec a
@@ -434,8 +444,7 @@ GetMonHeader::
 	ld hl, BaseStats
 	call AddNTimes
 	ld de, wMonHeader
-	ld bc, BASE_DATA_SIZE
-	call CopyData
+	call CopyData ; bc is still BASE_DATA_SIZE, AddNTimes preserves it
 	jr .done
 .specialID
 	ld hl, wMonHSpriteDim
@@ -444,6 +453,11 @@ GetMonHeader::
 	ld [hl], e ; write front sprite pointer
 	inc hl
 	ld [hl], d
+	jr .done
+.nonDexMon
+	ld de, wMonHeader
+	ld bc, BASE_DATA_SIZE
+	call CopyData
 .done
 	ld a, [wCurSpecies]
 	ld [wMonHIndex], a

@@ -7,3 +7,8 @@
 - [ ] Mark overworld Pokemon as seen in Pokedex when you interact with them (e.g. Slowbro in Cerulean)
 - [ ] Bill's Lighthouse instead of Cottage?
 - [x] Donphan for sure
+- [ ] Better burned animation (instead of reusing poisoned animation)
+- [x] mt.moon fossil nerd walks on top of misty (fixed by letting the player take both fossils instead)
+- [ ] mt.moon
+    - team rocket walks on top of misty and brock
+    - emerging from ladders looks bad 

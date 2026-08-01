@@ -563,7 +563,6 @@ INCLUDE "data/maps/headers/MtMoonB2F.asm"
 INCLUDE "scripts/MtMoonB2F.asm"
 INCLUDE "data/maps/objects/MtMoonB2F.asm"
 MtMoonB2F_Blocks: INCBIN "maps/MtMoonB2F.blk"
-INCLUDE "scripts/MtMoonB2F_2.asm"
 
 INCLUDE "data/maps/headers/SafariZoneWest.asm"
 INCLUDE "scripts/SafariZoneWest.asm"
