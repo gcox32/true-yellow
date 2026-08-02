@@ -9,6 +9,14 @@ DEF TEXT_BOX_TILE_ROW  EQU 6  ; bottom 3 rows overlap the text box
 DEF MENU_TILE_COL      EQU 5  ; right cols overlap the start menu (MENU_TEMPLATE_10, left edge col 7)
 DEF LIST_MENU_TILE_COL EQU 2  ; right cols overlap the wide list menu (LIST_MENU_BOX, left edge col 4)
 
+; Brock trails 1 tile further behind the player than Misty (3 steps vs 2, see
+; header above), so his screen_tile offset reads 1 lower than Misty's would
+; at the same true on-screen spot. Shift his thresholds down to compensate,
+; so both followers vanish at the same visual boundary.
+DEF BROCK_TEXT_BOX_TILE_ROW  EQU TEXT_BOX_TILE_ROW - 1
+DEF BROCK_MENU_TILE_COL      EQU MENU_TILE_COL - 1
+DEF BROCK_LIST_MENU_TILE_COL EQU LIST_MENU_TILE_COL - 1
+
 ; =====================================
 ; UNIFIED SPAWN DISPATCHER
 ; =====================================
@@ -429,7 +437,7 @@ ShouldBrockSpawn::
 	sub [hl]
 	cp 9
 	jr nc, .fontNotLoadedBrock
-	cp TEXT_BOX_TILE_ROW
+	cp BROCK_TEXT_BOX_TILE_ROW
 	jr nc, .hide
 	jr .fontNotLoadedBrock
 .checkMenuBrock
@@ -444,11 +452,11 @@ ShouldBrockSpawn::
 	cp MENU_TEMPLATE_10
 	ld a, b
 	jr z, .narrowMenuBrock
-	cp LIST_MENU_TILE_COL
+	cp BROCK_LIST_MENU_TILE_COL
 	jr nc, .hide
 	jr .fontNotLoadedBrock
 .narrowMenuBrock
-	cp MENU_TILE_COL
+	cp BROCK_MENU_TILE_COL
 	jr nc, .hide
 .fontNotLoadedBrock
 	; Check if in exit doorway mode (delayed spawn - wait for 3 steps after exiting)
