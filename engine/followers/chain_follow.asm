@@ -66,6 +66,13 @@ RecordPlayerPositionToTrail::
 .noModeChange
 
 	; Shift trail entries: [3] <- [2] <- [1] <- [0]
+	; This always runs, doorway sequence or not: it's what continuously and
+	; correctly tracks "N steps behind the player" using true path history
+	; (accurate through direction changes), for whichever slot isn't actively
+	; guarded off in InitializePositionTrail. Skipping it would starve a
+	; hidden, not-yet-spawned follower of accurate history to use once they
+	; finally do spawn.
+
 	ld a, [wPositionTrailY + 2]
 	ld [wPositionTrailY + 3], a
 	ld a, [wPositionTrailX + 2]
@@ -107,7 +114,9 @@ RecordPlayerPositionToTrail::
 .storeDoorPosition:
 ; Store the door tile position for delayed follower spawning
 ; Called when mode transitions from 2 to 3 (first step after exiting building)
-; At this moment, Pikachu is still at the door tile, so just use Pikachu's position
+; At this moment, Pikachu is still at the door tile, so just use Pikachu's
+; position. Misty/Brock materialize directly on this tile (their trail target
+; already points here too, via the continuously-shifted trail), facing down.
 	ld a, [wSpritePikachuStateData2MapY]
 	ld [wExitDoorwayY], a
 	ld a, [wSpritePikachuStateData2MapX]
@@ -139,30 +148,45 @@ InitializePositionTrail::
 	ld d, a  ; save facing direction
 
 	; Fill trail[0] through trail[3] with positions behind player
-	; Each position is one step further behind
+	; Each position is one step further behind. Each write is guarded by that
+	; follower's own spawn status: a follower that's already out and mid-walk
+	; toward its current target must NOT have that target clobbered just
+	; because a DIFFERENT follower's spawn triggered this recompute.
 
 	; trail[0] = 1 step behind player (Pikachu's target)
 	call .computeBehindPosition
+	ld a, [wSpritePikachuStateData1MovementStatus]
+	and a
+	jr nz, .skipTrail0Normal
 	ld a, b
 	ld [wPositionTrailY + 0], a
 	ld a, c
 	ld [wPositionTrailX + 0], a
+.skipTrail0Normal
 
 	; trail[1] = 2 steps behind player (Misty's target)
 	call .computeBehindPosition
+	ld a, [wSpriteMistyStateData1MovementStatus]
+	and a
+	jr nz, .skipTrail1Normal
 	ld a, b
 	ld [wPositionTrailY + 1], a
 	ld a, c
 	ld [wPositionTrailX + 1], a
+.skipTrail1Normal
 
 	; trail[2] = 3 steps behind player (Brock's target)
 	call .computeBehindPosition
+	ld a, [wSpriteBrockStateData1MovementStatus]
+	and a
+	jr nz, .skipTrail2Normal
 	ld a, b
 	ld [wPositionTrailY + 2], a
 	ld a, c
 	ld [wPositionTrailX + 2], a
+.skipTrail2Normal
 
-	; trail[3] = 4 steps behind player (spare)
+	; trail[3] = 4 steps behind player (spare, no live follower target)
 	call .computeBehindPosition
 	ld a, b
 	ld [wPositionTrailY + 3], a
@@ -185,6 +209,9 @@ InitializePositionTrail::
 ;   trail[1] = (X+2, Y) - Misty target (right of Pikachu)
 ;   trail[2] = (X-1, Y) - Brock target (left of player)
 ;   trail[3] = (X-2, Y) - spare (further left)
+; Same as .normalPositioning, each write is guarded so a follower that's
+; already spawned and mid-walk doesn't get its target yanked by a sibling's
+; spawn event triggering this recompute.
 
 	ld a, [wYCoord]
 	add 4
@@ -194,28 +221,40 @@ InitializePositionTrail::
 	ld c, a  ; base X coord (player's X)
 
 	; trail[0] = X+1, Y (Pikachu: right of player)
+	ld a, [wSpritePikachuStateData1MovementStatus]
+	and a
+	jr nz, .skipTrail0Doorway
 	ld a, c
 	inc a
 	ld [wPositionTrailX + 0], a
 	ld a, b
 	ld [wPositionTrailY + 0], a
+.skipTrail0Doorway
 
 	; trail[1] = X+2, Y (Misty: right of Pikachu)
+	ld a, [wSpriteMistyStateData1MovementStatus]
+	and a
+	jr nz, .skipTrail1Doorway
 	ld a, c
 	inc a
 	inc a
 	ld [wPositionTrailX + 1], a
 	ld a, b
 	ld [wPositionTrailY + 1], a
+.skipTrail1Doorway
 
 	; trail[2] = X-1, Y (Brock: left of player)
+	ld a, [wSpriteBrockStateData1MovementStatus]
+	and a
+	jr nz, .skipTrail2Doorway
 	ld a, c
 	dec a
 	ld [wPositionTrailX + 2], a
 	ld a, b
 	ld [wPositionTrailY + 2], a
+.skipTrail2Doorway
 
-	; trail[3] = X-2, Y (spare: further left)
+	; trail[3] = X-2, Y (spare: further left, no live follower target)
 	ld a, c
 	dec a
 	dec a
@@ -481,8 +520,29 @@ SpawnMisty_::
 	and a
 	jr nz, .alreadySpawned
 
-	; Fresh spawn (e.g. new map) - initialize position trail and Misty's position
+	; Don't materialize mid-step. wWalkCounter counts down from 8 while the
+	; player's own walk animation is still playing (see home/overworld.asm) -
+	; spawning before it hits 0 means our target/screen-position math runs
+	; against a player who hasn't settled on their new tile yet, so we
+	; resolve to a transient spot and then visibly snap once the step
+	; catches up. Just wait for it to finish.
+	ld a, [wWalkCounter]
+	and a
+	ret nz
+
+	; Fresh spawn (e.g. new map) - initialize position trail and Misty's position.
+	; Skip the trail recompute for a door-exit spawn: the trail has been
+	; continuously and correctly shifted every step since before we were
+	; hidden (true path history, accurate through direction changes), so
+	; trail[1] already holds the right target. Recomputing it here would
+	; instead approximate "N tiles behind wherever the player currently is,
+	; assuming they've walked straight in their current facing the whole
+	; time" - wrong the moment the player has turned during the sequence.
+	ld a, [wExitDoorwayY]
+	and a
+	jr nz, .skipTrailRecomputeMisty
 	call InitializePositionTrail
+.skipTrailRecomputeMisty
 	call InitializeMistyPosition
 
 .alreadySpawned
@@ -534,8 +594,20 @@ SpawnBrock_::
 	and a
 	jr nz, .alreadySpawned
 
-	; Fresh spawn (e.g. new map) - initialize position trail and Brock's position
+	; Don't materialize mid-step - see the matching comment in SpawnMisty_'s
+	; .shouldSpawn branch.
+	ld a, [wWalkCounter]
+	and a
+	ret nz
+
+	; Fresh spawn (e.g. new map) - initialize position trail and Brock's position.
+	; Skip the trail recompute for a door-exit spawn - see the matching
+	; comment in SpawnMisty_'s .shouldSpawn branch.
+	ld a, [wExitDoorwayY]
+	and a
+	jr nz, .skipTrailRecomputeBrock
 	call InitializePositionTrail
+.skipTrailRecomputeBrock
 	call InitializeBrockPosition
 
 .alreadySpawned
@@ -587,6 +659,10 @@ InitializeMistyPosition:
 	ld [wSpriteMistyStateData2MapY], a
 	ld a, [wExitDoorwayX]
 	ld [wSpriteMistyStateData2MapX], a
+	; Emerging from a door: face down (away from the building), regardless
+	; of the player's current facing.
+	ld a, SPRITE_FACING_DOWN
+	ld [wSpriteMistyStateData1FacingDirection], a
 	; If Brock is not following, clear it here (normally Brock's init clears it,
 	; but if he's not in the chain the stale value breaks Misty on future maps)
 	ld a, [wObtainedBadges]
@@ -602,15 +678,14 @@ InitializeMistyPosition:
 	ld [wSpriteMistyStateData2MapY], a
 	ld a, [wPositionTrailX + 1]
 	ld [wSpriteMistyStateData2MapX], a
+	; Copy player's facing direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	ld [wSpriteMistyStateData1FacingDirection], a
 .positionSet
 
 	; Set movement status to 1 (ready)
 	ld a, 1
 	ld [wSpriteMistyStateData1MovementStatus], a
-
-	; Copy player's facing direction
-	ld a, [wSpritePlayerStateData1FacingDirection]
-	ld [wSpriteMistyStateData1FacingDirection], a
 
 	; Initialize screen position
 	push bc
@@ -659,6 +734,10 @@ InitializeBrockPosition:
 	ld [wSpriteBrockStateData2MapY], a
 	ld a, [wExitDoorwayX]
 	ld [wSpriteBrockStateData2MapX], a
+	; Emerging from a door: face down (away from the building), regardless
+	; of the player's current facing.
+	ld a, SPRITE_FACING_DOWN
+	ld [wSpriteBrockStateData1FacingDirection], a
 	; Clear the exit doorway position (Brock is always last - clears it for both)
 	xor a
 	ld [wExitDoorwayY], a
@@ -670,15 +749,14 @@ InitializeBrockPosition:
 	ld [wSpriteBrockStateData2MapY], a
 	ld a, [wPositionTrailX + 2]
 	ld [wSpriteBrockStateData2MapX], a
+	; Copy player's facing direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	ld [wSpriteBrockStateData1FacingDirection], a
 .positionSetBrock
 
 	; Set movement status to 1 (ready)
 	ld a, 1
 	ld [wSpriteBrockStateData1MovementStatus], a
-
-	; Copy player's facing direction
-	ld a, [wSpritePlayerStateData1FacingDirection]
-	ld [wSpriteBrockStateData1FacingDirection], a
 
 	; Initialize screen position
 	push bc

@@ -197,19 +197,61 @@ This shows how followers continuously check their target position, determine mov
 
 ### Doorway Transitions
 
-Entering and exiting buildings requires special handling to prevent followers from appearing inside walls or overlapping each other.
+Entering and exiting buildings (and taking a ladder between floors, which is
+implemented as a warp between two non-outside maps - see below) requires
+special handling to prevent followers from appearing inside walls or
+overlapping each other.
 
 **Entering buildings** (`wFollowerDoorwayMode = 1`):
 - Position trail is initialized with horizontal positions
 - Arrangement: `[Brock] - [Player] - [Pikachu] - [Misty]`
 - Followers stand to the sides of the player rather than behind
 
-**Exiting buildings** (`wFollowerDoorwayMode = 2, 3, 4`):
-- Followers spawn delayed, one per step taken
-- Mode 2: All followers hidden, door position stored
-- Mode 3: Pikachu can spawn at door, Misty/Brock still hidden
-- Mode 4: Misty can spawn at door, Brock still hidden
-- Mode 0: All followers can spawn normally
+**Exiting buildings, or taking a ladder** (`wFollowerDoorwayMode = 2, 3, 4`):
+- `SetPikachuSpawnWarpPad` (`engine/pikachu/pikachu_follow.asm`) sets mode 2
+  for any plain warp between two non-outside maps - this covers ladders
+  (e.g. Mt. Moon's floors) as well as literal building exits, not just the
+  `LAST_MAP` "walk out the front door" case.
+- Followers spawn delayed, one per step taken, cascading via
+  `RecordPlayerPositionToTrail`: mode 2 -> 3 after the 1st step (door
+  position captured from Pikachu's current position), 3 -> 4 after the 2nd
+  step (Misty unlocks), 4 -> 0 after the 3rd step (Brock unlocks).
+- Misty and Brock materialize directly on the stored door tile, facing
+  down (away from the building), regardless of the player's current
+  facing.
+
+Three subtle bugs bit us hard enough here to be worth documenting so they
+don't get reintroduced:
+
+1. **Don't let one follower's spawn clobber another's target.**
+   `InitializePositionTrail` writes all four trail slots in one pass, but if
+   it's called every time *any* follower does a "fresh spawn" (which
+   includes Brock spawning one step after Misty), it will happily stomp
+   Misty's already-in-progress target with a freshly computed one. Every
+   slot write in `InitializePositionTrail` is now guarded by that
+   follower's own `MovementStatus` - if they're already spawned and
+   walking, their slot is left alone.
+2. **Prefer the trail's own history over a fresh approximation.** The
+   per-step shift in `RecordPlayerPositionToTrail` has been running
+   continuously (even while a follower is hidden) since before the doorway
+   sequence started, so by the time a follower unlocks, its trail slot
+   already holds an accurate "N steps behind the player" position derived
+   from true path history. `InitializePositionTrail`'s fresh recompute,
+   in contrast, approximates "N tiles behind wherever the player currently
+   is, assuming they've walked straight in their current facing direction
+   the whole time" - which is simply wrong if the player turned at any
+   point during the 2-3 step window. `SpawnMisty_`/`SpawnBrock_` now skip
+   the recompute entirely (`wExitDoorwayY != 0` check) for a door-exit
+   spawn and just trust the existing trail value.
+3. **Wait for the player's step to actually finish before spawning.**
+   `RecordPlayerPositionToTrail` (via `Func_fcc08`) runs at the *start* of
+   a step, right when `wWalkCounter` is set to 8 and the walk animation
+   begins (see `home/overworld.asm`), not 8 frames later when it completes.
+   Since a follower's spawn check runs every frame, it could fire on that
+   very first frame - materializing and computing screen position against
+   a player who hasn't visually settled on their new tile yet, causing a
+   one-frame "resolve to the wrong spot, then snap" glitch. Both spawn
+   functions now also wait for `wWalkCounter == 0` before materializing.
 
 ### Ledge Jumping
 
