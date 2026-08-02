@@ -43,6 +43,7 @@ ResetStatusAndHalveMoneyOnBlackout::
 	set BIT_FLY_OR_DUNGEON_WARP, [hl]
 	res BIT_FLY_WARP, [hl]
 	set BIT_ESCAPE_WARP, [hl]
+	set BIT_BLACKOUT_WARP, [hl]
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	predef_jump HealParty

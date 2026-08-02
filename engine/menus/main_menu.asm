@@ -168,6 +168,13 @@ SpecialEnterMap::
 	ld hl, wStatusFlags6
 	set BIT_GAME_TIMER_COUNTING, [hl]
 	call ResetPlayerSpriteData
+	ld hl, wStatusFlags6
+	bit BIT_BLACKOUT_WARP, [hl]
+	res BIT_BLACKOUT_WARP, [hl]
+	jr z, .notBlackoutWarp
+	ld a, SPRITE_FACING_RIGHT
+	ld [wSpritePlayerStateData1FacingDirection], a
+.notBlackoutWarp
 	ld c, 20
 	call DelayFrames
 	call Func_5cc1
