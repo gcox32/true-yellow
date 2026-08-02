@@ -187,7 +187,7 @@ AttackAnimationPointers:
 	dw ParalyzeAnim
 	dw ParalyzeAnim
 	dw PoisonAnim
-	dw PoisonAnim
+	dw BurnAnim
 	dw SleepPlayerAnim
 	dw SleepEnemyAnim
 	dw ConfusedPlayerAnim
@@ -1236,6 +1236,11 @@ ParalyzeAnim:
 PoisonAnim:
 	battle_anim BIND, SUBANIM_0_STATUS_POISONED, 0, 8
 	battle_anim BIND, SUBANIM_0_STATUS_POISONED, 0, 8
+	db -1 ; end
+
+BurnAnim:
+	battle_anim EMBER, SUBANIM_1_STATUS_BURNED, 1, 8
+	battle_anim EMBER, SUBANIM_1_STATUS_BURNED, 1, 8
 	db -1 ; end
 
 SleepPlayerAnim:

@@ -486,13 +486,17 @@ HandlePoisonBurnLeechSeed:
 	ld hl, HurtByPoisonText
 	ld a, [de]
 	and 1 << BRN
+	ld b, PSN_ANIM
 	jr z, .poisoned
 	ld hl, HurtByBurnText
+	ld b, BURN_ANIM
 .poisoned
+	push bc
 	call PrintText
+	pop bc
 	xor a
 	ld [wAnimationType], a
-	ld a, BURN_PSN_ANIM
+	ld a, b
 	call PlayMoveAnimation   ; play burn/poison animation
 	pop hl
 	call HandlePoisonBurnLeechSeed_DecreaseOwnHP

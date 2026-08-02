@@ -197,8 +197,8 @@ DEF CANNOT_MOVE EQU $ff
 	const ANIM_B7
 	const ANIM_B8
 	const ANIM_B9
-	const BURN_PSN_ANIM ; Plays when a monster is burned or poisoned
-	const ANIM_BB
+	const PSN_ANIM ; Plays when a monster is poisoned
+	const BURN_ANIM ; Plays when a monster is burned
 	const SLP_PLAYER_ANIM
 	const SLP_ANIM ; sleeping monster
 	const CONF_PLAYER_ANIM

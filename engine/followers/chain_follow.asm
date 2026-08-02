@@ -321,11 +321,19 @@ ShouldMistySpawn::
 	; Hide during PC interface (large menu covers entire screen)
 	ld a, [wMiscFlags]
 	bit BIT_USING_GENERIC_PC, a
-	jr nz, .hide
+	jp nz, .hide
 	; Conditionally hide during text/menus: only if Misty overlaps the UI region
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
-	jr z, .fontNotLoadedMisty
+	jr nz, .fontLoadedMisty
+	; No text/menu currently active - clear any stale Mart force-hide flag
+	; (bit 6, see below). CloseTextDisplay (home/text_script.asm) clears
+	; wFontLoaded only after it has redrawn the map view, so by the time we
+	; observe it clear here, the Mart's UI tiles are actually gone.
+	ld hl, wMistyOverworldStateFlags
+	res 6, [hl]
+	jr .fontNotLoadedMisty
+.fontLoadedMisty
 	; hTextID != 0 means text box (bottom); hTextID == 0 means menu (right side)
 	ldh a, [hTextID]
 	and a
@@ -370,6 +378,13 @@ ShouldMistySpawn::
 	bit 5, a
 	jr nz, .hide
 	bit 7, a
+	jr nz, .hide
+	; Bit 6: force-hide regardless of screen position (e.g. Mart menu - its
+	; boxes don't fit the "bottom text box" / "right-side menu" shapes the
+	; conditional windowing above assumes, so it's simplest to just hide
+	; unconditionally for the whole interaction). Self-clears above once
+	; wFontLoaded goes false.
+	bit 6, a
 	jr nz, .hide
 
 	; Special case: If in Cerulean Gym and haven't beaten Misty yet, hide follower
@@ -427,7 +442,13 @@ ShouldBrockSpawn::
 	; Conditionally hide during text/menus: only if Brock overlaps the UI region
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
-	jr z, .fontNotLoadedBrock
+	jr nz, .fontLoadedBrock
+	; No text/menu currently active - clear any stale Mart force-hide flag,
+	; see matching comment in ShouldMistySpawn
+	ld hl, wBrockOverworldStateFlags
+	res 6, [hl]
+	jr .fontNotLoadedBrock
+.fontLoadedBrock
 	ldh a, [hTextID]
 	and a
 	jr z, .checkMenuBrock
@@ -476,6 +497,10 @@ ShouldBrockSpawn::
 	bit 5, a
 	jr nz, .hide
 	bit 7, a
+	jr nz, .hide
+	; Bit 6: force-hide regardless of screen position (e.g. Mart menu - see
+	; matching comment in ShouldMistySpawn)
+	bit 6, a
 	jr nz, .hide
 
 	; Check if has Boulder badge (required to have defeated Brock)

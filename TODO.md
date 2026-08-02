@@ -1,14 +1,12 @@
 # TODO
 - [x] Fix double animation for two stat buff moves (e.g. DEFENSE_CURL)
 - [ ] Butterfree for Raticate trade and trade back on SS Anne
-- [ ] NPC to upgrade your Weezing to Floating Weezing
-- [ ] NPC to upgrade your Magneton to Floating Magneton
 - [x] Swap "Hardened Onix" for "Brock Onix" that is only _resistant_ not immune to Electric
 - [ ] Mark overworld Pokemon as seen in Pokedex when you interact with them (e.g. Slowbro in Cerulean)
 - [ ] Bill's Lighthouse instead of Cottage?
 - [x] Donphan for sure
-- [ ] Better burned animation (instead of reusing poisoned animation)
+- [x] Better burned animation (instead of reusing poisoned animation)
 - [x] mt.moon fossil nerd walks on top of misty (fixed by letting the player take both fossils instead)
-- [ ] mt.moon
+- [x] mt.moon
     - team rocket walks on top of misty and brock
     - emerging from ladders looks bad 

@@ -1,6 +1,14 @@
 DisplayPokemartDialogue_::
 	ld a, [wListScrollOffset]
 	ld [wSavedListScrollOffset], a
+	; The Mart's menus (buy/sell/quit box, item lists, quantity/yes-no prompts)
+	; don't fit the "text box at bottom" / "menu on the right" shapes the usual
+	; conditional hiding assumes, so just hide followers unconditionally for
+	; the whole interaction rather than trying to model every box's geometry.
+	ld hl, wMistyOverworldStateFlags
+	set 6, [hl]
+	ld hl, wBrockOverworldStateFlags
+	set 6, [hl]
 	call UpdateSprites
 	xor a
 	ld [wBoughtOrSoldItemInMart], a
@@ -220,6 +228,15 @@ DisplayPokemartDialogue_::
 .done
 	ld hl, PokemartThankYouText
 	call PrintText
+; Note: force-hide (bit 6 of wMistyOverworldStateFlags/wBrockOverworldStateFlags,
+; set above) is intentionally NOT cleared here. The player still has to press
+; a button to dismiss this text, and the Mart's menu tiles aren't actually
+; erased from the screen until CloseTextDisplay (home/text_script.asm) clears
+; wFontLoaded and redraws the map view afterward - clearing our flag here
+; would pop followers back into view while the leftover Mart UI is still on
+; screen. ShouldMistySpawn/ShouldBrockSpawn self-clear it as soon as they
+; notice wFontLoaded has gone false, which only happens once that redraw has
+; actually occurred.
 	ld a, 1
 	ld [wUpdateSpritesEnabled], a
 	call UpdateSprites

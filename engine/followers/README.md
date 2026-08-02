@@ -290,6 +290,36 @@ Fishing does NOT hide followers:
 - `BIT_LEDGE_OR_FISHING` is set but followers don't check this for visibility
 - Followers remain visible but frozen in place during fishing
 
+### Conditional UI Hiding vs. Force-Hiding
+
+Most text boxes and menus only cover part of the screen, so `ShouldMistySpawn`/
+`ShouldBrockSpawn` conditionally hide a follower only if their on-screen
+position actually overlaps the box - see the screen_tile_X/Y windowing logic
+near the top of each function (`TEXT_BOX_TILE_ROW`, `MENU_TILE_COL`,
+`LIST_MENU_TILE_COL` and their Brock-shifted equivalents). That logic assumes
+one of two box shapes: a message box hugging the bottom rows, or a menu
+hugging the right column and spanning full height.
+
+Some UI (the PC interface, the Mart's buy/sell/quit box and item/quantity
+menus) doesn't fit either shape - e.g. the Mart's `BUY_SELL_QUIT_MENU` box
+sits in the *top-left* and only spans rows 0-6, so the windowing logic (which
+assumes a full-height right-side menu) can leave a follower visible depending
+on which row they happen to be standing on. For these, followers are
+force-hidden unconditionally instead, via bit 6 of `wMistyOverworldStateFlags`
+/ `wBrockOverworldStateFlags` (checked right alongside the existing bit 5/7
+checks). `DisplayPokemartDialogue_` sets bit 6 on entry; it is deliberately
+NOT cleared when the Mart interaction logically ends (e.g. `.done`), because
+the Mart's UI tiles are still on screen at that point - the player has to
+press a button to dismiss the closing "Thank you" text, and only then does
+`CloseTextDisplay` (`home/text_script.asm`) clear `wFontLoaded` and redraw the
+map view, erasing the leftover Mart graphics. Clearing bit 6 any earlier
+popped followers back into view a beat before the menu was actually gone.
+Instead, `ShouldMistySpawn`/`ShouldBrockSpawn` self-clear bit 6 the moment
+they observe `wFontLoaded` has gone false - which, by construction, can't
+happen until after that redraw, since `CloseTextDisplay` clears it right
+before doing so. The PC interface uses the separate `BIT_USING_GENERIC_PC`
+flag in `wMiscFlags` for the equivalent purpose.
+
 ## Interaction System
 
 Players can talk to followers by pressing A while facing them.
@@ -327,8 +357,8 @@ Text content is stored in `text/follower_text.asm` and can be customized based o
 ### Follower State Flags
 | Variable | Size | Description |
 |----------|------|-------------|
-| `wMistyOverworldStateFlags` | 1 byte | Bit 5/7: hide Misty |
-| `wBrockOverworldStateFlags` | 1 byte | Bit 5/7: hide Brock |
+| `wMistyOverworldStateFlags` | 1 byte | Bit 5/7: hide Misty. Bit 6: force-hide regardless of screen position (e.g. Mart menu) |
+| `wBrockOverworldStateFlags` | 1 byte | Bit 5/7: hide Brock. Bit 6: force-hide regardless of screen position (e.g. Mart menu) |
 
 ### Sprite State Data
 Each follower uses standard sprite state data structures:
