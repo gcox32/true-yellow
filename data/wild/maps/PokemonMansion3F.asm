@@ -3,7 +3,7 @@ PokemonMansion3FWildMons:
 	db 35, VULPIX 
 	db 33, NINETALES
 	db 36, NINETALES
-	db 32, DITTO
+	db 32, GROWLITHE
 	db 34, WEEZING
 	db 40, MUK
 	db 36, MUK

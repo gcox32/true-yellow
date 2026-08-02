@@ -1,11 +1,11 @@
 CeruleanCaveB1FWildMons:
 	def_grass_wildmons 10 ; encounter rate
+	db 80, FLOATING_MAGNETON
+	db 85, FLOATING_MAGNETON
 	db 80, CHANSEY
 	db 85, CHANSEY
-	db 80, CHANSEY
-	db 85, CHANSEY
-	db 90, CHANSEY
-	db 100, CHANSEY
+	db 90, RAICHU
+	db 100, RAICHU
 	db 100, CHANSEY
 	db 90, CHANSEY
 	db 80, CLEFABLE

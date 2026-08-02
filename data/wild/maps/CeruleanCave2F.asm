@@ -1,7 +1,7 @@
 CeruleanCave2FWildMons:
 	def_grass_wildmons 8 ; encounter rate
-	db 65, DITTO
-	db 75, DITTO
+	db 65, RHYHORN
+	db 75, DONPHAN
 	db 55, SANDSLASH
 	db 60, ARCANINE
 	db 55, GENGAR

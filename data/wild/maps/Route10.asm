@@ -9,7 +9,7 @@ Route10WildMons:
 	db 22, MAGNEMITE
 	db 20, CUBONE
 	db 16, MACHOP
-	db 18, MACHOP
+	db 25, DONPHAN
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

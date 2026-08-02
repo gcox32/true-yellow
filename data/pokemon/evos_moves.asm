@@ -325,7 +325,7 @@ NidokingEvosMoves:
 	db 14, POISON_STING
 	db 18, FOCUS_ENERGY
 	db 23, THRASH
-	db 25, SLAM ; GASTRO ACID
+	db 25, BODY_SLAM
 	db 31, HYPER_BEAM
 	db 37, EARTHQUAKE
 	db 42, HORN_DRILL
@@ -342,7 +342,7 @@ SlowbroEvosMoves:
 	db 24, BUBBLEBEAM
 	db 28, PSYBEAM
 	db 32, WITHDRAW
-	db 36, SLAM
+	db 36, BODY_SLAM
 	db 41, AMNESIA
 	db 45, PSYCHIC_M
 	db 0
@@ -356,7 +356,7 @@ IvysaurEvosMoves:
 	db 13, VINE_WHIP
 	db 16, POISONPOWDER
 	db 19, STUN_SPORE
-	db 24, SLAM
+	db 24, BODY_SLAM
 	db 29, RAZOR_LEAF
 	db 35, SLEEP_POWDER
 	db 38, GROWTH
@@ -460,12 +460,13 @@ NidoqueenEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 8, DOUBLE_KICK
+	db 8,  DOUBLE_KICK
 	db 12, FURY_SWIPES
 	db 14, POISON_STING
 	db 18, BITE
 	db 23, BODY_SLAM
-	db 25, SLAM ; GASTRO ACID
+	db 25, MEGA_KICK
+	db 35, MEGA_PUNCH
 	db 43, EARTHQUAKE
 	db 49, DRILL_PECK
 	db 54, FISSURE
@@ -496,7 +497,7 @@ RhyhornEvosMoves:
 	db 19, HORN_ATTACK
 	db 23, HEADBUTT
 	db 27, FURY_ATTACK
-	db 36, SLAM ; GASTRO ACID
+	db 36, BODY_SLAM
 	db 39, EARTHQUAKE
 	db 42, SKULL_BASH
 	db 47, HARDEN
@@ -971,7 +972,6 @@ ElectabuzzEvosMoves:
 	db 28, LIGHT_SCREEN
 	db 30, THUNDERPUNCH
 	db 33, ICE_PUNCH
-	db 37, SLAM ; GASTRO ACID
 	db 42, FIRE_PUNCH
 	db 47, THUNDER
 	db 54, HYPER_BEAM
@@ -1060,7 +1060,6 @@ DiglettEvosMoves:
 	db 15, FURY_SWIPES
 	db 19, DIG
 	db 24, SAND_ATTACK
-	db 30, SLAM ; GASTRO ACID
 	db 35, SLASH
 	db 39, EARTHQUAKE
 	db 43, FURY_ATTACK
@@ -1246,7 +1245,6 @@ KrabbyEvosMoves:
 	db 22, GUILLOTINE
 	db 26, HARDEN
 	db 30, SLASH
-	db 35, SLAM ; GASTRO ACID
 	db 39, CRABHAMMER
 	db 44, EARTHQUAKE
 	db 50, SPIKE_CANNON
@@ -1286,7 +1284,7 @@ PikachuEvosMoves:
 	db 8,  THUNDER_WAVE
 	db 11, QUICK_ATTACK
 	db 15, DOUBLE_TEAM
-	db 20, SLAM
+	db 20, BODY_SLAM
 	db 26, THUNDERBOLT
 	db 33, AGILITY
 	db 41, THUNDER
@@ -1568,11 +1566,10 @@ EkansEvosMoves:
 	db 0
 ; Learnset
 	db 10, BITE
-	db 13, SMOG
 	db 17, GLARE
 	db 19, CONSTRICT
 	db 23, MEGA_DRAIN
-	db 26, SLAM ; GASTRO ACID
+	db 26, LEECH_LIFE ; GASTRO ACID
 	db 30, WITHDRAW
 	db 33, ACID
 	db 36, LEECH_LIFE
@@ -1700,7 +1697,6 @@ DugtrioEvosMoves:
 	db 15, FURY_SWIPES
 	db 19, DIG
 	db 24, SAND_ATTACK
-	db 30, SLAM ; GASTRO ACID
 	db 35, SLASH
 	db 39, EARTHQUAKE
 	db 43, FURY_ATTACK
@@ -1909,7 +1905,6 @@ KinglerEvosMoves:
 	db 22, GUILLOTINE
 	db 26, AGILITY
 	db 30, SLASH
-	db 35, SLAM
 	db 39, CRABHAMMER
 	db 44, EARTHQUAKE
 	db 51, SPIKE_CANNON
@@ -2106,7 +2101,7 @@ VenusaurEvosMoves:
 	db 36, SLEEP_POWDER
 	db 40, GROWTH
 	db 50, SOLARBEAM
-	db 55, SLAM
+	db 55, BODY_SLAM
 	db 61, EARTHQUAKE
 	db 67, SWORDS_DANCE
 	db 0

@@ -8,8 +8,8 @@ CeruleanCave1FWildMons:
 	db 65, ELECTABUZZ
 	db 55, KINGLER
 	db 65, KINGLER
-	db 58, DITTO
-	db 59, DITTO
+	db 58, FLOATING_WEEZING
+	db 59, FLOATING_WEEZING
 	end_grass_wildmons
 
 	def_water_wildmons 7 ; encounter rate
