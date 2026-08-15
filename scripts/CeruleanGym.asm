@@ -55,6 +55,7 @@ CeruleanGym_ScriptPointers:
 	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_CERULEANGYM_START_BATTLE
 	dw_const EndTrainerBattle,                      SCRIPT_CERULEANGYM_END_BATTLE
 	dw_const CeruleanGymMistyPostBattleScript,      SCRIPT_CERULEANGYM_MISTY_POST_BATTLE
+	dw_const CeruleanGymSpawnMistyFollower,         SCRIPT_CERULEANGYM_MISTY_SPAWN_FOLLOWER
 
 CeruleanGymMistyPostBattleScript:
 	ld a, [wIsInBattle]
@@ -64,10 +65,17 @@ CeruleanGymMistyPostBattleScript:
 	ld [wJoyIgnore], a
 
 CeruleanGymReceiveTM11:
+	; Note: EVENT_BEAT_MISTY is NOT set here. ShouldMistySpawn's Cerulean Gym
+	; special case (chain_follow.asm) keys directly off it to decide whether
+	; to show the follower, and the follower's per-frame update loop runs
+	; independently of this script - setting it early would make her follower
+	; sprite pop into view immediately (at whatever stale position it last
+	; held) while this text is still displaying, alongside her still-visible
+	; stationary gym sprite. It's set later, in CeruleanGymSpawnMistyFollower,
+	; only once her follower position has actually been corrected.
 	ld a, TEXT_CERULEANGYM_MISTY_CASCADE_BADGE_INFO
 	ldh [hTextID], a
 	call DisplayTextID
-	SetEvent EVENT_BEAT_MISTY
 	lb bc, TM_BUBBLEBEAM, 1
 	call GiveItem
 	jr nc, .BagFull
@@ -89,6 +97,18 @@ CeruleanGymReceiveTM11:
 	; deactivate gym trainers
 	SetEvents EVENT_BEAT_CERULEAN_GYM_TRAINER_0, EVENT_BEAT_CERULEAN_GYM_TRAINER_1
 
+	; Remember where Misty is standing, so when her follower sprite is
+	; spawned below it appears right where she's standing instead of
+	; teleporting into place behind the player. Hardcoded (rather than read
+	; from wSprite01StateData2) because she's a STAY-type NPC at a fixed
+	; spot - her object_event position (data/maps/objects/CeruleanGym.asm)
+	; is X=4, Y=2; MapY/MapX use a +4 coordinate offset (see object_event in
+	; macros/scripts/maps.asm), giving MapY=6, MapX=8.
+	ld a, 2 + 4
+	ld [wExitDoorwayY], a
+	ld a, 4 + 4
+	ld [wExitDoorwayX], a
+
 	; Hide Misty from the gym (she'll appear as follower instead)
 	; CERULEANGYM_MISTY is the first object (object ID 0), which is sprite 1 (offset $10)
 	; Clear the sprite's data to prevent it from rendering
@@ -102,9 +122,38 @@ CeruleanGymReceiveTM11:
 	ld hl, wSprite01StateData2 + SPRITESTATEDATA2_IMAGEBASEOFFSET
 	ld [hl], 0
 
-	; Initialize Misty's follower state (she'll appear when following flag is set)
-	farcall InitializeMistyFollower
+	; Don't spawn the follower yet - this text_asm script is still running
+	; (control hasn't returned to the player). Switch to a dedicated script
+	; state so the spawn happens on the next frame, once this whole script
+	; and its dialogue have fully finished. Both wCeruleanGymCurScript and
+	; wCurMapScript must be set: ExecuteCurMapScriptInTable re-reads
+	; wCurMapScript on return and CeruleanGym_Script copies that into
+	; wCeruleanGymCurScript, clobbering a wCeruleanGymCurScript-only write
+	; (see CeruleanGymResetScripts, which sets both for the same reason).
+	ld a, SCRIPT_CERULEANGYM_MISTY_SPAWN_FOLLOWER
+	ld [wCeruleanGymCurScript], a
+	ld [wCurMapScript], a
+	ret
 
+CeruleanGymSpawnMistyFollower:
+	; Initialize Misty's follower state. wExitDoorwayY/X (set above) makes
+	; her spawn exactly where she was standing rather than behind the
+	; player, so she stands in place and only starts walking to catch up
+	; once the player moves away from her current spot.
+	farcall InitializeMistyFollower
+	; Only now that her follower position is correct is it safe to let
+	; ShouldMistySpawn's Cerulean Gym check start showing her as a follower
+	; (see the comment in CeruleanGymReceiveTM11).
+	SetEvent EVENT_BEAT_MISTY
+	; InitializeMistyPosition only clears wExitDoorwayY/X itself when Brock
+	; isn't following (it otherwise expects Brock's own fresh-spawn init to
+	; clear it - see its comment). Brock isn't fresh-spawning here (he's
+	; been following the whole time we were in the gym), so clear it
+	; ourselves to avoid a stale gym position leaking into some future
+	; unrelated fresh follower spawn.
+	xor a
+	ld [wExitDoorwayY], a
+	ld [wExitDoorwayX], a
 	jp CeruleanGymResetScripts
 
 CeruleanGym_TextPointers:
