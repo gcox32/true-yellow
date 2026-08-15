@@ -31,7 +31,7 @@ Moves:
 	move WHIRLWIND,    SWITCH_AND_TELEPORT_EFFECT,   0, FLYING,        85, 20 ; type changed from NORMAL to FLYING
 	move FLY,          FLY_EFFECT,                  70, FLYING,        95, 15
 	move BIND,         TRAPPING_EFFECT,             15, NORMAL,        85, 20 ; accuracy changed from 75 to 85
-	move SLAM,         POISON_SIDE_EFFECT1,         80, POISON,        95, 20 ; type changed from NORMAL to POISON, now FILTHY SLAM
+	move SLAM,         BURN_SIDE_EFFECT1,           80, POISON,        95, 20 ; type changed from NORMAL to POISON, now GASTRO ACID
 	move VINE_WHIP,    NO_ADDITIONAL_EFFECT,        35, GRASS,        100, 20 ; pp changed from 10 to 20
 	move STOMP,        FLINCH_SIDE_EFFECT2,         65, NORMAL,       100, 20
 	move DOUBLE_KICK,  ATTACK_TWICE_EFFECT,         40, FIGHTING,     100, 30 ; power changed from 30 to 40

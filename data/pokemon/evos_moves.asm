@@ -952,13 +952,12 @@ MagmarEvosMoves:
 ; Learnset
 	db 15, SMOG
 	db 17, SMOKESCREEN
-	db 20, ROLLING_KICK
 	db 22, CONFUSE_RAY
 	db 24, TELEPORT
 	db 27, FIRE_PUNCH
 	db 30, BARRAGE
-	db 37, EGG_BOMB
-	db 43, EARTHQUAKE
+	db 37, FLAMETHROWER
+	db 43, SLAM
 	db 49, POISON_GAS
 	db 54, FIRE_BLAST
 	db 0
@@ -968,7 +967,7 @@ ElectabuzzEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 26, COMET_PUNCH
+	db 26, PIN_MISSILE
 	db 28, LIGHT_SCREEN
 	db 30, THUNDERPUNCH
 	db 33, ICE_PUNCH
@@ -1062,8 +1061,8 @@ DiglettEvosMoves:
 	db 24, SAND_ATTACK
 	db 35, SLASH
 	db 39, EARTHQUAKE
-	db 43, FURY_ATTACK
-	db 49, DISABLE
+	db 43, ROCK_THROW
+	db 49, ROCK_SLIDE
 	db 54, FISSURE
 	db 59, SUBMISSION
 	db 0
@@ -1484,11 +1483,11 @@ FlareonEvosMoves:
 	db 6,  GROWTH
 	db 21, EMBER
 	db 25, TAKE_DOWN
-	db 28, AGILITY
+	db 28, REFLECT
 	db 32, FLAMETHROWER
 	db 38, GLARE
 	db 44, SKULL_BASH
-	db 49, MEGA_KICK
+	db 49, FIRE_BLAST
 	db 0
 
 JolteonEvosMoves:
@@ -1500,9 +1499,9 @@ JolteonEvosMoves:
 	db 21, THUNDER_WAVE
 	db 25, DOUBLE_TEAM
 	db 28, THUNDERBOLT
-	db 32, BARRIER
+	db 32, LIGHT_SCREEN
 	db 38, PIN_MISSILE
-	db 44, TAKE_DOWN
+	db 44, SWIFT
 	db 49, THUNDER
 	db 0
 
@@ -1569,7 +1568,7 @@ EkansEvosMoves:
 	db 17, GLARE
 	db 19, CONSTRICT
 	db 23, MEGA_DRAIN
-	db 26, LEECH_LIFE ; GASTRO ACID
+	db 26, LEECH_LIFE
 	db 30, WITHDRAW
 	db 33, ACID
 	db 36, LEECH_LIFE
@@ -1619,7 +1618,7 @@ PoliwrathEvosMoves:
 ; Learnset
 	db 27, BODY_SLAM
 	db 30, WATERFALL
-	db 36, DIZZY_PUNCH
+	db 36, MEGA_PUNCH
 	db 41, ICE_PUNCH
 	db 45, HYDRO_PUMP
 	db 52, SUBMISSION
@@ -1650,8 +1649,8 @@ BeedrillEvosMoves:
 	db 25, FURY_ATTACK
 	db 30, PIN_MISSILE
 	db 35, AGILITY
-	db 40, DRILL_PECK
-	db 47, SPIKE_CANNON
+	db 40, SWORDS_DANCE
+	db 47, SONICBOOM
 	db 54, HAZE
 	db 0
 
@@ -1666,7 +1665,7 @@ DodrioEvosMoves:
 	db 25, RAGE
 	db 30, DRILL_PECK
 	db 35, TRI_ATTACK
-	db 41, EARTHQUAKE
+	db 41, SONICBOOM
 	db 49, TWINEEDLE
 	db 0
 
@@ -1699,8 +1698,8 @@ DugtrioEvosMoves:
 	db 24, SAND_ATTACK
 	db 35, SLASH
 	db 39, EARTHQUAKE
-	db 43, FURY_ATTACK
-	db 49, DISABLE
+	db 43, ROCK_THROW
+	db 49, ROCK_SLIDE
 	db 54, FISSURE
 	db 59, SUBMISSION
 	db 0
