@@ -33,8 +33,17 @@ screen_tile_X = follower_mapX - wXCoord
 Values >= 9 (or >= 10 for X) mean the follower is above/left of the player
 (unsigned wrap) or off-screen — safe in both cases.
 
+### Always-hide modals
+
+Cases that hard-hide regardless of position:
+- **Pikachu interaction modal** — the overworld reaction sequence (text/emote
+  bubble/pikapic) driven by `DoStarterPikachuEmotions`. Tracked by
+  `wPikachuReactionActive` (set/cleared around the call in
+  `engine/pikachu/pikachu_emotions.asm`), checked in `ShouldMistySpawn`/
+  `ShouldBrockSpawn`. Not needed for Pikachu itself - it has its own,
+  separate spawn gate in `engine/pikachu/pikachu_follow.asm`.
+
 ### Deferred: always-hide modals
 
-Two cases that should hard-hide regardless of position — flags not yet identified:
+One case that should hard-hide regardless of position — flag not yet identified:
 - **Town Map overlay** — full-screen, need the active-flag
-- **Pikachu interaction modal** — special reaction scene, need the active-flag

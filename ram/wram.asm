@@ -2096,8 +2096,11 @@ wExitDoorwayX:: db  ; Door tile X position for delayed follower spawning
 ; trail[1] = movement type for 2 steps ago (Misty)
 ; trail[2] = movement type for 3 steps ago (Brock)
 wMovementTypeTrail:: ds 4
+; Set while Pikachu's overworld reaction (text/emote/pikapic sequence) is
+; playing, so Misty/Brock know to hard-hide - see chain_follow.asm
+wPikachuReactionActive:: db
 wFollowerStateEnd::
-	ds 7 ; remaining padding (24 - 17 = 7)
+	ds 6 ; remaining padding (24 - 18 = 6)
 
 wd492:: db
 	ds 1

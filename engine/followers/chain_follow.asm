@@ -322,6 +322,11 @@ ShouldMistySpawn::
 	ld a, [wMiscFlags]
 	bit BIT_USING_GENERIC_PC, a
 	jp nz, .hide
+	; Hide during Pikachu's overworld reaction (text/emote/pikapic sequence
+	; drawn mid-screen) - doesn't fit the text-box/menu shapes below
+	ld a, [wPikachuReactionActive]
+	and a
+	jp nz, .hide
 	; Conditionally hide during text/menus: only if Misty overlaps the UI region
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
@@ -439,6 +444,11 @@ ShouldBrockSpawn::
 	ld a, [wMiscFlags]
 	bit BIT_USING_GENERIC_PC, a
 	jr nz, .hide
+	; Hide during Pikachu's overworld reaction (text/emote/pikapic sequence
+	; drawn mid-screen) - doesn't fit the text-box/menu shapes below
+	ld a, [wPikachuReactionActive]
+	and a
+	jr nz, .hide
 	; Conditionally hide during text/menus: only if Brock overlaps the UI region
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
@@ -543,6 +553,9 @@ SpawnMisty_::
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
 	ret nz
+	ld a, [wPikachuReactionActive]
+	and a
+	ret nz
 	xor a
 	ld [wSpriteMistyStateData1MovementStatus], a  ; Set MovementStatus to 0
 	ret
@@ -616,6 +629,9 @@ SpawnBrock_::
 	; (preserves position so follower reappears in the right spot when text closes)
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
+	ret nz
+	ld a, [wPikachuReactionActive]
+	and a
 	ret nz
 	xor a
 	ld [wSpriteBrockStateData1MovementStatus], a  ; Set MovementStatus to 0

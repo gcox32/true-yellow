@@ -10,3 +10,4 @@
 - [x] mt.moon
     - team rocket walks on top of misty and brock
     - emerging from ladders looks bad 
+- [ ] hide new followers on pikachu emotion check

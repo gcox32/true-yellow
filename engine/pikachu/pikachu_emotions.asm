@@ -253,7 +253,11 @@ TalkToPikachu::
 load_expression:
 	ld [wExpressionNumber], a
 	ld hl, PikachuEmotionTable
+	ld a, 1
+	ld [wPikachuReactionActive], a
 	call DoStarterPikachuEmotions
+	xor a
+	ld [wPikachuReactionActive], a
 	ret
 
 MACRO pikaemotion_def
