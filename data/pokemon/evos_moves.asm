@@ -309,7 +309,7 @@ VoltorbEvosMoves:
 	db 18, FLASH
 	db 22, EXPLOSION
 	db 24, THUNDER_WAVE
-	db 28, SCREECH
+	db 28, DEFENSE_CURL
 	db 31, THUNDERBOLT
 	db 35, SELFDESTRUCT
 	db 39, REFLECT
@@ -1931,7 +1931,7 @@ ElectrodeEvosMoves:
 	db 18, BARRAGE
 	db 22, EXPLOSION
 	db 24, THUNDER_WAVE
-	db 28, SCREECH
+	db 28, DEFENSE_CURL
 	db 31, THUNDERBOLT
 	db 35, SELFDESTRUCT
 	db 39, REFLECT
@@ -2156,16 +2156,17 @@ PonytaEvosMoves:
 	db 0
 ; Learnset
 	db 9,  TAIL_WHIP
-	db 18, STOMP
-	db 21, AGILITY
-	db 25, FOCUS_ENERGY
-	db 28, HEADBUTT
-	db 33, FLAMETHROWER
-	db 36, SWIFT
-	db 40, FURY_ATTACK
-	db 45, SKULL_BASH
-	db 49, MEGA_KICK
-	db 54, SOLARBEAM
+	db 14, STOMP
+	db 17, AGILITY
+	db 20, FOCUS_ENERGY
+	db 24, HEADBUTT
+	db 28, FLAMETHROWER
+	db 32, SWIFT
+	db 36, FURY_ATTACK
+	db 41, SKULL_BASH
+	db 45, MEGA_KICK
+	db 50, SOLARBEAM
+	db 54, FIRE_BLAST
 	db 0
 
 RapidashEvosMoves:
@@ -2180,6 +2181,7 @@ RapidashEvosMoves:
 	db 45, SKULL_BASH
 	db 49, MEGA_KICK
 	db 54, SOLARBEAM
+	db 58, FIRE_BLAST
 	db 0
 
 RattataEvosMoves:
@@ -2191,7 +2193,6 @@ RattataEvosMoves:
 	db 12, SHARPEN
 	db 14, BITE
 	db 17, HYPER_FANG
-	db 21, DOUBLE_KICK
 	db 23, FOCUS_ENERGY
 	db 26, RAGE
 	db 31, SKULL_BASH
@@ -2206,7 +2207,6 @@ RaticateEvosMoves:
 	db 12, SHARPEN
 	db 14, BITE
 	db 17, HYPER_FANG
-	db 21, DOUBLE_KICK
 	db 23, FOCUS_ENERGY
 	db 26, RAGE
 	db 31, SKULL_BASH
@@ -2271,7 +2271,7 @@ PorygonEvosMoves:
 	db 25, TRI_ATTACK
 	db 28, RECOVER
 	db 35, CONVERSION
-	db 42, PSYCHIC_M
+	db 42, ICE_BEAM
 	db 47, THUNDERBOLT
 	db 54, SELFDESTRUCT
 	db 0

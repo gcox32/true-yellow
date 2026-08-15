@@ -8,6 +8,10 @@
 DEF TEXT_BOX_TILE_ROW  EQU 6  ; bottom 3 rows overlap the text box
 DEF MENU_TILE_COL      EQU 5  ; right cols overlap the start menu (MENU_TEMPLATE_10, left edge col 7)
 DEF LIST_MENU_TILE_COL EQU 2  ; right cols overlap the wide list menu (LIST_MENU_BOX, left edge col 4)
+; right cols overlap a yes/no choice box (YesNoChoice, home/yes_no.asm - left
+; edge screen col 14) that can appear in the upper-right alongside a bottom
+; text box, e.g. "Did you check out the MUSEUM?"
+DEF YESNO_BOX_TILE_COL EQU 8
 
 ; Brock trails 1 tile further behind the player than Misty (3 steps vs 2, see
 ; header above), so his screen_tile offset reads 1 lower than Misty's would
@@ -16,6 +20,7 @@ DEF LIST_MENU_TILE_COL EQU 2  ; right cols overlap the wide list menu (LIST_MENU
 DEF BROCK_TEXT_BOX_TILE_ROW  EQU TEXT_BOX_TILE_ROW - 1
 DEF BROCK_MENU_TILE_COL      EQU MENU_TILE_COL - 1
 DEF BROCK_LIST_MENU_TILE_COL EQU LIST_MENU_TILE_COL - 1
+DEF BROCK_YESNO_BOX_TILE_COL EQU YESNO_BOX_TILE_COL - 1
 
 ; =====================================
 ; UNIFIED SPAWN DISPATCHER
@@ -352,13 +357,26 @@ ShouldMistySpawn::
 	ldh a, [hTextID]
 	and a
 	jr z, .checkMenuMisty
-	; Text box: only check Y axis
+	; Text box: check Y axis
 	ld hl, wYCoord
 	ld a, [wSpriteMistyStateData2MapY]
 	sub [hl]               ; screen_tile_Y; large value = above player = safe
 	cp 9
 	jr nc, .fontNotLoadedMisty
 	cp TEXT_BOX_TILE_ROW
+	jr nc, .hide
+	; Safe from the bottom text box row - but a yes/no choice box (upper-
+	; right, e.g. "Did you check out the MUSEUM?") can be showing alongside
+	; it, so also check X axis in that case
+	ld a, [wTextBoxID]
+	cp TWO_OPTION_MENU
+	jr nz, .fontNotLoadedMisty
+	ld hl, wXCoord
+	ld a, [wSpriteMistyStateData2MapX]
+	sub [hl]               ; screen_tile_X; large value = left of player = safe
+	cp 10
+	jr nc, .fontNotLoadedMisty
+	cp YESNO_BOX_TILE_COL
 	jr nc, .hide
 	jr .fontNotLoadedMisty
 .checkMenuMisty
@@ -462,12 +480,12 @@ ShouldBrockSpawn::
 	; Hide during PC interface (large menu covers entire screen)
 	ld a, [wMiscFlags]
 	bit BIT_USING_GENERIC_PC, a
-	jr nz, .hide
+	jp nz, .hide
 	; Hide during Pikachu's overworld reaction (text/emote/pikapic sequence
 	; drawn mid-screen) - doesn't fit the text-box/menu shapes below
 	ld a, [wPikachuReactionActive]
 	and a
-	jr nz, .hide
+	jp nz, .hide
 	; Conditionally hide during text/menus: only if Brock overlaps the UI region
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
@@ -483,13 +501,25 @@ ShouldBrockSpawn::
 	ldh a, [hTextID]
 	and a
 	jr z, .checkMenuBrock
-	; Text box: only check Y axis
+	; Text box: check Y axis
 	ld hl, wYCoord
 	ld a, [wSpriteBrockStateData2MapY]
 	sub [hl]
 	cp 9
 	jr nc, .fontNotLoadedBrock
 	cp BROCK_TEXT_BOX_TILE_ROW
+	jr nc, .hide
+	; Safe from the bottom text box row - but a yes/no choice box can be
+	; showing alongside it, see matching comment in ShouldMistySpawn
+	ld a, [wTextBoxID]
+	cp TWO_OPTION_MENU
+	jr nz, .fontNotLoadedBrock
+	ld hl, wXCoord
+	ld a, [wSpriteBrockStateData2MapX]
+	sub [hl]
+	cp 10
+	jr nc, .fontNotLoadedBrock
+	cp BROCK_YESNO_BOX_TILE_COL
 	jr nc, .hide
 	jr .fontNotLoadedBrock
 .checkMenuBrock

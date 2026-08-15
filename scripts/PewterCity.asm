@@ -62,6 +62,49 @@ PewterCitySuperNerd1ShowsPlayerMuseumScript:
 	call PlayDefaultMusic
 	ld hl, wMiscFlags
 	set BIT_NO_SPRITE_UPDATES, [hl]
+	; This text follows a long scripted walk (PewterMovementScript_WalkToMuseum)
+	; straight into DisplayTextID's blocking wait loop, which never calls
+	; UpdateSprites - so whichever follower hadn't fully caught up from the
+	; walk yet gets captured frozen mid-catch-up for the whole time the text
+	; is up. They're usually off in the upper part of the screen here, not
+	; overlapping the text box, so the normal row-overlap hiding doesn't
+	; catch this. Hard-hide instead (self-clears once this text closes, see
+	; matching comment in DisplayPokemartDialogue_/chain_follow.asm).
+	ld hl, wMistyOverworldStateFlags
+	set 6, [hl]
+	ld hl, wBrockOverworldStateFlags
+	set 6, [hl]
+	; Setting those flags alone doesn't hide anything - it only takes effect
+	; the next time ShouldMistySpawn/ShouldBrockSpawn actually run, and
+	; DisplayTextID's blocking wait loop never calls UpdateSprites again once
+	; the text opens, so whichever follower hadn't fully caught up yet would
+	; otherwise stay rendered at its last (frozen) OAM state for the whole
+	; time the text is up. A full UpdateSprites call here would apply it,
+	; but it reprocesses every sprite slot, including SUPER_NERD1 - whose
+	; MOVEMENTSTATUS is still mid-transition right after his scripted walk
+	; just ended, so running him through the generic per-frame NPC update a
+	; second time this same frame lands him on ImageIndex=$ff (invisible),
+	; clobbering the manual positioning above (BIT_NO_SPRITE_UPDATES exists
+	; precisely to stop DisplayTextIDInit's own UpdateSprites call from
+	; doing this to him). So call just the two follower slots directly
+	; instead, bypassing the guide's slot entirely - see SpawnMisty/
+	; SpawnBrock (home/pikachu.asm) and their dispatch in _UpdateSprites
+	; (engine/overworld/sprite_collisions.asm) for the calling convention.
+	; wFontLoaded is still false here (real text hasn't opened yet) -
+	; ShouldMistySpawn/ShouldBrockSpawn would otherwise treat that as
+	; "nothing active" and self-clear the flags above as stale before ever
+	; hiding anything, so set it first. DisplayTextID sets it again for
+	; real moments later, which is harmless.
+	ld hl, wFontLoaded
+	set BIT_FONT_LOADED, [hl]
+	ld a, $d0 ; misty (slot 13)
+	ldh [hCurrentSpriteOffset], a
+	ld hl, wSpriteMistyStateData2ImageBaseOffset
+	call SpawnMisty
+	ld a, $e0 ; brock (slot 14)
+	ldh [hCurrentSpriteOffset], a
+	ld hl, wSpriteBrockStateData2ImageBaseOffset
+	call SpawnBrock
 	ld a, TEXT_PEWTERCITY_SUPER_NERD1_ITS_RIGHT_HERE
 	ldh [hTextID], a
 	call DisplayTextID
