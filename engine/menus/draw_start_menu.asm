@@ -1,5 +1,12 @@
 ; function that displays the start menu
 DrawStartMenu::
+	; Force-hide followers for the whole Start Menu session (including any
+	; submenus, e.g. the party list) - see chain_follow.asm. This runs on
+	; every (re)draw of the Start menu box, including when a submenu closes
+	; back to it, so followers don't reappear on top of the still-open box.
+	; Self-clears once the whole session really ends (see chain_follow.asm).
+	ld a, 1
+	ldh [hStartMenuModalActive], a
 	CheckEvent EVENT_GOT_POKEDEX
 ; menu with pokedex
 	hlcoord 10, 0

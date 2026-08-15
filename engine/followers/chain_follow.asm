@@ -156,21 +156,27 @@ InitializePositionTrail::
 	ld d, a  ; save facing direction
 
 	; Fill trail[0] through trail[3] with positions behind player
-	; Each position is one step further behind. Each write is guarded by that
-	; follower's own spawn status: a follower that's already out and mid-walk
-	; toward its current target must NOT have that target clobbered just
-	; because a DIFFERENT follower's spawn triggered this recompute.
+	; Each position is one step further behind. trail[1]/trail[2] writes are
+	; guarded by that follower's own spawn status: a follower that's already
+	; out and mid-walk toward its current target must NOT have that target
+	; clobbered just because a DIFFERENT follower's spawn triggered this
+	; recompute. trail[0] and trail[3] are always overwritten unconditionally
+	; - neither is a live target read by an on-screen follower (Pikachu's
+	; own movement is driven separately, in pikachu_follow.asm, not from
+	; trail[0]); they only exist as history that rotates into trail[1]/[2]
+	; on the next step. Leaving trail[0] stale here (e.g. guarded on
+	; Pikachu's MovementStatus, which stays nonzero across a plain map
+	; connection crossing) let a pre-crossing, old-map-coordinate value
+	; survive this recompute and rotate into Misty's and then Brock's target
+	; a couple of steps later, causing them to "dart" across the screen to
+	; catch up before resolving to their correct spot.
 
-	; trail[0] = 1 step behind player (Pikachu's target)
+	; trail[0] = 1 step behind player (always fresh, see comment above)
 	call .computeBehindPosition
-	ld a, [wSpritePikachuStateData1MovementStatus]
-	and a
-	jr nz, .skipTrail0Normal
 	ld a, b
 	ld [wPositionTrailY + 0], a
 	ld a, c
 	ld [wPositionTrailX + 0], a
-.skipTrail0Normal
 
 	; trail[1] = 2 steps behind player (Misty's target)
 	call .computeBehindPosition
@@ -332,11 +338,14 @@ ShouldMistySpawn::
 	bit BIT_FONT_LOADED, a
 	jr nz, .fontLoadedMisty
 	; No text/menu currently active - clear any stale Mart force-hide flag
-	; (bit 6, see below). CloseTextDisplay (home/text_script.asm) clears
-	; wFontLoaded only after it has redrawn the map view, so by the time we
-	; observe it clear here, the Mart's UI tiles are actually gone.
+	; (bit 6, see below) and the Start Menu modal flag. CloseTextDisplay
+	; (home/text_script.asm) clears wFontLoaded only after it has redrawn
+	; the map view, so by the time we observe it clear here, the Mart's/
+	; Start Menu's UI tiles are actually gone.
 	ld hl, wMistyOverworldStateFlags
 	res 6, [hl]
+	xor a
+	ldh [hStartMenuModalActive], a
 	jr .fontNotLoadedMisty
 .fontLoadedMisty
 	; hTextID != 0 means text box (bottom); hTextID == 0 means menu (right side)
@@ -390,6 +399,16 @@ ShouldMistySpawn::
 	; unconditionally for the whole interaction). Self-clears above once
 	; wFontLoaded goes false.
 	bit 6, a
+	jr nz, .hide
+	; Hide for the whole Start Menu session (including any submenus, e.g.
+	; the party list) - a submenu closing back to the still-open parent
+	; Start menu shouldn't make followers reappear on top of it. Checked
+	; here (rather than as an early gate above) so the self-clear above
+	; still runs first once wFontLoaded actually goes false - an early
+	; gate would jump to .hide and return before ever reaching it, leaving
+	; the flag stuck set forever.
+	ldh a, [hStartMenuModalActive]
+	and a
 	jr nz, .hide
 
 	; Special case: If in Cerulean Gym and haven't beaten Misty yet, hide follower
@@ -453,10 +472,12 @@ ShouldBrockSpawn::
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
 	jr nz, .fontLoadedBrock
-	; No text/menu currently active - clear any stale Mart force-hide flag,
-	; see matching comment in ShouldMistySpawn
+	; No text/menu currently active - clear any stale Mart force-hide flag
+	; and the Start Menu modal flag, see matching comment in ShouldMistySpawn
 	ld hl, wBrockOverworldStateFlags
 	res 6, [hl]
+	xor a
+	ldh [hStartMenuModalActive], a
 	jr .fontNotLoadedBrock
 .fontLoadedBrock
 	ldh a, [hTextID]
@@ -511,6 +532,12 @@ ShouldBrockSpawn::
 	; Bit 6: force-hide regardless of screen position (e.g. Mart menu - see
 	; matching comment in ShouldMistySpawn)
 	bit 6, a
+	jr nz, .hide
+	; Hide for the whole Start Menu session, see matching comment in
+	; ShouldMistySpawn (checked here rather than as an early gate so the
+	; self-clear above still runs first)
+	ldh a, [hStartMenuModalActive]
+	and a
 	jr nz, .hide
 
 	; Check if has Boulder badge (required to have defeated Brock)

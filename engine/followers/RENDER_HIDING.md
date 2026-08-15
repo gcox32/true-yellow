@@ -42,6 +42,17 @@ Cases that hard-hide regardless of position:
   `engine/pikachu/pikachu_emotions.asm`), checked in `ShouldMistySpawn`/
   `ShouldBrockSpawn`. Not needed for Pikachu itself - it has its own,
   separate spawn gate in `engine/pikachu/pikachu_follow.asm`.
+- **Start Menu session** — the pause menu (POKeDEX/POKEMON/ITEM/etc.) and all
+  of its submenus (party list, item bag, trainer card, save/options). Its
+  submenus don't fit the text-box/menu shapes above, and closing one back to
+  the still-open parent Start menu would otherwise let a follower reappear
+  on top of it. Tracked by `hStartMenuModalActive` (set every time
+  `DrawStartMenu` (re)draws the box - `engine/menus/draw_start_menu.asm` -
+  which happens on open and again whenever a submenu returns to it), checked
+  in `ShouldMistySpawn`/`ShouldBrockSpawn`. Home bank (ROM0) is size-locked,
+  so the flag is set from `DrawStartMenu` (ROMX) rather than
+  `DisplayStartMenu` (home/start_menu.asm, ROM0) even though the latter
+  reads more naturally as "the" entry point.
 
 ### Deferred: always-hide modals
 

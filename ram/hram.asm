@@ -381,7 +381,11 @@ hSavedMapTextPtr:: dw
 	ds 1
 ENDU
 
-	ds 4
+; Set while the Start (pause) menu and any of its submenus are open, so
+; followers stay hard-hidden across submenu transitions - see chain_follow.asm
+hStartMenuModalActive:: db
+
+	ds 3
 
 hWhoseTurn:: db ; 0 on player's turn, 1 on enemy's turn
 
