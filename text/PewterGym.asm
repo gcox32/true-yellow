@@ -58,14 +58,14 @@ _TM34ExplanationText::
 
 	para "You beat me in a"
 	line "battle and in"
-	cont "kind to all"
+	cont "kindness to all"
 	cont "#MON."
 
 	para "To tell you the"
 	line "truth, I get more"
 	cont "pleasure from"
 	cont "raising #MON"
-	cont "then from making"
+	cont "than from making"
 	cont "them battle."
 
 	para "I don't care"

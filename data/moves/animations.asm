@@ -885,6 +885,7 @@ BideAnim:
 	battle_anim HARDEN, SE_LIGHT_SCREEN_PALETTE
 	battle_anim NO_MOVE, SUBANIM_0_CIRCLE_1_SQUARE_CLOSING, 1, 6
 	battle_anim REFLECT, SUBANIM_0_CIRCLE_1_SQUARE_CLOSING, 0, 4
+	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 
 MetronomeAnim:
