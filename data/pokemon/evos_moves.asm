@@ -882,10 +882,10 @@ ParasectEvosMoves:
 	db 0
 ; Learnset
 	db 13, STUN_SPORE
-	db 15, MEGA_DRAIN
+	db 15, LEECH_LIFE
 	db 18, SLASH
-	db 21, LEECH_LIFE
-	db 25, BARRAGE
+	db 21, MEGA_DRAIN
+	db 25, WITHDRAW
 	db 28, SPORE
 	db 33, GROWTH
 	db 39, SOLARBEAM
@@ -1584,11 +1584,10 @@ ParasEvosMoves:
 	db 0
 ; Learnset
 	db 13, STUN_SPORE
-	db 15, MEGA_DRAIN
+	db 15, LEECH_LIFE
 	db 18, SLASH
-	db 21, LEECH_LIFE
-	db 25, BARRAGE
-	db 28, SPORE
+	db 21, MEGA_DRAIN
+	db 25, SPORE
 	db 33, GROWTH
 	db 39, SOLARBEAM
 	db 44, EARTHQUAKE
