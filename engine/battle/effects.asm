@@ -1694,6 +1694,11 @@ GrowthEffect:
 	call GetSpecialPointers
 	jr WithdrawGrowthEffect
 
+WithdrawEffect:
+	lb bc, DEFENSE_UP1_EFFECT, WITHDRAW_EFFECT
+	call GetDefensePointers
+	jr WithdrawGrowthEffect
+
 WithdrawGrowthEffect:
 	push bc
 	ld a, [wHPBarType]
@@ -1740,9 +1745,7 @@ WithdrawGrowthEffect:
 	pop bc
 	ret
 
-WithdrawEffect:
-	lb bc, DEFENSE_UP1_EFFECT, WITHDRAW_EFFECT
-	call GetDefensePointers
+
 
 HealEffect:
 	jpfar HealEffect_
