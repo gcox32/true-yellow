@@ -54,6 +54,20 @@ HealEffect_:
 ; Recover and Softboiled only heal for half the mon's max HP
 	srl b
 	rr c
+; Withdraw and Growth only heal for a quarter of the mon's max HP
+	ldh a, [hWhoseTurn]
+	and a
+	ld a, [wPlayerMoveNum]
+	jr z, .gotHealMoveNum
+	ld a, [wEnemyMoveNum]
+.gotHealMoveNum
+	cp WITHDRAW
+	jr z, .quarterHeal
+	cp GROWTH
+	jr nz, .gotHPAmountToHeal
+.quarterHeal
+	srl b
+	rr c
 .gotHPAmountToHeal
 ; update HP
 	ld a, [de]
