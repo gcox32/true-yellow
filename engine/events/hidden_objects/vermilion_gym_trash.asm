@@ -47,14 +47,9 @@ GymTrashScript:
 	cp b
 	jr z, .openSecondLock
 
-; Reset the cans.
-	ResetEvent EVENT_1ST_LOCK_OPENED
-	call Random
-
-	and $e
-	ld [wFirstLockTrashCanIndex], a
-
-	tx_pre_id VermilionGymTrashFailText
+; Wrong second switch. Don't reset the puzzle (a random RNG time-waster) -
+; just keep the first lock open and let the player try other cans.
+	tx_pre_id VermilionGymTrashText
 	jr .done
 
 .openSecondLock
