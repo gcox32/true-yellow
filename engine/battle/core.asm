@@ -3514,6 +3514,8 @@ CheckPlayerStatusConditions:
 .WakeUp
 	ld hl, WokeUpText
 	call PrintText
+	ld hl, wBattleMonStatus
+	jr .FrozenCheck ; woke up this turn, so the selected move can still be used
 .sleepDone
 	xor a
 	ld [wPlayerUsedMove], a
@@ -5969,6 +5971,8 @@ CheckEnemyStatusConditions:
 .wokeUp
 	ld hl, WokeUpText
 	call PrintText
+	ld hl, wEnemyMonStatus
+	jr .checkIfFrozen ; woke up this turn, so the selected move can still be used
 .sleepDone
 	xor a
 	ld [wEnemyUsedMove], a

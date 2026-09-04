@@ -11,7 +11,4 @@
     - team rocket walks on top of misty and brock
     - emerging from ladders looks bad 
 - [x] hide new followers on pikachu emotion check
-- [ ] change sleep to attack on-wake-up turn
-
-## Bugs
-- [ ] follower misty needs to wait to appear until after "received bubblebeam tm" script (final step in gym scripts)
+- [x] change sleep to attack on-wake-up turn
