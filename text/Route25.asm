@@ -152,5 +152,5 @@ _Route25Hiker3AfterBattleText::
 
 _Route25BillSignText::
 	text "SEA COTTAGE"
-	line "BILL lives here!"
+	line " "
 	done
