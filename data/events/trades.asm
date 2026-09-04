@@ -25,4 +25,8 @@ TradeMons:
 	npctrade GOLDUCK,    RHYDON,   TRADE_DIALOGSET_EVOLUTION, "BUFFY"
 	npctrade GROWLITHE,  DEWGONG,  TRADE_DIALOGSET_HAPPY,     "CEZANNE"
 	npctrade CUBONE,     MACHOKE,  TRADE_DIALOGSET_HAPPY,     "RICKY"
+	; SS Anne gentleman: trades his RATICATE for the player's BUTTERFREE,
+	; then later offers to trade back
+	npctrade BUTTERFREE, RATICATE,   TRADE_DIALOGSET_CASUAL, "RATICATE"
+	npctrade RATICATE,   BUTTERFREE, TRADE_DIALOGSET_HAPPY,  "BUTTERFREE"
 	assert_table_length NUM_NPC_TRADES

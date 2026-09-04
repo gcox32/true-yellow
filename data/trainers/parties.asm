@@ -681,8 +681,8 @@ GentlemanData:
 	db 22, GROWLITHE, GROWLITHE, 0
 ; Unused
 	db 48, PRIMEAPE, 0
-; SS Anne 2F Rooms
-	db 21, POLIWHIRL, PONYTA, 0
+; SS Anne 2F Rooms (RATICATE traded for player's BUTTERFREE, and back again)
+	db 25, RATICATE, 0
 
 Rival2Data:
 ; SS Anne 2F

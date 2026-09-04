@@ -135,6 +135,9 @@ InGameTrade_DoTrade:
 	ld [wMonDataLocation], a
 	call AddPartyMon
 	call InGameTrade_CopyDataToReceivedMon
+	ld a, [wWhichTrade]
+	cp TRADE_FOR_GENTLEMAN_BUTTERFREE
+	call z, InGameTrade_SetReceivedMonOTToPlayer ; trading back: it's your own BUTTERFREE again
 	call InGameTrade_CheckForTradeEvo
 	call ClearScreen
 	call InGameTrade_RestoreScreen
@@ -215,6 +218,23 @@ InGameTrade_CopyDataToReceivedMon:
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, wTradedEnemyMonOTID
 	ld bc, $2
+	jp CopyData
+
+; overwrites the just-received mon's OT name/ID (normally the trading NPC's)
+; with the player's own, for the one trade where the "new" mon is actually
+; the player's original BUTTERFREE coming back
+InGameTrade_SetReceivedMonOTToPlayer:
+	ld hl, wPartyMonOT
+	ld bc, NAME_LENGTH
+	call InGameTrade_GetReceivedMonPointer
+	ld hl, wPlayerName
+	ld bc, NAME_LENGTH
+	call CopyData
+	ld hl, wPartyMon1OTID
+	ld bc, wPartyMon2 - wPartyMon1
+	call InGameTrade_GetReceivedMonPointer
+	ld hl, wPlayerID
+	ld bc, 2
 	jp CopyData
 
 ; the received mon's index is (partyCount - 1),

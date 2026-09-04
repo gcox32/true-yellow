@@ -152,7 +152,33 @@ SSAnne2FRoomsGentleman2EndBattleText:
 	text_end
 
 SSAnne2FRoomsGentleman2AfterBattleText:
+	text_asm
+	ld a, [wCompletedInGameTradeFlags + TRADE_FOR_GENTLEMAN_RATICATE / 8]
+	bit TRADE_FOR_GENTLEMAN_RATICATE % 8, a
+	ld a, TRADE_FOR_GENTLEMAN_RATICATE
+	jr z, .printOffer
+; already traded the RATICATE away -- offer to trade back
+	ld a, [wCompletedInGameTradeFlags + TRADE_FOR_GENTLEMAN_BUTTERFREE / 8]
+	bit TRADE_FOR_GENTLEMAN_BUTTERFREE % 8, a
+	ld a, TRADE_FOR_GENTLEMAN_BUTTERFREE
+	jr nz, .setWhichTrade ; already traded back too; let the engine print its usual text
+	ld hl, .WantsBackText
+	call PrintText
+	jr .setWhichTrade
+.printOffer
+	ld hl, .Text
+	call PrintText
+.setWhichTrade
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd
+
+.Text:
 	text_far _SSAnne2FRoomsGentleman2AfterBattleText
+	text_end
+
+.WantsBackText:
+	text_far _SSAnne2FRoomsGentleman2WantsBackText
 	text_end
 
 SSAnne2FRoomsCooltrainerFBattleText:

@@ -56,19 +56,32 @@ _SSAnne2FRoomsFisherAfterBattleText::
 	done
 
 _SSAnne2FRoomsGentleman2BattleText::
-	text "Which do you like,"
-	line "a strong or a"
-	cont "rare #MON?"
+	text "My RATICATE has"
+	line "never lost to a"
+	cont "bug #MON before!"
 	done
 
 _SSAnne2FRoomsGentleman2EndBattleText::
-	text "I must"
-	line "salute you!"
+	text "Incredible! Your"
+	line "#MON outclassed"
+	cont "my RATICATE!"
 	prompt
 
 _SSAnne2FRoomsGentleman2AfterBattleText::
-	text "I prefer strong"
-	line "and rare #MON."
+	text "I really want"
+	line "that #MON of"
+	cont "yours!"
+	done
+
+_SSAnne2FRoomsGentleman2WantsBackText::
+	text "You know, my"
+	line "RATICATE hasn't"
+	cont "been the same"
+	cont "without you."
+
+	para "Would you like to"
+	line "trade it back for"
+	cont "your old #MON?"
 	done
 
 _SSAnne2FRoomsCooltrainerFBattleText::
