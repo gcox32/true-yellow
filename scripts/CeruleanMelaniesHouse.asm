@@ -88,20 +88,20 @@ CeruleanHouse1Text_1cfdf:
 CeruleanMelanieHouseBulbasaurText:
 	text_far MelanieBulbasaurText
 	text_asm
-	ld a, BULBASAUR
-	call PlayCry
+	ld c, BULBASAUR
+	predef MarkMonSeenAndCry
 	jp TextScriptEnd
 
 CeruleanMelanieHouseOddishText:
 	text_far MelanieOddishText
 	text_asm
-	ld a, ODDISH
-	call PlayCry
+	ld c, ODDISH
+	predef MarkMonSeenAndCry
 	jp TextScriptEnd
 
 CeruleanMelanieHouseSandshrewText:
 	text_far MelanieSandshrewText
 	text_asm
-	ld a, SANDSHREW
-	call PlayCry
+	ld c, SANDSHREW
+	predef MarkMonSeenAndCry
 	jp TextScriptEnd

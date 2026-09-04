@@ -97,8 +97,8 @@ CeladonCityFisherText:
 CeladonCityPoliwrathText:
 	text_far _CeladonCityPoliwrathText
 	text_asm
-	ld a, POLIWRATH
-	call PlayCry
+	ld c, POLIWRATH
+	predef MarkMonSeenAndCry
 	jp TextScriptEnd
 
 CeladonCityRocket1Text:

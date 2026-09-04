@@ -243,8 +243,8 @@ VermilionCityGambler2Text:
 VermilionCityMachopText:
 	text_far _VermilionCityMachopText
 	text_asm
-	ld a, MACHOP
-	call PlayCry
+	ld c, MACHOP
+	predef MarkMonSeenAndCry
 	call WaitForSoundToFinish
 	ld hl, .StompingTheLandFlatText
 	ret

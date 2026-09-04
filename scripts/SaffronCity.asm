@@ -74,8 +74,15 @@ SaffronCityGentlemanText:
 	text_end
 
 SaffronCityPidgeotText:
+	text_asm
+	ld hl, .Text
+	call PrintText
+	ld c, PIDGEOT
+	predef MarkMonSeenAndCry
+	jp TextScriptEnd
+
+.Text:
 	text_far _SaffronCityPidgeotText
-	sound_cry_pidgeot
 	text_end
 
 SaffronCityRockerText:

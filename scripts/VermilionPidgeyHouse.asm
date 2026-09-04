@@ -15,8 +15,8 @@ VermilionPidgeyHouseYoungsterText:
 VermilionPidgeyHousePidgeyText:
 	text_far _VermilionPidgeyHousePidgeyText
 	text_asm
-	ld a, PIDGEY
-	call PlayCry
+	ld c, PIDGEY
+	predef MarkMonSeenAndCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 

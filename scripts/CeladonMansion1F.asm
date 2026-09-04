@@ -13,8 +13,8 @@ CeladonMansion1F_TextPointers:
 CeladonMansion1FMeowthText:
 	text_far _CeladonMansion1FMeowthText
 	text_asm
-	ld a, MEOWTH
-	call PlayCry
+	ld c, MEOWTH
+	predef MarkMonSeenAndCry
 	jp TextScriptEnd
 
 CeladonMansion1FGrannyText:
@@ -33,15 +33,15 @@ CeladonMansion1FGrannyText:
 CeladonMansion1FClefairyText:
 	text_far _CeladonMansion1FClefairyText
 	text_asm
-	ld a, CLEFAIRY
-	call PlayCry
+	ld c, CLEFAIRY
+	predef MarkMonSeenAndCry
 	jp TextScriptEnd
 
 CeladonMansion1FNidoranFText:
 	text_far _CeladonMansion1FNidoranFText
 	text_asm
-	ld a, NIDORAN_F
-	call PlayCry
+	ld c, NIDORAN_F
+	predef MarkMonSeenAndCry
 	jp TextScriptEnd
 
 CeladonMansion1FManagersSuiteSignText:

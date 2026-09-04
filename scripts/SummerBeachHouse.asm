@@ -69,8 +69,8 @@ SummerBeachHousePikachuText:
 	text_asm
 	ld hl, .SummerBeachHousePikachuText
 	call PrintText
-	ld a, PIKACHU
-	call PlayCry
+	ld c, PIKACHU
+	predef MarkMonSeenAndCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 

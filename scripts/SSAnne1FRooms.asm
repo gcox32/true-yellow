@@ -66,8 +66,8 @@ SSAnne1FRoomsCooltrainerFText:
 SSAnne1FRoomsWigglytuffText:
 	text_far _SSAnne1FRoomsWigglytuffText
 	text_asm
-	ld a, WIGGLYTUFF
-	call PlayCry
+	ld c, WIGGLYTUFF
+	predef MarkMonSeenAndCry
 	jp TextScriptEnd
 
 SSAnne1FRoomsGentleman1BattleText:

@@ -11,8 +11,8 @@ PewterNidoranHouse_TextPointers:
 PewterNidoranHouseNidoranText:
 	text_far _PewterNidoranHouseNidoranText
 	text_asm
-	ld a, NIDORAN_M
-	call PlayCry
+	ld c, NIDORAN_M
+	predef MarkMonSeenAndCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 

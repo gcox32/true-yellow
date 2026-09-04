@@ -82,8 +82,8 @@ SSAnneB1FRoomsFisherText:
 SSAnneB1FRoomsMachokeText:
 	text_far _SSAnneB1FRoomsMachokeText
 	text_asm
-	ld a, MACHOKE
-	call PlayCry
+	ld c, MACHOKE
+	predef MarkMonSeenAndCry
 	jp TextScriptEnd
 
 SSAnneB1FRoomsSailor1BattleText:

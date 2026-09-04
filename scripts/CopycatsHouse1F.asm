@@ -18,6 +18,6 @@ CopycatsHouse1FMiddleAgedManText:
 CopycatsHouse1FChanseyText:
 	text_far _CopycatsHouse1FChanseyText
 	text_asm
-	ld a, CHANSEY
-	call PlayCry
+	ld c, CHANSEY
+	predef MarkMonSeenAndCry
 	jp TextScriptEnd

@@ -150,8 +150,8 @@ PokemonFanClubClefairyText:
 	text_asm
 	ld hl, .Text
 	call PrintText
-	ld a, CLEFAIRY
-	call PlayCry
+	ld c, CLEFAIRY
+	predef MarkMonSeenAndCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
@@ -163,8 +163,8 @@ PokemonFanClubSeelText:
 	text_asm
 	ld hl, .Text
 	call PrintText
-	ld a, SEEL
-	call PlayCry
+	ld c, SEEL
+	predef MarkMonSeenAndCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 

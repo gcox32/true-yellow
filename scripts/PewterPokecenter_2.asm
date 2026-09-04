@@ -13,6 +13,9 @@ PewterJigglypuff::
 	ld hl, .Text
 	call PrintText
 
+	ld c, JIGGLYPUFF
+	predef MarkMonAsSeen
+
 	call StopAllMusic
 	ld c, 32
 	call DelayFrames

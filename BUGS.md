@@ -12,3 +12,5 @@
 
 - [x] Trainers on route 6 perpetually re-challenge after being defeated
 - [x] Cerulean map is glitchy: house in the NE has water tile through the middle
+
+- [ ] visual bug with menu from badge explainer guy in cerulean

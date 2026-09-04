@@ -375,6 +375,8 @@ CeruleanCityCooltrainerF1Text:
 
 CeruleanCityElectrodeText:
 	text_asm
+	ld c, ELECTRODE
+	predef MarkMonAsSeen
 	ldh a, [hRandomAdd]
 	cp 180 ; 76/256 chance of 1st dialogue
 	jr c, .notFirstText

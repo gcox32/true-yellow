@@ -748,4 +748,52 @@ IndexToPokedex:
 	pop bc
 	ret
 
+; Mark the species in c as seen in the Pokédex.
+; Used by overworld "pet" Pokémon interaction scripts (see also
+; DisplayPokedex, which the Fuchsia zoo signs use).
+; INPUT: c = species (internal index)
+MarkMonAsSeen::
+	call GetPredefRegisters
+_MarkMonAsSeen:
+	ld a, c
+	ld [wPokedexNum], a
+	call IndexToPokedex
+	ld a, [wPokedexNum]
+	and a
+	ret z ; skip invalid dex numbers
+	dec a ; a = seen-flag bit index (dex number - 1)
+	ld b, a
+	and %00000111
+	ld c, a ; bit within the byte
+	ld a, b
+	rrca
+	rrca
+	rrca
+	and %00011111
+	ld e, a
+	ld d, 0
+	ld hl, wPokedexSeen
+	add hl, de ; hl = byte holding this species' seen flag
+	ld a, 1
+	inc c
+.shiftLoop
+	dec c
+	jr z, .setBit
+	add a, a
+	jr .shiftLoop
+.setBit
+	or [hl]
+	ld [hl], a
+	ret
+
+; As MarkMonAsSeen, then play the species' cry.
+; INPUT: c = species (internal index)
+MarkMonSeenAndCry::
+	call GetPredefRegisters
+	ld a, c
+	push af ; save species for its cry
+	call _MarkMonAsSeen
+	pop af
+	jp PlayCry
+
 INCLUDE "data/pokemon/dex_order.asm"

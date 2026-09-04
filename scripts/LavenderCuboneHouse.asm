@@ -10,8 +10,8 @@ LavenderCuboneHouse_TextPointers:
 LavenderCuboneHouseCuboneText:
 	text_far _LavenderCuboneHouseCuboneText
 	text_asm
-	ld a, CUBONE
-	call PlayCry
+	ld c, CUBONE
+	predef MarkMonSeenAndCry
 	jp TextScriptEnd
 
 LavenderCuboneHouseBrunetteGirlText:

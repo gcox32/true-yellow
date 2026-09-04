@@ -1,8 +1,8 @@
 PokecenterChanseyText::
 	ld hl, NurseChanseyText
 	call PrintText
-	ld a, CHANSEY
-	call PlayCry
+	ld c, CHANSEY
+	predef MarkMonSeenAndCry
 	call WaitForSoundToFinish
 	ret
 
