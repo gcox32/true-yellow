@@ -1,15 +1,15 @@
-_Route6CooltrainerM1BattleText::
+_Route6SuperNerd1BattleText::
 	text "I'm doing this"
 	line "out of love."
 	cont "Leave me alone!"
 	done
 
-_Route6CooltrainerM1EndBattleText::
+_Route6SuperNerd1EndBattleText::
 	text "No,"
 	line "this can't be..."
 	prompt
 
-_Route6CooltrainerM1AfterBattleText::
+_Route6SuperNerd1AfterBattleText::
 	text "My love will leave"
 	line "me in disgust."
 	done
@@ -48,17 +48,17 @@ _Route6Youngster1AfterBattleText::
 	cont "VIRIDIAN FOREST."
 	done
 
-_Route6CooltrainerM2BattleText::
+_Route6SuperNerd2BattleText::
 	text "Huh? You want"
 	line "to talk to me?"
 	done
 
-_Route6CooltrainerM2EndBattleText::
+_Route6SuperNerd2EndBattleText::
 	text "I"
 	line "didn't start it!"
 	prompt
 
-_Route6CooltrainerM2AfterBattleText::
+_Route6SuperNerd2AfterBattleText::
 	text "I should carry"
 	line "more #MON with"
 	cont "me for safety."

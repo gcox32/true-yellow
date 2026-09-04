@@ -10,5 +10,5 @@
 - [x] followers should render one at a time on a ladder WARP tile, like pikachu, resembling exiting the ladder one at a time in succession
 - [x] followers disappearing during text and then reappearing is jarring
 
-- [ ] Trainers on route 6 perpetually re-challenge after being defeated
+- [x] Trainers on route 6 perpetually re-challenge after being defeated
 - [x] Cerulean map is glitchy: house in the NE has water tile through the middle
