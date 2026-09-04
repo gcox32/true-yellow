@@ -11,6 +11,17 @@ CeruleanBadgeHouse_TextPointers:
 
 CeruleanBadgeHouseMiddleAgedManText:
 	text_asm
+	; The badge-list menu is a wide SPECIALLISTMENU box (hlcoord 4,2, 14 wide) -
+	; it doesn't fit the "menu on the right" shape the positional follower hiding
+	; in ShouldMistySpawn/ShouldBrockSpawn assumes, so a follower standing to the
+	; player's left stays drawn on top of it. Force-hide for the whole interaction
+	; instead (self-clears once this text closes, see matching comment in
+	; DisplayPokemartDialogue_/chain_follow.asm). DisplayListMenuID's own
+	; UpdateSprites call applies it.
+	ld hl, wMistyOverworldStateFlags
+	set 6, [hl]
+	ld hl, wBrockOverworldStateFlags
+	set 6, [hl]
 	ld hl, .Text
 	call PrintText
 	xor a
