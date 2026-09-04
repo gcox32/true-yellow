@@ -252,9 +252,10 @@ TalkToPikachu::
 	call DeletedFunction_fcffb
 load_expression:
 	ld [wExpressionNumber], a
-	ld hl, PikachuEmotionTable
 	ld a, 1
 	ld [wPikachuReactionActive], a
+	ld hl, PikachuEmotionTable
+	ld a, [wExpressionNumber] ; reload index - the line above clobbered a
 	call DoStarterPikachuEmotions
 	xor a
 	ld [wPikachuReactionActive], a
