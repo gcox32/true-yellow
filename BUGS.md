@@ -11,4 +11,4 @@
 - [x] followers disappearing during text and then reappearing is jarring
 
 - [ ] Trainers on route 6 perpetually re-challenge after being defeated
-- [ ] Cerulean map is glitchy: house in the NE has water tile through the middle
+- [x] Cerulean map is glitchy: house in the NE has water tile through the middle
