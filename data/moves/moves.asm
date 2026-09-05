@@ -156,7 +156,7 @@ Moves:
 	move SKY_ATTACK,   RECOIL_EFFECT,              120, FLYING,       100,  5 ; power changed from 140 to 120, accuracy changed from 90 to 100, recoil now
 	move TRANSFORM,    TRANSFORM_EFFECT,             0, NORMAL,       100, 10 ; now priority move
 	move BUBBLE,       SPEED_DOWN_SIDE_EFFECT,      20, WATER,        100, 30
-	move DIZZY_PUNCH,  NO_ADDITIONAL_EFFECT,        70, NORMAL,       100, 10
+	move DIZZY_PUNCH,  CONFUSION_SIDE_EFFECT,       70, NORMAL,       100, 10
 	move SPORE,        SLEEP_EFFECT,                 0, GRASS,        100, 15
 	move FLASH,        FLINCH_SIDE_EFFECT1,         60, ELECTRIC,     100, 15 ; now priority move
 	move PSYWAVE,      SPECIAL_DOWN_SIDE_EFFECT,    30, PSYCHIC_TYPE, 100, 20 ; now a normal weak PSYCHIC type move
