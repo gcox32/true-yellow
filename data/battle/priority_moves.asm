@@ -24,8 +24,29 @@ CheckPriority:
 	cp c                         ; does it match the move about to be used?
 	jr nz, .priorityLoop         ; continue as a normal move if not
 	; if so, the move about to be used is a priority move
-.foundPriority 
+.foundPriority
 	scf
 .noPriority
+	pop hl
+	ret
+
+; Moves that always move last, regardless of Speed (negative priority).
+; Counter is designed to strike back after taking the opponent's hit.
+LastPriorityMoves:
+	db COUNTER
+	db -1 ; end
+
+; returns with carry set if move in c is a "moves last" move
+CheckLastPriority:
+	push hl
+	ld hl, LastPriorityMoves
+.loop
+	ld a, [hli]
+	cp -1
+	jr z, .notLast
+	cp c
+	jr nz, .loop
+	scf
+.notLast
 	pop hl
 	ret

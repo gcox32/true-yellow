@@ -257,7 +257,7 @@ NidoranMEvosMoves:
 	db 21, PIN_MISSILE
 	db 26, GLARE
 	db 31, FURY_ATTACK
-	db 37, COUNTER
+	db 37, TAKE_DOWN
 	db 43, DIG
 	db 46, HORN_DRILL
 	db 54, POISON_GAS
@@ -424,7 +424,7 @@ GrimerEvosMoves:
 	db 29, BODY_SLAM
 	db 33, ACID_ARMOR
 	db 37, SLUDGE
-	db 41, COUNTER
+	db 41, GROWTH
 	db 46, POISON_GAS
 	db 50, EXPLOSION
 	db 55, RECOVER
@@ -808,7 +808,7 @@ MachokeEvosMoves:
 	db 41, ROCK_SLIDE
 	db 44, COMET_PUNCH
 	db 47, MEGA_PUNCH
-	db 52, SKULL_BASH
+	db 52, MEDITATE
 	db 56, COUNTER
 	db 0
 
@@ -838,7 +838,7 @@ HitmonleeEvosMoves:
 	db 27, ROLLING_KICK
 	db 31, FOCUS_ENERGY
 	db 36, SUBMISSION
-	db 41, MIRROR_MOVE
+	db 41, BIDE
 	db 46, COUNTER
 	db 53, HI_JUMP_KICK
 	db 0
@@ -854,7 +854,7 @@ HitmonchanEvosMoves:
 	db 26, THUNDERPUNCH
 	db 32, DIZZY_PUNCH
 	db 37, COUNTER
-	db 43, MIRROR_MOVE
+	db 43, BIDE
 	db 49, MEGA_PUNCH
 	db 0
 
@@ -1329,11 +1329,11 @@ KabutoEvosMoves:
 	db 0
 ; Learnset
 	db 24, LEECH_LIFE
-	db 28, BIND
-	db 35, FURY_ATTACK
+	db 28, WITHDRAW
+	db 35, SLASH
 	db 39, SKULL_BASH
 	db 44, TWINEEDLE
-	db 49, EARTHQUAKE
+	db 49, ROCK_SLIDE
 	db 53, SWORDS_DANCE
 	db 0
 
@@ -1342,10 +1342,10 @@ KabutopsEvosMoves:
 	db 0
 ; Learnset
 	db 33, SHARPEN
-	db 35, FURY_ATTACK
+	db 35, SLASH
 	db 39, SKULL_BASH
 	db 44, TWINEEDLE
-	db 49, EARTHQUAKE
+	db 49, ROCK_SLIDE
 	db 53, SWORDS_DANCE
 	db 0
 
@@ -1536,7 +1536,7 @@ MachopEvosMoves:
 	db 41, ROCK_SLIDE
 	db 44, COMET_PUNCH
 	db 47, MEGA_PUNCH
-	db 52, SKULL_BASH
+	db 52, MEDITATE
 	db 56, COUNTER
 	db 0
 
@@ -1887,7 +1887,7 @@ MukEvosMoves:
 	db 29, BODY_SLAM
 	db 33, ACID_ARMOR
 	db 37, SLUDGE
-	db 41, COUNTER
+	db 41, GROWTH
 	db 46, POISON_GAS
 	db 50, EXPLOSION
 	db 55, RECOVER
@@ -2224,7 +2224,7 @@ NidorinoEvosMoves:
 	db 21, PIN_MISSILE
 	db 26, GLARE
 	db 31, FURY_ATTACK
-	db 37, COUNTER
+	db 37, TAKE_DOWN
 	db 43, DIG
 	db 46, HORN_DRILL
 	db 54, POISON_GAS
@@ -2333,7 +2333,7 @@ SquirtleEvosMoves:
 	db 18, BITE
 	db 23, GLARE
 	db 28, WITHDRAW
-	db 33, COUNTER
+	db 33, BUBBLEBEAM
 	db 35, SKULL_BASH
 	db 42, HYDRO_PUMP
 	db 0
@@ -2364,7 +2364,7 @@ WartortleEvosMoves:
 	db 18, BITE
 	db 23, GLARE
 	db 28, WITHDRAW
-	db 33, COUNTER
+	db 33, BUBBLEBEAM
 	db 35, SKULL_BASH
 	db 42, HYDRO_PUMP
 	db 0

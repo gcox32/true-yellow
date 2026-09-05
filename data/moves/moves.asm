@@ -28,7 +28,7 @@ Moves:
 	move CUT,          NO_ADDITIONAL_EFFECT,        50, BUG,           95, 30 ; type changed from NORMAL to BUG
 	move GUST,         NO_ADDITIONAL_EFFECT,        40, FLYING,       100, 35 ; type changed from NORMAL to FLYING
 	move WING_ATTACK,  NO_ADDITIONAL_EFFECT,        50, FLYING,       100, 35 ; priority move
-	move WHIRLWIND,    SWITCH_AND_TELEPORT_EFFECT,   0, FLYING,        85, 20 ; type changed from NORMAL to FLYING
+	move WHIRLWIND,    CONFUSION_SIDE_EFFECT,       70, FLYING,        95, 20 ; type changed from NORMAL to FLYING and given a side effect
 	move FLY,          FLY_EFFECT,                  70, FLYING,        95, 15
 	move BIND,         TRAPPING_EFFECT,             15, NORMAL,        85, 20 ; accuracy changed from 75 to 85
 	move SLAM,         BURN_SIDE_EFFECT1,           80, POISON,        95, 20 ; type changed from NORMAL to POISON, now GASTRO ACID
@@ -58,7 +58,7 @@ Moves:
 	move GROWL,        ATTACK_DOWN1_EFFECT,          0, NORMAL,       100, 40
 	move ROAR,         SWITCH_AND_TELEPORT_EFFECT,   0, DRAGON,       100, 20 ; changed type to dragon
 	move SING,         SLEEP_EFFECT,                 0, NORMAL,        70, 15 ; accuracy changed from 55 to 70
-	move SUPERSONIC,   CONFUSION_EFFECT,             0, NORMAL,        55, 20
+	move SUPERSONIC,   CONFUSION_EFFECT,             0, NORMAL,        75, 20
 	move SONICBOOM,    FLINCH_SIDE_EFFECT1,          1, FLYING,       100, 15 ; priority move, set damage still
 	move DISABLE,      DISABLE_EFFECT,               0, NORMAL,        85, 20 ; accuracy changed from 55 to 85
 	move ACID,         BURN_SIDE_EFFECT1,           40, POISON,       100, 30 ; effect changed to burn chance
@@ -78,7 +78,7 @@ Moves:
 	move DRILL_PECK,   NO_ADDITIONAL_EFFECT,        80, FLYING,       100, 20
 	move SUBMISSION,   RECOIL_EFFECT,               90, FIGHTING,      95, 25 ; power changed from 80 to 90, accuracy changed from 80 to 95
 	move LOW_KICK,     FLINCH_SIDE_EFFECT2,         50, FIGHTING,      95, 20 ; accuracy changed from 90 to 95
-	move COUNTER,      NO_ADDITIONAL_EFFECT,         1, FIGHTING,     100, 20
+	move COUNTER,      DRAIN_HP_EFFECT,             60, FIGHTING,     100, 20 ; now a FIGHTING-type draining move that always moves last (see LastPriorityMoves)
 	move SEISMIC_TOSS, SPECIAL_DAMAGE_EFFECT,        1, FIGHTING,     100, 20
 	move STRENGTH,     NO_ADDITIONAL_EFFECT,        80, NORMAL,       100, 15
 	move ABSORB,       DRAIN_HP_EFFECT,             30, GRASS,        100, 25 ; power changed from 20 to 30
@@ -150,7 +150,7 @@ Moves:
 	move GLARE,        PARALYZE_EFFECT,              0, NORMAL,        85, 30 ; accuracy changed from 75 to 85
 	move DREAM_EATER,  DREAM_EATER_EFFECT,         100, GHOST,        100, 15 ; type changed from PSYCHIC_TYPE to GHOST
 	move POISON_GAS,   POISON_SIDE_EFFECT1,         40, POISON,       100, 20 ; high critical hit ratio
-	move BARRAGE,      TWO_TO_FIVE_ATTACKS_EFFECT,  20, GRASS,         85, 20 ; power changed from 15 to 20, type changed from NORMAL to GRASS
+	move BARRAGE,      TWO_TO_FIVE_ATTACKS_EFFECT,  20, ROCK,          90, 20 ; power changed from 15 to 20, type changed from NORMAL to ROCK
 	move LEECH_LIFE,   DRAIN_HP_EFFECT,             50, BUG,          100, 15 ; power changed from 20 to 50
 	move LOVELY_KISS,  SLEEP_EFFECT,                 0, NORMAL,        85, 10 ; accuracy changed from 75 to 85
 	move SKY_ATTACK,   RECOIL_EFFECT,              120, FLYING,       100,  5 ; power changed from 140 to 120, accuracy changed from 90 to 100, recoil now
