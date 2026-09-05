@@ -135,9 +135,18 @@ InGameTrade_DoTrade:
 	ld [wMonDataLocation], a
 	call AddPartyMon
 	call InGameTrade_CopyDataToReceivedMon
-	ld a, [wWhichTrade]
-	cp TRADE_FOR_GENTLEMAN_BUTTERFREE
-	call z, InGameTrade_SetReceivedMonOTToPlayer ; trading back: it's your own BUTTERFREE again
+; On the gentleman's trade-back (RATICATE for BUTTERFREE), the "new" mon is really
+; the player's own BUTTERFREE returning, so stamp it with the player's OT name/ID
+; instead of the gentleman's. wWhichTrade can't be used here -- it's union scratch
+; that the trade animation clobbers by this point -- but the give/receive species
+; vars are intact (InGameTrade_DoTrade itself relies on them just below).
+	ld a, [wInGameTradeGiveMonSpecies]
+	cp RATICATE
+	jr nz, .notTradeBack
+	ld a, [wInGameTradeReceiveMonSpecies]
+	cp BUTTERFREE
+	call z, InGameTrade_SetReceivedMonOTToPlayer
+.notTradeBack
 	call InGameTrade_CheckForTradeEvo
 	call ClearScreen
 	call InGameTrade_RestoreScreen
