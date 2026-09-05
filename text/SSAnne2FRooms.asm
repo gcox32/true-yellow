@@ -63,9 +63,9 @@ _SSAnne2FRoomsGentleman2BattleText::
 	done
 
 _SSAnne2FRoomsGentleman2EndBattleText::
-	text "Well that's"
-	line "enough."
-	
+	text "Well"
+	line "that's enough."
+
 	para "Why don't we"
 	line "just call it"
 	cont "a draw?"
@@ -75,7 +75,7 @@ _SSAnne2FRoomsGentleman2AfterBattleText::
 	text "I'll be direct."
 	line "Why don't we"
 	cont "trade?"
-	done
+	prompt
 
 _SSAnne2FRoomsGentleman2WantsBackText::
 	text "So, you wanna"
@@ -84,7 +84,7 @@ _SSAnne2FRoomsGentleman2WantsBackText::
 
 	para "You leave me"
 	line "no choice."
-	done
+	prompt
 
 _SSAnne2FRoomsCooltrainerFBattleText::
 	text "I never saw you"
