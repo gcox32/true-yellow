@@ -56,32 +56,34 @@ _SSAnne2FRoomsFisherAfterBattleText::
 	done
 
 _SSAnne2FRoomsGentleman2BattleText::
-	text "My RATICATE has"
-	line "never lost to a"
-	cont "bug #MON before!"
+	text "So you think"
+	line "you are brave"
+	cont "enough to battle"
+	cont "my RATICATE?"
 	done
 
 _SSAnne2FRoomsGentleman2EndBattleText::
-	text "Incredible! Your"
-	line "#MON outclassed"
-	cont "my RATICATE!"
+	text "Well that's"
+	line "enough."
+	
+	para "Why don't we"
+	line "just call it"
+	cont "a draw?"
 	prompt
 
 _SSAnne2FRoomsGentleman2AfterBattleText::
-	text "I really want"
-	line "that #MON of"
-	cont "yours!"
+	text "I'll be direct."
+	line "Why don't we"
+	cont "trade?"
 	done
 
 _SSAnne2FRoomsGentleman2WantsBackText::
-	text "You know, my"
-	line "RATICATE hasn't"
-	cont "been the same"
-	cont "without you."
+	text "So, you wanna"
+	line "go back on our"
+	cont "trade?"
 
-	para "Would you like to"
-	line "trade it back for"
-	cont "your old #MON?"
+	para "You leave me"
+	line "no choice."
 	done
 
 _SSAnne2FRoomsCooltrainerFBattleText::

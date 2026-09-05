@@ -1,6 +1,6 @@
 # TODO
 - [x] Fix double animation for two stat buff moves (e.g. DEFENSE_CURL)
-- [ ] Butterfree for Raticate trade and trade back on SS Anne
+- [x] Butterfree for Raticate trade and trade back on SS Anne
 - [x] Swap "Hardened Onix" for "Brock Onix" that is only _resistant_ not immune to Electric
 - [x] Mark overworld Pokemon as seen in Pokedex when you interact with them (e.g. Slowbro in Cerulean)
 - [x] Bill's Lighthouse instead of Cottage?

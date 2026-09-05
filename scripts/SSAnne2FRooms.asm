@@ -155,21 +155,22 @@ SSAnne2FRoomsGentleman2AfterBattleText:
 	text_asm
 	ld a, [wCompletedInGameTradeFlags + TRADE_FOR_GENTLEMAN_RATICATE / 8]
 	bit TRADE_FOR_GENTLEMAN_RATICATE % 8, a
-	ld a, TRADE_FOR_GENTLEMAN_RATICATE
-	jr z, .printOffer
+	jr z, .offerForward
 ; already traded the RATICATE away -- offer to trade back
 	ld a, [wCompletedInGameTradeFlags + TRADE_FOR_GENTLEMAN_BUTTERFREE / 8]
 	bit TRADE_FOR_GENTLEMAN_BUTTERFREE % 8, a
 	ld a, TRADE_FOR_GENTLEMAN_BUTTERFREE
-	jr nz, .setWhichTrade ; already traded back too; let the engine print its usual text
+	ld [wWhichTrade], a ; set before any PrintText call -- PrintText does not preserve a
+	jr nz, .dispatch ; already traded back too; let the engine print its usual text
 	ld hl, .WantsBackText
 	call PrintText
-	jr .setWhichTrade
-.printOffer
+	jr .dispatch
+.offerForward
+	ld a, TRADE_FOR_GENTLEMAN_RATICATE
+	ld [wWhichTrade], a ; set before any PrintText call -- PrintText does not preserve a
 	ld hl, .Text
 	call PrintText
-.setWhichTrade
-	ld [wWhichTrade], a
+.dispatch
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd
 
