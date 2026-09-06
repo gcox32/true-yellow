@@ -395,8 +395,10 @@ OnixPicBackSW::       INCBIN "gfx/pokemon/back_sw/onixb.pic"
 OnixPicFrontAlt::     INCBIN "gfx/pokemon/front_alt/onix.pic"
 
 WeezingPicBackSW::     INCBIN "gfx/pokemon/back_sw/weezingb.pic"
+FloatingWeezingPicFront::  INCBIN "gfx/pokemon/front/weezing.pic"
 
 MagnetonPicBackSW::   INCBIN "gfx/pokemon/back_sw/magnetonb.pic"
+FloatingMagnetonPicFront:: INCBIN "gfx/pokemon/front/magneton.pic"
 
 DonphanPicFront:: INCBIN "gfx/pokemon/front/donphan.pic"
 DonphanPicBack:: INCBIN "gfx/pokemon/back/donphanb.pic"

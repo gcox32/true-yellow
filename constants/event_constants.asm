@@ -172,7 +172,8 @@
 ; Cinnabar Island events
 	const_next $278
 	const EVENT_MANSION_SWITCH_ON
-	const_skip 16
+	const_skip 15
+	const EVENT_FLOATING_WEEZING_CONVERSION
 	const EVENT_BEAT_MANSION_1_TRAINER_0
 	const_skip 14
 	const EVENT_GOT_TM38
@@ -317,6 +318,7 @@
 	const EVENT_BEAT_POWER_PLANT_VOLTORB_6
 	const EVENT_BEAT_POWER_PLANT_VOLTORB_7
 	const EVENT_BEAT_ZAPDOS
+	const EVENT_SUPERCHARGED_MAGNETON
 
 ; Route 11 events
 	const_next $470

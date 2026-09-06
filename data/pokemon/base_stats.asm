@@ -161,5 +161,22 @@ ArmoredMewtwoBaseStats::
 INCLUDE "data/pokemon/base_stats/armored_mewtwo.asm"
 BrockOnixBaseStats::
 INCLUDE "data/pokemon/base_stats/brock_onix.asm"
+FloatingMagnetonBaseStats::
 INCLUDE "data/pokemon/base_stats/floating_magneton.asm"
+FloatingWeezingBaseStats::
 INCLUDE "data/pokemon/base_stats/floating_weezing.asm"
+
+; species index -> its own base stats entry, for mons with no real dex slot.
+; Scanned by GetMonHeader (home/pokemon.asm).
+NonDexMonBaseStatsPointers::
+	db MISSINGNO
+	dw MissingnoBaseStats
+	db ARMORED_MEWTWO
+	dw ArmoredMewtwoBaseStats
+	db BROCK_ONIX
+	dw BrockOnixBaseStats
+	db FLOATING_MAGNETON
+	dw FloatingMagnetonBaseStats
+	db FLOATING_WEEZING
+	dw FloatingWeezingBaseStats
+	db -1

@@ -69,6 +69,7 @@ PokemonMansionB1F_TextPointers:
 	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_TM_SOLARBEAM
 	dw_const PokemonMansionB1FDiaryText,     TEXT_POKEMONMANSIONB1F_DIARY
 	dw_const PickUpItemText,                 TEXT_POKEMONMANSIONB1F_SECRET_KEY
+	dw_const PokemonMansionB1FGasValveText,  TEXT_POKEMONMANSIONB1F_GAS_VALVE
 	dw_const PokemonMansion2FSwitchText,     TEXT_POKEMONMANSIONB1F_SWITCH ; This switch uses the text script from the 2F.
 
 Mansion4TrainerHeaders:
@@ -117,4 +118,77 @@ PokemonMansionB1FScientistAfterBattleText:
 
 PokemonMansionB1FDiaryText:
 	text_far _PokemonMansionB1FDiaryText
+	text_end
+
+PokemonMansionB1FGasValveText:
+	text_asm
+	CheckEvent EVENT_FLOATING_WEEZING_CONVERSION
+	jr nz, .dormant
+	ld hl, PokemonMansionB1FGasPipeText
+	call PrintText
+	callfar SpeciesChangePartyMenu
+	jr c, .done
+	call GetPartyMonName2
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMon1Species
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+	ld a, [hl]
+	cp WEEZING
+	jr z, .convert
+	cp KOFFING
+	jr z, .notEvolved
+	cp FLOATING_WEEZING
+	jr z, .alreadyFloating
+	ld hl, PokemonMansionB1FGasWrongMonText
+	jr .print
+.notEvolved
+	ld hl, PokemonMansionB1FGasNotEvolvedText
+	jr .print
+.alreadyFloating
+	ld hl, PokemonMansionB1FGasAlreadyText
+	jr .print
+.convert
+	ld a, FLOATING_WEEZING
+	ld [wCurPartySpecies], a
+	callfar ChangePartyPokemonSpecies
+	ld a, SFX_BALL_POOF
+	call PlaySound
+	call WaitForSoundToFinish
+	ld a, FLOATING_WEEZING
+	call PlayCry
+	call WaitForSoundToFinish
+	SetEvent EVENT_FLOATING_WEEZING_CONVERSION
+	ld hl, PokemonMansionB1FGasSuccessText
+.print
+	call PrintText
+.done
+	jp TextScriptEnd
+.dormant
+	ld hl, PokemonMansionB1FGasDormantText
+	call PrintText
+	jp TextScriptEnd
+
+PokemonMansionB1FGasPipeText:
+	text_far _PokemonMansionB1FGasPipeText
+	text_end
+
+PokemonMansionB1FGasWrongMonText:
+	text_far _PokemonMansionB1FGasWrongMonText
+	text_end
+
+PokemonMansionB1FGasNotEvolvedText:
+	text_far _PokemonMansionB1FGasNotEvolvedText
+	text_end
+
+PokemonMansionB1FGasAlreadyText:
+	text_far _PokemonMansionB1FGasAlreadyText
+	text_end
+
+PokemonMansionB1FGasSuccessText:
+	text_far _PokemonMansionB1FGasSuccessText
+	text_end
+
+PokemonMansionB1FGasDormantText:
+	text_far _PokemonMansionB1FGasDormantText
 	text_end

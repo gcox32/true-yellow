@@ -428,15 +428,23 @@ GetMonHeader::
 	cp FOSSIL_AERODACTYL ; Aerodactyl fossil
 	jr z, .specialID
 ; these mons have their own base stats entry instead of a real dex slot
-	ld hl, MissingnoBaseStats
-	cp MISSINGNO
-	jr z, .nonDexMon
-	ld hl, ArmoredMewtwoBaseStats
-	cp ARMORED_MEWTWO
-	jr z, .nonDexMon
-	ld hl, BrockOnixBaseStats
-	cp BROCK_ONIX
-	jr z, .nonDexMon
+	ld b, a
+	ld hl, NonDexMonBaseStatsPointers
+.searchNonDexMon
+	ld a, [hli]
+	cp -1
+	jr z, .notNonDexMon
+	cp b
+	jr z, .foundNonDexMon
+	inc hl
+	inc hl
+	jr .searchNonDexMon
+.foundNonDexMon
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jr .nonDexMon
+.notNonDexMon
 	predef IndexToPokedex
 	ld a, [wPokedexNum]
 	dec a

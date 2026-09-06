@@ -29,6 +29,7 @@ PowerPlant_TextPointers:
 	dw_const PickUpItemText,           TEXT_POWERPLANT_RARE_CANDY
 	dw_const PickUpItemText,           TEXT_POWERPLANT_TM_THUNDER
 	dw_const PickUpItemText,           TEXT_POWERPLANT_TM_REFLECT
+	dw_const PowerPlantElectromagnetText, TEXT_POWERPLANT_ELECTROMAGNET
 
 PowerPlantTrainerHeaders:
 	def_trainers
@@ -114,3 +115,86 @@ PowerPlantZapdosBattleText:
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
+
+PowerPlantElectromagnetText:
+	text_asm
+	CheckEvent EVENT_BEAT_ZAPDOS
+	jr z, .noCharge
+	CheckEvent EVENT_SUPERCHARGED_MAGNETON
+	jr nz, .dormant
+	ld hl, PowerPlantMagnetHumText
+	call PrintText
+	callfar SpeciesChangePartyMenu
+	jr c, .done
+	call GetPartyMonName2
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMon1Species
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+	ld a, [hl]
+	cp MAGNETON
+	jr z, .convert
+	cp MAGNEMITE
+	jr z, .notEvolved
+	cp FLOATING_MAGNETON
+	jr z, .already
+	ld hl, PowerPlantMagnetWrongMonText
+	jr .print
+.notEvolved
+	ld hl, PowerPlantMagnetNotEvolvedText
+	jr .print
+.already
+	ld hl, PowerPlantMagnetAlreadyText
+	jr .print
+.convert
+	ld a, FLOATING_MAGNETON
+	ld [wCurPartySpecies], a
+	callfar ChangePartyPokemonSpecies
+	ld a, SFX_BALL_POOF
+	call PlaySound
+	call WaitForSoundToFinish
+	ld a, FLOATING_MAGNETON
+	call PlayCry
+	call WaitForSoundToFinish
+	SetEvent EVENT_SUPERCHARGED_MAGNETON
+	ld hl, PowerPlantMagnetSuccessText
+.print
+	call PrintText
+.done
+	jp TextScriptEnd
+.noCharge
+	ld hl, PowerPlantMagnetNoChargeText
+	call PrintText
+	jp TextScriptEnd
+.dormant
+	ld hl, PowerPlantMagnetDormantText
+	call PrintText
+	jp TextScriptEnd
+
+PowerPlantMagnetHumText:
+	text_far _PowerPlantMagnetHumText
+	text_end
+
+PowerPlantMagnetWrongMonText:
+	text_far _PowerPlantMagnetWrongMonText
+	text_end
+
+PowerPlantMagnetNotEvolvedText:
+	text_far _PowerPlantMagnetNotEvolvedText
+	text_end
+
+PowerPlantMagnetAlreadyText:
+	text_far _PowerPlantMagnetAlreadyText
+	text_end
+
+PowerPlantMagnetSuccessText:
+	text_far _PowerPlantMagnetSuccessText
+	text_end
+
+PowerPlantMagnetNoChargeText:
+	text_far _PowerPlantMagnetNoChargeText
+	text_end
+
+PowerPlantMagnetDormantText:
+	text_far _PowerPlantMagnetDormantText
+	text_end

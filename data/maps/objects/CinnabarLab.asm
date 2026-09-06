@@ -1,5 +1,6 @@
 	object_const_def
 	const_export CINNABARLAB_FISHING_GURU
+	const_export CINNABARLAB_MEWTWO_MACHINE
 
 CinnabarLab_Object:
 	db $17 ; border block
@@ -19,5 +20,6 @@ CinnabarLab_Object:
 
 	def_object_events
 	object_event  1,  3, SPRITE_FISHING_GURU, STAY, NONE, TEXT_CINNABARLAB_FISHING_GURU
+	object_event 14,  6, SPRITE_POKE_BALL, STAY, NONE, TEXT_CINNABARLAB_MEWTWO_MACHINE
 
 	def_warps_to CINNABAR_LAB

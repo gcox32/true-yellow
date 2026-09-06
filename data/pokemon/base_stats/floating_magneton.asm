@@ -8,7 +8,7 @@
 	db 161 ; base exp
 
 	INCBIN "gfx/pokemon/front/magneton.pic", 0, 1 ; sprite dimensions
-	dw MagnetonPicFront, MagnetonPicBackSW
+	dw FloatingMagnetonPicFront, MagnetonPicBackSW
 
 	db TACKLE, SCREECH, NO_MOVE, NO_MOVE ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -28,10 +28,5 @@
 	FLASH
 	; end
 
-	db BANK(MagnetonPicFront)
-	db 0
-	db BANK(MagnetonPicBack)
-	db BANK(MagnetonPicBackSW)
-
-	dw 0, MagnetonPicBack
+	db 0 ; padding
 
