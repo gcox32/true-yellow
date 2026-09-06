@@ -3328,6 +3328,7 @@ PlayerCalcMoveDamage:
 	               ; for these moves, accuracy tests will only occur if they are called as part of the effect itself
 	call AdjustDamageForMoveType
 	call RandomizeDamage
+	call SaveDamageIntention ; PureRGBnote: ADDED: preserve damage for JUMP_KICK_EFFECT crash damage
 .moveHitTest
 	call MoveHitTest
 HandleIfPlayerMoveMissed:
@@ -4056,18 +4057,18 @@ PrintMoveFailureText:
 	cp JUMP_KICK_EFFECT
 	ret nz
 
-	; if you get here, the mon used jump kick or hi jump kick and missed
-	ld hl, wDamage ; since the move missed, wDamage will always contain 0 at this point.
-	                ; Thus, recoil damage will always be equal to 1
-	                ; even if it was intended to be potential damage/8.
+	; if you get here, the mon used jump kick or hi jump kick and missed.
+	; PureRGBnote: FIXED: in the original game wDamage is always 0 here (MoveHitTest
+	; zeroes it on a miss), so the crash damage was always just 1. Read the preserved
+	; pre-miss damage from wDamageIntention instead and deal 1/4 of it.
+	ld hl, wDamageIntention
 	ld a, [hli]
 	ld b, [hl]
 	srl a
 	rr b
 	srl a
 	rr b
-	srl a
-	rr b
+	ld hl, wDamage + 1
 	ld [hl], b
 	dec hl
 	ld [hli], a
@@ -4341,6 +4342,17 @@ IgnoredOrdersText:
 	text_far _IgnoredOrdersText
 	text_end
 
+; PureRGBnote: FIXED (via shinpokered): cap a Reflect/Light Screen doubled stat in bc
+; at MAX_STAT_VALUE (999) so it doesn't overflow during the stat scaling that follows.
+do999StatCap:
+	ld a, c
+	sub LOW(MAX_STAT_VALUE)
+	ld a, b
+	sbc HIGH(MAX_STAT_VALUE)
+	ret c ; bc is below the cap, leave it alone
+	lb bc, HIGH(MAX_STAT_VALUE), LOW(MAX_STAT_VALUE)
+	ret
+
 ; sets b, c, d, and e for the CalculateDamage routine in the case of an attack by the player mon
 GetDamageVarsForPlayerAttack:
 	xor a
@@ -4366,6 +4378,7 @@ GetDamageVarsForPlayerAttack:
 ; if the enemy has used Reflect, double the enemy's defense
 	sla c
 	rl b
+	call do999StatCap ; PureRGBnote: FIXED: cap reflect-boosted stat at 999
 .physicalAttackCritCheck
 	ld hl, wBattleMonAttack
 	ld a, [wCriticalHitOrOHKO]
@@ -4396,8 +4409,7 @@ GetDamageVarsForPlayerAttack:
 ; if the enemy has used Light Screen, double the enemy's special
 	sla c
 	rl b
-; reflect and light screen boosts do not cap the stat at MAX_STAT_VALUE, so weird things will happen during stats scaling
-; if a Pokemon with 512 or more Defense has used Reflect, or if a Pokemon with 512 or more Special has used Light Screen
+	call do999StatCap ; PureRGBnote: FIXED: cap light screen-boosted stat at 999
 .specialAttackCritCheck
 	ld hl, wBattleMonSpecial
 	ld a, [wCriticalHitOrOHKO]
@@ -4479,6 +4491,7 @@ GetDamageVarsForEnemyAttack:
 ; if the player has used Reflect, double the player's defense
 	sla c
 	rl b
+	call do999StatCap ; PureRGBnote: FIXED: cap reflect-boosted stat at 999
 .physicalAttackCritCheck
 	ld hl, wEnemyMonAttack
 	ld a, [wCriticalHitOrOHKO]
@@ -4509,8 +4522,7 @@ GetDamageVarsForEnemyAttack:
 ; if the player has used Light Screen, double the player's special
 	sla c
 	rl b
-; reflect and light screen boosts do not cap the stat at MAX_STAT_VALUE, so weird things will happen during stats scaling
-; if a Pokemon with 512 or more Defense has used Reflect, or if a Pokemon with 512 or more Special has used Light Screen
+	call do999StatCap ; PureRGBnote: FIXED: cap light screen-boosted stat at 999
 .specialAttackCritCheck
 	ld hl, wEnemyMonSpecial
 	ld a, [wCriticalHitOrOHKO]
@@ -5679,6 +5691,16 @@ RandomizeDamage:
 	ld [hl], a
 	ret
 
+; PureRGBnote: ADDED: save the damage a move would deal (post type/randomization)
+; so JUMP_KICK_EFFECT crash damage can be based on it even though MoveHitTest
+; zeroes wDamage when the move misses.
+SaveDamageIntention:
+	ld a, [wDamage]
+	ld [wDamageIntention], a
+	ld a, [wDamage + 1]
+	ld [wDamageIntention + 1], a
+	ret
+
 ; for more detailed commentary, see equivalent function for player side (ExecutePlayerMove)
 ExecuteEnemyMove:
 	ld a, [wEnemySelectedMove]
@@ -5762,6 +5784,7 @@ EnemyCalcMoveDamage:
 	jp z, EnemyCheckIfFlyOrChargeEffect
 	call AdjustDamageForMoveType
 	call RandomizeDamage
+	call SaveDamageIntention ; PureRGBnote: ADDED: preserve damage for JUMP_KICK_EFFECT crash damage
 
 EnemyMoveHitTest:
 	call MoveHitTest
@@ -6683,25 +6706,27 @@ ApplyBadgeStatBoosts:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z ; return if link battle
+; PureRGBnote: FIXED: Thunder Badge boosts Speed and Soul Badge boosts Defense,
+; matching what LT. Surge and Koga's text claims (vanilla had them swapped).
+; Boulder (bit 0) - attack
+; Thunder (bit 2) - speed
+; Soul (bit 4) - defense
+; Volcano (bit 6) - special
 	ld a, [wObtainedBadges]
 	ld b, a
 	ld hl, wBattleMonAttack
-	ld c, $4
-; the boost is applied for badges whose bit position is even
-; the order of boosts matches the order they are laid out in RAM
-; Boulder (bit 0) - attack
-; Thunder (bit 2) - defense
-; Soul (bit 4) - speed
-; Volcano (bit 6) - special
-.loop
-	srl b
-	call c, .applyBoostToStat
-	inc hl
-	inc hl
-	srl b
-	dec c
-	jr nz, .loop
-	ret
+	bit BIT_BOULDERBADGE, b
+	call nz, .applyBoostToStat
+	ld hl, wBattleMonSpeed
+	bit BIT_THUNDERBADGE, b
+	call nz, .applyBoostToStat
+	ld hl, wBattleMonDefense
+	bit BIT_SOULBADGE, b
+	call nz, .applyBoostToStat
+	ld hl, wBattleMonSpecial
+	bit BIT_VOLCANOBADGE, b
+	ret z
+	; fall through
 
 ; multiply stat at hl by 1.125
 ; cap stat at MAX_STAT_VALUE

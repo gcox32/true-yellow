@@ -811,6 +811,12 @@ NEXTU
 wBoxNumString:: ds 3
 
 NEXTU
+; PureRGBnote: ADDED: in battle, the amount of damage a move would have done
+; before it was carried out. Used for the JUMP_KICK_EFFECT crash damage, since
+; wDamage is zeroed by MoveHitTest when the move misses.
+wDamageIntention:: dw
+
+NEXTU
 ; 0 = upper half (Y < 9)
 ; 1 = lower half (Y >= 9)
 wBattleTransitionCircleScreenQuadrantY:: db

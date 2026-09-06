@@ -10,14 +10,19 @@ HealEffect_:
 	ld a, [wEnemyMoveNum]
 .healEffect
 	ld b, a
+	; PureRGBnote: FIXED (via shinpokered): the vanilla check ignored the result of
+	; the high-byte comparison, so the move would wrongly fail when current HP was
+	; exactly 255 or 511 below max HP. Only do the low-byte check when the high
+	; bytes are equal.
 	ld a, [de]
-	cp [hl] ; most significant bytes comparison is ignored
-	        ; causes the move to miss if max HP is 255 or 511 points higher than the current HP
+	cp [hl]
 	inc de
 	inc hl
+	jr nz, .notAtMaxHP
 	ld a, [de]
 	sbc [hl]
 	jp z, .failed ; no effect if user's HP is already at its maximum
+.notAtMaxHP
 	ld a, b
 	cp REST
 	jr nz, .healHP

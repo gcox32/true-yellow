@@ -14,23 +14,24 @@
 - [x] change sleep to attack on-wake-up turn
 
 ## QOL
-- [ ] the "Grey pokemon" palette needs to be more grey than brown
+- [x] the "Grey pokemon" palette needs to be more grey than brown
 
 ## Bugfixes from PureRGB
-- [ ] High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
-- [ ] Focus Energy actually works as intended now (multiplies critical hit rate by 4 instead of dividing it by 4)
+- [x] High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
+- [x] Focus Energy actually works as intended now (multiplies critical hit rate by 4 instead of dividing it by 4)
 - [ ] Badge boosts aren't repeatedly applied to every stat when you use or are afflicted by a stat modifier move.
 - [ ] Speed decrease / Attack decrease caused by paralysis and burn statuses aren't repeatedly applied on being hit by or using a stat modifier move.
 - [ ] After healing Paralysis/Burn with an item, speed or attack stats will be correctly reset to their original values
-- [ ] Nidorino's cry plays correctly in Oak's introduction instead of nidorina's
-- [ ] Healing moves like Recover won't fail incorrectly when restoring exactly 255 HP.
+      (^ these 3 are one interconnected battle stat-recalc overhaul in PureRGB - CalculateModifiedStat / ApplyBadgeBoostsForSpecificStat / wWhatStat + StatModifierUp/DownEffect + item heal code. Deferred as a group.)
+- [x] Nidorino's cry plays correctly in Oak's introduction instead of nidorina's (N/A in Yellow: Oak's intro shows Pikachu, no Nidorino)
+- [x] Healing moves like Recover won't fail incorrectly when restoring exactly 255 HP.
 - [ ] The evolution stone item bypass glitch was removed - you must use evolution stones to evolve stone evolution pokemon.
 - [ ] Skipping a level due to gaining a lot of experience won't skip the move you could have learned on the skipped level anymore
 - [ ] Learning moves after evolution works correctly now.
 - [ ] Eevee will always learn a type-specific move on evolution regardless of the level it is evolved at
-- [ ] Cap light screen / reflect stat boosts to 999 to prevent overflows
-- [ ] LT Surge says the Thunderbadge boosts speed, but in the code it actually boosted defence. Now it boosts speed as text indicated.
-- [ ] Koga says the Soulbadge boosts defense, but in the code it actually boosted speed. Now it boosts defense as the text indicated.
+- [x] Cap light screen / reflect stat boosts to 999 to prevent overflows
+- [x] LT Surge says the Thunderbadge boosts speed, but in the code it actually boosted defence. Now it boosts speed as text indicated.
+- [x] Koga says the Soulbadge boosts defense, but in the code it actually boosted speed. Now it boosts defense as the text indicated.
 - [ ] When learning a new move in battle, the "Poof!" sound effect didn't work correctly and would play a random sound instead. Now it works.
 - [ ] While transformed into another pokemon via TRANSFORM, you cannot swap your move positions anymore - allowing this caused glitches that end with the game crashing
 - [ ] NPCs won't rarely disobey their facing behavioural assignments (facing forward, left, etc.)
