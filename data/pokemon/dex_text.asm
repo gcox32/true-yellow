@@ -1509,10 +1509,10 @@ _MewDexEntry::
 
 _DonphanDexEntry::
 	text "It attacks by"
-	next "curling up, "
-	next "rolling into "
-	
-	page "its foe. It "
-	next "can blow apart a"
-	next "house in one hit"
+	next "curling its body"
+	next "into a ball, then"
+
+	page "rolling into its"
+	next "foe. It can level"
+	next "a house in one hit"
 	dex

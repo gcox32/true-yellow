@@ -1179,9 +1179,9 @@ MagnemiteDexEntry:
 	text_end
 
 DonphanDexEntry:
-	db "ARMOR@@"
+	db "ARMOR@"
 	db 3,7
-	dw 265
+	dw 2650
 	text_far _DonphanDexEntry
 	text_end
 
