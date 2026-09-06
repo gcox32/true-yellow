@@ -1514,5 +1514,5 @@ _DonphanDexEntry::
 
 	page "rolling into its"
 	next "foe. It can level"
-	next "a house in one hit"
+	next "a house in 1 hit"
 	dex
