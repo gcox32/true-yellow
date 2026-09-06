@@ -678,7 +678,7 @@ GentlemanData:
 	db 20, GROWLITHE, DRATINI, 0
 	db 21, NIDORAN_M, NIDORAN_F, WEEPINBELL, 0
 ; SS Anne 2F Rooms/Vermilion Gym
-	db 22, GROWLITHE, GROWLITHE, 0
+	db 22, JOLTEON, 0
 ; Unused
 	db 48, PRIMEAPE, 0
 ; SS Anne 2F Rooms (RATICATE traded for player's BUTTERFREE, and back again)
