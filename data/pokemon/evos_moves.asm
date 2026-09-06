@@ -216,18 +216,17 @@ RhydonEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 12, BITE
-	db 15, LOW_KICK
-	db 19, HORN_ATTACK
+	db 12, DIG
+	db 15, HORN_ATTACK
 	db 23, HEADBUTT
 	db 27, FURY_ATTACK
-	db 36, TAKE_DOWN
+	db 36, BODY_SLAM
 	db 39, EARTHQUAKE
-	db 42, SKULL_BASH
-	db 47, DEFENSE_CURL
-	db 52, MEGA_KICK
-	db 56, HYPER_BEAM
-	db 0
+	db 42, FISSURE
+	db 47, HORN_DRILL
+	db 52, SHARPEN
+	db 56, ROCK_SLIDE
+	db 60, HYPER_BEAM
 
 KangaskhanEvosMoves:
 ; Evolutions
@@ -235,11 +234,10 @@ KangaskhanEvosMoves:
 ; Learnset
 	db 18, BITE
 	db 23, STOMP
-	db 27, HEADBUTT
-	db 30, MIMIC
+	db 27, TAKE_DOWN
 	db 36, REST
 	db 39, DOUBLE_EDGE
-	db 41, FOCUS_ENERGY
+	db 41, FISSURE
 	db 44, DIZZY_PUNCH
 	db 52, HYPER_BEAM
 	db 56, SUBMISSION
@@ -435,11 +433,12 @@ GengarEvosMoves:
 	db 0
 ; Learnset
 	db 21, HYPNOSIS
-	db 24, MEGA_DRAIN
-	db 29, BARRAGE
+	db 24, DOUBLE_TEAM
+	db 29, MEGA_DRAIN
 	db 33, DREAM_EATER
-	db 41, SLAM ; GASTRO ACID
+	db 41, ACID
 	db 46, ICE_PUNCH
+	db 51, NIGHT_SHADE
 	db 57, LOVELY_KISS
 	db 0
 
@@ -451,8 +450,10 @@ NidoranFEvosMoves:
 	db 8,  DOUBLE_KICK
 	db 12, POISON_STING
 	db 14, FURY_SWIPES
-	db 18, BITE
-	db 25, PIN_MISSILE
+	db 17, BITE
+	db 20, PIN_MISSILE
+	db 24, SLASH
+	db 29, DIG
 	db 36, SUPER_FANG
 	db 0
 
@@ -492,15 +493,14 @@ RhyhornEvosMoves:
 	db EVOLVE_LEVEL, 42, RHYDON
 	db 0
 ; Learnset
-	db 12, BITE
-	db 15, LOW_KICK
-	db 19, HORN_ATTACK
-	db 23, HEADBUTT
+	db 12, DIG
+	db 15, HORN_ATTACK
+	db 19, HEADBUTT
 	db 27, FURY_ATTACK
 	db 36, BODY_SLAM
 	db 39, EARTHQUAKE
 	db 42, SKULL_BASH
-	db 47, HARDEN
+	db 47, SHARPEN
 	db 0
 
 LaprasEvosMoves:
@@ -520,7 +520,7 @@ ArcanineEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 7, QUICK_ATTACK
+	db 7,  QUICK_ATTACK
 	db 10, LICK
 	db 15, EMBER
 	db 19, HYPER_FANG
@@ -594,10 +594,11 @@ GastlyEvosMoves:
 	db 0
 ; Learnset
 	db 21, HYPNOSIS
-	db 24, MEGA_DRAIN
-	db 29, BARRAGE
+	db 24, DOUBLE_TEAM
+	db 29, MEGA_DRAIN
 	db 33, DREAM_EATER
-	db 41, SLAM ; GASTRO ACID
+	db 41, ACID
+	db 48, NIGHT_SHADE
 	db 57, LOVELY_KISS
 	db 0
 
@@ -607,13 +608,12 @@ ScytherEvosMoves:
 ; Learnset
 	db 17, WING_ATTACK
 	db 19, FOCUS_ENERGY
-	db 23, PIN_MISSILE
+	db 23, LEECH_LIFE
 	db 25, DOUBLE_TEAM
-	db 27, FURY_ATTACK
+	db 27, SLASH
 	db 32, SWORDS_DANCE
 	db 38, TWINEEDLE
-	db 41, SLASH
-	db 48, HI_JUMP_KICK
+	db 41, HI_JUMP_KICK
 	db 0
 
 StaryuEvosMoves:
@@ -867,7 +867,6 @@ ArbokEvosMoves:
 	db 17, GLARE
 	db 19, CONSTRICT
 	db 22, MEGA_DRAIN
-	db 26, SLAM ; GASTRO ACID
 	db 30, WITHDRAW
 	db 33, ACID
 	db 36, LEECH_LIFE
@@ -938,7 +937,7 @@ GolemEvosMoves:
 	db 19, DEFENSE_CURL
 	db 21, SELFDESTRUCT
 	db 28, ROCK_SLIDE
-	db 31, BARRAGE
+	db 31, DIG
 	db 39, EARTHQUAKE
 	db 46, EXPLOSION
 	db 52, MEGA_PUNCH
@@ -1927,7 +1926,6 @@ ElectrodeEvosMoves:
 	db 0
 ; Learnset
 	db 15, SONICBOOM
-	db 18, BARRAGE
 	db 22, EXPLOSION
 	db 24, THUNDER_WAVE
 	db 28, DEFENSE_CURL
@@ -2005,10 +2003,12 @@ HaunterEvosMoves:
 	db 0
 ; Learnset
 	db 21, HYPNOSIS
-	db 24, MEGA_DRAIN
+	db 24, DOUBLE_TEAM
+	db 28, MEGA_DRAIN
 	db 33, DREAM_EATER
-	db 41, SLAM ; GASTRO ACID
+	db 38, ACID
 	db 46, ICE_PUNCH
+	db 50, NIGHT_SHADE
 	db 57, LOVELY_KISS
 	db 0
 

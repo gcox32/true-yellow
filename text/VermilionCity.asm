@@ -57,6 +57,15 @@ _VermilionCitySailor1ShipSetSailText::
 	text "The ship set sail."
 	done
 
+_VermilionCitySailor1ShipReturnedText::
+	text "The S.S.ANNE"
+	line "is back!"
+	
+	para "After a long"
+	line "journey it's"
+	cont "back in port."
+	done
+
 _VermilionCityGambler2Text::
 	text "I'm putting up a"
 	line "building on this"

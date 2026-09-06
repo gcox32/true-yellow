@@ -67,7 +67,13 @@ VermilionCityDefaultScript:
 	ldh [hTextID], a
 	call DisplayTextID
 	CheckEvent EVENT_SS_ANNE_LEFT
-	jr nz, .ship_departed
+	jr z, .check_ticket
+; the S.S. ANNE returns to port for good once the SOUL BADGE is obtained
+	ld a, [wObtainedBadges]
+	bit BIT_SOULBADGE, a
+	ret nz
+	jr .ship_departed
+.check_ticket
 	ld b, S_S_TICKET
 	predef GetQuantityOfItemInBag
 	ld a, b
@@ -206,6 +212,13 @@ VermilionCitySailor1Text:
 	ld [wVermilionCityCurScript], a
 	jr .end
 .ship_departed
+	ld a, [wObtainedBadges]
+	bit BIT_SOULBADGE, a
+	jr z, .ship_gone_for_good
+	ld hl, .ShipReturnedText
+	call PrintText
+	jr .end
+.ship_gone_for_good
 	ld hl, .ShipSetSailText
 	call PrintText
 .end
@@ -234,6 +247,10 @@ VermilionCitySailor1Text:
 
 .ShipSetSailText:
 	text_far _VermilionCitySailor1ShipSetSailText
+	text_end
+
+.ShipReturnedText:
+	text_far _VermilionCitySailor1ShipReturnedText
 	text_end
 
 VermilionCityGambler2Text:

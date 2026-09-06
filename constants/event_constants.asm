@@ -573,7 +573,9 @@
 	const EVENT_WALKED_PAST_GUARD_AFTER_SS_ANNE_LEFT
 	const EVENT_STARTED_WALKING_OUT_OF_DOCK
 	const EVENT_WALKED_OUT_OF_DOCK
-	const_skip 11
+	const EVENT_ENCOUNTERED_MEW ; bit 6 (must match def_trainers arg in scripts/VermilionDock.asm)
+	const EVENT_FOUND_MEW
+	const_skip 9
 	const EVENT_BEAT_SS_ANNE_8_TRAINER_0
 	const EVENT_BEAT_SS_ANNE_8_TRAINER_1
 	const EVENT_BEAT_SS_ANNE_8_TRAINER_2

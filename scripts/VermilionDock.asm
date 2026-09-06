@@ -1,5 +1,11 @@
 VermilionDock_Script:
 	call EnableAutoTextBoxDrawing
+	ld hl, VermilionDockTrainerHeaders
+	ld de, VermilionDock_ScriptPointers
+	ld a, [wVermilionDockCurScript]
+	call ExecuteCurMapScriptInTable
+	ld [wVermilionDockCurScript], a
+	call TruckCheck
 	CheckEventHL EVENT_STARTED_WALKING_OUT_OF_DOCK
 	jr nz, .walking_out_of_dock
 	CheckEventReuseHL EVENT_GOT_HM01
@@ -36,7 +42,18 @@ VermilionDock_Script:
 	SetEventReuseHL EVENT_WALKED_OUT_OF_DOCK
 	ret
 
+VermilionDock_ScriptPointers:
+	def_script_pointers
+	dw_const CheckFightingMapTrainers,              SCRIPT_VERMILIONDOCK_DEFAULT
+	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_VERMILIONDOCK_START_BATTLE
+	dw_const EndTrainerBattle,                      SCRIPT_VERMILIONDOCK_END_BATTLE
+
 VermilionDockSSAnneLeavesScript:
+; The S.S. ANNE returns to port once the SOUL BADGE is obtained, so from that
+; point on the departure cutscene must never play (the dock stays reachable).
+	ld a, [wObtainedBadges]
+	bit BIT_SOULBADGE, a
+	ret nz
 	SetEventForceReuseHL EVENT_SS_ANNE_LEFT
 	ld a, $ff
 	ld [wJoyIgnore], a
@@ -208,10 +225,172 @@ VermilionDock_EraseSSAnne:
 	call DelayFrames
 	ret
 
+; -----------------------------------------------------------------------------
+; "Mew is under the truck" (port of PureRGB's implementation)
+;
+; The truck already exists on the dock as block $03 at block coord (col 10,
+; row 0). With Strength active, the player stands at coord (22, 0) - the tile
+; directly right of the truck - and presses Left twice. The truck slides away
+; (8 hardware sprites + boulder-push SFX + dust) and a static Level 50 wild Mew
+; appears where it was. EVENT_FOUND_MEW makes the shifted state permanent.
+; -----------------------------------------------------------------------------
+
+TruckOAMTable:
+	db $50, $28, $c0, $10
+	db $50, $30, $c1, $10
+	db $50, $38, $c2, $10
+	db $50, $40, $c3, $10
+	db $58, $28, $c4, $10
+	db $58, $30, $c5, $10
+	db $58, $38, $c6, $10
+	db $58, $40, $c7, $10
+
+TruckSpriteGFX: INCBIN "gfx/sprites/truck.2bpp"
+
+NoTruckAction:
+	ld hl, wCurrentMapScriptFlags
+	res BIT_CUR_MAP_USED_ELEVATOR, [hl]
+	ret
+
+TruckCheck:
+	CheckEventHL EVENT_FOUND_MEW
+	jp nz, ChangeTruckTile
+	ld hl, wCurrentMapScriptFlags
+	res BIT_CUR_MAP_LOADED_1, [hl]
+; keep the overworld Mew sprite hidden until the truck has actually been moved
+	lb bc, FLAG_TEST, HS_MEW_VERMILION_DOCK
+	ld hl, wMissableObjectFlags
+	predef FlagActionPredef
+	ld a, c
+	and a
+	jr nz, .mewAlreadyHidden
+	ld a, HS_MEW_VERMILION_DOCK
+	ld [wMissableObjectIndex], a
+	predef HideObject
+.mewAlreadyHidden
+	ld a, [wStatusFlags1]
+	bit BIT_STRENGTH_ACTIVE, a ; using Strength?
+	jr z, NoTruckAction
+; the push position is (x=22, y=0)
+	ld hl, wYCoord
+	ld a, [hli]
+	and a
+	jr nz, NoTruckAction
+	ld a, [hl] ; wXCoord
+	cp 22
+	jr nz, NoTruckAction
+; is the player trying to walk left?
+	ld a, [wPlayerMovingDirection]
+	bit PLAYER_DIR_BIT_LEFT, a
+	jr z, NoTruckAction
+	ld hl, wCurrentMapScriptFlags
+	bit BIT_CUR_MAP_USED_ELEVATOR, [hl]
+	set BIT_CUR_MAP_USED_ELEVATOR, [hl] ; first Left press just primes the push
+	ret z
+	ldh a, [hJoyHeld]
+	bit B_PAD_LEFT, a ; is Left still held?
+	ret z
+	res BIT_CUR_MAP_USED_ELEVATOR, [hl]
+	ld a, $ff
+	ld [wJoyIgnore], a
+	ld [wUpdateSpritesEnabled], a
+; load the truck sprite tiles and lay out the 8 hardware sprites over the truck
+	ld bc, (BANK(TruckSpriteGFX) << 8) | 8
+	ld hl, vChars1 + $400
+	ld de, TruckSpriteGFX
+	call CopyVideoData
+	ld hl, TruckOAMTable
+	ld bc, $20
+	ld de, wShadowOAM + $20
+	call CopyData
+; drop an empty block where the truck was so the BG doesn't fight the sprites
+	ld a, $c
+	ld [wNewTileBlockID], a
+	ld bc, $a
+	predef ReplaceTileBlock
+; the truck sprites use OBP1 (attr $10); make sure it holds a sane palette
+	ld a, %11100100
+	ldh [rOBP1], a
+	call UpdateCGBPal_OBP1
+; slide the 8 truck sprites left
+	ld a, SFX_PUSH_BOULDER
+	call PlaySound
+	ld b, 32
+	ld de, 4
+.slideTruck
+	ld hl, wShadowOAM + $21
+	ld a, 8
+.slideTruckSprites
+	dec [hl]
+	add hl, de
+	dec a
+	jr nz, .slideTruckSprites
+	ld c, 2
+	call DelayFrames
+	dec b
+	jr nz, .slideTruck
+; put the truck block one block to the left of where it started
+	ld a, $3
+	ld [wNewTileBlockID], a
+	ld bc, $9
+	predef ReplaceTileBlock
+	callfar AnimateBoulderDust
+	call ShowMew
+	ld c, 20
+	call DelayFrames
+	xor a
+	ld [wJoyIgnore], a
+	SetEvent EVENT_FOUND_MEW
+	ret
+
+ShowMew:
+	ld a, 1
+	ld [wUpdateSpritesEnabled], a
+	ld a, HS_MEW_VERMILION_DOCK
+	ld [wMissableObjectIndex], a
+	predef_jump ShowObject
+
+ChangeTruckTile:
+; runs once per map load after EVENT_FOUND_MEW: redraw the "truck already moved"
+; state by shifting the truck block one block to the left in the block map.
+	ld hl, wCurrentMapScriptFlags
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_USED_ELEVATOR, [hl]
+	ret z
+	hlowcoord 9, 0, VERMILION_DOCK_WIDTH
+	ld a, [hl]
+	cp $3
+	ret z
+	ld a, $3
+	ld [hli], a
+	ld [hl], $c
+	CheckEvent EVENT_ENCOUNTERED_MEW
+	call z, ShowMew
+	jpfar RedrawMapView
+
 VermilionDock_TextPointers:
 	def_text_pointers
-	dw_const VermilionDockUnusedText, TEXT_VERMILIONDOCK_UNUSED
+	dw_const VermilionDockMewText, TEXT_VERMILIONDOCK_MEW
 
-VermilionDockUnusedText:
-	text_far _VermilionDockUnusedText
-	text_end
+VermilionDockTrainerHeaders:
+	def_trainers 6
+MewTrainerHeader:
+	trainer EVENT_ENCOUNTERED_MEW, 0, MewBattleText, MewBattleText, MewBattleText
+	db -1 ; end
+
+VermilionDockMewText:
+	text_asm
+	ld hl, MewTrainerHeader
+	call TalkToTrainer
+	ld a, [wCurMapScript]
+	ld [wVermilionDockCurScript], a
+	jp TextScriptEnd
+
+MewBattleText:
+	text_far _MewtwoBattleText ; "Mew!"
+	text_asm
+	ld a, MEW
+	call PlayCry
+	call WaitForSoundToFinish
+	jp TextScriptEnd

@@ -151,6 +151,6 @@ _Route25Hiker3AfterBattleText::
 	done
 
 _Route25BillSignText::
-	text "SEA COTTAGE"
+	text "LIGHTHOUSE"
 	line " "
 	done
