@@ -16,6 +16,8 @@ _SilphCo2FSilphWorkerFReceivedTM36Text::
 	text "!@"
 	text_end
 
+; currently unused - the TM36 handout is repeatable, so the "already got it"
+; branch never runs. Kept in case that changes back.
 _SilphCo2FSilphWorkerFTM36ExplanationText::
 	text "TM36 is"
 	line "SELFDESTRUCT!"

@@ -88,6 +88,14 @@ _CeladonMartRoofLittleGirlNoRoomText::
 	line "space for this!@"
 	text_end
 
+; currently unused - the drink trades are repeatable, so the "not thirsty"
+; branch never runs. Kept in case that changes back.
+_CeladonMartRoofLittleGirlImNotThirstyText::
+	text "No thank you!"
+	line "I'm not thirsty"
+	cont "after all!@"
+	text_end
+
 _CeladonMartRoofSuperNerdText::
 	text "My sister is a"
 	line "trainer, believe"

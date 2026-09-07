@@ -124,6 +124,14 @@ _ViridianCityFisherReceivedTM42Text::
 	line "TM42!@"
 	text_end
 
+; currently unused - the TM42 handout is repeatable, so the "already got it"
+; branch never runs. Kept in case that changes back.
+_ViridianCityFisherTM42ExplanationText::
+	text "TM42 contains"
+	line "DREAM EATER..."
+	cont "...Snore..."
+	done
+
 _ViridianCityFisherTM42NoRoomText::
 	text "You have too much"
 	line "stuff already."

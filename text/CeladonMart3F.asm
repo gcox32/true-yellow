@@ -86,6 +86,8 @@ _CeladonMart3FClerkReceivedTM18Text::
 	text "!@"
 	text_end
 
+; currently unused - the TM18 handout is repeatable, so the "already got it"
+; branch never runs. Kept in case that changes back.
 _CeladonMart3FClerkTM18ExplanationText::
 	text "TM18 is COUNTER!"
 	line "Not like the one"

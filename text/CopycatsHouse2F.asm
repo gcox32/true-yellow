@@ -43,6 +43,22 @@ _CopycatsHouse2FCopycatTM31Explanation1Text::
 	line "#MON!@"
 	text_end
 
+; currently unused - the TM31 trade is repeatable, so the "already got it"
+; branch never runs. Kept in case that changes back.
+_CopycatsHouse2FCopycatTM31Explanation2Text::
+	text "<PLAYER>: Hi!"
+	line "Thanks for TM31!"
+
+	para "<PLAYER>: Pardon?"
+
+	para "<PLAYER>: Is it"
+	line "that fun to mimic"
+	cont "my every move?"
+
+	para "COPYCAT: You bet!"
+	line "It's a scream!"
+	done
+
 _CopycatsHouse2FCopycatTM31NoRoomText::
 	text "Don't you want"
 	line "this?@"

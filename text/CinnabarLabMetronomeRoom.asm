@@ -13,6 +13,8 @@ _CinnabarLabMetronomeRoomScientist1ReceivedTM35Text::
 	text "!@"
 	text_end
 
+; currently unused - the TM35 handout is repeatable, so the "already got it"
+; branch never runs. Kept in case that changes back.
 _CinnabarLabMetronomeRoomScientist1TM35ExplanationText::
 	text "Tch-tch-tch!"
 	line "That's the sound"

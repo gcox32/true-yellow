@@ -52,8 +52,7 @@ CeladonCityGramps2Text:
 
 CeladonCityGramps3Text:
 	text_asm
-	CheckEvent EVENT_GOT_TM41
-	jr nz, .gotTM41
+	; EVENT_GOT_TM41 is never set, so the player can keep coming back for TM41
 	ld hl, .Text
 	call PrintText
 	lb bc, TM_SOFTBOILED, 1
@@ -65,11 +64,6 @@ CeladonCityGramps3Text:
 .Success
 	ld hl, .ReceivedTM41Text
 	call PrintText
-	SetEvent EVENT_GOT_TM41
-	jr .Done
-.gotTM41
-	ld hl, .TM41ExplanationText
-	call PrintText
 .Done
 	jp TextScriptEnd
 
@@ -80,10 +74,6 @@ CeladonCityGramps3Text:
 .ReceivedTM41Text:
 	text_far _CeladonCityGramps3ReceivedTM41Text
 	sound_get_item_1
-	text_end
-
-.TM41ExplanationText:
-	text_far _CeladonCityGramps3TM41ExplanationText
 	text_end
 
 .TM41NoRoomText:

@@ -46,6 +46,8 @@ _CeladonCityGramps3ReceivedTM41Text::
 	text "!@"
 	text_end
 
+; currently unused - the TM41 handout is repeatable, so the "already got it"
+; branch never runs. Kept in case that changes back.
 _CeladonCityGramps3TM41ExplanationText::
 	text "TM41 teaches"
 	line "SOFTBOILED!"

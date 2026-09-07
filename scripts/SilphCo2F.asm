@@ -114,19 +114,14 @@ SilphCo2TrainerHeader3:
 
 SilphCo2FSilphWorkerFText:
 	text_asm
-	CheckEvent EVENT_GOT_TM36
-	jr nz, .already_have_tm
+	; EVENT_GOT_TM36 is never set, so the player can keep coming back for TM36
 	ld hl, .PleaseTakeThisText
 	call PrintText
 	lb bc, TM_SELFDESTRUCT, 1
 	call GiveItem
 	ld hl, .TM36NoRoomText
 	jr nc, .print_text
-	SetEvent EVENT_GOT_TM36
 	ld hl, .ReceivedTM36Text
-	jr .print_text
-.already_have_tm
-	ld hl, .TM36ExplanationText
 .print_text
 	call PrintText
 	jp TextScriptEnd
@@ -138,10 +133,6 @@ SilphCo2FSilphWorkerFText:
 .ReceivedTM36Text:
 	text_far _SilphCo2FSilphWorkerFReceivedTM36Text
 	sound_get_item_1
-	text_end
-
-.TM36ExplanationText:
-	text_far _SilphCo2FSilphWorkerFTM36ExplanationText
 	text_end
 
 .TM36NoRoomText:
