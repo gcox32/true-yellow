@@ -12,14 +12,6 @@ _MrPsychicsHouseMrPsychicReceivedTM29Text::
 	text "!@"
 	text_end
 
-_MrPsychicsHouseMrPsychicTM29ExplanationText::
-	text "TM29 is PSYCHIC!"
-
-	para "It can lower the"
-	line "target's SPECIAL"
-	cont "abilities."
-	done
-
 _MrPsychicsHouseMrPsychicTM29NoRoomText::
 	text "Where do you plan"
 	line "to put this?"

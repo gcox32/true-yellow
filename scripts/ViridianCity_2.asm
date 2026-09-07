@@ -86,8 +86,7 @@ ViridianCityPrintOldManSleepyText::
 	text_end
 
 ViridianCityPrintFisherText::
-	CheckEvent EVENT_GOT_TM42
-	jr nz, .got_item
+	; EVENT_GOT_TM42 is never set, so the player can keep coming back for TM42
 	ld hl, .YouCanHaveThisText
 	call PrintText
 	lb bc, TM_DREAM_EATER, 1
@@ -95,14 +94,9 @@ ViridianCityPrintFisherText::
 	jr nc, .bag_full
 	ld hl, .ReceivedTM42Text
 	call PrintText
-	SetEvent EVENT_GOT_TM42
 	ret
 .bag_full
 	ld hl, .TM42NoRoomText
-	call PrintText
-	ret
-.got_item
-	ld hl, .TM42ExplanationText
 	call PrintText
 	ret
 
@@ -113,10 +107,6 @@ ViridianCityPrintFisherText::
 .ReceivedTM42Text:
 	text_far _ViridianCityFisherReceivedTM42Text
 	sound_get_item_2
-	text_end
-
-.TM42ExplanationText:
-	text_far _ViridianCityFisherTM42ExplanationText
 	text_end
 
 .TM42NoRoomText:

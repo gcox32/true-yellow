@@ -93,8 +93,7 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	cp SODA_POP
 	jr z, .gaveSodaPop
 ; gave Lemonade
-	CheckEvent EVENT_GOT_TM49
-	jr nz, .alreadyGaveDrink
+	; EVENT_GOT_TM49 is never set, so the girl keeps trading LEMONADE for TM49
 	ld hl, CeladonMartRoofLittleGirlYayLemonadeText
 	call PrintText
 	call RemoveItemByIDBank12
@@ -103,11 +102,9 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	jr nc, .bagFull
 	ld hl, CeladonMartRoofLittleGirlReceivedTM49Text
 	call PrintText
-	SetEvent EVENT_GOT_TM49
 	ret
 .gaveSodaPop
-	CheckEvent EVENT_GOT_TM48
-	jr nz, .alreadyGaveDrink
+	; EVENT_GOT_TM48 is never set, so the girl keeps trading SODA_POP for TM48
 	ld hl, CeladonMartRoofLittleGirlYaySodaPopText
 	call PrintText
 	call RemoveItemByIDBank12
@@ -116,11 +113,9 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	jr nc, .bagFull
 	ld hl, CeladonMartRoofLittleGirlReceivedTM48Text
 	call PrintText
-	SetEvent EVENT_GOT_TM48
 	ret
 .gaveFreshWater
-	CheckEvent EVENT_GOT_TM13
-	jr nz, .alreadyGaveDrink
+	; EVENT_GOT_TM13 is never set, so the girl keeps trading FRESH_WATER for TM13
 	ld hl, CeladonMartRoofLittleGirlYayFreshWaterText
 	call PrintText
 	call RemoveItemByIDBank12
@@ -129,14 +124,9 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	jr nc, .bagFull
 	ld hl, CeladonMartRoofLittleGirlReceivedTM13Text
 	call PrintText
-	SetEvent EVENT_GOT_TM13
 	ret
 .bagFull
 	ld hl, CeladonMartRoofLittleGirlNoRoomText
-	call PrintText
-	ret
-.alreadyGaveDrink
-	ld hl, CeladonMartRoofLittleGirlImNotThirstyText
 	call PrintText
 	ret
 
@@ -186,11 +176,6 @@ CeladonMartRoofLittleGirlReceivedTM49Text:
 
 CeladonMartRoofLittleGirlNoRoomText:
 	text_far _CeladonMartRoofLittleGirlNoRoomText
-	text_waitbutton
-	text_end
-
-CeladonMartRoofLittleGirlImNotThirstyText:
-	text_far _CeladonMartRoofLittleGirlImNotThirstyText
 	text_waitbutton
 	text_end
 

@@ -7,8 +7,7 @@ MrPsychicsHouse_TextPointers:
 
 MrPsychicsHouseMrPsychicText:
 	text_asm
-	CheckEvent EVENT_GOT_TM29
-	jr nz, .got_item
+	; EVENT_GOT_TM29 is never set, so the player can keep coming back for TM29
 	ld hl, .YouWantedThisText
 	call PrintText
 	lb bc, TM_PSYCHIC_M, 1
@@ -16,14 +15,9 @@ MrPsychicsHouseMrPsychicText:
 	jr nc, .bag_full
 	ld hl, .ReceivedTM29Text
 	call PrintText
-	SetEvent EVENT_GOT_TM29
 	jr .done
 .bag_full
 	ld hl, .TM29NoRoomText
-	call PrintText
-	jr .done
-.got_item
-	ld hl, .TM29ExplanationText
 	call PrintText
 .done
 	jp TextScriptEnd
@@ -35,10 +29,6 @@ MrPsychicsHouseMrPsychicText:
 .ReceivedTM29Text:
 	text_far _MrPsychicsHouseMrPsychicReceivedTM29Text
 	sound_get_item_1
-	text_end
-
-.TM29ExplanationText:
-	text_far _MrPsychicsHouseMrPsychicTM29ExplanationText
 	text_end
 
 .TM29NoRoomText:

@@ -124,12 +124,6 @@ _ViridianCityFisherReceivedTM42Text::
 	line "TM42!@"
 	text_end
 
-_ViridianCityFisherTM42ExplanationText::
-	text "TM42 contains"
-	line "DREAM EATER..."
-	cont "...Snore..."
-	done
-
 _ViridianCityFisherTM42NoRoomText::
 	text "You have too much"
 	line "stuff already."
