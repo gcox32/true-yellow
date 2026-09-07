@@ -13,9 +13,9 @@
     - emerging from ladders looks bad 
 - [x] hide new followers on pikachu emotion check
 - [x] change sleep to attack on-wake-up turn
-- [ ] Swap sell items in Celadon 2F for TMs
-- [ ] Need better coin buying experience in Game Corner
-- [ ] Need better prizes in Game Corner
+- [x] Swap sell items in Celadon 2F for TMs
+- [x] Need better coin buying experience in Game Corner
+- [x] Need better prizes in Game Corner
 
 ## QOL
 - [x] the "Grey pokemon" palette needs to be more grey than brown

@@ -159,40 +159,40 @@ GameCornerClerkText:
 	; - have room in the Coin Case for at least 9 coins
 	call Has9990Coins
 	jr nc, .coin_case_full
-	; - have at least 1000 yen
+	; - have at least 5000 yen
 	xor a
 	ldh [hMoney], a
 	ldh [hMoney + 2], a
-	ld a, $10
+	ld a, $50
 	ldh [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .buy_coins
 	ld hl, .CantAffordTheCoins
 	jr .print_ret
 .buy_coins
-	; Spend 1000 yen
+	; Spend 5000 yen
 	xor a
 	ldh [hMoney], a
 	ldh [hMoney + 2], a
-	ld a, $10
+	ld a, $50
 	ldh [hMoney + 1], a
 	ld hl, hMoney + 2
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
-	; Receive 50 coins
+	; Receive 500 coins
 	xor a
 	ldh [hUnusedCoinsByte], a
-	ldh [hCoins], a
-	ld a, $50
 	ldh [hCoins + 1], a
+	ld a, $05
+	ldh [hCoins], a
 	ld de, wPlayerCoins + 1
 	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
 	; Update display
 	call GameCornerDrawCoinBox
-	ld hl, .ThanksHereAre50Coins
+	ld hl, .ThanksHereAre500Coins
 	jr .print_ret
 .declined
 	ld hl, .PleaseComePlaySometime
@@ -210,8 +210,8 @@ GameCornerClerkText:
 	text_far _GameCornerClerkDoYouNeedSomeGameCoinsText
 	text_end
 
-.ThanksHereAre50Coins:
-	text_far _GameCornerClerkThanksHereAre50CoinsText
+.ThanksHereAre500Coins:
+	text_far _GameCornerClerkThanksHereAre500CoinsText
 	text_end
 
 .PleaseComePlaySometime:
