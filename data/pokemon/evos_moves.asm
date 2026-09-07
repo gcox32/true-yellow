@@ -1149,6 +1149,7 @@ PoliwagEvosMoves:
 	db EVOLVE_LEVEL, 25, POLIWHIRL
 	db 0
 ; Learnset
+	db 8,  DOUBLESLAP
 	db 12, WATER_GUN
 	db 15, HYPNOSIS
 	db 19, CONFUSION
