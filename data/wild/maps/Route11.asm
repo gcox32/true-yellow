@@ -4,7 +4,7 @@ Route11WildMons:
 	db 15, RATTATA
 	db 18, SPEAROW
 	db 15, DROWZEE
-	db 17, PARAS
+	db 17, DROWZEE
 	db 17, ODDISH
 	db 18, BELLSPROUT
 	db 20, PIDGEOTTO

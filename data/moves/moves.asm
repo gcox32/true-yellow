@@ -59,7 +59,7 @@ Moves:
 	move ROAR,         SWITCH_AND_TELEPORT_EFFECT,   0, DRAGON,       100, 20 ; changed type to dragon
 	move SING,         SLEEP_EFFECT,                 0, NORMAL,        70, 15 ; accuracy changed from 55 to 70
 	move SUPERSONIC,   CONFUSION_EFFECT,             0, NORMAL,        75, 20
-	move SONICBOOM,    FLINCH_SIDE_EFFECT1,          1, FLYING,       100, 15 ; priority move, set damage still
+	move SONICBOOM,    FLINCH_SIDE_EFFECT1,         30, FLYING,       100, 15 ; priority move
 	move DISABLE,      DISABLE_EFFECT,               0, NORMAL,        85, 20 ; accuracy changed from 55 to 85
 	move ACID,         BURN_SIDE_EFFECT1,           40, POISON,       100, 30 ; effect changed to burn chance
 	move EMBER,        BURN_SIDE_EFFECT1,           40, FIRE,         100, 25
@@ -140,7 +140,7 @@ Moves:
 	move WATERFALL,    FLINCH_SIDE_EFFECT2,         80, WATER,        100, 15 ; add flinching side effect
 	move CLAMP,        TRAPPING_EFFECT,             35, WATER,         85, 10 ; accuracy changed from 75 to 85
 	move SWIFT,        SWIFT_EFFECT,                60, ICE,          100, 20 ; priority move (and ICE)
-	move SKULL_BASH,   JUMP_KICK_EFFECT,           100, NORMAL,       100, 15
+	move SKULL_BASH,   JUMP_KICK_EFFECT,           100, ROCK,         100, 15
 	move SPIKE_CANNON, TWO_TO_FIVE_ATTACKS_EFFECT,  20, NORMAL,       100, 15
 	move CONSTRICT,    SPEED_DOWN_SIDE_EFFECT,      40, NORMAL,       100, 30 ; power changed from 10 to 40, pp changed from 35 to 30
 	move AMNESIA,      SPECIAL_UP2_EFFECT,           0, PSYCHIC_TYPE, 100, 20

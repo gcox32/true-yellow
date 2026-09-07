@@ -669,8 +669,8 @@ TangelaEvosMoves:
 	db 23, STUN_SPORE
 	db 26, MEGA_DRAIN
 	db 34, AMNESIA
-	db 44, SPORE
-	db 49, DREAM_EATER
+	db 44, SLEEP_POWDER
+	db 49, NIGHT_SHADE
 	db 54, SELFDESTRUCT
 	db 0
 
@@ -1356,11 +1356,10 @@ HorseaEvosMoves:
 	db 14, WATER_GUN
 	db 17, SMOKESCREEN
 	db 21, BUBBLEBEAM
-	db 24, MEGA_DRAIN
+	db 24, BARRAGE
 	db 26, LOVELY_KISS
-	db 31, PIN_MISSILE
-	db 35, WATERFALL
-	db 39, DOUBLE_TEAM
+	db 33, WATERFALL
+	db 39, AGILITY
 	db 44, DRAGON_RAGE
 	db 49, HYDRO_PUMP
 	db 0
@@ -1369,11 +1368,11 @@ SeadraEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 24, MEGA_DRAIN
+	db 24, BARRAGE
 	db 26, LOVELY_KISS
-	db 31, PIN_MISSILE
+	db 32, PIN_MISSILE
 	db 35, WATERFALL
-	db 39, DOUBLE_TEAM
+	db 39, AGILITY
 	db 44, DRAGON_RAGE
 	db 49, HYDRO_PUMP
 	db 0
@@ -1708,13 +1707,14 @@ VenomothEvosMoves:
 ; Learnset
 	db 18, LEECH_LIFE
 	db 22, PSYBEAM
-	db 27, WING_ATTACK
+	db 27, GUST
 	db 30, MIRROR_MOVE
-	db 33, SLUDGE
+	db 33, SLEEP_POWDER
 	db 37, DREAM_EATER
 	db 37, SLEEP_POWDER
 	db 42, PSYCHIC_M
 	db 49, HAZE
+	db 55, SPORE
 	db 0
 
 DewgongEvosMoves:

@@ -3,6 +3,7 @@
 - [x] Butterfree for Raticate trade and trade back on SS Anne
 - [x] Swap "Hardened Onix" for "Brock Onix" that is only _resistant_ not immune to Electric
 - [x] Mark overworld Pokemon as seen in Pokedex when you interact with them (e.g. Slowbro in Cerulean)
+    - [ ] Wigglytuff on SS Anne
 - [x] Bill's Lighthouse instead of Cottage?
 - [x] Donphan for sure
 - [x] Better burned animation (instead of reusing poisoned animation)
@@ -12,9 +13,20 @@
     - emerging from ladders looks bad 
 - [x] hide new followers on pikachu emotion check
 - [x] change sleep to attack on-wake-up turn
+- [ ] Swap sell items in Celadon 2F for TMs
+- [ ] Need better coin buying experience in Game Corner
+- [ ] Need better prizes in Game Corner
 
 ## QOL
 - [x] the "Grey pokemon" palette needs to be more grey than brown
+
+
+## Bugs
+= [ ] Pokemon who are "fully paralyzed" on the second turn of Dig or Fly remain untargetable until they Dig or Fly successfully later
+- [ ] Investigate recoil effects--not sure they're working
+- [ ] Investigate SONICBOOM
+- [ ] Investigate attack selection while asleep
+- [ ] Followers after dig/fly/teleport don't init position correctly
 
 ## Bugfixes from PureRGB
 - [x] High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
@@ -55,5 +67,3 @@
 - [ ] In the original game, if your opponent used minimize or substitute, you opened your FIGHT menu, exited, went to PARTY, looked at a pokemon's status menu, then returned to the fight, the opponent's sprite would be all messed up. Now it's fixed and doesn't do that.
 - [ ] Doing the same thing as the above on unidentified GHOSTS would reveal what pokemon they are. Now it doesn't.
 - [ ] After saving in rock tunnel, going title screen -> continue screen -> title screen -> continue screen will cause the continue screen to take on darker colors. Now it stays normal colors.
-
-## 
