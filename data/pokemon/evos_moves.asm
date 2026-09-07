@@ -1046,7 +1046,6 @@ SeelEvosMoves:
 	db 43, AMNESIA
 	db 50, BLIZZARD
 	db 55, SWIFT
-	db 59, WITHDRAW
 	db 0
 
 DiglettEvosMoves:
@@ -1730,7 +1729,6 @@ DewgongEvosMoves:
 	db 43, AMNESIA
 	db 50, BLIZZARD
 	db 55, SWIFT
-	db 59, WITHDRAW
 	db 0
 
 CaterpieEvosMoves:
