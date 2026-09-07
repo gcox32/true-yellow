@@ -317,8 +317,8 @@ MainInBattleLoop:
 	and a
 	ret nz ; return if pokedoll was used to escape from battle
 	ld a, [wBattleMonStatus]
-	and (1 << FRZ) | SLP_MASK
-	jr nz, .selectEnemyMove ; if so, jump
+	bit FRZ, a ; PureRGBnote: CHANGED: only skip move selection when frozen. A sleeping mon still
+	jr nz, .selectEnemyMove ; picks a move so it can be used on the turn it wakes up (see .WakeUp)
 	ld a, [wPlayerBattleStatus1]
 	and (1 << STORING_ENERGY) | (1 << USING_TRAPPING_MOVE) ; check player is using Bide or using a multi-turn attack like wrap
 	jr nz, .selectEnemyMove ; if so, jump
@@ -3127,8 +3127,8 @@ SelectEnemyMove:
 	and (1 << CHARGING_UP) | (1 << THRASHING_ABOUT) ; using a charging move or thrash/petal dance
 	ret nz
 	ld a, [wEnemyMonStatus]
-	and (1 << FRZ) | SLP_MASK
-	ret nz
+	bit FRZ, a ; PureRGBnote: CHANGED: only skip enemy move selection when frozen. A sleeping enemy
+	ret nz     ; still picks a move (via AI) so it can be used on the turn it wakes up
 	ld a, [wEnemyBattleStatus1]
 	and (1 << USING_TRAPPING_MOVE) | (1 << STORING_ENERGY) ; using a trapping move like wrap or bide
 	ret nz
@@ -3645,7 +3645,10 @@ CheckPlayerStatusConditions:
 	ld hl, wPlayerBattleStatus1
 	ld a, [hl]
 	; clear bide, thrashing, charging up, and trapping moves such as warp (already cleared for confusion damage)
-	and ~((1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE))
+	; PureRGBnote: FIXED: also clear INVULNERABLE here. Being fully paralyzed / hurting itself in confusion
+	; on the 2nd turn of Fly/Dig used to clear CHARGING_UP but leave INVULNERABLE set, making the mon
+	; permanently untargetable until it successfully used Fly/Dig again.
+	and ~((1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE) | (1 << INVULNERABLE))
 	ld [hl], a
 	ld a, [wPlayerMoveEffect]
 	cp FLY_EFFECT
@@ -3655,6 +3658,13 @@ CheckPlayerStatusConditions:
 	jr .NotFlyOrChargeEffect
 
 .FlyOrChargeEffect
+	; PureRGBnote: FIXED: if the mon was mid-Fly/Dig its pic is hidden. Redraw it here (unless a
+	; substitute is up) so clearing INVULNERABLE above doesn't leave it invisible yet targetable.
+	ld a, [wPlayerBattleStatus2]
+	bit HAS_SUBSTITUTE_UP, a
+	jr nz, .skipShowPic
+	callfar AnimationShowMonPic
+.skipShowPic
 	xor a
 	ld [wAnimationType], a
 	ld a, STATUS_AFFECTED_ANIM
@@ -4906,11 +4916,8 @@ ApplyAttackToEnemyPokemon:
 	ld a, [wPlayerMoveNum]
 	cp SEISMIC_TOSS
 	jr z, .storeDamage
-	cp NIGHT_SHADE
-	jr z, .storeDamage
-	ld b, SONICBOOM_DAMAGE ; 20
-	cp SONICBOOM
-	jr z, .storeDamage
+	; PureRGBnote: CHANGED: NIGHT_SHADE and SONICBOOM are now normal damaging moves, not fixed damage.
+	; Only SEISMIC_TOSS still uses SPECIAL_DAMAGE_EFFECT (damage = user's level).
 .storeDamage ; store damage value at b
 	ld hl, wDamage
 	xor a
@@ -5008,11 +5015,8 @@ ApplyAttackToPlayerPokemon:
 	ld a, [wEnemyMoveNum]
 	cp SEISMIC_TOSS
 	jr z, .storeDamage
-	; cp NIGHT_SHADE
-	; jr z, .storeDamage ; night shade was made a normal move instead of fixed damage
-	ld b, SONICBOOM_DAMAGE
-	cp SONICBOOM
-	jr z, .storeDamage
+	; PureRGBnote: CHANGED: NIGHT_SHADE and SONICBOOM are now normal damaging moves, not fixed damage.
+	; Only SEISMIC_TOSS still uses SPECIAL_DAMAGE_EFFECT (damage = user's level).
 .storeDamage
 	ld hl, wDamage
 	xor a
@@ -6086,7 +6090,9 @@ CheckEnemyStatusConditions:
 	ld hl, wEnemyBattleStatus1
 	ld a, [hl]
 	; clear bide, thrashing about, charging up, and multi-turn moves such as warp
-	and ~((1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE))
+	; PureRGBnote: FIXED: also clear INVULNERABLE (see matching note in CheckPlayerStatusConditions) so a
+	; full-paralysis / confusion hit on turn 2 of Fly/Dig doesn't leave the mon permanently untargetable.
+	and ~((1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE) | (1 << INVULNERABLE))
 	ld [hl], a
 	ld a, [wEnemyMoveEffect]
 	cp FLY_EFFECT
@@ -6095,6 +6101,13 @@ CheckEnemyStatusConditions:
 	jr z, .flyOrChargeEffect
 	jr .notFlyOrChargeEffect
 .flyOrChargeEffect
+	; PureRGBnote: FIXED: redraw the mon's pic (unless a substitute is up) so clearing INVULNERABLE
+	; above doesn't leave a mid-Fly/Dig mon invisible yet targetable.
+	ld a, [wEnemyBattleStatus2]
+	bit HAS_SUBSTITUTE_UP, a
+	jr nz, .skipShowPic
+	callfar AnimationShowMonPic
+.skipShowPic
 	xor a
 	ld [wAnimationType], a
 	ld a, STATUS_AFFECTED_ANIM

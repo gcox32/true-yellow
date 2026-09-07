@@ -1,4 +1,15 @@
 PrepareForSpecialWarp::
+	; PureRGBnote: FIXED: Fly / Dig / Teleport / Escape Rope don't take the regular warp
+	; path (WarpFound2 -> SetPikachuSpawn*), so wFollowerDoorwayMode / wExitDoorway* and the
+	; Misty/Brock movement state were carried over from the previous map - the followers then
+	; tried to walk to stale old-map trail coordinates. Reset them so the destination map
+	; re-inits the position trail cleanly (behind the player), like the map-connection path.
+	xor a
+	ld [wFollowerDoorwayMode], a
+	ld [wExitDoorwayY], a
+	ld [wExitDoorwayX], a
+	ld [wSpriteMistyStateData1MovementStatus], a
+	ld [wSpriteBrockStateData1MovementStatus], a
 	call LoadSpecialWarpData
 	predef LoadTilesetHeader
 	ld hl, wStatusFlags6

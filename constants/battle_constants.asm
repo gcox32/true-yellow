@@ -50,8 +50,7 @@ DEF MIN_NEUTRAL_DAMAGE EQU 2
 DEF MAX_NEUTRAL_DAMAGE EQU 999
 
 ; fixed damage constants
-DEF SONICBOOM_DAMAGE   EQU 20
-; DEF DRAGON_RAGE_DAMAGE EQU 40
+; PureRGBnote: CHANGED: SONICBOOM and DRAGON_RAGE are now normal damaging moves, not fixed damage.
 
 ; type effectiveness factors, scaled by 10
 DEF SUPER_EFFECTIVE    EQU 20

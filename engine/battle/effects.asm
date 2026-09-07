@@ -1413,7 +1413,7 @@ FocusEnergyEffect:
 	jpfar FocusEnergyEffect_
 
 RecoilEffect:
-	jpfar RecoilEffect_
+	jpfar DefaultRecoilEffect_ ; PureRGBnote: FIXED: was jpfar RecoilEffect_, which is only the damage-calc helper and never subtracted HP
 
 BigRecoilEffect:
 	jpfar BigRecoilEffect_ ; PureRGBnote: ADDED: recoil effect that does 1/2 of the damage done to the user
