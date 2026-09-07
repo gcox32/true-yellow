@@ -7,7 +7,7 @@ MapSpriteSets:
 	db SPRITESET_PEWTER_CERULEAN ; PEWTER_CITY
 	db SPRITESET_PEWTER_CERULEAN ; CERULEAN_CITY
 	db SPRITESET_LAVENDER        ; LAVENDER_TOWN
-	db SPRITESET_VERMILION       ; VERMILION_CITY
+	db SPRITESET_VERMILION_CITY  ; VERMILION_CITY
 	db SPRITESET_CELADON         ; CELADON_CITY
 	db SPRITESET_FUCHSIA         ; FUCHSIA_CITY
 	db SPRITESET_PALLET_VIRIDIAN ; CINNABAR_ISLAND
@@ -111,16 +111,19 @@ SpriteSets:
 	; db SPRITE_UNUSED_GAMBLER_ASLEEP_2
 
 ; SPRITESET_VERMILION
+; Route 6 (south half) and Route 11 (west half) only - Vermilion City has its
+; own set now (SPRITESET_VERMILION_CITY). Only 4 walking NPCs are used here
+; (COOLTRAINER_F, SUPER_NERD, YOUNGSTER, GAMBLER), all in full-facing slots.
 	db SPRITE_PIKACHU
 	db SPRITE_MISTY
 	db SPRITE_BROCK
-	db SPRITE_COOLTRAINER_F ; swapped: trainer on Route 6/Vermilion (needs non-DOWN facing)
-	db SPRITE_SUPER_NERD
-	db SPRITE_YOUNGSTER
-	db SPRITE_GAMBLER
-	db SPRITE_MONSTER
-	db SPRITE_SAILOR        ; slot $0A: STAY UP/WALK in Vermilion (broken, unavoidable - no safe candidates remain)
-	db SPRITE_OFFICER_JENNY ; slot $0B: STAY NONE in Vermilion (safe)
+	db SPRITE_COOLTRAINER_F ; trainer on Route 6 (needs non-DOWN facing)
+	db SPRITE_SUPER_NERD    ; trainer on Route 6/11 (needs non-DOWN facing)
+	db SPRITE_YOUNGSTER     ; trainer on Route 11 (needs non-DOWN facing)
+	db SPRITE_GAMBLER       ; trainer on Route 11 (needs non-DOWN facing)
+	db SPRITE_MONSTER       ; unused here
+	db SPRITE_SAILOR        ; unused here
+	db SPRITE_OFFICER_JENNY ; slot $0B: unused here (still slot)
 	; db SPRITE_COOLTRAINER_M
 	db SPRITE_POKE_BALL
 	; db SPRITE_UNUSED_GAMBLER_ASLEEP_2
@@ -214,5 +217,22 @@ SpriteSets:
 	db SPRITE_FISHER        ; slot $0A: STAY DOWN in Fuchsia City (safe)
 	db SPRITE_POKE_BALL
 	db SPRITE_FOSSIL
+
+; SPRITESET_VERMILION_CITY
+; Vermilion City only (Routes 6 & 11 use SPRITESET_VERMILION). Only 5 walking
+; NPCs spawn here, so each one gets a full-facing slot ($05-$09) - in
+; particular Officer Jenny ($09) can now turn to face the player, and the
+; dock sailor can face UP toward the gangway.
+	db SPRITE_PIKACHU
+	db SPRITE_MISTY
+	db SPRITE_BROCK
+	db SPRITE_COOLTRAINER_F ; beauty: WALK LEFT_RIGHT
+	db SPRITE_GAMBLER       ; STAY NONE x2 (turns to face player)
+	db SPRITE_SAILOR        ; STAY UP + WALK LEFT_RIGHT
+	db SPRITE_MONSTER       ; machop: WALK UP_DOWN
+	db SPRITE_OFFICER_JENNY ; STAY NONE (turns to face player)
+	db SPRITE_POKE_BALL     ; slot $0A: unused here
+	db SPRITE_FOSSIL        ; slot $0B: unused here (still slot)
+	db SPRITE_SNORLAX       ; slot $0C: unused here (still slot)
 
 	assert_table_length NUM_SPRITE_SETS

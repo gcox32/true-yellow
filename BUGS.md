@@ -13,4 +13,8 @@
 - [x] Trainers on route 6 perpetually re-challenge after being defeated
 - [x] Cerulean map is glitchy: house in the NE has water tile through the middle
 
+- [x] Officer Jenny in Vermilion City doesn't turn to face the player when talked to (she was stuck in still-only sprite slot $0B of the shared SPRITESET_VERMILION; gave Vermilion City its own SPRITESET_VERMILION_CITY)
+- [x] Wigglytuff on S.S. Anne 1F Rooms rendered as the player sprite (7 distinct NPC sprites, but indoor maps only have 6 slots after the Pikachu/Misty/Brock follower reservation; reskinned MIDDLE_AGED_MAN -> GENTLEMAN). S.S. Anne 2F Rooms had the same overflow (BEAUTY); reskinned GRAMPS -> GENTLEMAN.
+- [x] Celadon Game Corner: ROCKET (poster guard) and GAMBLER rendered as the player sprite (8 distinct NPC sprites > 6-slot indoor limit; reskinned GAMBLER -> MIDDLE_AGED_MAN and MIDDLE_AGED_WOMAN -> BEAUTY)
+
 - [ ] visual bug with menu from badge explainer guy in cerulean
