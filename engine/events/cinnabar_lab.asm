@@ -22,6 +22,14 @@ GiveFossilToCinnabarLab::
 	ld c, $d
 	hlcoord 0, 0
 	call TextBoxBorder
+	; Top-left menu box - doesn't fit the "text box at bottom" / "menu on the
+	; right" shapes the conditional follower-hiding assumes, so force-hide
+	; followers (bit 6; self-clears once wFontLoaded goes false - see
+	; ShouldMistySpawn in chain_follow.asm).
+	ld hl, wMistyOverworldStateFlags
+	set 6, [hl]
+	ld hl, wBrockOverworldStateFlags
+	set 6, [hl]
 	call UpdateSprites
 	call PrintFossilsInBag
 	ld hl, wStatusFlags5

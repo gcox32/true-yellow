@@ -5,6 +5,15 @@ CeladonPrizeMenu::
 	ld hl, RequireCoinCaseText
 	jp PrintText
 .havingCoinCase
+	; The prize list / coin box don't fit the "text box at bottom" / "menu on
+	; the right" shapes the usual conditional follower-hiding assumes, so just
+	; force-hide followers for the whole interaction (bit 6; self-clears once
+	; wFontLoaded goes false - see ShouldMistySpawn in chain_follow.asm).
+	ld hl, wMistyOverworldStateFlags
+	set 6, [hl]
+	ld hl, wBrockOverworldStateFlags
+	set 6, [hl]
+	call UpdateSprites
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	ld hl, ExchangeCoinsForPrizesText

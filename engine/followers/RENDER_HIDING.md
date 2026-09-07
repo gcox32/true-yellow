@@ -62,6 +62,28 @@ Cases that hard-hide regardless of position:
   `DisplayStartMenu` (home/start_menu.asm, ROM0) even though the latter
   reads more naturally as "the" entry point.
 
+### Force-hide (bit 6) menu sites
+
+Menus whose box doesn't fit the "bottom text box" / "right-side menu" shapes the
+conditional windowing assumes - each sets bit 6 of `wMistyOverworldStateFlags` /
+`wBrockOverworldStateFlags` right before drawing, then `UpdateSprites`. Bit 6
+self-clears in `ShouldMistySpawn`/`ShouldBrockSpawn` once `wFontLoaded` goes
+false (i.e. after the menu tiles are erased and the map redrawn):
+
+- **Poké Mart** — `engine/events/pokemart.asm` (buy/sell/quit, item lists, quantity/yes-no)
+- **Vending machine** — `engine/events/vending_machine.asm` (drink menu / money box)
+- **Game Corner prize exchange** — `engine/events/prize_menu.asm` (prize list / coin box)
+- **Cinnabar Lab fossil** — `engine/events/cinnabar_lab.asm` ("which FOSSIL?" — top-left box)
+- **Celadon Mart Roof drink** — `scripts/CeladonMartRoof.asm` (give the girl a drink — top-left box)
+- **Bike Shop** — `scripts/BikeShop.asm` (bike ↔ voucher — top-left box)
+- **School blackboard** — `engine/events/hidden_objects/school_blackboard.asm`
+  (`LinkCableHelp` + `ViridianSchoolBlackboard` — top-left boxes)
+- **Bill's House PC** — `engine/events/hidden_objects/bills_house_pc.asm` (Bill's Pokémon list — top-left box)
+
+The **elevator floor menu** (`engine/events/elevator.asm`) uses the standard
+`LIST_MENU_BOX`, so the `LIST_MENU_TILE_COL` conditional path covers it - not
+force-hidden.
+
 ### Deferred: always-hide modals
 
 One case that should hard-hide regardless of position — flag not yet identified:

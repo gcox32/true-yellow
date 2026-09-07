@@ -23,6 +23,13 @@ LinkCableHelp::
 	ld [wTopMenuItemY], a
 	ld a, 1
 	ld [wTopMenuItemX], a
+	; Top-left menu box - force-hide followers (bit 6; self-clears once
+	; wFontLoaded goes false - see ShouldMistySpawn in chain_follow.asm).
+	ld hl, wMistyOverworldStateFlags
+	set 6, [hl]
+	ld hl, wBrockOverworldStateFlags
+	set 6, [hl]
+	call UpdateSprites
 .linkHelpLoop
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
@@ -106,6 +113,13 @@ ViridianSchoolBlackboard::
 	ld [wTopMenuItemY], a
 	ld a, 1
 	ld [wTopMenuItemX], a
+	; Top-left menu box - force-hide followers (bit 6; self-clears once
+	; wFontLoaded goes false - see ShouldMistySpawn in chain_follow.asm).
+	ld hl, wMistyOverworldStateFlags
+	set 6, [hl]
+	ld hl, wBrockOverworldStateFlags
+	set 6, [hl]
+	call UpdateSprites
 .blackboardLoop
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]

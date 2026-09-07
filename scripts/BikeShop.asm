@@ -54,6 +54,12 @@ BikeShopClerkText:
 	hlcoord 0, 0
 	lb bc, 4, 15
 	call TextBoxBorder
+	; Top-left menu box - force-hide followers (bit 6; self-clears once
+	; wFontLoaded goes false - see ShouldMistySpawn in chain_follow.asm).
+	ld hl, wMistyOverworldStateFlags
+	set 6, [hl]
+	ld hl, wBrockOverworldStateFlags
+	set 6, [hl]
 	call UpdateSprites
 	hlcoord 2, 2
 	ld de, BikeShopMenuText
