@@ -202,20 +202,37 @@ implemented as a warp between two non-outside maps - see below) requires
 special handling to prevent followers from appearing inside walls or
 overlapping each other.
 
-**Entering buildings** (`wFollowerDoorwayMode = 1`):
-- Position trail is initialized with horizontal positions
-- Arrangement: `[Brock] - [Player] - [Pikachu] - [Misty]`
-- Followers stand to the sides of the player rather than behind
+**Entering buildings** (`wFollowerDoorwayMode = 2, 3, 4`):
+- `SetPikachuSpawnOutside` (`engine/pikachu/pikachu_follow.asm`) sets mode 2
+  for every spawn type, including spawn state 1 (a generic building
+  entrance - player lands on the doormat, Pikachu appears to their side).
+- Same delayed cascade as exiting (below): Misty and Brock stay hidden, then
+  emerge one per step from the door tile, keeping the chain intact, instead
+  of lining up horizontally beside the player.
+- The horizontal `[Brock] - [Player] - [Pikachu] - [Misty]` arrangement
+  (`InitializePositionTrail.doorwayPositioning`) is now only reachable via
+  `wFollowerDoorwayMode = 1`, which `SetPikachuSpawnWarpPad` /
+  `SetPikachuSpawnBackOutside` still set for gate walk-throughs (Viridian
+  Forest gates, safari rest houses, elevators, Cinnabar Lab rooms, the
+  Route 22 / Route 2 gates).
 
 **Exiting buildings, or taking a ladder** (`wFollowerDoorwayMode = 2, 3, 4`):
 - `SetPikachuSpawnWarpPad` (`engine/pikachu/pikachu_follow.asm`) sets mode 2
   for any plain warp between two non-outside maps - this covers ladders
   (e.g. Mt. Moon's floors) as well as literal building exits, not just the
-  `LAST_MAP` "walk out the front door" case.
+  `LAST_MAP` "walk out the front door" case (`SetPikachuSpawnBackOutside`).
 - Followers spawn delayed, one per step taken, cascading via
-  `RecordPlayerPositionToTrail`: mode 2 -> 3 after the 1st step (door
-  position captured from Pikachu's current position), 3 -> 4 after the 2nd
-  step (Misty unlocks), 4 -> 0 after the 3rd step (Brock unlocks).
+  `RecordPlayerPositionToTrail`: mode 2 -> 3 after the 1st step (door tile
+  captured), 3 -> 4 after the 2nd step (Misty unlocks), 4 -> 0 after the
+  3rd step (Brock unlocks).
+- The door tile is captured in `.storeDoorPosition` from `b,c` - the
+  player's own position as sampled by `Func_fcc08` at the *start* of that
+  first post-warp step, before `AdvancePlayerSprite` moves them. That's the
+  tile the player just warped onto (the outside doorstep on an exit, the
+  doormat on an entry) for both directions. (It used to read Pikachu's
+  position, which only lands on the door tile when exiting - on entry
+  Pikachu is off to the player's side, so followers spawned at a stale
+  coordinate and visibly rushed to resolve.)
 - Misty and Brock materialize directly on the stored door tile, facing
   down (away from the building), regardless of the player's current
   facing.

@@ -232,16 +232,19 @@ SetPikachuSpawnOutside::
 	ld a, $3
 .load
 	ld [wPikachuSpawnState], a
-	; Set follower doorway mode based on spawn type
-	; Mode 1 = map connection (horizontal positioning)
-	; Mode 2 = building/warp exit (sequential delayed spawning)
-	cp 1
-	jr z, .doorwayMode1
+	; Follower doorway cascade for every spawn type here, including spawn
+	; state 1 (entering a building - player on the doormat, Pikachu to their
+	; side): mode 2 = Misty and Brock stay hidden, then emerge one per step
+	; from the door tile, the same chain effect used when exiting a building,
+	; rather than lining up horizontally beside the player.
+	; The door tile itself is captured in .storeDoorPosition from the player's
+	; own pre-step position on the first post-warp step, so nothing needs to
+	; be pre-stored here - but clear any stale tile from a previous transition
+	; so InitializeMistyPosition doesn't read it before then.
+	xor a
+	ld [wExitDoorwayY], a
+	ld [wExitDoorwayX], a
 	ld a, 2
-	jr .setDoorwayMode
-.doorwayMode1
-	ld a, 1
-.setDoorwayMode
 	ld [wFollowerDoorwayMode], a
 	ret
 
@@ -297,6 +300,13 @@ SetPikachuSpawnWarpPad::
 	ld a, $1
 .load_spawn_state
 	ld [wPikachuSpawnState], a
+	; Clear any door tile left over from a previous transition's cascade (a
+	; no-follower exit sets one in .storeDoorPosition and nothing clears it); a
+	; stale value would misroute InitializeMistyPosition on a mode 1 spawn here.
+	xor a
+	ld [wExitDoorwayY], a
+	ld [wExitDoorwayX], a
+	ld a, [wPikachuSpawnState]
 	; Set follower doorway mode based on spawn state:
 	; spawn state 1 (Pikachu right of player) -> mode 1 (horizontal doorway entry)
 	; spawn state 0 (plain warp, e.g. a ladder) -> mode 2 (delayed sequential
@@ -355,6 +365,13 @@ SetPikachuSpawnBackOutside::
 
 .asm_fc6c1
 	ld [wPikachuSpawnState], a
+	; Clear any door tile left over from a previous transition's cascade (a
+	; no-follower exit sets one in .storeDoorPosition and nothing clears it); a
+	; stale value would misroute InitializeMistyPosition on a mode 1 spawn here.
+	xor a
+	ld [wExitDoorwayY], a
+	ld [wExitDoorwayX], a
+	ld a, [wPikachuSpawnState]
 	; Set follower doorway mode based on spawn state:
 	; Mode 1: spawn state 1 (Pikachu right of player) - enter doorway
 	; Mode 2: spawn state 3 (Pikachu behind player) - exit doorway, delayed spawn

@@ -61,8 +61,9 @@ RecordPlayerPositionToTrail::
 	jr z, .exitMode4
 	jr .noModeChange
 .exitMode2
-	; Store the door position (behind player) before advancing mode
-	; This is where Pikachu currently is / where followers should spawn
+	; Store the door tile (b,c = player's position at the start of this first
+	; post-warp step, i.e. the tile they just warped onto) before advancing
+	; mode. This is where the delayed followers will emerge.
 	push bc
 	call .storeDoorPosition
 	pop bc
@@ -125,14 +126,18 @@ RecordPlayerPositionToTrail::
 	ret
 
 .storeDoorPosition:
-; Store the door tile position for delayed follower spawning
-; Called when mode transitions from 2 to 3 (first step after exiting building)
-; At this moment, Pikachu is still at the door tile, so just use Pikachu's
-; position. Misty/Brock materialize directly on this tile (their trail target
-; already points here too, via the continuously-shifted trail), facing down.
-	ld a, [wSpritePikachuStateData2MapY]
+; Store the door tile position for delayed follower spawning.
+; Called when mode transitions from 2 to 3 (the first step after a warp).
+; b,c hold the player's position (map-coords + 4) as sampled by Func_fcc08
+; at the *start* of that step, before AdvancePlayerSprite moves them - i.e.
+; the tile the player just warped onto: the outside doorstep when exiting a
+; building, or the doormat when entering one. Misty/Brock materialize
+; directly on this tile, facing down. (Reading Pikachu's position instead
+; only worked for exits, where Pikachu spawns on the door tile; on entry he
+; spawns off to the player's side.)
+	ld a, b
 	ld [wExitDoorwayY], a
-	ld a, [wSpritePikachuStateData2MapX]
+	ld a, c
 	ld [wExitDoorwayX], a
 	ret
 
