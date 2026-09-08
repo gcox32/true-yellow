@@ -1,16 +1,25 @@
-; PureRGBnote: ADDED: same as big recoil effect but if the move missed, still damage the user.
-; Used with explosion/selfdestruct.
+; PureRGBnote: ADDED: used with explosion/selfdestruct.
+; On a hit, the user recoils 100% of the damage dealt.
+; On a miss, the user still recoils 1/2 of its max HP.
 ExplodeRecoilEffect_:
 	ld a, [wMoveMissed]
 	and a
-	jr z, BigRecoilEffect_
-	; if explosion/selfdestruct missed, the recoil will be 1/4 the max health of the user
+	jr nz, .missed
+	; PureRGBnote: CHANGED: on a hit, selfdestruct/explosion recoil 100% of the damage dealt
+	ld hl, wDamage
+	call GetMaxHPIntoDE ; de = user's max HP pointer (also clobbers a)
+	ld a, [hli]
+	ld b, a
+	ld c, [hl] ; bc = full damage dealt
+	ld h, d
+	ld l, e ; hl = user's max HP pointer
+	jr GotRecoilDamage
+.missed
+	; if explosion/selfdestruct missed, the recoil will be 1/2 the max health of the user
 	call GetMaxHPIntoDE
 	ld h, d
 	ld l, e
 	call CalculateRecoilDamage ; 1/2 of max HP
-	srl b
-	rr c ; 1/4
 	jr GotRecoilDamage
 
 ; PureRGBnote: ADDED: big recoil effect does 50% of the damage inflicted, used with struggle.

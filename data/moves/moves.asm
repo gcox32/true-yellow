@@ -130,7 +130,7 @@ Moves:
 	move BIDE,         ATTACK_DEFENSE_UP1_EFFECT,    0, NORMAL,       100, 10 ; new effect + atk + def
 	move METRONOME,    METRONOME_EFFECT,             0, NORMAL,       100, 10
 	move MIRROR_MOVE,  MIRROR_MOVE_EFFECT,           0, FLYING,       100, 20
-	move SELFDESTRUCT, EXPLODE_RECOIL_EFFECT,      140, FIRE,         100,  5 ; high recoil normally, original instant defeat effect and 250 power / half defense at low health.
+	move SELFDESTRUCT, EXPLODE_RECOIL_EFFECT,      140, FIRE,         100,  5 ; type changed from NORMAL to FIRE; recoils 100% of damage dealt instead of fainting the user
 	move EGG_BOMB,     NO_ADDITIONAL_EFFECT,       100, FLYING,        90, 10 ; accuracy changed from 75 to 90, type changed from NORMAL to FLYING
 	move LICK,         PARALYZE_SIDE_EFFECT2,       30, GHOST,        100, 30 ; power changed from 20 to 30
 	move SMOG,         POISON_SIDE_EFFECT2,         30, POISON,        85, 20 ; power changed from 20 to 30, accuracy changed from 70 to 85
@@ -163,7 +163,7 @@ Moves:
 	move SPLASH,       SPLASH_EFFECT,                0, WATER,        100, 10 ; type changed from NORMAL to WATER, pp changed from 40 to 10
 	move ACID_ARMOR,   DEFENSE_UP2_EFFECT,           0, POISON,       100, 20 ; pp changed from 40 to 20
 	move CRABHAMMER,   NO_ADDITIONAL_EFFECT,        90, WATER,         85, 10
-	move EXPLOSION,    EXPLODE_RECOIL_EFFECT,      140, ROCK,         100,  5 ; now explode recoil effect
+	move EXPLOSION,    EXPLODE_RECOIL_EFFECT,      140, ROCK,         100,  5 ; type changed from NORMAL to ROCK; recoils 100% of damage dealt instead of fainting the user
 	move FURY_SWIPES,  TWO_TO_FIVE_ATTACKS_EFFECT,  20, NORMAL,        85, 15 ; power changed from 18 to 20, accuracy changed from 80 to 85
 	move BONEMERANG,   ATTACK_TWICE_EFFECT,         50, GROUND,        90, 10
 	move REST,         HEAL_EFFECT,                  0, NORMAL,       100, 10 ; type changed from PSYCHIC_TYPE to NORMAL

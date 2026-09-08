@@ -1419,7 +1419,7 @@ BigRecoilEffect:
 	jpfar BigRecoilEffect_ ; PureRGBnote: ADDED: recoil effect that does 1/2 of the damage done to the user
 
 ExplodeRecoilEffect:
-	jpfar ExplodeRecoilEffect_ ; PureRGBnote: ADDED: same as bigrecoileffect, but if it misses does 1/4 the health of the user in recoil still
+	jpfar ExplodeRecoilEffect_ ; PureRGBnote: ADDED: recoils 100% of damage dealt on a hit, 1/2 the user's max HP on a miss
 
 ConfusionSideEffect:
 	call BattleRandom

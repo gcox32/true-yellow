@@ -897,10 +897,9 @@ PsyduckEvosMoves:
 	db EVOLVE_LEVEL, 33, GOLDUCK
 	db 0
 ; Learnset
-	db 10, PSYWAVE
+	db 10, DISABLE
 	db 13, WATER_GUN
 	db 17, CONFUSION
-	db 20, DISABLE
 	db 23, LOW_KICK
 	db 27, REFLECT
 	db 32, WATERFALL
@@ -1282,7 +1281,7 @@ PikachuEvosMoves:
 	db 8,  THUNDER_WAVE
 	db 11, QUICK_ATTACK
 	db 15, DOUBLE_TEAM
-	db 20, BODY_SLAM
+	db 20, SWIFT
 	db 26, THUNDERBOLT
 	db 33, AGILITY
 	db 41, THUNDER

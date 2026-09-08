@@ -92,7 +92,7 @@
 	const LEECH_SEED_EFFECT          ; $54
 	const SPLASH_EFFECT              ; $55
 	const DISABLE_EFFECT             ; $56
-	const EXPLODE_RECOIL_EFFECT      ; $58 ; PureRGBnote: ADDED: new effect, selfdestruct/explosion base effect, changes at lower health to EXPLODE_EFFECT
+	const EXPLODE_RECOIL_EFFECT      ; $58 ; PureRGBnote: ADDED: selfdestruct/explosion; recoils 100% of damage dealt (1/2 max HP on a miss)
 	const WITHDRAW_EFFECT            ; $59 ; added
 	const GROWTH_EFFECT              ; $5A ; added
 
