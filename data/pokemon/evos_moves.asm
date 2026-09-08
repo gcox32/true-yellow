@@ -440,6 +440,7 @@ GengarEvosMoves:
 	db 46, ICE_PUNCH
 	db 51, NIGHT_SHADE
 	db 57, LOVELY_KISS
+	db 63, TRANSFORM
 	db 0
 
 NidoranFEvosMoves:
@@ -598,8 +599,9 @@ GastlyEvosMoves:
 	db 29, MEGA_DRAIN
 	db 33, DREAM_EATER
 	db 41, ACID
-	db 48, NIGHT_SHADE
-	db 57, LOVELY_KISS
+	db 44, NIGHT_SHADE
+	db 48, LOVELY_KISS
+	db 53, TRANSFORM
 	db 0
 
 ScytherEvosMoves:
@@ -2008,6 +2010,7 @@ HaunterEvosMoves:
 	db 46, ICE_PUNCH
 	db 50, NIGHT_SHADE
 	db 57, LOVELY_KISS
+	db 63, TRANSFORM
 	db 0
 
 AbraEvosMoves:
