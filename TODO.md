@@ -26,6 +26,7 @@
 - [x] Investigate attack selection while asleep (menu was still skipped when asleep; cc8a8d03 only did the wake-up half. Now the move menu / enemy AI runs while asleep so the chosen move fires on the wake-up turn. Freeze still skips selection.)
 - [x] Pokemon who are "fully paralyzed" on the second turn of Dig or Fly remain untargetable until they Dig or Fly successfully later (MonHurtItselfOrFullyParalysed cleared CHARGING_UP but not INVULNERABLE; now clears both + redraws the hidden pic, player & enemy)
 - [x] Followers after overworld dig/fly/teleport don't init position correctly (special warps skip WarpFound2/SetPikachuSpawn*, so wFollowerDoorwayMode / wExitDoorway* / Misty+Brock MovementStatus carried over from the previous map -> stale trail coords. PrepareForSpecialWarp now resets them. NEEDS IN-GAME TEST.)
+- [ ] Rival walks on top of followers after LAVENDER TOWER battle (they need to move out of the way)
 
 ## Bugfixes from PureRGB
 - [x] High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)

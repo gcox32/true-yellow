@@ -848,12 +848,10 @@ FlashScreenEveryFourFrameBlocks:
 
 ; used for Explosion and Selfdestruct
 DoExplodeSpecialEffects:
-	ld a, [wSubAnimCounter]
-	cp 1 ; is it the end of the subanimation?
-	jr nz, FlashScreenEveryFourFrameBlocks
-; if it's the end of the subanimation, make the attacking pokemon disappear
-	hlcoord 1, 5
-	jp AnimationHideMonPic ; make pokemon disappear
+; PureRGBnote: CHANGED: don't hide the user's sprite at the end of the animation.
+; Selfdestruct/Explosion now recoil instead of fainting the user, so the user can
+; survive and must stay on the field to act again.
+	jp FlashScreenEveryFourFrameBlocks
 
 ; flashes the screen when subanimation counter is 1 modulo 4
 DoBlizzardSpecialEffects:
