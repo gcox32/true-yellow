@@ -63,6 +63,18 @@ WhichPrizeText:
 	text_far _WhichPrizeText
 	text_end
 
+PrizeWindowHoldsItems:
+; z if the current prize window (wWhichPrizeWindow) hands out Pokémon,
+; nz if it hands out items (TMs). Clobbers a, de, hl.
+	ld a, [wWhichPrizeWindow]
+	ld e, a
+	ld d, 0
+	ld hl, PrizeMenuIsItemWindow
+	add hl, de
+	ld a, [hl]
+	and a
+	ret
+
 GetPrizeMenuId:
 ; determine which one among the three prize texts has been selected using the text ID (stored in [hTextID])
 ; prize texts' IDs are TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_1-TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_3
@@ -92,9 +104,8 @@ GetPrizeMenuId:
 	ld de, wPrize1Price
 	ld bc, 6
 	call CopyData
-	ld a, [wWhichPrizeWindow]
-	cp 2 ; is TM_menu?
-	jr nz, .putMonName
+	call PrizeWindowHoldsItems
+	jr z, .putMonName
 	ld a, [wPrize1]
 	ld [wNamedObjectIndex], a
 	call GetItemName
@@ -197,9 +208,8 @@ HandlePrizeChoice:
 	add hl, de
 	ld a, [hl]
 	ld [wNamedObjectIndex], a
-	ld a, [wWhichPrizeWindow]
-	cp 2 ; is prize a TM?
-	jr nz, .getMonName
+	call PrizeWindowHoldsItems
+	jr z, .getMonName
 	call GetItemName
 	jr .givePrize
 .getMonName
@@ -214,9 +224,8 @@ HandlePrizeChoice:
 	call LoadCoinsToSubtract
 	call HasEnoughCoins
 	jr c, .notEnoughCoins
-	ld a, [wWhichPrizeWindow]
-	cp 2 ; is prize a TM?
-	jr nz, .giveMon
+	call PrizeWindowHoldsItems
+	jr z, .giveMon
 	ld a, [wNamedObjectIndex]
 	ld b, a
 	ld a, 1
