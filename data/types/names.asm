@@ -18,7 +18,7 @@ REPT UNUSED_TYPES_END - UNUSED_TYPES
 ENDR
 	dw .Tri
 	dw .Floating
-	dw .Magma
+	dw .Magma ; magma type
 	dw .Fire
 	dw .Water
 	dw .Grass

@@ -4367,6 +4367,22 @@ do999StatCap:
 	lb bc, HIGH(MAX_STAT_VALUE), LOW(MAX_STAT_VALUE)
 	ret
 
+; GHOST isn't fixed physical or special like every other type - it's decided per-attacker, per-turn,
+; based on whichever of the attacking mon's base Attack/base Special stat (not its current in-battle,
+; stage-modified stat) is higher. Ties go physical.
+; the player's own base stats aren't cached anywhere (unlike wEnemyMonBaseStats), so look them up live;
+; GetMonHeader preserves bc/de, so wPlayerMovePower (in d) survives the call
+DynamicTypeCheckPlayer:
+	ld a, [wBattleMonSpecies2]
+	ld [wCurSpecies], a
+	call GetMonHeader
+	ld a, [wMonHBaseSpecial]
+	ld b, a
+	ld a, [wMonHBaseAttack]
+	cp b ; a - b: sets carry if base Attack < base Special
+	jp c, GetDamageVarsForPlayerAttack.specialAttack
+	jp GetDamageVarsForPlayerAttack.physicalAttack
+
 ; sets b, c, d, and e for the CalculateDamage routine in the case of an attack by the player mon
 GetDamageVarsForPlayerAttack:
 	xor a
@@ -4379,6 +4395,8 @@ GetDamageVarsForPlayerAttack:
 	ld d, a ; d = move power
 	ret z ; return if move power is zero
 	ld a, [hl] ; a = [wPlayerMoveType]
+	cp GHOST
+	jr z, DynamicTypeCheckPlayer
 	cp SPECIAL ; types >= SPECIAL are all special
 	jr nc, .specialAttack
 .physicalAttack
@@ -4480,6 +4498,17 @@ GetDamageVarsForPlayerAttack:
 	and a
 	ret
 
+; see DynamicTypeCheckPlayer for what this does and why
+DynamicTypeCheckEnemy:
+	ld hl, wEnemyMonBaseStats + (wMonHBaseSpecial - wMonHBaseStats)
+	ld a, [hl]
+	ld b, a
+	ld hl, wEnemyMonBaseStats + (wMonHBaseAttack - wMonHBaseStats)
+	ld a, [hl]
+	cp b ; a - b: sets carry if base Attack < base Special
+	jp c, GetDamageVarsForEnemyAttack.specialAttack
+	jp GetDamageVarsForEnemyAttack.physicalAttack
+
 ; sets b, c, d, and e for the CalculateDamage routine in the case of an attack by the enemy mon
 GetDamageVarsForEnemyAttack:
 	ld hl, wDamage ; damage to eventually inflict, initialise to zero
@@ -4492,6 +4521,8 @@ GetDamageVarsForEnemyAttack:
 	and a
 	ret z ; return if move power is zero
 	ld a, [hl] ; a = [wEnemyMoveType]
+	cp GHOST
+	jr z, DynamicTypeCheckEnemy
 	cp SPECIAL ; types >= SPECIAL are all special
 	jr nc, .specialAttack
 .physicalAttack

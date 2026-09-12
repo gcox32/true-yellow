@@ -10,7 +10,7 @@ DEF PHYSICAL EQU const_value
 	const ROCK            ; $05
 	const TYPELESS        ; $06 CHANGED: used with struggle
 	const BUG             ; $07
-	const GHOST           ; $08 CHANGED: GHOST type has dynamic typing, special if your base special is higher than attack, physical if they're the same or attack is higher
+	const GHOST           ; $08 CHANGED: GHOST type has dynamic typing, decided per-attacker in DynamicTypeCheckPlayer/DynamicTypeCheckEnemy (engine/battle/core.asm) - special if the attacker's base special is higher than its base attack, physical if they're equal or attack is higher
 	const BROCK_TYPE      ; $09 ADDED: used with brock's onix so that pikachu can technically beat it with electric moves
 	const BONEMERANG_TYPE ; $0A ADDED: used with bonemerang...same as ground but can hit flying/floating pokemon for neutral dmg
 DEF UNUSED_TYPES EQU const_value

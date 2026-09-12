@@ -8,10 +8,14 @@ PrintMonType:
 	push hl
 	ld a, [wMonHType1]
 	call PrintType
+	ld a, [wMonHType2]
+	cp MAGMA ; MAGMA is a hidden type (e.g. Magmar's) never shown as a second type
+	jr z, .HideType2
 	ld a, [wMonHType1]
 	ld b, a
 	ld a, [wMonHType2]
 	cp b
+.HideType2
 	pop hl
 	jr z, EraseType2Text
 	ld bc, SCREEN_WIDTH * 2
