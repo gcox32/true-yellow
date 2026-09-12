@@ -1,4 +1,16 @@
 DisplayElevatorFloorMenu:
+	; The floor menu is a wide SPECIALLISTMENU box (hlcoord 4,2, 14 wide) - it
+	; doesn't fit the "menu on the right" shape the positional follower hiding
+	; in ShouldMistySpawn/ShouldBrockSpawn assumes, so a follower standing to
+	; the player's left stays drawn on top of it. Force-hide for the whole
+	; interaction instead (self-clears once this text closes, see matching
+	; comment in DisplayPokemartDialogue_/chain_follow.asm). Same fix as
+	; CeruleanBadgeHouse.asm's badge list, the only other SPECIALLISTMENU user.
+	ld hl, wMistyOverworldStateFlags
+	set 6, [hl]
+	ld hl, wBrockOverworldStateFlags
+	set 6, [hl]
+	call UpdateSprites
 	ld hl, wStatusFlags5
 	ld a, [hl]
 	push af

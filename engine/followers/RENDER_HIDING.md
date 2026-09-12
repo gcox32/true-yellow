@@ -79,10 +79,16 @@ false (i.e. after the menu tiles are erased and the map redrawn):
 - **School blackboard** — `engine/events/hidden_objects/school_blackboard.asm`
   (`LinkCableHelp` + `ViridianSchoolBlackboard` — top-left boxes)
 - **Bill's House PC** — `engine/events/hidden_objects/bills_house_pc.asm` (Bill's Pokémon list — top-left box)
+- **Cerulean Badge House** — `scripts/CeruleanBadgeHouse.asm` (which-badge `SPECIALLISTMENU`)
+- **Elevator floor menu** — `engine/events/elevator.asm` (`DisplayElevatorFloorMenu`, which-floor `SPECIALLISTMENU`)
 
-The **elevator floor menu** (`engine/events/elevator.asm`) uses the standard
-`LIST_MENU_BOX`, so the `LIST_MENU_TILE_COL` conditional path covers it - not
-force-hidden.
+The last two use `SPECIALLISTMENU` (`wListMenuID`), a wide box (`hlcoord 4,2`,
+14 tiles) rather than the narrower default `LIST_MENU_BOX` the
+`LIST_MENU_TILE_COL` conditional path assumes - not covered by it. (An
+earlier version of this doc claimed the elevator's box was the standard
+`LIST_MENU_BOX` and so didn't need force-hiding; that was wrong - it's
+`SPECIALLISTMENU` too, and the bug was visible in practice. `SPECIALLISTMENU`
+has exactly these two users in the whole codebase; both are now force-hidden.)
 
 ### Deferred: always-hide modals
 
