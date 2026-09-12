@@ -581,11 +581,9 @@ LowKickAnim:
 
 CounterAnim:
 ; slide off + slower LeechLifeAnim sequence without its SE_DARK_SCREEN_FLASH palette flashes
-	battle_anim LOW_KICK, SE_SLIDE_MON_OFF
 	battle_anim COUNTER, SUBANIM_0_STAR_THRICE, 0, 4
 	battle_anim NO_MOVE, SUBANIM_0_CIRCLES_1_SQUARES_CENTERING_ENEMY, 0, 6
 	battle_anim NO_MOVE, SUBANIM_0_CIRCLE_1_SQUARE_TOSS_BACK, 0, 6
-	battle_anim NO_MOVE, SE_SHOW_MON_PIC
 	db -1 ; end
 
 SeismicTossAnim:
