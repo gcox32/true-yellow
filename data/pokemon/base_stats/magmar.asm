@@ -3,7 +3,7 @@
 	db  65,  95,  57,  93,  85
 	;   hp  atk  def  spd  spc
 
-	db FIRE, FIRE ; type
+	db FIRE, MAGMA ; type ; testing if this renders as FIRE/MAGMA type or just FIRE (as intended)
 	db 85 ; catch rate
 	db 167 ; base exp
 

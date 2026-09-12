@@ -325,6 +325,8 @@ BindAnim:
 
 SlamAnim:
 	; battle_anim SLAM, SUBANIM_0_STAR_THRICE, 0, 6 ; replaced with GASTRO ACID
+	battle_anim ROAR, SUBANIM_1_SHOUT, 1, 6
+	battle_anim ROAR, SUBANIM_1_SHOUT, 1, 6
 	battle_anim SLUDGE, SUBANIM_1_BLOB_TOSS, 1, 6
 	battle_anim SLUDGE, SUBANIM_1_BLOB_DRIP_ENEMY, 1, 6
 	db -1 ; end
@@ -578,10 +580,12 @@ LowKickAnim:
 	db -1 ; end
 
 CounterAnim:
-; LeechLifeAnim's sequence without its SE_DARK_SCREEN_FLASH palette flashes
+; slide off + slower LeechLifeAnim sequence without its SE_DARK_SCREEN_FLASH palette flashes
+	battle_anim LOW_KICK, SE_SLIDE_MON_OFF
 	battle_anim COUNTER, SUBANIM_0_STAR_THRICE, 0, 4
 	battle_anim NO_MOVE, SUBANIM_0_CIRCLES_1_SQUARES_CENTERING_ENEMY, 0, 6
 	battle_anim NO_MOVE, SUBANIM_0_CIRCLE_1_SQUARE_TOSS_BACK, 0, 6
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC
 	db -1 ; end
 
 SeismicTossAnim:
