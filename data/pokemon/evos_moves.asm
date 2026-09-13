@@ -1001,9 +1001,8 @@ KoffingEvosMoves:
 	db 13, BARRAGE
 	db 17, POISON_GAS
 	db 21, SMOKESCREEN
-	db 24, ACID
-	db 26, HEADBUTT
-	db 30, SLUDGE
+	db 24, SLUDGE
+	db 26, SLAM
 	db 33, HAZE
 	db 36, SELFDESTRUCT
 	db 42, GROWTH
@@ -1961,9 +1960,8 @@ WeezingEvosMoves:
 	db 13, BARRAGE
 	db 17, POISON_GAS
 	db 21, SMOKESCREEN
-	db 24, ACID
-	db 26, HEADBUTT
-	db 30, SLUDGE
+	db 24, SLUDGE
+	db 30, SLAM
 	db 33, HAZE
 	db 36, SELFDESTRUCT
 	db 42, GROWTH
