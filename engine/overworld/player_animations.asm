@@ -35,6 +35,14 @@ EnterMapAnim::
 	call PlayerSpinInPlace
 	ld a, $1
 	ld [wPikachuSpawnState], a
+	; Pikachu spawns beside the player (state 1, right of player) rather than
+	; behind - used for Escape Rope/Dig/Teleport (and the shared entry below
+	; for Fly). Line Misty and Brock up horizontally too
+	; (InitializePositionTrail.doorwayPositioning: Brock - Player - Pikachu -
+	; Misty) instead of letting them fall in behind the player per current
+	; facing, which looked inconsistent with Pikachu standing to the side.
+	ld a, 1
+	ld [wFollowerDoorwayMode], a
 .restoreDefaultMusic
 	call PlayDefaultMusic
 .done
@@ -63,6 +71,10 @@ EnterMapAnim::
 	call LoadPlayerSpriteGraphics
 	ld a, $1
 	ld [wPikachuSpawnState], a
+	; See the comment above the other wPikachuSpawnState=1 site: line Misty
+	; and Brock up horizontally beside the player too, matching Pikachu.
+	ld a, 1
+	ld [wFollowerDoorwayMode], a
 	jr .restoreDefaultMusic
 
 FlyAnimationEnterScreenCoords:

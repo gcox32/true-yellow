@@ -10,6 +10,7 @@ Visual bugs:
 - [x] misty and brock both appear in front of menu screens; misty also appears in front of the town map, blinking along with the map's cursor
 - [x] misty leaves our chain and then comes back in line when we switch maps (outdoors); this _appears_ to only be a problem when the chain is just player, pikachu, misty (i.e. before we add brock)
 - [x] followers should appear "mixed" with the grass when walking through the grass, like pikachu and player
+- [x] Escape Rope (and Dig/Teleport/Fly) warp back to the last Pokemon Center left Misty and Brock falling in behind the player per current facing, even though Pikachu spawns beside the player for that landing - now they line up horizontally with Pikachu instead (`EnterMapAnim` sets `wFollowerDoorwayMode = 1`; see README.md "Escape Rope / Dig / Teleport / Fly Landing")
 
 Downstream issues:
 - [x] handle sprites overflow: now that we have 2 more sprites for every map, we need to edit all possible sprites for any particular map. this may mean going through, map by map, and removing sprite objects that do not meaningfully affect gameplay

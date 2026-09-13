@@ -214,7 +214,30 @@ overlapping each other.
   `wFollowerDoorwayMode = 1`, which `SetPikachuSpawnWarpPad` /
   `SetPikachuSpawnBackOutside` still set for gate walk-throughs (Viridian
   Forest gates, safari rest houses, elevators, Cinnabar Lab rooms, the
-  Route 22 / Route 2 gates).
+  Route 22 / Route 2 gates), and which `EnterMapAnim`
+  (`engine/overworld/player_animations.asm`) also sets for the Escape
+  Rope/Dig/Teleport/Fly "warp back to the last Pokemon Center" animation.
+
+### Escape Rope / Dig / Teleport / Fly Landing
+
+These all route through the same `PrepareForSpecialWarp` ->
+`EnterMapAnim` path (`engine/overworld/special_warps.asm`,
+`engine/overworld/player_animations.asm`), rather than the ordinary
+`WarpFound2` -> `SetPikachuSpawn*` path used for walking onto a warp tile.
+`PrepareForSpecialWarp` resets `wFollowerDoorwayMode` to 0 and clears
+Misty's and Brock's `MovementStatus` unconditionally (see the comment
+there), since none of `SetPikachuSpawn*` run to set it themselves.
+
+`EnterMapAnim` then places Pikachu beside the player (`wPikachuSpawnState
+= 1`, right of player) for both the spin-in-place landing (Escape
+Rope/Dig/Teleport) and the bird-flies-in landing (Fly) - everything except
+a literal dungeon warp tile, which keeps Pikachu on the player's own tile.
+To match, `EnterMapAnim` now also sets `wFollowerDoorwayMode = 1` right
+alongside each of those `wPikachuSpawnState = 1` writes, so Misty and
+Brock resolve via the same horizontal `doorwayPositioning` arrangement
+above instead of falling in behind the player per their current facing
+(which used to look like a vertical stack behind the player while Pikachu
+stood off to the side).
 
 **Exiting buildings, or taking a ladder** (`wFollowerDoorwayMode = 2, 3, 4`):
 - `SetPikachuSpawnWarpPad` (`engine/pikachu/pikachu_follow.asm`) sets mode 2
