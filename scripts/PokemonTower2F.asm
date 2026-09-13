@@ -71,6 +71,7 @@ PokemonTower2FDefeatedRivalScript:
 	ld a, TEXT_POKEMONTOWER2F_RIVAL
 	ldh [hTextID], a
 	call DisplayTextID
+	call PokemonTower2FScript_MoveFollowersAsideForRival
 	ld de, PokemonTower2FRivalDownThenRightMovement
 	CheckEvent EVENT_POKEMON_TOWER_RIVAL_ON_LEFT
 	jr nz, .got_movement
@@ -85,6 +86,35 @@ PokemonTower2FDefeatedRivalScript:
 	ld a, SCRIPT_POKEMONTOWER2F_RIVAL_EXITS
 	ld [wPokemonTower2FCurScript], a
 	ld [wCurMapScript], a
+	ret
+
+PokemonTower2FScript_MoveFollowersAsideForRival:
+; Only the ON_LEFT approach's exit route (RivalDownThenRightMovement) cuts
+; back through where Misty/Brock wait trailing behind the player - the other
+; route stays clear. Nudge each spawned follower one row down and out of
+; that path, same trick (and same caveat: can't verify walkability from
+; here, since we don't have a fixed anchor independent of the follower's own
+; recent step history - see MtMoonB2FScript_MoveFollowersAsideForRockets)
+; as Team Rocket's Mt Moon equivalent.
+	CheckEvent EVENT_POKEMON_TOWER_RIVAL_ON_LEFT
+	ret z
+	ld a, [wSpriteMistyStateData1MovementStatus]
+	and a
+	jr z, .skipMisty
+	ld a, [wPositionTrailY + 1]
+	inc a
+	ld [wPositionTrailY + 1], a
+	xor a
+	ld [wMovementTypeTrail + 1], a ; walk, not hop
+.skipMisty
+	ld a, [wSpriteBrockStateData1MovementStatus]
+	and a
+	ret z
+	ld a, [wPositionTrailY + 2]
+	inc a
+	ld [wPositionTrailY + 2], a
+	xor a
+	ld [wMovementTypeTrail + 2], a ; walk, not hop
 	ret
 
 PokemonTower2FRivalRightThenDownMovement:

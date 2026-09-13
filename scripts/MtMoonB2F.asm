@@ -55,31 +55,57 @@ MtMoonB2FScript_HideJessieJames:
 	ret
 
 MtMoonB2FScript_MoveFollowersAsideForRockets:
-; Jessie and James walk into the corridor behind the player, which is also where
-; Misty/Brock's position-trail targets are. Nudge each one tile diagonally from
-; wherever their trail target CURRENTLY is (not a hardcoded absolute map tile,
-; since we can't verify walkability from here) so Team Rocket doesn't walk
-; through them. Transient override: the player's next couple of real steps
-; cascade fresh trail values back in (Misty after 1 step, Brock after 2), same
-; as the normal follow logic self-correcting.
+; Jessie and James walk into the corridor behind the player, which is also
+; where Misty/Brock's position-trail targets are. An absolute destination
+; would need a fixed anchor point independent of the follower - we don't
+; have one: the player can reach map (3, 5) via any of this room's 4 warps,
+; so the follower's actual trail position (true recent step history, not a
+; simple offset from the player) varies run to run. So instead, nudge each
+; one out of the corridor from wherever their trail target CURRENTLY is, up
+; toward the open room at the top of the map: Misty two rows up, Brock one
+; row up and one col right (diagonally - moving him straight up would land
+; him on Misty's new spot). Row 5 (map coords, so wPositionTrailY value 9)
+; is the corridor itself - mostly wall except the doorway the player's
+; standing in - so a follower starting further down than usual (2+ rows
+; south of the player) still lands on or south of it after the usual nudge;
+; give those a second step up so everyone actually clears the corridor.
+; Not otherwise verified walkable from here, since we don't know the
+; starting tile, but the player's own last couple of steps got there fine,
+; and 1-2 tiles further in the same direction has held up in practice.
+; Transient override: the player's next couple of real steps cascade fresh
+; trail values back in (Misty after 1 step, Brock after 2), same as the
+; normal follow logic self-correcting.
 	ld a, [wSpriteMistyStateData1MovementStatus]
 	and a
 	jr z, .skipMisty
 	ld a, [wPositionTrailY + 1]
 	dec a ; one row up
-	dec a ; one more row up 
+	dec a ; one more row up
+	cp 5 + 4 ; still at/south of the corridor row?
+	jr c, .mistyNudged ; no - clear of it already
+	dec a
+	dec a ; started further south - take a second step up
+.mistyNudged
 	ld [wPositionTrailY + 1], a
-	; ld a, [wPositionTrailX + 1]
-	; dec a ; one col left
-	; ld [wPositionTrailX + 1], a
 	xor a
 	ld [wMovementTypeTrail + 1], a ; walk, not hop
 .skipMisty
 	ld a, [wSpriteBrockStateData1MovementStatus]
 	and a
 	ret z
+	; Brock's row varies with the path taken to reach this point, but always
+	; lands on one of 3 consecutive rows - either way, walk him up to the
+	; topmost of those (wram.asm: wPositionTrailY is map coord + 4). Check
+	; BEFORE decrementing, not after: checking post-decrement can never see
+	; "already at the target" as a 0-step case.
 	ld a, [wPositionTrailY + 2]
+	cp 2 + 4 ; already at the target row?
+	jr z, .brockNudged ; yes - no vertical step needed, just the col shift below
 	dec a ; one row up
+	cp 2 + 4 ; reached the target row now (started one below it)?
+	jr z, .brockNudged
+	dec a ; started two rows below target - take a second step up
+.brockNudged
 	ld [wPositionTrailY + 2], a
 	ld a, [wPositionTrailX + 2]
 	inc a ; one col right
