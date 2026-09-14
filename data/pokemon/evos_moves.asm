@@ -337,13 +337,13 @@ SlowbroEvosMoves:
 	db 12, CONFUSION
 	db 17, DISABLE
 	db 20, HEADBUTT
-	db 24, BUBBLEBEAM
+	db 24, REST
 	db 28, PSYBEAM
 	db 32, WITHDRAW
 	db 36, BODY_SLAM
 	db 41, AMNESIA
 	db 45, PSYCHIC_M
-	db 0
+	db 54, BLIZZARD
 
 IvysaurEvosMoves:
 ; Evolutions
@@ -354,7 +354,7 @@ IvysaurEvosMoves:
 	db 13, VINE_WHIP
 	db 16, POISONPOWDER
 	db 19, STUN_SPORE
-	db 24, BODY_SLAM
+	db 24, TAKE_DOWN
 	db 29, RAZOR_LEAF
 	db 35, SLEEP_POWDER
 	db 38, GROWTH
@@ -742,7 +742,7 @@ SlowpokeEvosMoves:
 	db 12, CONFUSION
 	db 17, DISABLE
 	db 20, HEADBUTT
-	db 24, BUBBLEBEAM
+	db 24, REST
 	db 29, PSYBEAM
 	db 32, WITHDRAW
 	db 36, SLAM ; GASTRO ACID
@@ -902,15 +902,12 @@ PsyduckEvosMoves:
 	db 10, DISABLE
 	db 13, WATER_GUN
 	db 17, CONFUSION
-	db 23, LOW_KICK
-	db 27, REFLECT
-	db 32, WATERFALL
-	db 34, TELEPORT
-	db 38, AMNESIA
-	db 44, PSYCHIC_M
-	db 50, SWIFT
-	db 56, HYDRO_PUMP
-	db 60, MEDITATE
+	db 23, REFLECT
+	db 28, TELEPORT
+	db 31, AMNESIA
+	db 37, PSYCHIC_M
+	db 42, HYDRO_PUMP
+	db 45, MEDITATE
 	db 0
 
 DrowzeeEvosMoves:
@@ -2082,7 +2079,6 @@ BulbasaurEvosMoves:
 	db 11, VINE_WHIP
 	db 14, POISONPOWDER
 	db 18, STUN_SPORE
-	db 21, CONSTRICT
 	db 25, RAZOR_LEAF
 	db 33, SLEEP_POWDER
 	db 38, GROWTH

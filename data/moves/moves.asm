@@ -106,7 +106,7 @@ Moves:
 	move CONFUSION,    CONFUSION_SIDE_EFFECT,       50,  PSYCHIC_TYPE,   100, 25
 	move PSYCHIC_M,    SPECIAL_DOWN_SIDE_EFFECT,    90,  PSYCHIC_TYPE,   100, 10
 	move HYPNOSIS,     SLEEP_EFFECT,                 0,  PSYCHIC_TYPE,    70, 20 ; accuracy changed from 60 to 70
-	move MEDITATE,     ATTACK_UP1_EFFECT,            0,  PSYCHIC_TYPE,   100, 10 ; new effect and pp reduced to 10
+	move MEDITATE,     ATTACK_UP1_EFFECT,            0,  FIGHTING,       100, 10 ; new effect and pp reduced to 10
 	move AGILITY,      SPEED_UP2_EFFECT,             0,  PSYCHIC_TYPE,   100, 20 ; pp changed from 30 to 20
 	move QUICK_ATTACK, NO_ADDITIONAL_EFFECT,        40,  NORMAL,         100, 30
 	move RAGE,         ATTACK_UP_SIDE_EFFECT,       60,  DRAGON,         100, 20 ; new effect
@@ -140,15 +140,15 @@ Moves:
 	move WATERFALL,    FLINCH_SIDE_EFFECT2,         80,  WATER,          100, 15 ; add flinching side effect
 	move CLAMP,        TRAPPING_EFFECT,             35,  WATER,           85, 10 ; accuracy changed from 75 to 85
 	move SWIFT,        SWIFT_EFFECT,                60,  ICE,            100, 20 ; priority move (and ICE)
-	move SKULL_BASH,   JUMP_KICK_EFFECT,           100,  ROCK,           100, 15
+	move SKULL_BASH,   RECOIL_EFFECT,              100,  ROCK,           100, 15
 	move SPIKE_CANNON, TWO_TO_FIVE_ATTACKS_EFFECT,  20,  NORMAL,         100, 15
-	move CONSTRICT,    SPEED_DOWN_SIDE_EFFECT,      40,  NORMAL,         100, 30 ; power changed from 10 to 40, pp changed from 35 to 30
+	move CONSTRICT,    PARALYZE_SIDE_EFFECT1,       60,  ELECTRIC,       100, 20 ; power changed from 10 to 60, pp from 35 to 20, ELECTRIC move
 	move AMNESIA,      SPECIAL_UP2_EFFECT,           0,  PSYCHIC_TYPE,   100, 20
 	move KINESIS,      ACCURACY_DOWN1_EFFECT,        0,  PSYCHIC_TYPE,   100, 15 ; accuracy changed from 80 to 100
 	move SOFTBOILED,   HEAL_EFFECT,                  0,  NORMAL,         100, 10
 	move HI_JUMP_KICK, JUMP_KICK_EFFECT,            85,  FIGHTING,        90, 20
 	move GLARE,        PARALYZE_EFFECT,              0,  NORMAL,          85, 30 ; accuracy changed from 75 to 85
-	move DREAM_EATER,  DREAM_EATER_EFFECT,         100,  GHOST,          100, 15 ; type changed from PSYCHIC_TYPE to GHOST
+	move DREAM_EATER,  DREAM_EATER_EFFECT,          90,  GHOST,          100, 15 ; type changed from PSYCHIC_TYPE to GHOST
 	move POISON_GAS,   POISON_SIDE_EFFECT1,         40,  POISON,         100, 20 ; high critical hit ratio
 	move BARRAGE,      TWO_TO_FIVE_ATTACKS_EFFECT,  20,  ROCK,            90, 20 ; power changed from 15 to 20, type changed from NORMAL to ROCK
 	move LEECH_LIFE,   DRAIN_HP_EFFECT,             50,  BUG,            100, 15 ; power changed from 20 to 50
