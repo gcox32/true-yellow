@@ -1188,12 +1188,12 @@ ArticunoEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 51, BLIZZARD
-	db 55, AGILITY
+	db 51, AURORA_BEAM
+	db 55, REFLECT
 	db 60, MIST
-	db 66, WHIRLWIND
+	db 66, BLIZZARD
 	db 71, SKY_ATTACK
-	db 80, THUNDER
+	db 80, PSYCHIC_M
 	db 0
 
 ZapdosEvosMoves:
@@ -1203,9 +1203,9 @@ ZapdosEvosMoves:
 	db 51, THUNDER
 	db 55, AGILITY
 	db 60, LIGHT_SCREEN
-	db 66, FLASH
+	db 66, DRILL_PECK
 	db 71, SKY_ATTACK
-	db 80, SPIKE_CANNON
+	db 80, PIN_MISSILE
 	db 0
 
 DittoEvosMoves:
@@ -1223,10 +1223,10 @@ MeowthEvosMoves:
 	db 10, FURY_SWIPES
 	db 12, BITE
 	db 17, SCREECH
-	db 21, HEADBUTT
+	db 21, PAY_DAY
 	db 25, MIRROR_MOVE
 	db 33, MIMIC
-	db 53, SLASH
+	db 35, SLASH
 	db 0
 
 KrabbyEvosMoves:
@@ -1974,8 +1974,8 @@ PersianEvosMoves:
 	db 12, BITE
 	db 17, SCREECH
 	db 25, PAY_DAY
-	db 33, MIRROR_MOVE
-	db 53, SLASH
+	db 34, MIRROR_MOVE
+	db 38, SLASH
 	db 0
 
 MarowakEvosMoves:

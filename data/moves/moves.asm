@@ -47,7 +47,7 @@ Moves:
 	move BODY_SLAM,    PARALYZE_SIDE_EFFECT2,       85,  NORMAL,         100, 15
 	move WRAP,         TRAPPING_EFFECT,             15,  NORMAL,          85, 20
 	move TAKE_DOWN,    RECOIL_EFFECT,               90,  NORMAL,          95, 20 ; accuracy changed from 85 to 95
-	move THRASH,       THRASH_PETAL_DANCE_EFFECT,   90,  NORMAL,         100, 20 ; type changed from NORMAL to DRAGON
+	move THRASH,       THRASH_PETAL_DANCE_EFFECT,   90,  DRAGON,         100, 20 ; type changed from NORMAL to DRAGON
 	move DOUBLE_EDGE,  RECOIL_EFFECT,              100,  NORMAL,         100, 15
 	move TAIL_WHIP,    DEFENSE_DOWN1_EFFECT,         0,  NORMAL,         100, 30
 	move POISON_STING, POISON_SIDE_EFFECT1,         15,  POISON,         100, 35
@@ -86,7 +86,7 @@ Moves:
 	move LEECH_SEED,   LEECH_SEED_EFFECT,            0,  GRASS,           90, 20 ; pp changed from 10 to 20
 	move GROWTH,       GROWTH_EFFECT,                0,  GRASS,          100, 10 ; new effect
 	move RAZOR_LEAF,   NO_ADDITIONAL_EFFECT,        55,  GRASS,           95, 25
-	move SOLARBEAM,    BURN_SIDE_EFFECT1,          110,  GRASS,          100, 10 ; remove the charge in favor of a burn
+	move SOLARBEAM,    BURN_SIDE_EFFECT1,          100,  GRASS,          100, 10 ; remove the charge in favor of a burn
 	move POISONPOWDER, POISON_EFFECT,                0,  POISON,          85, 20 ; accuracy changed from 75 to 85, pp changed from 35 to 20
 	move STUN_SPORE,   PARALYZE_EFFECT,              0,  GRASS,           85, 20 ; accuracy changed from 75 to 85, pp changed from 30 to 20
 	move SLEEP_POWDER, SLEEP_EFFECT,                 0,  GRASS,           75, 15
