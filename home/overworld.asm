@@ -78,27 +78,27 @@ OverworldLoopLessDelay::
 ; if START is pressed
 	xor a ; TEXT_START_MENU
 	ldh [hTextID], a
-	jp .displayDialogue
+	jr .displayDialogue
 .startButtonNotPressed
 	bit B_PAD_A, a
-	jp z, .checkIfDownButtonIsPressed
+	jr z, .checkIfDownButtonIsPressed
 ; if A is pressed
 	ld a, [wStatusFlags5]
 	bit BIT_UNKNOWN_5_2, a
-	jp nz, .noDirectionButtonsPressed
+	jr nz, .noDirectionButtonsPressed
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
 	call CheckForHiddenObjectOrBookshelfOrCardKeyDoor
 	ldh a, [hItemAlreadyFound]
 	and a
-	jp z, OverworldLoop ; jump if a hidden object or bookshelf was found, but not if a card key door was found
+	jr z, OverworldLoop ; jump if a hidden object or bookshelf was found, but not if a card key door was found
 	xor a
 	ld [wd435], a ; new yellow address
 	call IsSpriteOrSignInFrontOfPlayer
 	call Func_0ffe
 	ldh a, [hTextID]
 	and a
-	jp z, OverworldLoop
+	jr z, OverworldLoop
 .displayDialogue
 	predef GetTileAndCoordsInFrontOfPlayer
 	call UpdateSprites
@@ -285,7 +285,7 @@ OverworldLoopLessDelay::
 	set BIT_BATTLE_OVER_OR_BLACKOUT, [hl]
 	ld a, [wCurMap]
 	cp OAKS_LAB
-	jp z, .noFaintCheck ; no blacking out if the player lost to the rival in Oak's lab
+	jr z, .noFaintCheck ; no blacking out if the player lost to the rival in Oak's lab
 	callfar AnyPartyAlive
 	ld a, d
 	and a
@@ -413,7 +413,7 @@ CheckWarpsNoCollisionRetry2::
 ContinueCheckWarpsNoCollisionLoop::
 	inc b ; increment warp number
 	dec c ; decrement number of warps
-	jp nz, CheckWarpsNoCollisionLoop
+	jr nz, CheckWarpsNoCollisionLoop
 	jp CheckMapConnections
 
 ; check if the player has stepped onto a warp after having collided
@@ -518,8 +518,20 @@ WarpFound2::
 
 ; if no matching warp was found
 CheckMapConnections::
+; Snapshot the player's pre-crossing coordinates (wYCoord/wXCoord are
+; adjacent, hence the hl walk). If a connection is found below, followers'
+; own per-frame update (ROMX, see chain_follow.asm) uses these plus the
+; post-crossing wYCoord/wXCoord to rebase their stored positions and the
+; position trail by the same amount the player's own coordinates just
+; shifted - done there instead of here since ROM0 is size-locked. The X
+; value ends up in `a`, which .checkWestMap needs anyway, so its own
+; wXCoord read is folded into this.
+	ld hl, wYCoord
+	ld a, [hli]
+	ldh [hPreConnectionCrossingY], a
+	ld a, [hl]
+	ldh [hPreConnectionCrossingX], a
 .checkWestMap
-	ld a, [wXCoord]
 	cp $ff
 	jr nz, .checkEastMap
 	ld a, [wWestConnectedMap]
@@ -589,7 +601,7 @@ CheckMapConnections::
 	ld [wCurrentTileBlockMapViewPointer], a ; pointer to upper left corner of current tile block map section
 	ld a, h
 	ld [wCurrentTileBlockMapViewPointer + 1], a
-	jp .loadNewMap
+	jr .loadNewMap
 
 .checkNorthMap
 	ld a, [wYCoord]
@@ -616,7 +628,7 @@ CheckMapConnections::
 	ld [wCurrentTileBlockMapViewPointer], a ; pointer to upper left corner of current tile block map section
 	ld a, h
 	ld [wCurrentTileBlockMapViewPointer + 1], a
-	jp .loadNewMap
+	jr .loadNewMap
 
 .checkSouthMap
 	ld b, a
@@ -647,6 +659,17 @@ CheckMapConnections::
 .loadNewMap ; load the connected map that was entered
 	ld hl, wPikachuOverworldStateFlags
 	set 4, [hl]
+; Bit 0 (otherwise unused on this flags byte) marks "a connection crossing is
+; in progress", which three places downstream read before it is consumed and
+; cleared by RebaseFollowerPositionsForConnection (chain_follow.asm) on the
+; followers' next update:
+;   - InitSprites below, to spare Misty's and Brock's sprite structs
+;   - InitOutsideMapSprites (engine/overworld/map_sprites.asm), to reload only
+;     the sprite tile patterns that actually changed rather than all 11 slots
+;   - the rebase itself, which shifts the followers' stored coordinates and
+;     the position trail by however far the crossing just moved the player -
+;     see the wPreConnectionCrossingY/X snapshot above.
+	set 0, [hl]
 	ld a, $2
 	ld [wPikachuSpawnState], a
 	call LoadMapHeader
@@ -1670,7 +1693,7 @@ GetSimulatedInput::
 CollisionCheckOnWater::
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_MOVEMENT_STATE, a
-	jp nz, .noCollision ; return and clear carry if button presses are being simulated
+	jr nz, .noCollision ; return and clear carry if button presses are being simulated
 	ld a, [wPlayerDirection] ; the direction that the player is trying to go in
 	ld d, a
 	ld a, [wSpritePlayerStateData1CollisionData]
@@ -2145,6 +2168,25 @@ InitSprites::
 	push hl
 	push de
 	push bc
+; Sprite structs 13 and 14 are Misty and Brock. Walking across an outdoor map
+; connection reloads the map without the followers having gone anywhere, so
+; spare their two structs there and let them carry straight on - wiping them
+; forces a full respawn, which blinks them off screen and throws away the
+; position and facing they were mid-walk with.
+; RebaseFollowerPositionsForConnection (engine/followers/chain_follow.asm)
+; shifts their stored coordinates into the new map's space instead. Every
+; other map load still wipes all 14.
+; A map whose own object list is long enough to reach struct 13 (only Saffron
+; City, at 14) overwrites the followers' structs in .loadSpriteLoop below
+; regardless - RebaseFollowerPositionsForConnection notices that from
+; wNumSprites and forces the respawn back on, rather than spending ROM0 bytes
+; on the check here.
+	ld c, 14
+	ld a, [wPikachuOverworldStateFlags]
+	rrca ; bit 0: crossing a map connection, set by CheckMapConnections
+	jr nc, .wipeAllSprites
+	ld c, 12
+.wipeAllSprites
 	call ZeroSpriteStateData
 	call DisableRegularSprites
 	ld hl, wMapSpriteData
@@ -2194,12 +2236,16 @@ InitSprites::
 	ret
 
 ZeroSpriteStateData::
-; zero out sprite state data for sprites 01-14
+; zero out sprite state data for sprites 01-c
 ; sprite 15 is used for Pikachu
+; c = how many sprite structs to wipe, 14 or (across a map connection, to
+; leave Misty and Brock alone) 12 - see InitSprites, the only caller
 	ld hl, wSprite01StateData1
 	ld de, wSprite01StateData2
+	ld a, c
+	swap a ; $10 bytes per struct; c is at most 14 so this can't overflow
+	ld b, a
 	xor a
-	ld b, 14 * $10
 .loop
 	ld [hli], a
 	ld [de], a
@@ -2209,10 +2255,11 @@ ZeroSpriteStateData::
 	ret
 
 DisableRegularSprites::
-; disable SPRITESTATEDATA1_IMAGEINDEX (set to $ff) for sprites 01-14
+; disable SPRITESTATEDATA1_IMAGEINDEX (set to $ff) for sprites 01-c
+; c is the same count ZeroSpriteStateData just used and is left untouched by
+; it - see InitSprites, the only caller of either
 	ld hl, wSprite01StateData1ImageIndex
 	ld de, $10
-	ld c, $e
 .loop
 	ld [hl], $ff
 	add hl, de

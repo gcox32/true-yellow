@@ -385,7 +385,13 @@ ENDU
 ; followers stay hard-hidden across submenu transitions - see chain_follow.asm
 hStartMenuModalActive:: db
 
-	ds 3
+; Player's wYCoord/wXCoord snapshotted right before CheckMapConnections
+; (home/overworld.asm) applies its per-connection coordinate rebase - see
+; RebaseFollowerPositionsForConnection in engine/followers/chain_follow.asm.
+hPreConnectionCrossingY:: db
+hPreConnectionCrossingX:: db
+
+	ds 1
 
 hWhoseTurn:: db ; 0 on player's turn, 1 on enemy's turn
 

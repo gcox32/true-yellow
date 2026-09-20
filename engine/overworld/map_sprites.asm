@@ -32,15 +32,26 @@ InitOutsideMapSprites:
 	ld a, [wSpriteSetID]
 	cp b ; has the sprite set ID changed?
 	jr z, .skipLoadingSpriteSet ; if not, don't load it again
+; The set changed. Every other caller gets here with the screen already torn
+; down (a warp, a map load, a redraw after text), but walking across an
+; outdoor map connection does it mid-step with the player in control and the
+; LCD on - and LoadMapSpriteTilePatterns is vblank-paced at 8 tiles a frame,
+; so reloading all 11 slots costs ~38 frames of visibly frozen overworld.
+; Connected maps are meant to share a sprite set so this never happens, but
+; Vermilion City and Cerulean City have their own (they need Officer Jenny in
+; a full 12-tile slot); those sets are deliberately kept slot-for-slot
+; identical to their neighbours' apart from the one entry that has to differ,
+; so on a crossing only reload what actually changed. Bit 0 is set by
+; CheckMapConnections (home/overworld.asm) for exactly this crossing and is
+; consumed later, on the followers' next update.
+	ld a, [wPikachuOverworldStateFlags]
+	bit 0, a
+	jr z, .loadSpriteSet
+	call GetSpriteSetPointer
+	call LoadChangedMapSpriteTilePatterns
+	jr .skipLoadingSpriteSet
 .loadSpriteSet
-	ld a, b
-	ld [wSpriteSetID], a
-	dec a
-	ld c, a
-	ld b, 0
-	ld a, wSpriteSetID - wSpriteSet
-	ld hl, SpriteSets
-	call AddNTimes ; get sprite set offset
+	call GetSpriteSetPointer
 	ld de, wSpriteSet
 	ld bc, wSpriteSetID - wSpriteSet
 	call CopyData ; copy it to wSpriteSet
@@ -55,6 +66,62 @@ InitOutsideMapSprites:
 .skipLoadingSpriteSet
 	call LoadMapSpritesImageBaseOffset
 	scf
+	ret
+
+GetSpriteSetPointer:
+; Store sprite set ID b as the loaded one and return hl = its entries in
+; SpriteSets. (Split out of .loadSpriteSet so the incremental path above can
+; reuse it.)
+	ld a, b
+	ld [wSpriteSetID], a
+	dec a
+	ld c, a
+	ld b, 0
+	ld a, wSpriteSetID - wSpriteSet
+	ld hl, SpriteSets
+	jp AddNTimes ; get sprite set offset
+
+LoadChangedMapSpriteTilePatterns:
+; Copy the sprite set at hl into wSpriteSet, reloading a VRAM slot's tile
+; patterns only where the entry actually changed - every slot left alone
+; already holds the right sprite's tiles. See the comment at the call site
+; for why that's worth doing (and why only the map connection path uses it).
+;
+; Nothing needs to force Pikachu/Misty/Brock into the first three slots the
+; way .loadSpriteSet does: every set in SpriteSets already starts with them,
+; so those three can never read as changed here.
+	ld de, wSpriteSet
+	xor a
+.loop
+	ldh [hVRAMSlot], a
+	ld a, [hl]
+	ld c, a ; c = the new slot's picture ID
+	ld a, [de]
+	cp c ; same sprite as the slot already holds?
+	jr z, .unchanged
+	ld a, c
+	ld [de], a ; record it first - the tile pattern loaders read it back out
+	           ; of wSpriteSet via hVRAMSlot
+	push hl
+	push de
+	ldh a, [hVRAMSlot]
+	cp 9
+	jr nc, .fourTileSprite
+	call LoadStillTilePattern
+	call LoadWalkingTilePattern
+	jr .slotLoaded
+.fourTileSprite
+	call LoadStillTilePattern
+.slotLoaded
+	pop de
+	pop hl
+.unchanged
+	inc hl
+	inc de
+	ldh a, [hVRAMSlot]
+	inc a
+	cp SPRITE_SET_LENGTH
+	jr nz, .loop
 	ret
 
 LoadSpriteSetFromMapHeader:
@@ -352,15 +419,20 @@ GetSplitMapSpriteSetID:
 .loadSpriteSetID
 	ld a, [hl]
 	ret
-; Uses sprite set SPRITESET_PALLET_VIRIDIAN for west side and SPRITESET_FUCHSIA for east side.
+; Uses sprite set SPRITESET_SEA_ROUTES for west side and SPRITESET_FUCHSIA for east side.
 ; Route 20 is a special case because the two map sections have a more complex
 ; shape instead of the map simply being split horizontally or vertically.
+; The west side used SPRITESET_PALLET_VIRIDIAN, which had no room left for
+; this side's swimmers or its cooltrainer - they were commented out of that
+; set and rendered as clones of the player. SPRITESET_SEA_ROUTES holds them
+; (and Route 21's trainers) while matching SPRITESET_PALLET_VIRIDIAN in every
+; other slot, so the Cinnabar border still only reloads two of them.
 .route20
 	ld hl, wXCoord
-	; Use SPRITESET_PALLET_VIRIDIAN if X < 43
+	; Use SPRITESET_SEA_ROUTES if X < 43
 	ld a, [hl]
 	cp 43
-	ld a, SPRITESET_PALLET_VIRIDIAN
+	ld a, SPRITESET_SEA_ROUTES
 	ret c
 	; Use SPRITESET_FUCHSIA if X >= 62.
 	ld a, [hl]
@@ -374,12 +446,12 @@ GetSplitMapSpriteSetID:
 	jr nc, .next
 	ld b, 13
 .next
-	; Use SPRITESET_FUCHSIA if Y < split; else use SPRITESET_PALLET_VIRIDIAN
+	; Use SPRITESET_FUCHSIA if Y < split; else use SPRITESET_SEA_ROUTES
 	ld a, [wYCoord]
 	cp b
 	ld a, SPRITESET_FUCHSIA
 	ret c
-	ld a, SPRITESET_PALLET_VIRIDIAN
+	ld a, SPRITESET_SEA_ROUTES
 	ret
 
 INCLUDE "data/maps/sprite_sets.asm"

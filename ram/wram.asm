@@ -2105,8 +2105,16 @@ wMovementTypeTrail:: ds 4
 ; Set while Pikachu's overworld reaction (text/emote/pikapic sequence) is
 ; playing, so Misty/Brock know to hard-hide - see chain_follow.asm
 wPikachuReactionActive:: db
+; Armed (to wCurMap + 1) by the frame right after the player walks across an
+; outdoor map connection, disarmed on the first warp/doorway spawn or map
+; change after that. While it's armed, a follower forced to re-spawn (that
+; crossing's map load wipes sprite structs 1-14, which includes Misty and
+; Brock - see ZeroSpriteStateData) keeps its true trail position and facing
+; instead of re-lining-up behind the player. 0 = not armed.
+; See RebaseFollowerPositionsForConnection in engine/followers/chain_follow.asm
+wFollowerConnectionCrossing:: db
 wFollowerStateEnd::
-	ds 6 ; remaining padding (24 - 18 = 6)
+	ds 5 ; remaining padding (24 - 19 = 5)
 
 wd492:: db
 	ds 1

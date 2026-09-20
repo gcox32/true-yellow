@@ -10,6 +10,10 @@ PrepareForSpecialWarp::
 	ld [wExitDoorwayX], a
 	ld [wSpriteMistyStateData1MovementStatus], a
 	ld [wSpriteBrockStateData1MovementStatus], a
+	; Same reason: a connection crossing can leave the "keep your trail
+	; position across the respawn" flag armed (chain_follow.asm), and none of
+	; the doorway state this path clears would disarm it on the way out.
+	ld [wFollowerConnectionCrossing], a
 	call LoadSpecialWarpData
 	predef LoadTilesetHeader
 	ld hl, wStatusFlags6

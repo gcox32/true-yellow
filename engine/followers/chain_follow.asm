@@ -28,6 +28,11 @@ DEF BROCK_YESNO_BOX_TILE_COL EQU YESNO_BOX_TILE_COL - 1
 ; Called from home bank, dispatches to appropriate follower spawn function
 
 SpawnFollower_::
+; Cheap no-op most frames (a single bit test) - only does real work on the
+; one frame right after crossing an outdoor map connection. Called here
+; (rather than from home/overworld.asm at the moment of the crossing) since
+; ROM0 is size-locked; see RebaseFollowerPositionsForConnection.
+	call RebaseFollowerPositionsForConnection
 	ldh a, [hCurrentSpriteOffset]
 	cp $f0 ; pikachu (slot 15)
 	jp z, SpawnPikachu_
@@ -318,6 +323,191 @@ InitializePositionTrail::
 .behindLeft
 	; Facing left - behind is to the right (X+1)
 	inc c
+	ret
+
+RebaseFollowerPositionsForConnection::
+; Called every frame (cheaply - see the bit-0 check below) from
+; SpawnFollower_'s dispatcher. home/overworld.asm's CheckMapConnections sets
+; wPikachuOverworldStateFlags bit 0 and snapshots the player's pre-crossing
+; wYCoord/wXCoord into wPreConnectionCrossingY/X whenever the player walks
+; across an outdoor map connection (a plain scroll into an adjacent map, not
+; a warp) - the actual per-axis delta math is done here rather than there
+; since ROM0 is size-locked.
+;
+; The player's own wYCoord/wXCoord get shifted by that crossing so their
+; on-screen position stays continuous across the border. Misty and Brock's
+; stored map positions, and the position trail's history, are snapshots
+; taken in the OLD map's coordinate space and are never otherwise touched by
+; the crossing - left alone, they'd fall out of sync with the player's
+; newly-shifted coordinates the instant the crossing happens, making
+; followers appear to warp to the wrong spot. Apply the identical delta here
+; so every stored position stays correct relative to the player, exactly as
+; if no coordinate rebase had happened.
+	ld hl, wPikachuOverworldStateFlags
+	bit 0, [hl]
+	ret z
+	res 0, [hl]
+
+; InitSprites (home/overworld.asm) leaves Misty's and Brock's sprite structs
+; (13 and 14) alone across a crossing, so they normally just carry on here
+; with nothing more than the coordinate rebase below. The exception is a map
+; with enough objects of its own to reach struct 13 - only Saffron City, at
+; 14 - where InitSprites' .loadSpriteLoop overwrites their PictureID and
+; coordinates with that object's no matter what we do. Spot that from
+; wNumSprites and put them back in their spawn function's "fresh spawn"
+; branch, which rebuilds both from the (rebased) trail.
+	ld a, [wNumSprites]
+	cp 13
+	jr c, .followerStructsIntact
+	xor a
+	ld [wSpriteMistyStateData1MovementStatus], a
+	ld [wSpriteBrockStateData1MovementStatus], a
+.followerStructsIntact
+; Arm the preserve flag for this map either way: a respawn forced just above
+; must still rebuild from the trail rather than re-lining up behind the
+; player's current facing - see ShouldPreserveFollowerAcrossConnection.
+	ld a, [wCurMap]
+	inc a ; 0 means "not armed", so store map + 1
+	ld [wFollowerConnectionCrossing], a
+
+	ldh a, [hPreConnectionCrossingY]
+	ld b, a
+	ld a, [wYCoord]
+	sub b ; a = newY - oldY = deltaY
+; a = deltaY; compute deltaX into c now that a is free to clobber
+	push af
+	ldh a, [hPreConnectionCrossingX]
+	ld b, a
+	ld a, [wXCoord]
+	sub b ; a = newX - oldX = deltaX
+	ld c, a
+	pop af
+; a = deltaY, c = deltaX
+	or a
+	jr z, .skipY
+	ld b, a
+	ld a, [wSpriteMistyStateData2MapY]
+	add b
+	ld [wSpriteMistyStateData2MapY], a
+	ld a, [wSpriteBrockStateData2MapY]
+	add b
+	ld [wSpriteBrockStateData2MapY], a
+	ld a, [wPositionTrailY + 0]
+	add b
+	ld [wPositionTrailY + 0], a
+	ld a, [wPositionTrailY + 1]
+	add b
+	ld [wPositionTrailY + 1], a
+	ld a, [wPositionTrailY + 2]
+	add b
+	ld [wPositionTrailY + 2], a
+	ld a, [wPositionTrailY + 3]
+	add b
+	ld [wPositionTrailY + 3], a
+.skipY
+	ld a, c
+	or a
+	jr z, .skipX
+	ld b, a
+	ld a, [wSpriteMistyStateData2MapX]
+	add b
+	ld [wSpriteMistyStateData2MapX], a
+	ld a, [wSpriteBrockStateData2MapX]
+	add b
+	ld [wSpriteBrockStateData2MapX], a
+	ld a, [wPositionTrailX + 0]
+	add b
+	ld [wPositionTrailX + 0], a
+	ld a, [wPositionTrailX + 1]
+	add b
+	ld [wPositionTrailX + 1], a
+	ld a, [wPositionTrailX + 2]
+	add b
+	ld [wPositionTrailX + 2], a
+	ld a, [wPositionTrailX + 3]
+	add b
+	ld [wPositionTrailX + 3], a
+.skipX
+	ret
+
+ShouldPreserveFollowerAcrossConnection::
+; Returns carry set if the follower that's re-spawning right now is only doing
+; so because an outdoor map connection crossing wiped its sprite state - i.e.
+; it isn't really a new spawn at all and should carry on exactly where it was,
+; reading its position straight out of the (already rebased) position trail
+; instead of recomputing "N tiles behind the player, per the player's current
+; facing". That recompute is wrong the moment the player has turned during
+; the crossing's respawn window, which is easy to do: the map load takes long
+; enough that a turn-in-place lands first, and the followers then pop back in
+; lined up behind the player's NEW facing instead of where they were standing.
+;
+; Also self-disarms: any doorway/warp spawn, or a map change, means the trail
+; is no longer continuous with wherever the followers were, so the normal
+; recompute has to run and the flag has served its purpose.
+	ld a, [wFollowerConnectionCrossing]
+	and a
+	ret z ; not armed (carry clear)
+	ld b, a
+
+	; A warp is driving this spawn (doorway entry cascade, or a follower
+	; emerging from a door tile) - that positioning wins.
+	ld a, [wFollowerDoorwayMode]
+	and a
+	jr nz, .disarm
+	ld a, [wExitDoorwayY]
+	and a
+	jr nz, .disarm
+
+	; Armed for a different map than the one we're standing on: we got here
+	; by some other transition since (Fly/Dig/Teleport clear the flag in
+	; PrepareForSpecialWarp, but a plain warp spawn can land here first).
+	ld a, [wCurMap]
+	inc a
+	cp b
+	jr nz, .disarm
+
+	scf
+	ret
+
+.disarm
+	xor a ; also clears carry
+	ld [wFollowerConnectionCrossing], a
+	ret
+
+GetFollowerTrailFacing::
+; Input: de = the follower's trail index (1 = Misty, 2 = Brock)
+; Output: a = SPRITE_FACING_* for the direction that follower last stepped in,
+; taken from trail[de] (where they're standing) against trail[de + 1] (where
+; they stepped from). Used in place of copying the player's facing when a
+; follower is being restored after a connection crossing - the crossing wiped
+; its FacingDirection along with the rest of its sprite struct, and the player
+; may have turned since, so the trail is the only surviving record of which
+; way it was actually looking.
+	ld hl, wPositionTrailY
+	add hl, de
+	ld a, [hli]
+	sub [hl] ; trail[n] - trail[n + 1]
+	jr z, .checkX
+	bit 7, a ; negative = Y decreased = stepped up
+	ld a, SPRITE_FACING_UP
+	ret nz
+	ld a, SPRITE_FACING_DOWN
+	ret
+.checkX
+	ld hl, wPositionTrailX
+	add hl, de
+	ld a, [hli]
+	sub [hl]
+	jr z, .noMovement
+	bit 7, a ; negative = X decreased = stepped left
+	ld a, SPRITE_FACING_LEFT
+	ret nz
+	ld a, SPRITE_FACING_RIGHT
+	ret
+.noMovement
+; Both trail entries are the same tile (no step recorded yet) - nothing to
+; derive a facing from, so fall back to the player's.
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	ret
 
 ; =====================================
@@ -646,6 +836,11 @@ SpawnMisty_::
 	; instead approximate "N tiles behind wherever the player currently is,
 	; assuming they've walked straight in their current facing the whole
 	; time" - wrong the moment the player has turned during the sequence.
+	; Same reasoning for a connection crossing, where this isn't a real spawn
+	; at all - Misty just had her sprite state wiped out from under her by the
+	; new map's load and is resuming exactly where she stood.
+	call ShouldPreserveFollowerAcrossConnection
+	jr c, .skipTrailRecomputeMisty
 	ld a, [wExitDoorwayY]
 	and a
 	jr nz, .skipTrailRecomputeMisty
@@ -712,8 +907,11 @@ SpawnBrock_::
 	ret nz
 
 	; Fresh spawn (e.g. new map) - initialize position trail and Brock's position.
-	; Skip the trail recompute for a door-exit spawn - see the matching
-	; comment in SpawnMisty_'s .shouldSpawn branch.
+	; Skip the trail recompute for a door-exit spawn, and for a connection
+	; crossing's forced respawn - see the matching comment in SpawnMisty_'s
+	; .shouldSpawn branch.
+	call ShouldPreserveFollowerAcrossConnection
+	jr c, .skipTrailRecomputeBrock
 	ld a, [wExitDoorwayY]
 	and a
 	jr nz, .skipTrailRecomputeBrock
@@ -789,8 +987,24 @@ InitializeMistyPosition:
 	ld [wSpriteMistyStateData2MapY], a
 	ld a, [wPositionTrailX + 1]
 	ld [wSpriteMistyStateData2MapX], a
-	; Copy player's facing direction
+	; Copy player's facing direction - a genuine spawn lines up behind them,
+	; so that's the direction she'd be looking. When she's instead being
+	; restored after a connection crossing wiped her sprite state, she's
+	; continuing a walk rather than spawning: take the facing from the step
+	; she last took (trail[1] <- trail[2]), since the player may have turned
+	; while she was gone.
+	push bc
+	push de
+	call ShouldPreserveFollowerAcrossConnection
+	jr nc, .usePlayerFacingMisty
+	ld de, 1 ; Misty stands at trail[1]
+	call GetFollowerTrailFacing
+	jr .facingSetMisty
+.usePlayerFacingMisty
 	ld a, [wSpritePlayerStateData1FacingDirection]
+.facingSetMisty
+	pop de
+	pop bc
 	ld [wSpriteMistyStateData1FacingDirection], a
 .positionSet
 
@@ -860,8 +1074,21 @@ InitializeBrockPosition:
 	ld [wSpriteBrockStateData2MapY], a
 	ld a, [wPositionTrailX + 2]
 	ld [wSpriteBrockStateData2MapX], a
-	; Copy player's facing direction
+	; Copy player's facing direction, or the step he last took when he's being
+	; restored after a connection crossing - see the matching comment in
+	; InitializeMistyPosition.
+	push bc
+	push de
+	call ShouldPreserveFollowerAcrossConnection
+	jr nc, .usePlayerFacingBrock
+	ld de, 2 ; Brock stands at trail[2]
+	call GetFollowerTrailFacing
+	jr .facingSetBrock
+.usePlayerFacingBrock
 	ld a, [wSpritePlayerStateData1FacingDirection]
+.facingSetBrock
+	pop de
+	pop bc
 	ld [wSpriteBrockStateData1FacingDirection], a
 .positionSetBrock
 

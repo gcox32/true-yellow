@@ -228,7 +228,7 @@ CheckBoulderCoords::
 	sub $4 ; because sprite coordinates are offset by 4
 	ld c, a
 	pop hl
-	jp CheckCoords
+	jr CheckCoords
 
 GetPointerWithinSpriteStateData1::
 	ld h, HIGH(wSpriteStateData1)
