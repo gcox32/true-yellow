@@ -9,7 +9,7 @@ Route11WildMons:
 	db 18, BELLSPROUT
 	db 20, PIDGEOTTO
 	db 19, SCYTHER
-	db 17, TAUROS
+	db 17, PONYTA
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

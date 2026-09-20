@@ -979,12 +979,10 @@ MagnetonEvosMoves:
 ; Learnset
 	db 13, THUNDERSHOCK
 	db 16, SONICBOOM
-	db 19, TELEPORT
+	db 19, FLASH
 	db 22, THUNDER_WAVE
-	db 26, PSYBEAM
 	db 31, TRI_ATTACK
 	db 34, THUNDERBOLT
-	db 38, CLAMP
 	db 43, CONVERSION
 	db 47, THUNDER
 	db 52, SELFDESTRUCT
@@ -2124,9 +2122,8 @@ GoldeenEvosMoves:
 	db 27, FURY_ATTACK
 	db 31, WATERFALL
 	db 35, DOUBLE_EDGE
+	db 41, SWIFT
 	db 45, MIST
-	db 52, TWINEEDLE
-	db 57, HYPER_BEAM
 	db 0
 
 SeakingEvosMoves:
@@ -2139,8 +2136,8 @@ SeakingEvosMoves:
 	db 27, FURY_ATTACK
 	db 31, WATERFALL
 	db 35, DOUBLE_EDGE
-	db 45, MIST
-	db 52, TWINEEDLE
+	db 45, SWIFT
+	db 52, HORN_DRILL
 	db 57, HYPER_BEAM
 	db 0
 
@@ -2156,8 +2153,8 @@ PonytaEvosMoves:
 	db 24, HEADBUTT
 	db 28, FLAMETHROWER
 	db 32, SWIFT
-	db 36, FURY_ATTACK
-	db 41, SKULL_BASH
+	db 36, FIRE_SPIN
+	db 41, JUMP_KICK
 	db 45, MEGA_KICK
 	db 50, SOLARBEAM
 	db 54, FIRE_BLAST
@@ -2172,7 +2169,7 @@ RapidashEvosMoves:
 	db 33, FLAMETHROWER
 	db 36, SWIFT
 	db 40, FURY_ATTACK
-	db 45, SKULL_BASH
+	db 45, HORN_DRILL
 	db 49, MEGA_KICK
 	db 54, SOLARBEAM
 	db 58, FIRE_BLAST
@@ -2293,10 +2290,8 @@ MagnemiteEvosMoves:
 	db 16, SONICBOOM
 	db 19, TELEPORT
 	db 22, THUNDER_WAVE
-	db 26, PSYBEAM
-	db 31, TRI_ATTACK
+	db 28, FLASH
 	db 34, THUNDERBOLT
-	db 38, CLAMP
 	db 43, CONVERSION
 	db 47, THUNDER
 	db 52, SELFDESTRUCT

@@ -5,7 +5,7 @@ MapSpriteSets:
 	db SPRITESET_PALLET_VIRIDIAN ; PALLET_TOWN
 	db SPRITESET_PALLET_VIRIDIAN ; VIRIDIAN_CITY
 	db SPRITESET_PEWTER_CERULEAN ; PEWTER_CITY
-	db SPRITESET_PEWTER_CERULEAN ; CERULEAN_CITY
+	db SPRITESET_CERULEAN_CITY   ; CERULEAN_CITY
 	db SPRITESET_LAVENDER        ; LAVENDER_TOWN
 	db SPRITESET_VERMILION_CITY  ; VERMILION_CITY
 	db SPRITESET_CELADON         ; CELADON_CITY
@@ -81,6 +81,14 @@ SpriteSets:
 	db SPRITE_GAMBLER_ASLEEP
 
 ; SPRITESET_PEWTER_CERULEAN
+; Pewter City and Routes 3/4/9/24/25 only - Cerulean City has its own set now
+; (SPRITESET_CERULEAN_CITY). Officer Jenny is a full 12-tile sprite and can
+; never safely occupy a still (4-tile) slot even STAY DOWN-only: the tile
+; loader copies her full graphic regardless of slot size, overflowing past
+; the end of vChars0 into the player's own walking-frame tiles in vChars1.
+; That's what was corrupting the player's sprite while walking near
+; Cerulean/Pewter/Routes 3-4/9/24-25 - fixed by dropping her from this
+; shared set entirely (she's unused outside Cerulean City anyway).
 	db SPRITE_PIKACHU
 	db SPRITE_MISTY
 	db SPRITE_BROCK
@@ -90,7 +98,7 @@ SpriteSets:
 	db SPRITE_HIKER
 	db SPRITE_COOLTRAINER_F ; slot $09 (facing), needs non-DOWN facing
 	db SPRITE_BLUE          ; slot $0A: needs to walk on Cerulean bridge (must be in walking slot)
-	db SPRITE_OFFICER_JENNY ; slot $0B: always STAY DOWN in this region (safe in still slot)
+	db SPRITE_FOSSIL        ; slot $0B: unused here (still slot; must be a genuine 4-tile sprite)
 	; db SPRITE_COOLTRAINER_M
 	db SPRITE_POKE_BALL
 	; db SPRITE_UNUSED_GAMBLER_ASLEEP_2
@@ -123,7 +131,7 @@ SpriteSets:
 	db SPRITE_GAMBLER       ; trainer on Route 11 (needs non-DOWN facing)
 	db SPRITE_MONSTER       ; unused here
 	db SPRITE_SAILOR        ; unused here
-	db SPRITE_OFFICER_JENNY ; slot $0B: unused here (still slot)
+	db SPRITE_FOSSIL        ; slot $0B: unused here (still slot; must be a genuine 4-tile sprite - see below)
 	; db SPRITE_COOLTRAINER_M
 	db SPRITE_POKE_BALL
 	; db SPRITE_UNUSED_GAMBLER_ASLEEP_2
@@ -234,5 +242,23 @@ SpriteSets:
 	db SPRITE_POKE_BALL     ; slot $0A: unused here
 	db SPRITE_FOSSIL        ; slot $0B: unused here (still slot)
 	db SPRITE_SNORLAX       ; slot $0C: unused here (still slot)
+
+; SPRITESET_CERULEAN_CITY
+; Cerulean City only (Pewter City and Routes 3/4/9/24/25 use
+; SPRITESET_PEWTER_CERULEAN). Only 5 walking NPCs spawn here, so each one
+; gets a full-facing slot ($03-$07) - in particular Officer Jenny is no
+; longer a 12-tile sprite jammed into a 4-tile still slot, which was
+; overflowing into the player's own walking-frame tiles in vChars1.
+	db SPRITE_PIKACHU
+	db SPRITE_MISTY
+	db SPRITE_BROCK
+	db SPRITE_BLUE          ; rival: STAY DOWN
+	db SPRITE_ROCKET        ; STAY NONE (turns to face player)
+	db SPRITE_SUPER_NERD    ; WALK UP_DOWN / WALK LEFT_RIGHT / STAY DOWN (must be in walking slot)
+	db SPRITE_COOLTRAINER_F ; STAY LEFT (needs non-DOWN facing)
+	db SPRITE_OFFICER_JENNY ; STAY DOWN x2 (now safe: full slot, no VRAM overflow)
+	db SPRITE_BLUE          ; slot $0A: spare full slot, duplicate filler (no 6th NPC needed here)
+	db SPRITE_POKE_BALL     ; slot $0B: unused here (still slot; electrode item ball)
+	db SPRITE_FOSSIL        ; slot $0C: unused here (still slot)
 
 	assert_table_length NUM_SPRITE_SETS
