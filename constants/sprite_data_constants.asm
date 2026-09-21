@@ -29,3 +29,9 @@ DEF PLAYER_DIR_UP    EQU 1 << PLAYER_DIR_BIT_UP
 DEF MISTY_FOLLOWER_SPRITE_INDEX EQU 13
 DEF BROCK_FOLLOWER_SPRITE_INDEX EQU 14
 ; PIKACHU_SPRITE_INDEX is already 15 (defined in map_object_constants.asm)
+
+; Position trail slots: trail[n] is where the player stood n+1 steps ago, so
+; each follower reads the slot matching how far back it walks.
+DEF PIKACHU_TRAIL_SLOT EQU 0
+DEF MISTY_TRAIL_SLOT   EQU 1
+DEF BROCK_TRAIL_SLOT   EQU 2

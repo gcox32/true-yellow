@@ -471,8 +471,9 @@ Key constraints:
 |------|---------|
 | `chain_follow.asm` | Main follower implementation |
 | `README.md` | This documentation |
-| `TODO.md` | Development task tracking |
 | `SPRITE_SET_ANALYSIS.md` | Sprite set modification analysis |
+| `RENDER_HIDING.md` | Conditional hiding of followers behind text boxes and menus |
+| `CUTSCENE_COLLISIONS.md` | Scripted NPCs walking over followers: the per-scene audit, and `tools/cutscene_check.py` |
 
 ## Future Enhancements
 

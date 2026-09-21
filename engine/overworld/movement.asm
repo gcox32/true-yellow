@@ -70,7 +70,7 @@ UpdatePlayerSprite:
 	ld a, [wMovementFlags]
 	bit BIT_SPINNING, a
 	jr nz, .skipSpriteAnim
-	call Func_5274
+	call AdvanceSpriteAnimationFrame
 	call Func_4e32
 .skipSpriteAnim
 ; If the player is standing on a grass tile, make the player's sprite have
@@ -132,7 +132,7 @@ UpdateNPCSprite:
 	cp $3
 	jp z, UpdateSpriteInWalkingAnimation  ; [x#SPRITESTATEDATA1_MOVEMENTSTATUS] == 3
 	cp $4
-	jp z, Func_5357
+	jp z, UpdateSpriteInFastWalkingAnimation
 	ld a, [wWalkCounter]
 	and a
 	ret nz           ; don't do anything yet if player is currently moving
@@ -177,7 +177,7 @@ UpdateNPCSprite:
 	call LoadDEPlusA ; a = [wNPCMovementDirections + $fe] (?)
 .asm_4ecb
 	push af
-	call Func_5288
+	call TryExtendedMovementCode
 	pop bc
 	ld a, b
 	jr nc, .determineDirection
@@ -256,14 +256,14 @@ ChangeFacingDirection:
 ; set carry on failure, clears carry on success
 TryWalking:
 	push hl
-	call Func_5337
+	call SetSpriteFacingAndStepVector
 	pop hl
 	push de
 	ld c, [hl]
 	call CanWalkOntoTile
 	pop de
 	ret c               ; cannot walk there (reinitialization of delay values already done)
-	call Func_5349
+	call AdvanceSpriteMapCoords
 	ldh a, [hCurrentSpriteOffset]
 	ld l, a
 	ld [hl], $10        ; [x#SPRITESTATEDATA2_WALKANIMATIONCOUNTER] = 16
@@ -274,7 +274,7 @@ TryWalking:
 
 ; update the walking animation parameters for a sprite that is currently walking
 UpdateSpriteInWalkingAnimation:
-	call Func_5274
+	call AdvanceSpriteAnimationFrame
 	ldh a, [hCurrentSpriteOffset]
 	add $3
 	ld l, a
@@ -840,7 +840,7 @@ AnimScriptedNPCMovement:
 	ret
 
 AdvanceScriptedNPCAnimFrameCounter:
-	call Func_5274
+	call AdvanceSpriteAnimationFrame
 	ld h, HIGH(wSpriteStateData1)
 	ldh a, [hCurrentSpriteOffset]
 	add $8
@@ -850,7 +850,7 @@ AdvanceScriptedNPCAnimFrameCounter:
 	ldh [hSpriteAnimFrameCounter], a
 	ret
 
-Func_5274:
+AdvanceSpriteAnimationFrame:
 	ldh a, [hCurrentSpriteOffset]
 	add $7
 	ld l, a
@@ -867,70 +867,92 @@ Func_5274:
 	ld [hl], a                       ; advance to next animation frame every 4 ticks (16 ticks total for one step)
 	ret
 
-Func_5288:
-; nice lookup table
-; a is supposedly [wNPCMovementDirections + $fe]
+TryExtendedMovementCode:
+; Yellow-only extended movement codes, handled BEFORE the quadrant encoding
+; that the rest of the scripted movement path uses (NPC_MOVEMENT_DOWN $00 /
+; _UP $40 / _LEFT $80 / _RIGHT $C0, decoded by range in .determineDirection).
+;
+; a: the current movement byte from wNPCMovementDirections.
+; Returns carry SET if this was an extended code and the step has already been
+; performed here - the caller must not fall through to .determineDirection.
+; Returns carry CLEAR (a = 0) if it wasn't, and the quadrant decoding applies.
+;
+;   $04 down  $05 up  $06 left  $07 right  - one full tile at DOUBLE speed:
+;       walk counter 8 with movement status 4, whose handler
+;       (UpdateSpriteInFastWalkingAnimation) doubles the step vectors, so
+;       8 frames * 2px = 16px. Map coords are updated.
+;   $11 up  $12 down  $13 left  $14 right  - HALF a tile, visual only:
+;       walk counter 8 with ordinary movement status 3 (1px/frame) = 8px, and
+;       AdvanceSpriteMapCoords is deliberately not called, so the sprite slides
+;       half a tile without changing its map coordinate.
+;   A third set (map coords updated but only half the pixels) is present below
+;   but unreachable - it would desync the sprite from its map coord.
+;
+; CAUTION: every one of these codes is numerically inside the "< $40 = down"
+; quadrant, so movement data like `db $06` reads as a plain step down unless
+; this table is applied first. The three Team Rocket cutscenes that use them
+; (Mt Moon B2F, Pokemon Tower 7F, Rocket Hideout B4F) walk sideways, not down.
 	cp $5
-	jr z, .asm_52af
+	jr z, .fastUp
 	cp $4
-	jr z, .asm_52aa
+	jr z, .fastDown
 	cp $6
-	jr z, .asm_52b4
+	jr z, .fastLeft
 	cp $7
-	jr z, .asm_52b9
+	jr z, .fastRight
 	cp $11
-	jr z, .asm_52c3
+	jr z, .halfUp
 	cp $12
-	jr z, .asm_52be
+	jr z, .halfDown
 	cp $13
-	jr z, .asm_52c8
+	jr z, .halfLeft
 	cp $14
-	jr z, .asm_52cd
+	jr z, .halfRight
 	xor a
 	ret
-; set 1?
-.asm_52aa
-	call Func_531f
-	jr .asm_52e6
-.asm_52af
-	call Func_5325
-	jr .asm_52e6
-.asm_52b4
-	call Func_5331
-	jr .asm_52e6
-.asm_52b9
-	call Func_532b
-	jr .asm_52e6
-; set 2?
-.asm_52be
-	call Func_531f
-	jr .asm_52fa
-.asm_52c3
-	call Func_5325
-	jr .asm_52fa
-.asm_52c8
-	call Func_5331
-	jr .asm_52fa
-.asm_52cd
-	call Func_532b
-	jr .asm_52fa
-; set 3? (unused)
-.asm_52d2
-	call Func_531f
-	jr .asm_530b
-.asm_52d7
-	call Func_5325
-	jr .asm_530b
-.asm_52dc
-	call Func_5331
-	jr .asm_530b
-.asm_52e1
-	call Func_532b
-	jr .asm_530b
+; full tile, double speed
+.fastDown
+	call SetStepVectorDown
+	jr .fullTileDoubleSpeed
+.fastUp
+	call SetStepVectorUp
+	jr .fullTileDoubleSpeed
+.fastLeft
+	call SetStepVectorLeft
+	jr .fullTileDoubleSpeed
+.fastRight
+	call SetStepVectorRight
+	jr .fullTileDoubleSpeed
+; half tile, visual only (map coords unchanged)
+.halfDown
+	call SetStepVectorDown
+	jr .halfTileVisualOnly
+.halfUp
+	call SetStepVectorUp
+	jr .halfTileVisualOnly
+.halfLeft
+	call SetStepVectorLeft
+	jr .halfTileVisualOnly
+.halfRight
+	call SetStepVectorRight
+	jr .halfTileVisualOnly
+; unused: half the pixels but a full map-coord step, so it desyncs
+.unusedDown
+	call SetStepVectorDown
+	jr .unusedHalfTileWithCoordUpdate
+.unusedUp
+	call SetStepVectorUp
+	jr .unusedHalfTileWithCoordUpdate
+.unusedLeft
+	call SetStepVectorLeft
+	jr .unusedHalfTileWithCoordUpdate
+.unusedRight
+	call SetStepVectorRight
+	jr .unusedHalfTileWithCoordUpdate
 
-.asm_52e6
-	call Func_5337
-	call Func_5349
+.fullTileDoubleSpeed
+	call SetSpriteFacingAndStepVector
+	call AdvanceSpriteMapCoords
 	ldh a, [hCurrentSpriteOffset]
 	ld l, a
 	ld [hl], $8
@@ -941,8 +963,8 @@ Func_5288:
 	scf
 	ret
 
-.asm_52fa
-	call Func_5337
+.halfTileVisualOnly
+	call SetSpriteFacingAndStepVector
 	ldh a, [hCurrentSpriteOffset]
 	ld l, a
 	ld [hl], $8
@@ -953,9 +975,9 @@ Func_5288:
 	scf
 	ret
 
-.asm_530b
-	call Func_5337
-	call Func_5349
+.unusedHalfTileWithCoordUpdate
+	call SetSpriteFacingAndStepVector
+	call AdvanceSpriteMapCoords
 	ldh a, [hCurrentSpriteOffset]
 	ld l, a
 	ld [hl], $8
@@ -966,27 +988,27 @@ Func_5288:
 	scf
 	ret
 
-Func_531f:
+SetStepVectorDown:
 	lb de, 1, 0
 	ld c, SPRITE_FACING_DOWN
 	ret
 
-Func_5325:
+SetStepVectorUp:
 	lb de, -1, 0
 	ld c, SPRITE_FACING_UP
 	ret
 
-Func_532b:
+SetStepVectorRight:
 	lb de, 0, 1
 	ld c, SPRITE_FACING_RIGHT
 	ret
 
-Func_5331:
+SetStepVectorLeft:
 	lb de, 0, -1
 	ld c, SPRITE_FACING_LEFT
 	ret
 
-Func_5337:
+SetSpriteFacingAndStepVector:
 	ldh a, [hCurrentSpriteOffset]
 	add $9
 	ld l, a
@@ -1001,7 +1023,7 @@ Func_5337:
 	ld [hl], e          ; x#SPRITESTATEDATA1_XSTEPVECTOR
 	ret
 
-Func_5349:
+AdvanceSpriteMapCoords:
 	ld h, HIGH(wSpriteStateData2)
 	ldh a, [hCurrentSpriteOffset]
 	add $4
@@ -1014,8 +1036,12 @@ Func_5349:
 	ld [hl], a          ; update X position
 	ret
 
-Func_5357:
-	call Func_5274
+; The movement status 4 twin of UpdateSpriteInWalkingAnimation: identical,
+; except each step vector is doubled before being added to the pixel
+; position, so a tile takes 8 frames at 2px instead of 16 at 1px. Only
+; TryExtendedMovementCode's $04-$07 codes put a sprite in this state.
+UpdateSpriteInFastWalkingAnimation:
+	call AdvanceSpriteAnimationFrame
 	ldh a, [hCurrentSpriteOffset]
 	add $3
 	ld l, a
@@ -1042,14 +1068,14 @@ Func_5357:
 	ld l, a
 	ld a, [hl]
 	cp $fe
-	jr nc, .asm_5386
+	jr nc, .initNextMovementCounter
 	ldh a, [hCurrentSpriteOffset]
 	inc a
 	ld l, a
 	ld h, HIGH(wSpriteStateData1)
 	ld [hl], $1
 	ret
-.asm_5386
+.initNextMovementCounter
 	call Random
 	ldh a, [hCurrentSpriteOffset]
 	add $8

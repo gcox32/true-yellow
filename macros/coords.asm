@@ -112,3 +112,31 @@ MACRO? dbmapcoord
 ; x, y
 	db \2, \1
 ENDM
+
+; One entry of a ParkFollowers table (engine/followers/chain_follow.asm): if
+; that follower is standing on the danger tile when a cutscene NPC is about to
+; walk through it, send them to the destination instead.
+;\1 trail slot (MISTY_TRAIL_SLOT / BROCK_TRAIL_SLOT)
+;\2,\3 danger x, y   \4,\5 destination x, y   (both in map coords)
+; Position trail entries are stored as map coord + 4 (see wram.asm), which the
+; +4s here fold in at assembly time so the table reads in plain map coords.
+MACRO park_follower
+	db \1, \3 + 4, \2 + 4, \5 + 4, \4 + 4
+ENDM
+
+; Unconditional form: park that follower wherever they happen to be standing.
+; Use this when the follower's position at scene time is fixed rather than
+; dependent on how the player walked in - after a battle, for instance, the
+; trail is rebuilt from the player's facing, so there is only one arrangement
+; to handle and no danger tile worth matching.
+;\1 trail slot   \2,\3 destination x, y (map coords)
+; $ff in the danger-Y byte is the wildcard ParkFollowers looks for.
+MACRO park_follower_always
+	db \1, -1, -1, \3 + 4, \2 + 4
+ENDM
+
+DEF PARK_FOLLOWER_ENTRY_SIZE EQU 5
+
+MACRO park_followers_end
+	db -1
+ENDM

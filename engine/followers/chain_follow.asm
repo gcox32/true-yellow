@@ -2447,3 +2447,132 @@ ENDR
 .notOnGrassBrock
 	ld [wSpriteBrockStateData2GrassPriority], a
 	ret
+
+ParkFollowers::
+; Walk Misty and/or Brock out of a scripted NPC's way before that NPC moves.
+;
+; de -> a table of park_follower entries, terminated by park_followers_end.
+; (de, not hl: the `farcall` that gets here clobbers hl and b.)
+;
+; An entry fires only when that follower is spawned AND its trail entry is
+; exactly the danger tile, so a follower who isn't in the way is never moved -
+; which matters, because "nudge everyone by a constant delta" has no safe delta
+; on some maps and shoves the innocent follower into a wall.
+;
+; The override is transient: the player's next couple of real steps cascade
+; fresh trail values back in (Misty after 1 step, Brock after 2), exactly as
+; the normal follow logic self-corrects.
+;
+; Destinations are absolute and verified at build time - walkable, off the NPC's
+; path, and reachable by the follower's greedy Y-then-X walk before the NPC
+; arrives. See engine/followers/CUTSCENE_COLLISIONS.md and
+; tools/cutscene_check.py.
+.entryLoop
+	ld a, [de]
+	inc a
+	ret z                    ; park_followers_end
+	call ParkFollowerEntry
+	jr .entryLoop
+
+ParkFollowerEntry:
+; de -> one entry; always returns with de past it, whether or not it fired.
+	ld a, [de]
+	inc de
+	ld c, a
+	ld b, 0                  ; bc = trail slot
+	call IsFollowerSpawned
+	jr z, .skipDanger
+
+	ld a, [de]               ; danger Y, or $ff for park-always
+	inc de
+	inc a
+	jr z, .parkAlways
+	dec a
+	ld hl, wPositionTrailY
+	add hl, bc
+	cp [hl]
+	jr nz, .skipDangerX
+
+	ld a, [de]               ; danger X
+	inc de
+	ld hl, wPositionTrailX
+	add hl, bc
+	cp [hl]
+	jr nz, .skipDest
+	jr .writeDestination
+
+.parkAlways
+	inc de                   ; the danger X byte is unused in this form
+
+.writeDestination
+	ld hl, wPositionTrailY
+	add hl, bc
+	ld a, [de]               ; destination Y
+	inc de
+	ld [hl], a
+
+	ld hl, wPositionTrailX
+	add hl, bc
+	ld a, [de]               ; destination X
+	inc de
+	ld [hl], a
+
+	ld hl, wMovementTypeTrail
+	add hl, bc
+	ld [hl], 0               ; walk to it, don't hop
+	ret
+
+; Step de over whatever is left of the entry. Fallthrough, so each label skips
+; one more byte than the one below it.
+.skipDanger
+	inc de                   ; danger Y
+.skipDangerX
+	inc de                   ; danger X
+.skipDest
+	inc de                   ; destination Y
+	inc de                   ; destination X
+	ret
+
+IsFollowerSpawned:
+; c = trail slot. Returns z when that follower is not currently on the map.
+	ld a, c
+	cp MISTY_TRAIL_SLOT
+	jr nz, .brock
+	ld a, [wSpriteMistyStateData1MovementStatus]
+	and a
+	ret
+.brock
+	ld a, [wSpriteBrockStateData1MovementStatus]
+	and a
+	ret
+
+; --- Park tables --------------------------------------------------------
+; These MUST live in this bank, not in the calling script's: `farcall`
+; maps this bank before ParkFollowers runs its `ld a, [de]`, so a table in
+; the script's bank would read whatever happens to sit at the same address
+; here. The park_followers macro asserts the bank at link time.
+
+MtMoonB2FRocketsParkTable::
+	;              slot              danger  destination
+	park_follower BROCK_TRAIL_SLOT,   3, 3,    3, 2
+	park_follower BROCK_TRAIL_SLOT,   4, 4,    4, 2
+	park_followers_end
+
+; Rival on the left, player on the right at (15,5); he exits down-then-right.
+PokemonTower2FRivalOnLeftParkTable::
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT, 14, 6,   16, 6
+	park_follower MISTY_TRAIL_SLOT, 15, 7,   16, 6
+	park_follower BROCK_TRAIL_SLOT, 14, 7,   13, 7
+	park_follower BROCK_TRAIL_SLOT, 16, 7,   16, 8
+	park_followers_end
+
+; Player below the rival at (14,6); he exits right-then-down.
+PokemonTower2FRivalBelowParkTable::
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT, 15, 5,   14, 4
+	park_follower MISTY_TRAIL_SLOT, 15, 7,   13, 7
+	park_follower BROCK_TRAIL_SLOT, 15, 6,   14, 7
+	park_follower BROCK_TRAIL_SLOT, 16, 7,   17, 7
+	park_followers_end
+

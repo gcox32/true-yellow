@@ -14,11 +14,18 @@ wPositionTrailY/X. Picking those destinations used to be guesswork - see the
 AsideForRockets. This makes the destination verifiable at build time.
 
 Usage:
-  cutscene_check.py --list-scenes
-  cutscene_check.py MtMoonB2F
-  cutscene_check.py MtMoonB2F --path MtMoonB2FJessieJamesExitMovement --from 9,3
-  cutscene_check.py MtMoonB2F --path <label> --from-object MTMOONB2F_JESSIE
-  cutscene_check.py MtMoonB2F --at 25,9 --radius 3
+  cutscene_check.py --list-scenes            every scripted NPC walk in the game
+  cutscene_check.py --audit                  trace them all, flag paths hitting walls
+  cutscene_check.py MtMoonB2F                walkability grid, objects, warps
+  cutscene_check.py MtMoonB2F --triggers     candidate scene trigger tiles
+
+  # does this cutscene run over Misty or Brock, and does a candidate fix help?
+  cutscene_check.py MtMoonB2F --trigger 3,5 --forced up \\
+      --path MovementData_f9e65 --from-object MTMOONB2F_JESSIE \\
+      --nudge-misty 0,-2 --nudge-brock 1,-1
+
+Multi-stage scenes move the NPC before the walk you care about, so give the
+real start with --from X,Y, or replay the earlier stage with --after LABEL.
 """
 
 import argparse
@@ -175,19 +182,24 @@ SYMBOLS = {
 NPC_CHANGE_FACING = 0xE0
 STAY = 0xFF
 
-# Yellow-only lookup table (Func_5288, engine/overworld/movement.asm). These
-# bytes are matched BEFORE the range dispatch below and end in `scf; ret`, so
-# they never reach it - which matters because all of them are numerically in
-# the "< $40 = down" range. Getting this wrong makes every Jessie/James scene
-# (Mt Moon B2F, Pokemon Tower 7F, Rocket Hideout B4F - the three scripts that
-# use these bytes) decode as walking down through walls.
-# $4/$12 -> Func_531f (down), $5/$11 -> Func_5325 (up),
-# $6/$13 -> Func_5331 (left), $7/$14 -> Func_532b (right).
+# Yellow-only codes (TryExtendedMovementCode, engine/overworld/movement.asm).
+# They are matched BEFORE the quadrant range dispatch below and end in
+# `scf; ret`, so they never reach it - which matters because all of them are
+# numerically in the "< $40 = down" range. Getting this wrong makes every
+# Jessie/James scene (Mt Moon B2F, Pokemon Tower 7F, Rocket Hideout B4F - the
+# three scripts that use these codes) decode as walking down through walls.
+# $04-$07 step a full tile; $11-$14 slide half a tile without changing the
+# sprite's map coordinate, so for path purposes they are not a step at all.
 YELLOW_MOVEMENT_TABLE = {
-	0x04: (0, 1, "down"),  0x12: (0, 1, "down"),
-	0x05: (0, -1, "up"),   0x11: (0, -1, "up"),
-	0x06: (-1, 0, "left"), 0x13: (-1, 0, "left"),
-	0x07: (1, 0, "right"), 0x14: (1, 0, "right"),
+	0x04: (0, 1, "down"),
+	0x05: (0, -1, "up"),
+	0x06: (-1, 0, "left"),
+	0x07: (1, 0, "right"),
+	# $11-$14 slide half a tile for show and never call AdvanceSpriteMapCoords,
+	# so the sprite keeps its map coordinate: zero delta for path purposes.
+	# Unused by any current script, but decode them correctly if one appears.
+	0x11: (0, 0, "half-up"),    0x12: (0, 0, "half-down"),
+	0x13: (0, 0, "half-left"),  0x14: (0, 0, "half-right"),
 }
 
 
@@ -305,6 +317,140 @@ class MapGrid:
 		return out
 
 
+# --- follower reachability --------------------------------------------------
+
+STEP_DIRS = {"down": (0, 1), "up": (0, -1), "left": (-1, 0), "right": (1, 0)}
+
+# Who stands on which trail slot once everyone has settled (engine/followers).
+# RecordPlayerPositionToTrail stores the player's position at the START of each
+# step, so with the player stationary trail[n] is simply where they stood n+1
+# steps ago.
+TRAIL_OWNERS = ["Pikachu", "Misty", "Brock"]
+
+
+def backward_walks(grid, end, n, blocked=frozenset()):
+	"""Every legal n-step walk arriving at `end`, oldest position first.
+
+	Tiles may repeat: a player pacing back and forth is a real approach, and
+	those produce follower placements the straight-line cases never do.
+
+	`blocked` holds tiles the player cannot stand on even though the terrain is
+	passable - NPCs and ground items. Skipping this invents approaches that walk
+	through the very NPC the scene is about, which then shows up as a follower
+	"standing" on that NPC's start tile.
+	"""
+	if n <= 0:
+		return [()]
+	out = []
+
+	def rec(cur, left, acc):
+		if left == 0:
+			out.append(tuple(reversed(acc)))
+			return
+		for dx, dy in STEP_DIRS.values():
+			nxt = (cur[0] + dx, cur[1] + dy)
+			if grid.is_walkable(*nxt) and nxt not in blocked:
+				acc.append(nxt)
+				rec(nxt, left - 1, acc)
+				acc.pop()
+
+	rec(end, n, [])
+	return out
+
+
+def follower_tiles(grid, trigger, forced=(), blocked=None):
+	"""Tiles each follower can occupy when a scene acts, as {name: set}.
+
+	`trigger` is the tile the scene fires on; `forced` are directions the script
+	pushes the player before the NPCs move (Mt Moon B2F's PAD_UP, say), each of
+	which shifts the trail one more slot.
+
+	`blocked` defaults to every object_event tile on the map, since NPCs and
+	ground items block the player. Hidden (missable) objects don't actually
+	block until shown, so this can be slightly conservative.
+
+	Caveats this does not model: a player who entered the map fewer than three
+	steps ago has a seeded rather than walked trail, and ledge hops are ignored.
+	"""
+	if blocked is None:
+		blocked = {(o["x"], o["y"]) for o in grid.objects}
+	known = [trigger]
+	cur = trigger
+	for d in forced:
+		cur = (cur[0] + STEP_DIRS[d][0], cur[1] + STEP_DIRS[d][1])
+		known.append(cur)
+
+	tiles = {name: set() for name in TRAIL_OWNERS}
+	for prefix in backward_walks(grid, trigger, max(0, 4 - len(known)), blocked):
+		history = list(prefix) + known           # oldest .. where they stand now
+		for slot, name in enumerate(TRAIL_OWNERS):
+			tiles[name].add(history[-(slot + 2)])
+	return tiles, cur
+
+
+def greedy_route(grid, start, target):
+	"""Tiles a follower walks through to reach `target`.
+
+	UpdateMistyIdleState / UpdateBrockIdleState (engine/followers/chain_follow.asm)
+	close the Y gap first and only then the X gap, one tile per update. Followers
+	don't collision-check either, so a route crossing a wall still arrives - it
+	just looks broken on the way.
+	"""
+	x, y = start
+	cells = [(x, y)]
+	while y != target[1]:
+		y += 1 if y < target[1] else -1
+		cells.append((x, y))
+	while x != target[0]:
+		x += 1 if x < target[0] else -1
+		cells.append((x, y))
+	return cells
+
+
+def evaluate_park(grid, starts, dest_for, npc_path, player):
+	"""Problems with sending each start tile to dest_for(start). Empty == good."""
+	bad = []
+	for s in sorted(starts, key=lambda c: (c[1], c[0])):
+		d = dest_for(s)
+		if not grid.is_walkable(*d):
+			bad.append("from (%d,%d): destination (%d,%d) is not walkable" % (s + d))
+			continue
+		route = greedy_route(grid, s, d)
+		wall = [c for c in route[1:] if not grid.is_walkable(*c)]
+		if wall:
+			bad.append("from (%d,%d): route to (%d,%d) crosses %s"
+			           % (s + d + (" ".join("(%d,%d)" % c for c in wall),)))
+		if d in npc_path:
+			bad.append("from (%d,%d): destination (%d,%d) is still on the NPC path" % (s + d))
+		if d == player:
+			bad.append("from (%d,%d): destination (%d,%d) is the player's tile" % (s + d))
+	return bad
+
+
+def search_park(grid, follower, starts, npc_path, player, reach=3):
+	"""Deltas that move every possible start somewhere safe, nearest first.
+
+	A constant delta is what the existing scene fixes encode (a few inc/dec on
+	the trail entry), and short moves matter: the follower has to finish walking
+	before the NPC reaches them.
+	"""
+	ok = []
+	for dy in range(-reach, reach + 1):
+		for dx in range(-reach, reach + 1):
+			if dx == 0 and dy == 0:
+				continue
+			if not evaluate_park(grid, starts, lambda s: (s[0] + dx, s[1] + dy),
+			                     npc_path, player):
+				ok.append((abs(dx) + abs(dy), dx, dy))
+	ok.sort()
+	print("  %s: %d clear delta(s)%s" % (follower, len(ok), ":" if ok else ""))
+	for dist, dx, dy in ok[:8]:
+		print("      (%+d,%+d)  max %d step(s)" % (dx, dy, dist))
+	if not ok:
+		print("      none within %d - needs absolute destinations or a stash" % reach)
+	return ok
+
+
 # --- rendering --------------------------------------------------------------
 
 def render(grid, overlays=None, marks=None):
@@ -343,6 +489,148 @@ def render(grid, overlays=None, marks=None):
 			row.append(ch)
 		lines.append("%3d %s" % (y, "".join(row)))
 	return "\n".join(lines)
+
+
+# --- park table verification -----------------------------------------------
+
+# Scenes whose scripts call ParkFollowers, with the facts the asm can't state:
+# where the scene fires, any scripted step it forces on the player, and which
+# NPC walks it has to keep clear of. --verify-parks reads each table back out
+# of the script and re-checks it, so the asm stays the source of truth.
+PARKED_SCENES = [
+	{
+		"name": "Mt Moon B2F - Jessie and James corner the player",
+		"map": "MtMoonB2F", "trigger": (3, 5), "forced": ["up"],
+		"npc_paths": [((9, 3), "MovementData_f9e65"), ((9, 4), "MovementData_f9e66")],
+		"table": "MtMoonB2FRocketsParkTable",
+	},
+	{
+		"name": "Pokemon Tower 2F - rival exits, player on the right",
+		"map": "PokemonTower2F", "trigger": (15, 5), "forced": [],
+		"npc_paths": [((14, 5), "PokemonTower2FRivalDownThenRightMovement")],
+		"table": "PokemonTower2FRivalOnLeftParkTable",
+	},
+	{
+		"name": "Pokemon Tower 2F - rival exits, player below",
+		"map": "PokemonTower2F", "trigger": (14, 6), "forced": [],
+		"npc_paths": [((14, 5), "PokemonTower2FRivalRightThenDownMovement")],
+		"table": "PokemonTower2FRivalBelowParkTable",
+	},
+]
+
+SLOT_NAMES = {"MISTY_TRAIL_SLOT": "Misty", "BROCK_TRAIL_SLOT": "Brock"}
+
+
+def parse_park_table(map_name, label):
+	"""-> [(follower, danger, dest)] from the park_follower entries at `label`.
+
+	Park tables live in the follower bank next to ParkFollowers, not beside the
+	script that uses them - farcall maps that bank before the routine reads
+	them. (Look in the script too, so a stray table there is still checked
+	rather than silently skipped.)
+	"""
+	lines = read("engine", "followers", "chain_follow.asm").splitlines()
+	start = next((i for i, l in enumerate(lines)
+	              if re.match(r"\s*%s::?" % re.escape(label), l)), None)
+	if start is None:
+		lines = read("scripts", map_name + ".asm").splitlines()
+		start = next((i for i, l in enumerate(lines)
+		              if re.match(r"\s*%s::?" % re.escape(label), l)), None)
+	if start is None:
+		raise SystemExit("park table %s not found in chain_follow.asm or scripts/%s.asm"
+		                 % (label, map_name))
+	out = []
+	for raw in lines[start + 1:]:
+		line = strip_comment(raw).strip()
+		if not line:
+			continue
+		if line.startswith("park_followers_end") or line == "db -1":
+			break
+		m = re.match(r"park_follower_always\s+(\w+)\s*,(.+)$", line)
+		if m:
+			nums = [parse_number(t) for t in m.group(2).split(",")]
+			out.append((SLOT_NAMES[m.group(1)], None, (nums[0], nums[1])))
+			continue
+		m = re.match(r"park_follower\s+(\w+)\s*,(.+)$", line)
+		if not m:
+			raise SystemExit("unexpected line in park table %s: %r" % (label, line))
+		nums = [parse_number(t) for t in m.group(2).split(",")]
+		out.append((SLOT_NAMES[m.group(1)], (nums[0], nums[1]), (nums[2], nums[3])))
+	return out
+
+
+def joint_outcomes(grid, trigger, forced=()):
+	"""(Misty, Brock) pairs from the SAME approach - their tiles are correlated."""
+	known, cur = [trigger], trigger
+	for d in forced:
+		cur = (cur[0] + STEP_DIRS[d][0], cur[1] + STEP_DIRS[d][1])
+		known.append(cur)
+	blocked = {(o["x"], o["y"]) for o in grid.objects}
+	out = set()
+	for prefix in backward_walks(grid, trigger, max(0, 4 - len(known)), blocked):
+		h = list(prefix) + known
+		out.add((h[-3], h[-4]))
+	return sorted(out), cur
+
+
+def verify_parks():
+	failures = 0
+	for scene in PARKED_SCENES:
+		grid = MapGrid(scene["map"])
+		path, arrival = set(), {}
+		for start, label in scene["npc_paths"]:
+			cells = grid.walk_path(start, parse_movement(scene["map"], label))
+			path |= set(cells)
+			for i, c in enumerate(cells):
+				arrival[c] = min(arrival.get(c, 99), i)
+		table = parse_park_table(scene["map"], scene["table"])
+		lookup = {(who, danger): dest for who, danger, dest in table}
+		pairs, player = joint_outcomes(grid, scene["trigger"], scene["forced"])
+
+		problems = []
+		always = {who: dest for who, danger, dest in table if danger is None}
+		if len(always) == 2 and len(set(always.values())) == 1:
+			problems.append("both followers park on the same tile (%d,%d)"
+			                % tuple(next(iter(always.values()))))
+		for who, danger, dest in table:
+			if not grid.is_walkable(*dest):
+				problems.append("%s -> (%d,%d) is not walkable" % ((who,) + dest))
+			if dest in path:
+				problems.append("%s -> (%d,%d) is on the NPC path" % ((who,) + dest))
+			if dest == player:
+				problems.append("%s -> (%d,%d) is the player's tile" % ((who,) + dest))
+			if danger is None:
+				# park-always: the follower's start isn't known from the table,
+				# so the route can't be traced - destination checks only.
+				continue
+			route = greedy_route(grid, danger, dest)
+			for i, c in enumerate(route):
+				if not grid.is_walkable(*c):
+					problems.append("%s route to (%d,%d) crosses wall (%d,%d)"
+					                % ((who,) + dest + c))
+				elif c in arrival and i >= arrival[c]:
+					problems.append("%s reaches (%d,%d) on step %d but the NPC is there "
+					                "by step %d" % ((who,) + c + (i, arrival[c])))
+		for m, b in pairs:
+			m2 = always.get("Misty") or lookup.get(("Misty", m), m)
+			b2 = always.get("Brock") or lookup.get(("Brock", b), b)
+			for who, t in (("Misty", m2), ("Brock", b2)):
+				if t in path:
+					problems.append("approach Misty=%s Brock=%s: %s still on the path at "
+					                "(%d,%d)" % (m, b, who, t[0], t[1]))
+			if m2 == b2:
+				problems.append("approach Misty=%s Brock=%s: both end on (%d,%d)"
+				                % (m, b, m2[0], m2[1]))
+
+		status = "FAIL" if problems else "ok"
+		print("[%s] %s  (%d entr%s, %d approach outcome%s)"
+		      % (status, scene["name"], len(table), "y" if len(table) == 1 else "ies",
+		         len(pairs), "" if len(pairs) == 1 else "s"))
+		for msg in dict.fromkeys(problems):
+			print("       %s" % msg)
+		failures += bool(problems)
+	print("\n%d scene(s) checked, %d failing" % (len(PARKED_SCENES), failures))
+	return failures
 
 
 # --- scene inventory --------------------------------------------------------
@@ -395,6 +683,54 @@ def list_scenes():
 		                                ",".join(s["labels"]) or "?"))
 	print("\n%d scripted NPC walks in %d maps"
 	      % (len(scenes), len({s["map"] for s in scenes})))
+
+
+def find_triggers(map_name):
+	"""Candidate tiles a scene can fire on, scraped from the map's script.
+
+	Two shapes cover essentially every cutscene: a `dbmapcoord` table fed to
+	ArePlayerCoordsInArray, and an inline `wXCoord`/`wYCoord` compare pair.
+	Pairing a trigger with the right scene still needs eyes on the script -
+	this just saves hunting for the numbers.
+	"""
+	lines = read("scripts", map_name + ".asm").splitlines()
+	found = []
+	label = "?"
+	pending = {}
+	for n, raw in enumerate(lines, 1):
+		line = strip_comment(raw).strip()
+		m = re.match(r"^([A-Za-z_.]\w*):", line)
+		if m:
+			label = m.group(1)
+			pending = {}
+		m = re.match(r"dbmapcoord\s+(\S+)\s*,\s*(\S+)", line)
+		if m:
+			found.append((label, parse_number(m.group(1)), parse_number(m.group(2)),
+			              n, "dbmapcoord"))
+			continue
+		m = re.match(r"ld\s+a\s*,\s*\[w([XY])Coord\]", line)
+		if m:
+			pending["axis"] = m.group(1)
+			continue
+		m = re.match(r"cp\s+(\S+)$", line)
+		if m and "axis" in pending:
+			try:
+				pending[pending.pop("axis")] = parse_number(m.group(1))
+			except ValueError:
+				pending.pop("axis", None)
+			if "X" in pending and "Y" in pending:
+				found.append((label, pending.pop("X"), pending.pop("Y"), n, "wXCoord/wYCoord"))
+	return found
+
+
+def list_triggers(map_name):
+	rows = find_triggers(map_name)
+	grid = MapGrid(map_name)
+	for label, x, y, n, kind in rows:
+		print("  (%2d,%2d) %-10s %-44s scripts/%s.asm:%d%s"
+		      % (x, y, "" if grid.is_walkable(x, y) else "NOT WALKABLE",
+		         label, map_name, n, "" if kind == "dbmapcoord" else "  [" + kind + "]"))
+	print("%d candidate trigger tile(s) in %s" % (len(rows), map_name))
 
 
 def audit():
@@ -451,6 +787,11 @@ def main():
 	ap.add_argument("map", nargs="?", help="map name, e.g. MtMoonB2F")
 	ap.add_argument("--list-scenes", action="store_true",
 	                help="list every scripted NPC walk (call MoveSprite) in the game")
+	ap.add_argument("--triggers", action="store_true",
+	                help="list candidate scene trigger tiles scraped from the map's script")
+	ap.add_argument("--verify-parks", action="store_true",
+	                help="re-check every ParkFollowers table in the scripts against the "
+	                     "scene it guards")
 	ap.add_argument("--audit", action="store_true",
 	                help="walk every scene's path and flag any that leaves walkable ground")
 	ap.add_argument("--path", help="movement data label in scripts/<map>.asm")
@@ -464,6 +805,19 @@ def main():
 	                help="apply an earlier stage's movement first (repeatable). Multi-stage "
 	                     "scenes move the NPC before the walk you care about, so their start "
 	                     "is not the object_event coord")
+	ap.add_argument("--trigger", metavar="X,Y",
+	                help="tile the scene fires on; enumerates every tile Misty/Brock "
+	                     "can occupy there and intersects them with --path")
+	ap.add_argument("--forced", metavar="DIRS",
+	                help="comma-separated directions the script pushes the player before "
+	                     "the NPCs move (e.g. 'up' for Mt Moon B2F's PAD_UP)")
+	ap.add_argument("--nudge-misty", metavar="DX,DY",
+	                help="test a candidate fix: shift every tile Misty could be on by this "
+	                     "delta, then re-check walkability and collisions")
+	ap.add_argument("--nudge-brock", metavar="DX,DY", help="same, for Brock")
+	ap.add_argument("--search-park", action="store_true",
+	                help="search for nudge deltas that move every possible follower "
+	                     "position somewhere walkable, reachable and off the NPC path")
 	ap.add_argument("--at", metavar="X,Y", help="highlight a tile (e.g. a trigger coord)")
 	ap.add_argument("--radius", type=int, default=0,
 	                help="with --at, also shade tiles within N walkable steps")
@@ -473,8 +827,17 @@ def main():
 		list_scenes()
 		return
 
+	if args.verify_parks:
+		sys.exit(1 if verify_parks() else 0)
+
 	if args.audit:
 		audit()
+		return
+
+	if args.triggers:
+		if not args.map:
+			ap.error("--triggers needs a map")
+		list_triggers(args.map)
 		return
 
 	if not args.map:
@@ -496,6 +859,27 @@ def main():
 			print("reachable within %d step(s) of (%d,%d): %d tiles"
 			      % (args.radius, ax, ay, len(ring) - 1))
 
+	follower = None
+	if args.trigger:
+		tx, ty = (int(v) for v in args.trigger.split(","))
+		forced = [d.strip() for d in args.forced.split(",")] if args.forced else []
+		bad = [d for d in forced if d not in STEP_DIRS]
+		if bad:
+			raise SystemExit("unknown --forced direction(s): %s" % ", ".join(bad))
+		if not grid.is_walkable(tx, ty):
+			print("WARNING: trigger tile (%d,%d) is not walkable" % (tx, ty))
+		follower, final = follower_tiles(grid, (tx, ty), forced)
+		marks[final] = "P"
+		print("trigger (%d,%d)%s -> player ends at (%d,%d)"
+		      % (tx, ty, " + forced " + ">".join(forced) if forced else "", final[0], final[1]))
+		for name in TRAIL_OWNERS:
+			cells = sorted(follower[name], key=lambda c: (c[1], c[0]))
+			print("  %-7s can be on %2d tile(s): %s"
+			      % (name, len(cells), " ".join("(%d,%d)" % c for c in cells)))
+		overlays.append((follower["Brock"] - follower["Misty"], "B"))
+		overlays.append((follower["Misty"] - follower["Brock"], "M"))
+		overlays.append((follower["Misty"] & follower["Brock"], "b"))
+
 	if args.path:
 		start = resolve_start(grid, args)
 		for earlier in args.after:
@@ -515,11 +899,48 @@ def main():
 			print("WARNING: path crosses non-walkable tiles: "
 			      + " ".join("(%d,%d)" % c for c in blocked))
 
+		if follower:
+			hits = False
+			for name in ("Misty", "Brock"):
+				clash = sorted(follower[name] & set(cells), key=lambda c: (c[1], c[0]))
+				if clash:
+					hits = True
+					print("COLLISION: %s can be standing on %s"
+					      % (name, " ".join("(%d,%d)" % c for c in clash)))
+					for c in clash:
+						marks[c] = "!"
+			if not hits:
+				print("no collision: this path misses every tile a follower can reach")
+
+			if args.search_park:
+				print("safe park deltas (destination walkable, greedy route clear, "
+				      "off the NPC path, not the player's tile):")
+				for name in ("Misty", "Brock"):
+					search_park(grid, name, follower[name], set(cells), final)
+
+			nudges = {"Misty": args.nudge_misty, "Brock": args.nudge_brock}
+			for name, spec in nudges.items():
+				if not spec:
+					continue
+				dx, dy = (int(v) for v in spec.split(","))
+				moved = {(c[0] + dx, c[1] + dy) for c in follower[name]}
+				offmap = sorted(c for c in moved if not grid.is_walkable(*c))
+				left = sorted(moved & set(cells), key=lambda c: (c[1], c[0]))
+				print("nudge %s by (%+d,%+d):" % (name, dx, dy))
+				if offmap:
+					print("    LANDS ON NON-WALKABLE: "
+					      + " ".join("(%d,%d)" % c for c in offmap))
+				if left:
+					print("    STILL COLLIDES on " + " ".join("(%d,%d)" % c for c in left))
+				if not offmap and not left:
+					print("    clear: every destination is walkable and off the path")
+
 	print()
 	print(render(grid, overlays, marks))
 	print()
 	print("legend: . walkable   # blocked   w warp   S/E path start/end   * path"
-	      "   P marked tile   o within radius")
+	      "   P player   o within radius"
+	      "\n        M/B/b tiles Misty/Brock/either can occupy   ! collision")
 	for i, o in enumerate(grid.objects):
 		print("  %s  (%2d,%2d) %-22s %s" %
 		      ("0123456789abcdefghijklmnopqrstuvwxyz"[i % 36], o["x"], o["y"],

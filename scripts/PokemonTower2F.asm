@@ -89,32 +89,27 @@ PokemonTower2FDefeatedRivalScript:
 	ret
 
 PokemonTower2FScript_MoveFollowersAsideForRival:
-; Only the ON_LEFT approach's exit route (RivalDownThenRightMovement) cuts
-; back through where Misty/Brock wait trailing behind the player - the other
-; route stays clear. Nudge each spawned follower one row down and out of
-; that path, same trick (and same caveat: can't verify walkability from
-; here, since we don't have a fixed anchor independent of the follower's own
-; recent step history - see MtMoonB2FScript_MoveFollowersAsideForRockets)
-; as Team Rocket's Mt Moon equivalent.
+; The rival leaves by one of two routes depending on which side the player
+; engaged him from, and BOTH cut through where Misty/Brock trail behind the
+; player. (The previous version only handled the ON_LEFT route and claimed the
+; other stayed clear; it doesn't.)
+;
+; The battle in between does NOT disturb the position trail - the followers are
+; still wherever the player's walk-in left them - so each branch matches on its
+; own danger tiles. A blanket "park everyone at tile X" was tried and can't
+; work here: no single destination is reachable safely from every approach
+; (Brock coming from (13,4), for one, would route straight through the wall at
+; (13,6)).
+;
+; Tables live in ParkFollowers' bank, not this one - see chain_follow.asm.
+	ASSERT BANK(PokemonTower2FRivalOnLeftParkTable) == BANK(ParkFollowers)
+	ASSERT BANK(PokemonTower2FRivalBelowParkTable) == BANK(ParkFollowers)
+	ld de, PokemonTower2FRivalOnLeftParkTable
 	CheckEvent EVENT_POKEMON_TOWER_RIVAL_ON_LEFT
-	ret z
-	ld a, [wSpriteMistyStateData1MovementStatus]
-	and a
-	jr z, .skipMisty
-	ld a, [wPositionTrailY + 1]
-	inc a
-	ld [wPositionTrailY + 1], a
-	xor a
-	ld [wMovementTypeTrail + 1], a ; walk, not hop
-.skipMisty
-	ld a, [wSpriteBrockStateData1MovementStatus]
-	and a
-	ret z
-	ld a, [wPositionTrailY + 2]
-	inc a
-	ld [wPositionTrailY + 2], a
-	xor a
-	ld [wMovementTypeTrail + 2], a ; walk, not hop
+	jr nz, .got_table
+	ld de, PokemonTower2FRivalBelowParkTable
+.got_table
+	park_followers_de
 	ret
 
 PokemonTower2FRivalRightThenDownMovement:
