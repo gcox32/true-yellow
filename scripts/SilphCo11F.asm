@@ -127,6 +127,19 @@ SilphCo11FScript_621c5:
 	ld a, SILPHCO11F_GIOVANNI
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
+; Walk the followers out of the column he comes down; see chain_follow.asm.
+	ASSERT BANK(SilphCo11FGiovanniPlayerBelowParkTable) == BANK(ParkFollowers)
+	ASSERT BANK(SilphCo11FGiovanniPlayerRightParkTable) == BANK(ParkFollowers)
+	ld de, SilphCo11FGiovanniPlayerBelowParkTable
+	ld a, [wSavedCoordIndex]
+	cp 1
+	jr z, .got_park_table
+	ld de, SilphCo11FGiovanniPlayerRightParkTable
+.got_park_table
+	park_followers_de
+
+	ld a, SILPHCO11F_GIOVANNI
+	ldh [hSpriteIndex], a
 	ld de, .GiovanniMovement
 	call MoveSprite
 	ld a, SCRIPT_SILPHCO11F_GIOVANNI_START_BATTLE

@@ -550,6 +550,22 @@ PARKED_SCENES = [
 		"table": "PokemonTower2FRivalOnLeftParkTable",
 	},
 	{
+		"name": "Silph Co 11F - Giovanni steps down (player below)",
+		"map": "SilphCo11F", "trigger": (6, 13), "forced": [],
+		"npc_paths": [((6, 9), ".GiovanniMovement")],
+		"table": "SilphCo11FGiovanniPlayerBelowParkTable",
+		# the triggers do NOT seal this room - a route up column 12 reaches the
+		# tiles north of them - so the region is most of the floor.
+		"entries": [(9, 0), (13, 0), (3, 2), (5, 5)], "triggers": [(6, 13), (7, 12)],
+	},
+	{
+		"name": "Silph Co 11F - Giovanni steps down (player right)",
+		"map": "SilphCo11F", "trigger": (7, 12), "forced": [],
+		"npc_paths": [((6, 9), ".GiovanniMovement")],
+		"table": "SilphCo11FGiovanniPlayerRightParkTable",
+		"entries": [(9, 0), (13, 0), (3, 2), (5, 5)], "triggers": [(6, 13), (7, 12)],
+	},
+	{
 		# Both Bill walks plus Bill's own later walk: the followers are parked
 		# once and stay put for the whole sequence, so the doorway tiles have to
 		# clear all three.

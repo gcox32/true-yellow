@@ -350,6 +350,23 @@ one across lands it on the other. `--verify-parks` caught it:
 The real answer spreads them out, one dropping to the wider stretch at row 10.
 No amount of reading the map catches this; the joint check does.
 
+### Triggers don't always seal
+
+Silph Co 11F is the counter-example to the sealing rule. Giovanni steps down
+column 6 to meet the player, and the triggers (6,13)/(7,12) look like they cut
+the room - but a route up column 12 reaches the tiles north of them, so a
+follower can be anywhere along his column rather than only below it.
+
+It also needs two tables where one would seem to do: the script has a single
+call site and a single movement, but Misty on (6,11) has to go somewhere, and
+every tile near her is one Brock might already be standing on. Which ones those
+are differs between the two approach tiles, so the safe destination does too.
+The tables are picked by the coord index the script already stashes in
+`wSavedCoordIndex`.
+
+The general point: "one NPC walk" does not imply "one table". What matters is
+how many distinct follower arrangements the approach allows.
+
 ### Sometimes the answer is "get out of the room"
 
 Bill's House is a tiny 8x8 room with three separate scripted walks, and every
@@ -442,7 +459,7 @@ reading as if it were complete - hence the full enumeration here.
 | Cerulean City | 2 | converted (exit only; approach is clear) |
 | Pokemon Tower 7F | 2 | clear - no work |
 | Rocket Hideout B4F | 2 | clear - no work |
-| Silph Co 11F | 3 | Jessie/James clear; **Giovanni's walk unexamined** |
+| Silph Co 11F | 3 | Jessie/James clear; Giovanni converted |
 | Oak's Lab | 6 | N/A - pre-follower |
 | Pallet Town | 1 | N/A - pre-follower (Oak stops you leaving, before you have a Pokemon) |
 | Bill's House | 2 | converted - followers wait by the door |
@@ -451,16 +468,15 @@ reading as if it were complete - hence the full enumeration here.
 | **Cinnabar Gym** | **1** | **unexamined** |
 | **Viridian City** | **1** | **unexamined** |
 
-`--verify-parks` guards the 15 converted scenes and runs on every `make`.
+`--verify-parks` guards the 17 converted scenes and runs on every `make`.
 
 ### Still to do
 
 - **Champion's Room** (2 sites): Oak walks up column 3 from (3,7) to (3,2).
   Only beating the rival from (5,2) is clean.
-- **Silph Co 11F** Giovanni's own walk, **Cinnabar Gym** and **Viridian City**
-  have not been looked at.
+- **Cinnabar Gym** and **Viridian City** have not been looked at.
 
-That is 5 sites across 4 maps.
+That is 4 sites across 3 maps.
 
 Check follower gating before solving any of them - it has ruled out scenes for
 free three times now: Route 22's first rival battle (Pewter Gym grants the

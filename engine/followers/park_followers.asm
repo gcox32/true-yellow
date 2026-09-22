@@ -273,3 +273,30 @@ BillsHouseDoorwayParkTable::
 	park_follower_always MISTY_TRAIL_SLOT,    1, 7
 	park_follower_always BROCK_TRAIL_SLOT,    4, 7
 	park_followers_end
+
+; Silph Co 11F - Giovanni steps down from (6,9) to (6,12) to meet the player.
+;
+; Unlike the other corridor scenes the triggers do NOT seal this room: a route
+; up column 12 lets the player reach the tiles north of them, so a follower can
+; be anywhere along Giovanni's column, not just below it.
+;
+; Two tables, because no single one works. Misty on (6,11) has to go somewhere,
+; and every tile near her is one Brock might already be standing on - but WHICH
+; ones differ between the two approach tiles, so the safe destination does too.
+; Picked by the coord index the script already stashes in wSavedCoordIndex.
+
+SilphCo11FGiovanniPlayerBelowParkTable::
+	; player on (6,13), directly below where Giovanni stops
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,   6,11,    5,10
+	park_follower BROCK_TRAIL_SLOT,   6,10,    7,10
+	park_follower BROCK_TRAIL_SLOT,   6,12,    5,11
+	park_followers_end
+
+SilphCo11FGiovanniPlayerRightParkTable::
+	; player on (7,12), to the right of where Giovanni stops
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,   6,11,    5,12
+	park_follower BROCK_TRAIL_SLOT,   6,10,    5,10
+	park_follower BROCK_TRAIL_SLOT,   6,12,    5,11
+	park_followers_end
