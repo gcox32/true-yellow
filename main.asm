@@ -425,4 +425,9 @@ INCLUDE "engine/pikachu/pikachu_emotions.asm"
 INCLUDE "engine/pikachu/pikachu_movement.asm"
 INCLUDE "engine/pikachu/pikachu_pic_animation.asm"
 INCLUDE "engine/followers/chain_follow.asm"
+
+
+SECTION "Park Followers", ROMX
+
+INCLUDE "engine/followers/park_followers.asm"
 INCLUDE "engine/debug/debug_menu.asm"

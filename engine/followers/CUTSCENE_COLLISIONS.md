@@ -231,7 +231,7 @@ row-5 wall. That is precisely how the old code's cascade ended up targeting
 (4,5). Moving only the follower who is actually in the way also means nobody
 takes a pointless step.
 
-### Park tables must live in ParkFollowers' bank
+### ParkFollowers and its tables share one section
 
 `farcall` maps the follower bank *before* the routine runs, so a table sitting
 in the calling script's bank is read from whatever occupies the same address in
@@ -239,9 +239,24 @@ the follower bank instead. This is silent and destructive rather than merely
 broken: the garbage first byte is taken as a trail slot, and `wPositionTrailY +
 <garbage>` writes off the end of the trail into unrelated WRAM.
 
-That cost a long debugging session. All park tables therefore live in
-`chain_follow.asm` next to the routine, and scripts call through a macro that
-asserts it at link time:
+The routine and every table therefore live together in
+`engine/followers/park_followers.asm`, under a single
+`SECTION "Park Followers", ROMX`. One section means the linker can place the
+whole unit in whichever bank has room - it cannot split them - so the bank
+assertion below holds wherever it lands. (The tables started out in
+`chain_follow.asm`; adding SS Anne's overflowed that bank by 11 bytes, which is
+what prompted the move. Being able to relocate freely is the point.)
+
+### The bank assertion
+
+`farcall` maps the follower bank *before* the routine runs, so a table sitting
+in the calling script's bank is read from whatever occupies the same address in
+the follower bank instead. This is silent and destructive rather than merely
+broken: the garbage first byte is taken as a trail slot, and `wPositionTrailY +
+<garbage>` writes off the end of the trail into unrelated WRAM.
+
+That cost a long debugging session, so scripts call through a macro that
+asserts the shared bank at link time:
 
 ```asm
 MACRO park_followers
@@ -314,6 +329,27 @@ movement encoding and compares against a follower at a conservative 8 frames,
 so Mt Moon's fast Rockets still get a strict 1:1 test while normal NPCs get the
 honest 2:1.
 
+### Both followers must be solved together
+
+Destinations are solved against every *joint* (Misty, Brock) arrangement, not
+two independent sets. They come from the same approach walk, so their tiles are
+correlated, and parking one onto a tile the other simultaneously occupies just
+trades one overlap for another.
+
+SS Anne 2F is the cautionary example. The rival and player share a two-tile-wide
+corridor (cols 36-37) and he exits down whichever column the player isn't in.
+The obvious fix - step each follower across to the other column - is wrong,
+because in a two-wide corridor the followers occupy *both* columns, so moving
+one across lands it on the other. `--verify-parks` caught it:
+
+```
+[FAIL] SS Anne 2F - rival exits down column 36
+       approach Misty=(36,9) Brock=(37,9): both end on (37,9)
+```
+
+The real answer spreads them out, one dropping to the wider stretch at row 10.
+No amount of reading the map catches this; the joint check does.
+
 ### Choosing destinations
 
 Destinations are solved against every *joint* (Misty, Brock) outcome, not two
@@ -372,37 +408,49 @@ follower for the scene and restore after.
 
 ### Remaining work
 
-Converted and verified in-game: **Mt Moon B2F**, **Pokemon Tower 2F** (both
-branches), **Silph Co 7F** (both exit branches), **Game Corner** (both routes).
+**Every scene is now converted.** `--verify-parks` covers 11 of them.
 
-Re-checking every remaining branch with the sealed-region rule cut the work
-roughly in half - several scenes the looser model flagged turn out to be
-unreachable collisions:
+Applying the sealed-region rule to every branch removed a great deal of
+phantom work - several scenes the looser model flagged turn out to be
+collisions the map makes unreachable.
 
-| Map | Branches needing a table | Notes |
-|-----|--------------------------|-------|
-| SS Anne 2F | 4 (approach x2, exit x2) | 2 call sites - all that is left |
-| Route 22 | 2 (rival 1's two exits) | rival 2 and both approaches are clear |
-| **Game Corner** | done | (8,5) clear; (10,5) and (9,6) converted |
-| **Pokemon Tower 7F** | **0** | clear |
-| **Rocket Hideout B4F** | **0** | clear |
-| **Silph Co 11F** | **0** | clear |
+| Map | Outcome |
+|-----|---------|
+| Mt Moon B2F | converted · tested |
+| Pokemon Tower 2F (x2) | converted · tested |
+| Silph Co 7F (x2) | converted · tested |
+| Game Corner (x2) | converted · tested |
+| Route 22 rival 1 (x2) | converted |
+| SS Anne 2F (x2) | converted |
+| **Pokemon Tower 7F** | **clear - no work** |
+| **Rocket Hideout B4F** | **clear - no work** |
+| **Silph Co 11F** | **clear - no work** |
+| **Route 22 rival 2** | **clear - no work** |
 
-Why the three zeroes:
+Every *approach* stage is clear except Mt Moon's, because in each case the
+triggers span the only route in, so the NPC walks down to a player whose
+followers are always behind them. Only exits needed tables.
+
+Why the clear ones are clear:
 
 - **Pokemon Tower 7F** is a vertical corridor. Row 13 is two tiles wide, so the
   only way north is onto a trigger. Followers can never leave rows 13-15; the
   Rockets never come below row 12.
 - **Rocket Hideout B4F** is sealed harder still: the elevator at (24,15)/(25,15)
   is a **two-tile pocket** whose only exits are the triggers. Exactly one legal
-  approach, leaving the followers on the elevator tiles. Jessie and James
-  standing on (24,10)/(25,10) are themselves the only tiles joining the trigger
-  area to the north half of the floor - they wall off their own scene.
-- **Silph Co 11F** was always clear: the Rockets flee upward, away from the
-  player.
+  approach. Jessie and James standing on (24,10)/(25,10) are themselves the only
+  tiles joining the trigger area to the north half of the floor - they wall off
+  their own scene.
+- **Silph Co 11F** was always clear: the Rockets flee upward, away from the player.
+- **Route 22 rival 2** exits *westward*, back the way he came, while the
+  followers trail east of the player.
 
-**Route 22 rival 2** is clear because his exit walks *left*, back the way he
-came, while the followers trail east of the player.
+**Route 22 rival 1** needs only Misty. Beating Pewter Gym grants the Boulder
+Badge (which is what makes Brock follow) and in the same script resets
+`EVENT_1ST_ROUTE22_RIVAL_BATTLE` (`scripts/PewterGym.asm`), so Brock and that
+scene are mutually exclusive by construction. `PARKED_SCENES` records this with
+a `followers` list, so the verifier doesn't demand coverage for a follower who
+cannot attend.
 
 **Game Corner** was the odd one out: its Rocket has no trainer header, so he
 never walks up - he's engaged by talking, and the player is simply adjacent.
@@ -412,4 +460,4 @@ trigger, so the park call mirrors that same condition. Talking from (8,5) needs
 no entries: reaching a tile on his route from there means walking through him,
 and he blocks his own tile. Verified in-game, all three positions.
 
-None of the remaining branches needs the hide-and-restore fallback.
+No scene needed the hide-and-restore fallback.

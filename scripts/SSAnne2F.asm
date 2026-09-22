@@ -117,6 +117,17 @@ SSAnne2FRivalAfterBattleScript:
 	ld a, SSANNE2F_RIVAL
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
+; Step the followers across to the column he isn't using; see chain_follow.asm.
+	ASSERT BANK(SSAnne2FRivalDownParkTable) == BANK(ParkFollowers)
+	ASSERT BANK(SSAnne2FRivalWalkAroundParkTable) == BANK(ParkFollowers)
+	ld de, SSAnne2FRivalDownParkTable
+	ld a, [wXCoord]
+	cp 37
+	jr z, .got_park_table
+	ld de, SSAnne2FRivalWalkAroundParkTable
+.got_park_table
+	park_followers_de
+
 	ld a, [wXCoord]
 	cp 37
 	jr nz, .player_standing_left

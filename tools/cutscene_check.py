@@ -550,6 +550,23 @@ PARKED_SCENES = [
 		"table": "PokemonTower2FRivalOnLeftParkTable",
 	},
 	{
+		"name": "SS Anne 2F - rival exits down column 36",
+		"map": "SSAnne2F", "trigger": (37, 8), "forced": [],
+		"npc_paths": [((36, 8), ".RivalDownFourMovement")],
+		"table": "SSAnne2FRivalDownParkTable",
+		# the corridor is two tiles wide and the triggers span it, so the player
+		# can never have been north of them. (36,4) is a warp but the rival
+		# stands on it, so it seeds nothing.
+		"entries": [(9,11), (13,11), (17,11), (21,11), (25,11), (29,11), (2,4), (2,12), (36,4)], "triggers": [(36, 8), (37, 8)],
+	},
+	{
+		"name": "SS Anne 2F - rival exits down column 37",
+		"map": "SSAnne2F", "trigger": (36, 8), "forced": [],
+		"npc_paths": [((36, 7), ".RivalWalkAroundPlayerMovement")],
+		"table": "SSAnne2FRivalWalkAroundParkTable",
+		"entries": [(9,11), (13,11), (17,11), (21,11), (25,11), (29,11), (2,4), (2,12), (36,4)], "triggers": [(36, 8), (37, 8)],
+	},
+	{
 		"name": "Route 22 - rival 1 exits (player north)",
 		"map": "Route22", "trigger": (29, 4), "forced": [],
 		"npc_paths": [((29, 5), "Route22Rival1ExitMovementData1")],
@@ -610,21 +627,27 @@ SLOT_NAMES = {"MISTY_TRAIL_SLOT": "Misty", "BROCK_TRAIL_SLOT": "Brock"}
 def parse_park_table(map_name, label):
 	"""-> [(follower, danger, dest)] from the park_follower entries at `label`.
 
-	Park tables live in the follower bank next to ParkFollowers, not beside the
+	Park tables live beside ParkFollowers in park_followers.asm, not beside the
 	script that uses them - farcall maps that bank before the routine reads
-	them. (Look in the script too, so a stray table there is still checked
-	rather than silently skipped.)
+	them. (The other locations are searched too, so a stray table is still
+	checked rather than silently skipped.)
 	"""
-	lines = read("engine", "followers", "chain_follow.asm").splitlines()
-	start = next((i for i, l in enumerate(lines)
-	              if re.match(r"\s*%s::?" % re.escape(label), l)), None)
-	if start is None:
-		lines = read("scripts", map_name + ".asm").splitlines()
+	sources = [("engine", "followers", "park_followers.asm"),
+	           ("engine", "followers", "chain_follow.asm"),
+	           ("scripts", map_name + ".asm")]
+	lines, start = None, None
+	for src in sources:
+		try:
+			lines = read(*src).splitlines()
+		except FileNotFoundError:
+			continue
 		start = next((i for i, l in enumerate(lines)
 		              if re.match(r"\s*%s::?" % re.escape(label), l)), None)
+		if start is not None:
+			break
 	if start is None:
-		raise SystemExit("park table %s not found in chain_follow.asm or scripts/%s.asm"
-		                 % (label, map_name))
+		raise SystemExit("park table %s not found in %s"
+		                 % (label, " / ".join("/".join(s) for s in sources)))
 	out = []
 	for raw in lines[start + 1:]:
 		line = strip_comment(raw).strip()
