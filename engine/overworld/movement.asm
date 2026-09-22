@@ -64,14 +64,14 @@ UpdatePlayerSprite:
 	xor a
 	ld [wSpritePlayerStateData1IntraAnimFrameCounter], a
 	ld [wSpritePlayerStateData1AnimFrameCounter], a
-	call Func_4e32
+	call UpdatePlayerSpriteImage
 	jr .skipSpriteAnim
 .moving
 	ld a, [wMovementFlags]
 	bit BIT_SPINNING, a
 	jr nz, .skipSpriteAnim
 	call AdvanceSpriteAnimationFrame
-	call Func_4e32
+	call UpdatePlayerSpriteImage
 .skipSpriteAnim
 ; If the player is standing on a grass tile, make the player's sprite have
 ; lower priority than the background so that it's partially obscured by the
@@ -88,7 +88,10 @@ UpdatePlayerSprite:
 	ld [wSpritePlayerStateData2GrassPriority], a
 	ret
 
-Func_4e32:
+; The player's counterpart to UpdateSpriteImage: pick the sprite frame from the
+; current walk-animation frame plus the facing direction. (NPCs additionally
+; offset by hTilePlayerStandingOn; the player never needs that.)
+UpdatePlayerSpriteImage:
 	ld a, [wSpritePlayerStateData1AnimFrameCounter]
 	ld b, a
 	ld a, [wSpritePlayerStateData1FacingDirection]
@@ -419,7 +422,7 @@ InitializeSpriteScreenPosition:
 	ld b, a
 	ld a, [hl]      ; x#SPRITESTATEDATA2_MAPY
 	sub b           ; relative to player position
-	call Func_5033
+	call TileOffsetToPixels
 	sub $4          ; - 4
 	dec h
 	ld [hli], a     ; [x#SPRITESTATEDATA1_YPIXELS]
@@ -428,20 +431,26 @@ InitializeSpriteScreenPosition:
 	ld b, a
 	ld a, [hli]     ; x#SPRITESTATEDATA2_MAPX
 	sub b           ; relative to player position
-	call Func_5033
+	call TileOffsetToPixels
 	dec h
 	ld [hl], a      ; [x#SPRITESTATEDATA1_XPIXELS]
 	ret
 
-Func_5033:
-	jr nc, .asm_503c
+; Scale a signed tile offset into a signed pixel offset (x16).
+;
+; a: the offset, as left by the caller's `sub` - so the CARRY FLAG is an input:
+; set means the subtraction borrowed and the value is negative. `swap` only
+; multiplies a magnitude, so a negative value is negated, swapped, and negated
+; back.
+TileOffsetToPixels:
+	jr nc, .positive
 	cpl
 	inc a
 	swap a
 	cpl
 	inc a
 	ret
-.asm_503c
+.positive
 	swap a
 	ret
 

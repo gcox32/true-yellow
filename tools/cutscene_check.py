@@ -550,6 +550,40 @@ PARKED_SCENES = [
 		"table": "PokemonTower2FRivalOnLeftParkTable",
 	},
 	{
+		# Both Bill walks plus Bill's own later walk: the followers are parked
+		# once and stay put for the whole sequence, so the doorway tiles have to
+		# clear all three.
+		"name": "Bill's House - followers wait by the door (player above Bill)",
+		"map": "BillsHouse", "trigger": (6, 4), "forced": [],
+		"npc_paths": [((6, 5), "MovementData_1e79c"), ((6, 5), "MovementData_1e7a0"),
+		              ((4, 4), "MovementData_1e807")],
+		"table": "BillsHouseDoorwayParkTable",
+	},
+	{
+		"name": "Bill's House - followers wait by the door (player beside Bill)",
+		"map": "BillsHouse", "trigger": (5, 5), "forced": [],
+		"npc_paths": [((6, 5), "MovementData_1e79c"), ((6, 5), "MovementData_1e7a0"),
+		              ((4, 4), "MovementData_1e807")],
+		"table": "BillsHouseDoorwayParkTable",
+	},
+	{
+		"name": "Cerulean City - rival exits down column 21",
+		"map": "CeruleanCity", "trigger": (20, 6), "forced": [],
+		"npc_paths": [((20, 5), "CeruleanCityMovement4")],
+		"table": "CeruleanCityRivalExitEastParkTable",
+		# Route 24 is north across this same bridge, so the only way to be north
+		# of the triggers is to have crossed them: seed the region from the city
+		# side. The other trigger stays impassable.
+		"entries": [(21, 11)], "triggers": [(20, 6), (21, 6)],
+	},
+	{
+		"name": "Cerulean City - rival exits down column 20",
+		"map": "CeruleanCity", "trigger": (21, 6), "forced": [],
+		"npc_paths": [((21, 5), "CeruleanCityMovement3")],
+		"table": "CeruleanCityRivalExitWestParkTable",
+		"entries": [(21, 11)], "triggers": [(20, 6), (21, 6)],
+	},
+	{
 		"name": "SS Anne 2F - rival exits down column 36",
 		"map": "SSAnne2F", "trigger": (37, 8), "forced": [],
 		"npc_paths": [((36, 8), ".RivalDownFourMovement")],

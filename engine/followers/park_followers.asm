@@ -225,3 +225,51 @@ SSAnne2FRivalWalkAroundParkTable::
 	park_follower MISTY_TRAIL_SLOT,  37, 9,   36,10
 	park_follower BROCK_TRAIL_SLOT,  37,10,   35,10
 	park_followers_end
+
+; Cerulean City - the rival's exit after the Nugget Bridge battle. Same shape as
+; SS Anne: a two-wide corridor (the bridge, cols 20-21) with the triggers
+; (20,6)/(21,6) spanning it, and he leaves down whichever column the player
+; isn't in.
+;
+; His walk DOWN to meet the player needs no table - the triggers seal the
+; bridge, so the player can never have been north of them and the followers are
+; always below him.
+;
+; As on SS Anne, the followers cannot simply step across: they occupy both
+; columns, so they swap ROWS as well, which keeps them off each other.
+
+CeruleanCityRivalExitEastParkTable::
+	; player on (20,6); he steps right and exits down column 21
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,  21, 7,   20, 8
+	park_follower BROCK_TRAIL_SLOT,  21, 8,   20, 7
+	park_followers_end
+
+CeruleanCityRivalExitWestParkTable::
+	; player on (21,6); he steps left and exits down column 20
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,  20, 7,   21, 8
+	park_follower BROCK_TRAIL_SLOT,  20, 8,   21, 7
+	park_followers_end
+
+; Bill's House - Bill's Pokemon walks into the teleporter machine, and later
+; Bill himself walks across the room. Three separate walks in an 8x8 room, and
+; every tile the player can talk from leaves a follower on one of them.
+;
+; Rather than dodge three paths, send both followers to the doorway and leave
+; them there: (1,7) and (4,7) flank the double-wide entrance at (2,7)/(3,7),
+; and neither is on any of the three walks. Unconditional, because there is no
+; arrangement where standing put is safe.
+;
+; Parking once here covers Bill's later walk too: the player doesn't move for
+; the rest of the sequence, so the trail - and therefore the followers - stay
+; where this puts them.
+;
+; Note (6,2) is the machine, a wall tile Bill's Pokemon steps into on purpose;
+; a path check flagging it is a false positive, not a bug.
+
+BillsHouseDoorwayParkTable::
+	;                     slot              dest x, y
+	park_follower_always MISTY_TRAIL_SLOT,    1, 7
+	park_follower_always BROCK_TRAIL_SLOT,    4, 7
+	park_followers_end

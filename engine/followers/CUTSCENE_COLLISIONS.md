@@ -350,6 +350,24 @@ one across lands it on the other. `--verify-parks` caught it:
 The real answer spreads them out, one dropping to the wider stretch at row 10.
 No amount of reading the map catches this; the joint check does.
 
+### Sometimes the answer is "get out of the room"
+
+Bill's House is a tiny 8x8 room with three separate scripted walks, and every
+tile the player can talk from leaves a follower on one of them. Solving three
+paths at once was not worth it: instead both followers are sent unconditionally
+to **(1,7)** and **(4,7)**, flanking the double-wide doorway at (2,7)/(3,7),
+which is clear of all three walks.
+
+Parking once covers the whole sequence. The player doesn't move again until it
+ends, so the trail - and therefore the followers - stay where they were put,
+including through Bill's own later walk.
+
+One rough edge worth knowing rather than hiding: a follower standing on (6,4)
+routes doorward Y-first through **(6,5)**, Bill's start tile, as he steps up out
+of it, so they swap tiles and visibly cross for half a step. Every doorward
+route from (6,4) does this - Y-then-X pathing leaves no alternative - and it is
+far milder than being walked over, which is what happens with no table at all.
+
 ### Choosing destinations
 
 Destinations are solved against every *joint* (Misty, Brock) outcome, not two
@@ -406,58 +424,45 @@ the danger tiles are plausible but wrong.
 Where no safe destination exists, the fallback is a second primitive: hide the
 follower for the scene and restore after.
 
-### Remaining work
+### Status
 
-**Every scene is now converted.** `--verify-parks` covers 11 of them.
+This table accounts for all **35 `call MoveSprite` sites** from `--list-scenes`,
+not a hand-picked subset. An earlier version of this document tracked only the
+scenes named in the repo-root `TODO.md`, which left nine maps unexamined while
+reading as if it were complete - hence the full enumeration here.
 
-Applying the sealed-region rule to every branch removed a great deal of
-phantom work - several scenes the looser model flagged turn out to be
-collisions the map makes unreachable.
+| Map | Sites | Status |
+|-----|-------|--------|
+| Mt Moon B2F | 2 | converted · tested |
+| Pokemon Tower 2F | 1 | converted · tested (2 branches) |
+| Silph Co 7F | 2 | converted · tested (exit only; approach is clear) |
+| Game Corner | 1 | converted · tested (2 routes) |
+| SS Anne 2F | 2 | converted · tested (exit only; approach is clear) |
+| Route 22 | 3 | converted (rival 1's two exits); rival 2 and approaches clear |
+| Cerulean City | 2 | converted (exit only; approach is clear) |
+| Pokemon Tower 7F | 2 | clear - no work |
+| Rocket Hideout B4F | 2 | clear - no work |
+| Silph Co 11F | 3 | Jessie/James clear; **Giovanni's walk unexamined** |
+| Oak's Lab | 6 | N/A - pre-follower |
+| Pallet Town | 1 | N/A - pre-follower (Oak stops you leaving, before you have a Pokemon) |
+| Bill's House | 2 | converted - followers wait by the door |
+| Pewter City | 2 | N/A - the museum/gym guides |
+| **Champion's Room** | **2** | **collides from 3 of 4 positions** |
+| **Cinnabar Gym** | **1** | **unexamined** |
+| **Viridian City** | **1** | **unexamined** |
 
-| Map | Outcome |
-|-----|---------|
-| Mt Moon B2F | converted · tested |
-| Pokemon Tower 2F (x2) | converted · tested |
-| Silph Co 7F (x2) | converted · tested |
-| Game Corner (x2) | converted · tested |
-| Route 22 rival 1 (x2) | converted |
-| SS Anne 2F (x2) | converted |
-| **Pokemon Tower 7F** | **clear - no work** |
-| **Rocket Hideout B4F** | **clear - no work** |
-| **Silph Co 11F** | **clear - no work** |
-| **Route 22 rival 2** | **clear - no work** |
+`--verify-parks` guards the 15 converted scenes and runs on every `make`.
 
-Every *approach* stage is clear except Mt Moon's, because in each case the
-triggers span the only route in, so the NPC walks down to a player whose
-followers are always behind them. Only exits needed tables.
+### Still to do
 
-Why the clear ones are clear:
+- **Champion's Room** (2 sites): Oak walks up column 3 from (3,7) to (3,2).
+  Only beating the rival from (5,2) is clean.
+- **Silph Co 11F** Giovanni's own walk, **Cinnabar Gym** and **Viridian City**
+  have not been looked at.
 
-- **Pokemon Tower 7F** is a vertical corridor. Row 13 is two tiles wide, so the
-  only way north is onto a trigger. Followers can never leave rows 13-15; the
-  Rockets never come below row 12.
-- **Rocket Hideout B4F** is sealed harder still: the elevator at (24,15)/(25,15)
-  is a **two-tile pocket** whose only exits are the triggers. Exactly one legal
-  approach. Jessie and James standing on (24,10)/(25,10) are themselves the only
-  tiles joining the trigger area to the north half of the floor - they wall off
-  their own scene.
-- **Silph Co 11F** was always clear: the Rockets flee upward, away from the player.
-- **Route 22 rival 2** exits *westward*, back the way he came, while the
-  followers trail east of the player.
+That is 5 sites across 4 maps.
 
-**Route 22 rival 1** needs only Misty. Beating Pewter Gym grants the Boulder
-Badge (which is what makes Brock follow) and in the same script resets
-`EVENT_1ST_ROUTE22_RIVAL_BATTLE` (`scripts/PewterGym.asm`), so Brock and that
-scene are mutually exclusive by construction. `PARKED_SCENES` records this with
-a `followers` list, so the verifier doesn't demand coverage for a follower who
-cannot attend.
-
-**Game Corner** was the odd one out: its Rocket has no trainer header, so he
-never walks up - he's engaged by talking, and the player is simply adjacent.
-Three talk positions exist, (8,5), (10,5) and (9,6) ((9,4) is wall), and the
-script picks his route from the player's coords rather than a coord-array
-trigger, so the park call mirrors that same condition. Talking from (8,5) needs
-no entries: reaching a tile on his route from there means walking through him,
-and he blocks his own tile. Verified in-game, all three positions.
-
-No scene needed the hide-and-restore fallback.
+Check follower gating before solving any of them - it has ruled out scenes for
+free three times now: Route 22's first rival battle (Pewter Gym grants the
+Boulder Badge and resets the battle event in the same script, so Brock can never
+attend), Oak's Lab and Pallet Town (both before any follower exists).

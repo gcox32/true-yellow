@@ -58,6 +58,9 @@ BillsHouseScript1:
 BillsHouseScript2:
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
+; Send the followers to flank the doorway and leave them there for the whole
+; sequence - see chain_follow.asm.
+	park_followers BillsHouseDoorwayParkTable
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
 	ld de, MovementData_1e79c

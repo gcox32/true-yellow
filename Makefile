@@ -29,6 +29,8 @@ else
 SHA1 := sha1sum
 endif
 
+PYTHON ?= python3
+
 RGBDS ?=
 RGBASM  ?= $(RGBDS)rgbasm
 RGBFIX  ?= $(RGBDS)rgbfix
@@ -47,9 +49,11 @@ RGBGFXFLAGS  ?= -Weverything
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all yellow yellow_debug clean tidy compare tools
+.PHONY: all yellow yellow_debug clean tidy compare tools verify-parks
 
-all: $(roms)
+# `all` lints the follower park tables; `yellow` skips it if you need the ROM
+# built regardless. See engine/followers/CUTSCENE_COLLISIONS.md.
+all: verify-parks $(roms)
 yellow:       pokeyellow.gbc
 yellow_debug: pokeyellow_debug.gbc
 yellow_vc:    pokeyellow.patch
@@ -78,6 +82,13 @@ tidy:
 	      $(pokeyellow_debug_obj) \
 	      rgbdscheck.o
 	$(MAKE) clean -C tools/
+
+# Re-check every ParkFollowers table against the cutscene it guards: that each
+# destination is walkable, off the NPC's path, reachable in time, and that the
+# two followers never end up on the same tile. Reads the tables straight out of
+# the asm, so the source stays the authority.
+verify-parks:
+	$(PYTHON) tools/cutscene_check.py --verify-parks
 
 compare: $(roms) $(patches)
 	@$(SHA1) -c roms.sha1

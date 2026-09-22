@@ -164,6 +164,17 @@ CeruleanCityRivalDefeatedScript:
 	ld a, CERULEANCITY_RIVAL
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
+; Swap the followers into the column he isn't using; see chain_follow.asm.
+	ASSERT BANK(CeruleanCityRivalExitEastParkTable) == BANK(ParkFollowers)
+	ASSERT BANK(CeruleanCityRivalExitWestParkTable) == BANK(ParkFollowers)
+	ld de, CeruleanCityRivalExitEastParkTable
+	ld a, [wXCoord]
+	cp 20
+	jr z, .got_park_table
+	ld de, CeruleanCityRivalExitWestParkTable
+.got_park_table
+	park_followers_de
+
 	ld a, [wXCoord]
 	cp 20 ; is the player standing on the right side of the bridge?
 	jr nz, .playerOnRightSideOfBridge
