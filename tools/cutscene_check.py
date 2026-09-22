@@ -550,6 +550,25 @@ PARKED_SCENES = [
 		"table": "PokemonTower2FRivalOnLeftParkTable",
 	},
 	{
+		"name": "Route 22 - rival 1 exits (player north)",
+		"map": "Route22", "trigger": (29, 4), "forced": [],
+		"npc_paths": [((29, 5), "Route22Rival1ExitMovementData1")],
+		"table": "Route22Rival1Exit1ParkTable",
+		"entries": ["borders"], "triggers": [(29, 4), (29, 5)],
+		# Pewter Gym grants the Boulder Badge (Brock starts following) and in the
+		# same breath resets EVENT_1ST_ROUTE22_RIVAL_BATTLE, so Brock can never
+		# be present for this scene.
+		"followers": ["Misty"],
+	},
+	{
+		"name": "Route 22 - rival 1 exits (player south)",
+		"map": "Route22", "trigger": (29, 5), "forced": [],
+		"npc_paths": [((28, 5), "Route22Rival1ExitMovementData2")],
+		"table": "Route22Rival1Exit2ParkTable",
+		"entries": ["borders"], "triggers": [(29, 4), (29, 5)],
+		"followers": ["Misty"],
+	},
+	{
 		"name": "Game Corner - Rocket leaves by the direct route",
 		"map": "GameCorner", "trigger": (9, 6), "forced": [],
 		"npc_paths": [((9, 5), "GameCornerMovement_Rocket_WalkDirect")],
@@ -649,6 +668,41 @@ def joint_outcomes(grid, trigger, forced=(), extra_blocked=(), region=None):
 	return sorted(out), cur
 
 
+def scene_region(grid, scene):
+	"""Tiles the player can stand on before the scene fires.
+
+	Given `entries` (warps, or "borders" for an outdoor map reached across map
+	connections), flood from them without crossing a trigger. Returns None when
+	the scene doesn't declare any, meaning "anywhere walkable" - a superset, so
+	still safe, just looser.
+	"""
+	if scene.get("region"):
+		return scene["region"]
+	entries = scene.get("entries")
+	if not entries:
+		return None
+	seeds = []
+	for e in entries:
+		if e == "borders":
+			seeds += [(x, y) for y in range(grid.height) for x in range(grid.width)
+			          if (x in (0, grid.width - 1) or y in (0, grid.height - 1))
+			          and grid.is_walkable(x, y)]
+		else:
+			seeds.append(e)
+	triggers = set(scene.get("triggers", [scene["trigger"]]))
+	blocked = {(o["x"], o["y"]) for o in grid.objects} | triggers
+	seen = {s for s in seeds if grid.is_walkable(*s) and s not in blocked}
+	frontier = list(seen)
+	while frontier:
+		c = frontier.pop()
+		for dx, dy in STEP_DIRS.values():
+			n = (c[0] + dx, c[1] + dy)
+			if n not in seen and grid.is_walkable(*n) and n not in blocked:
+				seen.add(n)
+				frontier.append(n)
+	return seen | {scene["trigger"]}
+
+
 def verify_parks():
 	failures = 0
 	for scene in PARKED_SCENES:
@@ -669,7 +723,8 @@ def verify_parks():
 		# can be trailing there.
 		pairs, player = joint_outcomes(grid, scene["trigger"], scene["forced"],
 		                               extra_blocked=[st for st, _ in scene["npc_paths"]],
-		                               region=scene.get("region"))
+		                               region=scene_region(grid, scene))
+		present = scene.get("followers", TRAIL_OWNERS[1:])
 
 		problems = []
 		always = {who: dest for who, danger, dest in table if danger is None}
@@ -700,10 +755,12 @@ def verify_parks():
 			m2 = always.get("Misty") or lookup.get(("Misty", m), m)
 			b2 = always.get("Brock") or lookup.get(("Brock", b), b)
 			for who, t in (("Misty", m2), ("Brock", b2)):
+				if who not in present:
+					continue          # that follower can't be in this scene at all
 				if t in path:
 					problems.append("approach Misty=%s Brock=%s: %s still on the path at "
 					                "(%d,%d)" % (m, b, who, t[0], t[1]))
-			if m2 == b2:
+			if m2 == b2 and len(present) == 2:
 				problems.append("approach Misty=%s Brock=%s: both end on (%d,%d)"
 				                % (m, b, m2[0], m2[1]))
 

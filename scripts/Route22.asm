@@ -174,6 +174,17 @@ Route22Rival1AfterBattleScript:
 	call DisplayTextID
 	call StopAllMusic
 	farcall Music_RivalAlternateStart
+; Walk Misty clear of whichever exit route he takes; see chain_follow.asm.
+	ASSERT BANK(Route22Rival1Exit1ParkTable) == BANK(ParkFollowers)
+	ASSERT BANK(Route22Rival1Exit2ParkTable) == BANK(ParkFollowers)
+	ld de, Route22Rival1Exit1ParkTable
+	ld a, [wSavedCoordIndex]
+	cp 1
+	jr z, .got_park_table
+	ld de, Route22Rival1Exit2ParkTable
+.got_park_table
+	park_followers_de
+
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, lower entry in Route22DefaultScript.Route22RivalBattleCoords
 	jr nz, .exit_movement_2

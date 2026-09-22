@@ -2624,3 +2624,21 @@ GameCornerRocketWalkAroundParkTable::
 	park_follower BROCK_TRAIL_SLOT,  10, 6,    8, 6
 	park_follower BROCK_TRAIL_SLOT,  12, 6,   13, 6
 	park_followers_end
+
+; Route 22 - the rival's exit after the FIRST battle. Misty only: beating
+; Pewter Gym is what makes Brock follow (Boulder Badge) and the same script
+; resets EVENT_1ST_ROUTE22_RIVAL_BATTLE (scripts/PewterGym.asm), so Brock and
+; this scene are mutually exclusive. The second Route 22 battle, which does
+; have both followers, needs no table - that rival exits back the way he came,
+; westward, while the followers trail east of the player.
+
+Route22Rival1Exit1ParkTable::
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,  30, 5,   30, 4
+	park_followers_end
+
+Route22Rival1Exit2ParkTable::
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,  30, 4,   30, 5
+	park_follower MISTY_TRAIL_SLOT,  31, 5,   30, 5
+	park_followers_end
