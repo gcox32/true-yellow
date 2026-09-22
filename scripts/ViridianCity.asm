@@ -217,6 +217,9 @@ ViridianCityOldManEndInitialCatchTrainingScript:
 	ret
 
 ViridianCityPostInitialCatchTraining:
+; Step Misty out of whichever column he walks down; see chain_follow.asm.
+	park_followers ViridianCityOldManParkTable
+
 	ld de, ViridianCityOldManMovementData2
 	ld a, [wXCoord]
 	cp 19

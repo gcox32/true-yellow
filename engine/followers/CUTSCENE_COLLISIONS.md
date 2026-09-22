@@ -466,17 +466,17 @@ reading as if it were complete - hence the full enumeration here.
 | Pewter City | 2 | N/A - the museum/gym guides |
 | **Champion's Room** | **2** | **collides from 3 of 4 positions** |
 | **Cinnabar Gym** | **1** | **unexamined** |
-| **Viridian City** | **1** | **unexamined** |
+| Viridian City | 1 | converted - Misty only |
 
-`--verify-parks` guards the 17 converted scenes and runs on every `make`.
+`--verify-parks` guards the 19 converted scenes and runs on every `make`.
 
 ### Still to do
 
 - **Champion's Room** (2 sites): Oak walks up column 3 from (3,7) to (3,2).
   Only beating the rival from (5,2) is clean.
-- **Cinnabar Gym** and **Viridian City** have not been looked at.
+- **Cinnabar Gym** has not been looked at.
 
-That is 4 sites across 3 maps.
+That is 3 sites across 2 maps.
 
 Check follower gating before solving any of them - it has ruled out scenes for
 free three times now: Route 22's first rival battle (Pewter Gym grants the

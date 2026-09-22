@@ -550,6 +550,22 @@ PARKED_SCENES = [
 		"table": "PokemonTower2FRivalOnLeftParkTable",
 	},
 	{
+		"name": "Viridian City - catch-training old man walks back (player right)",
+		"map": "ViridianCity", "trigger": (19, 9), "forced": [],
+		"npc_paths": [((18, 9), "ViridianCityOldManMovementData2")],
+		"table": "ViridianCityOldManParkTable",
+		# Brock needs the Boulder Badge, several towns away; Misty has followed
+		# since Pallet Town. Earliest scene in the game with a follower.
+		"followers": ["Misty"],
+	},
+	{
+		"name": "Viridian City - catch-training old man walks back (player below)",
+		"map": "ViridianCity", "trigger": (18, 10), "forced": [],
+		"npc_paths": [((18, 9), "ViridianCityOldManMovementData1")],
+		"table": "ViridianCityOldManParkTable",
+		"followers": ["Misty"],
+	},
+	{
 		"name": "Silph Co 11F - Giovanni steps down (player below)",
 		"map": "SilphCo11F", "trigger": (6, 13), "forced": [],
 		"npc_paths": [((6, 9), ".GiovanniMovement")],

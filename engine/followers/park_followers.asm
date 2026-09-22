@@ -300,3 +300,26 @@ SilphCo11FGiovanniPlayerRightParkTable::
 	park_follower BROCK_TRAIL_SLOT,   6,10,    5,10
 	park_follower BROCK_TRAIL_SLOT,   6,12,    5,11
 	park_followers_end
+
+; Viridian City - the catch-training old man walks back down the corridor he
+; was gating. Like several other scenes he uses the column the player isn't in:
+; straight down column 18 if the player is on (19,9), or a step right and down
+; column 19 otherwise.
+;
+; Misty only. This is the earliest scene in the game where a follower exists at
+; all - EVENT_MISTY_FOLLOWING_PLAYER is set back in Pallet Town
+; (scripts/PalletTown.asm) - while Brock needs the Boulder Badge from Pewter,
+; which is several towns later. No joint constraint, so one entry per tile.
+;
+; He can only be approached from below or from the right; he gates the route
+; north, so (18,8) above him is unreachable.
+;
+; One table serves both routes: each entry only fires on a tile that follower
+; can occupy in the branch it belongs to.
+
+ViridianCityOldManParkTable::
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,  19, 9,   19, 8
+	park_follower MISTY_TRAIL_SLOT,  18,10,   17,10
+	park_follower MISTY_TRAIL_SLOT,  19,11,   20,11
+	park_followers_end
