@@ -95,6 +95,63 @@ Each follower has specific conditions that must be met to appear:
 4. Pikachu is spawned (movement status != 0)
 5. Not biking or surfing (`wWalkBikeSurfState` == 0)
 
+### Joining the Chain
+
+There are three points where a follower who wasn't following before starts
+to: Misty in Pallet Town once Oak has his parcel, Brock in Pewter Gym after
+he's beaten, and Misty again in Cerulean Gym after she's beaten (she drops
+out of the chain on entering the gym, before the battle, so she can stand at
+her gym leader spot). All three go through `JoinMistyFollowerInPlace` /
+`JoinBrockFollowerInPlace`, called from the map script with `d` = the
+follower's map Y + 4 and `e` = their map X + 4. (`de` is the only register
+pair that survives a `farcall` - `Bankswitch` clobbers `af`, `bc` and `hl`.)
+
+The point of these entry points is that the follower joins **from the tile
+the NPC was already standing on**. They deliberately do *not* call
+`InitializePositionTrail`:
+
+- **The trail isn't recomputed.** `InitializePositionTrail` approximates the
+  trail as "N tiles behind wherever the player is, assuming they walked
+  straight in their current facing the whole time", which is wrong the
+  moment the player turned - and it would clobber `trail[0]`, the player's
+  genuine previous tile, which rotates into the new follower's own target on
+  the very next step.
+- **The follower's own trail slot is seeded with their current tile.**
+  `UpdateMisty/BrockIdleState` therefore takes its `.atTarget` branch and
+  leaves them standing. When the player takes a step,
+  `RecordPlayerPositionToTrail` shifts `trail[0]` (the tile the player just
+  left, adjacent to them) into that slot and they walk into the chain under
+  their own power, using the existing fast-walk to close any gap.
+- **Facing is the opposite of the player's** (the `xor $4` idiom), i.e.
+  still looking at the player - which is how the script that just finished
+  talking to them left the NPC. Not copied from the player the way
+  `InitializeMistyPosition.useTrailPosition` does, and not forced `DOWN` the
+  way the door-exit path does.
+
+Because the follower sprite appears on the same tile, with the same picture
+and the same facing as the NPC object the script just hid, the handover is
+atomic and invisible - there's nothing to defer until after the text box.
+Cerulean Gym used to need a dedicated script state
+(`SCRIPT_CERULEANGYM_MISTY_SPAWN_FOLLOWER`) for exactly that reason; it's
+gone, since deferring now only opens a window where she's blinked out.
+
+Two ordering rules the call sites have to keep:
+
+1. **Set the gating flag last.** `ShouldMistySpawn`/`ShouldBrockSpawn` run
+   every frame, independently of the script. Pewter Gym therefore sets the
+   Boulder Badge *after* `JoinBrockFollowerInPlace`, and Cerulean Gym sets
+   `EVENT_BEAT_MISTY` after `JoinMistyFollowerInPlace`, with no
+   frame-yielding call in between - otherwise the follower can spawn itself
+   at whatever stale position it last held before the script gets to place it.
+2. **`hCurrentSpriteOffset` has to be set by hand.**
+   `InitializeSpriteScreenPosition` takes its sprite from that HRAM byte,
+   *not* from `bc` (the `ld bc, wSprite..StateData1` lines before the other
+   `farcall`s to it in `chain_follow.asm` are dead code). Inside the
+   per-frame sprite loop it's already correct; from a map script it holds
+   whichever sprite the loop last finished on, so the join routines point it
+   at `$d0` (Misty, sprite struct 13) or `$e0` (Brock, struct 14) themselves
+   and restore it afterwards.
+
 ### Movement States
 
 Followers use movement status values to track their current state:

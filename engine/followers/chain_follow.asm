@@ -2073,51 +2073,112 @@ UpdateBrockWalkingSprite:
 	ret
 
 ; =====================================
-; MISTY INITIALIZATION (called from script)
+; JOINING THE CHAIN IN PLACE (called from script)
 ; =====================================
 
-InitializeMistyFollower::
-; Called when Misty first starts following - clears state and initializes position
-	; Initialize position trail first (sets up positions for all followers)
-	call InitializePositionTrail
+; A follower who has just agreed to come along is standing somewhere on the
+; map as an ordinary NPC, usually right next to the player and looking at
+; them. The InitializeMistyFollower/InitializeBrockFollower routines these
+; replaced threw that away: they called InitializePositionTrail, which
+; fabricates a trail by assuming the player has been walking in a straight
+; line in their current facing, and then dropped the follower onto the
+; resulting trail slot - so the NPC visibly teleported several tiles across
+; (and through) the player the instant the text box closed, facing the same
+; way the player was. All three join sites now come through here instead,
+; so those two routines are gone.
+;
+; These entry points instead let them join from exactly where they stand:
+;
+;   * The trail is NOT recomputed. trail[0] already holds the player's real
+;     previous tile - genuine history that RecordPlayerPositionToTrail has
+;     been keeping every step since the start of the game - and clobbering
+;     it would feed an invented coordinate into the new follower's own
+;     target on the very next step.
+;   * The follower's own trail slot is seeded with the tile they are
+;     standing on. UpdateMisty/BrockIdleState therefore sees them already
+;     at target and leaves them put: they hold their ground until the
+;     player actually takes a step. That step shifts trail[0] (the tile the
+;     player just left, adjacent to them) into their slot, and they walk
+;     one tile into the chain under their own power.
+;   * Facing is the opposite of the player's, i.e. still looking at the
+;     player - which is how the NPC was left by the script that just
+;     finished talking to them - rather than copied from the player
+;     (InitializeMistyPosition.useTrailPosition) or forced DOWN (the
+;     door-exit path).
+;
+; Because the follower sprite appears on the same tile, with the same
+; picture and the same facing as the NPC object the script just hid, the
+; handover is invisible; there is nothing to defer until after the text box.
+;
+; Input: d = the follower's map Y + 4, e = their map X + 4 (the +4 offset
+; MapY/MapX carry over object_event coords - see macros/scripts/maps.asm).
+; Registers a/bc/hl are free; de must survive a farcall, and it does -
+; Bankswitch only clobbers af, bc and hl.
 
-	; Clear state flags (ensures spawn conditions can pass)
+JoinMistyFollowerInPlace::
+	; Seed trail[1] (Misty's target) with her own tile, so she stands still.
+	ld a, d
+	ld [wPositionTrailY + 1], a
+	ld a, e
+	ld [wPositionTrailX + 1], a
 	xor a
+	ld [wMovementTypeTrail + 1], a  ; walk, not a ledge hop
 	ld [wMistyOverworldStateFlags], a
+	; This path never consults the stored door tile, so make sure a stale one
+	; can't leak into some later fresh spawn. Safe to clear unconditionally:
+	; a join always happens standing still after a conversation, never during
+	; the 3-step doorway cascade that owns these.
+	ld [wExitDoorwayY], a
+	ld [wExitDoorwayX], a
 
-	; Clear StateData1 (16 bytes) - note: StateData1 and StateData2 are NOT contiguous
+	push de
+	; Clear StateData1 and StateData2 (16 bytes each; they are NOT contiguous)
 	ld hl, wSpriteMistyStateData1
 	ld bc, $10
 	xor a
 	call FillMemory
-
-	; Clear StateData2 (16 bytes) - in separate memory page
 	ld hl, wSpriteMistyStateData2
 	ld bc, $10
 	xor a
 	call FillMemory
+	pop de
 
-	; Set sprite picture ID
+	; Sprite identity, and VRAM slot 3 (after player=1, pikachu=2)
 	ld a, SPRITE_MISTY
 	ld [wSpriteMistyStateData1PictureID], a
 	ld [wSpriteMistyStateData2PictureID], a
-
-	; Set VRAM slot (ImageBaseOffset) - required for sprite to be processed
-	ld a, $3  ; Misty is in VRAM slot 3 (after player=1, pikachu=2)
+	ld a, $3
 	ld [wSpriteMistyStateData2ImageBaseOffset], a
 
-	; Set image index to $ff (will be updated on first spawn)
-	ld a, $ff
-	ld [wSpriteMistyStateData1ImageIndex], a
+	; Stand her on her own tile, still looking at the player
+	ld a, d
+	ld [wSpriteMistyStateData2MapY], a
+	ld a, e
+	ld [wSpriteMistyStateData2MapX], a
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	xor $4  ; opposite direction
+	ld [wSpriteMistyStateData1FacingDirection], a
 
-	; Clear movement status (will be set by InitializeMistyPosition)
-	xor a
+	; Idle, ready to move
+	ld a, 1
 	ld [wSpriteMistyStateData1MovementStatus], a
 
-	; Initialize position from trail
-	call InitializeMistyPosition
+	; Derive her screen pixels from the tile we just put her on.
+	; InitializeSpriteScreenPosition takes its sprite from
+	; hCurrentSpriteOffset, NOT from bc - the `ld bc, wSprite..StateData1`
+	; lines before the other farcalls to it in this file are dead code.
+	; Inside the per-frame sprite loop the offset is already right; we're
+	; being called from a map script, where it still holds whichever sprite
+	; the loop happened to finish on, so point it at Misty ourselves. Saved
+	; and restored so we can't disturb a caller that cares.
+	ldh a, [hCurrentSpriteOffset]
+	push af
+	ld a, $d0  ; Misty is sprite struct 13 (see ram/wram.asm)
+	ldh [hCurrentSpriteOffset], a
+	farcall InitializeSpriteScreenPosition
+	pop af
+	ldh [hCurrentSpriteOffset], a
 
-	; Set initial image index (same calculation as UpdatePikachuWalkingSprite)
 	; ImageIndex = (ImageBaseOffset - 1) << 4 | FacingDirection | AnimFrameCounter
 	ld a, [wSpriteMistyStateData2ImageBaseOffset]
 	dec a
@@ -2127,59 +2188,69 @@ InitializeMistyFollower::
 	ld a, [wSpriteMistyStateData1FacingDirection]
 	or b
 	ld [wSpriteMistyStateData1ImageIndex], a
-
-	; Clear anim frame counter
 	xor a
 	ld [wSpriteMistyStateData1AnimFrameCounter], a
 
-	ret
+	jp UpdateMistyGrassPriority
 
-; =====================================
-; BROCK INITIALIZATION (called from script)
-; =====================================
-
-InitializeBrockFollower::
-; Called when Brock first starts following - clears state and initializes position
-	; Initialize position trail first (sets up positions for all followers)
-	call InitializePositionTrail
-
-	; Clear state flags (ensures spawn conditions can pass)
+JoinBrockFollowerInPlace::
+; Brock's twin of JoinMistyFollowerInPlace - see the commentary above it for
+; why none of this recomputes the trail. Only the slot numbers differ: Brock
+; targets trail[2], lives in VRAM slot 4 and is sprite struct 14.
+	; Seed trail[2] (Brock's target) with his own tile, so he stands still.
+	ld a, d
+	ld [wPositionTrailY + 2], a
+	ld a, e
+	ld [wPositionTrailX + 2], a
 	xor a
+	ld [wMovementTypeTrail + 2], a  ; walk, not a ledge hop
 	ld [wBrockOverworldStateFlags], a
+	ld [wExitDoorwayY], a
+	ld [wExitDoorwayX], a
 
-	; Clear StateData1 (16 bytes) - note: StateData1 and StateData2 are NOT contiguous
+	push de
+	; Clear StateData1 and StateData2 (16 bytes each; they are NOT contiguous)
 	ld hl, wSpriteBrockStateData1
 	ld bc, $10
 	xor a
 	call FillMemory
-
-	; Clear StateData2 (16 bytes) - in separate memory page
 	ld hl, wSpriteBrockStateData2
 	ld bc, $10
 	xor a
 	call FillMemory
+	pop de
 
-	; Set sprite picture ID
+	; Sprite identity, and VRAM slot 4 (after player=1, pikachu=2, misty=3)
 	ld a, SPRITE_BROCK
 	ld [wSpriteBrockStateData1PictureID], a
 	ld [wSpriteBrockStateData2PictureID], a
-
-	; Set VRAM slot (ImageBaseOffset) - required for sprite to be processed
-	ld a, $4  ; Brock is in VRAM slot 4 (after player=1, pikachu=2, misty=3)
+	ld a, $4
 	ld [wSpriteBrockStateData2ImageBaseOffset], a
 
-	; Set image index to $ff (will be updated on first spawn)
-	ld a, $ff
-	ld [wSpriteBrockStateData1ImageIndex], a
+	; Stand him on his own tile, still looking at the player
+	ld a, d
+	ld [wSpriteBrockStateData2MapY], a
+	ld a, e
+	ld [wSpriteBrockStateData2MapX], a
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	xor $4  ; opposite direction
+	ld [wSpriteBrockStateData1FacingDirection], a
 
-	; Clear movement status (will be set by InitializeBrockPosition)
-	xor a
+	; Idle, ready to move
+	ld a, 1
 	ld [wSpriteBrockStateData1MovementStatus], a
 
-	; Initialize position from trail
-	call InitializeBrockPosition
+	; Screen pixels from the tile we just put him on - see the matching
+	; comment in JoinMistyFollowerInPlace for why hCurrentSpriteOffset has
+	; to be pointed at him by hand when we're called from a map script.
+	ldh a, [hCurrentSpriteOffset]
+	push af
+	ld a, $e0  ; Brock is sprite struct 14 (see ram/wram.asm)
+	ldh [hCurrentSpriteOffset], a
+	farcall InitializeSpriteScreenPosition
+	pop af
+	ldh [hCurrentSpriteOffset], a
 
-	; Set initial image index (same calculation as UpdatePikachuWalkingSprite)
 	; ImageIndex = (ImageBaseOffset - 1) << 4 | FacingDirection | AnimFrameCounter
 	ld a, [wSpriteBrockStateData2ImageBaseOffset]
 	dec a
@@ -2189,20 +2260,10 @@ InitializeBrockFollower::
 	ld a, [wSpriteBrockStateData1FacingDirection]
 	or b
 	ld [wSpriteBrockStateData1ImageIndex], a
-
-	; Clear anim frame counter
 	xor a
 	ld [wSpriteBrockStateData1AnimFrameCounter], a
 
-	ret
-
-; =====================================
-; HELPER: Initialize Follower Screen Position
-; (This reuses existing InitializeSpriteScreenPosition)
-; =====================================
-
-; Note: The farcall to InitializeSpriteScreenPosition requires bc to point
-; to the sprite's StateData1 base address
+	jp UpdateBrockGrassPriority
 
 ; =====================================
 ; FOLLOWER INTERACTION - TALKING TO MISTY/BROCK

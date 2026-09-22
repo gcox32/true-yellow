@@ -82,11 +82,11 @@ PewterGymScriptReceiveTM34:
 	ldh [hTextID], a
 	call DisplayTextID
 .gymVictory
-	ld hl, wObtainedBadges
-	set BIT_BOULDERBADGE, [hl]
-	ld hl, wBeatGymFlags
-	set BIT_BOULDERBADGE, [hl]
-
+	; Note: the Boulder Badge is NOT set here. ShouldBrockSpawn keys off it
+	; to decide whether to show the follower, and that check runs every
+	; frame, independently of this script - setting it before his follower
+	; position has been established would let him spawn at whatever stale
+	; position he last held. It's set below, right after the handover.
 	ld a, HS_GYM_GUY
 	ld [wMissableObjectIndex], a
 	predef HideObject
@@ -112,8 +112,24 @@ PewterGymScriptReceiveTM34:
 	ld hl, wSprite01StateData2 + SPRITESTATEDATA2_IMAGEBASEOFFSET
 	ld [hl], 0
 
-	; Initialize Brock's follower state (he'll appear when both badges are obtained)
-	farcall InitializeBrockFollower
+	; Hand his follower sprite the exact tile and facing the gym sprite we
+	; just cleared was using, so the swap is invisible: he stays put on
+	; (4,1) still looking down at the player, and only steps into the chain
+	; behind Misty once the player actually moves. Hardcoded (rather than
+	; read from wSprite01StateData2) because he's a STAY-type NPC at a fixed
+	; spot - his object_event position (data/maps/objects/PewterGym.asm) is
+	; X=4, Y=1; MapY/MapX use a +4 coordinate offset (see object_event in
+	; macros/scripts/maps.asm), giving MapY=5, MapX=8.
+	ld d, 1 + 4
+	ld e, 4 + 4
+	farcall JoinBrockFollowerInPlace
+
+	; Only now that his follower position is correct is it safe to let
+	; ShouldBrockSpawn start showing him (see the comment at .gymVictory).
+	ld hl, wObtainedBadges
+	set BIT_BOULDERBADGE, [hl]
+	ld hl, wBeatGymFlags
+	set BIT_BOULDERBADGE, [hl]
 
 	jp PewterGymResetScripts
 

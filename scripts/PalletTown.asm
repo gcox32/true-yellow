@@ -382,8 +382,17 @@ PalletTownMistyText:
 	ld a, HS_PALLET_TOWN_MISTY
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	; Initialize Misty's follower sprite state
-	farcall InitializeMistyFollower
+	; Hand her follower sprite the exact tile and facing the NPC object we
+	; just hid was using, so the swap is invisible: she stays put on (11,2)
+	; still looking left at the player, and only steps into the chain once
+	; the player actually moves. Hardcoded (rather than read from
+	; wSprite04StateData2) because she's a STAY-type NPC at a fixed spot -
+	; her object_event position (data/maps/objects/PalletTown.asm) is X=11,
+	; Y=2, and MapY/MapX carry a +4 offset (see object_event in
+	; macros/scripts/maps.asm), giving MapY=6, MapX=15.
+	ld d, 2 + 4
+	ld e, 11 + 4
+	farcall JoinMistyFollowerInPlace
 	jp TextScriptEnd
 
 .alreadyFollowing
