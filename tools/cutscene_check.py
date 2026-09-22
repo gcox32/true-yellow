@@ -550,6 +550,16 @@ PARKED_SCENES = [
 		"table": "PokemonTower2FRivalOnLeftParkTable",
 	},
 	{
+		"name": "Champion's Room - Oak walks up to congratulate the player",
+		"map": "ChampionsRoom", "trigger": (4, 3), "forced": [],
+		"npc_paths": [((3, 7), "OakEntranceAfterVictoryMovement"),
+		              ((3, 2), "OakExitChampionsRoomMovement")],
+		"table": "ChampionsRoomOakParkTable",
+		# the player is force-walked in from warp 1 at (3,7), so the only tiles
+		# they can have occupied are that path.
+		"region": {(3, 7), (3, 6), (3, 5), (3, 4), (4, 4), (4, 3)},
+	},
+	{
 		"name": "Viridian City - catch-training old man walks back (player right)",
 		"map": "ViridianCity", "trigger": (19, 9), "forced": [],
 		"npc_paths": [((18, 9), "ViridianCityOldManMovementData2")],

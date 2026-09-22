@@ -106,6 +106,9 @@ ChampionsRoomOakArrivesScript:
 	ld a, CHAMPIONSROOM_OAK
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
+; Step the followers out of the column he walks up; see chain_follow.asm.
+	park_followers ChampionsRoomOakParkTable
+
 	ld de, OakEntranceAfterVictoryMovement
 	ld a, CHAMPIONSROOM_OAK
 	ldh [hSpriteIndex], a

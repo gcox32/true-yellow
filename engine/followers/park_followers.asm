@@ -323,3 +323,25 @@ ViridianCityOldManParkTable::
 	park_follower MISTY_TRAIL_SLOT,  18,10,   17,10
 	park_follower MISTY_TRAIL_SLOT,  19,11,   20,11
 	park_followers_end
+
+; Champion's Room - Oak walks up column 3 to congratulate the player, then up
+; the same column again to leave.
+;
+; The player never chooses where to stand here: entering from Lance's Room
+; always lands on warp 1 at (3,7), and ChampionsRoomPlayerEntersScript then
+; force-walks them with a simulated joypad. RivalEntrance_RLEMovement decodes
+; to [UP, RIGHT, UP, UP, UP] but is consumed BACKWARDS - GetSimulatedInput
+; walks the index down from the end - so it actually runs UP, UP, UP, RIGHT, UP:
+;
+;     (3,7) -> (3,6) -> (3,5) -> (3,4) -> (4,4) -> (4,3)
+;                        Brock    Misty   Pikachu  player
+;
+; That leaves both followers parked in Oak's column. One fixed arrangement, so
+; two entries cover it; stepping west clears the column for both of his walks,
+; and the player doesn't move in between so they stay put.
+
+ChampionsRoomOakParkTable::
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,   3, 4,    2, 4
+	park_follower BROCK_TRAIL_SLOT,   3, 5,    2, 5
+	park_followers_end

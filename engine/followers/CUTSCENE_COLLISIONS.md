@@ -350,6 +350,29 @@ one across lands it on the other. `--verify-parks` caught it:
 The real answer spreads them out, one dropping to the wider stretch at row 10.
 No amount of reading the map catches this; the joint check does.
 
+### Check whether the player's position is forced
+
+Three times now the model has produced a wrong answer by guessing where the
+player stands instead of checking:
+
+- Assuming they could stand anywhere adjacent invented collisions on Pokemon
+  Tower 7F and Rocket Hideout B4F, where the triggers actually seal the room.
+- Assuming a *specific* tile did the opposite on Champion's Room: it looked
+  clear, and was not.
+
+Champion's Room is the sharpest example. The player never chooses a tile there.
+Both Lance's Room exits lead to warp 1 at (3,7), and
+`ChampionsRoomPlayerEntersScript` then force-walks them with a simulated
+joypad. Worth knowing: an RLE movement list is consumed **backwards** -
+`DecodeRLEList` fills forward, the script sets the index to the count, and
+`GetSimulatedInput` walks it down - so `[UP, RIGHT, UP, UP, UP]` actually runs
+UP, UP, UP, RIGHT, UP. That leaves both followers sitting in the column Oak
+walks up.
+
+So: before enumerating approaches, look for a coord trigger, a sealed region, or
+forced movement. Any of them can collapse the problem to a handful of
+arrangements - or a single one.
+
 ### Triggers don't always seal
 
 Silph Co 11F is the counter-example to the sealing rule. Giovanni steps down
@@ -464,19 +487,21 @@ reading as if it were complete - hence the full enumeration here.
 | Pallet Town | 1 | N/A - pre-follower (Oak stops you leaving, before you have a Pokemon) |
 | Bill's House | 2 | converted - followers wait by the door |
 | Pewter City | 2 | N/A - the museum/gym guides |
-| **Champion's Room** | **2** | **collides from 3 of 4 positions** |
+| Champion's Room | 2 | converted - Oak's column cleared |
 | **Cinnabar Gym** | **1** | **unexamined** |
 | Viridian City | 1 | converted - Misty only |
 
-`--verify-parks` guards the 19 converted scenes and runs on every `make`.
+`--verify-parks` guards the 20 converted scenes and runs on every `make`.
 
 ### Still to do
 
-- **Champion's Room** (2 sites): Oak walks up column 3 from (3,7) to (3,2).
-  Only beating the rival from (5,2) is clean.
-- **Cinnabar Gym** has not been looked at.
-
-That is 3 sites across 2 maps.
+- **Cinnabar Gym** (1 site) is the only one left, and the only map the static
+  model cannot handle: its quiz gates are runtime tile-block replacements
+  (`UpdateCinnabarGymGateTileBlocks`), so the `.blk` on disk has every gate
+  closed and the walkability grid is wrong for whichever configuration the
+  player is actually in - 2^6 of them. All six quiz tiles, the ones the player
+  stands on to answer, come back non-walkable. Any danger set computed for this
+  map is unreliable until the gates are modelled.
 
 Check follower gating before solving any of them - it has ruled out scenes for
 free three times now: Route 22's first rival battle (Pewter Gym grants the
