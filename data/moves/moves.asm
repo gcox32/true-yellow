@@ -31,7 +31,7 @@ Moves:
 	move WHIRLWIND,    CONFUSION_SIDE_EFFECT,       70,  FLYING,          95, 20 ; type changed from NORMAL to FLYING and given a side effect
 	move FLY,          FLY_EFFECT,                  70,  FLYING,          95, 15
 	move BIND,         TRAPPING_EFFECT,             15,  NORMAL,          85, 20 ; accuracy changed from 75 to 85
-	move SLAM,         BURN_SIDE_EFFECT1,           80,  POISON,          95, 20 ; type changed from NORMAL to POISON, now GASTRO ACID
+	move SLAM,         RECOIL_EFFECT,  		        80,  GROUND,          95, 20 ; type changed from NORMAL to GROUND, added recoil
 	move VINE_WHIP,    NO_ADDITIONAL_EFFECT,        35,  GRASS,          100, 20 ; pp changed from 10 to 20
 	move STOMP,        FLINCH_SIDE_EFFECT2,         65,  NORMAL,         100, 20
 	move DOUBLE_KICK,  ATTACK_TWICE_EFFECT,         40,  FIGHTING,       100, 30 ; power changed from 30 to 40
@@ -60,8 +60,8 @@ Moves:
 	move SING,         SLEEP_EFFECT,                 0,  NORMAL,          70, 15 ; accuracy changed from 55 to 70
 	move SUPERSONIC,   CONFUSION_EFFECT,             0,  NORMAL,          75, 20
 	move SONICBOOM,    FLINCH_SIDE_EFFECT1,         30,  FLYING,         100, 15 ; priority move
-	move DISABLE,      DISABLE_EFFECT,               0,  NORMAL,          85, 20 ; accuracy changed from 55 to 85
-	move ACID,         DEFENSE_DOWN_SIDE_EFFECT,    40,  POISON,         100, 30 ; effect changed to burn chance
+	move DISABLE,      DISABLE_EFFECT,               0,  PSYCHIC_TYPE,    85, 20 ; accuracy changed from 55 to 85
+	move ACID,         BURN_SIDE_EFFECT1,  		    40,  POISON,         100, 30 ; effect changed to burn chance
 	move EMBER,        BURN_SIDE_EFFECT1,           40,  FIRE,           100, 25
 	move FLAMETHROWER, BURN_SIDE_EFFECT1,           95,  FIRE,           100, 15
 	move MIST,         MIST_EFFECT,                  0,  WATER,          100, 30 ; type changed from ICE to WATER
@@ -111,7 +111,7 @@ Moves:
 	move QUICK_ATTACK, NO_ADDITIONAL_EFFECT,        40,  NORMAL,         100, 30
 	move RAGE,         ATTACK_UP_SIDE_EFFECT,       60,  DRAGON,         100, 20 ; new effect
 	move TELEPORT,     SWITCH_AND_TELEPORT_EFFECT,   0,  PSYCHIC_TYPE,   100, 10
-	move NIGHT_SHADE,  NO_ADDITIONAL_EFFECT,        65,  GHOST,          100, 20 ; now a normal GHOST type move
+	move NIGHT_SHADE,  NO_ADDITIONAL_EFFECT,        70,  GHOST,          100, 20 ; now a normal GHOST type move
 	move MIMIC,        MIMIC_EFFECT,                 0,  NORMAL,         100, 10
 	move SCREECH,      DEFENSE_DOWN2_EFFECT,         0,  NORMAL,          85, 30 ; pp changed from 40 to 30
 	move DOUBLE_TEAM,  EVASION_UP1_EFFECT,           0,  NORMAL,         100, 15
@@ -120,7 +120,7 @@ Moves:
 	move MINIMIZE,     EVASION_UP1_EFFECT,           0,  NORMAL,         100, 20
 	move SMOKESCREEN,  ACCURACY_DOWN1_EFFECT,        0,  POISON,         100, 20 ; type changed from NORMAL to POISON
 	move CONFUSE_RAY,  CONFUSION_EFFECT,             0,  GHOST,          100, 10
-	move WITHDRAW,     WITHDRAW_EFFECT,              0,  WATER,          100, 10
+	move WITHDRAW,     WITHDRAW_EFFECT,              0,  NORMAL,         100, 10
 	move DEFENSE_CURL, DEFENSE_SPEED_UP1_EFFECT,     0,  FIGHTING,       100, 30 ; pp changed from 40 to 30
 	move BARRIER,      DEFENSE_UP2_EFFECT,           0,  PSYCHIC_TYPE,   100, 30
 	move LIGHT_SCREEN, LIGHT_SCREEN_EFFECT,          0,  PSYCHIC_TYPE,   100, 30
@@ -131,11 +131,11 @@ Moves:
 	move METRONOME,    METRONOME_EFFECT,             0,  NORMAL,         100, 10
 	move MIRROR_MOVE,  MIRROR_MOVE_EFFECT,           0,  FLYING,         100, 20
 	move SELFDESTRUCT, EXPLODE_RECOIL_EFFECT,      140,  FIRE,           100,  5 ; type changed from NORMAL to FIRE; recoils 100% of damage dealt instead of fainting the user
-	move EGG_BOMB,     NO_ADDITIONAL_EFFECT,       100,  FLYING,          90, 10 ; accuracy changed from 75 to 90, type changed from NORMAL to FLYING
+	move EGG_BOMB,     NO_ADDITIONAL_EFFECT,       100,  NORMAL,          90, 10 ; accuracy changed from 75 to 90
 	move LICK,         PARALYZE_SIDE_EFFECT2,       30,  GHOST,          100, 30 ; power changed from 20 to 30
 	move SMOG,         POISON_SIDE_EFFECT2,         30,  POISON,          85, 20 ; power changed from 20 to 30, accuracy changed from 70 to 85
-	move SLUDGE,       POISON_SIDE_EFFECT2,         65,  POISON,         100, 20
-	move BONE_CLUB,    FLINCH_SIDE_EFFECT1,         65,  GROUND,         100, 20 ; accuracy changed from 85 to 100
+	move SLUDGE,       POISON_SIDE_EFFECT2,         70,  POISON,         100, 20
+	move BONE_CLUB,    FLINCH_SIDE_EFFECT1,         60,  GROUND,         100, 20 ; accuracy changed from 85 to 100
 	move FIRE_BLAST,   BURN_SIDE_EFFECT2,          120,  FIRE,            85,  5
 	move WATERFALL,    FLINCH_SIDE_EFFECT2,         80,  WATER,          100, 15 ; add flinching side effect
 	move CLAMP,        TRAPPING_EFFECT,             35,  WATER,           85, 10 ; accuracy changed from 75 to 85
@@ -146,7 +146,7 @@ Moves:
 	move AMNESIA,      SPECIAL_UP2_EFFECT,           0,  PSYCHIC_TYPE,   100, 20
 	move KINESIS,      ACCURACY_DOWN1_EFFECT,        0,  PSYCHIC_TYPE,   100, 15 ; accuracy changed from 80 to 100
 	move SOFTBOILED,   HEAL_EFFECT,                  0,  NORMAL,         100, 10
-	move HI_JUMP_KICK, JUMP_KICK_EFFECT,            85,  FIGHTING,        90, 20
+	move HI_JUMP_KICK, JUMP_KICK_EFFECT,            90,  FIGHTING,        90, 20
 	move GLARE,        PARALYZE_EFFECT,              0,  NORMAL,          85, 30 ; accuracy changed from 75 to 85
 	move DREAM_EATER,  DREAM_EATER_EFFECT,          90,  GHOST,          100, 15 ; type changed from PSYCHIC_TYPE to GHOST
 	move POISON_GAS,   POISON_SIDE_EFFECT1,         40,  POISON,         100, 20 ; high critical hit ratio
@@ -158,7 +158,7 @@ Moves:
 	move BUBBLE,       SPEED_DOWN_SIDE_EFFECT,      20,  WATER,          100, 30
 	move DIZZY_PUNCH,  CONFUSION_SIDE_EFFECT,       70,  NORMAL,         100, 10
 	move SPORE,        SLEEP_EFFECT,                 0,  GRASS,          100, 15
-	move FLASH,        FLINCH_SIDE_EFFECT1,         60,  ELECTRIC,       100, 15 ; now priority move
+	move FLASH,        FLINCH_SIDE_EFFECT1,         50,  ELECTRIC,       100, 15 ; now priority move
 	move PSYWAVE,      SPECIAL_DOWN_SIDE_EFFECT,    30,  PSYCHIC_TYPE,   100, 20 ; now a normal weak PSYCHIC type move
 	move SPLASH,       SPLASH_EFFECT,                0,  WATER,          100, 10 ; type changed from NORMAL to WATER, pp changed from 40 to 10
 	move ACID_ARMOR,   DEFENSE_UP2_EFFECT,           0,  POISON,         100, 20 ; pp changed from 40 to 20

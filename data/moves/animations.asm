@@ -324,11 +324,10 @@ BindAnim:
 	db -1 ; end
 
 SlamAnim:
-	; battle_anim SLAM, SUBANIM_0_STAR_THRICE, 0, 6 ; replaced with GASTRO ACID
-	battle_anim ROAR, SUBANIM_1_SHOUT, 1, 6
-	battle_anim ROAR, SUBANIM_1_SHOUT, 1, 6
-	battle_anim SLUDGE, SUBANIM_1_BLOB_TOSS, 1, 6
-	battle_anim SLUDGE, SUBANIM_1_BLOB_DRIP_ENEMY, 1, 6
+	battle_anim LEECH_SEED, SE_MOVE_MON_HORIZONTALLY
+	battle_anim NO_MOVE, SE_RESET_MON_POSITION
+	; battle_anim SLAM, SUBANIM_0_STAR_THRICE, 0, 6
+	battle_anim STOMP, SUBANIM_1_STAR_BIG, 1, 8
 	db -1 ; end
 
 VineWhipAnim:

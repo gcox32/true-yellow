@@ -387,7 +387,7 @@ LickitungEvosMoves:
 	db 20, LICK
 	db 23, HEADBUTT
 	db 28, DIZZY_PUNCH
-	db 31, SLAM ; GASTRO ACID
+	db 31, SLAM
 	db 37, MEDITATE
 	db 42, MEGA_PUNCH
 	db 50, HYPER_BEAM
@@ -418,8 +418,7 @@ GrimerEvosMoves:
 ; Learnset
 	db 14, ACID
 	db 23, MINIMIZE
-	db 26, SLAM ; GASTRO ACID
-	db 29, BODY_SLAM
+	db 26, SLAM
 	db 33, ACID_ARMOR
 	db 37, SLUDGE
 	db 41, GROWTH
@@ -745,7 +744,7 @@ SlowpokeEvosMoves:
 	db 24, REST
 	db 29, PSYBEAM
 	db 32, WITHDRAW
-	db 36, SLAM ; GASTRO ACID
+	db 36, BODY_SLAM
 	db 41, AMNESIA
 	db 45, PSYCHIC_M
 	db 0
@@ -826,7 +825,7 @@ MrMimeEvosMoves:
 	db 31, SEISMIC_TOSS
 	db 35, MEDITATE
 	db 39, PSYCHIC_M
-	db 44, SONICBOOM
+	db 44, GLARE
 	db 48, SUBSTITUTE
 	db 53, MIMIC
 	db 0
@@ -865,17 +864,16 @@ ArbokEvosMoves:
 	db 0
 ; Learnset
 	db 10, BITE
-	db 13, SMOG
 	db 17, GLARE
 	db 19, CONSTRICT
 	db 22, MEGA_DRAIN
 	db 30, WITHDRAW
-	db 33, ACID
+	db 33, SLAM
 	db 36, LEECH_LIFE
-	db 38, ACID_ARMOR
+	db 38, WRAP
 	db 43, SUPER_FANG
-	db 50, SKULL_BASH
-	db 54, HAZE
+	db 50, ACID
+	db 54, GLARE
 	db 0
 
 ParasectEvosMoves:
@@ -888,10 +886,10 @@ ParasectEvosMoves:
 	db 21, MEGA_DRAIN
 	db 25, WITHDRAW
 	db 28, SPORE
-	db 33, GROWTH
+	db 33, TWINEEDLE
 	db 39, SOLARBEAM
 	db 44, EARTHQUAKE
-	db 49, TWINEEDLE
+	db 49, GROWTH
 	db 0
 
 PsyduckEvosMoves:
@@ -996,11 +994,11 @@ KoffingEvosMoves:
 	db 13, BARRAGE
 	db 17, POISON_GAS
 	db 21, SMOKESCREEN
-	db 24, SLUDGE
+	db 24, SELFDESTRUCT
 	db 26, SLAM
-	db 33, HAZE
-	db 36, SELFDESTRUCT
-	db 42, GROWTH
+	db 33, SLUDGE
+	db 36, HAZE
+	db 42, TOXIC
 	db 48, EXPLOSION
 	db 0
 
@@ -1452,7 +1450,8 @@ WigglytuffEvosMoves:
 	db 16, DOUBLESLAP
 	db 24, BODY_SLAM
 	db 32, REST
-	db 37, SING
+	db 37, DIZZY_PUNCH
+	db 41, SING
 	db 0
 
 EeveeEvosMoves:
@@ -1545,7 +1544,7 @@ ZubatEvosMoves:
 	db 25, CONFUSE_RAY
 	db 28, SWORDS_DANCE
 	db 30, SLUDGE
-	db 37, SKULL_BASH
+	db 37, SCREECH
 	db 44, SUPER_FANG
 	db 50, POISON_GAS
 	db 55, HAZE
@@ -1563,12 +1562,12 @@ EkansEvosMoves:
 	db 23, MEGA_DRAIN
 	db 26, LEECH_LIFE
 	db 30, WITHDRAW
-	db 33, ACID
+	db 33, SLAM
 	db 36, LEECH_LIFE
-	db 38, ACID_ARMOR
+	db 38, WRAP
 	db 43, SUPER_FANG
-	db 50, SKULL_BASH
-	db 54, HAZE
+	db 50, ACID
+	db 54, GLARE
 	db 0
 
 ParasEvosMoves:
@@ -1581,10 +1580,10 @@ ParasEvosMoves:
 	db 18, SLASH
 	db 21, MEGA_DRAIN
 	db 25, SPORE
-	db 33, GROWTH
+	db 33, TWINEEDLE
 	db 39, SOLARBEAM
 	db 44, EARTHQUAKE
-	db 49, TWINEEDLE
+	db 49, GROWTH
 	db 0
 
 PoliwhirlEvosMoves:
@@ -1818,7 +1817,7 @@ GolbatEvosMoves:
 	db 25, CONFUSE_RAY
 	db 28, SWORDS_DANCE
 	db 30, SLUDGE
-	db 37, SKULL_BASH
+	db 37, SCREECH
 	db 44, SUPER_FANG
 	db 50, POISON_GAS
 	db 55, HAZE
@@ -1844,7 +1843,7 @@ DonphanEvosMoves:
 	db 20, TAKE_DOWN
 	db 30, EARTHQUAKE
 	db 40, DEFENSE_CURL
-	db 45, DOUBLE_EDGE
+	db 45, BODY_SLAM
 	db 50, ROCK_SLIDE
 	db 55, HYPER_BEAM
 	db 60, FISSURE
@@ -1856,7 +1855,7 @@ SnorlaxEvosMoves:
 ; Learnset
 	db 35, BODY_SLAM
 	db 41, POISON_GAS
-	db 46, DOUBLE_EDGE
+	db 46, REST
 	db 51, HYPER_BEAM
 	db 55, MEGA_KICK
 	db 59, EXPLOSION
@@ -1876,8 +1875,7 @@ MukEvosMoves:
 ; Learnset
 	db 14, ACID
 	db 23, MINIMIZE
-	db 26, SLAM ; GASTRO ACID
-	db 29, BODY_SLAM
+	db 26, SLAM
 	db 33, ACID_ARMOR
 	db 37, SLUDGE
 	db 41, GROWTH
@@ -1908,7 +1906,7 @@ CloysterEvosMoves:
 	db 18, CLAMP
 	db 23, WITHDRAW
 	db 28, AURORA_BEAM
-	db 32, WATERFALL
+	db 32, BUBBLEBEAM
 	db 36, VICEGRIP
 	db 45, ICE_BEAM
 	db 52, AMNESIA
@@ -1955,11 +1953,11 @@ WeezingEvosMoves:
 	db 13, BARRAGE
 	db 17, POISON_GAS
 	db 21, SMOKESCREEN
-	db 24, SLUDGE
+	db 24, SELFDESTRUCT
 	db 30, SLAM
-	db 33, HAZE
-	db 36, SELFDESTRUCT
-	db 42, GROWTH
+	db 33, SLUDGE
+	db 36, HAZE
+	db 42, TOXIC
 	db 48, EXPLOSION
 	db 0
 
@@ -2105,7 +2103,7 @@ TentacruelEvosMoves:
 	db 21, WRAP
 	db 23, CONFUSE_RAY
 	db 26, MEGA_DRAIN
-	db 32, SLUDGE
+	db 32, ACID
 	db 36, BARRIER
 	db 43, PSYBEAM
 	db 48, HYDRO_PUMP
@@ -2367,10 +2365,10 @@ CharizardEvosMoves:
 	db 9,  EMBER
 	db 12, BITE
 	db 15, SMOKESCREEN
-	db 23, RAGE
+	db 23, SLASH
 	db 30, FLAMETHROWER
 	db 36, FLY
-	db 38, SLASH
+	db 38, FIRE_BLAST
 	db 46, FIRE_SPIN
 	db 50, DRAGON_RAGE
 	db 0
@@ -2432,7 +2430,7 @@ BellsproutEvosMoves:
 	db 17, ACID
 	db 19, STUN_SPORE
 	db 22, SLEEP_POWDER
-	db 29, SLAM ; GASTRO ACID
+	db 29, MEGA_DRAIN
 	db 35, RAZOR_LEAF
 	db 43, GROWTH
 	db 0
@@ -2447,7 +2445,7 @@ WeepinbellEvosMoves:
 	db 17, ACID
 	db 19, STUN_SPORE
 	db 22, SLEEP_POWDER
-	db 29, SLAM ; GASTRO ACID
+	db 29, MEGA_DRAIN
 	db 35, RAZOR_LEAF
 	db 43, GROWTH
 	db 0
@@ -2461,7 +2459,7 @@ VictreebelEvosMoves:
 	db 17, ACID
 	db 19, STUN_SPORE
 	db 22, SLEEP_POWDER
-	db 29, SLAM ; GASTRO ACID
+	db 29, MEGA_DRAIN
 	db 35, RAZOR_LEAF
 	db 43, SELFDESTRUCT
 	db 48, GROWTH
