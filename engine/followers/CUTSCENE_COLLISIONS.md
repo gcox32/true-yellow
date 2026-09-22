@@ -488,20 +488,39 @@ reading as if it were complete - hence the full enumeration here.
 | Bill's House | 2 | converted - followers wait by the door |
 | Pewter City | 2 | N/A - the museum/gym guides |
 | Champion's Room | 2 | converted - Oak's column cleared |
-| **Cinnabar Gym** | **1** | **unexamined** |
+| Cinnabar Gym | 1 | **known gap - deliberately not solved** |
 | Viridian City | 1 | converted - Misty only |
 
 `--verify-parks` guards the 20 converted scenes and runs on every `make`.
 
-### Still to do
+### Known gap: Cinnabar Gym
 
-- **Cinnabar Gym** (1 site) is the only one left, and the only map the static
-  model cannot handle: its quiz gates are runtime tile-block replacements
-  (`UpdateCinnabarGymGateTileBlocks`), so the `.blk` on disk has every gate
-  closed and the walkability grid is wrong for whichever configuration the
-  player is actually in - 2^6 of them. All six quiz tiles, the ones the player
-  stands on to answer, come back non-walkable. Any danger set computed for this
-  map is unreliable until the gates are modelled.
+Every other site is either converted or shown not to need it. Cinnabar Gym is
+left unsolved on purpose.
+
+It is the one map the static model cannot read. The quiz gates are runtime
+tile-block replacements (`UpdateCinnabarGymGateTileBlocks`, `home/hidden_objects.asm`),
+so the `.blk` on disk has every gate **closed**: all six tiles the player stands
+on to answer a question come back non-walkable, and the real map is whichever of
+**2^6** open/closed configurations the player has unlocked. Any danger set
+computed against the closed map - including the one an earlier draft of this
+document quoted - is unreliable.
+
+Why it is not worth chasing:
+
+- The walks are tiny. A wrong answer sends that gate's trainer one tile left
+  (two for Super Nerd 3, left then up), and he steps *toward* the player from a
+  tile they cannot have walked through.
+- For a follower to be on that one tile, the player has to have paced back and
+  forth right at the gate.
+- Solving it properly means teaching `MapGrid` about dynamic tile blocks and
+  then picking which gate configuration to solve against.
+
+What would change the decision: someone actually seeing a trainer walk over a
+follower there. That is cheap to check with the usual test rig - warp in, answer
+a question wrong - and worth doing before building the machinery. The same
+machinery would also cover Silph Co's card-key doors and Pokemon Mansion's
+switches, if those ever turn out to matter.
 
 Check follower gating before solving any of them - it has ruled out scenes for
 free three times now: Route 22's first rival battle (Pewter Gym grants the
