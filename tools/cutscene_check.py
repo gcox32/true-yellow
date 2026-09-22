@@ -550,6 +550,18 @@ PARKED_SCENES = [
 		"table": "PokemonTower2FRivalOnLeftParkTable",
 	},
 	{
+		"name": "Game Corner - Rocket leaves by the direct route",
+		"map": "GameCorner", "trigger": (9, 6), "forced": [],
+		"npc_paths": [((9, 5), "GameCornerMovement_Rocket_WalkDirect")],
+		"table": "GameCornerRocketDirectParkTable",
+	},
+	{
+		"name": "Game Corner - Rocket walks around the player",
+		"map": "GameCorner", "trigger": (10, 5), "forced": [],
+		"npc_paths": [((9, 5), "GameCornerMovement_Rocket_WalkAroundPlayer")],
+		"table": "GameCornerRocketWalkAroundParkTable",
+	},
+	{
 		"name": "Silph Co 7F - rival exits right",
 		"map": "SilphCo7F", "trigger": (3, 2), "forced": [],
 		"npc_paths": [((3, 3), ".RivalExitRightMovement")],

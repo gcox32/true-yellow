@@ -373,27 +373,43 @@ follower for the scene and restore after.
 ### Remaining work
 
 Converted and verified in-game: **Mt Moon B2F**, **Pokemon Tower 2F** (both
-branches), **Silph Co 7F** (both exit branches; its approach needs nothing).
-The solver has been run over every remaining branch and all of them solve.
+branches), **Silph Co 7F** (both exit branches), **Game Corner** (both routes).
 
-| Map | Branches | Status |
-|-----|----------|--------|
-| Route 22 | rival 1 x2, rival 2 x2 | 3 solved · 1 needs nothing |
-| SS Anne 2F | approach x2, exit x2 | all 4 solved |
-| Pokemon Tower 7F | 2 triggers | both solved |
-| Rocket Hideout B4F | 2 triggers | both solved |
-| Game Corner | 2 routes | both solved |
-| Silph Co 11F | - | already clear, no work |
+Re-checking every remaining branch with the sealed-region rule cut the work
+roughly in half - several scenes the looser model flagged turn out to be
+unreachable collisions:
 
-**Route 22 rival 2, exit 2** comes back "nothing at risk" - the tiles the
-findings table lists for it are the rival's own - so that branch needs no fix.
+| Map | Branches needing a table | Notes |
+|-----|--------------------------|-------|
+| SS Anne 2F | 4 (approach x2, exit x2) | 2 call sites - all that is left |
+| Route 22 | 2 (rival 1's two exits) | rival 2 and both approaches are clear |
+| **Game Corner** | done | (8,5) clear; (10,5) and (9,6) converted |
+| **Pokemon Tower 7F** | **0** | clear |
+| **Rocket Hideout B4F** | **0** | clear |
+| **Silph Co 11F** | **0** | clear |
 
-No branch needs the hide-and-restore fallback. Silph Co 7F's walk-around looked
-unsolvable until two corrections landed: the sealed region above, and the speed
-model. Worth remembering before writing off a scene as impossible.
+Why the three zeroes:
 
-A third model correction came out of solving these: **an NPC occupies its
-scene-time tile, not its `object_event` tile.** Eight branches first reported
-"no candidate for Brock at (29,5)" - the tile the rival had already walked to in
-an earlier stage. Once that tile blocks the player's approach, all eight solve.
-`--verify-parks` now blocks each scene's NPC start tiles for this reason.
+- **Pokemon Tower 7F** is a vertical corridor. Row 13 is two tiles wide, so the
+  only way north is onto a trigger. Followers can never leave rows 13-15; the
+  Rockets never come below row 12.
+- **Rocket Hideout B4F** is sealed harder still: the elevator at (24,15)/(25,15)
+  is a **two-tile pocket** whose only exits are the triggers. Exactly one legal
+  approach, leaving the followers on the elevator tiles. Jessie and James
+  standing on (24,10)/(25,10) are themselves the only tiles joining the trigger
+  area to the north half of the floor - they wall off their own scene.
+- **Silph Co 11F** was always clear: the Rockets flee upward, away from the
+  player.
+
+**Route 22 rival 2** is clear because his exit walks *left*, back the way he
+came, while the followers trail east of the player.
+
+**Game Corner** was the odd one out: its Rocket has no trainer header, so he
+never walks up - he's engaged by talking, and the player is simply adjacent.
+Three talk positions exist, (8,5), (10,5) and (9,6) ((9,4) is wall), and the
+script picks his route from the player's coords rather than a coord-array
+trigger, so the park call mirrors that same condition. Talking from (8,5) needs
+no entries: reaching a tile on his route from there means walking through him,
+and he blocks his own tile. Verified in-game, all three positions.
+
+None of the remaining branches needs the hide-and-restore fallback.

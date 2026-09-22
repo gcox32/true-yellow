@@ -63,6 +63,21 @@ GameCornerRocketBattleScript:
 	ld a, GAMECORNER_ROCKET
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
+; Walk the followers clear of whichever route he's about to take. Same
+; condition as the movement choice below; see chain_follow.asm for the tables.
+	ASSERT BANK(GameCornerRocketDirectParkTable) == BANK(ParkFollowers)
+	ASSERT BANK(GameCornerRocketWalkAroundParkTable) == BANK(ParkFollowers)
+	ld de, GameCornerRocketDirectParkTable
+	ld a, [wYCoord]
+	cp 6
+	jr z, .got_park_table
+	ld a, [wXCoord]
+	cp 8
+	jr z, .got_park_table
+	ld de, GameCornerRocketWalkAroundParkTable
+.got_park_table
+	park_followers_de
+
 	ld de, GameCornerMovement_Rocket_WalkAroundPlayer
 	ld a, [wYCoord]
 	cp 6

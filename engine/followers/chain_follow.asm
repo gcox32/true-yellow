@@ -2601,3 +2601,26 @@ SilphCo7FRivalWalkAroundParkTable::
 	park_follower MISTY_TRAIL_SLOT,   4, 2,    1, 2
 	park_follower BROCK_TRAIL_SLOT,   5, 2,    4, 3
 	park_followers_end
+
+; Game Corner - the Rocket guarding the hideout poster. He has no trainer
+; header, so he never walks up: you talk to him at (9,5) from (8,5), (9,6) or
+; (10,5) ((9,4) is wall), and the script picks his exit route from the player's
+; own coords. Talking from (8,5) is already clear - the player would have had
+; to walk through him to leave a follower on his route - so only the other two
+; positions need entries.
+
+GameCornerRocketDirectParkTable::
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,  10, 5,   10, 7
+	park_follower BROCK_TRAIL_SLOT,  11, 5,   10, 6
+	park_followers_end
+
+GameCornerRocketWalkAroundParkTable::
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,  12, 5,   12, 7
+	park_follower MISTY_TRAIL_SLOT,   9, 6,    7, 6
+	park_follower MISTY_TRAIL_SLOT,  11, 6,   10, 7
+	park_follower BROCK_TRAIL_SLOT,  13, 5,   13, 6
+	park_follower BROCK_TRAIL_SLOT,  10, 6,    8, 6
+	park_follower BROCK_TRAIL_SLOT,  12, 6,   13, 6
+	park_followers_end
