@@ -220,6 +220,45 @@ def decode_movement_byte(value):
 	return 1, 0, "right"
 
 
+# Frames a single tile takes. A scripted NPC going through TryWalking gets
+# WALKANIMATIONCOUNTER = $10; the Yellow fast codes ($04-$07) use 8 with
+# doubled step vectors. A follower closing a gap of 2+ tiles runs at 4
+# (status 5) and its last step at 8 (status 3) - take the slower one, so the
+# margin is never overstated.
+NPC_FRAMES_NORMAL = 16
+NPC_FRAMES_FAST = 8
+FOLLOWER_FRAMES = 8
+
+
+def npc_frames_per_step(map_name, label):
+	"""16 normally; 8 if the data uses the Yellow fast movement codes."""
+	lines = read("scripts", map_name + ".asm").splitlines()
+	start = next((i for i, l in enumerate(lines)
+	              if re.match(r"\s*%s:" % re.escape(label), l)), None)
+	if start is None:
+		return NPC_FRAMES_NORMAL
+	for raw in lines[start + 1:]:
+		line = strip_comment(raw).strip()
+		if not line or re.match(r"^[A-Za-z_.]\w*:", line):
+			continue
+		m = re.match(r"db\s+(\S+)", line)
+		if not m:
+			break
+		tok = m.group(1).rstrip(",")
+		if tok in SYMBOLS:
+			value = SYMBOLS[tok]
+		else:
+			try:
+				value = parse_number(tok) & 0xFF
+			except ValueError:
+				break
+		if value == STAY:
+			break
+		if value in YELLOW_MOVEMENT_TABLE:
+			return NPC_FRAMES_FAST
+	return NPC_FRAMES_NORMAL
+
+
 def parse_movement(map_name, label):
 	"""-> list of (dx, dy, name) for the `db` run starting at `label`.
 
@@ -511,6 +550,22 @@ PARKED_SCENES = [
 		"table": "PokemonTower2FRivalOnLeftParkTable",
 	},
 	{
+		"name": "Silph Co 7F - rival exits right",
+		"map": "SilphCo7F", "trigger": (3, 2), "forced": [],
+		"npc_paths": [((3, 3), ".RivalExitRightMovement")],
+		"table": "SilphCo7FRivalExitRightParkTable",
+		# the (3,2)/(3,3) triggers seal the room; the 3F pad at (5,3) is the
+		# only way in, so these 4 tiles are all the player can have walked.
+		"region": {(5, 3), (4, 3), (5, 2), (4, 2)},
+	},
+	{
+		"name": "Silph Co 7F - rival walks around the player",
+		"map": "SilphCo7F", "trigger": (3, 3), "forced": [],
+		"npc_paths": [((3, 4), ".RivalWalkAroundPlayerMovement")],
+		"table": "SilphCo7FRivalWalkAroundParkTable",
+		"region": {(5, 3), (4, 3), (5, 2), (4, 2)},
+	},
+	{
 		"name": "Pokemon Tower 2F - rival exits, player below",
 		"map": "PokemonTower2F", "trigger": (14, 6), "forced": [],
 		"npc_paths": [((14, 5), "PokemonTower2FRivalRightThenDownMovement")],
@@ -559,13 +614,22 @@ def parse_park_table(map_name, label):
 	return out
 
 
-def joint_outcomes(grid, trigger, forced=()):
-	"""(Misty, Brock) pairs from the SAME approach - their tiles are correlated."""
+def joint_outcomes(grid, trigger, forced=(), extra_blocked=(), region=None):
+	"""(Misty, Brock) pairs from the SAME approach - their tiles are correlated.
+
+	`region`, when given, is the set of tiles the player can occupy before the
+	scene fires. Trigger tiles are one-way: stepping on one starts the scene, so
+	a path that crosses one is impossible, which can seal a room off. On Silph
+	Co 7F that cuts the arrangements from 20 to 4.
+	"""
 	known, cur = [trigger], trigger
 	for d in forced:
 		cur = (cur[0] + STEP_DIRS[d][0], cur[1] + STEP_DIRS[d][1])
 		known.append(cur)
-	blocked = {(o["x"], o["y"]) for o in grid.objects}
+	blocked = {(o["x"], o["y"]) for o in grid.objects} | set(extra_blocked)
+	if region is not None:
+		blocked |= {(x, y) for y in range(grid.height) for x in range(grid.width)
+		            if (x, y) not in region and (x, y) != trigger}
 	out = set()
 	for prefix in backward_walks(grid, trigger, max(0, 4 - len(known)), blocked):
 		h = list(prefix) + known
@@ -578,14 +642,22 @@ def verify_parks():
 	for scene in PARKED_SCENES:
 		grid = MapGrid(scene["map"])
 		path, arrival = set(), {}
+		npc_frames = NPC_FRAMES_NORMAL
 		for start, label in scene["npc_paths"]:
 			cells = grid.walk_path(start, parse_movement(scene["map"], label))
+			npc_frames = min(npc_frames, npc_frames_per_step(scene["map"], label))
 			path |= set(cells)
 			for i, c in enumerate(cells):
 				arrival[c] = min(arrival.get(c, 99), i)
 		table = parse_park_table(scene["map"], scene["table"])
 		lookup = {(who, danger): dest for who, danger, dest in table}
-		pairs, player = joint_outcomes(grid, scene["trigger"], scene["forced"])
+		# The NPC stands on its scene-time start tile, which for a multi-stage
+		# scene is wherever an earlier stage left it rather than its
+		# object_event coord. The player can't walk through it, so no follower
+		# can be trailing there.
+		pairs, player = joint_outcomes(grid, scene["trigger"], scene["forced"],
+		                               extra_blocked=[st for st, _ in scene["npc_paths"]],
+		                               region=scene.get("region"))
 
 		problems = []
 		always = {who: dest for who, danger, dest in table if danger is None}
@@ -608,9 +680,10 @@ def verify_parks():
 				if not grid.is_walkable(*c):
 					problems.append("%s route to (%d,%d) crosses wall (%d,%d)"
 					                % ((who,) + dest + c))
-				elif c in arrival and i >= arrival[c]:
-					problems.append("%s reaches (%d,%d) on step %d but the NPC is there "
-					                "by step %d" % ((who,) + c + (i, arrival[c])))
+				elif c in arrival and i * FOLLOWER_FRAMES >= arrival[c] * npc_frames:
+					problems.append("%s reaches (%d,%d) at frame %d but the NPC is there "
+					                "by frame %d" % ((who,) + c +
+					                (i * FOLLOWER_FRAMES, arrival[c] * npc_frames)))
 		for m, b in pairs:
 			m2 = always.get("Misty") or lookup.get(("Misty", m), m)
 			b2 = always.get("Brock") or lookup.get(("Brock", b), b)

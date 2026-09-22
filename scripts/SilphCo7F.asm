@@ -210,6 +210,18 @@ SilphCo7FRivalAfterBattleScript:
 	call DisplayTextID
 	call StopAllMusic
 	farcall Music_RivalAlternateStart
+; Walk the followers clear of whichever exit route he's about to take. Only the
+; exit needs this - the approach can't reach them (see chain_follow.asm).
+	ASSERT BANK(SilphCo7FRivalExitRightParkTable) == BANK(ParkFollowers)
+	ASSERT BANK(SilphCo7FRivalWalkAroundParkTable) == BANK(ParkFollowers)
+	ld de, SilphCo7FRivalWalkAroundParkTable
+	ld a, [wSavedCoordIndex]
+	cp 1
+	jr nz, .got_park_table
+	ld de, SilphCo7FRivalExitRightParkTable
+.got_park_table
+	park_followers_de
+
 	ld de, .RivalWalkAroundPlayerMovement
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, lower entry in SilphCo7FDefaultScript.RivalEncounterCoordinates

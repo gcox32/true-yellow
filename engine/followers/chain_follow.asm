@@ -2576,3 +2576,28 @@ PokemonTower2FRivalBelowParkTable::
 	park_follower BROCK_TRAIL_SLOT, 16, 7,   17, 7
 	park_followers_end
 
+
+; Silph Co 7F - the rival's exit. Two routes, picked by wSavedCoordIndex.
+;
+; The two trigger tiles (3,2) and (3,3) seal the room: every path from the 3F
+; teleport pad at (5,3) to the rest of the floor crosses one of them, so before
+; the scene fires the player can only ever have been on (5,3), (4,3), (5,2) or
+; (4,2). That leaves 4 possible follower arrangements per branch instead of 20,
+; and means the rival's walk UP to meet the player can never reach them - only
+; his exit needs a table.
+;
+; Brock on (4,3) is deliberately absent: he's safe there, and he's boxed in
+; anyway (every neighbour is on the rival's route, the player, or wall).
+
+SilphCo7FRivalExitRightParkTable::
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,   4, 3,    5, 2
+	park_follower BROCK_TRAIL_SLOT,   5, 3,    4, 2
+	park_followers_end
+
+SilphCo7FRivalWalkAroundParkTable::
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,   5, 3,    1, 2
+	park_follower MISTY_TRAIL_SLOT,   4, 2,    1, 2
+	park_follower BROCK_TRAIL_SLOT,   5, 2,    4, 3
+	park_followers_end

@@ -276,6 +276,44 @@ Brock coming from (13,4) routes Y-first through the wall at (13,6), and several
 other starts cross the rival's route after he has already reached it. Hence the
 conditional tables, whose short per-tile hops are verifiable.
 
+### Trigger tiles are one-way, and can seal a room
+
+Stepping on a trigger tile starts the scene, so the player can never have walked
+*through* one. Any approach path crossing a trigger is impossible - and where
+the triggers sit across the only route in, that seals off everything beyond
+them.
+
+Silph Co 7F is the extreme case. Its triggers (3,2) and (3,3) block every path
+from the 3F teleport pad at (5,3) to the rest of the floor, so before the scene
+fires the player can only ever have stood on **(5,3), (4,3), (5,2), (4,2)**.
+That cuts the arrangements from 20 per branch to 4, and it means the rival's
+walk *up* to meet the player can never reach a follower - only his exit needs a
+table. Confirmed in-game: no approach collision is reachable there.
+
+Scenes can declare this with a `region` in `PARKED_SCENES`; without one the
+enumeration assumes the player could have come from anywhere walkable, which is
+a superset and therefore safe, just looser.
+
+### Followers move faster than scripted NPCs
+
+A destination has to be reached before the NPC arrives, so the comparison needs
+real speeds, not step counts:
+
+| Mover | Frames per tile |
+|-------|-----------------|
+| Follower closing a gap of 2+ tiles (status 5) | 4 |
+| Follower's final step (status 3) | 8 |
+| Scripted NPC via `TryWalking` | 16 |
+| Scripted NPC using the Yellow fast codes `$04`-`$07` | 8 |
+
+So a follower is 2-4x faster than a normal-speed NPC. Comparing step indices
+one-to-one - as this tool first did - rejects perfectly safe routes: it failed
+Misty's 4-step walk to Silph Co 7F (1,3) even though she clears the rival's loop
+with frames to spare. The check now derives the NPC's step time from its
+movement encoding and compares against a follower at a conservative 8 frames,
+so Mt Moon's fast Rockets still get a strict 1:1 test while normal NPCs get the
+honest 2:1.
+
 ### Choosing destinations
 
 Destinations are solved against every *joint* (Misty, Brock) outcome, not two
@@ -331,3 +369,31 @@ the danger tiles are plausible but wrong.
 
 Where no safe destination exists, the fallback is a second primitive: hide the
 follower for the scene and restore after.
+
+### Remaining work
+
+Converted and verified in-game: **Mt Moon B2F**, **Pokemon Tower 2F** (both
+branches), **Silph Co 7F** (both exit branches; its approach needs nothing).
+The solver has been run over every remaining branch and all of them solve.
+
+| Map | Branches | Status |
+|-----|----------|--------|
+| Route 22 | rival 1 x2, rival 2 x2 | 3 solved · 1 needs nothing |
+| SS Anne 2F | approach x2, exit x2 | all 4 solved |
+| Pokemon Tower 7F | 2 triggers | both solved |
+| Rocket Hideout B4F | 2 triggers | both solved |
+| Game Corner | 2 routes | both solved |
+| Silph Co 11F | - | already clear, no work |
+
+**Route 22 rival 2, exit 2** comes back "nothing at risk" - the tiles the
+findings table lists for it are the rival's own - so that branch needs no fix.
+
+No branch needs the hide-and-restore fallback. Silph Co 7F's walk-around looked
+unsolvable until two corrections landed: the sealed region above, and the speed
+model. Worth remembering before writing off a scene as impossible.
+
+A third model correction came out of solving these: **an NPC occupies its
+scene-time tile, not its `object_event` tile.** Eight branches first reported
+"no candidate for Brock at (29,5)" - the tile the rival had already walked to in
+an earlier stage. Once that tile blocks the player's approach, all eight solve.
+`--verify-parks` now blocks each scene's NPC start tiles for this reason.
