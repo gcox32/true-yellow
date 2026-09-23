@@ -80,6 +80,7 @@
 	const ATTACK_UP_SIDE_EFFECT      ; $48 ; used in bide, sharpen, submission and meditate
 	const ATTACK_ACCURACY_UP1_EFFECT ; $49 ; used in sharpen
 	const ATTACK_DEFENSE_UP1_EFFECT  ; $4A ; used in bide
+	const CONFUSION_BIG_SIDE_EFFECT  ; $4B ; used in WHIRLWIND + DIZZY_PUNCH
 	;;;
 	const CONFUSION_SIDE_EFFECT      ; $4C
 	const TWINEEDLE_EFFECT           ; $4D
@@ -92,7 +93,7 @@
 	const LEECH_SEED_EFFECT          ; $54
 	const SPLASH_EFFECT              ; $55
 	const DISABLE_EFFECT             ; $56
-	const EXPLODE_RECOIL_EFFECT      ; $58 ; PureRGBnote: ADDED: selfdestruct/explosion; recoils 100% of damage dealt (1/2 max HP on a miss)
+	const EXPLODE_RECOIL_EFFECT      ; $58 ; ADDED: selfdestruct/explosion; recoils 100% of damage dealt (1/2 max HP on a miss)
 	const WITHDRAW_EFFECT            ; $59 ; added
 	const GROWTH_EFFECT              ; $5A ; added
 

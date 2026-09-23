@@ -28,7 +28,7 @@ Moves:
 	move CUT,          NO_ADDITIONAL_EFFECT,        50,  BUG,             95, 30 ; type changed from NORMAL to BUG
 	move GUST,         NO_ADDITIONAL_EFFECT,        40,  FLYING,         100, 35 ; type changed from NORMAL to FLYING
 	move WING_ATTACK,  NO_ADDITIONAL_EFFECT,        50,  FLYING,         100, 35 ; priority move
-	move WHIRLWIND,    CONFUSION_SIDE_EFFECT,       70,  FLYING,          95, 20 ; type changed from NORMAL to FLYING and given a side effect
+	move WHIRLWIND,    CONFUSION_BIG_SIDE_EFFECT,  100,  FLYING,          85, 20 ; type changed from NORMAL to FLYING and given a side effect
 	move FLY,          FLY_EFFECT,                  70,  FLYING,          95, 15
 	move BIND,         TRAPPING_EFFECT,             15,  NORMAL,          85, 20 ; accuracy changed from 75 to 85
 	move SLAM,         RECOIL_EFFECT,  		        80,  GROUND,          95, 20 ; type changed from NORMAL to GROUND, added recoil
@@ -47,7 +47,7 @@ Moves:
 	move BODY_SLAM,    PARALYZE_SIDE_EFFECT2,       85,  NORMAL,         100, 15
 	move WRAP,         TRAPPING_EFFECT,             15,  NORMAL,          85, 20
 	move TAKE_DOWN,    RECOIL_EFFECT,               90,  NORMAL,          95, 20 ; accuracy changed from 85 to 95
-	move THRASH,       THRASH_PETAL_DANCE_EFFECT,   90,  DRAGON,         100, 20 ; type changed from NORMAL to DRAGON
+	move THRASH,       THRASH_PETAL_DANCE_EFFECT,   90,  NORMAL,         100, 20 ; type changed from NORMAL to DRAGON
 	move DOUBLE_EDGE,  RECOIL_EFFECT,              100,  NORMAL,         100, 15
 	move TAIL_WHIP,    DEFENSE_DOWN1_EFFECT,         0,  NORMAL,         100, 30
 	move POISON_STING, POISON_SIDE_EFFECT1,         15,  POISON,         100, 35
@@ -56,7 +56,7 @@ Moves:
 	move LEER,         DEFENSE_DOWN1_EFFECT,         0,  NORMAL,         100, 30
 	move BITE,         FLINCH_SIDE_EFFECT1,         50,  NORMAL,         100, 25 ; power changed from 60 to 50
 	move GROWL,        ATTACK_DOWN1_EFFECT,          0,  NORMAL,         100, 40
-	move ROAR,         SWITCH_AND_TELEPORT_EFFECT,   0,  DRAGON,         100, 20 ; changed type to dragon
+	move ROAR,         ATTACK_DOWN_SIDE_EFFECT,     40,  DRAGON,         100, 20 ; changed type to dragon
 	move SING,         SLEEP_EFFECT,                 0,  NORMAL,          70, 15 ; accuracy changed from 55 to 70
 	move SUPERSONIC,   CONFUSION_EFFECT,             0,  NORMAL,          75, 20
 	move SONICBOOM,    FLINCH_SIDE_EFFECT1,         30,  FLYING,         100, 15 ; priority move
@@ -116,7 +116,7 @@ Moves:
 	move SCREECH,      DEFENSE_DOWN2_EFFECT,         0,  NORMAL,          85, 30 ; pp changed from 40 to 30
 	move DOUBLE_TEAM,  EVASION_UP1_EFFECT,           0,  NORMAL,         100, 15
 	move RECOVER,      HEAL_EFFECT,                  0,  NORMAL,         100, 20
-	move HARDEN,       DEFENSE_UP1_EFFECT,           0,  NORMAL,         100, 20 ; pp changed from 30 to 20
+	move HARDEN,       DEFENSE_UP1_EFFECT,           0,  ROCK,           100, 20 ; pp changed from 30 to 20
 	move MINIMIZE,     EVASION_UP1_EFFECT,           0,  NORMAL,         100, 20
 	move SMOKESCREEN,  ACCURACY_DOWN1_EFFECT,        0,  POISON,         100, 20 ; type changed from NORMAL to POISON
 	move CONFUSE_RAY,  CONFUSION_EFFECT,             0,  GHOST,          100, 10
@@ -131,7 +131,7 @@ Moves:
 	move METRONOME,    METRONOME_EFFECT,             0,  NORMAL,         100, 10
 	move MIRROR_MOVE,  MIRROR_MOVE_EFFECT,           0,  FLYING,         100, 20
 	move SELFDESTRUCT, EXPLODE_RECOIL_EFFECT,      140,  FIRE,           100,  5 ; type changed from NORMAL to FIRE; recoils 100% of damage dealt instead of fainting the user
-	move EGG_BOMB,     NO_ADDITIONAL_EFFECT,       100,  NORMAL,          90, 10 ; accuracy changed from 75 to 90
+	move EGG_BOMB,     NO_ADDITIONAL_EFFECT,       100,  DRAGON,          90, 10 ; accuracy changed from 75 to 90
 	move LICK,         PARALYZE_SIDE_EFFECT2,       30,  GHOST,          100, 30 ; power changed from 20 to 30
 	move SMOG,         POISON_SIDE_EFFECT2,         30,  POISON,          85, 20 ; power changed from 20 to 30, accuracy changed from 70 to 85
 	move SLUDGE,       POISON_SIDE_EFFECT2,         70,  POISON,         100, 20
@@ -156,7 +156,7 @@ Moves:
 	move SKY_ATTACK,   RECOIL_EFFECT,              120,  FLYING,         100,  5 ; power changed from 140 to 120, accuracy changed from 90 to 100, recoil now
 	move TRANSFORM,    TRANSFORM_EFFECT,             0,  NORMAL,         100, 10 ; now priority move
 	move BUBBLE,       SPEED_DOWN_SIDE_EFFECT,      20,  WATER,          100, 30
-	move DIZZY_PUNCH,  CONFUSION_SIDE_EFFECT,       70,  NORMAL,         100, 10
+	move DIZZY_PUNCH,  CONFUSION_BIG_SIDE_EFFECT,   70,  NORMAL,         100, 10
 	move SPORE,        SLEEP_EFFECT,                 0,  GRASS,          100, 15
 	move FLASH,        FLINCH_SIDE_EFFECT1,         50,  ELECTRIC,       100, 15 ; now priority move
 	move PSYWAVE,      SPECIAL_DOWN_SIDE_EFFECT,    30,  PSYCHIC_TYPE,   100, 20 ; now a normal weak PSYCHIC type move

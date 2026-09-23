@@ -1427,6 +1427,12 @@ ConfusionSideEffect:
 	ret nc
 	jr ConfusionSideEffectSuccess
 
+ConfusionBigSideEffect: ; PureRGBnote: ADDED: confusion effect that has a 30% chance of applying confusion
+	call BattleRandom
+	cp 30 percent ; chance of confusion
+	ret nc
+	jr ConfusionSideEffectSuccess
+
 ConfusionEffect:
 	call CheckTargetSubstitute
 	jr nz, ConfusionEffectFailed
@@ -1466,6 +1472,8 @@ BecameConfusedText:
 	text_end
 
 ConfusionEffectFailed:
+	cp CONFUSION_BIG_SIDE_EFFECT
+	ret z
 	cp CONFUSION_SIDE_EFFECT
 	ret z
 	ld c, 50

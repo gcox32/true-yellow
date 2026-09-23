@@ -699,7 +699,7 @@ OnixEvosMoves:
 	db 22, ROAR
 	db 25, ROCK_THROW
 	db 31, EARTHQUAKE
-	db 39, SHARPEN
+	db 39, SLAM
 	db 45, ROCK_SLIDE
 	db 52, SELFDESTRUCT
 	db 0
@@ -806,7 +806,7 @@ MachokeEvosMoves:
 	db 26, FOCUS_ENERGY
 	db 30, BIND
 	db 35, SUBMISSION
-	db 41, ROCK_SLIDE
+	db 41, SLAM
 	db 44, COMET_PUNCH
 	db 47, MEGA_PUNCH
 	db 52, MEDITATE
@@ -887,7 +887,6 @@ ParasectEvosMoves:
 	db 25, WITHDRAW
 	db 28, SPORE
 	db 33, TWINEEDLE
-	db 39, SOLARBEAM
 	db 44, EARTHQUAKE
 	db 49, GROWTH
 	db 0
@@ -1525,7 +1524,7 @@ MachopEvosMoves:
 	db 26, FOCUS_ENERGY
 	db 30, BIND
 	db 35, SUBMISSION
-	db 41, ROCK_SLIDE
+	db 41, SLAM
 	db 44, COMET_PUNCH
 	db 47, MEGA_PUNCH
 	db 52, MEDITATE
@@ -1581,9 +1580,8 @@ ParasEvosMoves:
 	db 21, MEGA_DRAIN
 	db 25, SPORE
 	db 33, TWINEEDLE
-	db 39, SOLARBEAM
-	db 44, EARTHQUAKE
-	db 49, GROWTH
+	db 38, EARTHQUAKE
+	db 42, GROWTH
 	db 0
 
 PoliwhirlEvosMoves:
@@ -1641,8 +1639,7 @@ BeedrillEvosMoves:
 	db 30, PIN_MISSILE
 	db 35, AGILITY
 	db 40, SWORDS_DANCE
-	db 47, SONICBOOM
-	db 54, HAZE
+	db 47, RAZOR_WIND
 	db 0
 
 DodrioEvosMoves:
@@ -1657,7 +1654,6 @@ DodrioEvosMoves:
 	db 30, DRILL_PECK
 	db 35, TRI_ATTACK
 	db 41, SONICBOOM
-	db 49, TWINEEDLE
 	db 0
 
 PrimeapeEvosMoves:
@@ -1672,11 +1668,9 @@ PrimeapeEvosMoves:
 	db 23, SEISMIC_TOSS
 	db 25, RAGE
 	db 28, THRASH
-	db 35, VICEGRIP
 	db 39, COMET_PUNCH
 	db 45, SUBMISSION
 	db 51, EXPLOSION
-	db 54, SONICBOOM
 	db 0
 
 DugtrioEvosMoves:
@@ -1692,7 +1686,6 @@ DugtrioEvosMoves:
 	db 43, ROCK_THROW
 	db 49, ROCK_SLIDE
 	db 54, FISSURE
-	db 59, SUBMISSION
 	db 0
 
 VenomothEvosMoves:
@@ -1768,7 +1761,7 @@ MachampEvosMoves:
 	db 26, FOCUS_ENERGY
 	db 30, BIND
 	db 35, SUBMISSION
-	db 41, ROCK_SLIDE
+	db 41, SLAM
 	db 44, COMET_PUNCH
 	db 47, MEGA_PUNCH
 	db 52, SKULL_BASH
@@ -2335,10 +2328,10 @@ CharmeleonEvosMoves:
 	db 9,  EMBER
 	db 12, BITE
 	db 15, SMOKESCREEN
-	db 23, RAGE
+	db 23, SLASH
 	db 30, FLAMETHROWER
-	db 38, SLASH
-	db 46, FIRE_SPIN
+	db 38, RAGE
+	db 41, FIRE_SPIN
 	db 0
 
 WartortleEvosMoves:

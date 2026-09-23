@@ -75,6 +75,7 @@ MoveEffectPointerTable:
 	dw StatUpSideEffect          ; ATTACK_UP_SIDE_EFFECT
 	dw AccuracyAttackUpEffect    ; ATTACK_ACCURACY_UP1_EFFECT
 	dw AttackDefenseUpEffect     ; ATTACK_DEFENSE_UP1_EFFECT
+	dw ConfusionBigSideEffect    ; CONFUSION_BIG_SIDE_EFFECT
 	dw ConfusionSideEffect       ; CONFUSION_SIDE_EFFECT
 	dw TwoToFiveAttacksEffect    ; TWINEEDLE_EFFECT
 	dw DefenseSpeedUpEffect      ; DEFENSE_SPEED_UP1_EFFECT
