@@ -49,10 +49,14 @@ RGBGFXFLAGS  ?= -Weverything
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all yellow yellow_debug clean tidy compare tools verify-parks
+.PHONY: all yellow yellow_debug clean tidy compare tools verify-parks docs check-docs
 
 # `all` lints the follower park tables; `yellow` skips it if you need the ROM
 # built regardless. See engine/followers/CUTSCENE_COLLISIONS.md.
+#
+# Target-specific variables carry down to prerequisites, so the check runs quiet
+# as part of a build and verbose when you ask for it by name.
+all: VERIFY_PARKS_FLAGS := --quiet
 all: verify-parks $(roms)
 yellow:       pokeyellow.gbc
 yellow_debug: pokeyellow_debug.gbc
@@ -87,8 +91,28 @@ tidy:
 # destination is walkable, off the NPC's path, reachable in time, and that the
 # two followers never end up on the same tile. Reads the tables straight out of
 # the asm, so the source stays the authority.
+#
+# Run by name you get the per-scene breakdown; `all` sets VERIFY_PARKS_FLAGS to
+# --quiet so a build only hears about tables that actually fail.
 verify-parks:
-	$(PYTHON) tools/cutscene_check.py --verify-parks
+	@$(PYTHON) tools/cutscene_check.py --verify-parks $(VERIFY_PARKS_FLAGS)
+
+# Regenerate the docs whose tables are derived from the data files, so they
+# can't drift from the asm. Only the generated tables are rewritten; the prose
+# around them is left alone. Each generator reports what it wrote, so the raw
+# command line is suppressed.
+#
+# These are phony rather than file rules on purpose: the generators are cheap,
+# and mtimes lie here - editing prose in a doc makes it newer than the asm it
+# derives from, which would leave a stale table looking up to date.
+docs:
+	@$(PYTHON) tools/gen_moves_doc.py
+	@$(PYTHON) tools/gen_types_doc.py
+
+# Fail instead of rewriting - for checking a tree is up to date.
+check-docs:
+	@$(PYTHON) tools/gen_moves_doc.py --check
+	@$(PYTHON) tools/gen_types_doc.py --check
 
 compare: $(roms) $(patches)
 	@$(SHA1) -c roms.sha1

@@ -802,7 +802,9 @@ def scene_region(grid, scene):
 	return seen | {scene["trigger"]}
 
 
-def verify_parks():
+def verify_parks(quiet=False):
+	"""quiet: say nothing about the scenes that pass - `make` runs this every build,
+	and 20 [ok] lines bury anything else the build has to say."""
 	failures = 0
 	for scene in PARKED_SCENES:
 		grid = MapGrid(scene["map"])
@@ -864,13 +866,17 @@ def verify_parks():
 				                % (m, b, m2[0], m2[1]))
 
 		status = "FAIL" if problems else "ok"
-		print("[%s] %s  (%d entr%s, %d approach outcome%s)"
-		      % (status, scene["name"], len(table), "y" if len(table) == 1 else "ies",
-		         len(pairs), "" if len(pairs) == 1 else "s"))
+		if problems or not quiet:
+			print("[%s] %s  (%d entr%s, %d approach outcome%s)"
+			      % (status, scene["name"], len(table), "y" if len(table) == 1 else "ies",
+			         len(pairs), "" if len(pairs) == 1 else "s"))
 		for msg in dict.fromkeys(problems):
 			print("       %s" % msg)
 		failures += bool(problems)
-	print("\n%d scene(s) checked, %d failing" % (len(PARKED_SCENES), failures))
+	if quiet and not failures:
+		print("%d follower park table(s) verified, all ok" % len(PARKED_SCENES))
+	else:
+		print("\n%d scene(s) checked, %d failing" % (len(PARKED_SCENES), failures))
 	return failures
 
 
@@ -1033,6 +1039,8 @@ def main():
 	ap.add_argument("--verify-parks", action="store_true",
 	                help="re-check every ParkFollowers table in the scripts against the "
 	                     "scene it guards")
+	ap.add_argument("--quiet", action="store_true",
+	                help="with --verify-parks, report only the scenes that fail (for `make`)")
 	ap.add_argument("--audit", action="store_true",
 	                help="walk every scene's path and flag any that leaves walkable ground")
 	ap.add_argument("--path", help="movement data label in scripts/<map>.asm")
@@ -1069,7 +1077,7 @@ def main():
 		return
 
 	if args.verify_parks:
-		sys.exit(1 if verify_parks() else 0)
+		sys.exit(1 if verify_parks(args.quiet) else 0)
 
 	if args.audit:
 		audit()
