@@ -567,7 +567,7 @@ ShellderEvosMoves:
 	db 28, CLAMP
 	db 33, WITHDRAW
 	db 38, ICE_BEAM
-	db 44, SPIKE_CANNON
+	db 44, BUBBLEBEAM
 	db 0
 
 TentacoolEvosMoves:
@@ -1902,8 +1902,9 @@ CloysterEvosMoves:
 	db 32, BUBBLEBEAM
 	db 36, VICEGRIP
 	db 45, ICE_BEAM
-	db 52, AMNESIA
-	db 56, SPIKE_CANNON
+	db 52, SPIKE_CANNON
+	db 56, BLIZZARD
+	db 63, CLAMP
 	db 0
 
 ElectrodeEvosMoves:
