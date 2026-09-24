@@ -33,7 +33,7 @@ Moves:
 	move BIND,         TRAPPING_EFFECT,             15,  NORMAL,          85, 20 ; accuracy changed from 75 to 85
 	move SLAM,         RECOIL_EFFECT,  		        80,  GROUND,          95, 20 ; type changed from NORMAL to GROUND, added recoil
 	move VINE_WHIP,    NO_ADDITIONAL_EFFECT,        35,  GRASS,          100, 20 ; pp changed from 10 to 20
-	move STOMP,        FLINCH_SIDE_EFFECT2,         65,  NORMAL,         100, 20
+	move STOMP,        FLINCH_SIDE_EFFECT2,         65,  GROUND,         100, 20 ; type changed to GROUND
 	move DOUBLE_KICK,  ATTACK_TWICE_EFFECT,         40,  FIGHTING,       100, 30 ; power changed from 30 to 40
 	move MEGA_KICK,    NO_ADDITIONAL_EFFECT,       100,  NORMAL,          95, 10 ; power changed from 120 to 100, accuracy changed from 75 to 95, pp changed from 5 to 10
 	move JUMP_KICK,    JUMP_KICK_EFFECT,            70,  FIGHTING,        95, 25

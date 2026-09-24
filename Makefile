@@ -51,13 +51,15 @@ RGBGFXFLAGS  ?= -Weverything
 .SECONDARY:
 .PHONY: all yellow yellow_debug clean tidy compare tools verify-parks docs check-docs
 
-# `all` lints the follower park tables; `yellow` skips it if you need the ROM
-# built regardless. See engine/followers/CUTSCENE_COLLISIONS.md.
+# `all` lints the follower park tables and checks the generated docs against the
+# data they come from; `yellow` skips both if you need the ROM built regardless.
+# See engine/followers/CUTSCENE_COLLISIONS.md. Neither check writes anything - a
+# stale doc fails the build and names the command that fixes it.
 #
 # Target-specific variables carry down to prerequisites, so the check runs quiet
 # as part of a build and verbose when you ask for it by name.
 all: VERIFY_PARKS_FLAGS := --quiet
-all: verify-parks $(roms)
+all: verify-parks check-docs $(roms)
 yellow:       pokeyellow.gbc
 yellow_debug: pokeyellow_debug.gbc
 yellow_vc:    pokeyellow.patch
@@ -108,11 +110,13 @@ verify-parks:
 docs:
 	@$(PYTHON) tools/gen_moves_doc.py
 	@$(PYTHON) tools/gen_types_doc.py
+	@$(PYTHON) tools/gen_parties_doc.py
 
 # Fail instead of rewriting - for checking a tree is up to date.
 check-docs:
 	@$(PYTHON) tools/gen_moves_doc.py --check
 	@$(PYTHON) tools/gen_types_doc.py --check
+	@$(PYTHON) tools/gen_parties_doc.py --check
 
 compare: $(roms) $(patches)
 	@$(SHA1) -c roms.sha1

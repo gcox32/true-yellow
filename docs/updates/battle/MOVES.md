@@ -30,7 +30,7 @@ The table is generated - run `make docs` (or `tools/gen_moves_doc.py`) after edi
 | BIND         | TRAPPING_EFFECT            | 15    | NORMAL          | 85       | 20 |
 | SLAM         | RECOIL_EFFECT              | 80    | GROUND          | 95       | 20 |
 | VINE_WHIP    | NO_ADDITIONAL_EFFECT       | 35    | GRASS           | 100      | 20 |
-| STOMP        | FLINCH_SIDE_EFFECT2        | 65    | NORMAL          | 100      | 20 |
+| STOMP        | FLINCH_SIDE_EFFECT2        | 65    | GROUND          | 100      | 20 |
 | DOUBLE_KICK  | ATTACK_TWICE_EFFECT        | 40    | FIGHTING        | 100      | 30 |
 | MEGA_KICK    | NO_ADDITIONAL_EFFECT       | 100   | NORMAL          | 95       | 10 |
 | JUMP_KICK    | JUMP_KICK_EFFECT           | 70    | FIGHTING        | 95       | 25 |

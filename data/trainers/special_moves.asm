@@ -83,32 +83,9 @@ SpecialTrainerMoves:
 	db 0
 
 	db LANCE, 1
-	db 5, 1, BLIZZARD
-	db 5, 2, FIRE_BLAST
-	db 5, 3, THUNDER
-	db 0
-
-	db RIVAL3, 1
-	db 2, 4, KINESIS
-	db 4, 1, EXPLOSION
-	db 5, 1, BIDE
-	db 5, 4, DOUBLE_TEAM
-	db 6, 3, QUICK_ATTACK
-	db 0
-
-	db RIVAL3, 2
-	db 2, 4, KINESIS
-	db 4, 1, BLIZZARD
-	db 5, 1, SUBSTITUTE
-	db 6, 2, REFLECT
-	db 6, 3, QUICK_ATTACK
-	db 0
-
-	db RIVAL3, 3
-	db 2, 4, KINESIS
-	db 5, 1, THUNDER
-	db 6, 1, AURORA_BEAM
-	db 6, 3, QUICK_ATTACK
+	db 6, 1, BLIZZARD
+	db 6, 2, FIRE_BLAST
+	db 6, 3, THUNDER
 	db 0
 
 	db -1 ; end

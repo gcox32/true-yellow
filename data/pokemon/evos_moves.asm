@@ -2086,6 +2086,7 @@ VenusaurEvosMoves:
 	db 55, BODY_SLAM
 	db 61, EARTHQUAKE
 	db 67, SWORDS_DANCE
+	db 75, PETAL_DANCE
 	db 0
 
 TentacruelEvosMoves:
