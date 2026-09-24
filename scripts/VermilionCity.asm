@@ -71,14 +71,14 @@ VermilionCityDefaultScript:
 ; the S.S. ANNE returns to port for good once the SOUL BADGE is obtained
 	ld a, [wObtainedBadges]
 	bit BIT_SOULBADGE, a
-	ret nz
+	jr nz, .allow_passage
 	jr .ship_departed
 .check_ticket
 	ld b, S_S_TICKET
 	predef GetQuantityOfItemInBag
 	ld a, b
 	and a
-	ret nz
+	ret nz ; the sailor's text already set PLAYER_ALLOWED_TO_PASS
 .ship_departed
 	ld a, PAD_UP
 	ld [wSimulatedJoypadStatesEnd], a
@@ -86,6 +86,15 @@ VermilionCityDefaultScript:
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, SCRIPT_VERMILIONCITY_PLAYER_MOVING_UP1
+	ld [wVermilionCityCurScript], a
+	ret
+
+.allow_passage
+; The ship is back in port, so the sailor waves the player through. Park the map
+; script in PLAYER_ALLOWED_TO_PASS (same as the ticket path) so the coord check
+; doesn't fire again on the very next frame while the player is still standing
+; on the trigger tile.
+	ld a, SCRIPT_VERMILIONCITY_PLAYER_ALLOWED_TO_PASS
 	ld [wVermilionCityCurScript], a
 	ret
 

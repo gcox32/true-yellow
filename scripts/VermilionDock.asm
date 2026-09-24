@@ -231,8 +231,10 @@ VermilionDock_EraseSSAnne:
 ; The truck already exists on the dock as block $03 at block coord (col 10,
 ; row 0). With Strength active, the player stands at coord (22, 0) - the tile
 ; directly right of the truck - and presses Left twice. The truck slides away
-; (8 hardware sprites + boulder-push SFX + dust) and a static Level 50 wild Mew
-; appears where it was. EVENT_FOUND_MEW makes the shifted state permanent.
+; (8 hardware sprites + boulder-push SFX + dust) and a static wild Mew
+; appears where it was (level set on the object_event in
+; data/maps/objects/VermilionDock.asm). EVENT_FOUND_MEW makes the shifted state
+; permanent.
 ; -----------------------------------------------------------------------------
 
 TruckOAMTable:
