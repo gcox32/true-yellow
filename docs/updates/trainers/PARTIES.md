@@ -79,12 +79,12 @@ level.
 | ROCKET        | Mt. Moon B2F                                                               | 13    | NIDORAN_M, ZUBAT                                                                   |                                 |
 | ROCKET        | Mt. Moon B2F                                                               | 11    | SANDSHREW, MANKEY, ZUBAT                                                           |                                 |
 | ROCKET        | Mt. Moon B2F                                                               | 12    | PSYDUCK, EKANS                                                                     |                                 |
-| ROCKET        | Jessie & James                                                             | 14    | EKANS, KOFFING, MEOWTH                                                             | Mt. Moon B2F                    |
+| ROCKET        | Jessie & James                                                             | 16    | EKANS, KOFFING, MEOWTH                                                             | Mt. Moon B2F                    |
 | LASS          | Route 4                                                                    | 14    | PARAS, PARAS, CLEFAIRY                                                             |                                 |
 | RIVAL1        | Cerulean City                                                              | 15-18 | SPEAROW 18, SANDSHREW 15, RATTATA 15, EEVEE 17                                     |                                 |
 | ROCKET        | Cerulean City                                                              | 17    | LICKITUNG, DROWZEE                                                                 |                                 |
 | JR_TRAINER_F  | Cerulean Gym                                                               | 19    | GOLDEEN, PSYDUCK                                                                   |                                 |
-| SWIMMER       | Cerulean Gym                                                               | 16    | HORSEA, ABRA, SHELLDER                                                             |                                 |
+| SWIMMER       | Cerulean Gym                                                               | 16    | HORSEA, OMANYTE, SHELLDER                                                          |                                 |
 | MISTY         | Cerulean Gym                                                               | 22-23 | STARYU 22, STARMIE 23                                                              |                                 |
 | YOUNGSTER     | Route 24                                                                   | 14    | RATTATA, EKANS, ZUBAT                                                              |                                 |
 | BUG_CATCHER   | Route 24                                                                   | 18    | METAPOD, BEEDRILL                                                                  |                                 |
@@ -124,7 +124,7 @@ level.
 | GENTLEMAN     | SS Anne 1F Rooms                                                           | 20    | GROWLITHE, DRATINI                                                                 |                                 |
 | GENTLEMAN     | SS Anne 1F Rooms                                                           | 21    | NIDORAN_M, NIDORAN_F, WEEPINBELL                                                   |                                 |
 | LASS          | SS Anne 2F Rooms                                                           | 21    | NIDORAN_F, PIKACHU, GOLDEEN                                                        |                                 |
-| FISHER        | SS Anne 2F Rooms                                                           | 21    | GOLDEEN, TENTACOOL, SEEL                                                           |                                 |
+| FISHER        | SS Anne 2F Rooms                                                           | 21    | GOLDEEN, TENTACOOL, MAGIKARP                                                       |                                 |
 | GENTLEMAN     | SS Anne 2F Rooms/Vermilion Gym                                             | 22    | JOLTEON                                                                            |                                 |
 | GENTLEMAN     | SS Anne 2F Rooms (RATICATE traded for player's BUTTERFREE, and back again) | 25    | RATICATE                                                                           |                                 |
 | SAILOR        | SS Anne B1F Rooms                                                          | 21    | SHELLDER, KRABBY                                                                   |                                 |
@@ -132,7 +132,7 @@ level.
 | SAILOR        | SS Anne B1F Rooms                                                          | 22    | TENTACOOL, STARYU                                                                  |                                 |
 | SAILOR        | SS Anne B1F Rooms                                                          | 20    | HORSEA, SANDSHREW, POLIWHIRL                                                       |                                 |
 | SAILOR        | SS Anne B1F Rooms                                                          | 21    | MACHOP, SQUIRTLE                                                                   |                                 |
-| FISHER        | SS Anne B1F Rooms                                                          | 21    | SHELLDER, STARYU, NIDORINA                                                         |                                 |
+| FISHER        | SS Anne B1F Rooms                                                          | 21    | SHELLDER, STARYU, STARYU                                                           |                                 |
 | RIVAL2        | SS Anne 2F                                                                 | 20-24 | SPEAROW 22, EXEGGCUTE 20, PORYGON 21, EEVEE 24                                     |                                 |
 | SAILOR        | Vermilion Gym                                                              | 24    | MAGNEMITE                                                                          |                                 |
 | ROCKER        | Vermilion Gym                                                              | 22    | VOLTORB, WARTORTLE, CUBONE                                                         |                                 |
@@ -182,7 +182,7 @@ level.
 | CHANNELER     | Pokémon Tower 6F                                                           | 32    | GASTLY, VENONAT, GASTLY                                                            |                                 |
 | CHANNELER     | Pokémon Tower 6F                                                           | 34    | JYNX                                                                               |                                 |
 | CHANNELER     | Pokémon Tower 6F                                                           | 33    | KADABRA                                                                            |                                 |
-| ROCKET        | Jessie & James                                                             | 27    | MEOWTH, ARBOK, WEEZING                                                             | Pokémon Tower 7F                |
+| ROCKET        | Jessie & James                                                             | 36    | MEOWTH, ARBOK, WEEZING                                                             | Pokémon Tower 7F                |
 | BUG_CATCHER   | Route 8                                                                    | 26    | VENONAT, SCYTHER, KABUTO                                                           |                                 |
 | LASS          | Route 8                                                                    | 28    | NIDORAN_F, NIDORINA                                                                |                                 |
 | LASS          | Route 8                                                                    | 26    | MEOWTH, FARFETCHD, EEVEE                                                           |                                 |
@@ -203,7 +203,7 @@ level.
 | ROCKET        | Rocket Hideout B3F                                                         | 31    | DROWZEE, GOLDUCK, HITMONLEE                                                        |                                 |
 | ROCKET        | Rocket Hideout B3F                                                         | 32    | MACHOKE, LICKITUNG                                                                 |                                 |
 | ROCKET        | Rocket Hideout B4F                                                         | 35    | PARASECT, MAROWAK, ARBOK                                                           |                                 |
-| ROCKET        | Jessie & James                                                             | 25    | KOFFING, EKANS, MEOWTH                                                             | Rocket Hideout B4F              |
+| ROCKET        | Jessie & James                                                             | 27    | KOFFING, EKANS, MEOWTH                                                             | Rocket Hideout B4F              |
 | GIOVANNI      | Rocket Hideout B4F                                                         | 35-38 | SANDSLASH 37, RHYHORN 35, DODRIO 35, KANGASKHAN 38                                 |                                 |
 | LASS          | Celadon Gym                                                                | 31    | NIDORINA, WEEPINBELL                                                               |                                 |
 | LASS          | Celadon Gym                                                                | 31    | CHANSEY, GLOOM                                                                     |                                 |
@@ -223,10 +223,10 @@ level.
 | ROCKET        | Silph Co. 2F                                                               | 42    | CLOYSTER, DUGTRIO                                                                  |                                 |
 | ROCKET        | Silph Co. 2F                                                               | 39    | GOLBAT, SANDSLASH, POLIWRATH, RATICATE, HITMONCHAN                                 |                                 |
 | SCIENTIST     | Silph Co. 3F                                                               | 42    | ELECTRODE, WEEZING                                                                 |                                 |
-| ROCKET        | Silph Co. 3F                                                               | 41    | RATICATE, HYPNO, CHARIZARD                                                         |                                 |
+| ROCKET        | Silph Co. 3F                                                               | 41    | RATICATE, HYPNO, CHARMELEON                                                        |                                 |
 | SCIENTIST     | Silph Co. 4F                                                               | 44    | DITTO                                                                              |                                 |
 | ROCKET        | Silph Co. 4F                                                               | 42    | ARCANINE, GENGAR                                                                   |                                 |
-| ROCKET        | Silph Co. 4F                                                               | 40    | GOLEM, JOLTEON, BLASTOISE                                                          |                                 |
+| ROCKET        | Silph Co. 4F                                                               | 40    | GOLEM, JOLTEON, WARTORTLE                                                          |                                 |
 | JUGGLER       | Silph Co. 5F                                                               | 42    | BUTTERFREE, ALAKAZAM                                                               |                                 |
 | SCIENTIST     | Silph Co. 5F                                                               | 39    | MAGNETON, TENTACRUEL, EXEGGUTOR, ELECTRODE                                         |                                 |
 | ROCKET        | Silph Co. 5F                                                               | 45    | GENGAR                                                                             |                                 |
@@ -250,7 +250,7 @@ level.
 | SCIENTIST     | Silph Co. 10F                                                              | 42    | MAGNETON, PORYGON                                                                  |                                 |
 | ROCKET        | Silph Co. 10F                                                              | 46    | ALAKAZAM                                                                           |                                 |
 | ROCKET        | Silph Co. 11F                                                              | 39    | LICKITUNG, CHARIZARD, GOLEM, MAGMAR, GYARADOS                                      |                                 |
-| ROCKET        | Jessie & James                                                             | 31    | WEEZING, ARBOK, VICTREEBEL, LICKITUNG, MEOWTH                                      | Silph Co. 11F                   |
+| ROCKET        | Jessie & James                                                             | 42    | WEEZING, ARBOK, VICTREEBEL, LICKITUNG, MEOWTH                                      | Silph Co. 11F                   |
 | GIOVANNI      | Silph Co. 11F                                                              | 48-51 | NIDOKING 48, KANGASKHAN 49, KINGLER 49, NIDOQUEEN 51                               |                                 |
 | PSYCHIC_TR    | Saffron Gym                                                                | 48    | KADABRA, POLIWRATH, MR_MIME, VENOMOTH                                              |                                 |
 | PSYCHIC_TR    | Saffron Gym                                                                | 50    | MR_MIME, ALAKAZAM                                                                  |                                 |
@@ -258,7 +258,7 @@ level.
 | PSYCHIC_TR    | Saffron Gym                                                                | 52    | STARMIE                                                                            |                                 |
 | CHANNELER     | Saffron Gym                                                                | 50    | MR_MIME, NINETALES                                                                 |                                 |
 | CHANNELER     | Saffron Gym                                                                | 51    | GENGAR                                                                             |                                 |
-| CHANNELER     | Saffron Gym                                                                | 49    | HYPNO, LAPRAS, GOLDUCK                                                             |                                 |
+| CHANNELER     | Saffron Gym                                                                | 49    | HYPNO, HAUNTER, GOLDUCK                                                            |                                 |
 | SABRINA       | Saffron Gym                                                                | 55    | ABRA, KADABRA, ALAKAZAM                                                            |                                 |
 | JR_TRAINER_M  | Route 12                                                                   | 41    | NIDORINO, NIDORINA                                                                 |                                 |
 | FISHER        | Route 12                                                                   | 27    | GOLDEEN, POLIWAG, TANGELA                                                          |                                 |
@@ -316,14 +316,14 @@ level.
 | BIRD_KEEPER   | Route 18                                                                   | 42    | SCYTHER, FEAROW                                                                    |                                 |
 | BIRD_KEEPER   | Route 18                                                                   | 43    | AERODACTYL                                                                         |                                 |
 | BIRD_KEEPER   | Route 18                                                                   | 39    | FEAROW, RAICHU, DUGTRIO, DODRIO                                                    |                                 |
-| JUGGLER       | Fuchsia Gym                                                                | 46    | HYPNO, BEEDRILL, KADABRA, GOLBAT                                                   |                                 |
+| JUGGLER       | Fuchsia Gym                                                                | 46    | DROWZEE, BEEDRILL, KADABRA, GOLBAT                                                 |                                 |
 | JUGGLER       | Fuchsia Gym                                                                | 47    | STARMIE, MR_MIME                                                                   |                                 |
 | JUGGLER       | Fuchsia Gym                                                                | 50    | EXEGGCUTE                                                                          |                                 |
 | JUGGLER       | Fuchsia Gym                                                                | 47    | DRAGONAIR, CLEFABLE                                                                |                                 |
 | TAMER         | Fuchsia Gym                                                                | 47    | SANDSLASH, ARBOK                                                                   |                                 |
 | TAMER         | Fuchsia Gym                                                                | 46    | VENUSAUR, NIDOQUEEN, ARBOK                                                         |                                 |
 | KOGA          | Fuchsia Gym                                                                | 50-54 | TENTACRUEL 50, MUK 51, VENOMOTH 51, GOLBAT 52, FLOATING_WEEZING 54                 |                                 |
-| SWIMMER       | Route 19 (beach)                                                           | 43    | CLOYSTER, FARFETCHD                                                                |                                 |
+| SWIMMER       | Route 19 (beach)                                                           | 43    | CLOYSTER, MACHOKE                                                                  |                                 |
 | SWIMMER       | Route 19 (beach)                                                           | 41    | POLIWHIRL, TAUROS, STARMIE                                                         |                                 |
 | SWIMMER       | Route 19 (water)                                                           | 51    | RAICHU, POLIWRATH                                                                  |                                 |
 | SWIMMER       | Route 19 (water)                                                           | 48    | SEADRA, RHYDON, MUK, BLASTOISE                                                     |                                 |
@@ -335,7 +335,7 @@ level.
 | BEAUTY        | Route 19                                                                   | 50    | JYNX, VILEPLUME, LAPRAS                                                            |                                 |
 | JR_TRAINER_F  | Route 20                                                                   | 52    | WIGGLYTUFF, SEAKING                                                                |                                 |
 | JR_TRAINER_F  | Route 20                                                                   | 50    | CHANSEY, DRAGONAIR, VENUSAUR                                                       |                                 |
-| SWIMMER       | Route 20                                                                   | 52    | VENOMOTH, CLOYSTER                                                                 |                                 |
+| SWIMMER       | Route 20                                                                   | 52    | OMANYTE, CLOYSTER                                                                  |                                 |
 | SWIMMER       | Route 20                                                                   | 55    | GYARADOS                                                                           |                                 |
 | SWIMMER       | Route 20                                                                   | 49    | BEEDRILL, GOLBAT, PARASECT, PRIMEAPE                                               |                                 |
 | BEAUTY        | Route 20                                                                   | 55    | DEWGONG                                                                            |                                 |
@@ -358,11 +358,11 @@ level.
 | BLAINE        | Cinnabar Gym                                                               | 59-63 | RHYDON 59, ARCANINE 60, FLAREON 60, RAPIDASH 61, MAGMAR 63                         |                                 |
 | FISHER        | Route 21                                                                   | 49    | SEADRA, VICTREEBEL, FEAROW, SEAKING                                                |                                 |
 | FISHER        | Route 21                                                                   | 53    | MAROWAK, CLOYSTER                                                                  |                                 |
-| FISHER        | Route 21                                                                   | 99    | MAGIKARP, MAGIKARP, MAGIKARP, MAGIKARP, MAGIKARP, DITTO                            |                                 |
-| FISHER        | Route 21                                                                   | 52    | SEAKING, SCYTHER                                                                   |                                 |
-| SWIMMER       | Route 21                                                                   | 52    | ELECTRODE, TENTACRUEL                                                              |                                 |
+| FISHER        | Route 21                                                                   | 99    | MAGIKARP, MAGIKARP, MAGIKARP, MAGIKARP, MAGIKARP                                   |                                 |
+| FISHER        | Route 21                                                                   | 52    | SEAKING, FARFETCHD                                                                 |                                 |
+| SWIMMER       | Route 21                                                                   | 52    | OMASTAR, TENTACRUEL                                                                |                                 |
 | SWIMMER       | Route 21                                                                   | 55    | STARMIE                                                                            |                                 |
-| SWIMMER       | Route 21                                                                   | 52    | SEADRA, CHARIZARD                                                                  |                                 |
+| SWIMMER       | Route 21                                                                   | 52    | SEADRA, SEADRA                                                                     |                                 |
 | SWIMMER       | Route 21                                                                   | 50    | GOLBAT, BEEDRILL, KINGLER                                                          |                                 |
 | CUE_BALL      | Route 21                                                                   | 51    | MACHOKE, POLIWRATH, TENTACRUEL                                                     |                                 |
 | TAMER         | Viridian Gym                                                               | 61    | RHYDON                                                                             |                                 |
@@ -370,7 +370,7 @@ level.
 | BLACKBELT     | Viridian Gym                                                               | 59    | HITMONLEE, HITMONCHAN                                                              |                                 |
 | BLACKBELT     | Viridian Gym                                                               | 61    | MACHAMP                                                                            |                                 |
 | BLACKBELT     | Viridian Gym                                                               | 58    | CLOYSTER, GOLEM, PRIMEAPE                                                          |                                 |
-| COOLTRAINER_M | Viridian Gym                                                               | 58    | PARASECT, NIDOKING                                                                 |                                 |
+| COOLTRAINER_M | Viridian Gym                                                               | 58    | OMASTAR, NIDOKING                                                                  |                                 |
 | COOLTRAINER_M | Viridian Gym                                                               | 58    | SANDSLASH, DUGTRIO                                                                 |                                 |
 | COOLTRAINER_M | Viridian Gym                                                               | 61    | SNORLAX                                                                            |                                 |
 | GIOVANNI      | Viridian Gym                                                               | 61-70 | KINGLER 62, GOLEM 61, NIDOQUEEN 61, NIDOKING 62, PERSIAN 62, ARMORED_MEWTWO 70     |                                 |
@@ -380,17 +380,17 @@ level.
 | COOLTRAINER_M | Victory Road 1F                                                            | 54    | BEEDRILL, SANDSLASH, GOLDUCK, CHARIZARD                                            |                                 |
 | COOLTRAINER_F | Victory Road 1F                                                            | 57    | PERSIAN, NINETALES                                                                 |                                 |
 | POKEMANIAC    | Victory Road 2F                                                            | 56    | EXEGGUTOR, LAPRAS, LICKITUNG                                                       |                                 |
-| JUGGLER       | Victory Road 2F                                                            | 55    | SCYTHER, HYPNO, ELECTABUZZ, SEADRA                                                 |                                 |
+| JUGGLER       | Victory Road 2F                                                            | 55    | SCYTHER, ELECTABUZZ, SEADRA                                                        |                                 |
 | JUGGLER       | Victory Road 2F                                                            | 62    | EXEGGUTOR                                                                          |                                 |
 | TAMER         | Victory Road 2F                                                            | 57    | DONPHAN, MACHAMP, PINSIR, GOLEM, VENOMOTH                                          | this guy right here             |
 | BLACKBELT     | Victory Road 2F                                                            | 57    | PINSIR, HITMONCHAN, MACHOKE                                                        |                                 |
 | COOLTRAINER_M | Victory Road 3F                                                            | 56    | EXEGGUTOR, CLOYSTER, ARCANINE                                                      |                                 |
 | COOLTRAINER_M | Victory Road 3F                                                            | 56    | KINGLER, HITMONLEE, DRAGONITE                                                      |                                 |
 | COOLTRAINER_F | Victory Road 3F                                                            | 55    | WIGGLYTUFF, SEAKING, VICTREEBEL                                                    |                                 |
-| COOLTRAINER_F | Victory Road 3F                                                            | 55    | PARASECT, DEWGONG, CHANSEY                                                         |                                 |
+| COOLTRAINER_F | Victory Road 3F                                                            | 55    | TANGELA, DEWGONG, CHANSEY                                                          |                                 |
 | LORELEI       | Lorelei's Room                                                             | 62-66 | DEWGONG 62, CLOYSTER 63, SLOWBRO 63, JYNX 62, VAPOREON 63, LAPRAS 66               |                                 |
 | BRUNO         | Bruno's Room                                                               | 63-67 | HITMONCHAN 63, HITMONLEE 63, ONIX 65, ONIX 65, PRIMEAPE 64, MACHAMP 67             |                                 |
-| AGATHA        | Agatha's Room                                                              | 63-68 | HAUNTER 63, HYPNO 63, NINETALES 64, ARBOK 65, GENGAR 65, GENGAR 68                 |                                 |
+| AGATHA        | Agatha's Room                                                              | 63-68 | GENGAR 65, HYPNO 63, NINETALES 64, ARBOK 65, HAUNTER 63, GENGAR 68                 |                                 |
 | LANCE         | Lance's Room                                                               | 66-69 | GYARADOS 66, DRAGONAIR 66, AERODACTYL 67, DRAGONITE 68, CHARIZARD 67, DRAGONITE 69 |                                 |
 | RIVAL3        | Champion's Room                                                            | 68-82 | ARTICUNO 69, ALAKAZAM 68, GOLEM 68, EXEGGUTOR 68, JOLTEON 75, BLASTOISE 82         |                                 |
 | RIVAL3        | Champion's Room                                                            | 68-82 | ZAPDOS 69, ALAKAZAM 68, NIDOQUEEN 68, EXEGGUTOR 68, FLAREON 75, BLASTOISE 82       |                                 |
@@ -446,13 +446,13 @@ An entry listed as `(none)` is a trainer the table names and then gives nothing 
 | BRUNO       | 1     | 1    | HITMONCHAN | 1      | DOUBLE_TEAM  |
 | BRUNO       | 1     | 2    | HITMONLEE  | 4      | DOUBLE_TEAM  |
 | BRUNO       | 1     | 5    | PRIMEAPE   | 3      | HYPER_BEAM   |
-| AGATHA      | 1     | 1    | HAUNTER    | 2      | SUBSTITUTE   |
-| AGATHA      | 1     | 1    | HAUNTER    | 3      | LICK         |
-| AGATHA      | 1     | 1    | HAUNTER    | 4      | MEGA_DRAIN   |
+| AGATHA      | 1     | 1    | GENGAR     | 2      | SUBSTITUTE   |
+| AGATHA      | 1     | 1    | GENGAR     | 3      | LICK         |
+| AGATHA      | 1     | 1    | GENGAR     | 4      | MEGA_DRAIN   |
 | AGATHA      | 1     | 2    | HYPNO      | 2      | TOXIC        |
 | AGATHA      | 1     | 3    | NINETALES  | 2      | HYPNOSIS     |
 | AGATHA      | 1     | 4    | ARBOK      | 1      | WRAP         |
-| AGATHA      | 1     | 5    | GENGAR     | 2      | PSYCHIC_M    |
+| AGATHA      | 1     | 5    | HAUNTER    | 2      | PSYCHIC_M    |
 | LANCE       | 1     | 6    | DRAGONITE  | 1      | BLIZZARD     |
 | LANCE       | 1     | 6    | DRAGONITE  | 2      | FIRE_BLAST   |
 | LANCE       | 1     | 6    | DRAGONITE  | 3      | THUNDER      |
