@@ -52,6 +52,40 @@ RecordPlayerPositionToTrail::
 ; Should be called BEFORE player position is updated, or with the old position
 ; Input: b = old Y position (map coords + 4), c = old X position (map coords + 4)
 
+; Stepping off SURF onto land: start the door-exit cascade, anchored on the tile
+; the player is about to land on.
+;
+; Neither surf-exit path (CollisionCheckOnWater.stopSurfing in home/overworld.asm
+; for walking into land, ItemUseSurfboard.stopSurfing in engine/items/item_effects.asm
+; for getting off via the menu) touches wFollowerDoorwayMode - they only clear
+; wWalkBikeSurfState, and they do it BEFORE the step off the water is taken. Since
+; ShouldMisty/BrockSpawn gate on nothing but `wWalkBikeSurfState == 0` plus
+; `wWalkCounter == 0`, both of which come true the instant that step lands, the
+; followers resolved straight through InitializePositionTrail using whatever mode
+; the last warp happened to leave behind - and mode 1 never self-clears (only the
+; 2->3->4->0 cascade does), so the result flip-flopped between the horizontal
+; arrangement (last warp was a gate) and `.normalPositioning`, which lines them up
+; 2 and 3 tiles behind the player's facing: out in the water they just left.
+;
+; Both paths do set wPikachuOverworldStateFlags bit 5, which exists for exactly
+; this moment - it hides Pikachu for the duration of the step off the water, and
+; _AdvancePlayerSprite (engine/overworld/advance_player_sprite.asm) clears it once
+; wWalkCounter hits 0. Those two .stopSurfing routines are its only setters, so
+; seeing it set here - at the start of the step, via Func_fcc08 - means "this step
+; is the one leaving the water", and nothing else.
+;
+; Force mode 2 and skip this call's mode dispatch. Skipping matters: .storeDoorPosition
+; captures b,c, which on THIS step is still the water tile. Letting the cascade pick
+; up from mode 2 on the next step instead captures the landing tile, so Misty and Brock
+; emerge from it one per step exactly like a building exit, and never stand on water.
+	ld a, [wPikachuOverworldStateFlags]
+	bit 5, a
+	jr z, .notLeavingSurf
+	ld a, 2
+	ld [wFollowerDoorwayMode], a
+	jr .noModeChange
+.notLeavingSurf
+
 	; If in exit doorway mode (mode >= 2), advance the mode each step
 	; Mode 2 -> 3 after 1st step (still hidden, store door position)
 	; Mode 3 -> 4 after 2nd step (Misty can spawn at door)

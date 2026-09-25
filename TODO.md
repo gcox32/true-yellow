@@ -26,7 +26,19 @@
 - [x] Investigate attack selection while asleep (menu was still skipped when asleep; cc8a8d03 only did the wake-up half. Now the move menu / enemy AI runs while asleep so the chosen move fires on the wake-up turn. Freeze still skips selection.)
 - [x] Pokemon who are "fully paralyzed" on the second turn of Dig or Fly remain untargetable until they Dig or Fly successfully later (MonHurtItselfOrFullyParalysed cleared CHARGING_UP but not INVULNERABLE; now clears both + redraws the hidden pic, player & enemy)
 - [x] Followers after overworld dig/fly/teleport don't init position correctly (special warps skip WarpFound2/SetPikachuSpawn*, so wFollowerDoorwayMode / wExitDoorway* / Misty+Brock MovementStatus carried over from the previous map -> stale trail coords. PrepareForSpecialWarp now resets them. NEEDS IN-GAME TEST.)
-- [ ] upon blackout followers need to proceed from the pokemon center front door warp tile
+- [x] upon blackout followers need to be purposefully init'd, to the left and right of the player
+      (blackout clears BIT_FLY_WARP so EnterMap skips EnterMapAnim, the only thing that seeds
+      wPikachuSpawnState/wFollowerDoorwayMode for a special-warp landing -> followers fell back to
+      .normalPositioning, 2 and 3 tiles behind. SpecialEnterMap's blackout branch now seeds mode 1
+      (Brock - Player - Pikachu - Misty) and clears Pikachu's MovementStatus, which survives the
+      warp because his sprite struct is 15 and ZeroSpriteStateData only reaches 14. NEEDS IN-GAME TEST.)
+- [x] upon exiting the SURFing, specifically on a ramp/ladder tile, followers reveal too early (i.e. in line in the water)
+      (not tile-dependent after all: neither .stopSurfing path sets wFollowerDoorwayMode, and they clear
+      wWalkBikeSurfState before the step off the water, so followers resolved on whatever mode the LAST WARP
+      left - mode 1 never self-clears, so a gate gave left/right and a building door gave .normalPositioning,
+      2 and 3 tiles back into the water. RecordPlayerPositionToTrail now detects the step off the water via
+      wPikachuOverworldStateFlags bit 5 - set only by the two .stopSurfing routines - and starts the door-exit
+      cascade anchored on the landing tile, so they emerge from it one per step. Zero ROM0 bytes. NEEDS IN-GAME TEST.)
 
 ## Bugfixes from PureRGB
 - [x] High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)

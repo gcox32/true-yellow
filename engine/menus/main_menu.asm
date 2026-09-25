@@ -174,6 +174,28 @@ SpecialEnterMap::
 	jr z, .notBlackoutWarp
 	ld a, SPRITE_FACING_RIGHT
 	ld [wSpritePlayerStateData1FacingDirection], a
+	; Blacking out lands on the same "in front of the Pokemon Center" tiles as
+	; Fly/Dig/Teleport, but it does NOT run EnterMapAnim: ResetStatusAndHalveMoneyOnBlackout
+	; clears BIT_FLY_WARP, so EnterMap's `and (1 << BIT_FLY_WARP) | (1 << BIT_DUNGEON_WARP)`
+	; gate falls through. EnterMapAnim is the only thing that seeds the "spawn beside the
+	; player" state for that kind of landing, and PrepareForSpecialWarp has just zeroed
+	; wFollowerDoorwayMode, so the followers would instead resolve via
+	; InitializePositionTrail.normalPositioning - lining up 2 and 3 tiles behind the player
+	; in the direction they're facing, trailing back into the Pokemon Center wall.
+	; Seed it here by hand so we get the same horizontal arrangement the special-warp
+	; landing uses: Brock - Player - Pikachu - Misty.
+	ld a, $1
+	ld [wPikachuSpawnState], a
+	ld a, 1
+	ld [wFollowerDoorwayMode], a
+	; InitializePositionTrail.doorwayPositioning only writes a follower's trail slot if
+	; that follower isn't already out and walking. PrepareForSpecialWarp cleared Misty's
+	; and Brock's MovementStatus (and wExitDoorway*), but Pikachu's struct is number 15,
+	; which InitSprites' ZeroSpriteStateData doesn't reach, so his status survives the
+	; warp - leaving trail[0] holding an old-map coordinate that rotates into Misty's
+	; target on the player's first step, and leaving wPikachuSpawnState above unconsumed.
+	xor a
+	ld [wSpritePikachuStateData1MovementStatus], a
 .notBlackoutWarp
 	ld c, 20
 	call DelayFrames

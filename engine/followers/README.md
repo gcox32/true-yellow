@@ -296,6 +296,31 @@ above instead of falling in behind the player per their current facing
 (which used to look like a vertical stack behind the player while Pikachu
 stood off to the side).
 
+### Blacking Out
+
+Blacking out lands on the *same* Pokemon Center tiles as a Fly, but it is
+**not** an `EnterMapAnim` landing: `ResetStatusAndHalveMoneyOnBlackout`
+(`engine/events/black_out.asm`) clears `BIT_FLY_WARP` while setting
+`BIT_ESCAPE_WARP`/`BIT_BLACKOUT_WARP`, so `EnterMap`'s
+`and (1 << BIT_FLY_WARP) | (1 << BIT_DUNGEON_WARP)` gate falls through and
+the animation - and therefore the `wPikachuSpawnState`/`wFollowerDoorwayMode`
+seeding above - never runs. With `PrepareForSpecialWarp` having just zeroed
+`wFollowerDoorwayMode`, the followers resolved via `.normalPositioning`
+instead and lined up 2 and 3 tiles behind the player, trailing back into
+the Pokemon Center's front wall.
+
+`SpecialEnterMap` (`engine/menus/main_menu.asm`) now seeds that state by
+hand in the branch that already handles the blackout case (the one that
+forces the player to face right), giving the same
+`Brock - Player - Pikachu - Misty` line as the special-warp landing. It
+also has to clear **Pikachu's** `MovementStatus`: Pikachu is sprite struct
+15, past the 14 that `InitSprites`' `ZeroSpriteStateData`
+(`home/overworld.asm`) wipes, so unlike Misty's and Brock's (cleared in
+`PrepareForSpecialWarp`) his survives the warp - which would both leave
+`wPikachuSpawnState` unconsumed in `TrySpawnPikachu` and guard off the
+`trail[0]` write in `.doorwayPositioning`, letting an old-map coordinate
+rotate into Misty's target on the player's first step.
+
 **Exiting buildings, or taking a ladder** (`wFollowerDoorwayMode = 2, 3, 4`):
 - `SetPikachuSpawnWarpPad` (`engine/pikachu/pikachu_follow.asm`) sets mode 2
   for any plain warp between two non-outside maps - this covers ladders
@@ -349,6 +374,50 @@ don't get reintroduced:
    a player who hasn't visually settled on their new tile yet, causing a
    one-frame "resolve to the wrong spot, then snap" glitch. Both spawn
    functions now also wait for `wWalkCounter == 0` before materializing.
+
+### Stepping Off SURF
+
+Getting off SURF onto land runs the **same door-exit cascade** as walking out of
+a building, anchored on the tile the player lands on - Misty and Brock stay
+hidden across the step out of the water, then emerge from the landing tile one
+per step. That keeps them out of the water entirely, and it matches Pikachu,
+who already re-emerges on the player's own landing tile (`wPikachuSpawnState = 3`).
+
+Neither surf-exit path - `CollisionCheckOnWater.stopSurfing`
+(`home/overworld.asm`, walking into land) or `ItemUseSurfboard.stopSurfing`
+(`engine/items/item_effects.asm`, getting off via the menu) - touches
+`wFollowerDoorwayMode`. They only clear `wWalkBikeSurfState`, and they do it
+*before* the step off the water is taken. Since `ShouldMisty/BrockSpawn` gate on
+nothing but `wWalkBikeSurfState == 0` plus `wWalkCounter == 0`, both of which come
+true the instant that step lands, the followers used to resolve straight through
+`InitializePositionTrail` with whatever mode the **last warp** happened to leave
+behind. Mode 1 never self-clears (only the 2->3->4->0 cascade does), so the result
+flip-flopped by transition history rather than by location: arrive from a gate or
+rest house (mode 1) and you got the horizontal arrangement; arrive from an ordinary
+building door (cascade ran back to 0) and you got `.normalPositioning` - lined up 2
+and 3 tiles behind the player's facing, standing on the water they just left.
+
+The hook is in `RecordPlayerPositionToTrail`, and costs **zero ROM0 bytes** - which
+matters, because `CollisionCheckOnWater` is home code and ROM0 has no slack (see
+the ROM0 budget notes). Both `.stopSurfing` routines already set
+`wPikachuOverworldStateFlags` **bit 5**, a flag that exists for precisely this
+moment: it hides Pikachu for the duration of the step off the water, and
+`_AdvancePlayerSprite` (`engine/overworld/advance_player_sprite.asm`) clears it once
+`wWalkCounter` hits 0. Those two routines are its *only* setters, so observing it set
+at the start of a step - `RecordPlayerPositionToTrail` runs there, via `Func_fcc08` -
+means "this step is the one leaving the water", and nothing else.
+
+When it fires, the trail forces `wFollowerDoorwayMode = 2` and **skips that call's
+mode dispatch**. The skip is the whole point: `.storeDoorPosition` captures `b,c`,
+which on *this* step is still the water tile. Deferring lets the cascade pick up from
+mode 2 on the next step, capturing the landing tile instead:
+
+| Step | `b,c` at start | Mode before -> after | After the step |
+|------|----------------|----------------------|----------------|
+| off the water | water tile `W` | (bit 5) -> 2 | player on `L`; both hidden |
+| 1st on land | `L` | 2 -> 3 (stores `L`) | player at `L+1`; both hidden |
+| 2nd | `L+1` | 3 -> 4 | player at `L+2`; **Misty** emerges at `L` |
+| 3rd | `L+2` | 4 -> 0 | player at `L+3`; **Brock** emerges at `L` |
 
 ### Ledge Jumping
 
