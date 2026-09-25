@@ -11,5 +11,4 @@ AlwaysHappenSideEffects:
 	db TWINEEDLE_EFFECT
 	db RAGE_EFFECT
 	db ATTACK_UP_SIDE_EFFECT ; PureRGBnote: ADDED:
-	db EXPLODE_RECOIL_EFFECT ; PureRGBnote: ADDED:
 	db -1 ; end

@@ -93,8 +93,7 @@
 	const LEECH_SEED_EFFECT          ; $54
 	const SPLASH_EFFECT              ; $55
 	const DISABLE_EFFECT             ; $56
-	const EXPLODE_RECOIL_EFFECT      ; $58 ; ADDED: selfdestruct/explosion; recoils 100% of damage dealt (1/2 max HP on a miss)
-	const WITHDRAW_EFFECT            ; $59 ; added
-	const GROWTH_EFFECT              ; $5A ; added
+	const WITHDRAW_EFFECT            ; $57 ; added
+	const GROWTH_EFFECT              ; $58 ; added
 
 DEF NUM_MOVE_EFFECTS EQU const_value - 1

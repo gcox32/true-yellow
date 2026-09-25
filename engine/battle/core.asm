@@ -3338,8 +3338,6 @@ HandleIfPlayerMoveMissed:
 	ld a, [wPlayerMoveEffect]
 	cp EXPLODE_EFFECT
 	jr z, PlayPlayerMoveAnimation ; don't play any animation if the move missed, unless it was EXPLODE_EFFECT
-	cp EXPLODE_RECOIL_EFFECT ; PureRGBnote: ADDED: selfdestruct/explosion still animate + apply recoil on a miss
-	jr z, PlayPlayerMoveAnimation
 	jr PlayerCheckIfFlyOrChargeEffect
 GetPlayerAnimationType:
 	ld a, [wPlayerMoveEffect]
@@ -3406,8 +3404,6 @@ MirrorMoveCheck:
 	call PrintMoveFailureText
 	ld a, [wPlayerMoveEffect]
 	cp EXPLODE_EFFECT ; even if Explosion or Selfdestruct missed, its effect still needs to be activated
-	jr z, .notDone
-	cp EXPLODE_RECOIL_EFFECT ; PureRGBnote: ADDED: recoil from a missed Explosion/Selfdestruct still needs to apply
 	jr z, .notDone
 	jp ExecutePlayerMoveDone ; otherwise, we're done if the move missed
 .moveDidNotMiss
@@ -5834,8 +5830,6 @@ HandleIfEnemyMoveMissed:
 	ld a, [wEnemyMoveEffect]
 	cp EXPLODE_EFFECT
 	jr z, HandleExplosionMiss
-	cp EXPLODE_RECOIL_EFFECT ; PureRGBnote: ADDED: selfdestruct/explosion still animate + apply recoil on a miss
-	jr z, HandleExplosionMiss
 	jr EnemyCheckIfFlyOrChargeEffect
 .moveDidNotMiss
 	call SwapPlayerAndEnemyLevels
@@ -5909,8 +5903,6 @@ EnemyCheckIfMirrorMoveEffect:
 	call PrintMoveFailureText
 	ld a, [wEnemyMoveEffect]
 	cp EXPLODE_EFFECT
-	jr z, .handleExplosionMiss
-	cp EXPLODE_RECOIL_EFFECT ; PureRGBnote: ADDED: recoil from a missed Explosion/Selfdestruct still needs to apply
 	jr z, .handleExplosionMiss
 	jp ExecuteEnemyMoveDone
 .moveDidNotMiss

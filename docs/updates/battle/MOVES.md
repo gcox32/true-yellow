@@ -127,7 +127,7 @@ The table is generated - run `make docs` (or `tools/gen_moves_doc.py`) after edi
 | BIDE         | ATTACK_DEFENSE_UP1_EFFECT  | 0     | NORMAL          | 100      | 10 |
 | METRONOME    | METRONOME_EFFECT           | 0     | NORMAL          | 100      | 10 |
 | MIRROR_MOVE  | MIRROR_MOVE_EFFECT         | 0     | FLYING          | 100      | 20 |
-| SELFDESTRUCT | EXPLODE_RECOIL_EFFECT      | 140   | FIRE            | 100      | 5  |
+| SELFDESTRUCT | EXPLODE_EFFECT             | 140   | FIRE            | 100      | 5  |
 | EGG_BOMB     | NO_ADDITIONAL_EFFECT       | 100   | DRAGON          | 90       | 10 |
 | LICK         | PARALYZE_SIDE_EFFECT2      | 30    | GHOST           | 100      | 30 |
 | SMOG         | POISON_SIDE_EFFECT2        | 30    | POISON          | 85       | 20 |
@@ -160,7 +160,7 @@ The table is generated - run `make docs` (or `tools/gen_moves_doc.py`) after edi
 | SPLASH       | SPLASH_EFFECT              | 0     | WATER           | 100      | 10 |
 | ACID_ARMOR   | DEFENSE_UP2_EFFECT         | 0     | POISON          | 100      | 20 |
 | CRABHAMMER   | NO_ADDITIONAL_EFFECT       | 90    | WATER           | 85       | 10 |
-| EXPLOSION    | EXPLODE_RECOIL_EFFECT      | 140   | ROCK            | 100      | 5  |
+| EXPLOSION    | EXPLODE_EFFECT             | 170   | NORMAL          | 100      | 5  |
 | FURY_SWIPES  | TWO_TO_FIVE_ATTACKS_EFFECT | 20    | NORMAL          | 85       | 15 |
 | BONEMERANG   | ATTACK_TWICE_EFFECT        | 50    | BONEMERANG_TYPE | 90       | 10 |
 | REST         | HEAL_EFFECT                | 0     | NORMAL          | 100      | 10 |
