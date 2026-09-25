@@ -45,6 +45,8 @@ SpecialTrainerMoves:
 	db 0
 
 	db SABRINA, 1
+	db 1, 2, PSYCHIC_M
+	db 1, 3, REFLECT
 	db 0
 
 	db GIOVANNI, 3
