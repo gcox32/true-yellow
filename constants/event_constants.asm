@@ -173,7 +173,7 @@
 	const_next $278
 	const EVENT_MANSION_SWITCH_ON
 	const_skip 15
-	const EVENT_FLOATING_WEEZING_CONVERSION
+	const_skip ; was EVENT_FLOATING_WEEZING_CONVERSION; pipes are repeatable now
 	const EVENT_BEAT_MANSION_1_TRAINER_0
 	const_skip 14
 	const EVENT_GOT_TM38

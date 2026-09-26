@@ -37,13 +37,11 @@ _CinnabarLabMachineSuccessText::
 	text "The rig clamped"
 	line "shut around @"
 	text_ram wNameBuffer
-	text_start
 	text "!"
 
 	para "When it opened,"
 	line "@"
 	text_ram wNameBuffer
-	text_start
 	text " stood"
 	line "transformed."
 	done

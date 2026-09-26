@@ -122,8 +122,6 @@ PokemonMansionB1FDiaryText:
 
 PokemonMansionB1FGasValveText:
 	text_asm
-	CheckEvent EVENT_FLOATING_WEEZING_CONVERSION
-	jr nz, .dormant
 	ld hl, PokemonMansionB1FGasPipeText
 	call PrintText
 	callfar SpeciesChangePartyMenu
@@ -158,15 +156,10 @@ PokemonMansionB1FGasValveText:
 	ld a, FLOATING_WEEZING
 	call PlayCry
 	call WaitForSoundToFinish
-	SetEvent EVENT_FLOATING_WEEZING_CONVERSION
 	ld hl, PokemonMansionB1FGasSuccessText
 .print
 	call PrintText
 .done
-	jp TextScriptEnd
-.dormant
-	ld hl, PokemonMansionB1FGasDormantText
-	call PrintText
 	jp TextScriptEnd
 
 PokemonMansionB1FGasPipeText:
@@ -187,8 +180,4 @@ PokemonMansionB1FGasAlreadyText:
 
 PokemonMansionB1FGasSuccessText:
 	text_far _PokemonMansionB1FGasSuccessText
-	text_end
-
-PokemonMansionB1FGasDormantText:
-	text_far _PokemonMansionB1FGasDormantText
 	text_end

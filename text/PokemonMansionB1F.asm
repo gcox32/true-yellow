@@ -72,17 +72,10 @@ _PokemonMansionB1FGasSuccessText::
 	text "The helium filled"
 	line "@"
 	text_ram wNameBuffer
-	text_start
 	text "!"
 
 	para "It swelled up and"
 	line "drifted off the"
 	cont "floor--it learned"
 	cont "to float!"
-	done
-
-_PokemonMansionB1FGasDormantText::
-	text "The valve is empty"
-	line "now. Only a faint"
-	cont "hiss remains."
 	done

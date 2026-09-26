@@ -39,7 +39,6 @@ _PowerPlantMagnetSuccessText::
 	text "The core surged"
 	line "into @"
 	text_ram wNameBuffer
-	text_start
 	text "!"
 
 	para "It rose into the"

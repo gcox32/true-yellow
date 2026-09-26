@@ -947,7 +947,6 @@ MagmarEvosMoves:
 	db 15, SMOG
 	db 17, SMOKESCREEN
 	db 22, CONFUSE_RAY
-	db 24, TELEPORT
 	db 27, FIRE_PUNCH
 	db 30, BARRAGE
 	db 37, FLAMETHROWER
@@ -995,10 +994,12 @@ KoffingEvosMoves:
 	db 21, SMOKESCREEN
 	db 24, SELFDESTRUCT
 	db 26, SLAM
+	db 30, HAZE
 	db 33, SLUDGE
-	db 36, HAZE
+	db 36, FIRE_BLAST
 	db 42, TOXIC
 	db 48, EXPLOSION
+	db 55, 
 	db 0
 
 
@@ -1948,10 +1949,11 @@ WeezingEvosMoves:
 	db 21, SMOKESCREEN
 	db 24, SELFDESTRUCT
 	db 30, SLAM
-	db 33, SLUDGE
-	db 36, HAZE
-	db 42, TOXIC
-	db 48, EXPLOSION
+	db 33, HAZE
+	db 36, SLUDGE
+	db 42, FIRE_BLAST
+	db 46, TOXIC
+	db 51, EXPLOSION
 	db 0
 
 PersianEvosMoves:
