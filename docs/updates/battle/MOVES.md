@@ -56,7 +56,7 @@ The table is generated - run `make docs` (or `tools/gen_moves_doc.py`) after edi
 | ROAR         | ATTACK_DOWN_SIDE_EFFECT    | 40    | DRAGON          | 100      | 20 |
 | SING         | SLEEP_EFFECT               | 0     | NORMAL          | 70       | 15 |
 | SUPERSONIC   | CONFUSION_EFFECT           | 0     | NORMAL          | 75       | 20 |
-| SONICBOOM    | FLINCH_SIDE_EFFECT1        | 30    | FLYING          | 100      | 15 |
+| SONICBOOM    | FLINCH_SIDE_EFFECT1        | 40    | FLYING          | 100      | 15 |
 | DISABLE      | DISABLE_EFFECT             | 0     | PSYCHIC_TYPE    | 85       | 20 |
 | ACID         | BURN_SIDE_EFFECT1          | 40    | POISON          | 100      | 30 |
 | EMBER        | BURN_SIDE_EFFECT1          | 40    | FIRE            | 100      | 25 |
@@ -155,7 +155,7 @@ The table is generated - run `make docs` (or `tools/gen_moves_doc.py`) after edi
 | BUBBLE       | SPEED_DOWN_SIDE_EFFECT     | 20    | WATER           | 100      | 30 |
 | DIZZY_PUNCH  | CONFUSION_BIG_SIDE_EFFECT  | 70    | NORMAL          | 100      | 10 |
 | SPORE        | SLEEP_EFFECT               | 0     | GRASS           | 100      | 15 |
-| FLASH        | FLINCH_SIDE_EFFECT1        | 50    | ELECTRIC        | 100      | 15 |
+| FLASH        | FLINCH_SIDE_EFFECT1        | 40    | ELECTRIC        | 100      | 15 |
 | PSYWAVE      | SPECIAL_DOWN_SIDE_EFFECT   | 30    | PSYCHIC_TYPE    | 100      | 20 |
 | SPLASH       | SPLASH_EFFECT              | 0     | WATER           | 100      | 10 |
 | ACID_ARMOR   | DEFENSE_UP2_EFFECT         | 0     | POISON          | 100      | 20 |

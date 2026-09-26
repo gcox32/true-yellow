@@ -59,7 +59,7 @@ Moves:
 	move ROAR,         ATTACK_DOWN_SIDE_EFFECT,     40,  DRAGON,         100, 20 ; changed type to dragon
 	move SING,         SLEEP_EFFECT,                 0,  NORMAL,          70, 15 ; accuracy changed from 55 to 70
 	move SUPERSONIC,   CONFUSION_EFFECT,             0,  NORMAL,          75, 20
-	move SONICBOOM,    FLINCH_SIDE_EFFECT1,         30,  FLYING,         100, 15 ; priority move
+	move SONICBOOM,    FLINCH_SIDE_EFFECT1,         40,  FLYING,         100, 15 ; priority move
 	move DISABLE,      DISABLE_EFFECT,               0,  PSYCHIC_TYPE,    85, 20 ; accuracy changed from 55 to 85
 	move ACID,         BURN_SIDE_EFFECT1,  		    40,  POISON,         100, 30 ; effect changed to burn chance
 	move EMBER,        BURN_SIDE_EFFECT1,           40,  FIRE,           100, 25
@@ -158,7 +158,7 @@ Moves:
 	move BUBBLE,       SPEED_DOWN_SIDE_EFFECT,      20,  WATER,          100, 30
 	move DIZZY_PUNCH,  CONFUSION_BIG_SIDE_EFFECT,   70,  NORMAL,         100, 10
 	move SPORE,        SLEEP_EFFECT,                 0,  GRASS,          100, 15
-	move FLASH,        FLINCH_SIDE_EFFECT1,         50,  ELECTRIC,       100, 15 ; now priority move
+	move FLASH,        FLINCH_SIDE_EFFECT1,         40,  ELECTRIC,       100, 15 ; now priority move
 	move PSYWAVE,      SPECIAL_DOWN_SIDE_EFFECT,    30,  PSYCHIC_TYPE,   100, 20 ; now a normal weak PSYCHIC type move
 	move SPLASH,       SPLASH_EFFECT,                0,  WATER,          100, 10 ; type changed from NORMAL to WATER, pp changed from 40 to 10
 	move ACID_ARMOR,   DEFENSE_UP2_EFFECT,           0,  POISON,         100, 20 ; pp changed from 40 to 20

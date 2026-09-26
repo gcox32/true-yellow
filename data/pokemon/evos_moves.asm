@@ -1821,10 +1821,9 @@ MewtwoEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 66, PSYCHIC_M
 	db 70, RECOVER
-	db 72, BARRIER
-	db 75, MIST
+	db 73, BARRIER
+	db 77, MIST
 	db 81, AMNESIA
 	db 0
 

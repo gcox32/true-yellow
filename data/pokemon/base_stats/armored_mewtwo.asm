@@ -1,6 +1,6 @@
 	db DEX_MEWTWO ; pokedex id
 
-	db 130, 110,  130, 115, 154
+	db 106, 110, 130, 115, 130
 	;   hp  atk  def  spd  spc
 
 	db PSYCHIC_TYPE, PSYCHIC_TYPE ; type
@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/armored_mewtwo.pic", 0, 1 ; sprite dimensions
 	dw ArmoredMewtwoPicFront, ArmoredMewtwoPicBackSW
 
-	db CONFUSION, DISABLE, SWIFT, PSYCHIC_M ; level 1 learnset
+	db REFLECT, HYPER_BEAM, PSYCHIC_M, NO_MOVE ; level 1 learnset
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
