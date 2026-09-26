@@ -757,12 +757,12 @@ KadabraEvosMoves:
 ; Learnset
 	db 16, CONFUSION
 	db 20, DISABLE
-	db 24, KINESIS
+	db 24, MEDITATE
 	db 27, PSYBEAM
 	db 31, RECOVER
 	db 38, PSYCHIC_M
 	db 42, REFLECT
-	db 54, MEDITATE
+	db 49, KINESIS
 	db 0
 
 GravelerEvosMoves:
@@ -2008,13 +2008,13 @@ AlakazamEvosMoves:
 	db 0
 ; Learnset
 	db 16, CONFUSION
-	db 24, KINESIS
+	db 24, MEDITATE
 	db 20, DISABLE
 	db 27, PSYBEAM
 	db 31, RECOVER
 	db 38, PSYCHIC_M
 	db 42, REFLECT
-	db 54, MEDITATE
+	db 54, KINESIS
 	db 0
 
 PidgeottoEvosMoves:

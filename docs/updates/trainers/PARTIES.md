@@ -456,4 +456,21 @@ An entry listed as `(none)` is a trainer the table names and then gives nothing 
 | LANCE       | 1     | 6    | DRAGONITE  | 1      | BLIZZARD     |
 | LANCE       | 1     | 6    | DRAGONITE  | 2      | FIRE_BLAST   |
 | LANCE       | 1     | 6    | DRAGONITE  | 3      | THUNDER      |
+| RIVAL3      | 1     | 1    | ARTICUNO   | 1      | LIGHT_SCREEN |
+| RIVAL3      | 1     | 2    | ALAKAZAM   | 4      | THUNDER_WAVE |
+| RIVAL3      | 1     | 3    | GOLEM      | 2      | ROCK_SLIDE   |
+| RIVAL3      | 1     | 4    | EXEGGUTOR  | 4      | PSYCHIC_M    |
+| RIVAL3      | 1     | 6    | BLASTOISE  | 2      | ICE_BEAM     |
+| RIVAL3      | 2     | 1    | ZAPDOS     | 4      | THUNDERBOLT  |
+| RIVAL3      | 2     | 2    | ALAKAZAM   | 4      | THUNDER_WAVE |
+| RIVAL3      | 2     | 3    | NIDOQUEEN  | 4      | BLIZZARD     |
+| RIVAL3      | 2     | 4    | EXEGGUTOR  | 4      | PSYCHIC_M    |
+| RIVAL3      | 2     | 5    | FLAREON    | 3      | BODY_SLAM    |
+| RIVAL3      | 2     | 6    | BLASTOISE  | 2      | ICE_BEAM     |
+| RIVAL3      | 3     | 1    | MOLTRES    | 3      | FIRE_BLAST   |
+| RIVAL3      | 3     | 2    | ALAKAZAM   | 4      | THUNDER_WAVE |
+| RIVAL3      | 3     | 3    | NIDOQUEEN  | 4      | BLIZZARD     |
+| RIVAL3      | 3     | 4    | MAGMAR     | 3      | PSYCHIC_M    |
+| RIVAL3      | 3     | 5    | VAPOREON   | 3      | BLIZZARD     |
+| RIVAL3      | 3     | 6    | BLASTOISE  | 2      | ICE_BEAM     |
 <!-- /generated:special-moves -->

@@ -90,4 +90,30 @@ SpecialTrainerMoves:
 	db 6, 3, THUNDER
 	db 0
 
+	db RIVAL3, 1
+	db 1, 1, LIGHT_SCREEN ; Articuno, over MIST
+	db 2, 4, THUNDER_WAVE ; Alakazam, over MEDITATE
+	db 3, 2, ROCK_SLIDE   ; Golem, over EXPLOSION
+	db 4, 4, PSYCHIC_M    ; Exeggutor, over STOMP
+	db 6, 2, ICE_BEAM     ; Blastoise, over BODY_SLAM
+	db 0
+
+	db RIVAL3, 2
+	db 1, 4, THUNDERBOLT  ; Zapdos, over AGILITY
+	db 2, 4, THUNDER_WAVE ; Alakazam, over MEDITATE
+	db 3, 4, BLIZZARD     ; Nidoqueen, over FISSURE
+	db 4, 4, PSYCHIC_M    ; Exeggutor, over STOMP
+	db 5, 3, BODY_SLAM    ; Flareon, over SKULL_BASH
+	db 6, 2, ICE_BEAM     ; Blastoise, over BODY_SLAM
+	db 0
+
+	db RIVAL3, 3
+	db 1, 3, FIRE_BLAST   ; Moltres, over DRAGON_RAGE
+	db 2, 4, THUNDER_WAVE ; Alakazam, over MEDITATE
+	db 3, 4, BLIZZARD     ; Nidoqueen, over FISSURE
+	db 4, 3, PSYCHIC_M    ; Magmar, over POISON_GAS
+	db 5, 3, BLIZZARD     ; Vaporeon, over MIST
+	db 6, 2, ICE_BEAM     ; Blastoise, over BODY_SLAM
+	db 0
+
 	db -1 ; end
