@@ -51,9 +51,9 @@ offers in `prizes.asm` means changing the dictionary too.
 | 1 (Pokémon) | ABRA               | 15    | 250 coins  |
 | 1 (Pokémon) | EEVEE              | 18    | 1000 coins |
 | 1 (Pokémon) | DRATINI            | 22    | 3000 coins |
-| 2 (items)   | TM14 (BLIZZARD)    | —     | 3000 coins |
-| 2 (items)   | TM25 (THUNDER)     | —     | 3000 coins |
-| 2 (items)   | TM38 (FIRE BLAST)  | —     | 3000 coins |
+| 2 (Pokémon) | OMANYTE            | 20    | 3000 coins |
+| 2 (Pokémon) | KABUTO             | 20    | 3000 coins |
+| 2 (Pokémon) | AERODACTYL         | 20    | 3000 coins |
 | 3 (items)   | TM23 (DRAGON RAGE) | —     | 5000 coins |
 | 3 (items)   | TM15 (HYPER BEAM)  | —     | 6000 coins |
 | 3 (items)   | TM50 (SUBSTITUTE)  | —     | 7000 coins |

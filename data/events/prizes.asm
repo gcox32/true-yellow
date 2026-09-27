@@ -1,14 +1,14 @@
 PrizeDifferentMenuPtrs:
 	dw PrizeMenuMon1Entries, PrizeMenuMon1Cost
-	dw PrizeMenuTMsEntries,  PrizeMenuTMsCost
+	dw PrizeMenuMon2Entries, PrizeMenuMon2Cost
 	dw PrizeMenuTMs2Entries, PrizeMenuTMs2Cost
 
 ; whether each prize window (indexed by wWhichPrizeWindow) hands out items (TRUE)
 ; or Pokémon (FALSE). Keep this in sync with PrizeDifferentMenuPtrs above.
 PrizeMenuIsItemWindow:
-	db FALSE ; PrizeMenuMon1Entries - Pokémon
-	db TRUE  ; PrizeMenuTMsEntries - TMs
-	db TRUE  ; PrizeMenuTMs2Entries - TMs
+	db FALSE 
+	db FALSE  
+	db TRUE 
 
 PrizeMenuMon1Entries:
 	db ABRA
@@ -22,13 +22,13 @@ PrizeMenuMon1Cost:
 	bcd2 3000
 	db "@"
 
-PrizeMenuTMsEntries:
-	db TM_BLIZZARD
-	db TM_THUNDER
-	db TM_FIRE_BLAST
+PrizeMenuMon2Entries:
+	db OMANYTE
+	db KABUTO
+	db AERODACTYL
 	db "@"
 
-PrizeMenuTMsCost:
+PrizeMenuMon2Cost:
 	bcd2 3000
 	bcd2 3000
 	bcd2 3000

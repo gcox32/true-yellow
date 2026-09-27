@@ -593,10 +593,13 @@ they're listed rather than quietly dropped.
 | FLAREON    | Pokémon Mansion 2F         | Grass     | 39     | 1.2%   |                                                               |
 | FLAREON    | Pokémon Mansion 3F         | Grass     | 35-37  | 5.5%   |                                                               |
 | PORYGON    | Pokémon Mansion B1F        | Grass     | 40     | 9.8%   |                                                               |
+| OMANYTE    | Game Corner Prize Room     | Prize     | 20     | —      | 3000 coins                                                    |
 | OMANYTE    | Cinnabar Lab Fossil Room   | Gift      | 30     | —      | revived from the matching fossil                              |
 | OMASTAR    | --                         | --        | --     | --     | --                                                            |
+| KABUTO     | Game Corner Prize Room     | Prize     | 20     | —      | 3000 coins                                                    |
 | KABUTO     | Cinnabar Lab Fossil Room   | Gift      | 30     | —      | revived from the matching fossil                              |
 | KABUTOPS   | --                         | --        | --     | --     | --                                                            |
+| AERODACTYL | Game Corner Prize Room     | Prize     | 20     | —      | 3000 coins                                                    |
 | AERODACTYL | Cinnabar Lab Fossil Room   | Gift      | 30     | —      | revived from the matching fossil                              |
 | SNORLAX    | Route 12                   | Static    | 30     | —      | one per save                                                  |
 | SNORLAX    | Route 16                   | Static    | 30     | —      | one per save                                                  |
