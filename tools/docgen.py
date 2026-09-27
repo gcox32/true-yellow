@@ -309,6 +309,8 @@ def main(doc_path, blocks, description):
 	                    help="fail if the doc is out of date instead of rewriting it")
 	parser.add_argument("--stdout", action="store_true",
 	                    help="print the generated tables instead of writing the doc")
+	parser.add_argument("--quiet", action="store_true",
+	                    help="say nothing when the doc was already up to date")
 	args = parser.parse_args()
 
 	tables = []
@@ -330,10 +332,11 @@ def main(doc_path, blocks, description):
 		updated = splice(updated, doc_path, name, table)
 
 	if updated == doc:
-		print("%s is up to date (%s)" % (rel, counts))
+		if not args.quiet:
+			print("%s is up to date (%s)" % (rel, counts))
 		return
 	if args.check:
-		sys.exit("%s is out of date; run `make docs`" % rel)
+		sys.exit("%s is out of date; `make` regenerates it" % rel)
 	with open(doc_path, "w", encoding="utf-8") as f:
 		f.write(updated)
 	print("Regenerated %s (%s)" % (rel, counts))

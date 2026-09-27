@@ -1,9 +1,9 @@
 # Game Corner prizes
 
 What the Celadon Game Corner's prize counters hand out, and what they charge in coins. The
-table below is generated - run `make docs` (or `tools/gen_prizes_doc.py`) after editing
-`data/events/prizes.asm` or `data/events/prize_mon_levels.asm`. Hand edits to it will be
-overwritten; the prose around it is preserved.
+table below is generated - `make` rewrites it (or run `tools/gen_prizes_doc.py`) after you
+edit `data/events/prizes.asm` or `data/events/prize_mon_levels.asm`. Hand edits to it will
+be overwritten; the prose around it is preserved.
 
 All three counters are in the Game Corner prize room, one per vendor, left to right.
 
@@ -37,7 +37,7 @@ end-of-table check. A prize that isn't in the dictionary therefore doesn't get a
 level: the scan runs off the end of the table and whatever byte follows becomes the level.
 
 A **Level** of `?` in the table means exactly that, and the generator warns about it on
-every `make docs`. The two files agree as things stand, so no row says `?` today.
+every build. The two files agree as things stand, so no row says `?` today.
 
 The mismatch runs both ways, and a **Counter** of `none` is the other direction - a level
 with no prize to apply it to. That one breaks nothing, so it's a row rather than a warning.

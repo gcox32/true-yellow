@@ -1,7 +1,7 @@
 # Types
 
-Both tables below are generated - run `make docs` (or `tools/gen_types_doc.py`) after
-editing `/constants/type_constants.asm`, `/data/types/names.asm` or
+Both tables below are generated - `make` rewrites them (or run `tools/gen_types_doc.py`)
+after you edit `/constants/type_constants.asm`, `/data/types/names.asm` or
 `/data/types/type_matchups.asm`. Hand edits to them will be overwritten; the prose
 around them is preserved.
 

@@ -1,7 +1,7 @@
 # Marts
 
 Everywhere in the game that sells something, and what it charges. The table below is
-generated - run `make docs` (or `tools/gen_marts_doc.py`) after editing
+generated - `make` rewrites it (or run `tools/gen_marts_doc.py`) after you edit
 `data/items/marts.asm`, `data/items/prices.asm`, `data/items/tm_prices.asm`,
 `data/items/names.asm` or `data/items/vending_prices.asm`. Hand edits to it will be
 overwritten; the prose around it is preserved.
@@ -60,16 +60,12 @@ to one is a one-line change.
 | Cerulean Mart                       | ESCAPE ROPE         | ¥550         |
 | Cerulean Mart                       | REPEL               | ¥350         |
 | Cerulean Mart                       | ANTIDOTE            | ¥100         |
-| Cerulean Mart                       | BURN HEAL           | ¥250         |
-| Cerulean Mart                       | AWAKENING           | ¥200         |
 | Cerulean Mart                       | PARLYZ HEAL         | ¥200         |
 | Cerulean Mart                       | TM34 (BIDE)         | ¥2000        |
 | Cerulean Mart                       | TM01 (MEGA PUNCH)   | ¥3000        |
 | Cerulean Mart                       | TM12 (WATER GUN)    | ¥1000        |
 | Vermilion Mart                      | POKé BALL           | ¥200         |
 | Vermilion Mart                      | SUPER POTION        | ¥700         |
-| Vermilion Mart                      | ICE HEAL            | ¥250         |
-| Vermilion Mart                      | AWAKENING           | ¥200         |
 | Vermilion Mart                      | PARLYZ HEAL         | ¥200         |
 | Vermilion Mart                      | REPEL               | ¥350         |
 | Vermilion Mart                      | TM19 (SEISMIC TOSS) | ¥3000        |
@@ -107,6 +103,8 @@ to one is a one-line change.
 | Celadon Mart 4F                     | LEAF STONE          | ¥2100        |
 | Celadon Mart 5F (clerk 1)           | RARE CANDY          | ¥3000        |
 | Celadon Mart 5F (clerk 1)           | POKé DOLL           | ¥1000        |
+| Celadon Mart 5F (clerk 1)           | GUARD SPEC.         | ¥700         |
+| Celadon Mart 5F (clerk 1)           | X ACCURACY          | ¥950         |
 | Celadon Mart 5F (clerk 2)           | HP UP               | ¥9800        |
 | Celadon Mart 5F (clerk 2)           | IRON                | ¥9800        |
 | Celadon Mart 5F (clerk 2)           | PROTEIN             | ¥9800        |
@@ -146,15 +144,10 @@ to one is a one-line change.
 | Indigo Plateau Lobby                | FULL RESTORE        | ¥3000        |
 | Indigo Plateau Lobby                | REVIVE              | ¥1500        |
 | Indigo Plateau Lobby                | MAX REVIVE          | ¥4000        |
-| Indigo Plateau Lobby                | TM29 (PSYCHIC M)    | ¥4000        |
 | Indigo Plateau Lobby                | TM47 (EXPLOSION)    | ¥3000        |
 | Indigo Plateau Lobby                | TM14 (BLIZZARD)     | ¥5000        |
 | Indigo Plateau Lobby                | TM38 (FIRE BLAST)   | ¥5000        |
 | Indigo Plateau Lobby                | TM25 (THUNDER)      | ¥5000        |
 | Bike Shop (unused)                  | BICYCLE             | not for sale |
 | Mart (unused)                       | GREAT BALL          | ¥600         |
-| Mart (unused)                       | HYPER POTION        | ¥1500        |
-| Mart (unused)                       | SUPER POTION        | ¥700         |
-| Mart (unused)                       | FULL HEAL           | ¥600         |
-| Mart (unused)                       | REVIVE              | ¥1500        |
 <!-- /generated:marts -->

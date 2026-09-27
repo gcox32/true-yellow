@@ -51,15 +51,17 @@ RGBGFXFLAGS  ?= -Weverything
 .SECONDARY:
 .PHONY: all yellow yellow_debug clean tidy compare tools verify-parks docs check-docs
 
-# `all` lints the follower park tables and checks the generated docs against the
-# data they come from; `yellow` skips both if you need the ROM built regardless.
-# See engine/followers/CUTSCENE_COLLISIONS.md. Neither check writes anything - a
-# stale doc fails the build and names the command that fixes it.
+# `all` lints the follower park tables and regenerates the docs whose tables are
+# derived from the data files, so neither can drift from the asm without you
+# noticing; `yellow` skips both if you need the ROM built regardless. See
+# engine/followers/CUTSCENE_COLLISIONS.md.
 #
-# Target-specific variables carry down to prerequisites, so the check runs quiet
-# as part of a build and verbose when you ask for it by name.
+# Target-specific variables carry down to prerequisites, so both run quiet as
+# part of a build - saying only what changed - and verbose when you ask for them
+# by name.
 all: VERIFY_PARKS_FLAGS := --quiet
-all: verify-parks check-docs $(roms)
+all: DOCS_FLAGS := --quiet
+all: verify-parks docs $(roms)
 yellow:       pokeyellow.gbc
 yellow_debug: pokeyellow_debug.gbc
 yellow_vc:    pokeyellow.patch
@@ -104,18 +106,22 @@ verify-parks:
 # around them is left alone. Each generator reports what it wrote, so the raw
 # command line is suppressed.
 #
+# Part of `all`, which passes --quiet so a build only mentions the docs it
+# actually rewrote; run by name you get a line per doc either way.
+#
 # These are phony rather than file rules on purpose: the generators are cheap,
 # and mtimes lie here - editing prose in a doc makes it newer than the asm it
 # derives from, which would leave a stale table looking up to date.
 docs:
-	@$(PYTHON) tools/gen_moves_doc.py
-	@$(PYTHON) tools/gen_types_doc.py
-	@$(PYTHON) tools/gen_parties_doc.py
-	@$(PYTHON) tools/gen_wild_doc.py
-	@$(PYTHON) tools/gen_marts_doc.py
-	@$(PYTHON) tools/gen_prizes_doc.py
+	@$(PYTHON) tools/gen_moves_doc.py $(DOCS_FLAGS)
+	@$(PYTHON) tools/gen_types_doc.py $(DOCS_FLAGS)
+	@$(PYTHON) tools/gen_parties_doc.py $(DOCS_FLAGS)
+	@$(PYTHON) tools/gen_wild_doc.py $(DOCS_FLAGS)
+	@$(PYTHON) tools/gen_marts_doc.py $(DOCS_FLAGS)
+	@$(PYTHON) tools/gen_prizes_doc.py $(DOCS_FLAGS)
 
-# Fail instead of rewriting - for checking a tree is up to date.
+# Fail instead of rewriting - for checking a tree someone else built is up to
+# date, where a build that quietly fixes the docs would hide the drift.
 check-docs:
 	@$(PYTHON) tools/gen_moves_doc.py --check
 	@$(PYTHON) tools/gen_types_doc.py --check

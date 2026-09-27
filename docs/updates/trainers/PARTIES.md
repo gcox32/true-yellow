@@ -1,8 +1,9 @@
 # Parties
 
-Both tables below are generated - run `make docs` (or `tools/gen_parties_doc.py`) after
-editing `data/trainers/parties.asm` or `data/trainers/special_moves.asm`. Hand edits to
-them will be overwritten; the prose around them is preserved.
+Both tables below are generated - `make` rewrites them (or run
+`tools/gen_parties_doc.py`) after you edit `data/trainers/parties.asm` or
+`data/trainers/special_moves.asm`. Hand edits to them will be overwritten; the prose
+around them is preserved.
 
 ## Party Updates
 NPC trainer parties are established in `data/trainers/parties.asm`.

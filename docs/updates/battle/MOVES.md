@@ -3,7 +3,7 @@
 ## Moves
 A simple table, found in `/data/moves/moves.asm`, defines each move's corresponding animation, effect, power, type, percent accuracy, and pp. We adjust the values in this table to most quickly. Below is every move as it currently stands.
 
-The table is generated - run `make docs` (or `tools/gen_moves_doc.py`) after editing `data/moves/moves.asm`. Hand edits to it will be overwritten; the prose around it is preserved.
+The table is generated - `make` rewrites it (or run `tools/gen_moves_doc.py`) after you edit `data/moves/moves.asm`. Hand edits to it will be overwritten; the prose around it is preserved.
 
 <!-- generated:moves -->
 | Move         | Effect                     | Power | Type            | Accuracy | PP |

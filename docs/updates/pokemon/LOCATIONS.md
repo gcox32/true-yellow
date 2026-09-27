@@ -2,10 +2,10 @@
 
 Where every Pokemon can be got, one row per place and method. Every Pokemon in the dex
 has at least one row, so the ones you can't meet, be given or buy anywhere are visible as
-gaps rather than absences. The table below is
-generated - run `make docs` (or `tools/gen_wild_doc.py`) after editing anything under
-`data/wild/`, a map's `data/maps/objects/` file, or a script that hands out or sets up a
-Pokemon. Hand edits to it will be overwritten; the prose around it is preserved.
+gaps rather than absences. The table below is generated - `make` rewrites it (or run
+`tools/gen_wild_doc.py`) after you edit anything under `data/wild/`, a map's
+`data/maps/objects/` file, or a script that hands out or sets up a Pokemon. Hand edits to
+it will be overwritten; the prose around it is preserved.
 
 This is deliberately the Pokemon-first view. The other direction - what lives on a given
 map - is what `data/wild/maps/*.asm` already is, one file per map, so it isn't duplicated
