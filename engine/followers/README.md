@@ -296,6 +296,27 @@ above instead of falling in behind the player per their current facing
 (which used to look like a vertical stack behind the player while Pikachu
 stood off to the side).
 
+### Falling Down a Hole (dungeon warp)
+
+`EnterMapAnim.dungeonWarpAnimation` is that one exception: Pikachu lands on
+the player's own tile (`wPikachuSpawnState = 0`), so neither the horizontal
+mode 1 arrangement nor `.normalPositioning` describes where Misty and Brock
+should be. `.normalPositioning` is what they used to get, and because
+`ResetPlayerSpriteData` (`SpecialEnterMap`) zeroes the player's facing on
+every special warp, "2 and 3 tiles behind" always resolved to the two tiles
+straight *above* the landing spot - i.e. the ceiling the player just fell
+through. Both Pokemon Mansion 3F holes land in a pocket with a solid wall row
+directly above it (1F `16,14`, reached from hole coords `16,14`/`17,14`; 2F
+`18,14`, from `19,14`), so the pair materialized inside that wall with Brock a
+room away beyond it, then walked back out through the wall to catch up.
+
+`.dungeonWarpAnimation` now sets `wFollowerDoorwayMode = 2`, giving the same
+delayed cascade as a building exit: both stay hidden and emerge one per step
+from the tile the player landed on - the hole they fell through, walkable by
+definition. `PrepareForSpecialWarp` has already cleared `wExitDoorway*`, so
+`.storeDoorPosition` captures that landing tile on the player's first step.
+This covers the Seafoam Islands falls and Victory Road 2F as well.
+
 ### Blacking Out
 
 Blacking out lands on the *same* Pokemon Center tiles as a Fly, but it is

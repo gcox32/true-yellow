@@ -54,6 +54,24 @@ EnterMapAnim::
 	call PlayerSpinWhileMovingDown
 	ld a, $0
 	ld [wPikachuSpawnState], a
+	; Falling down a hole (Pokemon Mansion 3F's two holes, the Seafoam
+	; Islands falls, Victory Road 2F) is the one landing that keeps Pikachu on
+	; the player's own tile rather than beside them, so neither the horizontal
+	; mode 1 arrangement nor .normalPositioning suits Misty and Brock here.
+	; .normalPositioning is what they got, and since ResetPlayerSpriteData
+	; (SpecialEnterMap) zeroes the player's facing, "behind" is always the two
+	; tiles straight above the landing spot - which is the ceiling the player
+	; just dropped through. Both mansion holes land in a pocket with a solid
+	; wall row directly above (1F 16,14 and 2F 18,14), so the pair
+	; materialized inside that wall, with Brock a room away on the far side of
+	; it, then walked back out through it to catch up.
+	; Use the door-exit cascade instead: they stay hidden and emerge one per
+	; step from the tile the player landed on - the same hole they fell
+	; through, and walkable by definition. wExitDoorway* was cleared by
+	; PrepareForSpecialWarp, so .storeDoorPosition captures the landing tile on
+	; the player's first step, exactly as it does on a building exit.
+	ld a, 2
+	ld [wFollowerDoorwayMode], a
 	jr .done
 .flyAnimation
 	pop hl

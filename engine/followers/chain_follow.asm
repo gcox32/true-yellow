@@ -438,6 +438,20 @@ RebaseFollowerPositionsForConnection::
 	ld a, [wPositionTrailY + 3]
 	add b
 	ld [wPositionTrailY + 3], a
+; The door tile a delayed follower is still waiting to emerge from is the same
+; kind of old-map snapshot as everything above, and it outlives the crossing
+; whenever the mode 2-4 cascade is mid-flight as the border is crossed. That is
+; not a corner case: surfing down Route 21 to Cinnabar Island, the dismount
+; lands on Route 21's last land row and the cascade reaches mode 4 - Misty's
+; emergence - on the very step that crosses into Cinnabar, so both followers
+; materialized at a Route 21 coordinate (deltaY there is -90) and then ran up
+; the player's column for ~88 tiles to reach their trail targets. Shift it too.
+; 0 means "not set", so leave that alone.
+	ld a, [wExitDoorwayY]
+	and a
+	jr z, .skipY
+	add b
+	ld [wExitDoorwayY], a
 .skipY
 	ld a, c
 	or a
@@ -461,6 +475,14 @@ RebaseFollowerPositionsForConnection::
 	ld a, [wPositionTrailX + 3]
 	add b
 	ld [wPositionTrailX + 3], a
+; Pending door tile again - see the matching comment in the Y block above. Its
+; Y half is the "is it set" sentinel for the pair, so test that, not X.
+	ld a, [wExitDoorwayY]
+	and a
+	jr z, .skipX
+	ld a, [wExitDoorwayX]
+	add b
+	ld [wExitDoorwayX], a
 .skipX
 	ret
 
