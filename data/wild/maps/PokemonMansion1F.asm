@@ -1,15 +1,15 @@
 PokemonMansion1FWildMons:
 	def_grass_wildmons 8 ; encounter rate
-	db 33, MAGNEMITE
-	db 35, MAGNETON
-	db 36, GRIMER
-	db 38, KOFFING
-	db 40, MUK
-	db 42, WEEZING
-	db 60, DITTO
-	db 55, DITTO
-	db 61, MAGMAR
-	db 62, MAGMAR
+	db 33, GROWLITHE
+	db 33, VULPIX
+	db 34, KOFFING
+	db 33, CHARMANDER
+	db 33, GRIMER
+	db 31, MAGNEMITE
+	db 38, GROWLITHE
+	db 38, VULPIX
+	db 33, MAGMAR
+	db 36, FLAREON
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

@@ -1,15 +1,15 @@
 PokemonMansion3FWildMons:
 	def_grass_wildmons 8 ; encounter rate
 	db 35, VULPIX 
-	db 33, NINETALES
-	db 36, NINETALES
-	db 32, GROWLITHE
-	db 34, WEEZING
-	db 40, MUK
+	db 30, GROWLITHE
+	db 36, RATTATA
+	db 35, GROWLITHE
+	db 34, KOFFING
+	db 34, GRIMER
 	db 36, MUK
-	db 38, FLAREON
-	db 36, FLAREON
-	db 42, FLAREON
+	db 38, MAGMAR
+	db 35, FLAREON
+	db 37, FLAREON
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

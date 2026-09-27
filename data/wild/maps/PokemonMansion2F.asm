@@ -5,11 +5,11 @@ PokemonMansion2FWildMons:
 	db 36, KOFFING
 	db 32, WEEZING
 	db 34, GRIMER
-	db 40, MUK
+	db 40, VULPIX
 	db 36, RATICATE
-	db 38, FLAREON
-	db 36, FLAREON
-	db 42, FLAREON
+	db 38, MUK
+	db 36, MAGMAR
+	db 39, FLAREON
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

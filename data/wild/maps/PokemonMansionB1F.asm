@@ -1,15 +1,15 @@
 PokemonMansionB1FWildMons:
 	def_grass_wildmons 10 ; encounter rate
-	db 32, VULPIX
-	db 38, GROWLITHE
-	db 48, MR_MIME
-	db 45, DITTO
-	db 55, DITTO
-	db 42, MAGMAR
-	db 56, PORYGON
-	db 58, PORYGON
-	db 60, FLOATING_WEEZING
-	db 50, FLOATING_MAGNETON
+	db 32, KOFFING
+	db 35, MAGNEMITE
+	db 36, GROWLITHE
+	db 36, GRIMER
+	db 39, RATICATE
+	db 40, PORYGON
+	db 40, FLOATING_WEEZING
+	db 36, GASTLY
+	db 42, MUK
+	db 40, DITTO
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate
