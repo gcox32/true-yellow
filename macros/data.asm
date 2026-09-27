@@ -100,3 +100,16 @@ MACRO sine_table
 		dw sin(x * 0.5 / (\1))
 	ENDR
 ENDM
+
+MACRO item_list
+; A list for LoadItemList to copy into wItemList: the entry count, the entries,
+; and the terminator. The count is taken from the arguments rather than written
+; out, so it can't disagree with them.
+	ASSERT _NARG <= MAX_ITEM_LIST_ENTRIES, \
+		"an item list holds at most {d:MAX_ITEM_LIST_ENTRIES} entries, got {d:_NARG}"
+	db _NARG
+	IF _NARG
+		db \#
+	ENDC
+	db -1 ; end
+ENDM

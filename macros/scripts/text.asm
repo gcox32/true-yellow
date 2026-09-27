@@ -193,11 +193,7 @@ ENDM
 	const TX_SCRIPT_MART ; $fe
 MACRO script_mart
 	db TX_SCRIPT_MART
-	db _NARG ; number of items
-	IF _NARG
-		db \# ; all item ids
-	ENDC
-	db -1 ; end
+	item_list \# ; the stock, as item ids
 ENDM
 
 	const TX_SCRIPT_BILLS_PC ; $fd

@@ -64,6 +64,9 @@ CeruleanBadgeHouseMiddleAgedManText:
 	jp TextScriptEnd
 
 .BadgeItemList:
+; LoadItemList copies this into wItemList, like a mart's stock or a floor list.
+	ASSERT NUM_BADGES <= MAX_ITEM_LIST_ENTRIES, \
+		"the badge list holds at most {d:MAX_ITEM_LIST_ENTRIES} entries, got {d:NUM_BADGES}"
 	db NUM_BADGES ; #
 	table_width 1
 	db BOULDERBADGE

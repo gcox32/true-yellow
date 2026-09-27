@@ -22,3 +22,11 @@
 	const INIT_OTHER_ITEM_LIST ; 3
 	const INIT_PLAYEROT_LIST   ; 4
 	const INIT_MON_LIST        ; 5
+
+; LoadItemList copies a list into wItemList verbatim: a count byte, the entries,
+; and the $FF terminator. The buffer is a fixed size and the copy has no bounds
+; check, and wListPointer - which the list menu dereferences to find the list
+; it's drawing - sits directly after it, so an overlong list points the menu at
+; its own trailing bytes.
+DEF ITEM_LIST_SIZE EQU 16
+DEF MAX_ITEM_LIST_ENTRIES EQU ITEM_LIST_SIZE - 2 ; the count byte and terminator

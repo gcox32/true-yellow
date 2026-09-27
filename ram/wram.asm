@@ -1270,7 +1270,7 @@ wGymCityName:: ds 17
 
 wGymLeaderName:: ds NAME_LENGTH
 
-wItemList:: ds 16
+wItemList:: ds ITEM_LIST_SIZE
 
 wListPointer:: dw
 

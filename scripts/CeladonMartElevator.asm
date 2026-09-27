@@ -40,13 +40,7 @@ CeladonMartElevatorCopyWarpMapsScript:
 	jp CopyData
 
 CeladonMartElevatorFloors:
-	db 5 ; #
-	db FLOOR_1F
-	db FLOOR_2F
-	db FLOOR_3F
-	db FLOOR_4F
-	db FLOOR_5F
-	db -1 ; end
+	item_list FLOOR_1F, FLOOR_2F, FLOOR_3F, FLOOR_4F, FLOOR_5F
 
 ; These specify where the player goes after getting out of the elevator.
 CeladonMartElevatorWarpMaps:
