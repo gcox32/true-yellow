@@ -25,7 +25,7 @@ _CinnabarLabMachineHumText::
 
 	para "Place a #MON in"
 	line "the rig?"
-	done
+	prompt
 
 _CinnabarLabMachineWrongMonText::
 	text "The rig didn't"

@@ -14,7 +14,7 @@ _PowerPlantMagnetHumText::
 
 	para "Expose a #MON to"
 	line "the magnetic core?"
-	done
+	prompt
 
 _PowerPlantMagnetWrongMonText::
 	text "The magnetic field"

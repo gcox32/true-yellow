@@ -16,6 +16,8 @@
 - [x] Swap sell items in Celadon 2F for TMs
 - [x] Need better coin buying experience in Game Corner
 - [x] Need better prizes in Game Corner
+- [ ] rewrite floating weezing event text to work for a vent in the floor (not a pipe)
+- [ ] better cinnabar maansion encounters
 
 ## QOL
 - [x] the "Grey pokemon" palette needs to be more grey than brown

@@ -39,16 +39,16 @@ _PokemonMansionB1FDiaryText::
 	done
 
 _PokemonMansionB1FGasPipeText::
-	text "A cracked valve on"
-	line "an old gas main."
+	text "A rusted vent set"
+	line "into the floor."
 
 	para "A steady hiss of"
-	line "helium leaks from"
-	cont "the seal."
+	line "helium rises from"
+	cont "the grate."
 
-	para "Hold a #MON up"
-	line "to the leak?"
-	done
+	para "Hold a #MON"
+	line "over the vent?"
+	prompt
 
 _PokemonMansionB1FGasWrongMonText::
 	text "The helium had no"
@@ -76,6 +76,6 @@ _PokemonMansionB1FGasSuccessText::
 
 	para "It swelled up and"
 	line "drifted off the"
-	cont "floor--it learned"
+	cont "floor. It learned"
 	cont "to float!"
 	done
