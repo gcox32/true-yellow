@@ -111,12 +111,18 @@ docs:
 	@$(PYTHON) tools/gen_moves_doc.py
 	@$(PYTHON) tools/gen_types_doc.py
 	@$(PYTHON) tools/gen_parties_doc.py
+	@$(PYTHON) tools/gen_wild_doc.py
+	@$(PYTHON) tools/gen_marts_doc.py
+	@$(PYTHON) tools/gen_prizes_doc.py
 
 # Fail instead of rewriting - for checking a tree is up to date.
 check-docs:
 	@$(PYTHON) tools/gen_moves_doc.py --check
 	@$(PYTHON) tools/gen_types_doc.py --check
 	@$(PYTHON) tools/gen_parties_doc.py --check
+	@$(PYTHON) tools/gen_wild_doc.py --check
+	@$(PYTHON) tools/gen_marts_doc.py --check
+	@$(PYTHON) tools/gen_prizes_doc.py --check
 
 compare: $(roms) $(patches)
 	@$(SHA1) -c roms.sha1

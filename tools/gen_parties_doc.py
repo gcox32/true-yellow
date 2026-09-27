@@ -31,11 +31,8 @@ import sys
 import docgen
 
 TRAINER_CONSTANTS_ASM = docgen.path("constants", "trainer_constants.asm")
-MAP_CONSTANTS_ASM = docgen.path("constants", "map_constants.asm")
 PARTIES_ASM = docgen.path("data", "trainers", "parties.asm")
 SPECIAL_MOVES_ASM = docgen.path("data", "trainers", "special_moves.asm")
-TOWN_MAP_ENTRIES_ASM = docgen.path("data", "maps", "town_map_entries.asm")
-TOWN_MAP_ORDER_ASM = docgen.path("data", "maps", "town_map_order.asm")
 PARTIES_DOC = docgen.path("docs", "updates", "trainers", "PARTIES.md")
 
 PARTY_COLUMNS = ("Class", "Location", "Lv", "Party", "Notes")
@@ -119,96 +116,9 @@ class Party:
 		self.location = None   # filled in by read_parties
 
 
-def number(token, asm, lineno):
-	"""A db field: decimal, $hex, or a sum of those (`75 + 128`)."""
-	total = 0
-	for term in token.split("+"):
-		term = term.strip()
-		try:
-			total += int(term[1:], 16) if term.startswith("$") else int(term, 10)
-		except ValueError:
-			sys.exit("%s:%d: %r is not a number" % (asm, lineno, token))
-	return total
 
 
-def read_map_ids():
-	"""({map constant: id}, the id the indoor maps start at)."""
-	ids = {}
-	value = 0
-	first_indoor = None
-	with open(MAP_CONSTANTS_ASM, encoding="utf-8") as f:
-		for line in f:
-			line = line.split(";")[0].strip()
-			if line.startswith("DEF FIRST_INDOOR_MAP"):
-				first_indoor = value
-			elif line.startswith("map_const "):
-				ids[line.split()[1].rstrip(",")] = value
-				value += 1
-	if first_indoor is None:
-		sys.exit("%s: no FIRST_INDOOR_MAP" % MAP_CONSTANTS_ASM)
-	return ids, first_indoor
 
-
-def read_town_map_entries():
-	"""(outdoor maps' town map coordinates by id, [(last map id, coordinates)]).
-
-	Indoor maps aren't listed one by one: InternalMapEntries is a run of "every
-	map up to this one sits here", which is why the second list is walked in
-	order rather than indexed.
-	"""
-	external = []
-	internal = []
-	with open(TOWN_MAP_ENTRIES_ASM, encoding="utf-8") as f:
-		for line in f:
-			line = line.split(";")[0].strip()
-			if line.startswith("external_map"):
-				fields = [f.strip() for f in line[len("external_map"):].split(",")]
-				external.append((int(fields[0]), int(fields[1])))
-			elif line.startswith("internal_map"):
-				fields = [f.strip() for f in line[len("internal_map"):].split(",")]
-				internal.append((fields[0], (int(fields[1]), int(fields[2]))))
-	if not external or not internal:
-		sys.exit("%s: no town map entries" % TOWN_MAP_ENTRIES_ASM)
-	return external, internal
-
-
-def town_map_spot(map_name, maps):
-	"""Where a map sits on the town map, as coordinates, or None if it's not a map.
-
-	Two maps at the same spot are the same place as far as the town map is
-	concerned - which is how Silph Co. ends up filed under Saffron City and the
-	Elite Four's rooms under Indigo Plateau.
-	"""
-	ids, first_indoor, external, internal = maps
-	if map_name not in ids:
-		return None
-	map_id = ids[map_name]
-	if map_id < first_indoor:
-		return external[map_id]
-	for last_map, coordinates in internal:
-		if last_map not in ids:
-			sys.exit("%s: unknown map %s" % (TOWN_MAP_ENTRIES_ASM, last_map))
-		if map_id <= ids[last_map]:
-			return coordinates
-	return None
-
-
-def read_town_map_order(maps):
-	"""{town map coordinates: how early the player gets there}."""
-	rank = {}
-	with open(TOWN_MAP_ORDER_ASM, encoding="utf-8") as f:
-		for line in f:
-			line = line.split(";")[0].strip()
-			if not line.startswith("db "):
-				continue
-			map_name = line.split()[1]
-			spot = town_map_spot(map_name, maps)
-			if spot is None:
-				sys.exit("%s: %s isn't on the town map" % (TOWN_MAP_ORDER_ASM, map_name))
-			rank.setdefault(spot, len(rank))
-	if not rank:
-		sys.exit("%s: no maps listed" % TOWN_MAP_ORDER_ASM)
-	return rank
 
 
 def map_constant(location):
@@ -227,10 +137,10 @@ def map_constant(location):
 def pinned_rank(pin, maps, rank):
 	"""A (map, offset) pin, as a rank that sorts either side of that map's own."""
 	map_name, offset = pin
-	spot = town_map_spot(map_name, maps)
+	spot = docgen.town_map_spot(map_name, maps)
 	if spot not in rank:
 		sys.exit("%s isn't in %s - it can't be pinned to" %
-		         (map_name, os.path.basename(TOWN_MAP_ORDER_ASM)))
+		         (map_name, os.path.basename(docgen.TOWN_MAP_ORDER_ASM)))
 	return rank[spot] + offset
 
 
@@ -246,7 +156,7 @@ def town_map_place(party, maps, rank):
 		if comment is None or comment in UNPLACED:
 			continue
 		map_name = map_constant(comment)
-		spot = town_map_spot(map_name, maps)
+		spot = docgen.town_map_spot(map_name, maps)
 		if spot in rank:
 			return rank[spot], map_name
 	return None, None
@@ -312,12 +222,12 @@ def parse_party(operand, note, asm, lineno):
 		if not tokens or len(tokens) % 2:
 			sys.exit("%s:%d: %s party wants level/species pairs, got %d fields" %
 			         (asm, lineno, header, len(tokens)))
-		mons = [(number(tokens[i], asm, lineno), tokens[i + 1])
+		mons = [(docgen.number(tokens[i], asm, lineno), tokens[i + 1])
 		        for i in range(0, len(tokens), 2)]
 	else:
 		if len(tokens) < 2:
 			sys.exit("%s:%d: party has a level but no species" % (asm, lineno))
-		level = number(tokens[0], asm, lineno)
+		level = docgen.number(tokens[0], asm, lineno)
 		mons = [(level, species) for species in tokens[1:]]
 
 	if len(mons) > PARTY_LENGTH:
@@ -438,7 +348,7 @@ def build_special_moves(parties):
 				if len(fields) != 2:
 					sys.exit("%s:%d: expected `db class, party`, got %r" %
 					         (SPECIAL_MOVES_ASM, lineno, match.group(1)))
-				name, party_number = fields[0], number(fields[1], SPECIAL_MOVES_ASM, lineno)
+				name, party_number = fields[0], docgen.number(fields[1], SPECIAL_MOVES_ASM, lineno)
 				if name not in parties:
 					sys.exit("%s:%d: unknown trainer class %s" %
 					         (SPECIAL_MOVES_ASM, lineno, name))
@@ -457,8 +367,8 @@ def build_special_moves(parties):
 				sys.exit("%s:%d: expected `db slot, move slot, move`, got %r" %
 				         (SPECIAL_MOVES_ASM, lineno, match.group(1)))
 			name, party_number, party = trainer
-			slot = number(fields[0], SPECIAL_MOVES_ASM, lineno)
-			move_slot = number(fields[1], SPECIAL_MOVES_ASM, lineno)
+			slot = docgen.number(fields[0], SPECIAL_MOVES_ASM, lineno)
+			move_slot = docgen.number(fields[1], SPECIAL_MOVES_ASM, lineno)
 			if not 1 <= slot <= len(party.mons):
 				sys.exit("%s:%d: %s party %d has no slot %d (%d Pokemon)" %
 				         (SPECIAL_MOVES_ASM, lineno, name, party_number, slot,
@@ -479,9 +389,7 @@ def build_special_moves(parties):
 
 if __name__ == "__main__":
 	all_parties = read_parties()
-	map_ids, indoor = read_map_ids()
-	town_map = (map_ids, indoor) + read_town_map_entries()
-	town_map_order = read_town_map_order(town_map)
+	town_map, town_map_order = docgen.read_town_map()
 	docgen.main(PARTIES_DOC, [
 		("parties", PARTY_COLUMNS, lambda: build_parties(all_parties, town_map, town_map_order)),
 		("special-moves", MOVE_COLUMNS, lambda: build_special_moves(all_parties)),
