@@ -54,7 +54,7 @@ Moves:
 	move TWINEEDLE,    TWINEEDLE_EFFECT,            40,  BUG,            100, 20 ; power changed from 25 to 40
 	move PIN_MISSILE,  TWO_TO_FIVE_ATTACKS_EFFECT,  20,  BUG,             95, 20 ; power changed from 14 to 20, accuracy changed from 85 to 95
 	move LEER,         DEFENSE_DOWN1_EFFECT,         0,  NORMAL,         100, 30
-	move BITE,         FLINCH_SIDE_EFFECT1,         50,  NORMAL,         100, 25 ; power changed from 60 to 50
+	move BITE,         FLINCH_SIDE_EFFECT1,         50,  POISON,         100, 25 ; power changed from 60 to 50
 	move GROWL,        ATTACK_DOWN1_EFFECT,          0,  NORMAL,         100, 40
 	move ROAR,         ATTACK_DOWN_SIDE_EFFECT,     40,  DRAGON,         100, 20 ; changed type to dragon
 	move SING,         SLEEP_EFFECT,                 0,  NORMAL,          70, 15 ; accuracy changed from 55 to 70
@@ -168,11 +168,11 @@ Moves:
 	move BONEMERANG,   ATTACK_TWICE_EFFECT,         50,  BONEMERANG_TYPE, 90, 10
 	move REST,         HEAL_EFFECT,                  0,  NORMAL,         100, 10 ; type changed from PSYCHIC_TYPE to NORMAL
 	move ROCK_SLIDE,   FLINCH_SIDE_EFFECT2,         90,  ROCK,            90, 10 ; power changed from 75 to 90, added FLINCH_SIDE_EFFECT2 effect
-	move HYPER_FANG,   FLINCH_SIDE_EFFECT1,         80,  NORMAL,          90, 15
+	move HYPER_FANG,   FLINCH_SIDE_EFFECT1,         80,  POISON,          90, 15
 	move SHARPEN,      ATTACK_ACCURACY_UP1_EFFECT,   0,  NORMAL,         100, 30 ; new effect
 	move CONVERSION,   CONVERSION_EFFECT,            0,  NORMAL,         100, 30
 	move TRI_ATTACK,   TRI_ATTACK_EFFECT,            80, TRI,            100, 10 ; effect changed from NO_ADDITIONAL_EFFECT to TRI_ATTACK_EFFECT
-	move SUPER_FANG,   SUPER_FANG_EFFECT,            1,  NORMAL,          95, 10 ; accuracy changed from 90 to 95
+	move SUPER_FANG,   SUPER_FANG_EFFECT,            1,  POISON,          95, 10 ; accuracy changed from 90 to 95
 	move SLASH,        NO_ADDITIONAL_EFFECT,        70,  NORMAL,         100, 20
 	move SUBSTITUTE,   SUBSTITUTE_EFFECT,            0,  NORMAL,         100, 10
 	move STRUGGLE,     RECOIL_EFFECT,               50,  TYPELESS,       100, 10 ; type changed from NORMAL to TYPELESS

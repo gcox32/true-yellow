@@ -1187,7 +1187,7 @@ ArticunoEvosMoves:
 ; Learnset
 	db 51, AURORA_BEAM
 	db 55, REFLECT
-	db 60, MIST
+	db 60, LIGHT_SCREEN
 	db 66, BLIZZARD
 	db 71, SKY_ATTACK
 	db 80, PSYCHIC_M
@@ -1198,7 +1198,7 @@ ZapdosEvosMoves:
 	db 0
 ; Learnset
 	db 51, THUNDER
-	db 55, AGILITY
+	db 55, SWIFT
 	db 60, LIGHT_SCREEN
 	db 66, DRILL_PECK
 	db 71, SKY_ATTACK
