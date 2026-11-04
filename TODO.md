@@ -47,39 +47,39 @@
 ## Bugfixes from PureRGB
 - [x] High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
 - [x] Focus Energy actually works as intended now (multiplies critical hit rate by 4 instead of dividing it by 4)
-- [ ] Badge boosts aren't repeatedly applied to every stat when you use or are afflicted by a stat modifier move.
-- [ ] Speed decrease / Attack decrease caused by paralysis and burn statuses aren't repeatedly applied on being hit by or using a stat modifier move.
-- [ ] After healing Paralysis/Burn with an item, speed or attack stats will be correctly reset to their original values
-      (^ these 3 are one interconnected battle stat-recalc overhaul in PureRGB - CalculateModifiedStat / ApplyBadgeBoostsForSpecificStat / wWhatStat + StatModifierUp/DownEffect + item heal code. Deferred as a group.)
+- [x] Badge boosts aren't repeatedly applied to every stat when you use or are afflicted by a stat modifier move.
+- [x] Speed decrease / Attack decrease caused by paralysis and burn statuses aren't repeatedly applied on being hit by or using a stat modifier move.
+- [x] After healing Paralysis/Burn with an item, speed or attack stats will be correctly reset to their original values
 - [x] Nidorino's cry plays correctly in Oak's introduction instead of nidorina's (N/A in Yellow: Oak's intro shows Pikachu, no Nidorino)
 - [x] Healing moves like Recover won't fail incorrectly when restoring exactly 255 HP.
-- [ ] The evolution stone item bypass glitch was removed - you must use evolution stones to evolve stone evolution pokemon.
-- [ ] Skipping a level due to gaining a lot of experience won't skip the move you could have learned on the skipped level anymore
-- [ ] Learning moves after evolution works correctly now.
-- [ ] Eevee will always learn a type-specific move on evolution regardless of the level it is evolved at
+- [x] The evolution stone item bypass glitch was removed - you must use evolution stones to evolve stone evolution pokemon. (N/A in Yellow: already has the same wIsInBattle check)
+- [x] Skipping a level due to gaining a lot of experience won't skip the move you could have learned on the skipped level anymore
+- [x] Learning moves after evolution works correctly now.
+- [x] Eevee will always learn a type-specific move on evolution regardless of the level it is evolved at (Ember / ThunderShock / Water Gun)
 - [x] Cap light screen / reflect stat boosts to 999 to prevent overflows
 - [x] LT Surge says the Thunderbadge boosts speed, but in the code it actually boosted defence. Now it boosts speed as text indicated.
 - [x] Koga says the Soulbadge boosts defense, but in the code it actually boosted speed. Now it boosts defense as the text indicated.
-- [ ] When learning a new move in battle, the "Poof!" sound effect didn't work correctly and would play a random sound instead. Now it works.
-- [ ] While transformed into another pokemon via TRANSFORM, you cannot swap your move positions anymore - allowing this caused glitches that end with the game crashing
-- [ ] NPCs won't rarely disobey their facing behavioural assignments (facing forward, left, etc.)
+- [x] When learning a new move in battle, the "Poof!" sound effect didn't work correctly and would play a random sound instead. Now it works. (N/A in Yellow: already switches to the correct audio bank)
+- [x] While transformed into another pokemon via TRANSFORM, you cannot swap your move positions anymore - allowing this caused glitches that end with the game crashing (N/A in Yellow: SwapMovesInMenu already checks TRANSFORMED)
+- [x] NPCs won't rarely disobey their facing behavioural assignments (facing forward, left, etc.) (N/A here: wMapSpriteData doesn't cross a page; ASSERT in movement.asm keeps it that way)
 - [ ] Double Edge animation appearance when opponent uses it fixed
-- [ ] Blacking out in the Safari Zone won't glitch the game out
+- [x] Blacking out in the Safari Zone won't glitch the game out
 - [ ] Trying to switch to the current pokemon or a fainted one won't trigger a small visual glitch
-- [ ] A small collision detection bug in cerulean cave was fixed
+- [x] A small collision detection bug in cerulean cave was fixed
 - [ ] Lagginess caused by tile block replacements when loading a map was reduced greatly
-- [ ] Sound effects during text will play properly now when you have instant text setting turned on
+- [x] Sound effects during text will play properly now when you have instant text setting turned on (N/A: no 0-delay text option here)
 - [ ] You won't occasionally see a tile block being replaced visually on loading a map anymore
-- [ ] Using substitute with exactly the right health to use substitute won't cause your pokemon to faint. Instead you will have 1HP left.
+- [x] Using substitute with exactly the right health to use substitute won't cause your pokemon to faint. Instead you will have 1HP left.
 - [ ] The screen won't flash white for 1 frame on entering a battle or a building on original gameboy or on GBC.
-- [ ] Pokeflute will correctly detect sleeping wild pokemon when used in battle.
+      (Skipped for now, not worth the overhead: building half needs ROM0 space; battle half reorders every battle start.)
+- [x] Pokeflute will correctly detect sleeping wild pokemon when used in battle. (N/A in Yellow: already detects sleeping enemy)
 - [ ] On original gameboy, while scrolling the trainer pics across at the start of the battle, they will be silhouettes like on SGB or GBC.
-- [ ] Route 17 sign can now be read from below.
-- [ ] Can't get blocked by the burglar on Pokemon Mansion 3F
-- [ ] If all your pokemon are fainted except for the current one, SHIFT mode won't ask you if you want to switch pokemon before the opponent sends out their next pokemon.
-- [ ] The LAPRAS npc in the fuchsia city zoo can now swim around its enclosure like it was coded to be able to.
-- [ ] Trapping moves won't erroneously still do ongoing damage to pokemon who are immune. Example: Wrap on a ghost pokemon.
-- [ ] In the original game if you or your opponent hurts theirself in confusion or is fully paralyzed while digging or flying, the pokemon will be stuck in an invulnerable state, making all attacks miss. This was fixed so it doesn't happen in link battles, and in normal gameplay, doesn't happen to enemy pokemon. But since it's a funny bug, it can still happen to the player - you will become invulnerable if this bug happens to you.
-- [ ] In the original game, if your opponent used minimize or substitute, you opened your FIGHT menu, exited, went to PARTY, looked at a pokemon's status menu, then returned to the fight, the opponent's sprite would be all messed up. Now it's fixed and doesn't do that.
-- [ ] Doing the same thing as the above on unidentified GHOSTS would reveal what pokemon they are. Now it doesn't.
-- [ ] After saving in rock tunnel, going title screen -> continue screen -> title screen -> continue screen will cause the continue screen to take on darker colors. Now it stays normal colors.
+- [x] Route 17 sign can now be read from below.
+- [x] Can't get blocked by the burglar on Pokemon Mansion 3F
+- [x] If all your pokemon are fainted except for the current one, SHIFT mode won't ask you if you want to switch pokemon before the opponent sends out their next pokemon.
+- [x] The LAPRAS npc in the fuchsia city zoo can now swim around its enclosure like it was coded to be able to. (N/A: zoo Lapras is commented out of the map)
+- [x] Trapping moves won't erroneously still do ongoing damage to pokemon who are immune. Example: Wrap on a ghost pokemon.
+- [x] In the original game if you or your opponent hurts theirself in confusion or is fully paralyzed while digging or flying, the pokemon will be stuck in an invulnerable state, making all attacks miss. This was fixed so it doesn't happen in link battles, and in normal gameplay, doesn't happen to enemy pokemon. But since it's a funny bug, it can still happen to the player - you will become invulnerable if this bug happens to you. (already fixed above for player and enemy, see Bugs)
+- [x] In the original game, if your opponent used minimize or substitute, you opened your FIGHT menu, exited, went to PARTY, looked at a pokemon's status menu, then returned to the fight, the opponent's sprite would be all messed up. Now it's fixed and doesn't do that. (N/A in Yellow: already sets hWhoseTurn before reloading the pic)
+- [x] Doing the same thing as the above on unidentified GHOSTS would reveal what pokemon they are. Now it doesn't.
+- [x] After saving in rock tunnel, going title screen -> continue screen -> title screen -> continue screen will cause the continue screen to take on darker colors. Now it stays normal colors.

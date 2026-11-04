@@ -191,7 +191,7 @@ ENDC
 	ld a, HIGH(vBGMap1)
 	call TitleScreenCopyTileMapToVRAM
 	call Delay3
-	call LoadGBPal
+	call GBPalNormal ; PureRGBnote: FIXED: LoadGBPal used wMapPalOffset, so a save in dark Rock Tunnel darkened the menu after returning to the title screen
 	ldh a, [hJoyHeld]
 	ld b, a
 	and PAD_UP | PAD_SELECT | PAD_B

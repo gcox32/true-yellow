@@ -1357,7 +1357,7 @@ CheckForTilePairCollisions::
 	jr .retry
 .currentTileMatchesFirstInPair
 	inc hl
-	ld a, [hl]
+	ld a, [hli] ; PureRGBnote: FIXED: without the inc, a non-matching pair misaligned the rest of the table walk
 	cp c
 	jr z, .foundMatch
 	jr .tilePairCollisionLoop

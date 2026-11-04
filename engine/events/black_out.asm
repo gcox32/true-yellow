@@ -39,6 +39,15 @@ ResetStatusAndHalveMoneyOnBlackout::
 	ld [wPlayerMoney + 2], a
 
 .lostmoney
+; PureRGBnote: FIXED: blacking out (poison while walking) ended the game without ending
+; the Safari Game. The step counter kept running everywhere and later warped you back.
+	ResetEvents EVENT_SAFARI_GAME_OVER, EVENT_IN_SAFARI_ZONE
+	xor a
+	ld [wNumSafariBalls], a
+	ld [wSafariSteps], a
+	ld [wSafariSteps + 1], a
+	ld [wSafariZoneGameOver], a
+	ld [wSafariZoneGateCurScript], a ; SCRIPT_SAFARIZONEGATE_DEFAULT
 	ld hl, wStatusFlags6
 	set BIT_FLY_OR_DUNGEON_WARP, [hl]
 	res BIT_FLY_WARP, [hl]

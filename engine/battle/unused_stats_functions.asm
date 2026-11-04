@@ -60,3 +60,36 @@ HalveSelectedStats:
 .nonzeroStat
 	dec hl
 	ret
+
+; PureRGBnote: FIXED: restores the stat lost to the burn or paralysis of the mon whose
+; turn it is. Call this BEFORE clearing the status, it reads which one to undo.
+UndoBurnParStats:
+	ld hl, wBattleMonStatus
+	ld de, wPlayerStatsToDouble
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .gotPointers
+	ld hl, wEnemyMonStatus
+	ld de, wEnemyStatsToDouble
+.gotPointers
+	ld a, [hl]
+	bit BRN, a
+	jr nz, .burned
+	bit PAR, a
+	ret z
+	ld a, 1 << 2 ; speed, quartered so double it twice
+	ld [de], a
+	push de
+	call DoubleSelectedStats
+	call DoubleSelectedStats
+	jr .done
+.burned
+	ld a, 1 << 0 ; attack
+	ld [de], a
+	push de
+	call DoubleSelectedStats
+.done
+	pop de
+	xor a
+	ld [de], a
+	ret

@@ -638,6 +638,15 @@ AICureStatus:
 	call AddNTimes
 	xor a
 	ld [hl], a ; clear status in enemy team roster
+; PureRGBnote: FIXED: the enemy gets back the attack or speed it lost to burn or paralysis
+	ldh a, [hWhoseTurn]
+	push af
+	ld a, 1
+	ldh [hWhoseTurn], a
+	callfar UndoBurnParStats
+	pop af
+	ldh [hWhoseTurn], a
+	xor a
 	ld [wEnemyMonStatus], a ; clear status of active enemy
 	ld hl, wEnemyBattleStatus3
 	res BADLY_POISONED, [hl]

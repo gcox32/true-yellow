@@ -163,7 +163,6 @@ INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/cries.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
 INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
-INCLUDE "gfx/trade.asm"
 INCLUDE "engine/pokemon/evos_moves.asm"
 
 
@@ -425,6 +424,11 @@ INCLUDE "engine/pikachu/pikachu_emotions.asm"
 INCLUDE "engine/pikachu/pikachu_movement.asm"
 INCLUDE "engine/pikachu/pikachu_pic_animation.asm"
 INCLUDE "engine/followers/chain_follow.asm"
+
+
+SECTION "Trade Graphics", ROMX
+
+INCLUDE "gfx/trade.asm"
 
 
 SECTION "Park Followers", ROMX

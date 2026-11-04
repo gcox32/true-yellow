@@ -63,7 +63,14 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ld a, c
 	ldh [hSCX], a
 	call DelayFrame
+; PureRGBnote: FIXED: the normal palette only looks like a silhouette with the black
+; SGB/CGB battle palette (wOnSGB is also set on CGB). Plain DMG needs a black one.
+	ld a, [wOnSGB]
+	and a
 	ld a, %11100100 ; inverted palette for silhouette effect
+	jr nz, .gotSilhouettePalette
+	ld a, %11111100 ; color 0 stays white, everything else black
+.gotSilhouettePalette
 	ldh [rBGP], a
 	ldh [rOBP0], a
 	ldh [rOBP1], a
@@ -96,6 +103,14 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ldh [rWY], a
 	inc a
 	ldh [hAutoBGTransferEnabled], a
+	ld a, [wOnSGB]
+	and a
+	jr nz, .paletteRestored
+	ld a, %11100100 ; undo the DMG silhouette palette
+	ldh [rBGP], a
+	ldh [rOBP0], a
+	ldh [rOBP1], a
+.paletteRestored
 	call Delay3
 	ld b, SET_PAL_BATTLE
 	call RunPaletteCommand
@@ -1427,6 +1442,9 @@ EnemySendOutFirstMon:
 	ld a, [wOptions]
 	bit BIT_BATTLE_SHIFT, a
 	jr nz, .next4
+	call CountAlivePartyMons ; PureRGBnote: FIXED: don't offer a switch with nobody to switch to
+	cp 2
+	jr c, .next4
 	ld hl, TrainerAboutToUseText
 	call PrintText
 	hlcoord 0, 7
@@ -1448,6 +1466,7 @@ EnemySendOutFirstMon:
 	ld a, [wWhichPokemon]
 	cp [hl]
 	jr nz, .next6
+	call RedrawPartyMenuWithoutText
 	ld hl, AlreadyOutText
 	call PrintText
 .next8
@@ -1504,6 +1523,25 @@ TrainerSentOutText:
 
 ; tests if the player has any pokemon that are not fainted
 ; sets d = 0 if all fainted, d != 0 if some mons are still alive
+; output: a = number of party mons that haven't fainted
+CountAlivePartyMons:
+	ld a, [wPartyCount]
+	ld e, a
+	ld d, 0
+	ld hl, wPartyMon1HP
+	ld bc, wPartyMon2 - wPartyMon1 - 1
+.loop
+	ld a, [hli]
+	or [hl]
+	jr z, .fainted
+	inc d
+.fainted
+	add hl, bc
+	dec e
+	jr nz, .loop
+	ld a, d
+	ret
+
 AnyPartyAlive::
 	ld a, [wPartyCount]
 	ld e, a
@@ -1522,6 +1560,21 @@ AnyPartyAlive::
 
 ; tests if player mon has fainted
 ; stores whether mon has fainted in Z flag
+; PureRGBnote: FIXED: clears the SWITCH/STATS/CANCEL submenu and redraws the party
+; before a message is printed on top, so no leftovers show around the text box.
+RedrawPartyMenuWithoutText:
+	hlcoord 11, 11
+	lb bc, 1, 9
+	call ClearScreenArea
+	ld a, [wPartyMenuTypeOrMessageID]
+	push af
+	ld a, EMPTY_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID], a
+	call RedrawPartyMenu
+	pop af
+	ld [wPartyMenuTypeOrMessageID], a
+	ret
+
 HasMonFainted:
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMon1HP
@@ -1533,6 +1586,7 @@ HasMonFainted:
 	ld a, [wFirstMonsNotOutYet]
 	and a
 	jr nz, .done
+	call RedrawPartyMenuWithoutText
 	ld hl, NoWillText
 	call PrintText
 .done
@@ -2500,12 +2554,32 @@ PartyMenuOrRockOrRun:
 	ld hl, AnimationMinimizeMon
 	jr nz, .doEnemyMonAnimation
 ; enemy mon is not minimized
+; PureRGBnote: FIXED: an unidentified ghost stays a ghost, vanilla revealed it here
+	call IsGhostBattle
+	jr z, .enemyMonIsGhost
 	ld a, [wEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	call GetMonHeader
 	ld de, vFrontPic
 	call LoadMonFrontSprite
+	jr .enemyMonPicReloaded
+.enemyMonIsGhost
+	ld hl, wMonHSpriteDim
+	ld a, $66
+	ld [hli], a ; write sprite dimensions
+	ld bc, GhostPic
+	ld a, c
+	ld [hli], a ; write front sprite pointer
+	ld [hl], b
+	ld a, [wCurPartySpecies]
+	push af
+	ld a, MON_GHOST
+	ld [wCurPartySpecies], a
+	ld de, vFrontPic
+	call LoadMonFrontSprite
+	pop af
+	ld [wCurPartySpecies], a
 	jr .enemyMonPicReloaded
 .doEnemyMonAnimation
 	ld b, BANK(AnimationSubstitute) ; BANK(AnimationMinimizeMon)
@@ -2519,6 +2593,7 @@ PartyMenuOrRockOrRun:
 	cp d ; check if the mon to switch to is already out
 	jr nz, .notAlreadyOut
 ; mon is already out
+	call RedrawPartyMenuWithoutText
 	ld hl, AlreadyOutText
 	call PrintText
 	jp .partyMonDeselected
@@ -6744,6 +6819,51 @@ CalculateModifiedStat:
 	inc [hl] ; if the stat is 0, bump it up to 1
 .done
 	pop bc
+	ret
+
+; PureRGBnote: FIXED: the player's stat in wWhatStat gets its badge boost back after
+; being recalculated by a stat modifier. Other stats keep the boost they already have.
+ApplyBadgeBoostForModifiedStat:
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
+	ret z ; return if link battle
+	ld a, [wObtainedBadges]
+	ld b, a
+	ld a, [wWhatStat]
+	ld hl, wBattleMonAttack
+	cp MOD_ATTACK
+	jr nz, .notAttack
+	bit BIT_BOULDERBADGE, b
+	jr .gotBadge
+.notAttack
+	ld hl, wBattleMonDefense
+	cp MOD_DEFENSE
+	jr nz, .notDefense
+	bit BIT_SOULBADGE, b
+	jr .gotBadge
+.notDefense
+	ld hl, wBattleMonSpeed
+	cp MOD_SPEED
+	jr nz, .notSpeed
+	bit BIT_THUNDERBADGE, b
+	jr .gotBadge
+.notSpeed
+	cp MOD_SPECIAL
+	ret nz ; accuracy and evasion have no badge boost
+	ld hl, wBattleMonSpecial
+	bit BIT_VOLCANOBADGE, b
+.gotBadge
+	ret z
+	jp ApplyBadgeStatBoosts.applyBoostToStat
+
+; PureRGBnote: FIXED: reapplies the paralysis or burn penalty if the stat in wWhatStat
+; is the one affected. Like the routines it calls, this acts on the mon whose turn it isn't.
+ApplyStatusPenaltyForModifiedStat:
+	ld a, [wWhatStat]
+	cp MOD_SPEED
+	jp z, QuarterSpeedDueToParalysis
+	cp MOD_ATTACK
+	jp z, HalveAttackDueToBurn
 	ret
 
 ApplyBadgeStatBoosts:

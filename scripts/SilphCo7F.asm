@@ -16,6 +16,11 @@ SilphCo7F_GateCallbackScript:
 	ld hl, .GateCoordinates
 	call SilphCo7F_SetCardKeyDoorYScript
 	call SilphCo7F_UnlockedDoorEventScript
+	SetFlag FLAG_BATCH_TILE_BLOCK_REDRAW
+	call .replaceDoors
+	jpfar EndTileBlockBatch
+
+.replaceDoors
 	CheckEvent EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	jr nz, .unlock_door1
 	push af

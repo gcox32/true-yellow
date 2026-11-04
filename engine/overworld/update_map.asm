@@ -26,6 +26,8 @@ ReplaceTileBlock:
 .addX
 	add hl, bc ; add X
 	ld a, [wNewTileBlockID]
+	cp [hl] ; PureRGBnote: FIXED: no need to redraw if the block isn't changing
+	ret z
 	ld [hl], a
 	ld a, [wCurrentTileBlockMapViewPointer]
 	ld c, a
@@ -45,6 +47,19 @@ ReplaceTileBlock:
 	pop bc
 	call CompareHLWithBC
 	ret c ; return if the replaced tile block is above the map view in memory
+; PureRGBnote: ADDED: a redraw takes 9 frames, so a script replacing several blocks can
+; batch them and redraw once with EndTileBlockBatch, only if one was actually in view.
+	CheckFlag FLAG_BATCH_TILE_BLOCK_REDRAW
+	jr z, RedrawMapView
+	SetFlagHL FLAG_TILE_BLOCK_REDRAW_PENDING
+	ret
+
+EndTileBlockBatch::
+	ResetFlag FLAG_BATCH_TILE_BLOCK_REDRAW
+	CheckFlag FLAG_TILE_BLOCK_REDRAW_PENDING
+	ret z
+	ResetFlag FLAG_TILE_BLOCK_REDRAW_PENDING
+	; fall through
 
 RedrawMapView::
 	ld a, [wIsInBattle]

@@ -37,8 +37,13 @@ SubstituteEffect_:
 	sbc 0
 	pop bc
 	jr c, .notEnoughHP ; underflow means user would be left with negative health
-                           ; bug: since it only branches on carry, it will possibly leave user with 0 HP
-.userHasZeroOrMoreHP
+; PureRGBnote: FIXED: exactly enough HP used to leave the user alive on 0 HP. Leave it on 1 HP instead.
+	jr nz, .userHasHPLeft ; high byte of the result (the flags are still from sbc)
+	inc d
+	dec d
+	jr nz, .userHasHPLeft
+	inc d
+.userHasHPLeft
 	ld [hli], a ; save resulting HP after subtraction into current HP
 	ld [hl], d
 	ld h, b

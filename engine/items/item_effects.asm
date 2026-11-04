@@ -997,18 +997,9 @@ ItemUseMedicine:
 	cp d ; is pokemon the item was used on active in battle?
 	jp nz, .doneHealing
 ; if it is active in battle
-	xor a
-	ld [wBattleMonStatus], a ; remove the status ailment in the in-battle pokemon data
-	push hl
-	ld hl, wPlayerBattleStatus3
-	res BADLY_POISONED, [hl] ; heal Toxic status
-	pop hl
-	ld bc, wPartyMon1Stats - wPartyMon1Status
-	add hl, bc ; hl now points to party stats
-	ld de, wBattleMonStats
-	ld bc, NUM_STATS * 2
-	call CopyData ; copy party stats to in-battle stat data
-	predef DoubleOrHalveSelectedStats
+; PureRGBnote: FIXED: vanilla copied the party stats over the in-battle ones here, which
+; also wiped stat stages and badge boosts. Only undo the status penalty now.
+	call CureBattleMonStatus
 	jp .doneHealing
 
 .healHP
@@ -1292,8 +1283,7 @@ ItemUseMedicine:
 	ld a, [wCurItem]
 	cp FULL_RESTORE
 	jr nz, .calculateHPBarCoords
-	xor a
-	ld [wBattleMonStatus], a ; remove the status ailment in the in-battle pokemon data
+	call CureBattleMonStatus
 .calculateHPBarCoords
 	hlcoord 4, -1
 	ld bc, 2 * SCREEN_WIDTH
@@ -1843,6 +1833,29 @@ ItemUseXStat:
 	ld [hld], a ; restore [wPlayerMoveEffect]
 	pop af
 	ld [hl], a ; restore [wPlayerMoveNum]
+	ret
+
+; PureRGBnote: FIXED: removes the status of the player's active mon and restores the
+; attack or speed it lost to burn or paralysis.
+CureBattleMonStatus:
+	ld a, [wIsInBattle]
+	and a
+	ret z ; wPlayerMonNumber is stale outside of battle
+	push hl
+	push de
+	ldh a, [hWhoseTurn]
+	push af
+	xor a
+	ldh [hWhoseTurn], a
+	callfar UndoBurnParStats
+	pop af
+	ldh [hWhoseTurn], a
+	xor a
+	ld [wBattleMonStatus], a ; remove the status ailment in the in-battle pokemon data
+	ld hl, wPlayerBattleStatus3
+	res BADLY_POISONED, [hl] ; heal Toxic status
+	pop de
+	pop hl
 	ret
 
 ItemUsePokeFlute:

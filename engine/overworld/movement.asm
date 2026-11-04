@@ -99,6 +99,10 @@ UpdatePlayerSpriteImage:
 	ld [wSpritePlayerStateData1ImageIndex], a
 	ret
 
+; PureRGB fixes movement byte 2 being read from the wrong address past a page boundary.
+; It can't happen at this address (sprite 15 is the highest offset), so just ensure it stays so.
+ASSERT HIGH(wMapSpriteData) == HIGH(wMapSpriteData + (15 - 1) * 2), "wMapSpriteData crosses a page boundary; UpdateNPCSprite has no carry"
+
 UpdateNPCSprite:
 	ldh a, [hCurrentSpriteOffset]
 	swap a

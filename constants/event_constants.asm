@@ -801,6 +801,8 @@ DEF INDIGO_PLATEAU_EVENTS_END EQU const_value - 1
 	; flags needed for double stat boost effects
 	const FLAG_SKIPPED_STAT_MODIFIER
 	const FLAG_SKIP_STAT_ANIMATION
+	const FLAG_BATCH_TILE_BLOCK_REDRAW
+	const FLAG_TILE_BLOCK_REDRAW_PENDING
 
 ; End of events
 	const_next $A00

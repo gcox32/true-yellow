@@ -158,6 +158,7 @@ GainExperience:
 	farcall CalcLevelFromExperience
 	pop hl
 	ld a, [hl] ; current level
+	ld [wTempLevelStore], a ; PureRGBnote: FIXED: level before this exp gain
 	cp d
 	jp z, .nextMon ; if level didn't change, go to next mon
 	ld a, [wCurEnemyLevel]
@@ -257,9 +258,24 @@ GainExperience:
 	call LoadScreenTilesFromBuffer1
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
+; PureRGBnote: FIXED: gaining several levels at once no longer skips the moves of
+; the levels in between. Check every level gained, not only the final one.
+	ld a, [wCurEnemyLevel]
+	ld c, a ; final level
+	ld a, [wTempLevelStore]
+	ld b, a ; level before this exp gain
+.learnMovesLoop
 	ld a, [wCurSpecies]
 	ld [wPokedexNum], a
+	inc b
+	ld a, b
+	ld [wCurEnemyLevel], a
+	push bc
 	predef LearnMoveFromLevelUp
+	pop bc
+	ld a, b
+	cp c
+	jr nz, .learnMovesLoop
 	ld hl, wCanEvolveFlags
 	ld a, [wWhichPokemon]
 	ld c, a

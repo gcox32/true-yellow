@@ -1,3 +1,21 @@
+StorePartyLevels:
+; PureRGBnote: FIXED: remember levels at battle start (see wStartBattleLevels).
+; Always copies every slot: the party can be empty (Yellow's Pikachu catching demo).
+	ld hl, wPartyMon1Level
+	ld de, wStartBattleLevels
+	ld bc, wPartyMon2 - wPartyMon1
+	ld a, PARTY_LENGTH
+.loop
+	push af
+	ld a, [hl]
+	ld [de], a
+	inc de
+	add hl, bc
+	pop af
+	dec a
+	jr nz, .loop
+	ret
+
 InitBattle::
 	ld a, [wCurOpponent]
 	and a
@@ -23,6 +41,7 @@ DetermineWildOpponent:
 	callfar TryDoWildEncounter
 	ret nz
 InitBattleCommon:
+	call StorePartyLevels
 	ld a, [wMapPalOffset]
 	push af
 	ld hl, wLetterPrintingDelayFlags

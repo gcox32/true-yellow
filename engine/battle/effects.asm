@@ -798,14 +798,21 @@ UpdateStatDone:
 .applyBadgeBoostsAndStatusPenalties
 	ldh a, [hWhoseTurn]
 	and a
-	call z, ApplyBadgeStatBoosts ; whenever the player uses a stat-up move, badge boosts get reapplied again to every stat,
-	                             ; even to those not affected by the stat-up move (will be boosted further)
+	call z, ApplyBadgeBoostForModifiedStat ; PureRGBnote: FIXED: only the stat that changed, vanilla re-boosted all of them
 	ld hl, MonsStatsRoseText
 	call PrintText
 
-; these shouldn't be here
-	call QuarterSpeedDueToParalysis ; apply speed penalty to the player whose turn is not, if it's paralyzed
-	jp HalveAttackDueToBurn ; apply attack penalty to the player whose turn is not, if it's burned
+; PureRGBnote: FIXED: vanilla applied these to the opposing mon, stacking its penalties
+; and leaving the user's stat free of the penalty it just lost in the recalculation.
+; Flip the turn because these two routines act on the mon whose turn it isn't.
+	ldh a, [hWhoseTurn]
+	push af
+	xor 1
+	ldh [hWhoseTurn], a
+	call ApplyStatusPenaltyForModifiedStat
+	pop af
+	ldh [hWhoseTurn], a
+	ret
 
 RestoreOriginalStatModifier:
 	pop hl
@@ -864,6 +871,9 @@ StatModifierDownEffect:
 .statModifierDownEffect
 	call CheckTargetSubstitute ; can't hit through substitute
 	jp nz, MoveMissed
+	ld a, [de]
+	call MapEffectToStat
+	ld [wWhatStat], a
 	ld a, [de]
 	cp ATTACK_DOWN_SIDE_EFFECT
 	jr c, .nonSideEffect
@@ -995,16 +1005,14 @@ UpdateLoweredStatDone:
 .ApplyBadgeBoostsAndStatusPenalties
 	ldh a, [hWhoseTurn]
 	and a
-	call nz, ApplyBadgeStatBoosts ; whenever the player uses a stat-down move, badge boosts get reapplied again to every stat,
-	                              ; even to those not affected by the stat-down move (will be boosted further)
+	call nz, ApplyBadgeBoostForModifiedStat ; PureRGBnote: FIXED: only the stat that changed, vanilla re-boosted all of them
 	ld hl, MonsStatsFellText
 	call PrintText
 
-; These where probably added given that a stat-down move affecting speed or attack will override
-; the stat penalties from paralysis and burn respectively.
-; But they are always called regardless of the stat affected by the stat-down move.
-	call QuarterSpeedDueToParalysis
-	jp HalveAttackDueToBurn
+; A stat-down move on speed or attack overrides the penalty from paralysis or burn.
+; PureRGBnote: FIXED: only reapply the penalty for that stat. Vanilla always reapplied
+; both, so every stat-down move stacked another penalty on the other stat.
+	jp ApplyStatusPenaltyForModifiedStat
 
 CantLowerAnymore_Pop:
 	pop de
@@ -1381,7 +1389,49 @@ DugAHoleText:
 	text_far _DugAHoleText
 	text_end
 
+; PureRGBnote: FIXED: a move that can't affect the target no longer starts trapping it.
+; This effect runs before the move's hit test, so vanilla set the trapping state anyway
+; and e.g. Wrap on a Ghost would hold it and deal damage on the following turns.
+CheckTargetImmuneToMoveType:
+; output: z if the target is immune to the type of the move being used
+	ldh a, [hWhoseTurn]
+	and a
+	ld a, [wPlayerMoveType]
+	ld hl, wEnemyMonType1
+	jr z, .gotPointers
+	ld a, [wEnemyMoveType]
+	ld hl, wBattleMonType1
+.gotPointers
+	ld d, a
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	ld hl, TypeEffects
+.loop
+	ld a, [hli]
+	cp -1
+	jr z, .notImmune
+	cp d
+	ld a, [hli]
+	jr nz, .nextEntry
+	cp b
+	jr z, .typeMatches
+	cp c
+	jr nz, .nextEntry
+.typeMatches
+	ld a, [hl]
+	and a ; NO_EFFECT
+	ret z
+.nextEntry
+	inc hl
+	jr .loop
+.notImmune
+	or 1
+	ret
+
 TrappingEffect:
+	call CheckTargetImmuneToMoveType
+	ret z
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerNumAttacksLeft
 	ldh a, [hWhoseTurn]

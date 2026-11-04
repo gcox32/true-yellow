@@ -1239,7 +1239,11 @@ wPartyMenuHPBarColors:: ds PARTY_LENGTH
 
 wStatusScreenHPBarColor:: db
 
-	ds 7
+; party levels when the current battle began, so moves from every level gained
+; in the battle can be learned (including after a post-battle evolution)
+wStartBattleLevels:: ds PARTY_LENGTH
+; level to start checking learnsets from (see GainExperience, EvolutionAfterBattle)
+wTempLevelStore:: db
 
 wCopyingSGBTileData::
 wWhichPartyMenuHPBar::

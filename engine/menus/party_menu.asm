@@ -241,6 +241,12 @@ PartyMenuMessagePointers:
 	dw PartyMenuUseTMText
 	dw PartyMenuSwapMonText
 	dw PartyMenuItemUseText
+	dw PartyMenuEmptyText
+
+; PureRGBnote: ADDED: for redrawing the menu when other text is about to be printed
+PartyMenuEmptyText:
+	text " "
+	done
 
 PartyMenuNormalText:
 	text_far _PartyMenuNormalText

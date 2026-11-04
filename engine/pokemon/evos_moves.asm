@@ -20,6 +20,8 @@ EvolutionAfterBattle:
 	push hl
 	push bc
 	push de
+	ld hl, wStartBattleLevels
+	push hl
 	ld hl, wPartyCount
 	push hl
 
@@ -27,11 +29,16 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld hl, wWhichPokemon
 	inc [hl]
 	pop hl
+	pop de ; pointer into wStartBattleLevels
+	ld a, [de]
+	ld [wTempLevelStore], a
+	inc de
 	inc hl
 	ld a, [hl]
 	cp $ff ; have we reached the end of the party?
 	jp z, .done
 	ld [wEvoOldSpecies], a
+	push de
 	push hl
 	ld a, [wWhichPokemon]
 	ld c, a
@@ -112,6 +119,14 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [wCurEnemyLevel], a
 	ld a, 1
 	ld [wEvolutionOccurred], a
+; PureRGBnote: FIXED: learnset checks start from the later of the battle's starting
+; level and the evolution level (b), so levels below the evolution aren't re-checked
+	ld a, [wTempLevelStore]
+	cp b
+	jr nc, .evoLevelRequirementSatisfied
+	ld a, b
+	ld [wTempLevelStore], a
+.evoLevelRequirementSatisfied
 	push hl
 	ld a, [hl]
 	ld [wEvoNewSpecies], a
@@ -211,7 +226,32 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [wPokedexNum], a
 	xor a
 	ld [wMonDataLocation], a
+	call EeveelutionForceLearnMove
+; PureRGBnote: FIXED: a mon that gained several levels in the battle it evolved after
+; learns the moves of its new form for each of those levels, not only the final one.
+; Evolving out of battle (stone, rare candy, trade) only needs the current level.
+	ld a, [wIsInBattle]
+	and a
+	jr z, .learnCurrentLevelOnly
+	ld a, [wCurEnemyLevel]
+	ld c, a ; final level
+	ld a, [wTempLevelStore]
+	ld b, a
+	dec b
+.learnMovesLoop
+	inc b
+	ld a, b
+	ld [wCurEnemyLevel], a
+	push bc
 	call LearnMoveFromLevelUp
+	pop bc
+	ld a, b
+	cp c
+	jr nz, .learnMovesLoop
+	jr .learnedMoves
+.learnCurrentLevelOnly
+	call LearnMoveFromLevelUp
+.learnedMoves
 	pop hl
 	predef SetPartyMonTypes
 	ld a, [wIsInBattle]
@@ -322,6 +362,43 @@ Evolution_ReloadTilesetTilePatterns:
 	ret z
 	jp ReloadTilesetTilePatterns
 
+; PureRGBnote: ADDED: an Eevee evolved late would otherwise miss its new type's moves.
+; Each eeveelution always gets a move of its type when evolving, whatever its level.
+EeveelutionForceLearnMove:
+	ld a, [wPokedexNum] ; species
+	ld d, EMBER
+	cp FLAREON
+	jr z, .gotMove
+	ld d, THUNDERSHOCK
+	cp JOLTEON
+	jr z, .gotMove
+	ld d, WATER_GUN
+	cp VAPOREON
+	ret nz
+.gotMove
+	push af
+	ld hl, wPartyMon1Moves
+	ld a, [wWhichPokemon]
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+	ld b, NUM_MOVES
+.checkCurrentMovesLoop ; a TM could already have taught it
+	ld a, [hli]
+	cp d
+	jr z, .done
+	dec b
+	jr nz, .checkCurrentMovesLoop
+	ld a, d
+	ld [wMoveNum], a
+	ld [wNamedObjectIndex], a
+	call GetMoveName
+	call CopyToStringBuffer
+	predef LearnMove
+.done
+	pop af
+	ld [wPokedexNum], a
+	ret
+
 LearnMoveFromLevelUp:
 	ld a, [wPokedexNum] ; species
 	ld [wCurPartySpecies], a
@@ -335,6 +412,7 @@ LearnMoveFromLevelUp:
 	cp b ; is the move learnt at the mon's current level?
 	ld a, [hli] ; move ID
 	jr nz, .learnSetLoop
+	push hl ; PureRGBnote: FIXED: keep scanning, a learnset can have 2 moves on 1 level
 	ld d, a ; ID of move to learn
 	ld a, [wMonDataLocation]
 	and a
@@ -352,7 +430,7 @@ LearnMoveFromLevelUp:
 .checkCurrentMovesLoop ; check if the move to learn is already known
 	ld a, [hli]
 	cp d
-	jr z, .done ; if already known, jump
+	jr z, .nextLearnSetEntry ; if already known, jump
 	dec b
 	jr nz, .checkCurrentMovesLoop
 	ld a, d
@@ -363,19 +441,22 @@ LearnMoveFromLevelUp:
 	predef LearnMove
 	ld a, b
 	and a
-	jr z, .done
+	jr z, .nextLearnSetEntry
 	callfar IsThisPartyMonStarterPikachu
-	jr nc, .done
+	jr nc, .nextLearnSetEntry
 	ld a, [wMoveNum]
 	cp THUNDERBOLT
 	jr z, .foundThunderOrThunderbolt
 	cp THUNDER
-	jr nz, .done
+	jr nz, .nextLearnSetEntry
 .foundThunderOrThunderbolt
 	ld a, $5
 	ld [wd49b], a
 	ld a, $85
 	ld [wPikachuMood], a
+.nextLearnSetEntry
+	pop hl
+	jr .learnSetLoop
 .done
 	ld a, [wCurPartySpecies]
 	ld [wPokedexNum], a
