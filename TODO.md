@@ -16,8 +16,8 @@
 - [x] Swap sell items in Celadon 2F for TMs
 - [x] Need better coin buying experience in Game Corner
 - [x] Need better prizes in Game Corner
-- [ ] rewrite floating weezing event text to work for a vent in the floor (not a pipe)
-- [ ] better cinnabar maansion encounters
+- [x] rewrite floating weezing event text to work for a vent in the floor (not a pipe)
+- [x] better cinnabar maansion encounters
 
 ## QOL
 - [x] the "Grey pokemon" palette needs to be more grey than brown
@@ -41,8 +41,8 @@
       2 and 3 tiles back into the water. RecordPlayerPositionToTrail now detects the step off the water via
       wPikachuOverworldStateFlags bit 5 - set only by the two .stopSurfing routines - and starts the door-exit
       cascade anchored on the landing tile, so they emerge from it one per step. Zero ROM0 bytes. NEEDS IN-GAME TEST.)
-- [ ] exiting surf throws off follower positions
-- [ ] HAZE is curing POISON status
+- [x] exiting surf throws off follower positions
+- [x] HAZE is curing POISON status
 
 ## Bugfixes from PureRGB
 - [x] High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)

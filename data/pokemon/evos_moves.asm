@@ -372,6 +372,7 @@ ExeggutorEvosMoves:
 	db 27, PSYBEAM
 	db 32, BARRAGE
 	db 36, SLEEP_POWDER
+	db 43, TRI_ATTACK
 	db 48, SOLARBEAM
 	db 53, EGG_BOMB
 	db 60, STOMP
@@ -1132,7 +1133,7 @@ DoduoEvosMoves:
 	db 20, FURY_ATTACK
 	db 23, RAGE
 	db 30, DRILL_PECK
-	db 35, TRI_ATTACK
+	db 35, DOUBLE_EDGE
 	db 41, EARTHQUAKE
 	db 49, TWINEEDLE
 	db 0
@@ -1684,7 +1685,7 @@ DugtrioEvosMoves:
 	db 24, SAND_ATTACK
 	db 35, SLASH
 	db 39, EARTHQUAKE
-	db 43, ROCK_THROW
+	db 43, TRI_ATTACK
 	db 49, ROCK_SLIDE
 	db 54, FISSURE
 	db 0
