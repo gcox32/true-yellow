@@ -51,7 +51,7 @@ The table is generated - `make` rewrites it (or run `tools/gen_moves_doc.py`) af
 | TWINEEDLE    | TWINEEDLE_EFFECT           | 40    | BUG             | 100      | 20 |
 | PIN_MISSILE  | TWO_TO_FIVE_ATTACKS_EFFECT | 20    | BUG             | 95       | 20 |
 | LEER         | DEFENSE_DOWN1_EFFECT       | 0     | NORMAL          | 100      | 30 |
-| BITE         | FLINCH_SIDE_EFFECT1        | 50    | NORMAL          | 100      | 25 |
+| BITE         | FLINCH_SIDE_EFFECT1        | 50    | POISON          | 100      | 25 |
 | GROWL        | ATTACK_DOWN1_EFFECT        | 0     | NORMAL          | 100      | 40 |
 | ROAR         | ATTACK_DOWN_SIDE_EFFECT    | 40    | DRAGON          | 100      | 20 |
 | SING         | SLEEP_EFFECT               | 0     | NORMAL          | 70       | 15 |
@@ -165,11 +165,11 @@ The table is generated - `make` rewrites it (or run `tools/gen_moves_doc.py`) af
 | BONEMERANG   | ATTACK_TWICE_EFFECT        | 50    | BONEMERANG_TYPE | 90       | 10 |
 | REST         | HEAL_EFFECT                | 0     | NORMAL          | 100      | 10 |
 | ROCK_SLIDE   | FLINCH_SIDE_EFFECT2        | 90    | ROCK            | 90       | 10 |
-| HYPER_FANG   | FLINCH_SIDE_EFFECT1        | 80    | NORMAL          | 90       | 15 |
+| HYPER_FANG   | FLINCH_SIDE_EFFECT1        | 80    | POISON          | 90       | 15 |
 | SHARPEN      | ATTACK_ACCURACY_UP1_EFFECT | 0     | NORMAL          | 100      | 30 |
 | CONVERSION   | CONVERSION_EFFECT          | 0     | NORMAL          | 100      | 30 |
 | TRI_ATTACK   | TRI_ATTACK_EFFECT          | 80    | TRI             | 100      | 10 |
-| SUPER_FANG   | SUPER_FANG_EFFECT          | 1     | NORMAL          | 95       | 10 |
+| SUPER_FANG   | SUPER_FANG_EFFECT          | 1     | POISON          | 95       | 10 |
 | SLASH        | NO_ADDITIONAL_EFFECT       | 70    | NORMAL          | 100      | 20 |
 | SUBSTITUTE   | SUBSTITUTE_EFFECT          | 0     | NORMAL          | 100      | 10 |
 | STRUGGLE     | RECOIL_EFFECT              | 50    | TYPELESS        | 100      | 10 |

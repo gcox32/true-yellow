@@ -1259,10 +1259,10 @@ _GainedText::
 	line "@"
 	text_end
 
-_WithExpAllText::
-	text "with EXP.ALL,"
-	cont "@"
-	text_end
+_ExpAllGainedText::
+	text "Party gained EXP."
+	line "with EXP.ALL."
+	prompt
 
 _BoostedText::
 	text "a boosted"

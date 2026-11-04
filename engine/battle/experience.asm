@@ -2,6 +2,13 @@ GainExperience:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z ; return if link battle
+; the exp all pass prints this one line instead of a line per party mon
+	ld a, [wBoostExpByExpAll]
+	and a
+	jr z, .noExpAllText
+	ld hl, ExpAllGainedText
+	call PrintText
+.noExpAllText
 	call DivideExpDataByNumMonsGainingExp
 	ld hl, wPartyMon1
 	xor a
@@ -145,9 +152,13 @@ GainExperience:
 	push hl
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
-	call GetPartyMonName
+	call GetPartyMonName ; GrewLevelText below still needs the name
+	ld a, [wBoostExpByExpAll]
+	and a
+	jr nz, .skipGainedText
 	ld hl, GainedText
 	call PrintText
+.skipGainedText
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 	call LoadMonData
@@ -368,10 +379,6 @@ CallBattleCore:
 GainedText:
 	text_far _GainedText
 	text_asm
-	ld a, [wBoostExpByExpAll]
-	ld hl, WithExpAllText
-	and a
-	ret nz
 	ld hl, ExpPointsText
 	ld a, [wGainBoostedExp]
 	and a
@@ -379,11 +386,9 @@ GainedText:
 	ld hl, BoostedText
 	ret
 
-WithExpAllText:
-	text_far _WithExpAllText
-	text_asm
-	ld hl, ExpPointsText
-	ret
+ExpAllGainedText:
+	text_far _ExpAllGainedText
+	text_end
 
 BoostedText:
 	text_far _BoostedText
