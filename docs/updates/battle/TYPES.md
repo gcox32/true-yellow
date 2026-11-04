@@ -153,7 +153,7 @@ not listed is neutral (1x).
 | BONEMERANG_TYPE | ROCK         | 2x         |
 | BONEMERANG_TYPE | POISON       | 2x         |
 | BONEMERANG_TYPE | GHOST        | 0x         |
-| WATER           | MAGMA        | 0x         |
+| WATER           | MAGMA        | 0.5x       |
 | FIRE            | MAGMA        | 0x         |
 <!-- /generated:matchups -->
 
