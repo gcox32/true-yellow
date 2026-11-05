@@ -86,7 +86,7 @@ Moves:
 	move LEECH_SEED,   LEECH_SEED_EFFECT,            0,  GRASS,           90, 20 ; pp changed from 10 to 20
 	move GROWTH,       GROWTH_EFFECT,                0,  GRASS,          100, 10 ; new effect
 	move RAZOR_LEAF,   NO_ADDITIONAL_EFFECT,        55,  GRASS,           95, 25
-	move SOLARBEAM,    BURN_SIDE_EFFECT1,          100,  GRASS,          100, 10 ; remove the charge in favor of a burn
+	move SOLARBEAM,    BURN_SIDE_EFFECT1,          100,  GRASS,          100, 10 ; remove the charge in favor of a burn; must recharge after hitting (see FreezeBurnParalyzeEffect)
 	move POISONPOWDER, POISON_EFFECT,                0,  POISON,          85, 20 ; accuracy changed from 75 to 85, pp changed from 35 to 20
 	move STUN_SPORE,   PARALYZE_EFFECT,              0,  GRASS,           85, 20 ; accuracy changed from 75 to 85, pp changed from 30 to 20
 	move SLEEP_POWDER, SLEEP_EFFECT,                 0,  GRASS,           75, 15

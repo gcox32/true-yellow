@@ -1081,12 +1081,10 @@ FarfetchdEvosMoves:
 	db 17, FURY_ATTACK
 	db 19, KARATE_CHOP
 	db 22, SWORDS_DANCE
-	db 24, SWIFT
 	db 27, SLASH
 	db 31, RAZOR_LEAF
 	db 35, SONICBOOM
-	db 40, POISON_GAS
-	db 45, WHIRLWIND
+	db 40, WHIRLWIND
 	db 0
 
 VenonatEvosMoves:

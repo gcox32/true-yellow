@@ -202,6 +202,16 @@ ExplodeEffect:
 	ret
 
 FreezeBurnParalyzeEffect:
+	; solarbeam keeps its burn chance but also must recharge like hyper beam.
+	; done first so the early returns below (substitute, already statused, etc.) can't skip it
+	ldh a, [hWhoseTurn]
+	and a
+	ld a, [wPlayerMoveNum]
+	jr z, .gotMoveNum
+	ld a, [wEnemyMoveNum]
+.gotMoveNum
+	cp SOLARBEAM
+	call z, HyperBeamEffect
 	xor a
 	ld [wAnimationType], a
 	call CheckTargetSubstitute
