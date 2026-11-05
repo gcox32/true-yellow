@@ -49,7 +49,7 @@ RGBGFXFLAGS  ?= -Weverything
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all yellow yellow_debug clean tidy compare tools verify-parks docs check-docs
+.PHONY: all yellow yellow_debug clean tidy compare tools verify-parks docs check-docs publish
 
 # `all` lints the follower park tables and regenerates the docs whose tables are
 # derived from the data files, so neither can drift from the asm without you
@@ -132,6 +132,10 @@ check-docs:
 
 compare: $(roms) $(patches)
 	@$(SHA1) -c roms.sha1
+
+# Build, then upload the ROM to Vercel Blob. Settings live in .env; see the script.
+publish: all
+	@tools/publish.sh
 
 tools:
 	$(MAKE) -C tools/
