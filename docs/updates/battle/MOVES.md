@@ -65,8 +65,8 @@ The table is generated - `make` rewrites it (or run `tools/gen_moves_doc.py`) af
 | WATER_GUN    | NO_ADDITIONAL_EFFECT       | 40    | WATER           | 100      | 25 |
 | HYDRO_PUMP   | NO_ADDITIONAL_EFFECT       | 120   | WATER           | 90       | 10 |
 | SURF         | NO_ADDITIONAL_EFFECT       | 95    | WATER           | 100      | 15 |
-| ICE_BEAM     | FREEZE_SIDE_EFFECT1        | 95    | ICE             | 100      | 10 |
-| BLIZZARD     | FREEZE_SIDE_EFFECT1        | 120   | ICE             | 90       | 5  |
+| ICE_BEAM     | FREEZE_SIDE_EFFECT1        | 95    | ICE             | 100      | 15 |
+| BLIZZARD     | FREEZE_SIDE_EFFECT1        | 120   | ICE             | 90       | 10 |
 | PSYBEAM      | CONFUSION_SIDE_EFFECT      | 65    | PSYCHIC_TYPE    | 100      | 20 |
 | BUBBLEBEAM   | SPEED_DOWN_SIDE_EFFECT     | 65    | WATER           | 100      | 20 |
 | AURORA_BEAM  | ATTACK_DOWN_SIDE_EFFECT    | 75    | ICE             | 100      | 20 |
@@ -133,7 +133,7 @@ The table is generated - `make` rewrites it (or run `tools/gen_moves_doc.py`) af
 | SMOG         | POISON_SIDE_EFFECT2        | 30    | POISON          | 85       | 20 |
 | SLUDGE       | POISON_SIDE_EFFECT2        | 70    | POISON          | 100      | 20 |
 | BONE_CLUB    | FLINCH_SIDE_EFFECT1        | 60    | GROUND          | 100      | 20 |
-| FIRE_BLAST   | BURN_SIDE_EFFECT2          | 120   | FIRE            | 85       | 5  |
+| FIRE_BLAST   | BURN_SIDE_EFFECT2          | 120   | FIRE            | 85       | 10 |
 | WATERFALL    | FLINCH_SIDE_EFFECT2        | 80    | WATER           | 100      | 15 |
 | CLAMP        | TRAPPING_EFFECT            | 35    | WATER           | 85       | 10 |
 | SWIFT        | SWIFT_EFFECT               | 60    | ICE             | 100      | 20 |

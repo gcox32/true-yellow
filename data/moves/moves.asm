@@ -68,8 +68,8 @@ Moves:
 	move WATER_GUN,    NO_ADDITIONAL_EFFECT,        40,  WATER,          100, 25
 	move HYDRO_PUMP,   NO_ADDITIONAL_EFFECT,       120,  WATER,           90, 10 ; accuracy changed from 80 to 90, more pp bc blastoise wants to use it
 	move SURF,         NO_ADDITIONAL_EFFECT,        95,  WATER,          100, 15
-	move ICE_BEAM,     FREEZE_SIDE_EFFECT1,         95,  ICE,            100, 10
-	move BLIZZARD,     FREEZE_SIDE_EFFECT1,        120,  ICE,             90,  5
+	move ICE_BEAM,     FREEZE_SIDE_EFFECT1,         95,  ICE,            100, 15
+	move BLIZZARD,     FREEZE_SIDE_EFFECT1,        120,  ICE,             90, 10
 	move PSYBEAM,      CONFUSION_SIDE_EFFECT,       65,  PSYCHIC_TYPE,   100, 20
 	move BUBBLEBEAM,   SPEED_DOWN_SIDE_EFFECT,      65,  WATER,          100, 20
 	move AURORA_BEAM,  ATTACK_DOWN_SIDE_EFFECT,     75,  ICE,            100, 20 ; power changed from 65 to 75
@@ -136,7 +136,7 @@ Moves:
 	move SMOG,         POISON_SIDE_EFFECT2,         30,  POISON,          85, 20 ; power changed from 20 to 30, accuracy changed from 70 to 85
 	move SLUDGE,       POISON_SIDE_EFFECT2,         70,  POISON,         100, 20
 	move BONE_CLUB,    FLINCH_SIDE_EFFECT1,         60,  GROUND,         100, 20 ; accuracy changed from 85 to 100
-	move FIRE_BLAST,   BURN_SIDE_EFFECT2,          120,  FIRE,            85,  5
+	move FIRE_BLAST,   BURN_SIDE_EFFECT2,          120,  FIRE,            85, 10
 	move WATERFALL,    FLINCH_SIDE_EFFECT2,         80,  WATER,          100, 15 ; add flinching side effect
 	move CLAMP,        TRAPPING_EFFECT,             35,  WATER,           85, 10 ; accuracy changed from 75 to 85
 	move SWIFT,        SWIFT_EFFECT,                60,  ICE,            100, 20 ; priority move (and ICE)

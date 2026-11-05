@@ -1509,8 +1509,8 @@ ConfusionSideEffectSuccess:
 	inc a
 	ld [bc], a ; confusion status will last 2-5 turns
 	pop af
-	cp CONFUSION_SIDE_EFFECT
-	call nz, PlayCurrentMoveAnimation2
+	cp CONFUSION_EFFECT ; side-effect variants already animated with the damage
+	call z, PlayCurrentMoveAnimation2
 	ld hl, BecameConfusedText
 	jp PrintText
 
