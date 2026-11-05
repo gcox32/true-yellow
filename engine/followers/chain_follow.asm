@@ -11,16 +11,7 @@ DEF LIST_MENU_TILE_COL EQU 2  ; right cols overlap the wide list menu (LIST_MENU
 ; right cols overlap a yes/no choice box (YesNoChoice, home/yes_no.asm - left
 ; edge screen col 14) that can appear in the upper-right alongside a bottom
 ; text box, e.g. "Did you check out the MUSEUM?"
-DEF YESNO_BOX_TILE_COL EQU 8
-
-; Brock trails 1 tile further behind the player than Misty (3 steps vs 2, see
-; header above), so his screen_tile offset reads 1 lower than Misty's would
-; at the same true on-screen spot. Shift his thresholds down to compensate,
-; so both followers vanish at the same visual boundary.
-DEF BROCK_TEXT_BOX_TILE_ROW  EQU TEXT_BOX_TILE_ROW - 1
-DEF BROCK_MENU_TILE_COL      EQU MENU_TILE_COL - 1
-DEF BROCK_LIST_MENU_TILE_COL EQU LIST_MENU_TILE_COL - 1
-DEF BROCK_YESNO_BOX_TILE_COL EQU YESNO_BOX_TILE_COL - 1
+DEF YESNO_BOX_TILE_COL EQU 7
 
 ; =====================================
 ; UNIFIED SPAWN DISPATCHER
@@ -758,7 +749,7 @@ ShouldBrockSpawn::
 	sub [hl]
 	cp 9
 	jr nc, .fontNotLoadedBrock
-	cp BROCK_TEXT_BOX_TILE_ROW
+	cp TEXT_BOX_TILE_ROW
 	jr nc, .hide
 	; Safe from the bottom text box row - but a yes/no choice box can be
 	; showing alongside it, see matching comment in ShouldMistySpawn
@@ -770,7 +761,7 @@ ShouldBrockSpawn::
 	sub [hl]
 	cp 10
 	jr nc, .fontNotLoadedBrock
-	cp BROCK_YESNO_BOX_TILE_COL
+	cp YESNO_BOX_TILE_COL
 	jr nc, .hide
 	jr .fontNotLoadedBrock
 .checkMenuBrock
@@ -785,11 +776,11 @@ ShouldBrockSpawn::
 	cp MENU_TEMPLATE_10
 	ld a, b
 	jr z, .narrowMenuBrock
-	cp BROCK_LIST_MENU_TILE_COL
+	cp LIST_MENU_TILE_COL
 	jr nc, .hide
 	jr .fontNotLoadedBrock
 .narrowMenuBrock
-	cp BROCK_MENU_TILE_COL
+	cp MENU_TILE_COL
 	jr nc, .hide
 .fontNotLoadedBrock
 	; Check if in exit doorway mode (delayed spawn - wait for 3 steps after exiting)

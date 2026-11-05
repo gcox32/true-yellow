@@ -27,9 +27,12 @@ screen_tile_X = follower_mapX - wXCoord
 
 | UI element         | Condition                  | Constant         |
 |--------------------|---------------------------|------------------|
-| Text box (bottom)  | screen_tile_Y >= 7        | TEXT_BOX_TILE_ROW |
-| Menu (right side)  | screen_tile_X >= 7        | MENU_TILE_COL    |
-| Yes/No box (upper-right, e.g. `YesNoChoice`, can appear alongside a text box) | screen_tile_X >= 9 | YESNO_BOX_TILE_COL |
+| Text box (bottom)  | screen_tile_Y >= 6        | TEXT_BOX_TILE_ROW |
+| List menu (right side) | screen_tile_X >= 2    | LIST_MENU_TILE_COL |
+| Yes/No box (upper-right, e.g. `YesNoChoice`, can appear alongside a text box) | screen_tile_X >= 7 | YESNO_BOX_TILE_COL |
+
+Misty and Brock share these thresholds. `screen_tile` is the follower's actual
+on-screen tile, so how far behind the player they trail doesn't affect it.
 
 Values >= 9 (or >= 10 for X) mean the follower is above/left of the player
 (unsigned wrap) or off-screen — safe in both cases.

@@ -79,21 +79,36 @@ Each follower targets a specific trail index:
 
 ### Spawn Conditions
 
-Each follower has specific conditions that must be met to appear:
+`ShouldMistySpawn` and `ShouldBrockSpawn` run every frame. A follower appears
+only if all of the shared conditions and their own conditions are met.
 
-**Misty** (`ShouldMistySpawn`):
-1. Not in exit doorway mode 2 or 3 (delayed spawn after exiting buildings)
-2. `wMistyOverworldStateFlags` bits 5 and 7 not set
-3. Not in Cerulean Gym before beating Misty (gym leader Misty takes priority)
-4. `EVENT_MISTY_FOLLOWING_PLAYER` flag is set
-5. Not biking or surfing (`wWalkBikeSurfState` == 0)
+**Both followers:**
+1. Not using a PC (`BIT_USING_GENERIC_PC` in `wMiscFlags`)
+2. No Pikachu reaction in progress (`wPikachuReactionActive` == 0)
+3. If text or a menu is open (`BIT_FONT_LOADED` in `wFontLoaded`), not overlapping
+   it. Both followers use the same thresholds; see [RENDER_HIDING.md](RENDER_HIDING.md)
+4. Own `wMistyOverworldStateFlags` / `wBrockOverworldStateFlags` bits 5, 6, and 7
+   not set (bit 6 is the force-hide used by menus that don't fit the overlap checks)
+5. No Start Menu session in progress (`hStartMenuModalActive` == 0)
+6. Not biking or surfing (`wWalkBikeSurfState` == 0)
 
-**Brock** (`ShouldBrockSpawn`):
-1. Not in exit doorway mode 2, 3, or 4
-2. `wBrockOverworldStateFlags` bits 5 and 7 not set
-3. Has Boulder Badge
-4. Pikachu is spawned (movement status != 0)
-5. Not biking or surfing (`wWalkBikeSurfState` == 0)
+**Misty only:**
+1. Not in exit doorway mode 2 or 3 (she reappears at mode 4)
+2. Not in Cerulean Gym before beating Misty (gym leader Misty takes priority)
+3. `EVENT_MISTY_FOLLOWING_PLAYER` flag is set
+
+**Brock only:**
+1. Not in exit doorway mode 2, 3, or 4 (he reappears one step after Misty, at mode 0)
+2. Has Boulder Badge
+
+Bit 6 and `hStartMenuModalActive` clear themselves once `wFontLoaded` goes false,
+so they only last as long as the UI that set them.
+
+When one of these checks fails, `SpawnMisty_` / `SpawnBrock_` hide the sprite. If
+text is open or a Pikachu reaction is running, the follower keeps its movement
+state and reappears where it was. Otherwise its `MovementStatus` resets to 0 and
+it goes through a fresh spawn, which waits until the player finishes their current
+step (`wWalkCounter` == 0).
 
 ### Joining the Chain
 

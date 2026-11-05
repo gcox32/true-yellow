@@ -1162,9 +1162,8 @@ JynxEvosMoves:
 	db 23, PSYWAVE
 	db 27, BODY_SLAM
 	db 30, ICE_PUNCH
-	db 39, AMNESIA
+	db 36, LOVELY_KISS
 	db 42, DREAM_EATER
-	db 42, LOVELY_KISS
 	db 49, BLIZZARD
 	db 60, MIST
 	db 0
