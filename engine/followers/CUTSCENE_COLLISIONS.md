@@ -68,6 +68,11 @@ stationary, `trail[n]` is simply where they stood `n+1` steps ago:
 | `trail[1]` | Misty   | 2 steps ago |
 | `trail[2]` | Brock   | 3 steps ago |
 
+Without Pikachu the line closes up by one (Misty 1 step ago, Brock 2) - see
+"Closing the Gap Without Pikachu" in the README. The slots they read don't change,
+but the tiles they can stand on do, so **every table has to hold for both line-ups**.
+`--verify-parks` checks both, and `--trigger ... --no-pikachu` enumerates the closed-up line.
+
 So the complete set of tiles a follower can occupy when a scene fires is found by
 enumerating every legal 3-step walk *into* the trigger tile. Tiles may repeat - a
 player pacing back and forth is a real approach, and produces placements that
@@ -492,6 +497,19 @@ reading as if it were complete - hence the full enumeration here.
 | Viridian City | 1 | converted - Misty only |
 
 `--verify-parks` guards the 20 converted scenes and runs on every `make`.
+
+The scenes marked clear above stay clear in the no-Pikachu line-up, re-derived with
+it applied: Route 22 (rival 2 and approaches), the SS Anne, Cerulean and Silph Co 7F
+approaches, Pokemon Tower 7F and Rocket Hideout B4F.
+
+### Known gap: Silph Co 11F's Jessie and James
+
+The "clear" above, and the matching row in the findings table, is wrong: it was
+checked at Giovanni's trigger (6,13). Their real triggers are row 3, x 1-3
+(`SilphCo11FScript_6229c`). Column 1 stays open past them at (2,8)/(3,8), so a player
+walking up from the south leaves followers on the Rockets' upward paths, with or
+without Pikachu. That comes from the static model and hasn't been confirmed in-game,
+so check first that the south side can really be reached before they're beaten. Not solved yet.
 
 ### Known gap: Cinnabar Gym
 

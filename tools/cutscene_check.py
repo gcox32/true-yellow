@@ -365,6 +365,10 @@ STEP_DIRS = {"down": (0, 1), "up": (0, -1), "left": (-1, 0), "right": (1, 0)}
 # step, so with the player stationary trail[n] is simply where they stood n+1
 # steps ago.
 TRAIL_OWNERS = ["Pikachu", "Misty", "Brock"]
+# With Pikachu fainted or out of the party, Misty and Brock close up by one step
+# (RecordPlayerPositionToTrail) - each stands where the next one forward would.
+# They still read trail[1] and trail[2]; it's what gets written there that moves.
+NO_PIKACHU_OWNERS = ["Misty", "Brock"]
 
 
 def backward_walks(grid, end, n, blocked=frozenset()):
@@ -397,12 +401,12 @@ def backward_walks(grid, end, n, blocked=frozenset()):
 	return out
 
 
-def follower_tiles(grid, trigger, forced=(), blocked=None):
+def follower_tiles(grid, trigger, forced=(), blocked=None, pikachu=True):
 	"""Tiles each follower can occupy when a scene acts, as {name: set}.
 
 	`trigger` is the tile the scene fires on; `forced` are directions the script
 	pushes the player before the NPCs move (Mt Moon B2F's PAD_UP, say), each of
-	which shifts the trail one more slot.
+	which shifts the trail one more slot. `pikachu` False closes the line up.
 
 	`blocked` defaults to every object_event tile on the map, since NPCs and
 	ground items block the player. Hidden (missable) objects don't actually
@@ -422,8 +426,8 @@ def follower_tiles(grid, trigger, forced=(), blocked=None):
 	tiles = {name: set() for name in TRAIL_OWNERS}
 	for prefix in backward_walks(grid, trigger, max(0, 4 - len(known)), blocked):
 		history = list(prefix) + known           # oldest .. where they stand now
-		for slot, name in enumerate(TRAIL_OWNERS):
-			tiles[name].add(history[-(slot + 2)])
+		for steps_back, name in enumerate(TRAIL_OWNERS if pikachu else NO_PIKACHU_OWNERS):
+			tiles[name].add(history[-(steps_back + 2)])
 	return tiles, cur
 
 
@@ -744,13 +748,15 @@ def parse_park_table(map_name, label):
 	return out
 
 
-def joint_outcomes(grid, trigger, forced=(), extra_blocked=(), region=None):
+def joint_outcomes(grid, trigger, forced=(), extra_blocked=(), region=None, pikachu=True):
 	"""(Misty, Brock) pairs from the SAME approach - their tiles are correlated.
 
 	`region`, when given, is the set of tiles the player can occupy before the
 	scene fires. Trigger tiles are one-way: stepping on one starts the scene, so
 	a path that crosses one is impossible, which can seal a room off. On Silph
 	Co 7F that cuts the arrangements from 20 to 4.
+
+	`pikachu` False is the closed-up line, one step nearer the player each.
 	"""
 	known, cur = [trigger], trigger
 	for d in forced:
@@ -763,7 +769,7 @@ def joint_outcomes(grid, trigger, forced=(), extra_blocked=(), region=None):
 	out = set()
 	for prefix in backward_walks(grid, trigger, max(0, 4 - len(known)), blocked):
 		h = list(prefix) + known
-		out.add((h[-3], h[-4]))
+		out.add((h[-3], h[-4]) if pikachu else (h[-2], h[-3]))
 	return sorted(out), cur
 
 
@@ -822,9 +828,17 @@ def verify_parks(quiet=False):
 		# scene is wherever an earlier stage left it rather than its
 		# object_event coord. The player can't walk through it, so no follower
 		# can be trailing there.
-		pairs, player = joint_outcomes(grid, scene["trigger"], scene["forced"],
-		                               extra_blocked=[st for st, _ in scene["npc_paths"]],
-		                               region=scene_region(grid, scene))
+		#
+		# Every table has to hold for both line-ups: the same bytes run whether or
+		# not Pikachu is walking with the player.
+		region = scene_region(grid, scene)
+		extra = [st for st, _ in scene["npc_paths"]]
+		lineups = []
+		for pikachu, tag in ((True, ""), (False, "no Pikachu, ")):
+			pairs, player = joint_outcomes(grid, scene["trigger"], scene["forced"],
+			                               extra_blocked=extra, region=region,
+			                               pikachu=pikachu)
+			lineups.append((tag, pairs))
 		present = scene.get("followers", TRAIL_OWNERS[1:])
 
 		problems = []
@@ -852,24 +866,26 @@ def verify_parks(quiet=False):
 					problems.append("%s reaches (%d,%d) at frame %d but the NPC is there "
 					                "by frame %d" % ((who,) + c +
 					                (i * FOLLOWER_FRAMES, arrival[c] * npc_frames)))
-		for m, b in pairs:
-			m2 = always.get("Misty") or lookup.get(("Misty", m), m)
-			b2 = always.get("Brock") or lookup.get(("Brock", b), b)
-			for who, t in (("Misty", m2), ("Brock", b2)):
-				if who not in present:
-					continue          # that follower can't be in this scene at all
-				if t in path:
-					problems.append("approach Misty=%s Brock=%s: %s still on the path at "
-					                "(%d,%d)" % (m, b, who, t[0], t[1]))
-			if m2 == b2 and len(present) == 2:
-				problems.append("approach Misty=%s Brock=%s: both end on (%d,%d)"
-				                % (m, b, m2[0], m2[1]))
+		for tag, pairs in lineups:
+			for m, b in pairs:
+				m2 = always.get("Misty") or lookup.get(("Misty", m), m)
+				b2 = always.get("Brock") or lookup.get(("Brock", b), b)
+				for who, t in (("Misty", m2), ("Brock", b2)):
+					if who not in present:
+						continue          # that follower can't be in this scene at all
+					if t in path:
+						problems.append("%sapproach Misty=%s Brock=%s: %s still on the path "
+						                "at (%d,%d)" % (tag, m, b, who, t[0], t[1]))
+				if m2 == b2 and len(present) == 2:
+					problems.append("%sapproach Misty=%s Brock=%s: both end on (%d,%d)"
+					                % (tag, m, b, m2[0], m2[1]))
 
 		status = "FAIL" if problems else "ok"
 		if problems or not quiet:
 			print("[%s] %s  (%d entr%s, %d approach outcome%s)"
 			      % (status, scene["name"], len(table), "y" if len(table) == 1 else "ies",
-			         len(pairs), "" if len(pairs) == 1 else "s"))
+			         sum(len(pairs) for _, pairs in lineups),
+			         "" if sum(len(pairs) for _, pairs in lineups) == 1 else "s"))
 		for msg in dict.fromkeys(problems):
 			print("       %s" % msg)
 		failures += bool(problems)
@@ -1060,6 +1076,9 @@ def main():
 	ap.add_argument("--forced", metavar="DIRS",
 	                help="comma-separated directions the script pushes the player before "
 	                     "the NPCs move (e.g. 'up' for Mt Moon B2F's PAD_UP)")
+	ap.add_argument("--no-pikachu", action="store_true",
+	                help="with --trigger, use the closed-up line Misty and Brock walk in "
+	                     "when Pikachu is fainted or out of the party")
 	ap.add_argument("--nudge-misty", metavar="DX,DY",
 	                help="test a candidate fix: shift every tile Misty could be on by this "
 	                     "delta, then re-check walkability and collisions")
@@ -1117,11 +1136,11 @@ def main():
 			raise SystemExit("unknown --forced direction(s): %s" % ", ".join(bad))
 		if not grid.is_walkable(tx, ty):
 			print("WARNING: trigger tile (%d,%d) is not walkable" % (tx, ty))
-		follower, final = follower_tiles(grid, (tx, ty), forced)
+		follower, final = follower_tiles(grid, (tx, ty), forced, pikachu=not args.no_pikachu)
 		marks[final] = "P"
 		print("trigger (%d,%d)%s -> player ends at (%d,%d)"
 		      % (tx, ty, " + forced " + ">".join(forced) if forced else "", final[0], final[1]))
-		for name in TRAIL_OWNERS:
+		for name in (NO_PIKACHU_OWNERS if args.no_pikachu else TRAIL_OWNERS):
 			cells = sorted(follower[name], key=lambda c: (c[1], c[0]))
 			print("  %-7s can be on %2d tile(s): %s"
 			      % (name, len(cells), " ".join("(%d,%d)" % c for c in cells)))

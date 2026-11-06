@@ -1,6 +1,12 @@
 ; Chain Follower System - Misty and Brock
 ; Uses Position Trail approach: stores where player WAS for the last N steps
 ; Pikachu targets trail[0], Misty targets trail[1], Brock targets trail[2]
+;
+; With no Pikachu to walk behind (fainted, or not in the party) Misty and Brock
+; close up by one step. They keep reading the same slots - only what gets
+; written there changes, so nothing downstream has to know: trail[1] holds the
+; player's last tile instead of the one before it. See "Closing the gap" in
+; engine/followers/README.md.
 
 ; Screen tile thresholds for conditional UI hiding (see RENDER_HIDING.md)
 ; screen_tile_Y = follower_mapY - wYCoord  (10x9 tile screen, player at ~row 4)
@@ -43,6 +49,16 @@ RecordPlayerPositionToTrail::
 ; Should be called BEFORE player position is updated, or with the old position
 ; Input: b = old Y position (map coords + 4), c = old X position (map coords + 4)
 
+; e = $ff if Pikachu is walking with us, 0 if not. Read straight from the party
+; rather than from CheckPikachuFollowingPlayer or the overworld state flags:
+; those also go false for momentary hides, where he's coming straight back and
+; his place in the line has to stay open.
+	push bc
+	call IsStarterPikachuAliveInOurParty
+	pop bc
+	sbc a
+	ld e, a
+
 ; Stepping off SURF onto land: start the door-exit cascade, anchored on the tile
 ; the player is about to land on.
 ;
@@ -81,6 +97,8 @@ RecordPlayerPositionToTrail::
 	; Mode 2 -> 3 after 1st step (still hidden, store door position)
 	; Mode 3 -> 4 after 2nd step (Misty can spawn at door)
 	; Mode 4 -> 0 after 3rd step (Brock can spawn at door)
+	; No Pikachu to emerge first: mode 2 -> 4 on the 1st step, so everyone
+	; comes out a step sooner.
 	; Mode 1 (enter doorway) is not touched here
 	ld a, [wFollowerDoorwayMode]
 	cp 2
@@ -97,7 +115,8 @@ RecordPlayerPositionToTrail::
 	push bc
 	call .storeDoorPosition
 	pop bc
-	ld a, 3
+	ld a, 4
+	add e ; 3 with Pikachu ($ff), 4 without
 	ld [wFollowerDoorwayMode], a
 	jr .noModeChange
 .exitMode3
@@ -116,6 +135,24 @@ RecordPlayerPositionToTrail::
 	; guarded off in InitializePositionTrail. Skipping it would starve a
 	; hidden, not-yet-spawned follower of accurate history to use once they
 	; finally do spawn.
+
+	; Pikachu just came back (revived, or returned to the party): trail[0] and
+	; trail[1] only ever match after a step taken without him, see below. Hold
+	; trail[1]-[3] for this one step, which leaves Misty and Brock standing
+	; still and opens up the gap he walks into. Shifting as usual would send
+	; Brock onto Misty's tile instead.
+	ld a, e
+	and a
+	jr z, .shiftTrail
+	ld a, [wPositionTrailY + 1]
+	ld hl, wPositionTrailY + 0
+	cp [hl]
+	jr nz, .shiftTrail
+	ld a, [wPositionTrailX + 1]
+	ld hl, wPositionTrailX + 0
+	cp [hl]
+	jr z, .storeNewPosition
+.shiftTrail
 
 	ld a, [wPositionTrailY + 2]
 	ld [wPositionTrailY + 3], a
@@ -139,10 +176,21 @@ RecordPlayerPositionToTrail::
 	ld [wMovementTypeTrail + 1], a
 
 	; Store new position at trail[0]
+.storeNewPosition
 	ld a, b
 	ld [wPositionTrailY + 0], a
 	ld a, c
 	ld [wPositionTrailX + 0], a
+	; No Pikachu: Misty takes the place he'd have walked to. trail[2] is already
+	; right, having just shifted out of what was Misty's own slot.
+	ld a, e
+	and a
+	jr nz, .trail1Done
+	ld a, b
+	ld [wPositionTrailY + 1], a
+	ld a, c
+	ld [wPositionTrailX + 1], a
+.trail1Done
 
 	; Store movement type at trail[0] (0=walk, 1=jump)
 	; Check if player is doing a ledge jump
@@ -153,6 +201,9 @@ RecordPlayerPositionToTrail::
 	ld a, 1
 .notJumping
 	ld [wMovementTypeTrail + 0], a
+	inc e
+	ret z ; Pikachu's with us ($ff)
+	ld [wMovementTypeTrail + 1], a
 	ret
 
 .storeDoorPosition:
@@ -175,6 +226,12 @@ InitializePositionTrail::
 ; Initialize trail with positions for followers
 ; For doorway scenarios (wFollowerDoorwayMode = 1), uses horizontal positioning
 ; Otherwise, creates positions behind player based on facing direction
+
+	; e = $ff if Pikachu is walking with us, 0 if not - see
+	; RecordPlayerPositionToTrail. Misty and Brock close up by a tile without him.
+	call IsStarterPikachuAliveInOurParty
+	sbc a
+	ld e, a
 
 	; Check if doorway scenario (flag set by SetPikachuSpawn* functions)
 	ld a, [wFollowerDoorwayMode]
@@ -218,8 +275,11 @@ InitializePositionTrail::
 	ld a, c
 	ld [wPositionTrailX + 0], a
 
-	; trail[1] = 2 steps behind player (Misty's target)
-	call .computeBehindPosition
+	; trail[1] = 2 steps behind player (Misty's target), or 1 with no Pikachu -
+	; matching trail[0], the same as a real step taken without him leaves it
+	ld a, e
+	and a
+	call nz, .computeBehindPosition
 	ld a, [wSpriteMistyStateData1MovementStatus]
 	and a
 	jr nz, .skipTrail1Normal
@@ -229,7 +289,7 @@ InitializePositionTrail::
 	ld [wPositionTrailX + 1], a
 .skipTrail1Normal
 
-	; trail[2] = 3 steps behind player (Brock's target)
+	; trail[2] = 3 steps behind player (Brock's target), or 2 with no Pikachu
 	call .computeBehindPosition
 	ld a, [wSpriteBrockStateData1MovementStatus]
 	and a
@@ -263,6 +323,7 @@ InitializePositionTrail::
 ;   trail[1] = (X+2, Y) - Misty target (right of Pikachu)
 ;   trail[2] = (X-1, Y) - Brock target (left of player)
 ;   trail[3] = (X-2, Y) - spare (further left)
+; With no Pikachu, Misty stands in his spot instead: trail[1] = (X+1, Y).
 ; Same as .normalPositioning, each write is guarded so a follower that's
 ; already spawned and mid-walk doesn't get its target yanked by a sibling's
 ; spawn event triggering this recompute.
@@ -285,13 +346,13 @@ InitializePositionTrail::
 	ld [wPositionTrailY + 0], a
 .skipTrail0Doorway
 
-	; trail[1] = X+2, Y (Misty: right of Pikachu)
+	; trail[1] = X+2, Y (Misty: right of Pikachu) or X+1, Y (no Pikachu)
 	ld a, [wSpriteMistyStateData1MovementStatus]
 	and a
 	jr nz, .skipTrail1Doorway
 	ld a, c
 	inc a
-	inc a
+	sub e ; e = $ff with Pikachu, so this adds the second tile
 	ld [wPositionTrailX + 1], a
 	ld a, b
 	ld [wPositionTrailY + 1], a

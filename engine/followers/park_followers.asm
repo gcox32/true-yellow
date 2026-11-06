@@ -108,6 +108,13 @@ IsFollowerSpawned:
 ; maps this bank before ParkFollowers runs its `ld a, [de]`, so a table in
 ; the script's bank would read whatever happens to sit at the same address
 ; here. The park_followers macro asserts the bank at link time.
+;
+; One table has to serve both line-ups, since the same bytes run whether or not
+; Pikachu is walking with the player. Without him Misty and Brock stand a step
+; closer (see RecordPlayerPositionToTrail), which puts them on tiles the scene's
+; with-Pikachu entries never see. Those extra entries are marked below. Each one's
+; danger tile is unreachable for that follower with Pikachu present, so it never
+; fires then; `--verify-parks` checks every table against both line-ups.
 
 MtMoonB2FRocketsParkTable::
 	;              slot              danger  destination
@@ -122,6 +129,9 @@ PokemonTower2FRivalOnLeftParkTable::
 	park_follower MISTY_TRAIL_SLOT, 15, 7,   16, 6
 	park_follower BROCK_TRAIL_SLOT, 14, 7,   13, 7
 	park_follower BROCK_TRAIL_SLOT, 16, 7,   16, 8
+	; no Pikachu: the line is a step closer
+	park_follower BROCK_TRAIL_SLOT, 14, 6,   13, 7
+	park_follower BROCK_TRAIL_SLOT, 15, 7,   13, 7
 	park_followers_end
 
 ; Player below the rival at (14,6); he exits right-then-down.
@@ -131,6 +141,10 @@ PokemonTower2FRivalBelowParkTable::
 	park_follower MISTY_TRAIL_SLOT, 15, 7,   13, 7
 	park_follower BROCK_TRAIL_SLOT, 15, 6,   14, 7
 	park_follower BROCK_TRAIL_SLOT, 16, 7,   17, 7
+	; no Pikachu: the line is a step closer
+	park_follower MISTY_TRAIL_SLOT, 15, 6,   14, 7
+	park_follower BROCK_TRAIL_SLOT, 15, 5,   15, 4
+	park_follower BROCK_TRAIL_SLOT, 15, 7,   13, 7
 	park_followers_end
 
 
@@ -150,6 +164,8 @@ SilphCo7FRivalExitRightParkTable::
 	;              slot              danger  destination
 	park_follower MISTY_TRAIL_SLOT,   4, 3,    5, 2
 	park_follower BROCK_TRAIL_SLOT,   5, 3,    4, 2
+	; no Pikachu: the line is a step closer
+	park_follower BROCK_TRAIL_SLOT,  4, 3,    5, 2
 	park_followers_end
 
 SilphCo7FRivalWalkAroundParkTable::
@@ -157,6 +173,9 @@ SilphCo7FRivalWalkAroundParkTable::
 	park_follower MISTY_TRAIL_SLOT,   5, 3,    1, 2
 	park_follower MISTY_TRAIL_SLOT,   4, 2,    1, 2
 	park_follower BROCK_TRAIL_SLOT,   5, 2,    4, 3
+	; no Pikachu: the line is a step closer
+	park_follower BROCK_TRAIL_SLOT,  4, 2,    1, 2
+	park_follower BROCK_TRAIL_SLOT,  5, 3,    1, 3
 	park_followers_end
 
 ; Game Corner - the Rocket guarding the hideout poster. He has no trainer
@@ -170,6 +189,8 @@ GameCornerRocketDirectParkTable::
 	;              slot              danger  destination
 	park_follower MISTY_TRAIL_SLOT,  10, 5,   10, 7
 	park_follower BROCK_TRAIL_SLOT,  11, 5,   10, 6
+	; no Pikachu: the line is a step closer
+	park_follower BROCK_TRAIL_SLOT, 10, 5,   10, 7
 	park_followers_end
 
 GameCornerRocketWalkAroundParkTable::
@@ -180,6 +201,11 @@ GameCornerRocketWalkAroundParkTable::
 	park_follower BROCK_TRAIL_SLOT,  13, 5,   13, 6
 	park_follower BROCK_TRAIL_SLOT,  10, 6,    8, 6
 	park_follower BROCK_TRAIL_SLOT,  12, 6,   13, 6
+	; no Pikachu: the line is a step closer
+	park_follower MISTY_TRAIL_SLOT, 10, 6,    9, 7
+	park_follower BROCK_TRAIL_SLOT,  9, 6,    8, 6
+	park_follower BROCK_TRAIL_SLOT, 11, 6,   11, 7
+	park_follower BROCK_TRAIL_SLOT, 12, 5,   12, 7
 	park_followers_end
 
 ; Route 22 - the rival's exit after the FIRST battle. Misty only: beating
@@ -217,6 +243,8 @@ SSAnne2FRivalDownParkTable::
 	;              slot              danger  destination
 	park_follower MISTY_TRAIL_SLOT,  36, 9,   37,10
 	park_follower BROCK_TRAIL_SLOT,  36,10,   35,10
+	; no Pikachu: the line is a step closer
+	park_follower BROCK_TRAIL_SLOT, 36, 9,   35,10
 	park_followers_end
 
 SSAnne2FRivalWalkAroundParkTable::
@@ -224,6 +252,8 @@ SSAnne2FRivalWalkAroundParkTable::
 	;              slot              danger  destination
 	park_follower MISTY_TRAIL_SLOT,  37, 9,   36,10
 	park_follower BROCK_TRAIL_SLOT,  37,10,   35,10
+	; no Pikachu: the line is a step closer
+	park_follower BROCK_TRAIL_SLOT, 37, 9,   36,10
 	park_followers_end
 
 ; Cerulean City - the rival's exit after the Nugget Bridge battle. Same shape as
@@ -243,6 +273,8 @@ CeruleanCityRivalExitEastParkTable::
 	;              slot              danger  destination
 	park_follower MISTY_TRAIL_SLOT,  21, 7,   20, 8
 	park_follower BROCK_TRAIL_SLOT,  21, 8,   20, 7
+	; no Pikachu: the line is a step closer
+	park_follower BROCK_TRAIL_SLOT, 21, 7,   20, 8
 	park_followers_end
 
 CeruleanCityRivalExitWestParkTable::
@@ -250,6 +282,8 @@ CeruleanCityRivalExitWestParkTable::
 	;              slot              danger  destination
 	park_follower MISTY_TRAIL_SLOT,  20, 7,   21, 8
 	park_follower BROCK_TRAIL_SLOT,  20, 8,   21, 7
+	; no Pikachu: the line is a step closer
+	park_follower BROCK_TRAIL_SLOT, 20, 7,   21, 8
 	park_followers_end
 
 ; Bill's House - Bill's Pokemon walks into the teleporter machine, and later
@@ -291,6 +325,9 @@ SilphCo11FGiovanniPlayerBelowParkTable::
 	park_follower MISTY_TRAIL_SLOT,   6,11,    5,10
 	park_follower BROCK_TRAIL_SLOT,   6,10,    7,10
 	park_follower BROCK_TRAIL_SLOT,   6,12,    5,11
+	; no Pikachu: the line is a step closer
+	park_follower MISTY_TRAIL_SLOT,  6,12,    7,12
+	park_follower BROCK_TRAIL_SLOT,  6,11,    5,11
 	park_followers_end
 
 SilphCo11FGiovanniPlayerRightParkTable::
@@ -299,6 +336,9 @@ SilphCo11FGiovanniPlayerRightParkTable::
 	park_follower MISTY_TRAIL_SLOT,   6,11,    5,12
 	park_follower BROCK_TRAIL_SLOT,   6,10,    5,10
 	park_follower BROCK_TRAIL_SLOT,   6,12,    5,11
+	; no Pikachu: the line is a step closer
+	park_follower MISTY_TRAIL_SLOT,  6,12,    6,13
+	park_follower BROCK_TRAIL_SLOT,  6,11,    5,11
 	park_followers_end
 
 ; Viridian City - the catch-training old man walks back down the corridor he
@@ -322,6 +362,8 @@ ViridianCityOldManParkTable::
 	park_follower MISTY_TRAIL_SLOT,  19, 9,   19, 8
 	park_follower MISTY_TRAIL_SLOT,  18,10,   17,10
 	park_follower MISTY_TRAIL_SLOT,  19,11,   20,11
+	; no Pikachu: the line is a step closer
+	park_follower MISTY_TRAIL_SLOT, 19,10,   20,10
 	park_followers_end
 
 ; Champion's Room - Oak walks up column 3 to congratulate the player, then up
@@ -344,4 +386,6 @@ ChampionsRoomOakParkTable::
 	;              slot              danger  destination
 	park_follower MISTY_TRAIL_SLOT,   3, 4,    2, 4
 	park_follower BROCK_TRAIL_SLOT,   3, 5,    2, 5
+	; no Pikachu: the line is a step closer
+	park_follower BROCK_TRAIL_SLOT,  3, 4,    2, 4
 	park_followers_end

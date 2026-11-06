@@ -77,6 +77,38 @@ Each follower targets a specific trail index:
 - **Misty**: trail[1] (2 steps behind player)
 - **Brock**: trail[2] (3 steps behind player)
 
+### Closing the Gap Without Pikachu
+
+When the starter Pikachu is fainted or out of the party
+(`IsStarterPikachuAliveInOurParty`), Misty and Brock walk 1 and 2 steps behind
+the player instead of 2 and 3. Momentary hides (surfing, biking, the overworld
+state flags) don't count - his place stays open, because he's coming straight back.
+
+```
+[Brock] -> [Misty] -> [Player]
+   ^          ^
+trail[2]   trail[1]
+```
+
+They still read the same trail slots. Only the writers change, so spawning,
+walking, hopping, facing, connection rebasing and park tables don't need to know:
+
+- `RecordPlayerPositionToTrail` also writes the new position and movement type
+  to `trail[1]`, which leaves `trail[0]` and `trail[1]` equal.
+- `InitializePositionTrail` seeds the closer line, and the doorway line-up
+  becomes `Brock - Player - Misty`.
+- The door-exit cascade goes from mode 2 straight to mode 4, so Misty emerges
+  after 1 step and Brock after 2.
+
+Transitions need no stored state:
+
+- **He leaves** (faints in battle, say): nobody moves until the player's next
+  step, when Misty fast-walks 2 tiles and Brock takes her old tile.
+- **He returns**: `trail[0] == trail[1]` with Pikachu present can only mean the
+  last step was taken without him, so `trail[1]`-`trail[3]` hold for that one step
+  and the gap opens for him. A false positive (`ParkFollowers` or a follower join
+  writing `trail[1]` onto `trail[0]`'s tile) just delays Brock by a step.
+
 ### Spawn Conditions
 
 `ShouldMistySpawn` and `ShouldBrockSpawn` run every frame. A follower appears
