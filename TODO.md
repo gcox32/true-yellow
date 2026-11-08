@@ -1,26 +1,13 @@
 # TODO
-- [x] Fix double animation for two stat buff moves (e.g. DEFENSE_CURL)
-- [x] Butterfree for Raticate trade and trade back on SS Anne
-- [x] Swap "Hardened Onix" for "Brock Onix" that is only _resistant_ not immune to Electric
-- [x] Mark overworld Pokemon as seen in Pokedex when you interact with them (e.g. Slowbro in Cerulean)
-    - [ ] Wigglytuff on SS Anne
-- [x] Bill's Lighthouse instead of Cottage?
-- [x] Donphan for sure
-- [x] Better burned animation (instead of reusing poisoned animation)
-- [x] mt.moon fossil nerd walks on top of misty (fixed by letting the player take both fossils instead)
-- [x] mt.moon
-    - team rocket walks on top of misty and brock
-    - emerging from ladders looks bad 
-- [x] hide new followers on pikachu emotion check
-- [x] change sleep to attack on-wake-up turn
-- [x] Swap sell items in Celadon 2F for TMs
-- [x] Need better coin buying experience in Game Corner
-- [x] Need better prizes in Game Corner
-- [x] rewrite floating weezing event text to work for a vent in the floor (not a pipe)
-- [x] better cinnabar maansion encounters
-
-## QOL
-- [x] the "Grey pokemon" palette needs to be more grey than brown
+- [ ] Make Pokemon Center at Rock Tunnel Entrance, Route 10, a FLYable desination
+- [ ] Move armor mewtwo event into silph co building somewhere
+- [ ] Location table for brock and misty responses if memory allows
+- [ ] More diversity to Saffron Gym trainers
+- [ ] Fighting Dojo as rechallengable (i.e. as a place to "train"?); only FIGHTING type pokemon allowed in?
+- [ ] Set SET (vs SWITCH) as default OPTION in OPTIONS
+- [ ] More LAPRAS-y overworld sprite for surfing _if_ it's LAPRAS surfing
+- [ ] OPTION to reduce text (first obvious place is interacting with the NURSE in the POKEMON CENTER)
+- [ ] instant SAVE after confirm (as opposed to delay with "Saving...")
 
 ## Bugs
 - [x] Investigate recoil effects--not sure they're working (RECOIL_EFFECT dispatched to calc-only helper; now points at DefaultRecoilEffect_)
@@ -83,3 +70,4 @@
 - [x] In the original game, if your opponent used minimize or substitute, you opened your FIGHT menu, exited, went to PARTY, looked at a pokemon's status menu, then returned to the fight, the opponent's sprite would be all messed up. Now it's fixed and doesn't do that. (N/A in Yellow: already sets hWhoseTurn before reloading the pic)
 - [x] Doing the same thing as the above on unidentified GHOSTS would reveal what pokemon they are. Now it doesn't.
 - [x] After saving in rock tunnel, going title screen -> continue screen -> title screen -> continue screen will cause the continue screen to take on darker colors. Now it stays normal colors.
+

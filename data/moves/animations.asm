@@ -1133,7 +1133,8 @@ TriAttackAnim:
 
 SuperFangAnim:
 	battle_anim LEECH_SEED, SE_DARK_SCREEN_PALETTE
-	battle_anim SUPER_FANG, SUBANIM_1_STAR_BIG_MOVING, 1, 6
+	; battle_anim SUPER_FANG, SUBANIM_1_STAR_BIG_MOVING, 1, 6
+	battle_anim HYPER_FANG, SUBANIM_0_STAR_THRICE, 0, 6
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 
