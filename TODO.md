@@ -1,5 +1,5 @@
 # TODO
-- [x] Make Pokemon Center at Rock Tunnel Entrance, Route 10, a FLYable desination (also Mt. Moon Pokemon Center + Seafoam Islands NW entrance; flags are wTownVisitedFlag bits 11-13, menu order in FlyLocationsOrder. NEEDS IN-GAME TEST for the two new ones.)
+- [x] Make Pokemon Center at Rock Tunnel Entrance, Route 10, a FLYable desination (also Mt. Moon Pokemon Center, Seafoam Islands NW entrance, Route 12 fishing house, Sea Cottage; flags are wTownVisitedFlag bits 11-15 (full), menu order in FlyLocationsOrder. NEEDS IN-GAME TEST for the two new ones.)
 - [ ] Move armor mewtwo event into silph co building somewhere
 - [ ] Location table for brock and misty responses if memory allows
 - [ ] More diversity to Saffron Gym trainers

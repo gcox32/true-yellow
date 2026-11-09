@@ -315,8 +315,10 @@ FlyLocationsOrder:
 	fly_location PEWTER_CITY
 	fly_location ROUTE_4, FLY_ROUTE_4_BIT   ; Mt. Moon Pokemon Center
 	fly_location CERULEAN_CITY
+	fly_location ROUTE_25, FLY_ROUTE_25_BIT ; Sea Cottage
 	fly_location ROUTE_10, FLY_ROUTE_10_BIT ; Rock Tunnel Pokemon Center
 	fly_location LAVENDER_TOWN
+	fly_location ROUTE_12, FLY_ROUTE_12_BIT ; fishing (Super Rod) house
 	fly_location VERMILION_CITY
 	fly_location CELADON_CITY
 	fly_location FUCHSIA_CITY

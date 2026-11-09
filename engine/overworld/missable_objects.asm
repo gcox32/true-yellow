@@ -7,6 +7,12 @@ MarkTownVisitedAndLoadMissableObjects::
 	ld c, FLY_ROUTE_4_BIT
 	cp MT_MOON_POKECENTER
 	jr z, .markVisited
+	ld c, FLY_ROUTE_12_BIT
+	cp ROUTE_12_SUPER_ROD_HOUSE
+	jr z, .markVisited
+	ld c, FLY_ROUTE_25_BIT
+	cp BILLS_HOUSE
+	jr z, .markVisited
 	ld c, FLY_ROUTE_20_BIT
 	cp SEAFOAM_ISLANDS_1F
 	jr z, .seafoam1F

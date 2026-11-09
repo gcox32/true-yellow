@@ -76,6 +76,8 @@ FlyWarpDataPtr:
 	fly_warp_spec ROUTE_4,         .Route4
 	fly_warp_spec ROUTE_10,        .Route10
 	fly_warp_spec ROUTE_20,        .Route20
+	fly_warp_spec ROUTE_12,        .Route12
+	fly_warp_spec ROUTE_25,        .Route25
 
 .PalletTown:     fly_warp PALLET_TOWN,      5,  6
 .ViridianCity:   fly_warp VIRIDIAN_CITY,   23, 26
@@ -91,3 +93,5 @@ FlyWarpDataPtr:
 .Route4:         fly_warp ROUTE_4,         11,  6
 .Route10:        fly_warp ROUTE_10,        11, 20
 .Route20:        fly_warp ROUTE_20,        48,  6 ; below the Seafoam Islands NW entrance
+.Route12:        fly_warp ROUTE_12,        11, 78 ; below the fishing (Super Rod) house door
+.Route25:        fly_warp ROUTE_25,        45,  5 ; below the Sea Cottage (lighthouse) door
