@@ -28,6 +28,12 @@ ENDM
 	map_const INDIGO_PLATEAU,                10,  9 ; $09
 	map_const SAFFRON_CITY,                  20, 18 ; $0A
 DEF NUM_CITY_MAPS EQU const_value
+; extra fly destinations beyond the cities, flagged in wTownVisitedFlag after the city bits
+; (2 bytes of flags = room for 16 destinations; past that the array, and the save layout, grows)
+DEF FLY_ROUTE_10_BIT EQU NUM_CITY_MAPS     ; Rock Tunnel Pokemon Center
+DEF FLY_ROUTE_4_BIT  EQU NUM_CITY_MAPS + 1 ; Mt. Moon Pokemon Center
+DEF FLY_ROUTE_20_BIT EQU NUM_CITY_MAPS + 2 ; Seafoam Islands NW entrance
+DEF NUM_FLY_LOCATIONS EQU NUM_CITY_MAPS + 3
 	map_const UNUSED_MAP_0B,                  0,  0 ; $0B
 DEF FIRST_ROUTE_MAP EQU const_value
 	map_const ROUTE_1,                       10, 18 ; $0C

@@ -256,35 +256,76 @@ LoadTownMap_Fly::
 	jr z, .pressedDown ; skip past unvisited towns
 	jp .townMapFlyLoop
 .wrapToEndOfList
-	ld hl, wFlyLocationsList + NUM_CITY_MAPS
+	ld hl, wFlyLocationsList + NUM_FLY_LOCATIONS
 	jr .pressedDown
 
 ToText:
 	db "To@"
 
 BuildFlyLocationsList:
+; fills wFlyLocationsList in FlyLocationsOrder, with NOT_VISITED for locked destinations
 	ld hl, wFlyAnimUsingCoordList
 	ld [hl], $ff
 	inc hl
-	ld a, [wTownVisitedFlag]
-	ld e, a
-	ld a, [wTownVisitedFlag + 1]
-	ld d, a
-	lb bc, 0, NUM_CITY_MAPS
+	ld de, FlyLocationsOrder
 .loop
-	srl d
-	rr e
+	ld a, [de]
+	cp $ff
+	jr z, .done
+	push hl
+	inc de
+	ld a, [de] ; wTownVisitedFlag bit
+	push de
+	ld c, a
+	ld b, FLAG_TEST
+	ld hl, wTownVisitedFlag
+	predef FlagActionPredef
+	pop de
+	pop hl
+	ld a, c
+	and a
 	ld a, NOT_VISITED
-	jr nc, .notVisited
-	ld a, b ; store the map number of the town if it has been visited
+	jr z, .notVisited
+	dec de
+	ld a, [de] ; visited: store the destination's map id
+	inc de
 .notVisited
-	ld [hl], a
-	inc hl
-	inc b
-	dec c
-	jr nz, .loop
-	ld [hl], $ff
+	ld [hli], a
+	inc de
+	jr .loop
+.done
+	ld [hl], a ; $ff
 	ret
+
+MACRO fly_location
+; map id, wTownVisitedFlag bit
+	IF _NARG == 1
+		ASSERT \1 < NUM_CITY_MAPS
+		db \1, \1 ; a city's flag bit is its map id
+	ELSE
+		db \1, \2
+	ENDC
+ENDM
+
+; order of the FLY menu (UP steps forward through this list, DOWN steps back)
+; every destination needs a FlyWarpDataPtr entry too
+FlyLocationsOrder:
+	fly_location PALLET_TOWN
+	fly_location VIRIDIAN_CITY
+	fly_location PEWTER_CITY
+	fly_location ROUTE_4, FLY_ROUTE_4_BIT   ; Mt. Moon Pokemon Center
+	fly_location CERULEAN_CITY
+	fly_location ROUTE_10, FLY_ROUTE_10_BIT ; Rock Tunnel Pokemon Center
+	fly_location LAVENDER_TOWN
+	fly_location VERMILION_CITY
+	fly_location CELADON_CITY
+	fly_location FUCHSIA_CITY
+	fly_location ROUTE_20, FLY_ROUTE_20_BIT ; Seafoam Islands NW entrance
+	fly_location CINNABAR_ISLAND
+	fly_location INDIGO_PLATEAU
+	fly_location SAFFRON_CITY
+	db $ff ; end
+	ASSERT @ - FlyLocationsOrder == NUM_FLY_LOCATIONS * 2 + 1
 
 TownMapUpArrow:
 	INCBIN "gfx/town_map/up_arrow.1bpp"

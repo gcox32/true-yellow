@@ -1,8 +1,39 @@
 MarkTownVisitedAndLoadMissableObjects::
 	ld a, [wCurMap]
+; non-city fly destinations, unlocked by visiting them (see FLY_*_BIT)
+	ld c, FLY_ROUTE_10_BIT
+	cp ROCK_TUNNEL_POKECENTER
+	jr z, .markVisited
+	ld c, FLY_ROUTE_4_BIT
+	cp MT_MOON_POKECENTER
+	jr z, .markVisited
+	ld c, FLY_ROUTE_20_BIT
+	cp SEAFOAM_ISLANDS_1F
+	jr z, .seafoam1F
+	cp ROUTE_20
+	jr z, .route20
 	cp FIRST_ROUTE_MAP
 	jr nc, .notInTown
 	ld c, a
+	jr .markVisited
+.seafoam1F
+; entered through Route 20's first warp (the NW cave mouth)?
+	ld a, [wWarpedFromWhichMap]
+	cp ROUTE_20
+	jr nz, .notInTown
+	ld a, [wWarpedFromWhichWarp]
+	and a
+	jr z, .markVisited
+	jr .notInTown
+.route20
+; came out of Seafoam 1F's first two warps (the NW cave mouth)?
+	ld a, [wWarpedFromWhichMap]
+	cp SEAFOAM_ISLANDS_1F
+	jr nz, .notInTown
+	ld a, [wWarpedFromWhichWarp]
+	cp 2
+	jr nc, .notInTown
+.markVisited
 	ld b, FLAG_SET
 	ld hl, wTownVisitedFlag   ; mark town as visited (for flying)
 	predef FlagActionPredef
