@@ -6,6 +6,7 @@
 - [ ] instant SAVE after confirm (as opposed to delay with "Saving...")
 - [ ] More diversity to Saffron Gym trainers
 - [ ] Move diversity in Seafoam Islands wild
+- [ ] Better Rival teams
 - [ ] Move armor mewtwo event into silph co building somewhere
 - [ ] Location table for brock and misty responses if memory allows
 - [ ] Fighting Dojo as rechallengable (i.e. as a place to "train"?); only FIGHTING type pokemon allowed in?

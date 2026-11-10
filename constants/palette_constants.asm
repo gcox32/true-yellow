@@ -66,4 +66,5 @@ DEF SET_PAL_DEFAULT EQU $ff
 	const PAL_PIKACHUS_BEACH       ; $25
 	const PAL_PIKACHU_PORTRAIT     ; $26
 	const PAL_PIKACHUS_BEACH_TITLE ; $27
+	const PAL_MEWTWOMON            ; $28
 DEF NUM_SGB_PALS EQU const_value
