@@ -401,7 +401,7 @@ MagnetonPicBackSW::   INCBIN "gfx/pokemon/back_sw/magnetonb.pic"
 FloatingMagnetonPicFront:: INCBIN "gfx/pokemon/front/magneton.pic"
 
 DonphanPicFront:: INCBIN "gfx/pokemon/front/donphan.pic"
-DonphanPicBack:: INCBIN "gfx/pokemon/back/donphanb.pic"
+DonphanPicBack:: INCBIN "gfx/pokemon/back_sw/donphanb.pic" ; old 4x4 art: gfx/pokemon/back/archived/donphanb.png
 
 GetSpriteBank::
 ; Returns the ROM bank containing the sprite for [wCurPartySpecies] in a.

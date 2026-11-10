@@ -196,9 +196,26 @@ LoadMonBackPic:
 	call ClearScreenArea
 	ld hl,  wMonHBackSprite - wMonHeader
 	call UncompressMonSprite
+; Gen 1 back pics are 4x4 tiles and get scaled up by two.
+; Larger (e.g. 6x6 Spaceworld) back pics are drawn at native size, centered like front pics.
+	ld a, [wSpriteWidth] ; width in pixels
+	cp 4 * 8
+	jr z, .scaleByTwo
+	ld a, [wSpriteHeight] ; height in pixels (tiles * 8)
+	add a                 ; tiles * 16 = height in the high nybble
+	ld c, a
+	ld a, [wSpriteWidth]
+	rrca
+	rrca
+	rrca                  ; width in tiles (low nybble)
+	ld de, vBackPic
+	call LoadUncompressedSpriteData
+	jr .copyToSprites
+.scaleByTwo
 	predef ScaleSpriteByTwo
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
+.copyToSprites
 	ld hl, vSprites
 	ld de, vBackPic
 	ld c, (2 * SPRITEBUFFERSIZE) / 16 ; count of 16-byte chunks to be copied
