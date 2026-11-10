@@ -642,8 +642,8 @@ RazorLeafAnim:
 SolarBeamAnim:
 	battle_anim GROWTH, SE_LIGHT_SCREEN_PALETTE
 	battle_anim NO_MOVE, SE_SPIRAL_BALLS_INWARD
-	battle_anim SOLARBEAM, SUBANIM_0_BEAM, 0, 2
-	battle_anim NO_MOVE, SUBANIM_0_STAR_TWICE, 0, 6
+	battle_anim SOLARBEAM, SUBANIM_0_BEAM, 0, 6
+	battle_anim MEGA_PUNCH, SUBANIM_1_STAR_BIG_MOVING, 1, 6
 	battle_anim NO_MOVE, SE_RESET_SCREEN_PALETTE
 	db -1 ; end
 
