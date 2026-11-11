@@ -1775,26 +1775,8 @@ LoadWalkingPlayerSpriteGraphics::
 	jr LoadPlayerSpriteGraphicsCommon
 
 LoadSurfingPlayerSpriteGraphics2::
-	ld a, [wd472]
-	and a
-	jr z, .asm_0d75
-	dec a
-	jr z, LoadSurfingPlayerSpriteGraphics
-	dec a
-	jr z, .asm_0d7c
-.asm_0d75
-	ld a, [wd471]
-	bit 6, a
-	jr z, LoadSurfingPlayerSpriteGraphics
-.asm_0d7c
-	ld b, BANK(SurfingPikachuSprite)
-	ld de, SurfingPikachuSprite
-	jr LoadPlayerSpriteGraphicsCommon
-
-LoadSurfingPlayerSpriteGraphics::
-	ld b, BANK(SeelSprite)
-	ld de, SeelSprite
-	jr LoadPlayerSpriteGraphicsCommon
+; picks Seel / surfing Pikachu / Lapras from wd472 (see engine/overworld/surf_sprite.asm)
+	farjp LoadSurfingPlayerSpriteGraphics_
 
 LoadBikePlayerSpriteGraphics::
 	ld b, BANK(RedBikeSprite)

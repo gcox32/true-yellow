@@ -435,3 +435,8 @@ SECTION "Park Followers", ROMX
 
 INCLUDE "engine/followers/park_followers.asm"
 INCLUDE "engine/debug/debug_menu.asm"
+
+
+SECTION "Surf Sprite Select", ROMX
+
+INCLUDE "engine/overworld/surf_sprite.asm"

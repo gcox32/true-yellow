@@ -171,7 +171,10 @@ StartMenu_Pokemon::
 	ld a, [wCurPartySpecies]
 	cp STARTER_PIKACHU
 	jr z, .surfingPikachu
-	ld a, $1
+	cp LAPRAS
+	ld a, $3 ; Lapras surf sprite
+	jr z, .continue
+	ld a, $1 ; Seel surf sprite
 	jr .continue
 .surfingPikachu
 	ld a, $2

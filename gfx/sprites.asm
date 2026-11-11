@@ -89,3 +89,9 @@ SurfingPikachuSprite::   INCBIN "gfx/sprites/surfing_pikachu.2bpp"
 BrockSprite::            INCBIN "gfx/sprites/brock.2bpp"
 JessieSprite::           INCBIN "gfx/sprites/jessie.2bpp"
 JamesSprite::            INCBIN "gfx/sprites/james.2bpp"
+
+
+SECTION "Lapras Surf Sprite", ROMX
+
+; From pokecrystal gfx/sprites/surf.png (Gen 2 Lapras surf sprite)
+LaprasSprite::           INCBIN "gfx/sprites/lapras.2bpp"
