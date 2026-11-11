@@ -143,6 +143,12 @@ SaveMenu:
 	call SaveTheGame_YesOrNo
 	and a   ;|0 = Yes|1 = No|
 	ret nz
+	ld a, [wLetterPrintingDelayFlags]
+	bit BIT_SHORT_TEXT, a
+	jr nz, .skipPause ; TEXT: SHORT
+	ld c, 10
+	call DelayFrames
+.skipPause
 	ld a, [wSaveFileStatus]
 	cp $1
 	jr z, .save
@@ -153,7 +159,15 @@ SaveMenu:
 	and a
 	ret nz
 .save
-	call SaveGameData ; data is written here; no "Saving..." pause afterwards
+	call SaveGameData ; the data is written here; "Saving..." is just for show
+	ld a, [wLetterPrintingDelayFlags]
+	bit BIT_SHORT_TEXT, a
+	jr nz, .savedText ; TEXT: SHORT skips "Saving..." and its pause
+	ld hl, SavingText
+	call PrintText
+	ld c, 128
+	call DelayFrames
+.savedText
 	ld hl, GameSavedText
 	call PrintText
 	ld c, 10
@@ -177,6 +191,10 @@ SaveTheGame_YesOrNo:
 
 WouldYouLikeToSaveText:
 	text_far _WouldYouLikeToSaveText
+	text_end
+
+SavingText:
+	text_far _SavingText
 	text_end
 
 GameSavedText:

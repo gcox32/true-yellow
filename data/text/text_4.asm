@@ -8,6 +8,10 @@ _WouldYouLikeToSaveText::
 	line "SAVE the game?"
 	done
 
+_SavingText::
+	text "Saving..."
+	done
+
 _GameSavedText::
 	text "<PLAYER> saved"
 	line "the game!"
