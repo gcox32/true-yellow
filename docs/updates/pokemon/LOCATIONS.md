@@ -100,18 +100,18 @@ they're listed rather than quietly dropped.
 |------------|----------------------------|-----------|--------|--------|---------------------------------------------------------------|
 | BULBASAUR  | Cerulean Melanie's House   | Gift      | 10     | —      |                                                               |
 | IVYSAUR    | Route 16                   | Grass     | 20-22  | 39.8%  |                                                               |
-| VENUSAUR   | --                         | --        | --     | --     | --                                                            |
+| VENUSAUR   | Cerulean Cave B1F          | Grass     | 90     | 4.3%   |                                                               |
 | CHARMANDER | Route 24                   | Gift      | 10     | —      |                                                               |
 | CHARMANDER | Route 9                    | Grass     | 20     | 4.3%   |                                                               |
 | CHARMANDER | Pokémon Mansion 1F         | Grass     | 33     | 9.8%   |                                                               |
 | CHARMELEON | --                         | --        | --     | --     | --                                                            |
-| CHARIZARD  | --                         | --        | --     | --     | --                                                            |
+| CHARIZARD  | Cerulean Cave B1F          | Grass     | 90     | 5.1%   |                                                               |
 | SQUIRTLE   | Route 24                   | Grass     | 8      | 4.3%   |                                                               |
 | SQUIRTLE   | Vermilion City             | Gift      | 10     | —      |                                                               |
 | WARTORTLE  | Seafoam Islands B1F        | Grass     | 30     | 9.8%   |                                                               |
 | WARTORTLE  | Seafoam Islands B2F        | Grass     | 32     | 5.1%   |                                                               |
-| BLASTOISE  | Cerulean Cave B1F          | Water     | 60-65  | 39.8%  |                                                               |
-| BLASTOISE  | Cerulean Cave 1F           | Water     | 60-65  | 39.8%  |                                                               |
+| BLASTOISE  | Cerulean Cave B1F          | Water     | 78-85  | 25.0%  |                                                               |
+| BLASTOISE  | Cerulean Cave 1F           | Water     | 64     | 1.2%   |                                                               |
 | CATERPIE   | Viridian Forest            | Grass     | 4-5    | 29.7%  |                                                               |
 | METAPOD    | Route 25                   | Grass     | 10     | 5.1%   |                                                               |
 | BUTTERFREE | S.S. Anne 2F Rooms         | Trade     | yours  | —      | trade a RATICATE; arrives as BUTTERFREE                       |
@@ -167,17 +167,18 @@ they're listed rather than quietly dropped.
 | EKANS      | Route 15                   | Grass     | 26     | 19.9%  |                                                               |
 | ARBOK      | Route 12                   | Grass     | 26     | 5.1%   |                                                               |
 | ARBOK      | Route 23                   | Grass     | 40     | 15.2%  |                                                               |
+| ARBOK      | Cerulean Cave 2F           | Grass     | 60     | 9.8%   |                                                               |
 | PIKACHU    | Pallet Town                | Static    | 5      | —      | cutscene - Oak catches it for you                             |
 | PIKACHU    | Power Plant                | Grass     | 30     | 19.9%  |                                                               |
 | RAICHU     | Power Plant                | Grass     | 28     | 9.8%   |                                                               |
-| RAICHU     | Cerulean Cave B1F          | Grass     | 90-100 | 19.5%  |                                                               |
+| RAICHU     | Cerulean Cave B1F          | Grass     | 84     | 15.2%  |                                                               |
 | SANDSHREW  | Route 3                    | Grass     | 8-10   | 14.8%  |                                                               |
 | SANDSHREW  | Mt. Moon 1F                | Grass     | 6      | 9.8%   |                                                               |
 | SANDSHREW  | Mt. Moon B1F               | Grass     | 10     | 9.8%   |                                                               |
 | SANDSHREW  | Mt. Moon B2F               | Grass     | 11     | 9.8%   |                                                               |
 | SANDSHREW  | Route 4                    | Grass     | 8-10   | 14.8%  |                                                               |
 | SANDSHREW  | Route 15                   | Grass     | 26     | 19.9%  |                                                               |
-| SANDSLASH  | Cerulean Cave 2F           | Grass     | 55     | 15.2%  |                                                               |
+| SANDSLASH  | Cerulean Cave 2F           | Grass     | 60     | 15.2%  |                                                               |
 | NIDORAN♀   | Route 2                    | Grass     | 4-6    | 14.8%  |                                                               |
 | NIDORAN♀   | Route 9                    | Grass     | 16-18  | 29.7%  |                                                               |
 | NIDORAN♀   | Route 10                   | Grass     | 17     | 9.8%   |                                                               |
@@ -204,7 +205,7 @@ they're listed rather than quietly dropped.
 | CLEFAIRY   | Mt. Moon 1F                | Grass     | 8-11   | 20.7%  |                                                               |
 | CLEFAIRY   | Mt. Moon B1F               | Grass     | 9      | 5.5%   |                                                               |
 | CLEFAIRY   | Mt. Moon B2F               | Grass     | 9-13   | 10.5%  |                                                               |
-| CLEFABLE   | Cerulean Cave B1F          | Grass     | 80-85  | 5.5%   |                                                               |
+| CLEFABLE   | Cerulean Cave B1F          | Grass     | 88     | 5.1%   |                                                               |
 | VULPIX     | Pokémon Tower 5F           | Grass     | 29     | 1.2%   |                                                               |
 | VULPIX     | Pokémon Tower 6F           | Grass     | 26     | 9.8%   |                                                               |
 | VULPIX     | Route 8                    | Grass     | 20-24  | 29.7%  |                                                               |
@@ -218,6 +219,7 @@ they're listed rather than quietly dropped.
 | JIGGLYPUFF | Route 7                    | Grass     | 19     | 5.1%   |                                                               |
 | JIGGLYPUFF | Route 14                   | Grass     | 28-29  | 25.0%  |                                                               |
 | WIGGLYTUFF | Route 14                   | Grass     | 29-30  | 19.5%  |                                                               |
+| WIGGLYTUFF | Cerulean Cave B1F          | Grass     | 85     | 9.8%   |                                                               |
 | ZUBAT      | Mt. Moon 1F                | Grass     | 8      | 19.9%  |                                                               |
 | ZUBAT      | Mt. Moon B1F               | Grass     | 8      | 19.9%  |                                                               |
 | ZUBAT      | Mt. Moon B2F               | Grass     | 10-11  | 29.7%  |                                                               |
@@ -230,6 +232,7 @@ they're listed rather than quietly dropped.
 | GOLBAT     | Seafoam Islands B4F        | Grass     | 34     | 9.8%   |                                                               |
 | GOLBAT     | Seafoam Islands 1F         | Grass     | 29     | 4.3%   |                                                               |
 | GOLBAT     | Victory Road 3F            | Grass     | 41-50  | 14.8%  |                                                               |
+| GOLBAT     | Cerulean Cave 1F           | Grass     | 58     | 19.9%  |                                                               |
 | ODDISH     | Mt. Moon 1F                | Grass     | 7      | 19.9%  |                                                               |
 | ODDISH     | Mt. Moon B1F               | Grass     | 7      | 19.9%  |                                                               |
 | ODDISH     | Mt. Moon B2F               | Grass     | 12     | 9.8%   |                                                               |
@@ -242,10 +245,12 @@ they're listed rather than quietly dropped.
 | PARAS      | Mt. Moon B1F               | Grass     | 9-11   | 14.8%  |                                                               |
 | PARAS      | Mt. Moon B2F               | Grass     | 13     | 5.1%   |                                                               |
 | PARASECT   | Route 18 Gate 2F           | Trade     | yours  | —      | trade a TANGELA; arrives as SPIKE                             |
+| PARASECT   | Cerulean Cave 2F           | Grass     | 60     | 5.1%   |                                                               |
 | VENONAT    | Route 8                    | Grass     | 15     | 9.8%   |                                                               |
 | VENONAT    | Route 15                   | Grass     | 24     | 15.2%  |                                                               |
 | VENOMOTH   | Route 8                    | Grass     | 20     | 4.3%   |                                                               |
 | VENOMOTH   | Route 15                   | Grass     | 30     | 1.2%   |                                                               |
+| VENOMOTH   | Cerulean Cave 1F           | Grass     | 61     | 5.1%   |                                                               |
 | DIGLETT    | Diglett's Cave             | Grass     | 15-21  | 89.5%  |                                                               |
 | DUGTRIO    | Diglett's Cave             | Grass     | 29-31  | 9.4%   |                                                               |
 | DUGTRIO    | Victory Road 2F            | Grass     | 40-43  | 10.5%  |                                                               |
@@ -276,6 +281,7 @@ they're listed rather than quietly dropped.
 | GOLDUCK    | Seafoam Islands B3F        | Grass     | 36     | 5.1%   |                                                               |
 | GOLDUCK    | Seafoam Islands B4F        | Grass     | 36     | 9.8%   |                                                               |
 | GOLDUCK    | Route 22                   | Water     | 32-36  | 10.5%  |                                                               |
+| GOLDUCK    | Cerulean Cave 1F           | Water     | 58     | 15.2%  |                                                               |
 | MANKEY     | Route 2                    | Grass     | 5-7    | 10.9%  |                                                               |
 | MANKEY     | Route 3                    | Grass     | 9      | 15.2%  |                                                               |
 | MANKEY     | Route 4                    | Grass     | 9      | 15.2%  |                                                               |
@@ -289,7 +295,7 @@ they're listed rather than quietly dropped.
 | GROWLITHE  | Pokémon Mansion 3F         | Grass     | 30-35  | 29.7%  |                                                               |
 | GROWLITHE  | Pokémon Mansion B1F        | Grass     | 36     | 15.2%  |                                                               |
 | ARCANINE   | Route 23                   | Grass     | 46     | 5.1%   |                                                               |
-| ARCANINE   | Cerulean Cave 2F           | Grass     | 60-62  | 14.8%  |                                                               |
+| ARCANINE   | Cerulean Cave 2F           | Grass     | 62     | 9.8%   |                                                               |
 | POLIWAG    | any water                  | Good Rod  | 10     | 50.0%  | one of the Good Rod's 2 mons, wherever you cast it            |
 | POLIWAG    | Viridian City              | Super Rod | 5-15   | 100.0% | slot 1, 2, 3, 4                                               |
 | POLIWAG    | Route 24                   | Water     | 30     | 19.9%  |                                                               |
@@ -321,6 +327,7 @@ they're listed rather than quietly dropped.
 | KADABRA    | Route 6                    | Grass     | 14     | 1.2%   |                                                               |
 | KADABRA    | Route 8                    | Grass     | 27     | 1.2%   |                                                               |
 | KADABRA    | Route 7                    | Grass     | 24     | 1.2%   |                                                               |
+| KADABRA    | Cerulean Cave 1F           | Grass     | 60     | 9.8%   |                                                               |
 | ALAKAZAM   | --                         | --        | --     | --     | --                                                            |
 | MACHOP     | Rock Tunnel 1F             | Grass     | 19-20  | 14.8%  |                                                               |
 | MACHOP     | Rock Tunnel B1F            | Grass     | 18-20  | 20.3%  |                                                               |
@@ -357,6 +364,8 @@ they're listed rather than quietly dropped.
 | TENTACRUEL | Route 20                   | Super Rod | 20-40  | 40.2%  | slot 2, 4                                                     |
 | TENTACRUEL | Route 21                   | Water     | 36     | 5.1%   |                                                               |
 | TENTACRUEL | Route 21                   | Super Rod | 30     | 10.5%  | slot 4                                                        |
+| TENTACRUEL | Cerulean Cave B1F          | Water     | 80     | 9.8%   |                                                               |
+| TENTACRUEL | Cerulean Cave 1F           | Water     | 60     | 9.8%   |                                                               |
 | GEODUDE    | Mt. Moon 1F                | Grass     | 8-10   | 14.8%  |                                                               |
 | GEODUDE    | Mt. Moon B1F               | Grass     | 7-10   | 30.1%  |                                                               |
 | GEODUDE    | Mt. Moon B2F               | Grass     | 11-13  | 35.2%  |                                                               |
@@ -379,16 +388,18 @@ they're listed rather than quietly dropped.
 | SLOWBRO    | Route 13                   | Water     | 15-20  | 5.5%   |                                                               |
 | SLOWBRO    | Seafoam Islands B4F        | Grass     | 38     | 4.3%   |                                                               |
 | SLOWBRO    | Seafoam Islands 1F         | Grass     | 38     | 1.2%   |                                                               |
+| SLOWBRO    | Cerulean Cave 1F           | Water     | 59     | 9.8%   |                                                               |
 | MAGNEMITE  | Route 10                   | Grass     | 16-22  | 50.0%  |                                                               |
 | MAGNEMITE  | Pokémon Mansion 1F         | Grass     | 31     | 9.8%   |                                                               |
 | MAGNEMITE  | Pokémon Mansion B1F        | Grass     | 35     | 19.9%  |                                                               |
 | MAGNEMITE  | Power Plant                | Grass     | 30     | 19.9%  |                                                               |
 | MAGNETON   | Power Plant                | Grass     | 30     | 9.8%   |                                                               |
-| MAGNETON   | Cerulean Cave B1F          | Grass     | 80-85  | 39.8%  | FLOATING                                                      |
+| MAGNETON   | Cerulean Cave B1F          | Grass     | 82     | 19.9%  | FLOATING                                                      |
 | FARFETCHD  | Route 12                   | Grass     | 28-29  | 14.1%  |                                                               |
 | DODUO      | Route 16                   | Grass     | 21-22  | 10.2%  |                                                               |
 | DODUO      | Route 17                   | Grass     | 26-27  | 19.5%  |                                                               |
 | DODRIO     | Route 17                   | Grass     | 29-31  | 19.9%  |                                                               |
+| DODRIO     | Cerulean Cave 2F           | Grass     | 61     | 5.1%   |                                                               |
 | SEEL       | Seafoam Islands B1F        | Grass     | 28     | 19.9%  |                                                               |
 | SEEL       | Seafoam Islands B2F        | Grass     | 30     | 19.9%  |                                                               |
 | SEEL       | Seafoam Islands B3F        | Grass     | 33     | 15.2%  |                                                               |
@@ -404,6 +415,7 @@ they're listed rather than quietly dropped.
 | DEWGONG    | Seafoam Islands B4F        | Water     | 36     | 9.8%   |                                                               |
 | DEWGONG    | Cinnabar Lab Trade Room    | Trade     | yours  | —      | trade a GROWLITHE; arrives as CEZANNE                         |
 | DEWGONG    | Route 23                   | Water     | 42-46  | 35.2%  |                                                               |
+| DEWGONG    | Cerulean Cave B1F          | Water     | 82     | 5.1%   |                                                               |
 | GRIMER     | Celadon City               | Water     | 25-32  | 94.5%  |                                                               |
 | GRIMER     | Pokémon Mansion 1F         | Grass     | 33     | 9.8%   |                                                               |
 | GRIMER     | Pokémon Mansion 2F         | Grass     | 34     | 9.8%   |                                                               |
@@ -426,6 +438,8 @@ they're listed rather than quietly dropped.
 | CLOYSTER   | Seafoam Islands B3F        | Water     | 38     | 1.2%   |                                                               |
 | CLOYSTER   | Seafoam Islands B4F        | Grass     | 37     | 5.1%   |                                                               |
 | CLOYSTER   | Seafoam Islands B4F        | Water     | 38     | 5.1%   |                                                               |
+| CLOYSTER   | Cerulean Cave B1F          | Water     | 82     | 9.8%   |                                                               |
+| CLOYSTER   | Cerulean Cave 1F           | Water     | 62     | 4.3%   |                                                               |
 | GASTLY     | Pokémon Tower 3F           | Grass     | 18-24  | 89.5%  |                                                               |
 | GASTLY     | Pokémon Tower 4F           | Grass     | 22-28  | 75.8%  |                                                               |
 | GASTLY     | Pokémon Tower 5F           | Grass     | 23-26  | 74.6%  |                                                               |
@@ -438,7 +452,7 @@ they're listed rather than quietly dropped.
 | HAUNTER    | Pokémon Tower 6F           | Grass     | 24-29  | 25.8%  |                                                               |
 | HAUNTER    | Pokémon Tower 7F           | Grass     | 23-25  | 34.8%  |                                                               |
 | GENGAR     | Pokémon Tower 7F           | Grass     | 29-30  | 5.5%   |                                                               |
-| GENGAR     | Cerulean Cave 2F           | Grass     | 55-57  | 19.5%  |                                                               |
+| GENGAR     | Cerulean Cave 2F           | Grass     | 60     | 9.8%   |                                                               |
 | ONIX       | Diglett's Cave             | Grass     | 31     | 1.2%   |                                                               |
 | ONIX       | Rock Tunnel 1F             | Grass     | 20     | 9.8%   |                                                               |
 | ONIX       | Rock Tunnel B1F            | Grass     | 14-22  | 10.5%  |                                                               |
@@ -446,7 +460,7 @@ they're listed rather than quietly dropped.
 | ONIX       | Victory Road 1F            | Grass     | 41-43  | 10.5%  |                                                               |
 | DROWZEE    | Route 7                    | Grass     | 24-26  | 9.4%   |                                                               |
 | DROWZEE    | Route 11                   | Grass     | 15-17  | 19.5%  |                                                               |
-| HYPNO      | --                         | --        | --     | --     | --                                                            |
+| HYPNO      | Cerulean Cave 1F           | Grass     | 60     | 19.9%  |                                                               |
 | KRABBY     | Route 24                   | Grass     | 12-14  | 24.6%  |                                                               |
 | KRABBY     | Route 25                   | Super Rod | 10-15  | 69.5%  | slot 1, 2                                                     |
 | KRABBY     | Route 10                   | Super Rod | 15-20  | 69.5%  | slot 1, 2                                                     |
@@ -462,12 +476,13 @@ they're listed rather than quietly dropped.
 | KINGLER    | Seafoam Islands B3F        | Super Rod | 35     | 19.9%  | slot 3                                                        |
 | KINGLER    | Seafoam Islands B4F        | Grass     | 34     | 19.9%  |                                                               |
 | KINGLER    | Seafoam Islands B4F        | Super Rod | 35     | 19.9%  | slot 3                                                        |
-| KINGLER    | Cerulean Cave 1F           | Grass     | 55-65  | 10.2%  |                                                               |
+| KINGLER    | Cerulean Cave 1F           | Grass     | 62     | 9.8%   |                                                               |
 | VOLTORB    | Fuchsia Gym                | Grass     | 20-41  | 100.0% |                                                               |
 | VOLTORB    | Power Plant                | Grass     | 33     | 15.2%  |                                                               |
 | VOLTORB    | Power Plant                | Static    | 40     | —      | 5 of them, one per save                                       |
 | ELECTRODE  | Power Plant                | Grass     | 35     | 9.8%   |                                                               |
 | ELECTRODE  | Power Plant                | Static    | 43     | —      | 2 of them, one per save                                       |
+| ELECTRODE  | Cerulean Cave B1F          | Grass     | 84     | 9.8%   |                                                               |
 | EXEGGCUTE  | Route 12                   | Grass     | 25-28  | 35.2%  |                                                               |
 | EXEGGCUTE  | Safari Zone East           | Grass     | 22-26  | 20.3%  |                                                               |
 | EXEGGCUTE  | Safari Zone North          | Grass     | 20     | 15.2%  |                                                               |
@@ -487,12 +502,13 @@ they're listed rather than quietly dropped.
 | MAROWAK    | Safari Zone East           | Grass     | 24     | 5.1%   |                                                               |
 | MAROWAK    | Safari Zone West           | Grass     | 24     | 5.1%   |                                                               |
 | MAROWAK    | Victory Road 3F            | Grass     | 42-50  | 20.7%  |                                                               |
+| MAROWAK    | Cerulean Cave 2F           | Grass     | 60     | 19.9%  |                                                               |
 | HITMONLEE  | Rock Tunnel 1F             | Grass     | 20     | 5.1%   |                                                               |
 | HITMONLEE  | Fighting Dojo              | Gift      | 30     | —      | one of the two, your pick                                     |
 | HITMONCHAN | Rock Tunnel 1F             | Grass     | 20-22  | 5.5%   |                                                               |
 | HITMONCHAN | Fighting Dojo              | Gift      | 30     | —      | one of the two, your pick                                     |
 | LICKITUNG  | Route 24                   | Grass     | 12     | 1.2%   |                                                               |
-| LICKITUNG  | Cerulean Cave 2F           | Grass     | 54-65  | 9.4%   |                                                               |
+| LICKITUNG  | Cerulean Cave 2F           | Grass     | 62     | 4.3%   |                                                               |
 | KOFFING    | Pokémon Mansion 1F         | Grass     | 34     | 15.2%  |                                                               |
 | KOFFING    | Pokémon Mansion 2F         | Grass     | 36     | 15.2%  |                                                               |
 | KOFFING    | Pokémon Mansion 3F         | Grass     | 34     | 9.8%   |                                                               |
@@ -500,17 +516,16 @@ they're listed rather than quietly dropped.
 | WEEZING    | Route 17                   | Grass     | 32-35  | 5.5%   |                                                               |
 | WEEZING    | Pokémon Mansion 2F         | Grass     | 32     | 9.8%   |                                                               |
 | WEEZING    | Pokémon Mansion B1F        | Grass     | 40     | 5.1%   | FLOATING                                                      |
-| WEEZING    | Cerulean Cave 1F           | Grass     | 58-59  | 5.5%   | FLOATING                                                      |
+| WEEZING    | Cerulean Cave 1F           | Grass     | 59     | 5.1%   | FLOATING                                                      |
 | RHYHORN    | Safari Zone East           | Grass     | 21     | 9.8%   |                                                               |
 | RHYHORN    | Safari Zone North          | Grass     | 25     | 9.8%   |                                                               |
-| RHYHORN    | Cerulean Cave 2F           | Grass     | 65     | 19.9%  |                                                               |
 | RHYDON     | Cinnabar Lab Trade Room    | Trade     | yours  | —      | trade a GOLDUCK; arrives as BUFFY                             |
 | RHYDON     | Route 23                   | Grass     | 60     | 1.2%   |                                                               |
 | RHYDON     | Victory Road 2F            | Grass     | 45     | 9.8%   |                                                               |
-| RHYDON     | Cerulean Cave 2F           | Grass     | 70     | 1.2%   |                                                               |
+| RHYDON     | Cerulean Cave 2F           | Grass     | 62     | 19.9%  |                                                               |
 | CHANSEY    | Safari Zone East           | Grass     | 21     | 4.3%   |                                                               |
 | CHANSEY    | Route 23                   | Grass     | 40-45  | 25.0%  |                                                               |
-| CHANSEY    | Cerulean Cave B1F          | Grass     | 80-100 | 35.2%  |                                                               |
+| CHANSEY    | Cerulean Cave B1F          | Grass     | 82-100 | 21.1%  |                                                               |
 | TANGELA    | Route 13                   | Grass     | 36-38  | 5.5%   |                                                               |
 | TANGELA    | Route 21                   | Grass     | 21-30  | 55.1%  |                                                               |
 | KANGASKHAN | Safari Zone North          | Grass     | 28-33  | 14.8%  |                                                               |
@@ -562,6 +577,7 @@ they're listed rather than quietly dropped.
 | SEAKING    | Route 22                   | Water     | 30     | 19.5%  |                                                               |
 | SEAKING    | Route 23                   | Water     | 41-42  | 14.8%  |                                                               |
 | SEAKING    | Cerulean Cave B1F          | Super Rod | 40-60  | 60.2%  | slot 2, 3, 4                                                  |
+| SEAKING    | Cerulean Cave 1F           | Water     | 58     | 19.9%  |                                                               |
 | SEAKING    | Cerulean Cave 1F           | Super Rod | 35-55  | 60.2%  | slot 2, 3, 4                                                  |
 | STARYU     | Pallet Town                | Super Rod | 5-10   | 59.8%  | slot 1, 3                                                     |
 | STARYU     | Route 24                   | Grass     | 8-13   | 25.0%  |                                                               |
@@ -575,7 +591,9 @@ they're listed rather than quietly dropped.
 | STARYU     | Route 20                   | Super Rod | 30     | 19.9%  | slot 3                                                        |
 | STARYU     | Cinnabar Island            | Super Rod | 10-15  | 59.8%  | slot 1, 3                                                     |
 | STARYU     | Route 21                   | Super Rod | 20     | 29.7%  | slot 2                                                        |
-| STARMIE    | Cerulean Cave 1F           | Grass     | 64-65  | 25.0%  |                                                               |
+| STARMIE    | Cerulean Cave B1F          | Water     | 80     | 9.8%   |                                                               |
+| STARMIE    | Cerulean Cave 1F           | Grass     | 62     | 15.2%  |                                                               |
+| STARMIE    | Cerulean Cave 1F           | Water     | 60     | 9.8%   |                                                               |
 | MR_MIME    | Route 2 Trade House        | Trade     | yours  | —      | trade a CLEFAIRY; arrives as MILES                            |
 | MR_MIME    | Route 21                   | Grass     | 28-32  | 6.2%   |                                                               |
 | SCYTHER    | Route 11                   | Grass     | 19     | 4.3%   |                                                               |
@@ -585,9 +603,9 @@ they're listed rather than quietly dropped.
 | JYNX       | Seafoam Islands B2F        | Grass     | 31     | 19.9%  |                                                               |
 | JYNX       | Seafoam Islands B3F        | Grass     | 33     | 19.9%  |                                                               |
 | JYNX       | Seafoam Islands B4F        | Grass     | 35     | 9.8%   |                                                               |
-| JYNX       | Cerulean Cave 1F           | Grass     | 60-65  | 39.8%  |                                                               |
+| JYNX       | Cerulean Cave 1F           | Grass     | 60     | 9.8%   |                                                               |
 | ELECTABUZZ | Power Plant                | Grass     | 32-35  | 10.2%  |                                                               |
-| ELECTABUZZ | Cerulean Cave 1F           | Grass     | 65-66  | 19.5%  |                                                               |
+| ELECTABUZZ | Cerulean Cave 1F           | Grass     | 65     | 1.2%   |                                                               |
 | MAGMAR     | Pokémon Mansion 1F         | Grass     | 33     | 4.3%   |                                                               |
 | MAGMAR     | Pokémon Mansion 2F         | Grass     | 36     | 4.3%   |                                                               |
 | MAGMAR     | Pokémon Mansion 3F         | Grass     | 38     | 5.1%   |                                                               |
@@ -611,14 +629,16 @@ they're listed rather than quietly dropped.
 | GYARADOS   | Fuchsia City               | Super Rod | 15     | 10.5%  | slot 4                                                        |
 | GYARADOS   | Route 19                   | Water     | 25     | 5.1%   |                                                               |
 | GYARADOS   | Route 20                   | Water     | 25     | 5.1%   |                                                               |
-| GYARADOS   | Cerulean Cave B1F          | Water     | 64-66  | 44.5%  |                                                               |
-| GYARADOS   | Cerulean Cave 1F           | Water     | 64-66  | 44.5%  |                                                               |
+| GYARADOS   | Cerulean Cave B1F          | Water     | 78-85  | 24.2%  |                                                               |
+| GYARADOS   | Cerulean Cave 1F           | Water     | 60-62  | 25.0%  |                                                               |
 | LAPRAS     | Silph Co. 7F               | Gift      | 15     | —      |                                                               |
 | LAPRAS     | Seafoam Islands B3F        | Water     | 32-35  | 20.3%  |                                                               |
 | LAPRAS     | Seafoam Islands B4F        | Water     | 34-40  | 35.9%  |                                                               |
-| LAPRAS     | Cerulean Cave B1F          | Water     | 55-65  | 15.6%  |                                                               |
-| LAPRAS     | Cerulean Cave 1F           | Water     | 55-65  | 15.6%  |                                                               |
+| LAPRAS     | Cerulean Cave B1F          | Water     | 80     | 15.2%  |                                                               |
+| LAPRAS     | Cerulean Cave 1F           | Water     | 62     | 5.1%   |                                                               |
 | DITTO      | Pokémon Mansion B1F        | Grass     | 40     | 1.2%   |                                                               |
+| DITTO      | Cerulean Cave B1F          | Grass     | 85     | 9.8%   |                                                               |
+| DITTO      | Cerulean Cave 1F           | Grass     | 63     | 4.3%   |                                                               |
 | EEVEE      | Celadon Mansion Roof House | Gift      | 25     | —      |                                                               |
 | EEVEE      | Game Corner Prize Room     | Prize     | 18     | —      | 1000 coins                                                    |
 | VAPOREON   | Seafoam Islands B2F        | Grass     | 37     | 1.2%   |                                                               |
@@ -652,9 +672,9 @@ they're listed rather than quietly dropped.
 | DRAGONAIR  | Safari Zone Center         | Super Rod | 15     | 10.5%  | slot 4                                                        |
 | DRAGONAIR  | Seafoam Islands B3F        | Water     | 33-36  | 14.1%  |                                                               |
 | DRAGONAIR  | Seafoam Islands B4F        | Water     | 35-40  | 34.0%  |                                                               |
-| DRAGONITE  | --                         | --        | --     | --     | --                                                            |
+| DRAGONITE  | Cerulean Cave B1F          | Water     | 90     | 1.2%   |                                                               |
 | MEWTWO     | Cerulean Cave B1F          | Static    | 70     | —      | one per save                                                  |
 | MEW        | Vermilion Dock             | Static    | 7      | —      | one per save                                                  |
 | DONPHAN    | Route 10                   | Grass     | 25     | 1.2%   |                                                               |
-| DONPHAN    | Cerulean Cave 2F           | Grass     | 75     | 19.9%  |                                                               |
+| DONPHAN    | Cerulean Cave 2F           | Grass     | 70     | 1.2%   |                                                               |
 <!-- /generated:locations -->

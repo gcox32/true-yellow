@@ -1,26 +1,26 @@
 CeruleanCaveB1FWildMons:
 	def_grass_wildmons 10 ; encounter rate
-	db 80, FLOATING_MAGNETON
-	db 85, FLOATING_MAGNETON
-	db 80, CHANSEY
-	db 85, CHANSEY
-	db 90, RAICHU
-	db 100, RAICHU
+	db 82, FLOATING_MAGNETON
+	db 82, CHANSEY
+	db 84, RAICHU
+	db 84, ELECTRODE
+	db 85, WIGGLYTUFF
+	db 85, DITTO
+	db 88, CLEFABLE
+	db 90, CHARIZARD
+	db 90, VENUSAUR
 	db 100, CHANSEY
-	db 90, CHANSEY
-	db 80, CLEFABLE
-	db 85, CLEFABLE
 	end_grass_wildmons
 
 	def_water_wildmons 7 ; encounter rate
-	db 60, BLASTOISE
-	db 65, BLASTOISE
-	db 65, GYARADOS
-	db 64, GYARADOS
-	db 66, GYARADOS
-	db 65, GYARADOS
-	db 55, LAPRAS
-	db 65, LAPRAS
-	db 58, LAPRAS
-	db 59, LAPRAS
+	db 78, BLASTOISE
+	db 78, GYARADOS
+	db 80, LAPRAS
+	db 80, STARMIE
+	db 80, TENTACRUEL
+	db 82, CLOYSTER
+	db 82, DEWGONG
+	db 85, BLASTOISE
+	db 85, GYARADOS
+	db 90, DRAGONITE
 	end_water_wildmons

@@ -1,15 +1,15 @@
 CeruleanCave2FWildMons:
 	def_grass_wildmons 8 ; encounter rate
-	db 65, RHYHORN
-	db 75, DONPHAN
-	db 55, SANDSLASH
-	db 60, ARCANINE
-	db 55, GENGAR
-	db 57, GENGAR
+	db 62, RHYDON
+	db 60, MAROWAK
+	db 60, SANDSLASH
 	db 62, ARCANINE
-	db 54, LICKITUNG
-	db 65, LICKITUNG
-	db 70, RHYDON
+	db 60, GENGAR
+	db 60, ARBOK
+	db 61, DODRIO
+	db 60, PARASECT
+	db 62, LICKITUNG
+	db 70, DONPHAN
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate
