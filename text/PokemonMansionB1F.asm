@@ -39,15 +39,16 @@ _PokemonMansionB1FDiaryText::
 	done
 
 _PokemonMansionB1FGasPipeText::
-	text "A rusted vent set"
-	line "into the floor."
+	text "A rusted pipe"
+	line "juts up from the"
+	cont "floor."
 
 	para "A steady hiss of"
-	line "helium rises from"
-	cont "the grate."
+	line "helium escapes"
+	cont "from its mouth."
 
 	para "Hold a #MON"
-	line "over the vent?"
+	line "over the pipe?"
 	prompt
 
 _PokemonMansionB1FGasWrongMonText::

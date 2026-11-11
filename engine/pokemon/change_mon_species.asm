@@ -98,4 +98,12 @@ SpeciesChangePartyMenu::
 	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	pop af
+	ret nc
+; Cancelled: every caller jumps straight to TextScriptEnd with nothing left to
+; read, so don't make DisplayTextID wait for a button press on the restored
+; (stale) prompt with sprites hidden. Map scripts' EnableAutoTextBoxDrawing
+; clears this flag again on the next frame.
+	ld a, 1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	scf
 	ret

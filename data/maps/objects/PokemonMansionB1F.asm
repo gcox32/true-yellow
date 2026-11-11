@@ -15,7 +15,7 @@ PokemonMansionB1F_Object:
 	warp_event 23, 22, POKEMON_MANSION_1F, 6
 
 	def_bg_events
-	bg_event 13, 12, TEXT_POKEMONMANSIONB1F_GAS_VALVE ; helium pipes
+	bg_event 13,  9, TEXT_POKEMONMANSIONB1F_GAS_VALVE ; helium pipe (wastebasket tile against the north wall, block $4B)
 
 	def_object_events
 	object_event 16, 23, SPRITE_SUPER_NERD, STAY, NONE, TEXT_POKEMONMANSIONB1F_BURGLAR, OPP_BURGLAR, 9
