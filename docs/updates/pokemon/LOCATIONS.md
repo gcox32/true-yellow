@@ -644,11 +644,12 @@ they're listed rather than quietly dropped.
 | VAPOREON   | Seafoam Islands B2F        | Grass     | 37     | 1.2%   |                                                               |
 | VAPOREON   | Seafoam Islands B3F        | Grass     | 39     | 1.2%   |                                                               |
 | VAPOREON   | Seafoam Islands B4F        | Grass     | 40     | 1.2%   |                                                               |
-| JOLTEON    | Power Plant                | Grass     | 33-36  | 5.5%   |                                                               |
+| JOLTEON    | Power Plant                | Grass     | 36     | 1.2%   |                                                               |
 | FLAREON    | Pokémon Mansion 1F         | Grass     | 36     | 1.2%   |                                                               |
 | FLAREON    | Pokémon Mansion 2F         | Grass     | 39     | 1.2%   |                                                               |
 | FLAREON    | Pokémon Mansion 3F         | Grass     | 35-37  | 5.5%   |                                                               |
 | PORYGON    | Pokémon Mansion B1F        | Grass     | 40     | 9.8%   |                                                               |
+| PORYGON    | Power Plant                | Grass     | 33     | 4.3%   |                                                               |
 | OMANYTE    | Game Corner Prize Room     | Prize     | 20     | —      | 3000 coins                                                    |
 | OMANYTE    | Cinnabar Lab Fossil Room   | Gift      | 30     | —      | revived from the matching fossil                              |
 | OMASTAR    | --                         | --        | --     | --     | --                                                            |

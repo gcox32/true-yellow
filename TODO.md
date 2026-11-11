@@ -5,7 +5,7 @@
 - [x] OPTION to reduce text (first obvious place is interacting with the NURSE in the POKEMON CENTER) (OPTIONS "TEXT : FULL/SHORT", stored in wLetterPrintingDelayFlags bit 7 = BIT_SHORT_TEXT. SHORT nurse: ask -> heal -> "Your #MON are fighting fit!". Other places can check the same bit. Tested in-game.)
 - [x] instant SAVE after confirm (as opposed to delay with "Saving...") (SaveMenu in engine/menus/save.asm: with OPTIONS TEXT: SHORT, skips "Saving..." + its 128-frame wait and the 10-frame pause after YES; FULL keeps the original. Always keeps "saved the game!" + jingle. NEEDS IN-GAME TEST.)
 - [x] More diversity to Saffron Gym trainers
-- [ ] Review diversity in Cerulean Cave
+- [x] Review diversity in Cerulean Cave
 - [ ] Move diversity in Seafoam Islands wild
 - [x] Better Rival teams
 - [x] Move armor mewtwo event into silph co building somewhere
