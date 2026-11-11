@@ -1,15 +1,15 @@
 VictoryRoad2FWildMons:
 	def_grass_wildmons 6 ; encounter rate
-	db 35, MACHOKE
-	db 36, MACHOKE
-	db 35, POLIWRATH
-	db 45, RHYDON
+	db 42, DUGTRIO
+	db 42, MACHOKE
+	db 44, ONIX
+	db 44, POLIWRATH
+	db 44, RHYDON
+	db 43, MAGMAR
 	db 45, NIDOQUEEN
-	db 50, POLIWRATH
-	db 41, GOLEM
-	db 40, DUGTRIO
-	db 40, DUGTRIO
-	db 43, DUGTRIO
+	db 45, RAPIDASH
+	db 46, NINETALES
+	db 48, GOLEM
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

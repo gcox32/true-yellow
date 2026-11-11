@@ -167,6 +167,7 @@ they're listed rather than quietly dropped.
 | EKANS      | Route 15                   | Grass     | 26     | 19.9%  |                                                               |
 | ARBOK      | Route 12                   | Grass     | 26     | 5.1%   |                                                               |
 | ARBOK      | Route 23                   | Grass     | 40     | 15.2%  |                                                               |
+| ARBOK      | Victory Road 3F            | Grass     | 48     | 5.1%   |                                                               |
 | ARBOK      | Cerulean Cave 2F           | Grass     | 60     | 9.8%   |                                                               |
 | PIKACHU    | Pallet Town                | Static    | 5      | —      | cutscene - Oak catches it for you                             |
 | PIKACHU    | Power Plant                | Grass     | 30     | 19.9%  |                                                               |
@@ -178,6 +179,7 @@ they're listed rather than quietly dropped.
 | SANDSHREW  | Mt. Moon B2F               | Grass     | 11     | 9.8%   |                                                               |
 | SANDSHREW  | Route 4                    | Grass     | 8-10   | 14.8%  |                                                               |
 | SANDSHREW  | Route 15                   | Grass     | 26     | 19.9%  |                                                               |
+| SANDSLASH  | Victory Road 1F            | Grass     | 40     | 9.8%   |                                                               |
 | SANDSLASH  | Cerulean Cave 2F           | Grass     | 60     | 15.2%  |                                                               |
 | NIDORAN♀   | Route 2                    | Grass     | 4-6    | 14.8%  |                                                               |
 | NIDORAN♀   | Route 9                    | Grass     | 16-18  | 29.7%  |                                                               |
@@ -190,7 +192,7 @@ they're listed rather than quietly dropped.
 | NIDORINA   | Safari Zone East           | Grass     | 32     | 9.8%   |                                                               |
 | NIDORINA   | Safari Zone North          | Grass     | 23     | 9.8%   |                                                               |
 | NIDORINA   | Route 23                   | Grass     | 43     | 9.8%   |                                                               |
-| NIDOQUEEN  | Victory Road 2F            | Grass     | 45     | 9.8%   |                                                               |
+| NIDOQUEEN  | Victory Road 2F            | Grass     | 45     | 5.1%   |                                                               |
 | NIDORAN♂   | Route 2                    | Grass     | 4-6    | 14.8%  |                                                               |
 | NIDORAN♂   | Route 9                    | Grass     | 16-18  | 29.7%  |                                                               |
 | NIDORAN♂   | Route 10                   | Grass     | 17     | 9.8%   |                                                               |
@@ -201,7 +203,8 @@ they're listed rather than quietly dropped.
 | NIDORINO   | Route 9                    | Grass     | 18     | 5.1%   |                                                               |
 | NIDORINO   | Safari Zone West           | Grass     | 32     | 9.8%   |                                                               |
 | NIDORINO   | Route 23                   | Grass     | 44     | 9.8%   |                                                               |
-| NIDOKING   | Victory Road 1F            | Grass     | 50     | 9.8%   |                                                               |
+| NIDOKING   | Victory Road 1F            | Grass     | 42     | 5.1%   |                                                               |
+| NIDOKING   | Victory Road 3F            | Grass     | 47     | 9.8%   |                                                               |
 | CLEFAIRY   | Mt. Moon 1F                | Grass     | 8-11   | 20.7%  |                                                               |
 | CLEFAIRY   | Mt. Moon B1F               | Grass     | 9      | 5.5%   |                                                               |
 | CLEFAIRY   | Mt. Moon B2F               | Grass     | 9-13   | 10.5%  |                                                               |
@@ -213,6 +216,7 @@ they're listed rather than quietly dropped.
 | VULPIX     | Pokémon Mansion 2F         | Grass     | 40     | 9.8%   |                                                               |
 | VULPIX     | Pokémon Mansion 3F         | Grass     | 35     | 19.9%  |                                                               |
 | NINETALES  | Pokémon Tower 7F           | Grass     | 24     | 5.1%   |                                                               |
+| NINETALES  | Victory Road 2F            | Grass     | 46     | 4.3%   |                                                               |
 | JIGGLYPUFF | Route 5                    | Grass     | 10-14  | 9.4%   |                                                               |
 | JIGGLYPUFF | Route 6                    | Grass     | 10-14  | 9.4%   |                                                               |
 | JIGGLYPUFF | Route 8                    | Grass     | 24     | 5.1%   |                                                               |
@@ -224,14 +228,15 @@ they're listed rather than quietly dropped.
 | ZUBAT      | Mt. Moon B1F               | Grass     | 8      | 19.9%  |                                                               |
 | ZUBAT      | Mt. Moon B2F               | Grass     | 10-11  | 29.7%  |                                                               |
 | ZUBAT      | Rock Tunnel 1F             | Grass     | 19     | 19.9%  |                                                               |
-| ZUBAT      | Rock Tunnel B1F            | Grass     | 20-22  | 39.5%  |                                                               |
+| ZUBAT      | Rock Tunnel B1F            | Grass     | 20-21  | 35.2%  |                                                               |
 | ZUBAT      | Seafoam Islands 1F         | Grass     | 22     | 9.8%   |                                                               |
 | GOLBAT     | Seafoam Islands B1F        | Grass     | 28     | 5.1%   |                                                               |
 | GOLBAT     | Seafoam Islands B2F        | Grass     | 30     | 9.8%   |                                                               |
 | GOLBAT     | Seafoam Islands B3F        | Grass     | 32     | 9.8%   |                                                               |
 | GOLBAT     | Seafoam Islands B4F        | Grass     | 34     | 9.8%   |                                                               |
 | GOLBAT     | Seafoam Islands 1F         | Grass     | 29     | 4.3%   |                                                               |
-| GOLBAT     | Victory Road 3F            | Grass     | 41-50  | 14.8%  |                                                               |
+| GOLBAT     | Victory Road 1F            | Grass     | 38-40  | 35.2%  |                                                               |
+| GOLBAT     | Victory Road 3F            | Grass     | 46     | 9.8%   |                                                               |
 | GOLBAT     | Cerulean Cave 1F           | Grass     | 58     | 19.9%  |                                                               |
 | ODDISH     | Mt. Moon 1F                | Grass     | 7      | 19.9%  |                                                               |
 | ODDISH     | Mt. Moon B1F               | Grass     | 7      | 19.9%  |                                                               |
@@ -244,16 +249,19 @@ they're listed rather than quietly dropped.
 | PARAS      | Mt. Moon 1F                | Grass     | 8-10   | 14.8%  |                                                               |
 | PARAS      | Mt. Moon B1F               | Grass     | 9-11   | 14.8%  |                                                               |
 | PARAS      | Mt. Moon B2F               | Grass     | 13     | 5.1%   |                                                               |
+| PARAS      | Rock Tunnel B1F            | Grass     | 20     | 5.1%   |                                                               |
 | PARASECT   | Route 18 Gate 2F           | Trade     | yours  | —      | trade a TANGELA; arrives as SPIKE                             |
 | PARASECT   | Cerulean Cave 2F           | Grass     | 60     | 5.1%   |                                                               |
 | VENONAT    | Route 8                    | Grass     | 15     | 9.8%   |                                                               |
 | VENONAT    | Route 15                   | Grass     | 24     | 15.2%  |                                                               |
 | VENOMOTH   | Route 8                    | Grass     | 20     | 4.3%   |                                                               |
 | VENOMOTH   | Route 15                   | Grass     | 30     | 1.2%   |                                                               |
+| VENOMOTH   | Victory Road 3F            | Grass     | 47     | 9.8%   |                                                               |
 | VENOMOTH   | Cerulean Cave 1F           | Grass     | 61     | 5.1%   |                                                               |
 | DIGLETT    | Diglett's Cave             | Grass     | 15-21  | 89.5%  |                                                               |
+| DIGLETT    | Rock Tunnel B1F            | Grass     | 19     | 5.1%   |                                                               |
 | DUGTRIO    | Diglett's Cave             | Grass     | 29-31  | 9.4%   |                                                               |
-| DUGTRIO    | Victory Road 2F            | Grass     | 40-43  | 10.5%  |                                                               |
+| DUGTRIO    | Victory Road 2F            | Grass     | 42     | 19.9%  |                                                               |
 | DUGTRIO    | Route 11 Gate 2F           | Trade     | yours  | —      | trade a LICKITUNG; arrives as GURIO                           |
 | MEOWTH     | Route 8                    | Grass     | 19-22  | 14.8%  |                                                               |
 | MEOWTH     | Route 14                   | Grass     | 25     | 19.9%  |                                                               |
@@ -285,10 +293,11 @@ they're listed rather than quietly dropped.
 | MANKEY     | Route 2                    | Grass     | 5-7    | 10.9%  |                                                               |
 | MANKEY     | Route 3                    | Grass     | 9      | 15.2%  |                                                               |
 | MANKEY     | Route 4                    | Grass     | 9      | 15.2%  |                                                               |
+| MANKEY     | Rock Tunnel 1F             | Grass     | 20     | 9.8%   |                                                               |
 | MANKEY     | Route 16                   | Grass     | 23-25  | 5.5%   |                                                               |
 | MANKEY     | Route 22                   | Grass     | 3      | 15.2%  |                                                               |
 | PRIMEAPE   | Route 23                   | Grass     | 41     | 19.9%  |                                                               |
-| PRIMEAPE   | Victory Road 1F            | Grass     | 35-49  | 20.3%  |                                                               |
+| PRIMEAPE   | Victory Road 1F            | Grass     | 39     | 9.8%   |                                                               |
 | GROWLITHE  | Route 7                    | Grass     | 19-22  | 29.7%  |                                                               |
 | GROWLITHE  | Pokémon Mansion 1F         | Grass     | 33-38  | 25.0%  |                                                               |
 | GROWLITHE  | Pokémon Mansion 2F         | Grass     | 33-35  | 39.8%  |                                                               |
@@ -316,7 +325,7 @@ they're listed rather than quietly dropped.
 | POLIWHIRL  | Route 22                   | Super Rod | 15     | 10.5%  | slot 4                                                        |
 | POLIWHIRL  | Route 23                   | Water     | 37-39  | 14.8%  |                                                               |
 | POLIWHIRL  | Route 23                   | Super Rod | 30-40  | 30.5%  | slot 3, 4                                                     |
-| POLIWRATH  | Victory Road 2F            | Grass     | 35-50  | 25.0%  |                                                               |
+| POLIWRATH  | Victory Road 2F            | Grass     | 44     | 9.8%   |                                                               |
 | ABRA       | Route 24                   | Grass     | 10-12  | 25.0%  |                                                               |
 | ABRA       | Route 25                   | Grass     | 8-12   | 44.9%  |                                                               |
 | ABRA       | Route 5                    | Grass     | 10-12  | 25.0%  |                                                               |
@@ -329,13 +338,13 @@ they're listed rather than quietly dropped.
 | KADABRA    | Route 7                    | Grass     | 24     | 1.2%   |                                                               |
 | KADABRA    | Cerulean Cave 1F           | Grass     | 60     | 9.8%   |                                                               |
 | ALAKAZAM   | --                         | --        | --     | --     | --                                                            |
-| MACHOP     | Rock Tunnel 1F             | Grass     | 19-20  | 14.8%  |                                                               |
-| MACHOP     | Rock Tunnel B1F            | Grass     | 18-20  | 20.3%  |                                                               |
+| MACHOP     | Rock Tunnel 1F             | Grass     | 20     | 19.9%  |                                                               |
+| MACHOP     | Rock Tunnel B1F            | Grass     | 20     | 9.8%   |                                                               |
 | MACHOP     | Route 10                   | Grass     | 16     | 4.3%   |                                                               |
-| MACHOKE    | Victory Road 1F            | Grass     | 35-36  | 39.8%  |                                                               |
-| MACHOKE    | Victory Road 2F            | Grass     | 35-36  | 39.8%  |                                                               |
+| MACHOKE    | Victory Road 2F            | Grass     | 42     | 19.9%  |                                                               |
 | MACHOKE    | Underground Path Route 5   | Trade     | yours  | —      | trade a CUBONE; arrives as RICKY                              |
-| MACHAMP    | Victory Road 3F            | Grass     | 40-50  | 24.6%  |                                                               |
+| MACHAMP    | Victory Road 1F            | Grass     | 45     | 1.2%   |                                                               |
+| MACHAMP    | Victory Road 3F            | Grass     | 46-52  | 21.1%  |                                                               |
 | BELLSPROUT | Route 25                   | Grass     | 9-14   | 44.5%  |                                                               |
 | BELLSPROUT | Route 11                   | Grass     | 18     | 5.1%   |                                                               |
 | BELLSPROUT | Route 15                   | Grass     | 28     | 9.8%   |                                                               |
@@ -370,16 +379,18 @@ they're listed rather than quietly dropped.
 | GEODUDE    | Mt. Moon B1F               | Grass     | 7-10   | 30.1%  |                                                               |
 | GEODUDE    | Mt. Moon B2F               | Grass     | 11-13  | 35.2%  |                                                               |
 | GEODUDE    | Rock Tunnel 1F             | Grass     | 19-21  | 25.0%  |                                                               |
-| GEODUDE    | Rock Tunnel B1F            | Grass     | 17-21  | 29.7%  |                                                               |
-| GRAVELER   | Victory Road 1F            | Grass     | 45     | 19.5%  |                                                               |
-| GOLEM      | Victory Road 2F            | Grass     | 41     | 5.1%   |                                                               |
-| GOLEM      | Victory Road 3F            | Grass     | 45     | 39.8%  |                                                               |
+| GEODUDE    | Rock Tunnel B1F            | Grass     | 19-21  | 29.7%  |                                                               |
+| GRAVELER   | Rock Tunnel B1F            | Grass     | 24     | 1.2%   |                                                               |
+| GRAVELER   | Victory Road 1F            | Grass     | 39     | 19.9%  |                                                               |
+| GOLEM      | Victory Road 2F            | Grass     | 48     | 1.2%   |                                                               |
+| GOLEM      | Victory Road 3F            | Grass     | 46     | 19.9%  |                                                               |
 | PONYTA     | Route 9                    | Grass     | 16-19  | 25.0%  |                                                               |
 | PONYTA     | Route 11                   | Grass     | 17     | 1.2%   |                                                               |
 | PONYTA     | Route 17                   | Grass     | 26-28  | 55.1%  |                                                               |
 | PONYTA     | Route 18                   | Grass     | 25-27  | 49.6%  |                                                               |
 | PONYTA     | Safari Zone West           | Grass     | 21-26  | 14.8%  |                                                               |
 | RAPIDASH   | Safari Zone West           | Grass     | 33     | 1.2%   |                                                               |
+| RAPIDASH   | Victory Road 2F            | Grass     | 45     | 5.1%   |                                                               |
 | SLOWPOKE   | Route 12                   | Water     | 15     | 94.5%  |                                                               |
 | SLOWPOKE   | Route 13                   | Water     | 15     | 94.5%  |                                                               |
 | SLOWPOKE   | Seafoam Islands B1F        | Grass     | 29     | 9.8%   |                                                               |
@@ -392,8 +403,8 @@ they're listed rather than quietly dropped.
 | MAGNEMITE  | Route 10                   | Grass     | 16-22  | 50.0%  |                                                               |
 | MAGNEMITE  | Pokémon Mansion 1F         | Grass     | 31     | 9.8%   |                                                               |
 | MAGNEMITE  | Pokémon Mansion B1F        | Grass     | 35     | 19.9%  |                                                               |
-| MAGNEMITE  | Power Plant                | Grass     | 30     | 19.9%  |                                                               |
-| MAGNETON   | Power Plant                | Grass     | 30     | 9.8%   |                                                               |
+| MAGNEMITE  | Power Plant                | Grass     | 30     | 29.7%  |                                                               |
+| MAGNETON   | Power Plant                | Grass     | 32     | 5.1%   |                                                               |
 | MAGNETON   | Cerulean Cave B1F          | Grass     | 82     | 19.9%  | FLOATING                                                      |
 | FARFETCHD  | Route 12                   | Grass     | 28-29  | 14.1%  |                                                               |
 | DODUO      | Route 16                   | Grass     | 21-22  | 10.2%  |                                                               |
@@ -440,6 +451,7 @@ they're listed rather than quietly dropped.
 | CLOYSTER   | Seafoam Islands B4F        | Water     | 38     | 5.1%   |                                                               |
 | CLOYSTER   | Cerulean Cave B1F          | Water     | 82     | 9.8%   |                                                               |
 | CLOYSTER   | Cerulean Cave 1F           | Water     | 62     | 4.3%   |                                                               |
+| GASTLY     | Rock Tunnel B1F            | Grass     | 20     | 9.8%   |                                                               |
 | GASTLY     | Pokémon Tower 3F           | Grass     | 18-24  | 89.5%  |                                                               |
 | GASTLY     | Pokémon Tower 4F           | Grass     | 22-28  | 75.8%  |                                                               |
 | GASTLY     | Pokémon Tower 5F           | Grass     | 23-26  | 74.6%  |                                                               |
@@ -454,10 +466,11 @@ they're listed rather than quietly dropped.
 | GENGAR     | Pokémon Tower 7F           | Grass     | 29-30  | 5.5%   |                                                               |
 | GENGAR     | Cerulean Cave 2F           | Grass     | 60     | 9.8%   |                                                               |
 | ONIX       | Diglett's Cave             | Grass     | 31     | 1.2%   |                                                               |
-| ONIX       | Rock Tunnel 1F             | Grass     | 20     | 9.8%   |                                                               |
-| ONIX       | Rock Tunnel B1F            | Grass     | 14-22  | 10.5%  |                                                               |
+| ONIX       | Rock Tunnel 1F             | Grass     | 20     | 5.1%   |                                                               |
+| ONIX       | Rock Tunnel B1F            | Grass     | 22     | 4.3%   |                                                               |
 | ONIX       | Route 23                   | Grass     | 60     | 4.3%   |                                                               |
-| ONIX       | Victory Road 1F            | Grass     | 41-43  | 10.5%  |                                                               |
+| ONIX       | Victory Road 1F            | Grass     | 40     | 9.8%   |                                                               |
+| ONIX       | Victory Road 2F            | Grass     | 44     | 15.2%  |                                                               |
 | DROWZEE    | Route 7                    | Grass     | 24-26  | 9.4%   |                                                               |
 | DROWZEE    | Route 11                   | Grass     | 15-17  | 19.5%  |                                                               |
 | HYPNO      | Cerulean Cave 1F           | Grass     | 60     | 19.9%  |                                                               |
@@ -488,7 +501,7 @@ they're listed rather than quietly dropped.
 | EXEGGCUTE  | Safari Zone North          | Grass     | 20     | 15.2%  |                                                               |
 | EXEGGCUTE  | Safari Zone West           | Grass     | 22     | 15.2%  |                                                               |
 | EXEGGUTOR  | Route 12                   | Grass     | 31     | 1.2%   |                                                               |
-| CUBONE     | Rock Tunnel 1F             | Grass     | 20     | 19.9%  |                                                               |
+| CUBONE     | Rock Tunnel 1F             | Grass     | 20     | 9.8%   |                                                               |
 | CUBONE     | Route 10                   | Grass     | 20     | 5.1%   |                                                               |
 | CUBONE     | Pokémon Tower 3F           | Grass     | 20-22  | 9.4%   |                                                               |
 | CUBONE     | Pokémon Tower 4F           | Grass     | 20-22  | 9.4%   |                                                               |
@@ -501,12 +514,14 @@ they're listed rather than quietly dropped.
 | MAROWAK    | Pokémon Tower 7F           | Grass     | 22-28  | 14.8%  |                                                               |
 | MAROWAK    | Safari Zone East           | Grass     | 24     | 5.1%   |                                                               |
 | MAROWAK    | Safari Zone West           | Grass     | 24     | 5.1%   |                                                               |
-| MAROWAK    | Victory Road 3F            | Grass     | 42-50  | 20.7%  |                                                               |
+| MAROWAK    | Victory Road 3F            | Grass     | 47     | 15.2%  |                                                               |
 | MAROWAK    | Cerulean Cave 2F           | Grass     | 60     | 19.9%  |                                                               |
 | HITMONLEE  | Rock Tunnel 1F             | Grass     | 20     | 5.1%   |                                                               |
 | HITMONLEE  | Fighting Dojo              | Gift      | 30     | —      | one of the two, your pick                                     |
+| HITMONLEE  | Victory Road 1F            | Grass     | 42     | 5.1%   |                                                               |
 | HITMONCHAN | Rock Tunnel 1F             | Grass     | 20-22  | 5.5%   |                                                               |
 | HITMONCHAN | Fighting Dojo              | Gift      | 30     | —      | one of the two, your pick                                     |
+| HITMONCHAN | Victory Road 1F            | Grass     | 42     | 4.3%   |                                                               |
 | LICKITUNG  | Route 24                   | Grass     | 12     | 1.2%   |                                                               |
 | LICKITUNG  | Cerulean Cave 2F           | Grass     | 62     | 4.3%   |                                                               |
 | KOFFING    | Pokémon Mansion 1F         | Grass     | 34     | 15.2%  |                                                               |
@@ -521,7 +536,8 @@ they're listed rather than quietly dropped.
 | RHYHORN    | Safari Zone North          | Grass     | 25     | 9.8%   |                                                               |
 | RHYDON     | Cinnabar Lab Trade Room    | Trade     | yours  | —      | trade a GOLDUCK; arrives as BUFFY                             |
 | RHYDON     | Route 23                   | Grass     | 60     | 1.2%   |                                                               |
-| RHYDON     | Victory Road 2F            | Grass     | 45     | 9.8%   |                                                               |
+| RHYDON     | Victory Road 2F            | Grass     | 44     | 9.8%   |                                                               |
+| RHYDON     | Victory Road 3F            | Grass     | 50     | 5.1%   |                                                               |
 | RHYDON     | Cerulean Cave 2F           | Grass     | 62     | 19.9%  |                                                               |
 | CHANSEY    | Safari Zone East           | Grass     | 21     | 4.3%   |                                                               |
 | CHANSEY    | Route 23                   | Grass     | 40-45  | 25.0%  |                                                               |
@@ -529,6 +545,7 @@ they're listed rather than quietly dropped.
 | TANGELA    | Route 13                   | Grass     | 36-38  | 5.5%   |                                                               |
 | TANGELA    | Route 21                   | Grass     | 21-30  | 55.1%  |                                                               |
 | KANGASKHAN | Safari Zone North          | Grass     | 28-33  | 14.8%  |                                                               |
+| KANGASKHAN | Victory Road 3F            | Grass     | 50     | 4.3%   |                                                               |
 | HORSEA     | Route 25                   | Water     | 20-30  | 44.9%  |                                                               |
 | HORSEA     | Vermilion City             | Super Rod | 5      | 10.5%  | slot 4                                                        |
 | HORSEA     | Route 10                   | Super Rod | 10     | 19.9%  | slot 3                                                        |
@@ -604,11 +621,12 @@ they're listed rather than quietly dropped.
 | JYNX       | Seafoam Islands B3F        | Grass     | 33     | 19.9%  |                                                               |
 | JYNX       | Seafoam Islands B4F        | Grass     | 35     | 9.8%   |                                                               |
 | JYNX       | Cerulean Cave 1F           | Grass     | 60     | 9.8%   |                                                               |
-| ELECTABUZZ | Power Plant                | Grass     | 32-35  | 10.2%  |                                                               |
+| ELECTABUZZ | Power Plant                | Grass     | 35     | 5.1%   |                                                               |
 | ELECTABUZZ | Cerulean Cave 1F           | Grass     | 65     | 1.2%   |                                                               |
 | MAGMAR     | Pokémon Mansion 1F         | Grass     | 33     | 4.3%   |                                                               |
 | MAGMAR     | Pokémon Mansion 2F         | Grass     | 36     | 4.3%   |                                                               |
 | MAGMAR     | Pokémon Mansion 3F         | Grass     | 38     | 5.1%   |                                                               |
+| MAGMAR     | Victory Road 2F            | Grass     | 43     | 9.8%   |                                                               |
 | PINSIR     | Route 25                   | Grass     | 7-8    | 5.5%   |                                                               |
 | PINSIR     | Route 13                   | Grass     | 32     | 5.1%   |                                                               |
 | PINSIR     | Safari Zone North          | Grass     | 35     | 1.2%   |                                                               |
