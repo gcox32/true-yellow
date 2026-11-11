@@ -89,6 +89,7 @@ SilphCo5F_TextPointers:
 	dw_const SilphCo5FPokemonReport1Text, TEXT_SILPHCO5F_POKEMON_REPORT1
 	dw_const SilphCo5FPokemonReport2Text, TEXT_SILPHCO5F_POKEMON_REPORT2
 	dw_const SilphCo5FPokemonReport3Text, TEXT_SILPHCO5F_POKEMON_REPORT3
+	dw_const SilphCo5FArmorMachineText,  TEXT_SILPHCO5F_ARMOR_MACHINE
 
 SilphCo5TrainerHeaders:
 	def_trainers 2
@@ -199,4 +200,54 @@ SilphCo5FPokemonReport2Text:
 
 SilphCo5FPokemonReport3Text:
 	text_far _SilphCo5FPokemonReport3Text
+	text_end
+
+SilphCo5FArmorMachineText:
+	text_asm
+	ld hl, SilphCo5FArmorMachineHumText
+	call PrintText
+	callfar SpeciesChangePartyMenu
+	jr c, .done
+	call GetPartyMonName2
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMon1Species
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+	ld a, [hl]
+	cp MEWTWO
+	jr z, .toArmored
+	cp ARMORED_MEWTWO
+	jr z, .toNormal
+	ld hl, SilphCo5FArmorMachineWrongMonText
+	jr .print
+.toArmored
+	ld a, ARMORED_MEWTWO
+	jr .transform
+.toNormal
+	ld a, MEWTWO
+.transform
+	ld [wCurPartySpecies], a
+	callfar ChangePartyPokemonSpecies
+	ld a, SFX_BALL_POOF
+	call PlaySound
+	call WaitForSoundToFinish
+	ld a, [wCurPartySpecies]
+	call PlayCry
+	call WaitForSoundToFinish
+	ld hl, SilphCo5FArmorMachineSuccessText
+.print
+	call PrintText
+.done
+	jp TextScriptEnd
+
+SilphCo5FArmorMachineHumText:
+	text_far _SilphCo5FArmorMachineHumText
+	text_end
+
+SilphCo5FArmorMachineWrongMonText:
+	text_far _SilphCo5FArmorMachineWrongMonText
+	text_end
+
+SilphCo5FArmorMachineSuccessText:
+	text_far _SilphCo5FArmorMachineSuccessText
 	text_end

@@ -105,3 +105,37 @@ _SilphCo5FPokemonReport3Text::
 	line "only when traded"
 	cont "by link-cable."
 	done
+
+_SilphCo5FArmorMachineHumText::
+	text "A row of humming"
+	line "machines. A label"
+	cont "reads:"
+	cont "PROJECT ARMOR."
+
+	para "The restraints are"
+	line "sized for one"
+	cont "#MON only."
+
+	para "Place a #MON in"
+	line "the machine?"
+	prompt
+
+_SilphCo5FArmorMachineWrongMonText::
+	text "The machine didn't"
+	line "respond to this"
+	cont "#MON."
+	done
+
+_SilphCo5FArmorMachineSuccessText::
+	text "Restraints clamped"
+	line "shut around"
+	cont "@"
+	text_ram wNameBuffer
+	text "!"
+
+	para "When they opened,"
+	line "@"
+	text_ram wNameBuffer
+	text " stood"
+	cont "transformed."
+	done

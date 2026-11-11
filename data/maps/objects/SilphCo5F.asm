@@ -24,6 +24,12 @@ SilphCo5F_Object:
 	warp_event  3, 15, SILPH_CO_3F, 6
 
 	def_bg_events
+	; PROJECT ARMOR: Mewtwo <-> Armored Mewtwo, on the four machines in the
+	; northwest room (block $61 x2). Faced from below.
+	bg_event  2,  1, TEXT_SILPHCO5F_ARMOR_MACHINE
+	bg_event  3,  1, TEXT_SILPHCO5F_ARMOR_MACHINE
+	bg_event  4,  1, TEXT_SILPHCO5F_ARMOR_MACHINE
+	bg_event  5,  1, TEXT_SILPHCO5F_ARMOR_MACHINE
 
 	def_object_events
 	object_event 13,  9, SPRITE_SILPH_WORKER_M, STAY, NONE, TEXT_SILPHCO5F_SILPH_WORKER_M
