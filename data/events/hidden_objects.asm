@@ -211,6 +211,7 @@ RockTunnelPokecenterHiddenObjects:
 PowerPlantHiddenObjects:
 	hidden_object 17, 16, MAX_ELIXER, HiddenItems
 	hidden_object 12,  1, PP_UP, HiddenItems
+	hidden_object 20, 32, TM_REFLECT, HiddenItems ; was a POKE_BALL object
 	db -1 ; end
 
 Route11HiddenObjects:

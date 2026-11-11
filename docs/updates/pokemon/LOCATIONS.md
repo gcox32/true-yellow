@@ -439,7 +439,7 @@ they're listed rather than quietly dropped.
 | KINGLER    | Cerulean Cave 1F           | Grass     | 55-65  | 10.2%  |                                                               |
 | VOLTORB    | Fuchsia Gym                | Grass     | 20-41  | 100.0% |                                                               |
 | VOLTORB    | Power Plant                | Grass     | 33     | 15.2%  |                                                               |
-| VOLTORB    | Power Plant                | Static    | 40     | —      | 6 of them, one per save                                       |
+| VOLTORB    | Power Plant                | Static    | 40     | —      | 5 of them, one per save                                       |
 | ELECTRODE  | Power Plant                | Grass     | 35     | 9.8%   |                                                               |
 | ELECTRODE  | Power Plant                | Static    | 43     | —      | 2 of them, one per save                                       |
 | EXEGGCUTE  | Route 12                   | Grass     | 25-28  | 35.2%  |                                                               |

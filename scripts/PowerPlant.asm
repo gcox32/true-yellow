@@ -22,13 +22,11 @@ PowerPlant_TextPointers:
 	dw_const PowerPlantVoltorb4Text,   TEXT_POWERPLANT_VOLTORB4
 	dw_const PowerPlantVoltorb5Text,   TEXT_POWERPLANT_VOLTORB5
 	dw_const PowerPlantElectrode2Text, TEXT_POWERPLANT_ELECTRODE2
-	dw_const PowerPlantVoltorb6Text,   TEXT_POWERPLANT_VOLTORB6
 	dw_const PowerPlantZapdosText,     TEXT_POWERPLANT_ZAPDOS
 	dw_const PickUpItemText,           TEXT_POWERPLANT_CARBOS
 	dw_const PickUpItemText,           TEXT_POWERPLANT_HP_UP
 	dw_const PickUpItemText,           TEXT_POWERPLANT_RARE_CANDY
 	dw_const PickUpItemText,           TEXT_POWERPLANT_TM_THUNDER
-	dw_const PickUpItemText,           TEXT_POWERPLANT_TM_REFLECT
 	dw_const PowerPlantElectromagnetText, TEXT_POWERPLANT_ELECTROMAGNET
 
 PowerPlantTrainerHeaders:
@@ -47,8 +45,9 @@ Voltorb5TrainerHeader:
 	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_5, 0, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText
 Voltorb6TrainerHeader:
 	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_6, 0, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText
-Voltorb7TrainerHeader:
-	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_7, 0, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText
+; VOLTORB_6 was removed (object budget); Zapdos stays object 9 so it keeps
+; EVENT_BEAT_ZAPDOS. EVENT_BEAT_POWER_PLANT_VOLTORB_7 is now unused.
+	def_trainers 9
 ZapdosTrainerHeader:
 	trainer EVENT_BEAT_ZAPDOS, 0, PowerPlantZapdosBattleText, PowerPlantZapdosBattleText, PowerPlantZapdosBattleText
 	db -1 ; end
@@ -94,11 +93,6 @@ PowerPlantElectrode2Text:
 	ld hl, Voltorb6TrainerHeader
 	jr PowerPlantInitBattleScript
 
-PowerPlantVoltorb6Text:
-	text_asm
-	ld hl, Voltorb7TrainerHeader
-	jr PowerPlantInitBattleScript
-
 PowerPlantZapdosText:
 	text_asm
 	ld hl, ZapdosTrainerHeader
@@ -120,8 +114,6 @@ PowerPlantElectromagnetText:
 	text_asm
 	CheckEvent EVENT_BEAT_ZAPDOS
 	jr z, .noCharge
-	CheckEvent EVENT_SUPERCHARGED_MAGNETON
-	jr nz, .dormant
 	ld hl, PowerPlantMagnetHumText
 	call PrintText
 	callfar SpeciesChangePartyMenu
@@ -156,7 +148,6 @@ PowerPlantElectromagnetText:
 	ld a, FLOATING_MAGNETON
 	call PlayCry
 	call WaitForSoundToFinish
-	SetEvent EVENT_SUPERCHARGED_MAGNETON
 	ld hl, PowerPlantMagnetSuccessText
 .print
 	call PrintText
@@ -164,10 +155,6 @@ PowerPlantElectromagnetText:
 	jp TextScriptEnd
 .noCharge
 	ld hl, PowerPlantMagnetNoChargeText
-	call PrintText
-	jp TextScriptEnd
-.dormant
-	ld hl, PowerPlantMagnetDormantText
 	call PrintText
 	jp TextScriptEnd
 
@@ -193,8 +180,4 @@ PowerPlantMagnetSuccessText:
 
 PowerPlantMagnetNoChargeText:
 	text_far _PowerPlantMagnetNoChargeText
-	text_end
-
-PowerPlantMagnetDormantText:
-	text_far _PowerPlantMagnetDormantText
 	text_end

@@ -60,5 +60,6 @@ HiddenItemCoords:
 	hidden_item CELADON_CITY,                  48,  15
 	hidden_item SAFARI_ZONE_GATE,              10,   1 ; inaccessible
 	hidden_item POKEMON_MANSION_1F,             8,  16
+	hidden_item POWER_PLANT,                   20,  32 ; appended, keeps earlier flag indices stable
 	assert_max_table_length MAX_HIDDEN_ITEMS
 	db -1 ; end

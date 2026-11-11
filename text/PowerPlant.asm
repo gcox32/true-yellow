@@ -7,13 +7,15 @@ _PowerPlantZapdosBattleText::
 	text_end
 
 _PowerPlantMagnetHumText::
-	text "A colossal electro-"
-	line "magnet fills the"
-	cont "room. It hums with"
-	cont "stored charge."
+	text "A colossal"
+	line "electromagnet"
+	cont "fills the room. It"
+	cont "hums with stored"
+	cont "charge."
 
-	para "Expose a #MON to"
-	line "the magnetic core?"
+	para "Expose a #MON"
+	line "to the magnetic"
+	cont "core?"
 	prompt
 
 _PowerPlantMagnetWrongMonText::
@@ -43,7 +45,7 @@ _PowerPlantMagnetSuccessText::
 
 	para "It rose into the"
 	line "air on a cushion"
-	cont "of magnetism--it"
+	cont "of magnetism. It"
 	cont "learned to float!"
 	done
 
@@ -53,11 +55,4 @@ _PowerPlantMagnetNoChargeText::
 	cont "take an immense"
 	cont "electric force to"
 	cont "wake it."
-	done
-
-_PowerPlantMagnetDormantText::
-	text "The electromagnet"
-	line "has spent its"
-	cont "charge. It sits"
-	cont "silent now."
 	done
