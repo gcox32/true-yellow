@@ -1,26 +1,26 @@
 SafariZoneNorthWildMons:
 	def_grass_wildmons 30 ; encounter rate
-	db 36, NIDORAN_M
-	db 14, NIDORAN_F
-	db 20, EXEGGCUTE
 	db 25, RHYHORN
-	db 23, NIDORINA
-	db 28, KANGASKHAN
-	db 16, CUBONE
-	db 33, KANGASKHAN
-	db 25, SCYTHER
-	db 35, PINSIR
+	db 24, NIDORAN_M
+	db 25, EXEGGCUTE
+	db 27, KANGASKHAN
+	db 26, NIDORINO
+	db 27, PINSIR
+	db 30, KANGASKHAN
+	db 29, VENOMOTH
+	db 27, TAUROS
+	db 28, SCYTHER
 	end_grass_wildmons
 
 	def_water_wildmons 7 ; encounter rate
-	db 32, GOLDEEN
-	db 30, POLIWAG
-	db 28, POLIWHIRL
-	db 30, SEAKING
-	db 31, PSYDUCK
-	db 30, SEAKING
-	db 35, GOLDUCK
-	db 25, POLIWHIRL
+	db 27, PSYDUCK
+	db 27, SLOWPOKE
+	db 28, GOLDEEN
+	db 29, PSYDUCK
+	db 26, POLIWAG
+	db 30, SLOWPOKE
 	db 32, GOLDUCK
-	db 36, GOLDUCK
+	db 30, SEAKING
+	db 34, GOLDUCK
+	db 35, SLOWBRO
 	end_water_wildmons

@@ -184,24 +184,23 @@ they're listed rather than quietly dropped.
 | NIDORAN♀   | Route 2                    | Grass     | 4-6    | 14.8%  |                                                               |
 | NIDORAN♀   | Route 9                    | Grass     | 16-18  | 29.7%  |                                                               |
 | NIDORAN♀   | Route 10                   | Grass     | 17     | 9.8%   |                                                               |
-| NIDORAN♀   | Safari Zone East           | Grass     | 29     | 19.9%  |                                                               |
-| NIDORAN♀   | Safari Zone North          | Grass     | 14     | 19.9%  |                                                               |
-| NIDORAN♀   | Safari Zone West           | Grass     | 21     | 19.9%  |                                                               |
+| NIDORAN♀   | Safari Zone East           | Grass     | 24     | 19.9%  |                                                               |
+| NIDORAN♀   | Safari Zone West           | Grass     | 24     | 9.8%   |                                                               |
+| NIDORAN♀   | Safari Zone Center         | Grass     | 23     | 15.2%  |                                                               |
 | NIDORAN♀   | Route 22                   | Grass     | 2-4    | 29.7%  |                                                               |
 | NIDORINA   | Route 9                    | Grass     | 18     | 5.1%   |                                                               |
-| NIDORINA   | Safari Zone East           | Grass     | 32     | 9.8%   |                                                               |
-| NIDORINA   | Safari Zone North          | Grass     | 23     | 9.8%   |                                                               |
+| NIDORINA   | Safari Zone East           | Grass     | 30     | 1.2%   |                                                               |
 | NIDORINA   | Route 23                   | Grass     | 43     | 9.8%   |                                                               |
 | NIDOQUEEN  | Victory Road 2F            | Grass     | 45     | 5.1%   |                                                               |
 | NIDORAN♂   | Route 2                    | Grass     | 4-6    | 14.8%  |                                                               |
 | NIDORAN♂   | Route 9                    | Grass     | 16-18  | 29.7%  |                                                               |
 | NIDORAN♂   | Route 10                   | Grass     | 17     | 9.8%   |                                                               |
-| NIDORAN♂   | Safari Zone East           | Grass     | 21     | 19.9%  |                                                               |
-| NIDORAN♂   | Safari Zone North          | Grass     | 36     | 19.9%  |                                                               |
-| NIDORAN♂   | Safari Zone West           | Grass     | 29     | 19.9%  |                                                               |
+| NIDORAN♂   | Safari Zone East           | Grass     | 25     | 9.8%   |                                                               |
+| NIDORAN♂   | Safari Zone North          | Grass     | 24     | 19.9%  |                                                               |
+| NIDORAN♂   | Safari Zone Center         | Grass     | 23     | 9.8%   |                                                               |
 | NIDORAN♂   | Route 22                   | Grass     | 2-4    | 29.7%  |                                                               |
 | NIDORINO   | Route 9                    | Grass     | 18     | 5.1%   |                                                               |
-| NIDORINO   | Safari Zone West           | Grass     | 32     | 9.8%   |                                                               |
+| NIDORINO   | Safari Zone North          | Grass     | 26     | 9.8%   |                                                               |
 | NIDORINO   | Route 23                   | Grass     | 44     | 9.8%   |                                                               |
 | NIDOKING   | Victory Road 1F            | Grass     | 42     | 5.1%   |                                                               |
 | NIDOKING   | Victory Road 3F            | Grass     | 47     | 9.8%   |                                                               |
@@ -251,12 +250,19 @@ they're listed rather than quietly dropped.
 | PARAS      | Mt. Moon B1F               | Grass     | 9-11   | 14.8%  |                                                               |
 | PARAS      | Mt. Moon B2F               | Grass     | 13     | 5.1%   |                                                               |
 | PARAS      | Rock Tunnel B1F            | Grass     | 20     | 9.8%   |                                                               |
+| PARAS      | Safari Zone East           | Grass     | 23     | 19.9%  |                                                               |
+| PARASECT   | Safari Zone East           | Grass     | 28     | 9.8%   |                                                               |
+| PARASECT   | Safari Zone Center         | Grass     | 30     | 4.3%   |                                                               |
 | PARASECT   | Route 18 Gate 2F           | Trade     | yours  | —      | trade a TANGELA; arrives as SPIKE                             |
 | PARASECT   | Cerulean Cave 2F           | Grass     | 60     | 5.1%   |                                                               |
 | VENONAT    | Route 8                    | Grass     | 15     | 9.8%   |                                                               |
 | VENONAT    | Route 15                   | Grass     | 24     | 15.2%  |                                                               |
+| VENONAT    | Safari Zone West           | Grass     | 23     | 15.2%  |                                                               |
+| VENONAT    | Safari Zone Center         | Grass     | 24     | 9.8%   |                                                               |
 | VENOMOTH   | Route 8                    | Grass     | 20     | 4.3%   |                                                               |
 | VENOMOTH   | Route 15                   | Grass     | 30     | 1.2%   |                                                               |
+| VENOMOTH   | Safari Zone North          | Grass     | 29     | 5.1%   |                                                               |
+| VENOMOTH   | Safari Zone West           | Grass     | 29     | 5.1%   |                                                               |
 | VENOMOTH   | Victory Road 3F            | Grass     | 47     | 9.8%   |                                                               |
 | VENOMOTH   | Cerulean Cave 1F           | Grass     | 61     | 5.1%   |                                                               |
 | DIGLETT    | Diglett's Cave             | Grass     | 15-21  | 89.5%  |                                                               |
@@ -271,10 +277,10 @@ they're listed rather than quietly dropped.
 | PERSIAN    | Route 15                   | Grass     | 27     | 4.3%   |                                                               |
 | PSYDUCK    | Route 24                   | Water     | 31     | 9.8%   |                                                               |
 | PSYDUCK    | Route 6                    | Water     | 15     | 94.5%  |                                                               |
-| PSYDUCK    | Safari Zone East           | Water     | 31     | 9.8%   |                                                               |
-| PSYDUCK    | Safari Zone North          | Water     | 31     | 9.8%   |                                                               |
-| PSYDUCK    | Safari Zone West           | Water     | 31     | 9.8%   |                                                               |
-| PSYDUCK    | Safari Zone Center         | Water     | 31     | 9.8%   |                                                               |
+| PSYDUCK    | Safari Zone East           | Water     | 28     | 9.8%   |                                                               |
+| PSYDUCK    | Safari Zone North          | Water     | 27-29  | 29.7%  |                                                               |
+| PSYDUCK    | Safari Zone West           | Water     | 27-29  | 29.7%  |                                                               |
+| PSYDUCK    | Safari Zone Center         | Water     | 28     | 9.8%   |                                                               |
 | PSYDUCK    | Seafoam Islands B1F        | Grass     | 28     | 9.8%   |                                                               |
 | PSYDUCK    | Seafoam Islands B2F        | Grass     | 31     | 9.8%   |                                                               |
 | PSYDUCK    | Seafoam Islands 1F         | Grass     | 26     | 19.9%  |                                                               |
@@ -282,10 +288,10 @@ they're listed rather than quietly dropped.
 | PSYDUCK    | Route 22                   | Water     | 31     | 9.8%   |                                                               |
 | GOLDUCK    | Route 24                   | Water     | 32-36  | 10.5%  |                                                               |
 | GOLDUCK    | Route 6                    | Water     | 15-20  | 5.5%   |                                                               |
-| GOLDUCK    | Safari Zone East           | Water     | 32-36  | 10.5%  |                                                               |
-| GOLDUCK    | Safari Zone North          | Water     | 32-36  | 10.5%  |                                                               |
-| GOLDUCK    | Safari Zone West           | Water     | 32-36  | 10.5%  |                                                               |
-| GOLDUCK    | Safari Zone Center         | Water     | 32-36  | 10.5%  |                                                               |
+| GOLDUCK    | Safari Zone East           | Water     | 32     | 4.3%   |                                                               |
+| GOLDUCK    | Safari Zone North          | Water     | 32-34  | 9.4%   |                                                               |
+| GOLDUCK    | Safari Zone West           | Water     | 32-35  | 6.2%   |                                                               |
+| GOLDUCK    | Safari Zone Center         | Water     | 32     | 4.3%   |                                                               |
 | GOLDUCK    | Seafoam Islands B2F        | Grass     | 36     | 5.1%   |                                                               |
 | GOLDUCK    | Seafoam Islands B3F        | Grass     | 36     | 5.1%   |                                                               |
 | GOLDUCK    | Seafoam Islands B4F        | Grass     | 36     | 9.8%   |                                                               |
@@ -309,23 +315,22 @@ they're listed rather than quietly dropped.
 | POLIWAG    | any water                  | Good Rod  | 10     | 50.0%  | one of the Good Rod's 2 mons, wherever you cast it            |
 | POLIWAG    | Viridian City              | Super Rod | 5-15   | 100.0% | slot 1, 2, 3, 4                                               |
 | POLIWAG    | Route 24                   | Water     | 30     | 19.9%  |                                                               |
-| POLIWAG    | Safari Zone East           | Water     | 30     | 19.9%  |                                                               |
-| POLIWAG    | Safari Zone North          | Water     | 30     | 19.9%  |                                                               |
-| POLIWAG    | Safari Zone West           | Water     | 30     | 19.9%  |                                                               |
-| POLIWAG    | Safari Zone Center         | Water     | 30     | 19.9%  |                                                               |
+| POLIWAG    | Safari Zone East           | Water     | 26-28  | 35.2%  |                                                               |
+| POLIWAG    | Safari Zone North          | Water     | 26     | 9.8%   |                                                               |
+| POLIWAG    | Safari Zone West           | Water     | 26     | 9.8%   |                                                               |
+| POLIWAG    | Safari Zone Center         | Water     | 26     | 19.9%  |                                                               |
 | POLIWAG    | Route 22                   | Grass     | 3      | 5.1%   |                                                               |
 | POLIWAG    | Route 22                   | Water     | 30     | 19.9%  |                                                               |
 | POLIWAG    | Route 22                   | Super Rod | 5-15   | 89.5%  | slot 1, 2, 3                                                  |
 | POLIWAG    | Route 23                   | Super Rod | 25-30  | 69.5%  | slot 1, 2                                                     |
 | POLIWHIRL  | Route 24                   | Water     | 25-28  | 20.3%  |                                                               |
-| POLIWHIRL  | Safari Zone East           | Water     | 25-28  | 20.3%  |                                                               |
-| POLIWHIRL  | Safari Zone North          | Water     | 25-28  | 20.3%  |                                                               |
-| POLIWHIRL  | Safari Zone West           | Water     | 25-28  | 20.3%  |                                                               |
-| POLIWHIRL  | Safari Zone Center         | Water     | 25-28  | 20.3%  |                                                               |
+| POLIWHIRL  | Safari Zone East           | Water     | 28-29  | 19.5%  |                                                               |
+| POLIWHIRL  | Safari Zone Center         | Water     | 28     | 5.1%   |                                                               |
 | POLIWHIRL  | Route 22                   | Water     | 25-28  | 20.3%  |                                                               |
 | POLIWHIRL  | Route 22                   | Super Rod | 15     | 10.5%  | slot 4                                                        |
 | POLIWHIRL  | Route 23                   | Water     | 37-39  | 14.8%  |                                                               |
 | POLIWHIRL  | Route 23                   | Super Rod | 30-40  | 30.5%  | slot 3, 4                                                     |
+| POLIWRATH  | Safari Zone East           | Water     | 34     | 1.2%   |                                                               |
 | POLIWRATH  | Victory Road 2F            | Grass     | 44     | 9.8%   |                                                               |
 | ABRA       | Route 24                   | Grass     | 10-12  | 25.0%  |                                                               |
 | ABRA       | Route 25                   | Grass     | 8-12   | 44.9%  |                                                               |
@@ -389,15 +394,21 @@ they're listed rather than quietly dropped.
 | PONYTA     | Route 11                   | Grass     | 17     | 1.2%   |                                                               |
 | PONYTA     | Route 17                   | Grass     | 26-28  | 55.1%  |                                                               |
 | PONYTA     | Route 18                   | Grass     | 25-27  | 49.6%  |                                                               |
-| PONYTA     | Safari Zone West           | Grass     | 21-26  | 14.8%  |                                                               |
-| RAPIDASH   | Safari Zone West           | Grass     | 33     | 1.2%   |                                                               |
+| PONYTA     | Safari Zone West           | Grass     | 24-27  | 29.7%  |                                                               |
+| RAPIDASH   | Safari Zone West           | Grass     | 32     | 1.2%   |                                                               |
 | RAPIDASH   | Victory Road 2F            | Grass     | 45     | 5.1%   |                                                               |
 | SLOWPOKE   | Route 12                   | Water     | 15     | 94.5%  |                                                               |
 | SLOWPOKE   | Route 13                   | Water     | 15     | 94.5%  |                                                               |
+| SLOWPOKE   | Safari Zone East           | Water     | 30     | 5.1%   |                                                               |
+| SLOWPOKE   | Safari Zone North          | Water     | 27-30  | 29.7%  |                                                               |
+| SLOWPOKE   | Safari Zone West           | Water     | 27-29  | 25.0%  |                                                               |
+| SLOWPOKE   | Safari Zone Center         | Water     | 27     | 9.8%   |                                                               |
 | SLOWPOKE   | Seafoam Islands B1F        | Grass     | 29     | 9.8%   |                                                               |
 | SLOWPOKE   | Seafoam Islands 1F         | Grass     | 28     | 5.1%   |                                                               |
 | SLOWBRO    | Route 12                   | Water     | 15-20  | 5.5%   |                                                               |
 | SLOWBRO    | Route 13                   | Water     | 15-20  | 5.5%   |                                                               |
+| SLOWBRO    | Safari Zone North          | Water     | 35     | 1.2%   |                                                               |
+| SLOWBRO    | Safari Zone West           | Water     | 32     | 4.3%   |                                                               |
 | SLOWBRO    | Seafoam Islands B4F        | Grass     | 38     | 4.3%   |                                                               |
 | SLOWBRO    | Seafoam Islands 1F         | Grass     | 38     | 1.2%   |                                                               |
 | SLOWBRO    | Cerulean Cave 1F           | Water     | 59     | 9.8%   |                                                               |
@@ -410,7 +421,10 @@ they're listed rather than quietly dropped.
 | FARFETCHD  | Route 12                   | Grass     | 28-29  | 14.1%  |                                                               |
 | DODUO      | Route 16                   | Grass     | 21-22  | 10.2%  |                                                               |
 | DODUO      | Route 17                   | Grass     | 26-27  | 19.5%  |                                                               |
+| DODUO      | Safari Zone West           | Grass     | 24     | 19.9%  |                                                               |
+| DODUO      | Safari Zone Center         | Grass     | 25     | 9.8%   |                                                               |
 | DODRIO     | Route 17                   | Grass     | 29-31  | 19.9%  |                                                               |
+| DODRIO     | Safari Zone West           | Grass     | 29     | 5.1%   |                                                               |
 | DODRIO     | Cerulean Cave 2F           | Grass     | 61     | 5.1%   |                                                               |
 | SEEL       | Seafoam Islands B1F        | Grass     | 28     | 19.9%  |                                                               |
 | SEEL       | Seafoam Islands B2F        | Grass     | 30     | 19.9%  |                                                               |
@@ -497,9 +511,10 @@ they're listed rather than quietly dropped.
 | ELECTRODE  | Power Plant                | Static    | 43     | —      | 2 of them, one per save                                       |
 | ELECTRODE  | Cerulean Cave B1F          | Grass     | 84     | 9.8%   |                                                               |
 | EXEGGCUTE  | Route 12                   | Grass     | 25-28  | 35.2%  |                                                               |
-| EXEGGCUTE  | Safari Zone East           | Grass     | 22-26  | 20.3%  |                                                               |
-| EXEGGCUTE  | Safari Zone North          | Grass     | 20     | 15.2%  |                                                               |
-| EXEGGCUTE  | Safari Zone West           | Grass     | 22     | 15.2%  |                                                               |
+| EXEGGCUTE  | Safari Zone East           | Grass     | 24     | 15.2%  |                                                               |
+| EXEGGCUTE  | Safari Zone North          | Grass     | 25     | 15.2%  |                                                               |
+| EXEGGCUTE  | Safari Zone West           | Grass     | 25     | 9.8%   |                                                               |
+| EXEGGCUTE  | Safari Zone Center         | Grass     | 24     | 19.9%  |                                                               |
 | EXEGGUTOR  | Route 12                   | Grass     | 31     | 1.2%   |                                                               |
 | CUBONE     | Rock Tunnel 1F             | Grass     | 20     | 9.8%   |                                                               |
 | CUBONE     | Route 10                   | Grass     | 20     | 5.1%   |                                                               |
@@ -507,13 +522,10 @@ they're listed rather than quietly dropped.
 | CUBONE     | Pokémon Tower 4F           | Grass     | 20-22  | 9.4%   |                                                               |
 | CUBONE     | Pokémon Tower 5F           | Grass     | 21-25  | 10.2%  |                                                               |
 | CUBONE     | Pokémon Tower 6F           | Grass     | 21-23  | 9.4%   |                                                               |
-| CUBONE     | Safari Zone East           | Grass     | 19     | 9.8%   |                                                               |
-| CUBONE     | Safari Zone North          | Grass     | 16     | 5.1%   |                                                               |
-| CUBONE     | Safari Zone West           | Grass     | 19     | 9.8%   |                                                               |
+| CUBONE     | Safari Zone East           | Grass     | 23     | 9.8%   |                                                               |
 | MAROWAK    | Pokémon Tower 6F           | Static    | 30     | —      | the restless soul - needs the Poké Flute's Silph Scope reveal |
 | MAROWAK    | Pokémon Tower 7F           | Grass     | 22-28  | 14.8%  |                                                               |
-| MAROWAK    | Safari Zone East           | Grass     | 24     | 5.1%   |                                                               |
-| MAROWAK    | Safari Zone West           | Grass     | 24     | 5.1%   |                                                               |
+| MAROWAK    | Safari Zone East           | Grass     | 28     | 5.1%   |                                                               |
 | MAROWAK    | Victory Road 3F            | Grass     | 47     | 15.2%  |                                                               |
 | MAROWAK    | Cerulean Cave 2F           | Grass     | 60     | 19.9%  |                                                               |
 | HITMONLEE  | Rock Tunnel 1F             | Grass     | 20     | 5.1%   |                                                               |
@@ -532,19 +544,21 @@ they're listed rather than quietly dropped.
 | WEEZING    | Pokémon Mansion 2F         | Grass     | 32     | 9.8%   |                                                               |
 | WEEZING    | Pokémon Mansion B1F        | Grass     | 40     | 5.1%   | FLOATING                                                      |
 | WEEZING    | Cerulean Cave 1F           | Grass     | 59     | 5.1%   | FLOATING                                                      |
-| RHYHORN    | Safari Zone East           | Grass     | 21     | 9.8%   |                                                               |
-| RHYHORN    | Safari Zone North          | Grass     | 25     | 9.8%   |                                                               |
+| RHYHORN    | Safari Zone North          | Grass     | 25     | 19.9%  |                                                               |
+| RHYHORN    | Safari Zone Center         | Grass     | 27     | 5.1%   |                                                               |
 | RHYDON     | Cinnabar Lab Trade Room    | Trade     | yours  | —      | trade a GOLDUCK; arrives as BUFFY                             |
 | RHYDON     | Route 23                   | Grass     | 60     | 1.2%   |                                                               |
 | RHYDON     | Victory Road 2F            | Grass     | 44     | 9.8%   |                                                               |
 | RHYDON     | Victory Road 3F            | Grass     | 50     | 5.1%   |                                                               |
 | RHYDON     | Cerulean Cave 2F           | Grass     | 62     | 19.9%  |                                                               |
-| CHANSEY    | Safari Zone East           | Grass     | 21     | 4.3%   |                                                               |
+| CHANSEY    | Safari Zone East           | Grass     | 26     | 5.1%   |                                                               |
+| CHANSEY    | Safari Zone Center         | Grass     | 26     | 1.2%   |                                                               |
 | CHANSEY    | Route 23                   | Grass     | 40-45  | 25.0%  |                                                               |
 | CHANSEY    | Cerulean Cave B1F          | Grass     | 82-100 | 21.1%  |                                                               |
 | TANGELA    | Route 13                   | Grass     | 36-38  | 5.5%   |                                                               |
 | TANGELA    | Route 21                   | Grass     | 21-30  | 55.1%  |                                                               |
-| KANGASKHAN | Safari Zone North          | Grass     | 28-33  | 14.8%  |                                                               |
+| KANGASKHAN | Safari Zone North          | Grass     | 27-30  | 14.8%  |                                                               |
+| KANGASKHAN | Safari Zone West           | Grass     | 28     | 4.3%   |                                                               |
 | KANGASKHAN | Victory Road 3F            | Grass     | 50     | 4.3%   |                                                               |
 | HORSEA     | Route 25                   | Water     | 20-30  | 44.9%  |                                                               |
 | HORSEA     | Vermilion City             | Super Rod | 5      | 10.5%  | slot 4                                                        |
@@ -574,10 +588,10 @@ they're listed rather than quietly dropped.
 | GOLDEEN    | Route 24                   | Super Rod | 20-30  | 89.5%  | slot 1, 2, 3                                                  |
 | GOLDEEN    | Route 6                    | Super Rod | 5-20   | 100.0% | slot 1, 2, 3, 4                                               |
 | GOLDEEN    | Celadon City               | Super Rod | 5-20   | 100.0% | slot 1, 2, 3, 4                                               |
-| GOLDEEN    | Safari Zone East           | Water     | 32     | 19.9%  |                                                               |
-| GOLDEEN    | Safari Zone North          | Water     | 32     | 19.9%  |                                                               |
-| GOLDEEN    | Safari Zone West           | Water     | 32     | 19.9%  |                                                               |
-| GOLDEEN    | Safari Zone Center         | Water     | 32     | 19.9%  |                                                               |
+| GOLDEEN    | Safari Zone East           | Water     | 27     | 19.9%  |                                                               |
+| GOLDEEN    | Safari Zone North          | Water     | 28     | 15.2%  |                                                               |
+| GOLDEEN    | Safari Zone West           | Water     | 26     | 19.9%  |                                                               |
+| GOLDEEN    | Safari Zone Center         | Water     | 27-29  | 35.2%  |                                                               |
 | GOLDEEN    | Route 21                   | Water     | 30-36  | 55.1%  |                                                               |
 | GOLDEEN    | Route 22                   | Water     | 32     | 19.9%  |                                                               |
 | GOLDEEN    | Cerulean Cave B1F          | Super Rod | 30     | 39.8%  | slot 1                                                        |
@@ -586,10 +600,10 @@ they're listed rather than quietly dropped.
 | SEAKING    | Cerulean City              | Super Rod | 30-40  | 30.5%  | slot 3, 4                                                     |
 | SEAKING    | Route 24                   | Water     | 30     | 19.5%  |                                                               |
 | SEAKING    | Route 24                   | Super Rod | 30     | 10.5%  | slot 4                                                        |
-| SEAKING    | Safari Zone East           | Water     | 30     | 19.5%  |                                                               |
-| SEAKING    | Safari Zone North          | Water     | 30     | 19.5%  |                                                               |
-| SEAKING    | Safari Zone West           | Water     | 30     | 19.5%  |                                                               |
-| SEAKING    | Safari Zone Center         | Water     | 30     | 19.5%  |                                                               |
+| SEAKING    | Safari Zone East           | Water     | 30     | 5.1%   |                                                               |
+| SEAKING    | Safari Zone North          | Water     | 30     | 5.1%   |                                                               |
+| SEAKING    | Safari Zone West           | Water     | 30     | 5.1%   |                                                               |
+| SEAKING    | Safari Zone Center         | Water     | 30-35  | 16.0%  |                                                               |
 | SEAKING    | Route 21                   | Water     | 32-33  | 14.8%  |                                                               |
 | SEAKING    | Route 22                   | Water     | 30     | 19.5%  |                                                               |
 | SEAKING    | Route 23                   | Water     | 41-42  | 14.8%  |                                                               |
@@ -615,8 +629,8 @@ they're listed rather than quietly dropped.
 | MR_MIME    | Route 21                   | Grass     | 28-32  | 6.2%   |                                                               |
 | SCYTHER    | Route 11                   | Grass     | 19     | 4.3%   |                                                               |
 | SCYTHER    | Route 13                   | Grass     | 30     | 5.1%   |                                                               |
-| SCYTHER    | Safari Zone East           | Grass     | 35     | 1.2%   |                                                               |
-| SCYTHER    | Safari Zone North          | Grass     | 25     | 4.3%   |                                                               |
+| SCYTHER    | Safari Zone East           | Grass     | 28     | 4.3%   |                                                               |
+| SCYTHER    | Safari Zone North          | Grass     | 28     | 1.2%   |                                                               |
 | JYNX       | Seafoam Islands B2F        | Grass     | 31     | 19.9%  |                                                               |
 | JYNX       | Seafoam Islands B3F        | Grass     | 33     | 19.9%  |                                                               |
 | JYNX       | Seafoam Islands B4F        | Grass     | 35     | 9.8%   |                                                               |
@@ -629,10 +643,10 @@ they're listed rather than quietly dropped.
 | MAGMAR     | Victory Road 2F            | Grass     | 43     | 9.8%   |                                                               |
 | PINSIR     | Route 25                   | Grass     | 7-8    | 5.5%   |                                                               |
 | PINSIR     | Route 13                   | Grass     | 32     | 5.1%   |                                                               |
-| PINSIR     | Safari Zone North          | Grass     | 35     | 1.2%   |                                                               |
-| PINSIR     | Safari Zone West           | Grass     | 25     | 4.3%   |                                                               |
+| PINSIR     | Safari Zone North          | Grass     | 27     | 9.8%   |                                                               |
 | TAUROS     | Route 14                   | Grass     | 28-32  | 5.5%   |                                                               |
-| TAUROS     | Safari Zone Center         | Grass     | 24-31  | 100.0% |                                                               |
+| TAUROS     | Safari Zone North          | Grass     | 27     | 4.3%   |                                                               |
+| TAUROS     | Safari Zone Center         | Grass     | 26-29  | 25.0%  |                                                               |
 | MAGIKARP   | any water                  | Old Rod   | 5      | 100.0% | every Old Rod bite, wherever you cast it                      |
 | MAGIKARP   | Route 25                   | Water     | 25-35  | 25.0%  |                                                               |
 | MAGIKARP   | Fuchsia City               | Super Rod | 5-15   | 89.5%  | slot 1, 2, 3                                                  |

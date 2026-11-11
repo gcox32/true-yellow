@@ -1,26 +1,26 @@
 SafariZoneWestWildMons:
 	def_grass_wildmons 30 ; encounter rate
-	db 29, NIDORAN_M
-	db 21, NIDORAN_F
-	db 22, EXEGGCUTE
-	db 21, PONYTA
-	db 32, NIDORINO
-	db 19, CUBONE
-	db 26, PONYTA
-	db 24, MAROWAK
-	db 25, PINSIR
-	db 33, RAPIDASH
+	db 24, PONYTA
+	db 24, DODUO
+	db 23, VENONAT
+	db 24, NIDORAN_F
+	db 25, EXEGGCUTE
+	db 27, PONYTA
+	db 29, DODRIO
+	db 29, VENOMOTH
+	db 28, KANGASKHAN
+	db 32, RAPIDASH
 	end_grass_wildmons
 
 	def_water_wildmons 7 ; encounter rate
-	db 32, GOLDEEN
-	db 30, POLIWAG
-	db 28, POLIWHIRL
+	db 27, PSYDUCK
+	db 26, GOLDEEN
+	db 27, SLOWPOKE
+	db 29, PSYDUCK
+	db 26, POLIWAG
+	db 29, SLOWPOKE
 	db 30, SEAKING
-	db 31, PSYDUCK
-	db 30, SEAKING
-	db 35, GOLDUCK
-	db 25, POLIWHIRL
 	db 32, GOLDUCK
-	db 36, GOLDUCK
+	db 32, SLOWBRO
+	db 35, GOLDUCK
 	end_water_wildmons
