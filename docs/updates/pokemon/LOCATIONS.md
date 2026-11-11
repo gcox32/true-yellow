@@ -108,8 +108,8 @@ they're listed rather than quietly dropped.
 | CHARIZARD  | --                         | --        | --     | --     | --                                                            |
 | SQUIRTLE   | Route 24                   | Grass     | 8      | 4.3%   |                                                               |
 | SQUIRTLE   | Vermilion City             | Gift      | 10     | —      |                                                               |
-| WARTORTLE  | Seafoam Islands B1F        | Grass     | 24-32  | 19.5%  |                                                               |
-| WARTORTLE  | Seafoam Islands B2F        | Grass     | 25-26  | 25.0%  |                                                               |
+| WARTORTLE  | Seafoam Islands B1F        | Grass     | 30     | 9.8%   |                                                               |
+| WARTORTLE  | Seafoam Islands B2F        | Grass     | 32     | 5.1%   |                                                               |
 | BLASTOISE  | Cerulean Cave B1F          | Water     | 60-65  | 39.8%  |                                                               |
 | BLASTOISE  | Cerulean Cave 1F           | Water     | 60-65  | 39.8%  |                                                               |
 | CATERPIE   | Viridian Forest            | Grass     | 4-5    | 29.7%  |                                                               |
@@ -223,6 +223,12 @@ they're listed rather than quietly dropped.
 | ZUBAT      | Mt. Moon B2F               | Grass     | 10-11  | 29.7%  |                                                               |
 | ZUBAT      | Rock Tunnel 1F             | Grass     | 19     | 19.9%  |                                                               |
 | ZUBAT      | Rock Tunnel B1F            | Grass     | 20-22  | 39.5%  |                                                               |
+| ZUBAT      | Seafoam Islands 1F         | Grass     | 22     | 9.8%   |                                                               |
+| GOLBAT     | Seafoam Islands B1F        | Grass     | 28     | 5.1%   |                                                               |
+| GOLBAT     | Seafoam Islands B2F        | Grass     | 30     | 9.8%   |                                                               |
+| GOLBAT     | Seafoam Islands B3F        | Grass     | 32     | 9.8%   |                                                               |
+| GOLBAT     | Seafoam Islands B4F        | Grass     | 34     | 9.8%   |                                                               |
+| GOLBAT     | Seafoam Islands 1F         | Grass     | 29     | 4.3%   |                                                               |
 | GOLBAT     | Victory Road 3F            | Grass     | 41-50  | 14.8%  |                                                               |
 | ODDISH     | Mt. Moon 1F                | Grass     | 7      | 19.9%  |                                                               |
 | ODDISH     | Mt. Moon B1F               | Grass     | 7      | 19.9%  |                                                               |
@@ -255,6 +261,9 @@ they're listed rather than quietly dropped.
 | PSYDUCK    | Safari Zone North          | Water     | 31     | 9.8%   |                                                               |
 | PSYDUCK    | Safari Zone West           | Water     | 31     | 9.8%   |                                                               |
 | PSYDUCK    | Safari Zone Center         | Water     | 31     | 9.8%   |                                                               |
+| PSYDUCK    | Seafoam Islands B1F        | Grass     | 28     | 9.8%   |                                                               |
+| PSYDUCK    | Seafoam Islands B2F        | Grass     | 31     | 9.8%   |                                                               |
+| PSYDUCK    | Seafoam Islands 1F         | Grass     | 26     | 19.9%  |                                                               |
 | PSYDUCK    | Route 22                   | Grass     | 3      | 5.1%   |                                                               |
 | PSYDUCK    | Route 22                   | Water     | 31     | 9.8%   |                                                               |
 | GOLDUCK    | Route 24                   | Water     | 32-36  | 10.5%  |                                                               |
@@ -263,6 +272,9 @@ they're listed rather than quietly dropped.
 | GOLDUCK    | Safari Zone North          | Water     | 32-36  | 10.5%  |                                                               |
 | GOLDUCK    | Safari Zone West           | Water     | 32-36  | 10.5%  |                                                               |
 | GOLDUCK    | Safari Zone Center         | Water     | 32-36  | 10.5%  |                                                               |
+| GOLDUCK    | Seafoam Islands B2F        | Grass     | 36     | 5.1%   |                                                               |
+| GOLDUCK    | Seafoam Islands B3F        | Grass     | 36     | 5.1%   |                                                               |
+| GOLDUCK    | Seafoam Islands B4F        | Grass     | 36     | 9.8%   |                                                               |
 | GOLDUCK    | Route 22                   | Water     | 32-36  | 10.5%  |                                                               |
 | MANKEY     | Route 2                    | Grass     | 5-7    | 10.9%  |                                                               |
 | MANKEY     | Route 3                    | Grass     | 9      | 15.2%  |                                                               |
@@ -361,12 +373,12 @@ they're listed rather than quietly dropped.
 | RAPIDASH   | Safari Zone West           | Grass     | 33     | 1.2%   |                                                               |
 | SLOWPOKE   | Route 12                   | Water     | 15     | 94.5%  |                                                               |
 | SLOWPOKE   | Route 13                   | Water     | 15     | 94.5%  |                                                               |
-| SLOWPOKE   | Seafoam Islands B1F        | Grass     | 30     | 19.9%  |                                                               |
-| SLOWPOKE   | Seafoam Islands 1F         | Grass     | 28-29  | 10.2%  |                                                               |
+| SLOWPOKE   | Seafoam Islands B1F        | Grass     | 29     | 9.8%   |                                                               |
+| SLOWPOKE   | Seafoam Islands 1F         | Grass     | 28     | 5.1%   |                                                               |
 | SLOWBRO    | Route 12                   | Water     | 15-20  | 5.5%   |                                                               |
 | SLOWBRO    | Route 13                   | Water     | 15-20  | 5.5%   |                                                               |
-| SLOWBRO    | Seafoam Islands B1F        | Grass     | 28     | 5.1%   |                                                               |
-| SLOWBRO    | Seafoam Islands 1F         | Grass     | 28-38  | 5.5%   |                                                               |
+| SLOWBRO    | Seafoam Islands B4F        | Grass     | 38     | 4.3%   |                                                               |
+| SLOWBRO    | Seafoam Islands 1F         | Grass     | 38     | 1.2%   |                                                               |
 | MAGNEMITE  | Route 10                   | Grass     | 16-22  | 50.0%  |                                                               |
 | MAGNEMITE  | Pokémon Mansion 1F         | Grass     | 31     | 9.8%   |                                                               |
 | MAGNEMITE  | Pokémon Mansion B1F        | Grass     | 35     | 19.9%  |                                                               |
@@ -377,13 +389,19 @@ they're listed rather than quietly dropped.
 | DODUO      | Route 16                   | Grass     | 21-22  | 10.2%  |                                                               |
 | DODUO      | Route 17                   | Grass     | 26-27  | 19.5%  |                                                               |
 | DODRIO     | Route 17                   | Grass     | 29-31  | 19.9%  |                                                               |
-| SEEL       | Seafoam Islands B1F        | Grass     | 25-26  | 35.2%  |                                                               |
-| SEEL       | Seafoam Islands B2F        | Grass     | 25-26  | 39.8%  |                                                               |
-| SEEL       | Seafoam Islands 1F         | Grass     | 25-26  | 29.7%  |                                                               |
+| SEEL       | Seafoam Islands B1F        | Grass     | 28     | 19.9%  |                                                               |
+| SEEL       | Seafoam Islands B2F        | Grass     | 30     | 19.9%  |                                                               |
+| SEEL       | Seafoam Islands B3F        | Grass     | 33     | 15.2%  |                                                               |
+| SEEL       | Seafoam Islands B3F        | Water     | 34     | 9.8%   |                                                               |
+| SEEL       | Seafoam Islands B4F        | Grass     | 34     | 15.2%  |                                                               |
+| SEEL       | Seafoam Islands 1F         | Grass     | 26     | 19.9%  |                                                               |
 | SEEL       | Route 23                   | Water     | 38-39  | 35.2%  |                                                               |
-| DEWGONG    | Seafoam Islands B1F        | Grass     | 37-38  | 5.5%   |                                                               |
-| DEWGONG    | Seafoam Islands B3F        | Grass     | 29-31  | 19.5%  |                                                               |
-| DEWGONG    | Seafoam Islands B4F        | Grass     | 29-31  | 19.5%  |                                                               |
+| DEWGONG    | Seafoam Islands B1F        | Grass     | 38     | 1.2%   |                                                               |
+| DEWGONG    | Seafoam Islands B2F        | Grass     | 35     | 4.3%   |                                                               |
+| DEWGONG    | Seafoam Islands B3F        | Grass     | 35     | 5.1%   |                                                               |
+| DEWGONG    | Seafoam Islands B3F        | Water     | 35     | 5.1%   |                                                               |
+| DEWGONG    | Seafoam Islands B4F        | Grass     | 35     | 19.9%  |                                                               |
+| DEWGONG    | Seafoam Islands B4F        | Water     | 36     | 9.8%   |                                                               |
 | DEWGONG    | Cinnabar Lab Trade Room    | Trade     | yours  | —      | trade a GROWLITHE; arrives as CEZANNE                         |
 | DEWGONG    | Route 23                   | Water     | 42-46  | 35.2%  |                                                               |
 | GRIMER     | Celadon City               | Water     | 25-32  | 94.5%  |                                                               |
@@ -399,7 +417,15 @@ they're listed rather than quietly dropped.
 | SHELLDER   | Vermilion Dock             | Super Rod | 10     | 10.5%  | slot 4                                                        |
 | SHELLDER   | Route 17                   | Super Rod | 25-35  | 30.5%  | slot 3, 4                                                     |
 | SHELLDER   | Route 18                   | Super Rod | 20-40  | 60.2%  | slot 2, 3, 4                                                  |
-| CLOYSTER   | --                         | --        | --     | --     | --                                                            |
+| SHELLDER   | Seafoam Islands B1F        | Grass     | 28     | 19.9%  |                                                               |
+| SHELLDER   | Seafoam Islands B2F        | Grass     | 30     | 15.2%  |                                                               |
+| SHELLDER   | Seafoam Islands B3F        | Grass     | 32     | 19.9%  |                                                               |
+| SHELLDER   | Seafoam Islands B3F        | Water     | 33     | 19.9%  |                                                               |
+| SHELLDER   | Seafoam Islands 1F         | Grass     | 27     | 5.1%   |                                                               |
+| CLOYSTER   | Seafoam Islands B3F        | Grass     | 36     | 4.3%   |                                                               |
+| CLOYSTER   | Seafoam Islands B3F        | Water     | 38     | 1.2%   |                                                               |
+| CLOYSTER   | Seafoam Islands B4F        | Grass     | 37     | 5.1%   |                                                               |
+| CLOYSTER   | Seafoam Islands B4F        | Water     | 38     | 5.1%   |                                                               |
 | GASTLY     | Pokémon Tower 3F           | Grass     | 18-24  | 89.5%  |                                                               |
 | GASTLY     | Pokémon Tower 4F           | Grass     | 22-28  | 75.8%  |                                                               |
 | GASTLY     | Pokémon Tower 5F           | Grass     | 23-26  | 74.6%  |                                                               |
@@ -425,16 +451,16 @@ they're listed rather than quietly dropped.
 | KRABBY     | Route 25                   | Super Rod | 10-15  | 69.5%  | slot 1, 2                                                     |
 | KRABBY     | Route 10                   | Super Rod | 15-20  | 69.5%  | slot 1, 2                                                     |
 | KRABBY     | Route 18                   | Grass     | 28     | 5.1%   |                                                               |
-| KRABBY     | Seafoam Islands B1F        | Grass     | 25-30  | 14.8%  |                                                               |
+| KRABBY     | Seafoam Islands B1F        | Grass     | 29     | 5.1%   |                                                               |
 | KRABBY     | Seafoam Islands B3F        | Super Rod | 25     | 39.8%  | slot 1                                                        |
 | KRABBY     | Seafoam Islands B4F        | Super Rod | 25     | 39.8%  | slot 1                                                        |
-| KRABBY     | Seafoam Islands 1F         | Grass     | 25-26  | 19.5%  |                                                               |
+| KRABBY     | Seafoam Islands 1F         | Grass     | 26     | 9.8%   |                                                               |
 | KINGLER    | Route 25                   | Super Rod | 15-25  | 30.5%  | slot 3, 4                                                     |
 | KINGLER    | Route 10                   | Super Rod | 25     | 10.5%  | slot 4                                                        |
 | KINGLER    | Route 18                   | Grass     | 30-34  | 5.5%   |                                                               |
-| KINGLER    | Seafoam Islands B3F        | Grass     | 29-31  | 10.2%  |                                                               |
+| KINGLER    | Seafoam Islands B3F        | Grass     | 33     | 9.8%   |                                                               |
 | KINGLER    | Seafoam Islands B3F        | Super Rod | 35     | 19.9%  | slot 3                                                        |
-| KINGLER    | Seafoam Islands B4F        | Grass     | 31-33  | 64.8%  |                                                               |
+| KINGLER    | Seafoam Islands B4F        | Grass     | 34     | 19.9%  |                                                               |
 | KINGLER    | Seafoam Islands B4F        | Super Rod | 35     | 19.9%  | slot 3                                                        |
 | KINGLER    | Cerulean Cave 1F           | Grass     | 55-65  | 10.2%  |                                                               |
 | VOLTORB    | Fuchsia Gym                | Grass     | 20-41  | 100.0% |                                                               |
@@ -495,10 +521,19 @@ they're listed rather than quietly dropped.
 | HORSEA     | Route 12                   | Super Rod | 20-25  | 69.5%  | slot 1, 2                                                     |
 | HORSEA     | Route 13                   | Super Rod | 15-20  | 69.5%  | slot 1, 2                                                     |
 | HORSEA     | Route 19                   | Water     | 28-31  | 25.0%  |                                                               |
+| HORSEA     | Seafoam Islands B1F        | Grass     | 29     | 15.2%  |                                                               |
+| HORSEA     | Seafoam Islands B2F        | Grass     | 31     | 9.8%   |                                                               |
+| HORSEA     | Seafoam Islands B3F        | Water     | 33     | 19.9%  |                                                               |
+| HORSEA     | Seafoam Islands 1F         | Grass     | 27     | 9.8%   |                                                               |
 | HORSEA     | Route 20                   | Water     | 28-31  | 25.0%  |                                                               |
 | SEADRA     | Route 25                   | Water     | 32     | 4.3%   |                                                               |
 | SEADRA     | Route 12                   | Super Rod | 25-35  | 30.5%  | slot 3, 4                                                     |
 | SEADRA     | Route 13                   | Super Rod | 20     | 10.5%  | slot 4                                                        |
+| SEADRA     | Seafoam Islands B1F        | Grass     | 32     | 4.3%   |                                                               |
+| SEADRA     | Seafoam Islands B3F        | Grass     | 34     | 9.8%   |                                                               |
+| SEADRA     | Seafoam Islands B3F        | Water     | 34     | 9.8%   |                                                               |
+| SEADRA     | Seafoam Islands B4F        | Grass     | 36     | 5.1%   |                                                               |
+| SEADRA     | Seafoam Islands B4F        | Water     | 36     | 15.2%  |                                                               |
 | SEADRA     | Route 21                   | Water     | 35-40  | 5.5%   |                                                               |
 | GOLDEEN    | any water                  | Good Rod  | 10     | 50.0%  | one of the Good Rod's 2 mons, wherever you cast it            |
 | GOLDEEN    | Route 4                    | Super Rod | 20-30  | 89.5%  | slot 1, 2, 3                                                  |
@@ -535,7 +570,7 @@ they're listed rather than quietly dropped.
 | STARYU     | Route 19                   | Super Rod | 20     | 29.7%  | slot 2                                                        |
 | STARYU     | Seafoam Islands B3F        | Super Rod | 20-40  | 40.2%  | slot 2, 4                                                     |
 | STARYU     | Seafoam Islands B4F        | Super Rod | 20-40  | 40.2%  | slot 2, 4                                                     |
-| STARYU     | Seafoam Islands 1F         | Grass     | 30-32  | 35.2%  |                                                               |
+| STARYU     | Seafoam Islands 1F         | Grass     | 28     | 15.2%  |                                                               |
 | STARYU     | Route 20                   | Water     | 30     | 19.5%  |                                                               |
 | STARYU     | Route 20                   | Super Rod | 30     | 19.9%  | slot 3                                                        |
 | STARYU     | Cinnabar Island            | Super Rod | 10-15  | 59.8%  | slot 1, 3                                                     |
@@ -547,8 +582,9 @@ they're listed rather than quietly dropped.
 | SCYTHER    | Route 13                   | Grass     | 30     | 5.1%   |                                                               |
 | SCYTHER    | Safari Zone East           | Grass     | 35     | 1.2%   |                                                               |
 | SCYTHER    | Safari Zone North          | Grass     | 25     | 4.3%   |                                                               |
-| JYNX       | Seafoam Islands B2F        | Grass     | 28-37  | 29.7%  |                                                               |
-| JYNX       | Seafoam Islands B3F        | Grass     | 31-35  | 64.8%  |                                                               |
+| JYNX       | Seafoam Islands B2F        | Grass     | 31     | 19.9%  |                                                               |
+| JYNX       | Seafoam Islands B3F        | Grass     | 33     | 19.9%  |                                                               |
+| JYNX       | Seafoam Islands B4F        | Grass     | 35     | 9.8%   |                                                               |
 | JYNX       | Cerulean Cave 1F           | Grass     | 60-65  | 39.8%  |                                                               |
 | ELECTABUZZ | Power Plant                | Grass     | 32-35  | 10.2%  |                                                               |
 | ELECTABUZZ | Cerulean Cave 1F           | Grass     | 65-66  | 19.5%  |                                                               |
@@ -578,16 +614,16 @@ they're listed rather than quietly dropped.
 | GYARADOS   | Cerulean Cave B1F          | Water     | 64-66  | 44.5%  |                                                               |
 | GYARADOS   | Cerulean Cave 1F           | Water     | 64-66  | 44.5%  |                                                               |
 | LAPRAS     | Silph Co. 7F               | Gift      | 15     | —      |                                                               |
-| LAPRAS     | Seafoam Islands B3F        | Water     | 30-36  | 44.5%  |                                                               |
-| LAPRAS     | Seafoam Islands B4F        | Water     | 30-36  | 44.5%  |                                                               |
+| LAPRAS     | Seafoam Islands B3F        | Water     | 32-35  | 20.3%  |                                                               |
+| LAPRAS     | Seafoam Islands B4F        | Water     | 34-40  | 35.9%  |                                                               |
 | LAPRAS     | Cerulean Cave B1F          | Water     | 55-65  | 15.6%  |                                                               |
 | LAPRAS     | Cerulean Cave 1F           | Water     | 55-65  | 15.6%  |                                                               |
 | DITTO      | Pokémon Mansion B1F        | Grass     | 40     | 1.2%   |                                                               |
 | EEVEE      | Celadon Mansion Roof House | Gift      | 25     | —      |                                                               |
 | EEVEE      | Game Corner Prize Room     | Prize     | 18     | —      | 1000 coins                                                    |
-| VAPOREON   | Seafoam Islands B2F        | Grass     | 33-37  | 5.5%   |                                                               |
-| VAPOREON   | Seafoam Islands B3F        | Grass     | 37-39  | 5.5%   |                                                               |
-| VAPOREON   | Seafoam Islands B4F        | Grass     | 29-39  | 15.6%  |                                                               |
+| VAPOREON   | Seafoam Islands B2F        | Grass     | 37     | 1.2%   |                                                               |
+| VAPOREON   | Seafoam Islands B3F        | Grass     | 39     | 1.2%   |                                                               |
+| VAPOREON   | Seafoam Islands B4F        | Grass     | 40     | 1.2%   |                                                               |
 | JOLTEON    | Power Plant                | Grass     | 33-36  | 5.5%   |                                                               |
 | FLAREON    | Pokémon Mansion 1F         | Grass     | 36     | 1.2%   |                                                               |
 | FLAREON    | Pokémon Mansion 2F         | Grass     | 39     | 1.2%   |                                                               |
@@ -614,8 +650,8 @@ they're listed rather than quietly dropped.
 | DRATINI    | Safari Zone Center         | Super Rod | 10     | 19.9%  | slot 3                                                        |
 | DRAGONAIR  | Route 25                   | Water     | 40     | 1.2%   |                                                               |
 | DRAGONAIR  | Safari Zone Center         | Super Rod | 15     | 10.5%  | slot 4                                                        |
-| DRAGONAIR  | Seafoam Islands B3F        | Water     | 32-40  | 55.5%  |                                                               |
-| DRAGONAIR  | Seafoam Islands B4F        | Water     | 32-40  | 55.5%  |                                                               |
+| DRAGONAIR  | Seafoam Islands B3F        | Water     | 33-36  | 14.1%  |                                                               |
+| DRAGONAIR  | Seafoam Islands B4F        | Water     | 35-40  | 34.0%  |                                                               |
 | DRAGONITE  | --                         | --        | --     | --     | --                                                            |
 | MEWTWO     | Cerulean Cave B1F          | Static    | 70     | —      | one per save                                                  |
 | MEW        | Vermilion Dock             | Static    | 7      | —      | one per save                                                  |

@@ -4,7 +4,8 @@
 - [x] More LAPRAS-y overworld sprite for surfing _if_ it's LAPRAS surfing (Gen 2 surf sprite from pokecrystal as gfx/sprites/lapras.png; wd472 mode 3; selector moved to ROMX in engine/overworld/surf_sprite.asm, freeing 18 ROM0 bytes. NEEDS IN-GAME TEST.)
 - [x] OPTION to reduce text (first obvious place is interacting with the NURSE in the POKEMON CENTER) (OPTIONS "TEXT : FULL/SHORT", stored in wLetterPrintingDelayFlags bit 7 = BIT_SHORT_TEXT. SHORT nurse: ask -> heal -> "Your #MON are fighting fit!". Other places can check the same bit. Tested in-game.)
 - [x] instant SAVE after confirm (as opposed to delay with "Saving...") (SaveMenu in engine/menus/save.asm: with OPTIONS TEXT: SHORT, skips "Saving..." + its 128-frame wait and the 10-frame pause after YES; FULL keeps the original. Always keeps "saved the game!" + jingle. NEEDS IN-GAME TEST.)
-- [ ] More diversity to Saffron Gym trainers
+- [x] More diversity to Saffron Gym trainers
+- [ ] Review diversity in Cerulean Cave
 - [ ] Move diversity in Seafoam Islands wild
 - [x] Better Rival teams
 - [x] Move armor mewtwo event into silph co building somewhere
