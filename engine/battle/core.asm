@@ -3444,7 +3444,19 @@ PlayerCheckIfFlyOrChargeEffect:
 	call DelayFrames
 	ld a, [wPlayerMoveEffect]
 	cp FLY_EFFECT
-	jr z, .playAnim
+	jr nz, .notFly
+	ld a, [wPlayerMoveNum]
+	cp TELEPORT
+	jr nz, .playAnim
+	; ADDED: 2nd turn of trainer-battle TELEPORT: reappear and end the turn (no damage, no effectiveness text)
+	ld a, [wPlayerBattleStatus2]
+	bit HAS_SUBSTITUTE_UP, a
+	jr nz, .teleportDone
+	callfar AnimationShowMonPic
+.teleportDone
+	jp ExecutePlayerMoveDone
+.notFly
+	ld a, [wPlayerMoveEffect]
 	cp CHARGE_EFFECT
 	jr z, .playAnim
 	jr MirrorMoveCheck
@@ -5338,6 +5350,7 @@ ReloadMoveData:
 	ld a, BANK(Moves)
 	call FarCopyData ; copy the move's stats
 	call IncrementMovePP
+	call TrainerTeleportAsFly
 ; the follow two function calls are used to reload the move name
 	call GetMoveName
 	call CopyToStringBuffer
@@ -5945,7 +5958,19 @@ EnemyCheckIfFlyOrChargeEffect:
 	call DelayFrames
 	ld a, [wEnemyMoveEffect]
 	cp FLY_EFFECT
-	jr z, .playAnim
+	jr nz, .notFly
+	ld a, [wEnemyMoveNum]
+	cp TELEPORT
+	jr nz, .playAnim
+	; ADDED: 2nd turn of trainer-battle TELEPORT: reappear and end the turn (no damage, no effectiveness text)
+	ld a, [wEnemyBattleStatus2]
+	bit HAS_SUBSTITUTE_UP, a
+	jr nz, .teleportDone
+	callfar AnimationShowMonPic
+.teleportDone
+	jp ExecuteEnemyMoveDone
+.notFly
+	ld a, [wEnemyMoveEffect]
 	cp CHARGE_EFFECT
 	jr z, .playAnim
 	jr EnemyCheckIfMirrorMoveEffect
@@ -6347,6 +6372,7 @@ GetCurrentMove:
 	call AddNTimes
 	ld a, BANK(Moves)
 	call FarCopyData
+	call TrainerTeleportAsFly
 
 	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
@@ -6355,6 +6381,25 @@ GetCurrentMove:
 	call GetName
 	ld de, wNameBuffer
 	jp CopyToStringBuffer
+
+; ADDED: in trainer battles TELEPORT can't escape, so it acts as a 0-power FLY instead:
+; turn 1 the user vanishes (invulnerable), turn 2 it reappears without dealing damage.
+; Only the executing move data is changed; the AI's ReadMove still sees SWITCH_AND_TELEPORT_EFFECT.
+TrainerTeleportAsFly:
+	ld a, [wIsInBattle]
+	cp 2 ; trainer battle?
+	ret nz
+	ld hl, wPlayerMoveNum
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .gotMove
+	ld hl, wEnemyMoveNum
+.gotMove
+	ld a, [hli]
+	cp TELEPORT
+	ret nz
+	ld [hl], FLY_EFFECT ; wPlayerMoveEffect / wEnemyMoveEffect
+	ret
 
 LoadEnemyMonData:
 	ld a, [wLinkState]

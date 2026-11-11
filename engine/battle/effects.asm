@@ -1371,6 +1371,9 @@ ChargeMoveEffectText:
 	cp FLY
 	ld hl, FlewUpHighText
 	ret z
+	cp TELEPORT
+	ld hl, VanishedText
+	ret z
 	cp DIG
 	ld hl, DugAHoleText
 	ret
@@ -1397,6 +1400,10 @@ FlewUpHighText:
 
 DugAHoleText:
 	text_far _DugAHoleText
+	text_end
+
+VanishedText:
+	text_far _VanishedText
 	text_end
 
 ; PureRGBnote: FIXED: a move that can't affect the target no longer starts trapping it.
