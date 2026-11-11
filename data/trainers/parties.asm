@@ -410,9 +410,9 @@ BeautyData:
 
 PsychicData:
 ; Saffron Gym
-	db 48, KADABRA, POLIWRATH, MR_MIME, VENOMOTH, 0
-	db 50, MR_MIME, ALAKAZAM, 0
-	db 49, BUTTERFREE, JOLTEON, SLOWBRO, 0
+	db 48, KADABRA, SLOWPOKE, EXEGGCUTE, EXEGGUTOR, 0
+	db 50, MR_MIME, KADABRA, 0
+	db 49, VENOMOTH, SLOWPOKE, SLOWBRO, 0
 	db 52, STARMIE, 0
 
 RockerData:
@@ -428,7 +428,7 @@ JugglerData:
 	db 55, SCYTHER, ELECTABUZZ, SEADRA, 0
 ; Fuchsia Gym
 	db 46, DROWZEE, BEEDRILL, KADABRA, GOLBAT, 0
-	db 47, STARMIE, MR_MIME, 0
+	db 47, EXEGGCUTE, MR_MIME, 0
 ; Victory Road 2F
 	db 62, EXEGGUTOR, 0
 ; Unused
@@ -745,7 +745,7 @@ ChannelerData:
 ; Unused
 	db 24, GASTLY, 0
 ; Pokémon Tower 5F
-	db 31, GASTLY, MR_MIME, 0
+	db 31, GASTLY, DROWZEE, 0
 	db 34, NINETALES, 0
 	db 34, LICKITUNG, 0
 ; Pokémon Tower 6F
@@ -753,7 +753,7 @@ ChannelerData:
 	db 34, JYNX, 0
 	db 33, KADABRA, 0
 ; Saffron Gym
-	db 50, MR_MIME, NINETALES, 0
+	db 50, HAUNTER, NINETALES, 0
 	db 51, GENGAR, 0
 	db 49, HYPNO, HAUNTER, GOLDUCK, 0
 
