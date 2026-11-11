@@ -82,7 +82,7 @@ level.
 | ROCKET        | Mt. Moon B2F                                                               | 12    | PSYDUCK, EKANS                                                                     |                                 |
 | ROCKET        | Jessie & James                                                             | 16    | EKANS, KOFFING, MEOWTH                                                             | Mt. Moon B2F                    |
 | LASS          | Route 4                                                                    | 14    | PARAS, PARAS, CLEFAIRY                                                             |                                 |
-| RIVAL1        | Cerulean City                                                              | 15-18 | SPEAROW 18, SANDSHREW 15, RATTATA 15, EEVEE 17                                     |                                 |
+| RIVAL1        | Cerulean City                                                              | 15-18 | SPEAROW 18, SANDSHREW 15, ABRA 15, EEVEE 17                                        |                                 |
 | ROCKET        | Cerulean City                                                              | 17    | LICKITUNG, DROWZEE                                                                 |                                 |
 | JR_TRAINER_F  | Cerulean Gym                                                               | 19    | GOLDEEN, PSYDUCK                                                                   |                                 |
 | SWIMMER       | Cerulean Gym                                                               | 16    | HORSEA, OMANYTE, SHELLDER                                                          |                                 |
@@ -134,7 +134,7 @@ level.
 | SAILOR        | SS Anne B1F Rooms                                                          | 20    | HORSEA, SANDSHREW, POLIWHIRL                                                       |                                 |
 | SAILOR        | SS Anne B1F Rooms                                                          | 21    | MACHOP, SQUIRTLE                                                                   |                                 |
 | FISHER        | SS Anne B1F Rooms                                                          | 21    | SHELLDER, STARYU, STARYU                                                           |                                 |
-| RIVAL2        | SS Anne 2F                                                                 | 20-24 | SPEAROW 22, EXEGGCUTE 20, PORYGON 21, EEVEE 24                                     |                                 |
+| RIVAL2        | SS Anne 2F                                                                 | 20-24 | SPEAROW 22, GROWLITHE 20, NIDORINO 21, EEVEE 24                                    |                                 |
 | SAILOR        | Vermilion Gym                                                              | 24    | MAGNEMITE                                                                          |                                 |
 | ROCKER        | Vermilion Gym                                                              | 22    | VOLTORB, WARTORTLE, CUBONE                                                         |                                 |
 | LT_SURGE      | Vermilion Gym                                                              | 30    | RAICHU                                                                             |                                 |
@@ -167,9 +167,9 @@ level.
 | POKEMANIAC    | Route 10                                                                   | 28    | CUBONE, SLOWPOKE                                                                   |                                 |
 | HIKER         | Route 10                                                                   | 27    | PSYDUCK, ONIX                                                                      |                                 |
 | HIKER         | Route 10                                                                   | 26    | MAROWAK, GRAVELER                                                                  |                                 |
-| RIVAL2        | Pokémon Tower 2F                                                           | 34-36 | HITMONCHAN 35, ELECTRODE 35, GYARADOS 34, KADABRA 35, EEVEE 36                     |                                 |
-| RIVAL2        | Pokémon Tower 2F                                                           | 34-36 | KABUTOPS 35, KADABRA 35, SANDSLASH 34, ELECTRODE 35, EEVEE 36                      |                                 |
-| RIVAL2        | Pokémon Tower 2F                                                           | 34-36 | SCYTHER 35, GYARADOS 35, ARCANINE 34, DODRIO 35, EEVEE 36                          |                                 |
+| RIVAL2        | Pokémon Tower 2F                                                           | 34-36 | ARCANINE 35, SCYTHER 35, NIDORINO 34, KADABRA 35, EEVEE 36                         |                                 |
+| RIVAL2        | Pokémon Tower 2F                                                           | 34-36 | ARCANINE 35, NIDORINO 35, KADABRA 34, GYARADOS 35, EEVEE 36                        |                                 |
+| RIVAL2        | Pokémon Tower 2F                                                           | 34-36 | ARCANINE 35, GYARADOS 35, SCYTHER 34, DODRIO 35, EEVEE 36                          |                                 |
 | CHANNELER     | Pokémon Tower 3F                                                           | 32    | GASTLY                                                                             |                                 |
 | CHANNELER     | Pokémon Tower 3F                                                           | 32    | GASTLY                                                                             |                                 |
 | CHANNELER     | Pokémon Tower 3F                                                           | 30    | GASTLY, DROWZEE                                                                    |                                 |
@@ -239,9 +239,9 @@ level.
 | ROCKET        | Silph Co. 7F                                                               | 40    | SCYTHER, ARBOK, GENGAR, GOLEM                                                      |                                 |
 | ROCKET        | Silph Co. 7F                                                               | 42    | EXEGGUTOR, KINGLER                                                                 |                                 |
 | ROCKET        | Silph Co. 7F                                                               | 42    | RAICHU, SANDSLASH                                                                  |                                 |
-| RIVAL2        | Silph Co. 7F                                                               | 43-47 | GOLBAT 46, GYARADOS 46, TANGELA 45, CHANSEY 43, JOLTEON 47                         |                                 |
-| RIVAL2        | Silph Co. 7F                                                               | 43-47 | FEAROW 46, DUGTRIO 46, GOLEM 45, SNORLAX 43, FLAREON 47                            |                                 |
-| RIVAL2        | Silph Co. 7F                                                               | 43-47 | PIDGEOT 46, ELECTABUZZ 46, WEEZING 45, ALAKAZAM 43, VAPOREON 47                    |                                 |
+| RIVAL2        | Silph Co. 7F                                                               | 43-47 | ARCANINE 46, GOLEM 46, PINSIR 45, GENGAR 43, JOLTEON 47                            |                                 |
+| RIVAL2        | Silph Co. 7F                                                               | 43-47 | ARCANINE 46, NIDOQUEEN 46, ALAKAZAM 45, AERODACTYL 43, JOLTEON 47                  |                                 |
+| RIVAL2        | Silph Co. 7F                                                               | 43-47 | ARCANINE 46, FEAROW 46, GENGAR 45, ALAKAZAM 43, JOLTEON 47                         |                                 |
 | SCIENTIST     | Silph Co. 8F                                                               | 42    | SLOWBRO, ELECTRODE                                                                 |                                 |
 | ROCKET        | Silph Co. 8F                                                               | 39    | RATICATE, NIDOKING, PRIMEAPE, RAPIDASH                                             |                                 |
 | ROCKET        | Silph Co. 8F                                                               | 41    | HITMONLEE, GOLBAT, GENGAR                                                          |                                 |
@@ -375,9 +375,9 @@ level.
 | COOLTRAINER_M | Viridian Gym                                                               | 58    | SANDSLASH, DUGTRIO                                                                 |                                 |
 | COOLTRAINER_M | Viridian Gym                                                               | 61    | SNORLAX                                                                            |                                 |
 | GIOVANNI      | Viridian Gym                                                               | 61-70 | KINGLER 62, GOLEM 61, NIDOQUEEN 61, NIDOKING 62, PERSIAN 62, ARMORED_MEWTWO 70     |                                 |
-| RIVAL2        | Route 22                                                                   | 62-65 | TENTACRUEL 62, MACHAMP 62, VICTREEBEL 63, GOLEM 63, ALAKAZAM 63, JOLTEON 65        |                                 |
-| RIVAL2        | Route 22                                                                   | 62-65 | RAICHU 62, NIDOKING 62, PERSIAN 63, RAPIDASH 63, AERODACTYL 63, FLAREON 65         |                                 |
-| RIVAL2        | Route 22                                                                   | 62-65 | FEAROW 62, POLIWRATH 62, MAGNETON 63, WEEZING 63, GENGAR 63, VAPOREON 65           |                                 |
+| RIVAL2        | Route 22                                                                   | 62-65 | ARCANINE 62, PINSIR 62, VICTREEBEL 63, GOLEM 63, ALAKAZAM 63, JOLTEON 65           |                                 |
+| RIVAL2        | Route 22                                                                   | 62-65 | ARCANINE 62, NIDOQUEEN 62, NIDOKING 63, PINSIR 63, AERODACTYL 63, JOLTEON 65       |                                 |
+| RIVAL2        | Route 22                                                                   | 62-65 | ARCANINE 62, FEAROW 62, NIDOKING 63, PINSIR 63, MAGMAR 63, JOLTEON 65              |                                 |
 | COOLTRAINER_M | Victory Road 1F                                                            | 54    | BEEDRILL, SANDSLASH, GOLDUCK, CHARIZARD                                            |                                 |
 | COOLTRAINER_F | Victory Road 1F                                                            | 57    | PERSIAN, NINETALES                                                                 |                                 |
 | POKEMANIAC    | Victory Road 2F                                                            | 56    | EXEGGUTOR, LAPRAS, LICKITUNG                                                       |                                 |
@@ -393,9 +393,9 @@ level.
 | BRUNO         | Bruno's Room                                                               | 63-67 | HITMONCHAN 63, HITMONLEE 63, ONIX 65, ONIX 65, PRIMEAPE 64, MACHAMP 67             |                                 |
 | AGATHA        | Agatha's Room                                                              | 63-68 | GENGAR 65, HYPNO 63, NINETALES 64, ARBOK 65, HAUNTER 63, GENGAR 68                 |                                 |
 | LANCE         | Lance's Room                                                               | 66-69 | GYARADOS 66, DRAGONAIR 66, AERODACTYL 67, DRAGONITE 68, CHARIZARD 67, DRAGONITE 69 |                                 |
-| RIVAL3        | Champion's Room                                                            | 68-82 | ARTICUNO 69, ALAKAZAM 68, GOLEM 68, EXEGGUTOR 68, JOLTEON 75, BLASTOISE 82         |                                 |
-| RIVAL3        | Champion's Room                                                            | 68-82 | ZAPDOS 69, ALAKAZAM 68, NIDOQUEEN 68, EXEGGUTOR 68, FLAREON 75, BLASTOISE 82       |                                 |
-| RIVAL3        | Champion's Room                                                            | 68-82 | MOLTRES 69, ALAKAZAM 68, NIDOQUEEN 68, MAGMAR 68, VAPOREON 75, BLASTOISE 82        |                                 |
+| RIVAL3        | Champion's Room                                                            | 68-82 | ARCANINE 69, NIDOKING 68, NIDOQUEEN 68, MAGMAR 68, JOLTEON 75, BLASTOISE 82        |                                 |
+| RIVAL3        | Champion's Room                                                            | 68-82 | ARCANINE 69, NIDOKING 68, NIDOQUEEN 68, MAGMAR 68, JOLTEON 75, BLASTOISE 82        |                                 |
+| RIVAL3        | Champion's Room                                                            | 68-82 | ARCANINE 69, NIDOKING 68, NIDOQUEEN 68, MAGMAR 68, JOLTEON 75, BLASTOISE 82        |                                 |
 <!-- /generated:parties -->
 
 ## Special Moves
@@ -457,21 +457,21 @@ An entry listed as `(none)` is a trainer the table names and then gives nothing 
 | LANCE       | 1     | 6    | DRAGONITE  | 1      | BLIZZARD     |
 | LANCE       | 1     | 6    | DRAGONITE  | 2      | FIRE_BLAST   |
 | LANCE       | 1     | 6    | DRAGONITE  | 3      | THUNDER      |
-| RIVAL3      | 1     | 1    | ARTICUNO   | 1      | LIGHT_SCREEN |
-| RIVAL3      | 1     | 2    | ALAKAZAM   | 4      | THUNDER_WAVE |
-| RIVAL3      | 1     | 3    | GOLEM      | 2      | ROCK_SLIDE   |
-| RIVAL3      | 1     | 4    | EXEGGUTOR  | 4      | PSYCHIC_M    |
+| RIVAL3      | 1     | 1    | ARCANINE   | 1      | LIGHT_SCREEN |
+| RIVAL3      | 1     | 2    | NIDOKING   | 4      | THUNDER_WAVE |
+| RIVAL3      | 1     | 3    | NIDOQUEEN  | 2      | ROCK_SLIDE   |
+| RIVAL3      | 1     | 4    | MAGMAR     | 4      | PSYCHIC_M    |
 | RIVAL3      | 1     | 6    | BLASTOISE  | 2      | ICE_BEAM     |
-| RIVAL3      | 2     | 1    | ZAPDOS     | 4      | THUNDERBOLT  |
-| RIVAL3      | 2     | 2    | ALAKAZAM   | 4      | THUNDER_WAVE |
+| RIVAL3      | 2     | 1    | ARCANINE   | 4      | THUNDERBOLT  |
+| RIVAL3      | 2     | 2    | NIDOKING   | 4      | THUNDER_WAVE |
 | RIVAL3      | 2     | 3    | NIDOQUEEN  | 4      | BLIZZARD     |
-| RIVAL3      | 2     | 4    | EXEGGUTOR  | 4      | PSYCHIC_M    |
-| RIVAL3      | 2     | 5    | FLAREON    | 3      | BODY_SLAM    |
+| RIVAL3      | 2     | 4    | MAGMAR     | 4      | PSYCHIC_M    |
+| RIVAL3      | 2     | 5    | JOLTEON    | 3      | BODY_SLAM    |
 | RIVAL3      | 2     | 6    | BLASTOISE  | 2      | ICE_BEAM     |
-| RIVAL3      | 3     | 1    | MOLTRES    | 3      | FIRE_BLAST   |
-| RIVAL3      | 3     | 2    | ALAKAZAM   | 4      | THUNDER_WAVE |
+| RIVAL3      | 3     | 1    | ARCANINE   | 3      | FIRE_BLAST   |
+| RIVAL3      | 3     | 2    | NIDOKING   | 4      | THUNDER_WAVE |
 | RIVAL3      | 3     | 3    | NIDOQUEEN  | 4      | BLIZZARD     |
 | RIVAL3      | 3     | 4    | MAGMAR     | 3      | PSYCHIC_M    |
-| RIVAL3      | 3     | 5    | VAPOREON   | 3      | BLIZZARD     |
+| RIVAL3      | 3     | 5    | JOLTEON    | 3      | BLIZZARD     |
 | RIVAL3      | 3     | 6    | BLASTOISE  | 2      | ICE_BEAM     |
 <!-- /generated:special-moves -->

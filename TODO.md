@@ -6,8 +6,8 @@
 - [x] instant SAVE after confirm (as opposed to delay with "Saving...") (SaveMenu in engine/menus/save.asm: with OPTIONS TEXT: SHORT, skips "Saving..." + its 128-frame wait and the 10-frame pause after YES; FULL keeps the original. Always keeps "saved the game!" + jingle. NEEDS IN-GAME TEST.)
 - [ ] More diversity to Saffron Gym trainers
 - [ ] Move diversity in Seafoam Islands wild
-- [ ] Better Rival teams
-- [ ] Move armor mewtwo event into silph co building somewhere
+- [x] Better Rival teams
+- [x] Move armor mewtwo event into silph co building somewhere
 - [x] Location table for brock and misty responses if memory allows (data/followers/follower_lines.asm: map/range + event-flag table, first match wins; engine in engine/followers/follower_talk.asm. Placeholder lines in - WRITE REAL LINES. NEEDS IN-GAME TEST.)
 - [ ] Fighting Dojo as rechallengable (i.e. as a place to "train"?); only FIGHTING type pokemon allowed in?
 
