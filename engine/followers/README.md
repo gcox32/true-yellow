@@ -566,11 +566,17 @@ Players can talk to followers by pressing A while facing them.
 **Dialogue display**:
 1. Make follower face the player (opposite of player's facing direction)
 2. Set up text box via `DisplayTextIDInit`
-3. Display text from `MistyFollowerText` or `BrockFollowerText`
+3. `farcall FollowerTalk_PrintLine` with `c` = `FOLLOWER_TALK_MISTY` / `FOLLOWER_TALK_BROCK`
 4. Wait for button press
 5. Clean up via `CleanupFollowerTextBox` (restore sprites, reload graphics)
 
-Text content is stored in `text/follower_text.asm` and can be customized based on game progress, current map, etc.
+**What they say** comes from the table in `data/followers/follower_lines.asm`
+(format documented at the top of that file). Each entry is a map or map range
+(or `ANYWHERE`), an optional event flag that must be set (or `NO_BEAT`), and a
+line for each follower (0 = skip). `FollowerTalk_PrintLine`
+(`engine/followers/follower_talk.asm`) uses the first matching entry per
+follower, falling back to `FollowerDefaultMistyText` / `FollowerDefaultBrockText`.
+The engine, table and text share one floating ROMX section ("Follower Talk").
 
 ## WRAM Variables
 

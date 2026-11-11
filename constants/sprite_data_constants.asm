@@ -28,6 +28,10 @@ DEF PLAYER_DIR_UP    EQU 1 << PLAYER_DIR_BIT_UP
 ; Chain follower sprite slot indices
 DEF MISTY_FOLLOWER_SPRITE_INDEX EQU 13
 DEF BROCK_FOLLOWER_SPRITE_INDEX EQU 14
+
+; FollowerTalk_PrintLine input (c): which follower is talking
+DEF FOLLOWER_TALK_MISTY EQU 0
+DEF FOLLOWER_TALK_BROCK EQU 1
 ; PIKACHU_SPRITE_INDEX is already 15 (defined in map_object_constants.asm)
 
 ; Position trail slots: trail[n] is where the player stood n+1 steps ago, so

@@ -440,3 +440,9 @@ INCLUDE "engine/debug/debug_menu.asm"
 SECTION "Surf Sprite Select", ROMX
 
 INCLUDE "engine/overworld/surf_sprite.asm"
+
+
+SECTION "Follower Talk", ROMX
+
+INCLUDE "engine/followers/follower_talk.asm"
+INCLUDE "data/followers/follower_lines.asm"

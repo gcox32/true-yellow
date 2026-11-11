@@ -8,7 +8,7 @@
 - [ ] Move diversity in Seafoam Islands wild
 - [ ] Better Rival teams
 - [ ] Move armor mewtwo event into silph co building somewhere
-- [ ] Location table for brock and misty responses if memory allows
+- [x] Location table for brock and misty responses if memory allows (data/followers/follower_lines.asm: map/range + event-flag table, first match wins; engine in engine/followers/follower_talk.asm. Placeholder lines in - WRITE REAL LINES. NEEDS IN-GAME TEST.)
 - [ ] Fighting Dojo as rechallengable (i.e. as a place to "train"?); only FIGHTING type pokemon allowed in?
 
 

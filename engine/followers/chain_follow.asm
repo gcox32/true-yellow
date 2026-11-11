@@ -2424,8 +2424,8 @@ TalkToMisty:
 	call SetupFollowerTextBox
 
 	; Display text
-	ld hl, MistyFollowerText
-	call PrintText
+	ld c, FOLLOWER_TALK_MISTY
+	farcall FollowerTalk_PrintLine ; data/followers/follower_lines.asm
 
 	; Wait for button press (like DisplayTextID does)
 	call WaitForTextScrollButtonPress
@@ -2452,8 +2452,8 @@ TalkToBrock:
 	call SetupFollowerTextBox
 
 	; Display text
-	ld hl, BrockFollowerText
-	call PrintText
+	ld c, FOLLOWER_TALK_BROCK
+	farcall FollowerTalk_PrintLine ; data/followers/follower_lines.asm
 
 	; Wait for button press (like DisplayTextID does)
 	call WaitForTextScrollButtonPress
@@ -2523,14 +2523,6 @@ SetupFollowerTextBox:
 	ld b, a
 	ld hl, DisplayTextIDInit
 	jp Bankswitch
-
-MistyFollowerText:
-	text_far _MistyFollowerText
-	text_end
-
-BrockFollowerText:
-	text_far _BrockFollowerText
-	text_end
 
 ; =====================================
 ; GRASS PRIORITY UPDATES
