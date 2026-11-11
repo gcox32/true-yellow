@@ -4,11 +4,11 @@ RockTunnelB1FWildMons:
 	db 19, GEODUDE
 	db 21, ZUBAT
 	db 20, MACHOP
-	db 20, GASTLY
+	db 20, PARAS
 	db 21, GEODUDE
 	db 19, DIGLETT
-	db 20, PARAS
-	db 22, ONIX
+	db 20, ONIX
+	db 22, GOLBAT
 	db 24, GRAVELER
 	end_grass_wildmons
 

@@ -230,6 +230,7 @@ they're listed rather than quietly dropped.
 | ZUBAT      | Rock Tunnel 1F             | Grass     | 19     | 19.9%  |                                                               |
 | ZUBAT      | Rock Tunnel B1F            | Grass     | 20-21  | 35.2%  |                                                               |
 | ZUBAT      | Seafoam Islands 1F         | Grass     | 22     | 9.8%   |                                                               |
+| GOLBAT     | Rock Tunnel B1F            | Grass     | 22     | 4.3%   |                                                               |
 | GOLBAT     | Seafoam Islands B1F        | Grass     | 28     | 5.1%   |                                                               |
 | GOLBAT     | Seafoam Islands B2F        | Grass     | 30     | 9.8%   |                                                               |
 | GOLBAT     | Seafoam Islands B3F        | Grass     | 32     | 9.8%   |                                                               |
@@ -249,7 +250,7 @@ they're listed rather than quietly dropped.
 | PARAS      | Mt. Moon 1F                | Grass     | 8-10   | 14.8%  |                                                               |
 | PARAS      | Mt. Moon B1F               | Grass     | 9-11   | 14.8%  |                                                               |
 | PARAS      | Mt. Moon B2F               | Grass     | 13     | 5.1%   |                                                               |
-| PARAS      | Rock Tunnel B1F            | Grass     | 20     | 5.1%   |                                                               |
+| PARAS      | Rock Tunnel B1F            | Grass     | 20     | 9.8%   |                                                               |
 | PARASECT   | Route 18 Gate 2F           | Trade     | yours  | —      | trade a TANGELA; arrives as SPIKE                             |
 | PARASECT   | Cerulean Cave 2F           | Grass     | 60     | 5.1%   |                                                               |
 | VENONAT    | Route 8                    | Grass     | 15     | 9.8%   |                                                               |
@@ -451,7 +452,6 @@ they're listed rather than quietly dropped.
 | CLOYSTER   | Seafoam Islands B4F        | Water     | 38     | 5.1%   |                                                               |
 | CLOYSTER   | Cerulean Cave B1F          | Water     | 82     | 9.8%   |                                                               |
 | CLOYSTER   | Cerulean Cave 1F           | Water     | 62     | 4.3%   |                                                               |
-| GASTLY     | Rock Tunnel B1F            | Grass     | 20     | 9.8%   |                                                               |
 | GASTLY     | Pokémon Tower 3F           | Grass     | 18-24  | 89.5%  |                                                               |
 | GASTLY     | Pokémon Tower 4F           | Grass     | 22-28  | 75.8%  |                                                               |
 | GASTLY     | Pokémon Tower 5F           | Grass     | 23-26  | 74.6%  |                                                               |
@@ -467,7 +467,7 @@ they're listed rather than quietly dropped.
 | GENGAR     | Cerulean Cave 2F           | Grass     | 60     | 9.8%   |                                                               |
 | ONIX       | Diglett's Cave             | Grass     | 31     | 1.2%   |                                                               |
 | ONIX       | Rock Tunnel 1F             | Grass     | 20     | 5.1%   |                                                               |
-| ONIX       | Rock Tunnel B1F            | Grass     | 22     | 4.3%   |                                                               |
+| ONIX       | Rock Tunnel B1F            | Grass     | 20     | 5.1%   |                                                               |
 | ONIX       | Route 23                   | Grass     | 60     | 4.3%   |                                                               |
 | ONIX       | Victory Road 1F            | Grass     | 40     | 9.8%   |                                                               |
 | ONIX       | Victory Road 2F            | Grass     | 44     | 15.2%  |                                                               |
