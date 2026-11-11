@@ -174,6 +174,13 @@ DisplayPokemonCenterDialogue::
 
 	inc hl
 	homecall DisplayPokemonCenterDialogue_
+; TEXT: SHORT ends with nothing on screen to dismiss, so DisplayPokemonCenterDialogue_
+; flags "don't wait for a button press". Consume and clear it here so it can't leak.
+	ld hl, wDoNotWaitForButtonPressAfterDisplayingText
+	ld a, [hl]
+	ld [hl], 0
+	and a
+	jp nz, HoldTextDisplayOpen
 	jp AfterDisplayingTextID
 
 DisplaySafariGameOverText::

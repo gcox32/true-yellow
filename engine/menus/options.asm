@@ -5,7 +5,8 @@
 	const OPT_BATTLE_STYLE ; 2
 	const OPT_SOUND        ; 3
 	const OPT_PRINTER      ; 4
-	const_skip 2
+	const OPT_SHORT_TEXT   ; 5
+	const_skip 1
 	const OPT_CANCEL       ; 7
 DEF NUM_OPTIONS EQU const_value ; 8
 
@@ -47,7 +48,7 @@ OptionMenuJumpTable:
 	dw OptionsMenu_BattleStyle
 	dw OptionsMenu_SpeakerSettings
 	dw OptionsMenu_GBPrinterBrightness
-	dw OptionsMenu_Dummy
+	dw OptionsMenu_ShortText
 	dw OptionsMenu_Dummy
 	dw OptionsMenu_Cancel
 
@@ -371,6 +372,29 @@ GetGBPrinterBrightness:
 	lb de, PRINTER_BRIGHTNESS_DARKER, PRINTER_BRIGHTNESS_LIGHTEST
 	ret
 
+OptionsMenu_ShortText:
+	ldh a, [hJoy5]
+	and PAD_LEFT | PAD_RIGHT
+	jr z, .nothingPressed
+	ld hl, wLetterPrintingDelayFlags
+	ld a, [hl]
+	xor 1 << BIT_SHORT_TEXT
+	ld [hl], a
+.nothingPressed
+	ld a, [wLetterPrintingDelayFlags]
+	ld de, .Full
+	bit BIT_SHORT_TEXT, a
+	jr z, .place
+	ld de, .Short
+.place
+	hlcoord 8, 12
+	call PlaceString
+	and a ; clear carry flag
+	ret
+
+.Full:  db "FULL @"
+.Short: db "SHORT@"
+
 OptionsMenu_Dummy:
 	and a ; clear carry flag
 	ret
@@ -404,9 +428,9 @@ OptionsControl:
 	scf
 	ret
 .doNotWrap
-	cp OPT_PRINTER ; skip the next two dummy options
+	cp OPT_SHORT_TEXT ; skip the next dummy option
 	jr c, .increase
-	ld [hl], OPT_CANCEL - 1 ; Cancel is after Print
+	ld [hl], OPT_CANCEL - 1 ; Cancel is after Text
 .increase
 	inc [hl]
 	scf
@@ -414,9 +438,9 @@ OptionsControl:
 
 .pressedUp
 	ld a, [hl]
-	cp OPT_CANCEL ; skip the previous two dummy options
+	cp OPT_CANCEL ; skip the previous dummy option
 	jr nz, .doNotSkip
-	ld [hl], OPT_PRINTER ; Print is before Cancel
+	ld [hl], OPT_SHORT_TEXT ; Text is before Cancel
 	scf
 	ret
 .doNotSkip
@@ -456,7 +480,7 @@ InitOptionsMenu:
 	call PlaceString
 	xor a
 	ld [wOptionsCursorLocation], a
-	ld c, 5 ; the number of options to loop through
+	ld c, OPT_SHORT_TEXT + 1 ; the number of options to loop through
 .loop
 	push bc
 	call GetOptionPointer ; updates the next option
@@ -477,7 +501,8 @@ AllOptionsText:
 	next "ANIMATION  :"
 	next "BATTLESTYLE:"
 	next "SOUND:"
-	next "PRINT:@"
+	next "PRINT:"
+	next "TEXT :@"
 
 OptionMenuCancelText:
 	db "CANCEL@"

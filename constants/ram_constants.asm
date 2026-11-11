@@ -51,6 +51,8 @@ DEF PRINTER_BRIGHTNESS_DARKEST  EQU $7f
 	const_def
 	const BIT_FAST_TEXT_DELAY ; 0
 	const BIT_TEXT_DELAY      ; 1
+	const_skip 5
+	const BIT_SHORT_TEXT      ; 7 ; OPTIONS "TEXT: SHORT" (saved; every writer of this byte saves/restores it)
 
 ; wCurMapTileset
 DEF BIT_NO_PREVIOUS_MAP EQU 7

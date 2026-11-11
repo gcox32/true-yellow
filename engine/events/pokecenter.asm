@@ -1,4 +1,6 @@
 DisplayPokemonCenterDialogue_::
+	xor a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a ; wait for a button press afterwards unless TEXT: SHORT says otherwise
 	ld a, [wCurMap]
 	cp PEWTER_POKECENTER
 	jr nz, .regularCenter
@@ -9,6 +11,9 @@ DisplayPokemonCenterDialogue_::
 	ret
 .regularCenter
 	call SaveScreenTilesToBuffer1 ; save screen
+	ld a, [wLetterPrintingDelayFlags]
+	bit BIT_SHORT_TEXT, a
+	jr nz, .shortIntro
 	ld hl, PokemonCenterWelcomeText
 	call PrintText
 	ld hl, wStatusFlags4
@@ -17,6 +22,14 @@ DisplayPokemonCenterDialogue_::
 	set BIT_USED_POKECENTER, [hl]
 	jr nz, .skipShallWeHealYourPokemon
 	ld hl, ShallWeHealYourPokemonText
+	jr .printShallWeHeal
+.shortIntro
+; TEXT: SHORT - straight to "Shall we heal your #MON?"
+	ld hl, wStatusFlags4
+	set BIT_UNKNOWN_4_1, [hl]
+	set BIT_USED_POKECENTER, [hl]
+	ld hl, ShallWeHealYourPokemonShortText
+.printShallWeHeal
 	call PrintText
 .skipShallWeHealYourPokemon
 	call YesNoChoicePokeCenter ; yes/no menu
@@ -34,10 +47,14 @@ DisplayPokemonCenterDialogue_::
 	call UpdateSprites
 	callfar PikachuWalksToNurseJoy
 .notHealingPlayerPikachu
+	ld a, [wLetterPrintingDelayFlags]
+	bit BIT_SHORT_TEXT, a
+	jr nz, .skipNeedYourPokemon
 	ld hl, NeedYourPokemonText
 	call PrintText
 	ld c, 64
 	call DelayFrames
+.skipNeedYourPokemon
 	call CheckPikachuFollowingPlayer
 	jr nz, .playerPikachuNotOnScreen
 	call DisablePikachuOverworldSpriteDrawing
@@ -68,7 +85,12 @@ DisplayPokemonCenterDialogue_::
 .doNotReturnPikachu
 	lb bc, 1, 0
 	call Func_6ebb
+	ld a, [wLetterPrintingDelayFlags]
+	bit BIT_SHORT_TEXT, a
 	ld hl, PokemonFightingFitText
+	jr z, .printFightingFit
+	ld hl, PokemonFightingFitShortText
+.printFightingFit
 	call PrintText
 	callfar IsStarterPikachuAliveInOurParty
 	jr nc, .notInParty
@@ -92,8 +114,15 @@ DisplayPokemonCenterDialogue_::
 .declinedHealing
 	call LoadScreenTilesFromBuffer1 ; restore screen
 .done
+; TEXT: SHORT has no farewell line, so tell DisplayPokemonCenterDialogue not to
+; wait for a button press afterwards (nothing would be on screen to dismiss)
+	ld a, [wLetterPrintingDelayFlags]
+	and 1 << BIT_SHORT_TEXT
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	jr nz, .skipFarewell
 	ld hl, PokemonCenterFarewellText
 	call PrintText
+.skipFarewell
 	call UpdateSprites
 	ret
 
@@ -129,6 +158,14 @@ PokemonCenterWelcomeText:
 ShallWeHealYourPokemonText:
 	text_pause
 	text_far _ShallWeHealYourPokemonText
+	text_end
+
+ShallWeHealYourPokemonShortText:
+	text_far _ShallWeHealYourPokemonText
+	text_end
+
+PokemonFightingFitShortText:
+	text_far _PokemonFightingFitShortText
 	text_end
 
 NeedYourPokemonText:
