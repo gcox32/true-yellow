@@ -143,8 +143,6 @@ SaveMenu:
 	call SaveTheGame_YesOrNo
 	and a   ;|0 = Yes|1 = No|
 	ret nz
-	ld c, 10
-	call DelayFrames
 	ld a, [wSaveFileStatus]
 	cp $1
 	jr z, .save
@@ -155,11 +153,7 @@ SaveMenu:
 	and a
 	ret nz
 .save
-	call SaveGameData
-	ld hl, SavingText
-	call PrintText
-	ld c, 128
-	call DelayFrames
+	call SaveGameData ; data is written here; no "Saving..." pause afterwards
 	ld hl, GameSavedText
 	call PrintText
 	ld c, 10
@@ -183,10 +177,6 @@ SaveTheGame_YesOrNo:
 
 WouldYouLikeToSaveText:
 	text_far _WouldYouLikeToSaveText
-	text_end
-
-SavingText:
-	text_far _SavingText
 	text_end
 
 GameSavedText:
