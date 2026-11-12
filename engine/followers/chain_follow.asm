@@ -2381,7 +2381,9 @@ IsPlayerTalkingToFollowerOrPikachu::
 ; Combined check for talking to Pikachu, Misty, or Brock
 ; Called from Func_0ffe via jpfar
 	call IsPlayerTalkingToPikachu
-	; Fall through to check followers
+	call IsPlayerTalkingToFollower
+	; nothing claimed the A press? offer SURF/CUT/STRENGTH if facing water/tree/boulder
+	jpfar CheckFieldMovePrompt ; engine/overworld/field_move_prompts.asm
 
 IsPlayerTalkingToFollower::
 ; Check if player is talking to Misty or Brock follower

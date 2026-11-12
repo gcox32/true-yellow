@@ -446,3 +446,8 @@ SECTION "Follower Talk", ROMX
 
 INCLUDE "engine/followers/follower_talk.asm"
 INCLUDE "data/followers/follower_lines.asm"
+
+
+SECTION "Field Move Prompts", ROMX
+
+INCLUDE "engine/overworld/field_move_prompts.asm"
