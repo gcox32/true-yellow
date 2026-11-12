@@ -100,16 +100,19 @@ they're listed rather than quietly dropped.
 |------------|----------------------------|-----------|--------|--------|---------------------------------------------------------------|
 | BULBASAUR  | Cerulean Melanie's House   | Gift      | 10     | —      |                                                               |
 | IVYSAUR    | Route 16                   | Grass     | 20-22  | 39.8%  |                                                               |
+| IVYSAUR    | Route 23                   | Grass     | 46     | 5.1%   |                                                               |
 | VENUSAUR   | Cerulean Cave B1F          | Grass     | 90     | 4.3%   |                                                               |
 | CHARMANDER | Route 24                   | Gift      | 10     | —      |                                                               |
 | CHARMANDER | Route 9                    | Grass     | 20     | 4.3%   |                                                               |
 | CHARMANDER | Pokémon Mansion 1F         | Grass     | 33     | 9.8%   |                                                               |
 | CHARMELEON | Safari Zone North          | Grass     | 28     | 1.2%   |                                                               |
+| CHARMELEON | Route 23                   | Grass     | 44     | 4.3%   |                                                               |
 | CHARIZARD  | Cerulean Cave B1F          | Grass     | 90     | 5.1%   |                                                               |
 | SQUIRTLE   | Route 24                   | Grass     | 8      | 4.3%   |                                                               |
 | SQUIRTLE   | Vermilion City             | Gift      | 10     | —      |                                                               |
 | WARTORTLE  | Seafoam Islands B1F        | Grass     | 30     | 9.8%   |                                                               |
 | WARTORTLE  | Seafoam Islands B2F        | Grass     | 32     | 5.1%   |                                                               |
+| WARTORTLE  | Route 23                   | Water     | 45     | 4.3%   |                                                               |
 | BLASTOISE  | Cerulean Cave B1F          | Water     | 78-85  | 25.0%  |                                                               |
 | BLASTOISE  | Cerulean Cave 1F           | Water     | 64     | 1.2%   |                                                               |
 | CATERPIE   | Viridian Forest            | Grass     | 4-5    | 29.7%  |                                                               |
@@ -200,7 +203,6 @@ they're listed rather than quietly dropped.
 | NIDORAN♂   | Safari Zone Center         | Grass     | 23     | 9.8%   |                                                               |
 | NIDORAN♂   | Route 22                   | Grass     | 2-4    | 29.7%  |                                                               |
 | NIDORINO   | Route 9                    | Grass     | 18     | 5.1%   |                                                               |
-| NIDORINO   | Safari Zone North          | Grass     | 26     | 9.8%   |                                                               |
 | NIDORINO   | Route 23                   | Grass     | 44     | 9.8%   |                                                               |
 | NIDOKING   | Victory Road 1F            | Grass     | 42     | 5.1%   |                                                               |
 | NIDOKING   | Victory Road 3F            | Grass     | 47     | 9.8%   |                                                               |
@@ -306,7 +308,6 @@ they're listed rather than quietly dropped.
 | GROWLITHE  | Pokémon Mansion 2F         | Grass     | 33-35  | 39.8%  |                                                               |
 | GROWLITHE  | Pokémon Mansion 3F         | Grass     | 30-35  | 29.7%  |                                                               |
 | GROWLITHE  | Pokémon Mansion B1F        | Grass     | 36     | 15.2%  |                                                               |
-| ARCANINE   | Route 23                   | Grass     | 46     | 5.1%   |                                                               |
 | ARCANINE   | Cerulean Cave 2F           | Grass     | 62     | 9.8%   |                                                               |
 | POLIWAG    | any water                  | Good Rod  | 10     | 50.0%  | one of the Good Rod's 2 mons, wherever you cast it            |
 | POLIWAG    | Viridian City              | Super Rod | 5-15   | 100.0% | slot 1, 2, 3, 4                                               |
@@ -438,7 +439,7 @@ they're listed rather than quietly dropped.
 | DEWGONG    | Seafoam Islands B4F        | Grass     | 35     | 19.9%  |                                                               |
 | DEWGONG    | Seafoam Islands B4F        | Water     | 36     | 9.8%   |                                                               |
 | DEWGONG    | Cinnabar Lab Trade Room    | Trade     | yours  | —      | trade a GROWLITHE; arrives as CEZANNE                         |
-| DEWGONG    | Route 23                   | Water     | 42-46  | 35.2%  |                                                               |
+| DEWGONG    | Route 23                   | Water     | 42-46  | 30.9%  |                                                               |
 | GRIMER     | Celadon City               | Water     | 25-32  | 94.5%  |                                                               |
 | GRIMER     | Pokémon Mansion 1F         | Grass     | 33     | 9.8%   |                                                               |
 | GRIMER     | Pokémon Mansion 2F         | Grass     | 34     | 9.8%   |                                                               |
@@ -481,7 +482,6 @@ they're listed rather than quietly dropped.
 | ONIX       | Diglett's Cave             | Grass     | 31     | 1.2%   |                                                               |
 | ONIX       | Rock Tunnel 1F             | Grass     | 20     | 5.1%   |                                                               |
 | ONIX       | Rock Tunnel B1F            | Grass     | 20     | 5.1%   |                                                               |
-| ONIX       | Route 23                   | Grass     | 60     | 4.3%   |                                                               |
 | ONIX       | Victory Road 1F            | Grass     | 40     | 9.8%   |                                                               |
 | ONIX       | Victory Road 2F            | Grass     | 44     | 15.2%  |                                                               |
 | DROWZEE    | Route 7                    | Grass     | 24-26  | 9.4%   |                                                               |
@@ -519,6 +519,7 @@ they're listed rather than quietly dropped.
 | EXEGGCUTE  | Safari Zone West           | Grass     | 25     | 9.8%   |                                                               |
 | EXEGGCUTE  | Safari Zone Center         | Grass     | 24     | 19.9%  |                                                               |
 | EXEGGUTOR  | Route 12                   | Grass     | 31     | 1.2%   |                                                               |
+| EXEGGUTOR  | Safari Zone North          | Grass     | 27     | 4.3%   |                                                               |
 | CUBONE     | Rock Tunnel 1F             | Grass     | 20     | 9.8%   |                                                               |
 | CUBONE     | Route 10                   | Grass     | 20     | 5.1%   |                                                               |
 | CUBONE     | Pokémon Tower 3F           | Grass     | 20-22  | 9.4%   |                                                               |
@@ -549,14 +550,14 @@ they're listed rather than quietly dropped.
 | WEEZING    | Cerulean Cave 1F           | Grass     | 59     | 5.1%   | FLOATING                                                      |
 | RHYHORN    | Safari Zone North          | Grass     | 25     | 19.9%  |                                                               |
 | RHYHORN    | Safari Zone Center         | Grass     | 27     | 5.1%   |                                                               |
+| RHYHORN    | Route 23                   | Grass     | 40     | 19.9%  |                                                               |
 | RHYDON     | Cinnabar Lab Trade Room    | Trade     | yours  | —      | trade a GOLDUCK; arrives as BUFFY                             |
-| RHYDON     | Route 23                   | Grass     | 60     | 1.2%   |                                                               |
 | RHYDON     | Victory Road 2F            | Grass     | 44     | 9.8%   |                                                               |
 | RHYDON     | Victory Road 3F            | Grass     | 50     | 5.1%   |                                                               |
 | RHYDON     | Cerulean Cave 2F           | Grass     | 62     | 19.9%  |                                                               |
 | CHANSEY    | Safari Zone East           | Grass     | 26     | 5.1%   |                                                               |
 | CHANSEY    | Safari Zone Center         | Grass     | 26     | 1.2%   |                                                               |
-| CHANSEY    | Route 23                   | Grass     | 40     | 19.9%  |                                                               |
+| CHANSEY    | Route 23                   | Grass     | 45     | 1.2%   |                                                               |
 | CHANSEY    | Cerulean Cave B1F          | Grass     | 82-100 | 21.1%  |                                                               |
 | TANGELA    | Route 13                   | Grass     | 36-38  | 5.5%   |                                                               |
 | TANGELA    | Route 21                   | Grass     | 21-30  | 55.1%  |                                                               |
@@ -651,7 +652,7 @@ they're listed rather than quietly dropped.
 | PINSIR     | Route 13                   | Grass     | 32     | 5.1%   |                                                               |
 | PINSIR     | Safari Zone North          | Grass     | 27     | 9.8%   |                                                               |
 | TAUROS     | Route 14                   | Grass     | 28-32  | 5.5%   |                                                               |
-| TAUROS     | Safari Zone North          | Grass     | 27     | 4.3%   |                                                               |
+| TAUROS     | Safari Zone North          | Grass     | 26     | 9.8%   |                                                               |
 | TAUROS     | Safari Zone Center         | Grass     | 26-29  | 25.0%  |                                                               |
 | MAGIKARP   | any water                  | Old Rod   | 5      | 100.0% | every Old Rod bite, wherever you cast it                      |
 | MAGIKARP   | Route 25                   | Water     | 25-35  | 25.0%  |                                                               |

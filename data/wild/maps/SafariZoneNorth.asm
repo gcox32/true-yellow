@@ -4,11 +4,11 @@ SafariZoneNorthWildMons:
 	db 24, NIDORAN_M
 	db 25, EXEGGCUTE
 	db 27, KANGASKHAN
-	db 26, NIDORINO
+	db 26, TAUROS
 	db 27, PINSIR
 	db 30, KANGASKHAN
 	db 29, VENOMOTH
-	db 27, TAUROS
+	db 27, EXEGGUTOR
 	db 28, CHARMELEON
 	end_grass_wildmons
 

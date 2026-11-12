@@ -1,15 +1,15 @@
 Route23WildMons:
 	def_grass_wildmons 40 ; encounter rate
-	db 40, CHANSEY
+	db 40, RHYHORN
 	db 41, PRIMEAPE
 	db 40, ARBOK
 	db 41, FEAROW
 	db 43, NIDORINA
 	db 44, NIDORINO
 	db 44, PIDGEOT
-	db 46, ARCANINE
-	db 60, ONIX
-	db 60, RHYDON
+	db 46, IVYSAUR
+	db 44, CHARMELEON
+	db 45, CHANSEY
 	end_grass_wildmons
 
 	def_water_wildmons 5 ; encounter rate
@@ -21,6 +21,6 @@ Route23WildMons:
 	db 41, SEAKING
 	db 37, POLIWHIRL
 	db 42, SEAKING
-	db 45, DEWGONG
+	db 45, WARTORTLE
 	db 46, DEWGONG
 	end_water_wildmons
