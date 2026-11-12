@@ -2355,6 +2355,7 @@ wWalkBikeSurfState:: db
 	ds 10
 
 wTownVisitedFlag:: flag_array NUM_FLY_LOCATIONS
+	ASSERT wTownVisitedFlag + 3 == @ ; grew from 2 to 3 bytes; the padding below shrank to match
 
 ; starts at 502
 wSafariSteps:: dw
@@ -2364,7 +2365,7 @@ wFossilItem:: db
 ; mon that will result from the item
 wFossilMon:: db
 
-	ds 2
+	ds 1
 
 ; trainer classes start at OPP_ID_OFFSET
 wEnemyMonOrTrainerClass:: db

@@ -13,6 +13,9 @@ MarkTownVisitedAndLoadMissableObjects::
 	ld c, FLY_ROUTE_25_BIT
 	cp BILLS_HOUSE
 	jr z, .markVisited
+	ld c, FLY_ROUTE_23_BIT
+	cp VICTORY_ROAD_1F
+	jr z, .markVisited
 	ld c, FLY_ROUTE_20_BIT
 	cp SEAFOAM_ISLANDS_1F
 	jr z, .seafoam1F

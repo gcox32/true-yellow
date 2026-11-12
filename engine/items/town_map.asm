@@ -324,6 +324,7 @@ FlyLocationsOrder:
 	fly_location FUCHSIA_CITY
 	fly_location ROUTE_20, FLY_ROUTE_20_BIT ; Seafoam Islands NW entrance
 	fly_location CINNABAR_ISLAND
+	fly_location ROUTE_23, FLY_ROUTE_23_BIT ; Victory Road south entrance
 	fly_location INDIGO_PLATEAU
 	fly_location SAFFRON_CITY
 	db $ff ; end

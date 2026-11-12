@@ -29,14 +29,15 @@ ENDM
 	map_const SAFFRON_CITY,                  20, 18 ; $0A
 DEF NUM_CITY_MAPS EQU const_value
 ; extra fly destinations beyond the cities, flagged in wTownVisitedFlag after the city bits
-; (2 bytes of flags = room for 16 destinations; past that the array, and the save layout, grows)
+; (3 bytes of flags = room for 24 destinations; the 3rd byte came from the padding after wFossilMon)
 DEF FLY_ROUTE_10_BIT EQU NUM_CITY_MAPS     ; Rock Tunnel Pokemon Center
 DEF FLY_ROUTE_4_BIT  EQU NUM_CITY_MAPS + 1 ; Mt. Moon Pokemon Center
 DEF FLY_ROUTE_20_BIT EQU NUM_CITY_MAPS + 2 ; Seafoam Islands NW entrance
 DEF FLY_ROUTE_12_BIT EQU NUM_CITY_MAPS + 3 ; Route 12 fishing (Super Rod) house
 DEF FLY_ROUTE_25_BIT EQU NUM_CITY_MAPS + 4 ; Sea Cottage (Bill's lighthouse)
-DEF NUM_FLY_LOCATIONS EQU NUM_CITY_MAPS + 5
-	ASSERT NUM_FLY_LOCATIONS <= 16 ; wTownVisitedFlag is 2 bytes
+DEF FLY_ROUTE_23_BIT EQU NUM_CITY_MAPS + 5 ; Victory Road south entrance
+DEF NUM_FLY_LOCATIONS EQU NUM_CITY_MAPS + 6
+	ASSERT NUM_FLY_LOCATIONS <= 24 ; wTownVisitedFlag is 3 bytes
 	map_const UNUSED_MAP_0B,                  0,  0 ; $0B
 DEF FIRST_ROUTE_MAP EQU const_value
 	map_const ROUTE_1,                       10, 18 ; $0C
