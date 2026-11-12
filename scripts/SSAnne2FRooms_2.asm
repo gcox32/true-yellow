@@ -25,11 +25,3 @@ SSAnne2FRoomsPrintBrunetteGirlText::
 	text_far _SSAnne2FRoomsBrunetteGirlText
 	text_end
 
-SSAnne2FRoomsPrintBeautyText::
-	ld hl, .text
-	call PrintText
-	ret
-
-.text
-	text_far _SSAnne2FRoomsBeautyText
-	text_end

@@ -100,7 +100,6 @@ DEF SHOW EQU $15
 	const HS_VICTORY_ROAD_2F_ITEM_1        ; 5C
 	const HS_VICTORY_ROAD_2F_ITEM_2        ; 5D
 	const HS_VICTORY_ROAD_2F_ITEM_3        ; 5E
-	const HS_VICTORY_ROAD_2F_ITEM_4        ; 5F
 	const HS_VICTORY_ROAD_2F_BOULDER       ; 60
 	const HS_BILL_POKEMON                  ; 61
 	const HS_BILL_1                        ; 62
@@ -113,7 +112,6 @@ DEF SHOW EQU $15
 	const HS_MT_MOON_1F_ITEM_3             ; 69
 	const HS_MT_MOON_1F_ITEM_4             ; 6A
 	const HS_MT_MOON_1F_ITEM_5             ; 6B
-	const HS_MT_MOON_1F_ITEM_6             ; 6C
 	const HS_MT_MOON_B2F_JESSIE            ; 6D
 	const HS_MT_MOON_B2F_JAMES             ; 6E
 	const HS_MT_MOON_B2F_FOSSIL_1          ; 6F

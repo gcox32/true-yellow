@@ -10,7 +10,6 @@
 	const_export MTMOON1F_MOON_STONE
 	const_export MTMOON1F_RARE_CANDY
 	const_export MTMOON1F_ESCAPE_ROPE
-	const_export MTMOON1F_POTION2
 	const_export MTMOON1F_TM_WATER_GUN
 
 MtMoon1F_Object:
@@ -38,7 +37,8 @@ MtMoon1F_Object:
 	object_event  2,  2, SPRITE_POKE_BALL, STAY, NONE, TEXT_MTMOON1F_MOON_STONE, MOON_STONE
 	object_event 35, 31, SPRITE_POKE_BALL, STAY, NONE, TEXT_MTMOON1F_RARE_CANDY, RARE_CANDY
 	object_event 36, 23, SPRITE_POKE_BALL, STAY, NONE, TEXT_MTMOON1F_ESCAPE_ROPE, ESCAPE_ROPE
-	object_event 20, 33, SPRITE_POKE_BALL, STAY, NONE, TEXT_MTMOON1F_POTION2, POTION
+	; POTION2 is a hidden item at (20, 33): followers own sprite structs 13-15,
+	; so maps get at most 12 objects.
 	object_event  5, 32, SPRITE_POKE_BALL, STAY, NONE, TEXT_MTMOON1F_TM_WATER_GUN, TM_WATER_GUN
 
 	def_warps_to MT_MOON_1F

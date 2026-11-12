@@ -31,6 +31,7 @@ HiddenObjectMaps:
 	dbw ROUTE_17,                     Route17HiddenObjects
 	dbw ROUTE_23,                     Route23HiddenObjects
 	dbw VICTORY_ROAD_2F,              VictoryRoad2HiddenObjects
+	dbw MT_MOON_1F,                   MtMoon1FHiddenObjects
 	dbw ROUTE_25,                     Route25HiddenObjects
 	dbw BILLS_HOUSE,                  BillsHouseHiddenObjects
 	dbw ROUTE_4,                      Route4HiddenObjects
@@ -248,6 +249,11 @@ Route23HiddenObjects:
 VictoryRoad2HiddenObjects:
 	hidden_object  5,  2, ULTRA_BALL, HiddenItems
 	hidden_object 26,  7, FULL_RESTORE, HiddenItems
+	hidden_object 11,  0, GUARD_SPEC, HiddenItems ; was a POKE_BALL object
+	db -1 ; end
+
+MtMoon1FHiddenObjects:
+	hidden_object 20, 33, POTION, HiddenItems ; was a POKE_BALL object
 	db -1 ; end
 
 Route25HiddenObjects:

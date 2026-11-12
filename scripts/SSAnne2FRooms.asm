@@ -27,7 +27,6 @@ SSAnne2FRooms_TextPointers:
 	dw_const SSAnne2FRoomsGentleman5Text,   TEXT_SSANNE2FROOMS_GENTLEMAN5
 	dw_const SSAnne2FRoomsLittleBoyText,    TEXT_SSANNE2FROOMS_LITTLE_BOY
 	dw_const SSAnne2FRoomsBrunetteGirlText, TEXT_SSANNE2FROOMS_BRUNETTE_GIRL
-	dw_const SSAnne2FRoomsBeautyText,       TEXT_SSANNE2FROOMS_BEAUTY
 
 SSAnne9TrainerHeaders:
 	def_trainers
@@ -112,11 +111,6 @@ SSAnne2FRoomsLittleBoyText:
 SSAnne2FRoomsBrunetteGirlText:
 	text_asm
 	farcall SSAnne2FRoomsPrintBrunetteGirlText
-	jp TextScriptEnd
-
-SSAnne2FRoomsBeautyText:
-	text_asm
-	farcall SSAnne2FRoomsPrintBeautyText
 	jp TextScriptEnd
 
 SSAnne2FRoomsGentleman1BattleText:

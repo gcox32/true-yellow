@@ -61,5 +61,7 @@ HiddenItemCoords:
 	hidden_item SAFARI_ZONE_GATE,              10,   1 ; inaccessible
 	hidden_item POKEMON_MANSION_1F,             8,  16
 	hidden_item POWER_PLANT,                   20,  32 ; appended, keeps earlier flag indices stable
+	hidden_item VICTORY_ROAD_2F,               11,   0 ; appended
+	hidden_item MT_MOON_1F,                    20,  33 ; appended
 	assert_max_table_length MAX_HIDDEN_ITEMS
 	db -1 ; end

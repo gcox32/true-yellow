@@ -10,8 +10,6 @@
 - [x] Move armor mewtwo event into silph co building somewhere
 - [x] Location table for brock and misty responses if memory allows (data/followers/follower_lines.asm: map/range + event-flag table, first match wins; engine in engine/followers/follower_talk.asm. Placeholder lines in - WRITE REAL LINES. NEEDS IN-GAME TEST.)
 - [x] Fighting Dojo as rechallengable training hall (after the Dojo is beaten: standing on the door mat re-arms the Master + 4 Blackbelts, but only once the Master has been beaten, so stepping out to heal mid-gauntlet keeps progress; ReadTrainer swaps in Fighting-themed teams at BLACKBELT 10-14 (DOJO_TRAINING_TEAMS_OFFSET) whose level byte is an offset from the player's highest party level: Blackbelts -5..-2, Master +2, clamped 2-100. Money/moves scale with level. New Master lines in text/FightingDojo.asm. Fighting-only restriction dropped. Tested in-game.)
-- [ ] JUMP KICK and HI-JUMP KICK crash damage need to be higher
-
 
 ## Bugs
 - [x] Investigate recoil effects--not sure they're working (RECOIL_EFFECT dispatched to calc-only helper; now points at DefaultRecoilEffect_)
@@ -34,6 +32,11 @@
       cascade anchored on the landing tile, so they emerge from it one per step. Zero ROM0 bytes. NEEDS IN-GAME TEST.)
 - [x] exiting surf throws off follower positions
 - [x] HAZE is curing POISON status
+- [x] JUMP KICK and HI-JUMP KICK crash damage need to be higher (now 1/2 of the damage it would have dealt, Gen 3/4 rule; was 1/4. NEEDS IN-GAME TEST.)
+- [x] possible overworld sprite overflow on certain maps (3 maps had 13 objects; object 13 is Misty's sprite struct, so it never appeared.
+      Mt Moon 1F's second POTION and Victory Road 2F GUARD_SPEC balls are now hidden items at the same tile (which brings
+      VR2F BOULDER3, the one dropped from 3F, back to object 12). SS Anne 2F Rooms BEAUTY removed. Distinct-sprite limits
+      re-audited: clean. Shifts hide/show flags, so old saves may show/hide items wrongly. NEEDS IN-GAME TEST.)
 
 ## Bugfixes from PureRGB
 - [x] High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)

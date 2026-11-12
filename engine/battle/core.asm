@@ -4157,12 +4157,10 @@ PrintMoveFailureText:
 	; if you get here, the mon used jump kick or hi jump kick and missed.
 	; PureRGBnote: FIXED: in the original game wDamage is always 0 here (MoveHitTest
 	; zeroes it on a miss), so the crash damage was always just 1. Read the preserved
-	; pre-miss damage from wDamageIntention instead and deal 1/4 of it.
+	; pre-miss damage from wDamageIntention instead and deal 1/2 of it (Gen 3/4 rule).
 	ld hl, wDamageIntention
 	ld a, [hli]
 	ld b, [hl]
-	srl a
-	rr b
 	srl a
 	rr b
 	ld hl, wDamage + 1

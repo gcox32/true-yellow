@@ -122,7 +122,3 @@ _SSAnne2FRoomsBrunetteGirlText::
 	cont "pale!"
 	done
 
-_SSAnne2FRoomsBeautyText::
-	text "I hear many people"
-	line "get seasick!"
-	done
