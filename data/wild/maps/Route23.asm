@@ -6,7 +6,7 @@ Route23WildMons:
 	db 41, FEAROW
 	db 43, NIDORINA
 	db 44, NIDORINO
-	db 45, CHANSEY
+	db 44, PIDGEOT
 	db 46, ARCANINE
 	db 60, ONIX
 	db 60, RHYDON

@@ -6,7 +6,7 @@ CeruleanCave2FWildMons:
 	db 62, ARCANINE
 	db 60, GENGAR
 	db 60, ARBOK
-	db 61, DODRIO
+	db 61, VILEPLUME
 	db 60, PARASECT
 	db 62, LICKITUNG
 	db 70, DONPHAN

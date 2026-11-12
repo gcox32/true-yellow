@@ -9,18 +9,18 @@ SafariZoneNorthWildMons:
 	db 30, KANGASKHAN
 	db 29, VENOMOTH
 	db 27, TAUROS
-	db 28, SCYTHER
+	db 28, CHARMELEON
 	end_grass_wildmons
 
 	def_water_wildmons 7 ; encounter rate
-	db 27, PSYDUCK
-	db 27, SLOWPOKE
-	db 28, GOLDEEN
-	db 29, PSYDUCK
-	db 26, POLIWAG
-	db 30, SLOWPOKE
-	db 32, GOLDUCK
-	db 30, SEAKING
-	db 34, GOLDUCK
-	db 35, SLOWBRO
+	db 24, PSYDUCK
+	db 25, GOLDEEN
+	db 26, PSYDUCK
+	db 23, POLIWAG
+	db 27, SEAKING
+	db 28, PSYDUCK
+	db 29, GOLDUCK
+	db 27, POLIWHIRL
+	db 31, GOLDUCK
+	db 33, GOLDUCK
 	end_water_wildmons

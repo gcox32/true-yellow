@@ -13,14 +13,14 @@ Route6WildMons: ; Saffron City South Gate
 	end_grass_wildmons
 
 	def_water_wildmons 3 ; encounter rate
+	db 13, PSYDUCK
+	db 12, GOLDEEN
+	db 14, PSYDUCK
+	db 12, POLIWAG
 	db 15, PSYDUCK
-	db 15, PSYDUCK
-	db 15, PSYDUCK
-	db 15, PSYDUCK
-	db 15, PSYDUCK
-	db 15, PSYDUCK
-	db 15, PSYDUCK
-	db 15, PSYDUCK
-	db 15, GOLDUCK
-	db 20, GOLDUCK
+	db 16, POLIWHIRL
+	db 15, GOLDEEN
+	db 16, PSYDUCK
+	db 17, PSYDUCK
+	db 19, PSYDUCK
 	end_water_wildmons

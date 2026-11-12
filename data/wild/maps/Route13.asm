@@ -13,14 +13,14 @@ Route13WildMons:
 	end_grass_wildmons
 
 	def_water_wildmons 3 ; encounter rate
-	db 15, SLOWPOKE
-	db 15, SLOWPOKE
-	db 15, SLOWPOKE
-	db 15, SLOWPOKE
-	db 15, SLOWPOKE
-	db 15, SLOWPOKE
-	db 15, SLOWPOKE
-	db 15, SLOWPOKE
-	db 15, SLOWBRO
-	db 20, SLOWBRO
+	db 29, SLOWPOKE
+	db 28, KRABBY
+	db 29, TENTACOOL
+	db 30, SLOWPOKE
+	db 29, STARYU
+	db 29, SHELLDER
+	db 32, SLOWBRO
+	db 32, KINGLER
+	db 33, TENTACRUEL
+	db 35, STARMIE
 	end_water_wildmons

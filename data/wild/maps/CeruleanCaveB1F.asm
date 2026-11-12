@@ -19,7 +19,7 @@ CeruleanCaveB1FWildMons:
 	db 80, STARMIE
 	db 80, TENTACRUEL
 	db 82, CLOYSTER
-	db 82, DEWGONG
+	db 82, SEADRA
 	db 85, BLASTOISE
 	db 85, GYARADOS
 	db 90, DRAGONITE

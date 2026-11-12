@@ -13,14 +13,14 @@ SafariZoneWestWildMons:
 	end_grass_wildmons
 
 	def_water_wildmons 7 ; encounter rate
-	db 27, PSYDUCK
-	db 26, GOLDEEN
-	db 27, SLOWPOKE
-	db 29, PSYDUCK
-	db 26, POLIWAG
-	db 29, SLOWPOKE
-	db 30, SEAKING
-	db 32, GOLDUCK
-	db 32, SLOWBRO
-	db 35, GOLDUCK
+	db 26, SLOWPOKE
+	db 20, MAGIKARP
+	db 28, SLOWPOKE
+	db 25, GOLDEEN
+	db 25, MAGIKARP
+	db 30, SLOWPOKE
+	db 29, SEAKING
+	db 31, SLOWBRO
+	db 29, GYARADOS
+	db 25, DRATINI
 	end_water_wildmons
