@@ -154,6 +154,13 @@ LoadTownMap_Fly::
 	call LoadFontTilePatterns
 	ld de, BirdSprite
 	ld b, BANK(BirdSprite)
+	; CHARIZARD/DRAGONITE fly with the Gen 2 dragon sprite (set in StartMenu_Pokemon.fly)
+	ld a, [wStatusFlags7]
+	bit BIT_FLY_ON_DRAGON, a
+	jr z, .gotFlySprite
+	ld de, DragonSprite
+	ld b, BANK(DragonSprite)
+.gotFlySprite
 	ld c, 12
 	ld hl, vSprites tile BIRD_BASE_TILE
 	call CopyVideoData

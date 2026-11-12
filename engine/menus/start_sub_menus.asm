@@ -141,6 +141,18 @@ StartMenu_Pokemon::
 	call PrintText
 	jp .loop
 .canFly
+	; easter egg: CHARIZARD/DRAGONITE fly with the Gen 2 dragon sprite
+	; (read by LoadBirdSpriteGraphics in the leave/enter map animations)
+	ld hl, wStatusFlags7
+	res BIT_FLY_ON_DRAGON, [hl]
+	ld a, [wCurPartySpecies]
+	cp CHARIZARD
+	jr z, .flyOnDragon
+	cp DRAGONITE
+	jr nz, .chooseFlyDestination
+.flyOnDragon
+	set BIT_FLY_ON_DRAGON, [hl]
+.chooseFlyDestination
 	call ChooseFlyDestination
 	ld a, [wStatusFlags6]
 	bit BIT_FLY_WARP, a

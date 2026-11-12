@@ -284,11 +284,23 @@ DoFlyAnimation:
 LoadBirdSpriteGraphics:
 	ld de, BirdSprite
 	ld b, BANK(BirdSprite)
+	ld a, [wStatusFlags7]
+	bit BIT_FLY_ON_DRAGON, a
+	jr z, .gotSprite
+	ld de, DragonSprite
+	ld b, BANK(DragonSprite)
+.gotSprite
+	push de
+	push bc
 	ld c, $c
 	ld hl, vNPCSprites
 	call CopyVideoData
-	ld de, BirdSprite tile 12 ; moving animation sprite
-	ld b, BANK(BirdSprite)
+	pop bc
+	pop hl
+	ld de, 12 tiles ; moving animation sprite
+	add hl, de
+	ld d, h
+	ld e, l
 	ld c, 12
 	ld hl, vNPCSprites2
 	jp CopyVideoData

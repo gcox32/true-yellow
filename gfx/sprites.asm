@@ -95,3 +95,10 @@ SECTION "Lapras Surf Sprite", ROMX
 
 ; From pokecrystal gfx/sprites/surf.png (Gen 2 Lapras surf sprite)
 LaprasSprite::           INCBIN "gfx/sprites/lapras.2bpp"
+
+
+SECTION "Dragon Fly Sprite", ROMX
+
+; From pokecrystal gfx/sprites/dragon.png (Gen 2 Charizard/Dragonite sprite),
+; used for the Fly animation when CHARIZARD or DRAGONITE uses Fly
+DragonSprite::           INCBIN "gfx/sprites/dragon.2bpp"
