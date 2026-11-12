@@ -488,6 +488,15 @@ BlackbeltData:
 	db 58, GRAVELER, MACHOKE, PRIMEAPE, 0
 ; Victory Road 2F
 	db 57, PINSIR, HITMONCHAN, MACHOKE, 0
+; Training-hall teams, used once the Dojo is beaten (see ReadTrainer).
+; Same order as the vanilla Dojo teams: wTrainerNo + DOJO_TRAINING_TEAMS_OFFSET.
+; The level byte is a signed offset from the player's highest party level.
+; Fighting Dojo (training hall)
+	db  2, POLIWRATH, ONIX, HITMONCHAN, HITMONLEE, MACHAMP, 0 ; KARATE MASTER
+	db -5, MACHOKE, PRIMEAPE, GRAVELER, 0
+	db -4, PRIMEAPE, MACHOKE, POLIWRATH, 0
+	db -3, HITMONCHAN, MACHOKE, PINSIR, 0
+	db -2, HITMONLEE, PRIMEAPE, FEAROW, 0
 
 Rival1Data:
 ; Oak's Lab

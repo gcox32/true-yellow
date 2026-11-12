@@ -35,10 +35,25 @@ _FightingDojoKarateMasterIWillGiveYouAPokemonText::
 	done
 
 _FightingDojoKarateMasterStayAndTrainWithUsText::
-	text "Ho!"
+	text "Ho! A fine bout!"
 
-	para "Stay and train at"
-	line "Karate with us!"
+	para "Step out, then"
+	line "come back in."
+
+	para "We will all be"
+	line "ready to spar"
+	cont "once more!"
+	done
+
+_FightingDojoKarateMasterTrainingText::
+	text "Ho! Back to train?"
+
+	para "My students and I"
+	line "will match your"
+	cont "strongest #MON!"
+
+	para "Show me what you"
+	line "have learned!"
 	done
 
 _FightingDojoBlackbelt1BattleText::

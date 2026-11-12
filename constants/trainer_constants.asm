@@ -63,3 +63,7 @@ ENDM
 	trainer_const AGATHA         ; $2E
 	trainer_const LANCE          ; $2F
 DEF NUM_TRAINERS EQU const_value - 1
+
+; Fighting Dojo training hall: BLACKBELT teams 1-5 are remapped to
+; 1+N..5+N once the Dojo is beaten (see ReadTrainer, BlackbeltData)
+DEF DOJO_TRAINING_TEAMS_OFFSET EQU 9

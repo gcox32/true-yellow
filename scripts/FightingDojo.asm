@@ -22,8 +22,21 @@ FightingDojo_ScriptPointers:
 	dw_const FightingDojoKarateMasterPostBattleScript, SCRIPT_FIGHTINGDOJO_KARATE_MASTER_POST_BATTLE
 
 FightingDojoDefaultScript:
+; Training hall: once the Dojo is beaten, standing on the door mat (just
+; walked in, or about to leave) re-arms the Master and all four Blackbelts,
+; but only after a completed loop (Master beaten), so the player can step
+; out to heal mid-gauntlet without losing progress.
+; (BIT_CUR_MAP_LOADED_1 can't be used: EndTrainerBattle sets it too.)
 	CheckEvent EVENT_DEFEATED_FIGHTING_DOJO
-	ret nz
+	jr z, .checkTrainers
+	CheckEventReuseA EVENT_BEAT_KARATE_MASTER
+	jr z, .checkTrainers
+	ld a, [wYCoord]
+	cp 11
+	jr nz, .checkTrainers
+	ResetEventRange EVENT_BEAT_KARATE_MASTER, EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
+	ret
+.checkTrainers
 	call CheckFightingMapTrainers
 	ld a, [wTrainerHeaderFlagBit]
 	and a
@@ -72,6 +85,10 @@ FightingDojoKarateMasterPostBattleScript:
 	ld [wJoyIgnore], a
 	SetEventRange EVENT_BEAT_KARATE_MASTER, EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
 	ld a, TEXT_FIGHTINGDOJO_KARATE_MASTER_I_WILL_GIVE_YOU_A_POKEMON
+	CheckEventHL EVENT_DEFEATED_FIGHTING_DOJO
+	jr z, .gotText
+	ld a, TEXT_FIGHTINGDOJO_KARATE_MASTER ; training hall: "come back" line
+.gotText
 	ldh [hTextID], a
 	call DisplayTextID
 	xor a ; SCRIPT_FIGHTINGDOJO_DEFAULT
@@ -105,11 +122,17 @@ FightingDojoTrainerHeader3:
 
 FightingDojoKarateMasterText:
 	text_asm
-	CheckEvent EVENT_DEFEATED_FIGHTING_DOJO
+	CheckEvent EVENT_BEAT_KARATE_MASTER
+	jr z, .challenge
+	CheckEventReuseA EVENT_DEFEATED_FIGHTING_DOJO
 	jp nz, .defeated_dojo
-	CheckEventReuseA EVENT_BEAT_KARATE_MASTER
-	jp nz, .defeated_master
+	jp .defeated_master
+.challenge
+	CheckEventReuseA EVENT_DEFEATED_FIGHTING_DOJO
 	ld hl, .Text
+	jr z, .gotChallengeText
+	ld hl, .TrainingText
+.gotChallengeText
 	call PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
@@ -137,6 +160,10 @@ FightingDojoKarateMasterText:
 
 .Text:
 	text_far _FightingDojoKarateMasterText
+	text_end
+
+.TrainingText:
+	text_far _FightingDojoKarateMasterTrainingText
 	text_end
 
 .DefeatedText:

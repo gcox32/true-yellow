@@ -5,6 +5,18 @@ ReadTrainer:
 	and a
 	ret nz
 
+; Fighting Dojo training hall: once the Dojo is beaten, its Blackbelts
+; field the training teams (appended after the vanilla Blackbelt teams).
+; The guard keeps this idempotent if ReadTrainer ever runs twice.
+	call IsDojoTrainingBout
+	jr nc, .notDojoTraining
+	ld a, [wTrainerNo]
+	cp DOJO_TRAINING_TEAMS_OFFSET + 1
+	jr nc, .notDojoTraining
+	add DOJO_TRAINING_TEAMS_OFFSET
+	ld [wTrainerNo], a
+.notDojoTraining
+
 ; set [wEnemyPartyCount] to 0, [wEnemyPartySpecies] to FF
 ; XXX first is total enemy pokemon?
 ; XXX second is species of first pokemon?
@@ -46,6 +58,8 @@ ReadTrainer:
 ; - if [wLoneAttackNo] != 0, one pokemon on the team has a special move
 ; else the first byte is the level of every pokemon on the team
 .IterateTrainer
+	call IsDojoTrainingBout
+	jr c, .DojoTrainingLevel
 	ld a, [hli]
 	cp $FF ; is the trainer special?
 	jr z, .SpecialTrainer ; if so, check for special moves
@@ -78,6 +92,44 @@ ReadTrainer:
 	call AddPartyMon
 	pop hl
 	jr .SpecialTrainer
+.DojoTrainingLevel
+; the team's level byte is a signed offset from the player's highest level
+	ld a, [hli]
+	ld c, a
+	push hl
+	ld hl, wPartyMon1Level
+	ld de, wPartyMon2 - wPartyMon1
+	ld a, [wPartyCount]
+	ld b, a
+	xor a
+.highestLevelLoop
+	cp [hl]
+	jr nc, .notHigher
+	ld a, [hl]
+.notHigher
+	add hl, de
+	dec b
+	jr nz, .highestLevelLoop
+	pop hl
+	ld b, a
+	ld a, c
+	bit 7, a
+	jr nz, .negativeOffset
+	add b
+	cp MAX_LEVEL + 1
+	jr c, .gotDojoLevel
+	ld a, MAX_LEVEL
+	jr .gotDojoLevel
+.negativeOffset
+	add b ; carry set iff level + offset >= 0
+	jr nc, .dojoLevelTooLow
+	cp 2
+	jr nc, .gotDojoLevel
+.dojoLevelTooLow
+	ld a, 2
+.gotDojoLevel
+	ld [wCurEnemyLevel], a
+	jp .LoopTrainerData
 .AddAdditionalMoveData
 ; does the trainer have additional move data?
 	ld a, [wTrainerClass]
@@ -142,4 +194,21 @@ ReadTrainer:
 	inc de
 	dec b
 	jr nz, .LastLoop ; repeat wCurEnemyLevel times
+	ret
+
+; carry set if this battle is a Fighting Dojo training-hall bout:
+; a Blackbelt in the Dojo after the Dojo has been beaten
+IsDojoTrainingBout:
+	ld a, [wCurMap]
+	cp FIGHTING_DOJO
+	jr nz, .no
+	ld a, [wTrainerClass]
+	cp BLACKBELT
+	jr nz, .no
+	CheckEvent EVENT_DEFEATED_FIGHTING_DOJO
+	jr z, .no
+	scf
+	ret
+.no
+	and a
 	ret
