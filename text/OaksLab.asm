@@ -136,6 +136,20 @@ _OaksLabOak1HowIsYourPokedexComingText::
 	cont "a look!"
 	prompt
 
+_OaksLabOak1MeetMeInCeruleanCaveText::
+	text "Was there"
+	line "something else"
+	cont "you wanted to ask?"
+
+	para "..."
+
+	para "I see..."
+
+	para "Not here."
+	line "Meet me in"
+	cont "CERULEAN CAVE."
+	prompt
+
 _OaksLabPokedexText::
 	text "It's encyclopedia-"
 	line "like, but the"

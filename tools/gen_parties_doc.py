@@ -101,6 +101,8 @@ PINNED_PARTIES = {
 	# This Route 10 Pokemaniac stands where only Surf reaches. Koga's badge stands
 	# in for having Surf, so he's fought right after Fuchsia Gym.
 	("POKEMANIAC", 1): ("FUCHSIA_CITY", +0.5),
+	# Cerulean Cave isn't in the town map order; OAK is the last battle there is.
+	("PROF_OAK", 1): ("POWER_PLANT", +0.5),
 }
 
 # Location comments that aren't their map constant's name with the punctuation
@@ -304,13 +306,17 @@ def ordered_parties(parties, maps, rank):
 			if party.location in UNPLACED:
 				continue
 			where, map_name = town_map_place(party, maps, rank)
+			pin = PINNED_PARTIES.get((name, index)) or PINNED_LOCATIONS.get(party.location)
+			if where is None and pin and party.location:
+				# a pin can place a map the town map order skips (post-game caves)
+				map_name = map_constant(party.location)
+				where = 0
 			if where is None:
 				sys.exit("%s:%d: can't place %s party %d (%s) - the doc is ordered by "
 				         "location, so add a comment naming the map, an entry to "
 				         "LOCATION_ALIASES, or one to UNPLACED" %
 				         (PARTIES_ASM, party.lineno, name, index,
 				          party.location or "no location comment"))
-			pin = PINNED_PARTIES.get((name, index)) or PINNED_LOCATIONS.get(party.location)
 			if pin:
 				used.add(pin)
 				where = pinned_rank(pin, maps, rank)

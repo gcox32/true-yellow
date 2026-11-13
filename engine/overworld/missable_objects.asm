@@ -96,6 +96,27 @@ MarkTownVisitedAndLoadMissableObjects::
 	inc de
 	jr .writeMissableObjectsListLoop
 .done
+; then pick up this map's entries from the appended tail (see ExtraMissableObjects)
+	ld hl, ExtraMissableObjects
+	ld c, FIRST_EXTRA_HS_OBJECT
+.extraLoop
+	ld a, [hli]
+	cp -1
+	jr z, .writeSentinel
+	cp b
+	jr nz, .nextExtra
+	ld a, [hl]
+	ld [de], a                 ; write (map-local) sprite ID
+	inc de
+	ld a, c
+	ld [de], a                 ; write (global) missable object index
+	inc de
+.nextExtra
+	inc hl
+	inc hl
+	inc c
+	jr .extraLoop
+.writeSentinel
 	ld a, -1
 	ld [de], a                 ; write sentinel
 	ret

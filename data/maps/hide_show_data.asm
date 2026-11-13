@@ -577,5 +577,13 @@ BluesHouseHSCopy: ; unreferenced
 	db BLUES_HOUSE, BLUESHOUSE_TOWN_MAP, SHOW
 VermilionDockHS:
 	db VERMILION_DOCK, VERMILIONDOCK_MEW, HIDE
+ExtraMissableObjects::
+; Objects added to maps that already have an HS block above. Inserting them
+; there would shift every later HS index and break saves, so they live here
+; instead, and MarkTownVisitedAndLoadMissableObjects scans this tail for the
+; current map after loading its contiguous block. Never point a MapHSPointers
+; entry into this section.
+	assert (@ - MissableObjects) / 3 == FIRST_EXTRA_HS_OBJECT
+	db CERULEAN_CAVE_1F, CERULEANCAVE1F_OAK, HIDE
 	assert_table_length NUM_HS_OBJECTS
 	db -1, 1, SHOW ; end

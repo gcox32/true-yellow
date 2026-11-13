@@ -242,5 +242,8 @@ DEF SHOW EQU $15
 	const HS_DAISY_SITTING_COPY            ; EC
 	const HS_DAISY_WALKING_COPY            ; ED
 	const HS_TOWN_MAP_COPY                 ; EE
-	const HS_MEW_VERMILION_DOCK            ; F0
+	const HS_MEW_VERMILION_DOCK            ; EF
+; extra objects (see ExtraMissableObjects in data/maps/hide_show_data.asm)
+DEF FIRST_EXTRA_HS_OBJECT EQU const_value
+	const HS_CERULEAN_CAVE_1F_OAK          ; F0
 DEF NUM_HS_OBJECTS EQU const_value

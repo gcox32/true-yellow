@@ -820,6 +820,14 @@ OaksLabOak1Text:
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	predef DisplayDexRating
+	CheckEvent EVENT_BEAT_CHAMPION_RIVAL
+	jp z, .done
+; invite the player to battle: OAK waits in Cerulean Cave 1F until beaten
+	ld hl, .MeetMeInCeruleanCaveText
+	call PrintText
+	ld a, HS_CERULEAN_CAVE_1F_OAK
+	ld [wMissableObjectIndex], a
+	predef ShowObject
 	jp .done
 .check_for_poke_balls
 	ld b, POKE_BALL
@@ -913,6 +921,10 @@ OaksLabOak1Text:
 
 .HowIsYourPokedexComingText:
 	text_far _OaksLabOak1HowIsYourPokedexComingText
+	text_end
+
+.MeetMeInCeruleanCaveText:
+	text_far _OaksLabOak1MeetMeInCeruleanCaveText
 	text_end
 
 OaksLabPokedexText:

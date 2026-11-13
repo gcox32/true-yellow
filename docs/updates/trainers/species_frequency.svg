@@ -30,7 +30,7 @@
 </style>
 <rect class="surface" width="960" height="400" rx="8"/>
 <text class="title" x="48" y="26">How often each species appears</text>
-<text class="subtitle" x="48" y="44">152 species · 863 trainer Pokémon, one version per Rival battle · mean 5.7 appearances · median 6 · SD 2.3</text>
+<text class="subtitle" x="48" y="44">152 species · 869 trainer Pokémon, one version per Rival battle · mean 5.7 appearances · median 6 · SD 2.2</text>
 <line class="grid" x1="48" x2="940" y1="348" y2="348"/>
 <text class="tick" x="42" y="348" text-anchor="end" dominant-baseline="middle">0</text>
 <line class="grid" x1="48" x2="940" y1="258" y2="258"/>
@@ -70,23 +70,23 @@
 <text class="tick" x="169.6" y="307" text-anchor="middle">4</text>
 <path class="bar" d="M224.4 348 V296 Q224.4 294 226.4 294 H275.1 Q277.1 294 277.1 296 V348 Z"><title>6 species appear 2 times: KABUTO, KRABBY, MAGIKARP, OMANYTE, SEEL, SQUIRTLE</title></path>
 <text class="tick" x="250.7" y="289" text-anchor="middle">6</text>
-<path class="bar" d="M305.5 348 V251 Q305.5 249 307.5 249 H356.2 Q358.2 249 358.2 251 V348 Z"><title>11 species appear 3 times: BLASTOISE, BULBASAUR, CHARMANDER, CHARMELEON, DIGLETT, DITTO, DRAGONITE, NIDORAN_M, OMASTAR, PONYTA, WEEDLE</title></path>
-<text class="tick" x="331.8" y="244" text-anchor="middle">11</text>
-<path class="bar" d="M386.6 348 V215 Q386.6 213 388.6 213 H437.3 Q439.3 213 439.3 215 V348 Z"><title>15 species appear 4 times: CHARIZARD, DODUO, GENGAR, GLOOM, GROWLITHE, HORSEA, IVYSAUR, MR_MIME, PIKACHU, POLIWHIRL, TENTACOOL, VENUSAUR, VILEPLUME, VULPIX, WARTORTLE</title></path>
-<text class="tick" x="412.9" y="208" text-anchor="middle">15</text>
-<path class="bar" d="M467.6 348 V116 Q467.6 114 469.6 114 H518.4 Q520.4 114 520.4 116 V348 Z"><title>26 species appear 5 times: ABRA, DUGTRIO, EXEGGUTOR, FLAREON, GOLDEEN, GRIMER, GYARADOS, HYPNO, JIGGLYPUFF, KAKUNA, LAPRAS, MAGNEMITE, MAROWAK, NIDOQUEEN, NINETALES, PARASECT, PIDGEOTTO, PIDGEY, POLIWRATH, RATTATA, RHYHORN, SLOWBRO, SNORLAX, TENTACRUEL, VAPOREON, VENONAT</title></path>
-<text class="tick" x="494" y="109" text-anchor="middle">26</text>
-<path class="bar" d="M548.7 348 V80 Q548.7 78 550.7 78 H599.4 Q601.4 78 601.4 80 V348 Z"><title>30 species appear 6 times: AERODACTYL, ALAKAZAM, BELLSPROUT, CLEFABLE, CLEFAIRY, DEWGONG, ELECTABUZZ, EXEGGCUTE, GOLDUCK, HITMONCHAN, JOLTEON, JYNX, KADABRA, KANGASKHAN, KINGLER, MANKEY, NIDORAN_F, NIDORINO, PARAS, PINSIR, POLIWAG, PORYGON, PSYDUCK, STARYU, TAUROS, VENOMOTH, VOLTORB, WEEPINBELL, WIGGLYTUFF, ZUBAT</title></path>
+<path class="bar" d="M305.5 348 V260 Q305.5 258 307.5 258 H356.2 Q358.2 258 358.2 260 V348 Z"><title>10 species appear 3 times: BULBASAUR, CHARMANDER, CHARMELEON, DIGLETT, DITTO, DRAGONITE, NIDORAN_M, OMASTAR, PONYTA, WEEDLE</title></path>
+<text class="tick" x="331.8" y="253" text-anchor="middle">10</text>
+<path class="bar" d="M386.6 348 V224 Q386.6 222 388.6 222 H437.3 Q439.3 222 439.3 224 V348 Z"><title>14 species appear 4 times: BLASTOISE, DODUO, GENGAR, GLOOM, GROWLITHE, HORSEA, IVYSAUR, MR_MIME, PIKACHU, POLIWHIRL, TENTACOOL, VILEPLUME, VULPIX, WARTORTLE</title></path>
+<text class="tick" x="412.9" y="217" text-anchor="middle">14</text>
+<path class="bar" d="M467.6 348 V107 Q467.6 105 469.6 105 H518.4 Q520.4 105 520.4 107 V348 Z"><title>27 species appear 5 times: ABRA, CHARIZARD, DUGTRIO, EXEGGUTOR, FLAREON, GOLDEEN, GRIMER, HYPNO, JIGGLYPUFF, KAKUNA, LAPRAS, MAGNEMITE, MAROWAK, NIDOQUEEN, NINETALES, PARASECT, PIDGEOTTO, PIDGEY, POLIWRATH, RATTATA, RHYHORN, SLOWBRO, SNORLAX, TENTACRUEL, VAPOREON, VENONAT, VENUSAUR</title></path>
+<text class="tick" x="494" y="100" text-anchor="middle">27</text>
+<path class="bar" d="M548.7 348 V80 Q548.7 78 550.7 78 H599.4 Q601.4 78 601.4 80 V348 Z"><title>30 species appear 6 times: AERODACTYL, ALAKAZAM, BELLSPROUT, CLEFABLE, CLEFAIRY, DEWGONG, ELECTABUZZ, EXEGGCUTE, GOLDUCK, GYARADOS, HITMONCHAN, JOLTEON, JYNX, KADABRA, KANGASKHAN, KINGLER, MANKEY, NIDORAN_F, NIDORINO, PARAS, PINSIR, POLIWAG, PORYGON, PSYDUCK, STARYU, VENOMOTH, VOLTORB, WEEPINBELL, WIGGLYTUFF, ZUBAT</title></path>
 <text class="tick" x="575.1" y="73" text-anchor="middle">30</text>
-<path class="bar" d="M629.8 348 V134 Q629.8 132 631.8 132 H680.5 Q682.5 132 682.5 134 V348 Z"><title>24 species appear 7 times: ARCANINE, BUTTERFREE, CATERPIE, CHANSEY, CLOYSTER, CUBONE, DRAGONAIR, DROWZEE, ELECTRODE, FARFETCHD, GASTLY, KOFFING, MAGMAR, NIDOKING, ODDISH, PIDGEOT, RHYDON, SANDSHREW, SCYTHER, SHELLDER, SLOWPOKE, SPEAROW, STARMIE, VICTREEBEL</title></path>
+<path class="bar" d="M629.8 348 V134 Q629.8 132 631.8 132 H680.5 Q682.5 132 682.5 134 V348 Z"><title>24 species appear 7 times: ARCANINE, BUTTERFREE, CATERPIE, CHANSEY, CLOYSTER, CUBONE, DRAGONAIR, DROWZEE, ELECTRODE, FARFETCHD, GASTLY, KOFFING, MAGMAR, NIDOKING, ODDISH, PIDGEOT, SANDSHREW, SCYTHER, SHELLDER, SLOWPOKE, SPEAROW, STARMIE, TAUROS, VICTREEBEL</title></path>
 <text class="tick" x="656.2" y="127" text-anchor="middle">24</text>
-<path class="bar" d="M710.9 348 V197 Q710.9 195 712.9 195 H761.6 Q763.6 195 763.6 197 V348 Z"><title>17 species appear 8 times: DODRIO, EKANS, GRAVELER, HITMONLEE, LICKITUNG, MACHAMP, MACHOKE, MACHOP, METAPOD, NIDORINA, PERSIAN, RAICHU, RAPIDASH, SANDSLASH, SEADRA, SEAKING, TANGELA</title></path>
-<text class="tick" x="737.3" y="190" text-anchor="middle">17</text>
+<path class="bar" d="M710.9 348 V188 Q710.9 186 712.9 186 H761.6 Q763.6 186 763.6 188 V348 Z"><title>18 species appear 8 times: DODRIO, EKANS, GRAVELER, HITMONLEE, LICKITUNG, MACHAMP, MACHOKE, MACHOP, METAPOD, NIDORINA, PERSIAN, RAICHU, RAPIDASH, RHYDON, SANDSLASH, SEADRA, SEAKING, TANGELA</title></path>
+<text class="tick" x="737.3" y="181" text-anchor="middle">18</text>
 <path class="bar" d="M792 348 V260 Q792 258 794 258 H842.7 Q844.7 258 844.7 260 V348 Z"><title>10 species appear 9 times: ARBOK, BEEDRILL, GEODUDE, GOLEM, HAUNTER, MAGNETON, MEOWTH, MUK, ONIX, WEEZING</title></path>
 <text class="tick" x="818.4" y="253" text-anchor="middle">10</text>
 <path class="bar" d="M873.1 348 V305 Q873.1 303 875.1 303 H923.8 Q925.8 303 925.8 305 V348 Z"><title>5 species appear 10 times: EEVEE, FEAROW, GOLBAT, PRIMEAPE, RATICATE</title></path>
 <text class="tick" x="899.5" y="298" text-anchor="middle">5</text>
-<polyline class="fit" points="48,342.4 68.3,340.4 88.5,337.9 108.8,334.7 129.1,330.7 149.4,325.9 169.6,320 189.9,312.9 210.2,304.6 230.5,295 250.7,284.1 271,271.9 291.3,258.4 311.5,243.9 331.8,228.5 352.1,212.4 372.4,196.2 392.6,180 412.9,164.4 433.2,149.8 453.5,136.7 473.7,125.4 494,116.4 514.3,110 534.5,106.5 554.8,105.8 575.1,108.2 595.4,113.4 615.6,121.3 635.9,131.7 656.2,144.1 676.5,158.1 696.7,173.3 717,189.3 737.3,205.6 757.5,221.8 777.8,237.5 798.1,252.4 818.4,266.4 838.6,279.1 858.9,290.6 879.2,300.7 899.5,309.6 919.7,317.1 940,323.5"/>
+<polyline class="fit" points="48,342.7 68.3,340.9 88.5,338.5 108.8,335.4 129.1,331.6 149.4,326.9 169.6,321.2 189.9,314.4 210.2,306.3 230.5,296.9 250.7,286.2 271,274.2 291.3,260.9 311.5,246.5 331.8,231.1 352.1,215.1 372.4,198.7 392.6,182.4 412.9,166.6 433.2,151.7 453.5,138.2 473.7,126.5 494,117.1 514.3,110.2 534.5,106.2 554.8,105 575.1,106.9 595.4,111.8 615.6,119.3 635.9,129.4 656.2,141.6 676.5,155.5 696.7,170.7 717,186.7 737.3,203 757.5,219.3 777.8,235.2 798.1,250.4 818.4,264.5 838.6,277.5 858.9,289.2 879.2,299.5 899.5,308.6 919.7,316.3 940,322.8"/>
 <g transform="translate(48 60)"><rect class="bar" x="0" y="-5" width="14" height="10" rx="2"/></g>
 <text class="tick" x="70" y="60" dominant-baseline="middle">Species appearing that many times</text>
 <g transform="translate(313 60)"><line class="fit" x1="0" x2="16" y1="0" y2="0"/></g>
