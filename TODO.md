@@ -16,7 +16,7 @@
 - [x] POISON_GAS should be a never miss move, like SWIFT (MoveHitTest in engine/battle/core.asm returns early on move POISON_GAS, same early return as SWIFT_EFFECT, now placed after the INVULNERABLE test: both skip accuracy and accuracy/evasion stages but miss a target mid-Fly/Dig/trainer-battle Teleport. NEEDS IN-GAME TEST.)
 - [x] Increase the payouts in the training hall (doubled: ReadTrainer .FinishUp runs the base-money × level loop twice when IsDojoTrainingBout, i.e. ¥50 × last mon's level instead of ¥25. Teams unchanged. NEEDS IN-GAME TEST.)
 - [x] Hide the FLOAT type from the summary screen if WEEZING or MAGNETON has the secondary FLOAT type (PrintMonType in engine/battle/print_type.asm treats Type2 FLOATING like MAGMA: erases the TYPE2/ row. Status screen + Hall of Fame. Battle math unchanged. NEEDS IN-GAME TEST.)
-- [ ] Add chance to poison to HYPER_FANG and SUPER_FANG
+- [x] Add chance to poison to HYPER_FANG and SUPER_FANG (20%, on top of their own flinch / halve-HP effects: FangPoisonEffect in core.asm runs after the normal side effects, borrowing POISON_SIDE_EFFECT1 for one PoisonEffect call. Usual rules: no SUBSTITUTE, POISON types or already-statused targets. Made room by moving SlidePlayerAndEnemySilhouettesOnScreen to engine/battle/silhouette_slide.asm (Battle Engine 1); Battle Core now has $cd free. NEEDS IN-GAME TEST.)
 - [ ] Investigate EXEGGUTOR usage across trainer parties--use this as the first inspection of any oddities across trainer parties
 - [ ] Better idea for move MIST
 - [ ] Beter idea for move HAZE
