@@ -50,8 +50,11 @@
       Mt Moon 1F's second POTION and Victory Road 2F GUARD_SPEC balls are now hidden items at the same tile (which brings
       VR2F BOULDER3, the one dropped from 3F, back to object 12). SS Anne 2F Rooms BEAUTY removed. Distinct-sprite limits
       re-audited: clean. Shifts hide/show flags, so old saves may show/hide items wrongly. NEEDS IN-GAME TEST.)
-- [ ] WHIRLWIND needs to reset the position of the affected pokemon
-- [ ] LORELEI's SLOWBRO tried to HORNDRILL me... where did that come from?
+- [x] WHIRLWIND needs to reset the position of the affected pokemon (WhirlwindAnim still ended on SE_SLIDE_ENEMY_MON_OFF from when it ended the battle;
+      now delays and re-shows the target's pic via SE_SHOW_ENEMY_MON_PIC. NEEDS IN-GAME TEST.)
+- [x] LORELEI's SLOWBRO tried to HORNDRILL me... where did that come from? (SlowbroEvosMoves had no learnset terminator, so it read
+      into Ivysaur's `EVOLVE_LEVEL, 32` as "L1: move $20 = HORN_DRILL". Any Slowbro above L54 got it. Added the `db 0`; Rhydon was
+      also unterminated, harmless only because Kangaskhan's evo `db 0` follows, and is fixed too. NEEDS IN-GAME TEST.)
 
 ## Bugfixes from PureRGB
 - [x] High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)

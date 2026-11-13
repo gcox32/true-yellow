@@ -310,6 +310,8 @@ WingAttackAnim:
 WhirlwindAnim:
 	battle_anim WHIRLWIND, SUBANIM_1_TORNADO, 1, 6
 	battle_anim NO_MOVE, SE_SLIDE_ENEMY_MON_OFF
+	battle_anim NO_MOVE, SE_DELAY_ANIMATION_10
+	battle_anim NO_MOVE, SE_SHOW_ENEMY_MON_PIC ; Whirlwind no longer ends the battle
 	db -1 ; end
 
 FlyAnim:

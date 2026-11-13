@@ -227,6 +227,7 @@ RhydonEvosMoves:
 	db 52, SHARPEN
 	db 56, ROCK_SLIDE
 	db 60, HYPER_BEAM
+	db 0
 
 KangaskhanEvosMoves:
 ; Evolutions
@@ -344,6 +345,7 @@ SlowbroEvosMoves:
 	db 41, AMNESIA
 	db 45, PSYCHIC_M
 	db 54, BLIZZARD
+	db 0
 
 IvysaurEvosMoves:
 ; Evolutions
