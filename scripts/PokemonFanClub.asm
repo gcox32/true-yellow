@@ -34,8 +34,8 @@ PokemonFanClubScript_59a39:
 	ret
 
 PokemonFanClubScript_59a44:
-	ld a, [wd471]
-	bit 7, a
+	ld a, [wPikachuPartyFlags]
+	bit BIT_STARTER_PIKACHU_ALIVE_IN_PARTY, a
 	ret z
 	callfar CheckPikachuStatusCondition
 	ret c

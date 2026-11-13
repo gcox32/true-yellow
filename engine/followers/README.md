@@ -399,7 +399,7 @@ rotate into Misty's target on the player's first step.
   captured), 3 -> 4 after the 2nd step (Misty unlocks), 4 -> 0 after the
   3rd step (Brock unlocks).
 - The door tile is captured in `.storeDoorPosition` from `b,c` - the
-  player's own position as sampled by `Func_fcc08` at the *start* of that
+  player's own position as sampled by `RecordPlayerStepForFollowers` at the *start* of that
   first post-warp step, before `AdvancePlayerSprite` moves them. That's the
   tile the player just warped onto (the outside doorstep on an exit, the
   doormat on an entry) for both directions. (It used to read Pikachu's
@@ -434,7 +434,7 @@ don't get reintroduced:
    the recompute entirely (`wExitDoorwayY != 0` check) for a door-exit
    spawn and just trust the existing trail value.
 3. **Wait for the player's step to actually finish before spawning.**
-   `RecordPlayerPositionToTrail` (via `Func_fcc08`) runs at the *start* of
+   `RecordPlayerPositionToTrail` (via `RecordPlayerStepForFollowers`) runs at the *start* of
    a step, right when `wWalkCounter` is set to 8 and the walk animation
    begins (see `home/overworld.asm`), not 8 frames later when it completes.
    Since a follower's spawn check runs every frame, it could fire on that
@@ -472,7 +472,7 @@ the ROM0 budget notes). Both `.stopSurfing` routines already set
 moment: it hides Pikachu for the duration of the step off the water, and
 `_AdvancePlayerSprite` (`engine/overworld/advance_player_sprite.asm`) clears it once
 `wWalkCounter` hits 0. Those two routines are its *only* setters, so observing it set
-at the start of a step - `RecordPlayerPositionToTrail` runs there, via `Func_fcc08` -
+at the start of a step - `RecordPlayerPositionToTrail` runs there, via `RecordPlayerStepForFollowers` -
 means "this step is the one leaving the water", and nothing else.
 
 When it fires, the trail forces `wFollowerDoorwayMode = 2` and **skips that call's
@@ -635,7 +635,7 @@ Key fields:
 The trail is updated from `engine/pikachu/pikachu_follow.asm`:
 
 ```asm
-Func_fcc08::
+RecordPlayerStepForFollowers::
 	; Record player's current position to trail (for Misty/Brock followers)
 	; Must do this before player moves, so their current position becomes trail history
 	ld a, [wYCoord]

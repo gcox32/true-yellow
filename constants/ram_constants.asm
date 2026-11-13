@@ -23,6 +23,12 @@ DEF BIT_TEXT_PREDEF EQU 0
 ; wFontLoaded
 DEF BIT_FONT_LOADED EQU 0
 
+; wPikachuPartyFlags
+	const_def 5
+	const BIT_PIKACHU_SPAWN_PLACED           ; 5 set by CalculatePikachuPlacementCoords; never read
+	const BIT_SURFING_PIKACHU_IN_PARTY       ; 6 a Pikachu in the party knows Surf
+	const BIT_STARTER_PIKACHU_ALIVE_IN_PARTY ; 7 the player's own starter Pikachu is in the party, not fainted
+
 ; wCurrentMapScriptFlags
 	const_def 5
 	const BIT_CUR_MAP_LOADED_1 ; 5

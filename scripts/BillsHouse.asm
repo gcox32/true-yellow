@@ -39,8 +39,8 @@ BillsHouseScript_1e09e:
 	ret
 
 BillsHouseScript0:
-	ld a, [wd471]
-	bit 7, a
+	ld a, [wPikachuPartyFlags]
+	bit BIT_STARTER_PIKACHU_ALIVE_IN_PARTY, a
 	jr z, .asm_1e0d2
 	callfar CheckPikachuStatusCondition
 	jr c, .asm_1e0d2
@@ -161,8 +161,8 @@ BillsHouseScript5:
 	predef ShowObject
 	ld c, 8
 	call DelayFrames
-	ld hl, wd471
-	bit 7, [hl]
+	ld hl, wPikachuPartyFlags
+	bit BIT_STARTER_PIKACHU_ALIVE_IN_PARTY, [hl]
 	jr z, .asm_1e1c6
 	call CheckPikachuFollowingPlayer
 	jr z, .asm_1e1c6

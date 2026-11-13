@@ -14,8 +14,8 @@ LoadSurfingPlayerSpriteGraphics_::
 	dec a
 	jr z, .lapras
 .checkParty
-	ld a, [wd471]
-	bit 6, a
+	ld a, [wPikachuPartyFlags]
+	bit BIT_SURFING_PIKACHU_IN_PARTY, a
 	jr z, .seel
 .pikachu
 	ld b, BANK(SurfingPikachuSprite)

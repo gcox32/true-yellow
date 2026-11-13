@@ -30,8 +30,8 @@ Museum2FBrunetteGirlText:
 
 Museum2FHikerText:
 	text_asm
-	ld a, [wd471]
-	bit 7, a
+	ld a, [wPikachuPartyFlags]
+	bit BIT_STARTER_PIKACHU_ALIVE_IN_PARTY, a
 	jr nz, .asm_5c1f6
 	ld hl, Museum2FText_5c20e
 	call PrintText

@@ -69,12 +69,12 @@ IsItemInBag::
 	ret
 
 IsSurfingPikachuInParty::
-; set bit 6 of wd471 if any Pikachu with Surf is in party
-; set bit 7 of wd471 if starter Pikachu is in party (with or without Surf)
+; set BIT_SURFING_PIKACHU_IN_PARTY of wPikachuPartyFlags if any Pikachu with Surf is in party
+; set BIT_STARTER_PIKACHU_ALIVE_IN_PARTY if the starter Pikachu is in party and not fainted (with or without Surf)
 ; also performs a bankswitch to IsStarterPikachuAliveInOurParty
-	ld a, [wd471]
-	and $3f
-	ld [wd471], a
+	ld a, [wPikachuPartyFlags]
+	and LOW(~((1 << BIT_SURFING_PIKACHU_IN_PARTY) | (1 << BIT_STARTER_PIKACHU_ALIVE_IN_PARTY)))
+	ld [wPikachuPartyFlags], a
 	ld hl, wPartyMon1
 	ld c, PARTY_LENGTH
 	ld b, SURF
@@ -98,9 +98,9 @@ IsSurfingPikachuInParty::
 	cp b
 	jr nz, .noSurf
 .hasSurf
-	ld a, [wd471]
-	set 6, a
-	ld [wd471], a
+	ld a, [wPikachuPartyFlags]
+	set BIT_SURFING_PIKACHU_IN_PARTY, a
+	ld [wPikachuPartyFlags], a
 .noSurf
 	pop hl
 .notPikachu
@@ -118,9 +118,9 @@ IsSurfingPikachuInParty::
 	pop bc
 	pop hl
 	ret nc
-	ld a, [wd471]
-	set 7, a
-	ld [wd471], a
+	ld a, [wPikachuPartyFlags]
+	set BIT_STARTER_PIKACHU_ALIVE_IN_PARTY, a
+	ld [wPikachuPartyFlags], a
 	ret
 
 DisplayPokedex::

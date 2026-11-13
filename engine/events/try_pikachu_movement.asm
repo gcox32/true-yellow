@@ -1,6 +1,6 @@
 TryApplyPikachuMovementData::
-	ld a, [wd471]
-	bit 7, a
+	ld a, [wPikachuPartyFlags]
+	bit BIT_STARTER_PIKACHU_ALIVE_IN_PARTY, a
 	ret z
 	ld a, [wWalkBikeSurfState]
 	and a

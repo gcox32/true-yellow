@@ -2021,8 +2021,10 @@ wDestinationWarpID:: db
 
 wPikachuOverworldStateFlags:: db
 wPikachuSpawnState:: db
-wd431:: db
-wd432:: db
+; pixel offset (y, x) the idle hop last added to Pikachu's sprite, so the next
+; frame can take it back off before applying the next entry of PikachuIdleHopOffsets
+wPikachuIdleHopOffsetY:: db
+wPikachuIdleHopOffsetX:: db
 wd433:: db
 wPikachuCollisionCounter:: db
 wd435:: db
@@ -2079,7 +2081,7 @@ ENDU
 
 wPikachuHappiness:: db
 wPikachuMood:: db
-wd471:: db
+wPikachuPartyFlags:: db ; see constants/ram_constants.asm
 wd472:: db
 	ds 1
 wd474:: db

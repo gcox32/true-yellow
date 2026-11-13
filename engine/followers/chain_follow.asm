@@ -78,7 +78,7 @@ RecordPlayerPositionToTrail::
 ; this moment - it hides Pikachu for the duration of the step off the water, and
 ; _AdvancePlayerSprite (engine/overworld/advance_player_sprite.asm) clears it once
 ; wWalkCounter hits 0. Those two .stopSurfing routines are its only setters, so
-; seeing it set here - at the start of the step, via Func_fcc08 - means "this step
+; seeing it set here - at the start of the step, via RecordPlayerStepForFollowers - means "this step
 ; is the one leaving the water", and nothing else.
 ;
 ; Force mode 2 and skip this call's mode dispatch. Skipping matters: .storeDoorPosition
@@ -209,7 +209,7 @@ RecordPlayerPositionToTrail::
 .storeDoorPosition:
 ; Store the door tile position for delayed follower spawning.
 ; Called when mode transitions from 2 to 3 (the first step after a warp).
-; b,c hold the player's position (map-coords + 4) as sampled by Func_fcc08
+; b,c hold the player's position (map-coords + 4) as sampled by RecordPlayerStepForFollowers
 ; at the *start* of that step, before AdvancePlayerSprite moves them - i.e.
 ; the tile the player just warped onto: the outside doorstep when exiting a
 ; building, or the doormat when entering one. Misty/Brock materialize

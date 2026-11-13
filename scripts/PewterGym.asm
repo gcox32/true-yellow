@@ -241,8 +241,8 @@ PewterGymGuideText:
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .PewterGymGuideBeginAdviceText
-	ld a, [wd471]
-	bit 7, a
+	ld a, [wPikachuPartyFlags]
+	bit BIT_STARTER_PIKACHU_ALIVE_IN_PARTY, a
 	jp nz, .asm_5c3fa
 	ld hl, PewterGymGuideBeginAdviceText
 	call PrintText

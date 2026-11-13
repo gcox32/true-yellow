@@ -104,8 +104,8 @@ PikachuMovementData_74f9e:
 	db $3f
 
 CinnabarGymScript_74fa3:
-	ld a, [wd471]
-	bit 7, a
+	ld a, [wPikachuPartyFlags]
+	bit BIT_STARTER_PIKACHU_ALIVE_IN_PARTY, a
 	ret z
 	push hl
 	push bc
