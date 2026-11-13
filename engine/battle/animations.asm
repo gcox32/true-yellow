@@ -1259,26 +1259,6 @@ AnimationSlideMonOff:
 	ld [wSlideMonDelay], a
 	jp _AnimationSlideMonOff
 
-AnimationSlideMonOffFast:
-; ADDED: twice as fast as AnimationSlideMonOff. Moves the pic 2 tiles per 3-frame
-; wait instead of 1; waiting less than 3 frames would shear the pic, since the
-; tilemap reaches VRAM a third at a time.
-	ld a, 4
-.loop
-	push af
-	xor a ; first tile: no wait
-	ld [wSlideMonDelay], a
-	ld e, 1
-	call _AnimationSlideMonOff
-	ld a, 3 ; second tile: one full tilemap transfer
-	ld [wSlideMonDelay], a
-	ld e, 1
-	call _AnimationSlideMonOff
-	pop af
-	dec a
-	jr nz, .loop
-	ret
-
 AnimationSlideEnemyMonOff:
 ; Slides the enemy mon off the screen horizontally.
 	ld hl, AnimationSlideMonOff
@@ -1919,11 +1899,8 @@ _AnimationSlideMonOff:
 	dec b
 	jr nz, .rowLoop
 	ld a, [wSlideMonDelay]
-	and a ; ADDED: 0 = don't wait (AnimationSlideMonOffFast)
-	jr z, .noDelay
 	ld c, a
 	call DelayFrames
-.noDelay
 	pop hl
 	dec d
 	dec e

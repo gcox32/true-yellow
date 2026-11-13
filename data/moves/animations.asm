@@ -760,13 +760,13 @@ AgilityAnim:
 	db -1 ; end
 
 QuickAttackAnim:
-	battle_anim QUICK_ATTACK, SE_SLIDE_MON_OFF_FAST
-	battle_anim NO_MOVE, SUBANIM_1_STAR_BIG_MOVING, 1, 3
+	battle_anim QUICK_ATTACK, SE_SLIDE_MON_OFF
+	battle_anim NO_MOVE, SUBANIM_1_STAR_BIG_MOVING, 1, 6
 	battle_anim NO_MOVE, SE_SHOW_MON_PIC
 	db -1 ; end
 
 RolloutAnim: ; Quick Attack's, with a heavier impact (thud + stationary big star)
-	battle_anim ROLLOUT, SE_SLIDE_MON_OFF_FAST ; rolls off toward the foe
+	battle_anim ROLLOUT, SE_SLIDE_MON_OFF ; rolls off toward the foe
 	battle_anim BODY_SLAM, SUBANIM_1_STAR_BIG, 1, 6 ; impact
 	battle_anim NO_MOVE, SE_SHOW_MON_PIC ; back in place (SLIDE_MON_OFF leaves it hidden)
 	db -1 ; end
