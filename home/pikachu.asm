@@ -1,4 +1,4 @@
-Func_1510::
+HidePikachuForWarpAnim::
 	push hl
 	ld hl, wPikachuOverworldStateFlags
 	set 7, [hl]
@@ -7,7 +7,7 @@ Func_1510::
 	pop hl
 	ret
 
-Func_151d::
+ShowPikachuAfterWarpAnim::
 	push hl
 	ld hl, wPikachuOverworldStateFlags
 	res 7, [hl]

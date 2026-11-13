@@ -49,7 +49,7 @@ EnterMapAnim::
 .restoreDefaultMusic
 	call PlayDefaultMusic
 .done
-	call Func_151d
+	call ShowPikachuAfterWarpAnim
 	; Every EnterMapAnim path ends here; let the followers back out alongside
 	; Pikachu (set by _LeaveMapAnim).
 	ld hl, wMistyOverworldStateFlags
@@ -138,8 +138,8 @@ PlayerSpinWhileMovingDown:
 
 
 _LeaveMapAnim::
-	call Func_1510
-	; Func_1510 hides Pikachu for the Fly/Dig/Teleport/Escape Rope/warp pad/hole
+	call HidePikachuForWarpAnim
+	; HidePikachuForWarpAnim hides Pikachu for the Fly/Dig/Teleport/Escape Rope/warp pad/hole
 	; animations; hide Misty and Brock the same way. Bit 7 of their state flags
 	; makes ShouldMisty/BrockSpawn hide them on every frame until EnterMapAnim
 	; clears it, and the ImageIndex writes take them off-screen right now (no
