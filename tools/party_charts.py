@@ -73,6 +73,10 @@ def other_rival_version(name, number):
 	           for first in RIVAL_VERSION_SETS.get(name, ()))
 
 
+# Easter-egg battles kept off the level curve: OAK's L115-128 team would flatten it.
+UNCHARTED_CLASSES = ("PROF_OAK",)
+
+
 def fixed_levels(ordered):
 	"""[(class, Party)] for the battles to chart: real levels only, and one
 	version of each Rival battle."""
@@ -190,7 +194,8 @@ def species_frequency(ordered):
 
 def level_curve(ordered):
 	"""Each party's level range, battle by battle, in play order."""
-	battles = fixed_levels(ordered)
+	battles = [(name, party) for name, party in fixed_levels(ordered)
+	           if name not in UNCHARTED_CLASSES]
 	count = len(battles)
 	top_level = max(level for _, party in battles for level, _ in party.mons)
 	top_value = nice_step(top_level, 5) * math.ceil(top_level / nice_step(top_level, 5))
