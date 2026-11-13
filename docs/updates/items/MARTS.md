@@ -83,7 +83,7 @@ to one is a one-line change.
 | Lavender Mart                       | TM24 (THUNDERBOLT)  | ¥2000        |
 | Celadon Mart 2F (clerk 1)           | TM16 (PAY DAY)      | ¥5000        |
 | Celadon Mart 2F (clerk 1)           | TM17 (SUBMISSION)   | ¥3000        |
-| Celadon Mart 2F (clerk 1)           | TM20 (RAGE)         | ¥2000        |
+| Celadon Mart 2F (clerk 1)           | TM20 (ROLLOUT)      | ¥2000        |
 | Celadon Mart 2F (clerk 1)           | TM22 (SOLARBEAM)    | ¥5000        |
 | Celadon Mart 2F (clerk 1)           | TM33 (REFLECT)      | ¥1000        |
 | Celadon Mart 2F (clerk 1)           | TM37 (EGG BOMB)     | ¥2000        |

@@ -311,7 +311,7 @@ VoltorbEvosMoves:
 	db 28, DEFENSE_CURL
 	db 31, THUNDERBOLT
 	db 35, SELFDESTRUCT
-	db 39, REFLECT
+	db 39, ROLLOUT
 	db 42, SWIFT
 	db 0
 
@@ -779,7 +779,7 @@ GravelerEvosMoves:
 	db 19, DEFENSE_CURL
 	db 21, SELFDESTRUCT
 	db 28, ROCK_SLIDE
-	db 31, BARRAGE
+	db 31, ROLLOUT
 	db 39, EARTHQUAKE
 	db 46, EXPLOSION
 	db 60, FISSURE
@@ -930,12 +930,11 @@ GolemEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 11, HARDEN
 	db 16, ROCK_THROW
 	db 19, DEFENSE_CURL
 	db 21, SELFDESTRUCT
 	db 28, ROCK_SLIDE
-	db 31, DIG
+	db 31, ROLLOUT
 	db 39, EARTHQUAKE
 	db 46, EXPLOSION
 	db 52, MEGA_PUNCH
@@ -1017,7 +1016,6 @@ MankeyEvosMoves:
 	db 18, FOCUS_ENERGY
 	db 20, DEFENSE_CURL
 	db 23, SEISMIC_TOSS
-	db 25, RAGE
 	db 28, THRASH
 	db 35, VICEGRIP
 	db 39, COMET_PUNCH
@@ -1066,7 +1064,6 @@ TaurosEvosMoves:
 	db 0
 ; Learnset
 	db 19, STOMP
-	db 24, RAGE
 	db 29, FURY_ATTACK
 	db 33, BODY_SLAM
 	db 37, GLARE
@@ -1098,7 +1095,6 @@ VenonatEvosMoves:
 	db 10, POISONPOWDER
 	db 13, PIN_MISSILE
 	db 15, STUN_SPORE
-	db 16, SLEEP_POWDER
 	db 18, LEECH_LIFE
 	db 22, PSYBEAM
 	db 30, MIRROR_MOVE
@@ -1131,7 +1127,6 @@ DoduoEvosMoves:
 	db 14, DOUBLE_TEAM
 	db 17, STOMP
 	db 20, FURY_ATTACK
-	db 23, RAGE
 	db 30, DRILL_PECK
 	db 35, DOUBLE_EDGE
 	db 41, EARTHQUAKE
@@ -1563,7 +1558,6 @@ EkansEvosMoves:
 	db 26, LEECH_LIFE
 	db 30, WITHDRAW
 	db 33, SLAM
-	db 36, LEECH_LIFE
 	db 38, WRAP
 	db 43, SUPER_FANG
 	db 50, ACID
@@ -1651,7 +1645,6 @@ DodrioEvosMoves:
 	db 14, DOUBLE_TEAM
 	db 17, STOMP
 	db 20, FURY_ATTACK
-	db 25, RAGE
 	db 30, DRILL_PECK
 	db 35, TRI_ATTACK
 	db 41, SONICBOOM
@@ -1667,7 +1660,6 @@ PrimeapeEvosMoves:
 	db 18, FOCUS_ENERGY
 	db 20, DEFENSE_CURL
 	db 23, SEISMIC_TOSS
-	db 25, RAGE
 	db 28, THRASH
 	db 39, COMET_PUNCH
 	db 45, SUBMISSION
@@ -1697,7 +1689,6 @@ VenomothEvosMoves:
 	db 22, PSYBEAM
 	db 27, GUST
 	db 30, MIRROR_MOVE
-	db 33, SLEEP_POWDER
 	db 37, DREAM_EATER
 	db 37, SLEEP_POWDER
 	db 42, PSYCHIC_M
@@ -1750,7 +1741,6 @@ ButterfreeEvosMoves:
 	db 35, PSYCHIC_M
 	db 45, DREAM_EATER
 	db 45, SLEEP_POWDER
-	db 50, MIST
 	db 0
 
 MachampEvosMoves:
@@ -1834,7 +1824,8 @@ DonphanEvosMoves:
 ; Learnset
 	db 15, FURY_ATTACK
 	db 20, TAKE_DOWN
-	db 30, EARTHQUAKE
+	db 30, ROLLOUT
+	db 35, EARTHQUAKE
 	db 40, DEFENSE_CURL
 	db 45, BODY_SLAM
 	db 50, ROCK_SLIDE
@@ -1917,7 +1908,7 @@ ElectrodeEvosMoves:
 	db 28, DEFENSE_CURL
 	db 31, THUNDERBOLT
 	db 35, SELFDESTRUCT
-	db 39, REFLECT
+	db 39, ROLLOUT
 	db 42, SWIFT
 	db 0
 
@@ -2011,8 +2002,8 @@ AlakazamEvosMoves:
 	db 0
 ; Learnset
 	db 16, CONFUSION
-	db 24, MEDITATE
 	db 20, DISABLE
+	db 24, MEDITATE
 	db 27, PSYBEAM
 	db 31, RECOVER
 	db 38, PSYCHIC_M
@@ -2179,7 +2170,6 @@ RattataEvosMoves:
 	db 14, BITE
 	db 17, HYPER_FANG
 	db 23, FOCUS_ENERGY
-	db 26, RAGE
 	db 31, SKULL_BASH
 	db 34, SUPER_FANG
 	db 0
@@ -2193,7 +2183,6 @@ RaticateEvosMoves:
 	db 14, BITE
 	db 17, HYPER_FANG
 	db 23, FOCUS_ENERGY
-	db 26, RAGE
 	db 31, SKULL_BASH
 	db 34, SUPER_FANG
 	db 0
@@ -2242,7 +2231,7 @@ GeodudeEvosMoves:
 	db 19, HARDEN
 	db 21, SELFDESTRUCT
 	db 28, ROCK_SLIDE
-	db 31, BARRAGE
+	db 31, ROLLOUT
 	db 39, EARTHQUAKE
 	db 46, EXPLOSION
 	db 60, FISSURE
@@ -2300,7 +2289,6 @@ CharmanderEvosMoves:
 	db 9,  EMBER
 	db 12, BITE
 	db 15, SMOKESCREEN
-	db 23, RAGE
 	db 30, SLASH
 	db 38, FLAMETHROWER
 	db 46, FIRE_SPIN
@@ -2333,7 +2321,6 @@ CharmeleonEvosMoves:
 	db 15, SMOKESCREEN
 	db 23, SLASH
 	db 30, FLAMETHROWER
-	db 38, RAGE
 	db 41, FIRE_SPIN
 	db 0
 

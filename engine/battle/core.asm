@@ -3348,6 +3348,8 @@ MirrorMoveCheck:
 	and a
 	jr z, .moveDidNotMiss
 	call PrintMoveFailureText
+	ld hl, wPlayerBattleStatus2
+	res USING_RAGE, [hl] ; a miss ends ROLLOUT
 	ld a, [wPlayerMoveEffect]
 	cp EXPLODE_EFFECT ; even if Explosion or Selfdestruct missed, its effect still needs to be activated
 	jr z, .notDone
@@ -3369,7 +3371,6 @@ MirrorMoveCheck:
 	ld b, [hl]
 	or b
 	ret z ; don't do anything else if the enemy fainted
-	call HandleBuildingRage
 
 	ld hl, wPlayerBattleStatus1
 	bit ATTACKING_MULTIPLE_TIMES, [hl]
@@ -3624,6 +3625,8 @@ CheckPlayerStatusConditions:
 	; permanently untargetable until it successfully used Fly/Dig again.
 	and ~((1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE) | (1 << INVULNERABLE))
 	ld [hl], a
+	inc hl
+	res USING_RAGE, [hl] ; ...and ROLLOUT
 	ld a, [wPlayerMoveEffect]
 	cp FLY_EFFECT
 	jr z, .FlyOrChargeEffect
@@ -3737,11 +3740,11 @@ CheckPlayerStatusConditions:
 	ld a, [wPlayerBattleStatus2]
 	bit USING_RAGE, a ; is mon using rage?
 	jp z, .checkPlayerStatusConditionsDone ; if we made it this far, mon can move normally this turn
-	ld a, RAGE
+	ld a, ROLLOUT
 	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
-	xor a
+	ld a, ROLLOUT_EFFECT ; Rage zeroed the effect here; ROLLOUT needs it every turn
 	ld [wPlayerMoveEffect], a
 	ld hl, PlayerCanExecuteMove
 	jp .returnToHL
@@ -5143,52 +5146,6 @@ SubstituteBrokeText:
 	text_end
 
 ; this function raises the attack modifier of a pokemon using Rage when that pokemon is attacked
-HandleBuildingRage:
-; values for the player turn
-	ld hl, wEnemyBattleStatus2
-	ld de, wEnemyMonStatMods
-	ld bc, wEnemyMoveNum
-	ldh a, [hWhoseTurn]
-	and a
-	jr z, .next
-; values for the enemy turn
-	ld hl, wPlayerBattleStatus2
-	ld de, wPlayerMonStatMods
-	ld bc, wPlayerMoveNum
-.next
-	bit USING_RAGE, [hl] ; is the pokemon being attacked under the effect of Rage?
-	ret z ; return if not
-	ld a, [de]
-	cp $0d ; maximum stat modifier value
-	ret z ; return if attack modifier is already maxed
-	ldh a, [hWhoseTurn]
-	xor $01 ; flip turn for the stat modifier raising function
-	ldh [hWhoseTurn], a
-; temporarily change the target pokemon's move to $00 and the effect to the one
-; that causes the attack modifier to go up one stage
-	ld h, b
-	ld l, c
-	ld [hl], $00 ; null move number
-	inc hl
-	ld [hl], ATTACK_UP1_EFFECT
-	push hl
-	ld hl, BuildingRageText
-	call PrintText
-	call StatModifierUpEffect ; stat modifier raising function
-	pop hl
-	xor a
-	ld [hld], a ; null move effect
-	ld a, RAGE
-	ld [hl], a ; restore the target pokemon's move number to Rage
-	ldh a, [hWhoseTurn]
-	xor $01 ; flip turn back to the way it was
-	ldh [hWhoseTurn], a
-	ret
-
-BuildingRageText:
-	text_far _BuildingRageText
-	text_end
-
 ; copy last move for Mirror Move
 ; sets zero flag on failure and unsets zero flag on success
 MirrorMoveCopyMove:
@@ -5893,6 +5850,8 @@ EnemyCheckIfMirrorMoveEffect:
 	and a
 	jr z, .moveDidNotMiss
 	call PrintMoveFailureText
+	ld hl, wEnemyBattleStatus2
+	res USING_RAGE, [hl] ; a miss ends ROLLOUT
 	ld a, [wEnemyMoveEffect]
 	cp EXPLODE_EFFECT
 	jr z, .handleExplosionMiss
@@ -5914,7 +5873,6 @@ EnemyCheckIfMirrorMoveEffect:
 	ld b, [hl]
 	or b
 	ret z
-	call HandleBuildingRage
 	ld hl, wEnemyBattleStatus1
 	bit ATTACKING_MULTIPLE_TIMES, [hl] ; is mon hitting multiple times? (example: double kick)
 	jr z, .notMultiHitMove
@@ -6118,6 +6076,8 @@ CheckEnemyStatusConditions:
 	; full-paralysis / confusion hit on turn 2 of Fly/Dig doesn't leave the mon permanently untargetable.
 	and ~((1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << CHARGING_UP) | (1 << USING_TRAPPING_MOVE) | (1 << INVULNERABLE))
 	ld [hl], a
+	inc hl
+	res USING_RAGE, [hl] ; ...and ROLLOUT
 	ld a, [wEnemyMoveEffect]
 	cp FLY_EFFECT
 	jr z, .flyOrChargeEffect
@@ -6226,11 +6186,11 @@ CheckEnemyStatusConditions:
 	ld a, [wEnemyBattleStatus2]
 	bit USING_RAGE, a ; is mon using rage?
 	jp z, .checkEnemyStatusConditionsDone ; if we made it this far, mon can move normally this turn
-	ld a, RAGE
+	ld a, ROLLOUT
 	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyToStringBuffer
-	xor a
+	ld a, ROLLOUT_EFFECT
 	ld [wEnemyMoveEffect], a
 	ld hl, EnemyCanExecuteMove
 	jp .enemyReturnToHL

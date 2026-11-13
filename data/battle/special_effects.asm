@@ -22,4 +22,5 @@ SpecialEffectsCont:
 ; damaging moves whose effect is executed prior to damage calculation
 	db THRASH_PETAL_DANCE_EFFECT
 	db TRAPPING_EFFECT
+	db ROLLOUT_EFFECT ; ADDED: sets the lock-in and this hit's power before damage calc
 	db -1 ; end

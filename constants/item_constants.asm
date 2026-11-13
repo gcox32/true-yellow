@@ -177,7 +177,7 @@ DEF TM01 EQU const_value
 	add_tm SUBMISSION   ; $D9 TM17
 	add_tm COUNTER      ; $DA TM18
 	add_tm SEISMIC_TOSS ; $DB TM19
-	add_tm RAGE         ; $DC TM20
+	add_tm ROLLOUT      ; $DC TM20
 	add_tm MEGA_DRAIN   ; $DD TM21
 	add_tm SOLARBEAM    ; $DE TM22
 	add_tm DRAGON_RAGE  ; $DF TM23

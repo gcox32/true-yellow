@@ -1572,15 +1572,8 @@ ClearHyperBeam:
 	pop hl
 	ret
 
-; RageEffect: ; Rage was changed so we don't need this
-; 	ld hl, wPlayerBattleStatus2
-; 	ldh a, [hWhoseTurn]
-; 	and a
-; 	jr z, .player
-; 	ld hl, wEnemyBattleStatus2
-; .player
-; 	set USING_RAGE, [hl] ; mon is now in "rage" mode
-; 	ret
+RolloutEffect:
+	jpfar RolloutEffect_
 
 MimicEffect:
 	ld c, 50

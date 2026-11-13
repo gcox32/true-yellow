@@ -98,7 +98,7 @@ AttackAnimationPointers:
 	dw MeditateAnim
 	dw AgilityAnim
 	dw QuickAttackAnim
-	dw RageAnim
+	dw RolloutAnim
 	dw TeleportAnim
 	dw NightShadeAnim
 	dw MimicAnim
@@ -765,8 +765,11 @@ QuickAttackAnim:
 	battle_anim NO_MOVE, SE_SHOW_MON_PIC
 	db -1 ; end
 
-RageAnim:
-	battle_anim RAGE, SUBANIM_0_STAR_TWICE, 0, 6
+RolloutAnim:
+	battle_anim ROLLOUT, SE_SHAKE_SCREEN ; rumble as it starts rolling
+	battle_anim NO_MOVE, SE_SLIDE_MON_OFF ; rolls off toward the foe
+	battle_anim BODY_SLAM, SUBANIM_1_STAR_BIG, 1, 6 ; impact
+	battle_anim NO_MOVE, SE_SHOW_MON_PIC ; back in place (SLIDE_MON_OFF leaves it hidden)
 	db -1 ; end
 
 TeleportAnim:

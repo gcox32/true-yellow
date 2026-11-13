@@ -87,7 +87,7 @@
 	const DEFENSE_SPEED_UP1_EFFECT   ; $4E ; ADDED: new effect, used in defense curl
 	const SUBSTITUTE_EFFECT          ; $4F
 	const HYPER_BEAM_EFFECT          ; $50
-	const RAGE_EFFECT                ; $51
+	const ROLLOUT_EFFECT             ; $51 (was RAGE_EFFECT)
 	const MIMIC_EFFECT               ; $52
 	const METRONOME_EFFECT           ; $53
 	const LEECH_SEED_EFFECT          ; $54

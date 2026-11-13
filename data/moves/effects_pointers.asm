@@ -81,7 +81,7 @@ MoveEffectPointerTable:
 	dw DefenseSpeedUpEffect      ; DEFENSE_SPEED_UP1_EFFECT
 	dw SubstituteEffect          ; SUBSTITUTE_EFFECT
 	dw HyperBeamEffect           ; HYPER_BEAM_EFFECT
-	dw StatUpSideEffect          ; RAGE_EFFECT
+	dw RolloutEffect             ; ROLLOUT_EFFECT
 	dw MimicEffect               ; MIMIC_EFFECT
 	dw NULL                      ; METRONOME_EFFECT
 	dw LeechSeedEffect           ; LEECH_SEED_EFFECT

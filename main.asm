@@ -84,6 +84,7 @@ INCLUDE "engine/battle/wild_encounters.asm"
 INCLUDE "engine/battle/move_effects/recoil.asm"
 INCLUDE "engine/battle/move_effects/conversion.asm"
 INCLUDE "engine/battle/move_effects/haze.asm"
+INCLUDE "engine/battle/move_effects/rollout.asm"
 INCLUDE "engine/battle/silhouette_slide.asm"
 
 
