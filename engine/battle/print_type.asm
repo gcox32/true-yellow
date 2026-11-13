@@ -11,6 +11,8 @@ PrintMonType:
 	ld a, [wMonHType2]
 	cp MAGMA ; MAGMA is a hidden type (e.g. Magmar's) never shown as a second type
 	jr z, .HideType2
+	cp FLOATING ; so is FLOATING (floating Weezing/Magneton)
+	jr z, .HideType2
 	ld a, [wMonHType1]
 	ld b, a
 	ld a, [wMonHType2]
