@@ -11,6 +11,11 @@
 DEF NUM_OPTIONS EQU const_value ; 8
 
 DisplayOptionMenu_:
+	; InitOptionsMenu draws each option by running its handler, and the handlers
+	; act on hJoy5 - which still holds whatever was pressed in the Start menu, so
+	; holding Left/Right as the menu opened shifted options. Clear it first.
+	xor a
+	ldh [hJoy5], a
 	call InitOptionsMenu
 .optionMenuLoop
 	call JoypadLowSensitivity

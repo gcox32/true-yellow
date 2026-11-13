@@ -130,7 +130,6 @@ CalculatePikachuPlacementCoords::
 
 .above_player
 	dec e
-	jr .load_coords ; useless jr
 .load_coords
 	ld hl, wSpritePlayerStateData2MapY - wSpritePlayerStateData1
 	add hl, bc
@@ -362,8 +361,6 @@ SetPikachuSpawnBackOutside::
 
 .on_player_tile
 	ld a, $3
-	jr .load_spawn_state
-
 .load_spawn_state
 	ld [wPikachuSpawnState], a
 	; Clear any door tile left over from a previous transition's cascade (a
@@ -1220,13 +1217,23 @@ ClearPikachuFollowCommandBuffer:
 	ret
 
 AppendPikachuFollowCommandToBuffer:
+; Size is the index of the last command ($ff = empty), and the buffer holds 16.
+; The original never checked for a full buffer, so a Pikachu that stopped
+; consuming commands (e.g. asleep in Pewter Pokemon Center) let every step write
+; one byte further into the RAM after it ("Pikawalk"). Drop the command instead.
 	ld hl, wPikachuFollowCommandBufferSize
 	inc [hl]
 	ld e, [hl]
+	bit 4, e ; 16 = one past the last slot
+	jr nz, .full
 	ld d, 0
 	ld hl, wPikachuFollowCommandBuffer
 	add hl, de
 	ld [hl], a
+	ret
+
+.full
+	dec [hl]
 	ret
 
 RefreshPikachuFollow:

@@ -99,6 +99,12 @@ GetBattleTransitionID_WildOrTrainer:
 	ret
 
 GetBattleTransitionID_CompareLevels:
+	; With an empty party (Oak catching Pikachu in Pallet Town) there's no
+	; non-fainted mon to find: the loop below would walk past the party data
+	; and let wRivalName decide the transition. Use the weaker one instead.
+	ld a, [wPartyCount]
+	and a
+	jr z, .lowLevelEnemy
 	ld hl, wPartyMon1HP
 .faintedLoop
 	ld a, [hli]
@@ -116,6 +122,7 @@ GetBattleTransitionID_CompareLevels:
 	ld a, [wCurEnemyLevel]
 	sub e
 	jr nc, .highLevelEnemy
+.lowLevelEnemy
 	res BIT_STRONGER_BATTLE_TRANSITION, c
 	ld a, 1
 	ld [wBattleTransitionSpiralDirection], a
