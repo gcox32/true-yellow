@@ -5604,9 +5604,6 @@ MoveHitTest:
 	and SLP_MASK
 	jp z, .moveMissed
 .swiftCheck
-	ld a, [de]
-	cp SWIFT_EFFECT
-	ret z ; Swift never misses (this was fixed from the Japanese versions)
 	call CheckTargetSubstitute ; substitute check (note that this overwrites a)
 	jr z, .checkForDigOrFlyStatus
 ; The fix for Swift broke this code. It's supposed to prevent HP draining moves from working on Substitutes.
@@ -5618,6 +5615,16 @@ MoveHitTest:
 .checkForDigOrFlyStatus
 	bit INVULNERABLE, [hl]
 	jp nz, .moveMissed
+; Swift and Poison Gas never miss, except against a Fly/Dig-invulnerable target
+	ld a, [de]
+	cp SWIFT_EFFECT
+	ret z
+; the move number sits just before the effect
+	dec de
+	ld a, [de]
+	inc de
+	cp POISON_GAS
+	ret z
 	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .enemyTurn

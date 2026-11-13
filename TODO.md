@@ -13,8 +13,8 @@
 - [x] Gen 2 dragon overworld sprite when FLYing with CHARIZARD or DRAGONITE
 - [x] "A" at water's edge prompts SURF?, at BOULDER prompts STRENGTH?, at CUT tree prompts CUT?
 - [x] confirm VICTORY ROAD is completable
-- [ ] POISON_GAS should be a never miss move, like SWIFT
-- [ ] Increase the payouts in the training hall (maybe make teams harder as well to compensate?)
+- [x] POISON_GAS should be a never miss move, like SWIFT (MoveHitTest in engine/battle/core.asm returns early on move POISON_GAS, same early return as SWIFT_EFFECT, now placed after the INVULNERABLE test: both skip accuracy and accuracy/evasion stages but miss a target mid-Fly/Dig/trainer-battle Teleport. NEEDS IN-GAME TEST.)
+- [x] Increase the payouts in the training hall (doubled: ReadTrainer .FinishUp runs the base-money × level loop twice when IsDojoTrainingBout, i.e. ¥50 × last mon's level instead of ¥25. Teams unchanged. NEEDS IN-GAME TEST.)
 - [ ] Hide the FLOAT type from the summary screen if WEEZING or MAGNETON has the secondary FLOAT type
 - [ ] Add chance to poison to HYPER_FANG and SUPER_FANG
 - [ ] Investigate EXEGGUTOR usage across trainer parties--use this as the first inspection of any oddities across trainer parties

@@ -183,6 +183,10 @@ ReadTrainer:
 	ld [de], a
 	ld a, [wCurEnemyLevel]
 	ld b, a
+; Fighting Dojo training hall pays double (level <= MAX_LEVEL, so b <= 200)
+	call IsDojoTrainingBout
+	jr nc, .LastLoop
+	sla b
 .LastLoop
 ; update wAmountMoneyWon addresses (money to win) based on enemy's level
 	ld hl, wTrainerBaseMoney + 1

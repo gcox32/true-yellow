@@ -149,7 +149,7 @@ Moves:
 	move HI_JUMP_KICK, JUMP_KICK_EFFECT,            90,  FIGHTING,        90, 20
 	move GLARE,        PARALYZE_EFFECT,              0,  NORMAL,          85, 30 ; accuracy changed from 75 to 85
 	move DREAM_EATER,  DREAM_EATER_EFFECT,          90,  GHOST,          100, 15 ; type changed from PSYCHIC_TYPE to GHOST
-	move POISON_GAS,   POISON_SIDE_EFFECT1,         40,  POISON,         100, 20 ; high critical hit ratio
+	move POISON_GAS,   POISON_SIDE_EFFECT1,         40,  POISON,         100, 20 ; high critical hit ratio; never misses (MoveHitTest)
 	move BARRAGE,      TWO_TO_FIVE_ATTACKS_EFFECT,  20,  ROCK,            90, 20 ; power changed from 15 to 20, type changed from NORMAL to ROCK
 	move LEECH_LIFE,   DRAIN_HP_EFFECT,             50,  BUG,            100, 15 ; power changed from 20 to 50
 	move LOVELY_KISS,  SLEEP_EFFECT,                 0,  NORMAL,          85, 10 ; accuracy changed from 75 to 85
