@@ -74,47 +74,11 @@ BOSS_CLASSES = ("BROCK", "MISTY", "LT_SURGE", "ERIKA", "KOGA", "BLAINE", "SABRIN
 # every party at a location next to a map from town_map_order.asm: -0.5 puts it
 # in just before that map's trainers, +0.5 just after.
 PINNED_LOCATIONS = {
-	# You're sent down Route 11 on the way out of Vermilion, long before the town
-	# map's order gets to it - it sits between Saffron and Route 12 there.
-	"Route 11": ("ROUTE_6", +0.5),
 	# The gym is only open once you've cleared the S.S. Anne and cut the tree.
 	"Vermilion Gym": ("SS_ANNE_1F", +0.5),
 	# Giovanni's gym is an endgame stop, not the second town you walk into.
 	"Viridian Gym": ("ROUTE_22", -0.5),
 }
-
-# Whole stretches of town_map_order.asm that are played somewhere else, as
-# (first map, last map, the map they go in front of). The asm list is the in-game
-# Town Map's cursor order, so it stays geographic and the move is made here.
-MOVED_SPANS = (
-	# South from Celadon down the coast to Fuchsia comes before Saffron: Koga's
-	# badge is earned before Sabrina's. (Route 11 is pinned on its own, above.)
-	("ROUTE_12", "FUCHSIA_CITY", "SAFFRON_CITY"),
-)
-
-
-def play_order(maps, rank):
-	"""town_map_order's ranks with MOVED_SPANS applied, renumbered from 0."""
-	spots = sorted(rank, key=rank.get)
-
-	def position(map_name):
-		spot = docgen.town_map_spot(map_name, maps)
-		if spot not in rank:
-			sys.exit("%s isn't in %s - MOVED_SPANS can't use it" %
-			         (map_name, os.path.basename(docgen.TOWN_MAP_ORDER_ASM)))
-		return spots.index(spot)
-
-	for first, last, before in MOVED_SPANS:
-		start, end = position(first), position(last) + 1
-		if start >= end:
-			sys.exit("MOVED_SPANS: %s comes after %s in %s" %
-			         (first, last, os.path.basename(docgen.TOWN_MAP_ORDER_ASM)))
-		span = spots[start:end]
-		del spots[start:end]
-		target = position(before)
-		spots[target:target] = span
-	return {spot: index for index, spot in enumerate(spots)}
-
 
 # Inside one place, locations run in map id order - which walks Silph Co. and the
 # Pokemon Mansion floor by floor - and the gym is always the last stop in its
@@ -441,7 +405,7 @@ def build_special_moves(parties):
 if __name__ == "__main__":
 	all_parties = read_parties()
 	town_map, town_map_order = docgen.read_town_map()
-	in_order = ordered_parties(all_parties, town_map, play_order(town_map, town_map_order))
+	in_order = ordered_parties(all_parties, town_map, docgen.play_order(town_map, town_map_order))
 	docgen.main(PARTIES_DOC, [
 		("parties", PARTY_COLUMNS, lambda: build_parties(in_order)),
 		("special-moves", MOVE_COLUMNS, lambda: build_special_moves(all_parties)),

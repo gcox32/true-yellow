@@ -139,6 +139,44 @@ def read_town_map():
 	"""
 	maps = read_map_ids() + read_town_map_entries()
 	return maps, read_town_map_order(maps)
+# Whole stretches of town_map_order.asm that are played somewhere else, as
+# (first map, last map, the map they go in front of), applied in order. The asm
+# list is the in-game Town Map's cursor order, so it stays geographic and the
+# docs that want play order make the moves here.
+MOVED_SPANS = (
+	# You're sent down Route 11 on the way out of Vermilion, long before the town
+	# map's order gets to it - it sits between Saffron and Route 12 there.
+	("ROUTE_11", "ROUTE_11", "VERMILION_CITY"),
+	# South from Celadon down the coast to Fuchsia comes before Saffron: Koga's
+	# badge is earned before Sabrina's.
+	("ROUTE_12", "FUCHSIA_CITY", "SAFFRON_CITY"),
+)
+
+
+def play_order(maps, rank):
+	"""{town map coordinates: play-order rank} - read_town_map's ranks with
+	MOVED_SPANS applied, renumbered from 0."""
+	spots = sorted(rank, key=rank.get)
+
+	def position(map_name):
+		spot = town_map_spot(map_name, maps)
+		if spot not in rank:
+			sys.exit("%s isn't in %s - MOVED_SPANS can't use it" %
+			         (map_name, os.path.basename(TOWN_MAP_ORDER_ASM)))
+		return spots.index(spot)
+
+	for first, last, before in MOVED_SPANS:
+		start, end = position(first), position(last) + 1
+		if start >= end:
+			sys.exit("MOVED_SPANS: %s comes after %s in %s" %
+			         (first, last, os.path.basename(TOWN_MAP_ORDER_ASM)))
+		span = spots[start:end]
+		del spots[start:end]
+		target = position(before)
+		spots[target:target] = span
+	return {spot: index for index, spot in enumerate(spots)}
+
+
 # A map name that isn't its constant with the underscores turned into spaces and
 # each word capitalized. Floor suffixes (1F, B2F) are left alone by that rule.
 NAME_WORDS = {

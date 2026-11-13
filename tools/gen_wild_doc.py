@@ -31,7 +31,8 @@ Where the rows come from:
                data/events/prize_mon_levels.asm for the levels.
 
 Only the table between the generated: markers is rewritten; the prose around it
-stays.
+stays. availability.svg beside the doc is drawn from the same encounters - see
+wild_charts.py.
 
 Usage:
   gen_wild_doc.py            rewrite the table in place
@@ -45,6 +46,7 @@ import re
 import sys
 
 import docgen
+import wild_charts
 
 POKEMON_CONSTANTS_ASM = docgen.path("constants", "pokemon_constants.asm")
 POKEDEX_CONSTANTS_ASM = docgen.path("constants", "pokedex_constants.asm")
@@ -64,6 +66,7 @@ PRIZE_LEVELS_ASM = docgen.path("data", "events", "prize_mon_levels.asm")
 OBJECTS_DIR = docgen.path("data", "maps", "objects")
 SCRIPTS_DIR = docgen.path("scripts")
 LOCATIONS_DOC = docgen.path("docs", "updates", "pokemon", "LOCATIONS.md")
+AVAILABILITY_SVG = docgen.path("docs", "updates", "pokemon", "availability.svg")
 
 COLUMNS = ("Pokémon", "Location", "Method", "Levels", "Chance", "Notes")
 
@@ -106,6 +109,10 @@ SCRIPTED_DEMOS = {
 	("PALLET_TOWN", "PIKACHU"): "cutscene - Oak catches it for you",
 	("VIRIDIAN_CITY", "RATTATA"): "the old man's catching demo, not a real encounter",
 }
+
+# Of those, the one that doesn't end with a Pokemon in your party. Oak's Pikachu
+# does - it's your starter - so it stays on the availability chart.
+NOT_OBTAINED = {("VIRIDIAN_CITY", "RATTATA")}
 
 # Statics whose script name for the species isn't the species: the Pokemon Tower
 # ghost is RESTLESS_SOUL, an alias for MAROWAK.
@@ -648,8 +655,22 @@ def levels(values):
 	return "%d-%d" % (min(values), max(values))
 
 
-def build_rows(data, scripted):
-	"""Every encounter in the game, one row each, grouped by Pokemon."""
+class Encounter:
+	"""One row's facts before they're formatted, for the availability chart."""
+
+	def __init__(self, species, map_name, method, rate):
+		self.species = species    # the base form - what the dex calls it
+		self.map_name = map_name  # None for the rods you can cast anywhere
+		self.method = method
+		self.rate = rate          # share of that slate's encounters, or None for a one-off
+
+
+def build_rows(data, scripted, encounters=None):
+	"""Every encounter in the game, one row each, grouped by Pokemon.
+
+	If `encounters` is a list, an Encounter is appended to it per row, except for
+	NOT_OBTAINED, which isn't a Pokemon you can get.
+	"""
 	species_ids, indexes, map_ids, town_map, rank = data
 	dex, roster = read_dex_numbers(species_ids, indexes)
 	forms = read_forms(dex, species_ids)
@@ -659,9 +680,11 @@ def build_rows(data, scripted):
 	rows = []
 	present = set()
 
-	def add(species, map_name, method, level_text, chance_text, note):
+	def add(species, map_name, method, level_text, chance_text, note, rate=None):
 		present.add(species)
 		base, form = forms.get(species, (species, None))
+		if encounters is not None and (map_name, species) not in NOT_OBTAINED:
+			encounters.append(Encounter(base, map_name, method, rate))
 		if form:
 			note = "%s; %s" % (form, note) if note else form
 		if map_name is None:
@@ -695,19 +718,21 @@ def build_rows(data, scripted):
 							sys.exit("%s: %s is not a species" % (asm, species))
 						slots.setdefault(species, []).append((slot, level))
 					for species, found in slots.items():
+						share = sum(slot_chances[slot] for slot, _ in found)
 						add(species, map_name, method,
-						    levels([level for _, level in found]),
-						    chance(sum(slot_chances[slot] for slot, _ in found)), "")
+						    levels([level for _, level in found]), chance(share), "",
+						    rate=share)
 
 	# Fishing. The Old and Good Rods ignore where you are; only the Super Rod has
 	# a per-map slate.
 	old_level, old_species = read_old_rod()
 	add(old_species, None, "Old Rod", "%d" % old_level, chance(1.0),
-	    "every Old Rod bite, wherever you cast it")
+	    "every Old Rod bite, wherever you cast it", rate=1.0)
 	good_rod = read_good_rod()
 	for level, species in good_rod:
 		add(species, None, "Good Rod", "%d" % level, chance(1.0 / len(good_rod)),
-		    "one of the Good Rod's %d mons, wherever you cast it" % len(good_rod))
+		    "one of the Good Rod's %d mons, wherever you cast it" % len(good_rod),
+		    rate=1.0 / len(good_rod))
 
 	for map_name, slots in read_super_rod(map_ids).items():
 		folded = {}
@@ -719,7 +744,8 @@ def build_rows(data, scripted):
 			add(species, map_name, "Super Rod",
 			    levels([level for _, level in found]),
 			    chance(sum(rod_chances[slot] for slot, _ in found)),
-			    "slot %s" % ", ".join(str(slot + 1) for slot, _ in found))
+			    "slot %s" % ", ".join(str(slot + 1) for slot, _ in found),
+			    rate=sum(rod_chances[slot] for slot, _ in found))
 
 	# Statics: the map objects, then the scripted ones. The Power Plant's Voltorbs
 	# are eight separate objects at two levels, so identical ones are counted into
@@ -778,8 +804,14 @@ if __name__ == "__main__":
 	whole_town_map, progress = docgen.read_town_map()
 	fossils = read_fossil_mons(all_species)
 	scripted = read_script_encounters(all_species, all_aliases, all_maps, fossils)
+	found = []
+	rows = build_rows((all_species, num_indexes, all_maps, whole_town_map, progress),
+	                  scripted, found)
+	_, dex_roster = read_dex_numbers(all_species, num_indexes)
 	docgen.main(LOCATIONS_DOC, [
-		("locations", COLUMNS,
-		 lambda: build_rows((all_species, num_indexes, all_maps, whole_town_map, progress),
-		                    scripted)),
-	], __doc__)
+		("locations", COLUMNS, lambda: rows),
+	], __doc__, files=[
+		(AVAILABILITY_SVG, lambda: wild_charts.availability(
+			found, dex_roster, species_name, whole_town_map,
+			docgen.play_order(whole_town_map, progress), all_maps)),
+	])

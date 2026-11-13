@@ -11,6 +11,33 @@ This is deliberately the Pokemon-first view. The other direction - what lives on
 map - is what `data/wild/maps/*.asm` already is, one file per map, so it isn't duplicated
 here.
 
+## Availability
+
+![Where each species can be caught, through the game](availability.svg)
+
+Every species in the dex against the places you can get it, generated alongside the
+table from the same encounters (`tools/wild_charts.py`). Columns run in play order -
+the same order as the trainer level curve in `docs/updates/trainers/PARTIES.md` - and a
+column is a spot on the town map, so every floor of Mt. Moon or the Safari Zone's four
+areas share one.
+
+- A **square** is somewhere you can keep encountering it - grass, water or a rod -
+  shaded by its share of that place's encounters (the best of its slates there, if it's
+  on more than one).
+- A **ring** is a one-off: a static encounter, a gift, a trade or a prize. The starter
+  Pikachu counts; the old man's catching demo doesn't.
+- The Old and Good Rods work on any water, so their catches sit where you're handed the
+  rod: Vermilion and Fuchsia.
+- Rows are sorted by the first column a species turns up in, so the marks fall as a
+  staircase. Where it drops steeply, the game is introducing species quickly; a flat run
+  is a stretch with nothing new. A species with no marks at all is listed under its own
+  heading at the bottom - one you can only get by evolving something.
+
+Columns follow geography plus a few moves, not what you can reach yet: water and fishing
+slates appear at the place they're on even when Surf or a rod comes later - which is why
+Tentacool and Staryu lead the chart, from the water off Pallet Town. Cerulean Cave isn't
+on the town map's list and sits last, which is where the postgame belongs.
+
 ## Reading the table
 
 **Location** is the map the encounter is on, spelled out from its `constants/map_constants.asm`
