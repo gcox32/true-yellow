@@ -824,7 +824,7 @@ MrMimeEvosMoves:
 	db 25, TELEPORT
 	db 28, MIRROR_MOVE
 	db 31, SEISMIC_TOSS
-	db 35, MEDITATE
+	db 35, REFLECT
 	db 39, PSYCHIC_M
 	db 44, GLARE
 	db 48, SUBSTITUTE
@@ -867,7 +867,7 @@ ArbokEvosMoves:
 	db 10, BITE
 	db 17, GLARE
 	db 19, CONSTRICT
-	db 22, MEGA_DRAIN
+	db 22, HYPER_FANG
 	db 30, WITHDRAW
 	db 33, SLAM
 	db 36, LEECH_LIFE
@@ -1541,7 +1541,7 @@ ZubatEvosMoves:
 	db 21, LEECH_LIFE
 	db 25, CONFUSE_RAY
 	db 28, SWORDS_DANCE
-	db 30, SLUDGE
+	db 30, HYPER_FANG
 	db 37, SCREECH
 	db 44, SUPER_FANG
 	db 50, POISON_GAS
@@ -1557,7 +1557,7 @@ EkansEvosMoves:
 	db 10, BITE
 	db 17, GLARE
 	db 19, CONSTRICT
-	db 23, MEGA_DRAIN
+	db 23, HYPER_FANG
 	db 26, LEECH_LIFE
 	db 30, WITHDRAW
 	db 33, SLAM
@@ -1808,7 +1808,7 @@ GolbatEvosMoves:
 	db 21, LEECH_LIFE
 	db 25, CONFUSE_RAY
 	db 28, SWORDS_DANCE
-	db 30, SLUDGE
+	db 30, HYPER_FANG
 	db 37, SCREECH
 	db 44, SUPER_FANG
 	db 50, POISON_GAS

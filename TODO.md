@@ -12,7 +12,7 @@
 - [x] Fighting Dojo as rechallengable training hall (after the Dojo is beaten: standing on the door mat re-arms the Master + 4 Blackbelts, but only once the Master has been beaten, so stepping out to heal mid-gauntlet keeps progress; ReadTrainer swaps in Fighting-themed teams at BLACKBELT 10-14 (DOJO_TRAINING_TEAMS_OFFSET) whose level byte is an offset from the player's highest party level: Blackbelts -5..-2, Master +2, clamped 2-100. Money/moves scale with level. New Master lines in text/FightingDojo.asm. Fighting-only restriction dropped. Tested in-game.)
 - [x] Gen 2 dragon overworld sprite when FLYing with CHARIZARD or DRAGONITE
 - [x] "A" at water's edge prompts SURF?, at BOULDER prompts STRENGTH?, at CUT tree prompts CUT?
-- [ ] confirm VICTORY ROAD is completable
+- [x] confirm VICTORY ROAD is completable
 
 ## Bugs
 - [x] Investigate recoil effects--not sure they're working (RECOIL_EFFECT dispatched to calc-only helper; now points at DefaultRecoilEffect_)
