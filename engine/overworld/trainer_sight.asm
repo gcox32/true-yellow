@@ -347,3 +347,34 @@ CheckPlayerIsInFrontOfSprite:
 .done
 	ld [wTrainerSpriteOffset], a
 	ret
+
+; Called from EndTrainerBattle. Returns carry if the battle that just ended
+; should NOT mark its trainer header as beaten (nor hide the object):
+; - the player blacked out, or
+; - it was a static wild encounter (legendaries, Mew, Power Plant Voltorbs)
+;   that CheckWildBattleUnresolved says is unresolved.
+CheckTrainerBattleUnresolved::
+	ld a, [wEnemyMonOrTrainerClass]
+	cp OPP_ID_OFFSET
+	jr c, CheckWildBattleUnresolved
+	ld a, [wIsInBattle]
+	add 1 ; carry iff $ff (blacked out)
+	ret
+
+; Returns carry if a static wild battle that just ended left the mon in place:
+; the player blacked out, or the mon neither fainted nor was caught (the player
+; ran, or Teleport / Roar / Whirlwind ended it). Also used by the Snorlax
+; post-battle scripts, which don't go through a trainer header.
+CheckWildBattleUnresolved::
+	ld a, [wIsInBattle]
+	add 1 ; carry iff $ff (blacked out)
+	ret c
+	ld a, [wBattleResult]
+	cp $2 ; caught (z, nc)
+	ret z
+	ld hl, wEnemyMonHP
+	ld a, [hli]
+	or [hl] ; fainted (z, nc)
+	ret z
+	scf
+	ret

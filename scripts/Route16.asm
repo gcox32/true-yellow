@@ -44,9 +44,15 @@ Route16DefaultScript:
 	ret
 
 Route16SnorlaxPostBattleScript:
-	ld a, [wIsInBattle]
-	cp $ff
-	jp z, Route16ResetScripts
+; Snorlax is hidden before the battle; if the player blacked out or fled,
+; put it back so it can be woken again with the flute.
+	farcall CheckWildBattleUnresolved
+	jr nc, .resolved
+	ld a, HS_ROUTE_16_SNORLAX
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	jp Route16ResetScripts
+.resolved
 	call UpdateSprites
 	ld a, [wBattleResult]
 	cp $2

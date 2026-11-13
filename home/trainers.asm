@@ -190,9 +190,8 @@ EndTrainerBattle::
 	res BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld hl, wMiscFlags
 	res BIT_SEEN_BY_TRAINER, [hl] ; player is no longer engaged by any trainer
-	ld a, [wIsInBattle]
-	cp $ff
-	jp z, ResetButtonPressedAndMapScript
+	farcall CheckTrainerBattleUnresolved ; blacked out, or fled a static wild mon?
+	jr c, ResetButtonPressedAndMapScript ; then don't flag/hide the object
 	ld a, $2
 	call ReadTrainerHeaderInfo
 	ld a, [wTrainerHeaderFlagBit]
