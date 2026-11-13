@@ -13,6 +13,16 @@
 - [x] Gen 2 dragon overworld sprite when FLYing with CHARIZARD or DRAGONITE
 - [x] "A" at water's edge prompts SURF?, at BOULDER prompts STRENGTH?, at CUT tree prompts CUT?
 - [x] confirm VICTORY ROAD is completable
+- [ ] POISON_GAS should be a never miss move, like SWIFT
+- [ ] Increase the payouts in the training hall (maybe make teams harder as well to compensate?)
+- [ ] Hide the FLOAT type from the summary screen if WEEZING or MAGNETON has the secondary FLOAT type
+- [ ] Add chance to poison to HYPER_FANG and SUPER_FANG
+- [ ] Investigate EXEGGUTOR usage across trainer parties--use this as the first inspection of any oddities across trainer parties
+- [ ] Better idea for move MIST
+- [ ] Beter idea for move HAZE
+- [ ] Better idea for DRAGON_RAGE
+- [ ] Better idea for RAGE (repurpose this mechanic for replacement move ROLLOUT?)
+
 
 ## Bugs
 - [x] Investigate recoil effects--not sure they're working (RECOIL_EFFECT dispatched to calc-only helper; now points at DefaultRecoilEffect_)
@@ -40,6 +50,8 @@
       Mt Moon 1F's second POTION and Victory Road 2F GUARD_SPEC balls are now hidden items at the same tile (which brings
       VR2F BOULDER3, the one dropped from 3F, back to object 12). SS Anne 2F Rooms BEAUTY removed. Distinct-sprite limits
       re-audited: clean. Shifts hide/show flags, so old saves may show/hide items wrongly. NEEDS IN-GAME TEST.)
+- [ ] WHIRLWIND needs to reset the position of the affected pokemon
+- [ ] LORELEI's SLOWBRO tried to HORNDRILL me... where did that come from?
 
 ## Bugfixes from PureRGB
 - [x] High Jump Kick / Jump Kick crash damage on missing does more damage instead of 1 damage always now. (1/4 the damage of what it would have done to the opponent)
