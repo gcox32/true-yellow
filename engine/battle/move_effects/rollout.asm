@@ -8,7 +8,7 @@
 ; Power doubles if the user has used Defense Curl since it was sent out (as in
 ; Gen 2): 60/120/180/240, then 255 (the power byte's cap) instead of 300.
 DEF ROLLOUT_MAX_HITS EQU 5
-DEF ROLLOUT_POWER_STEP EQU 30 ; power = 30 x hit number: 30/60/90/120/150
+DEF ROLLOUT_POWER_STEP EQU 30 ; power = 30 x hit number: 60/90/120/150/180
 
 RolloutEffect_:
 	ld hl, wPlayerBattleStatus2

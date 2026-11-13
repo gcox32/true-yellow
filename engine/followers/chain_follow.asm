@@ -346,6 +346,15 @@ InitializePositionTrail::
 	ld [wPositionTrailY + 0], a
 .skipTrail0Doorway
 
+	; Indigo Plateau's fly/blackout/teleport landing (9,6) sits in a 2-tile-wide
+	; opening in front of the lobby, walled on both sides: the usual line-up
+	; would put Brock (X-1) and Misty (X+2) inside those walls. Mode 1 is only
+	; ever set on this map by such a landing (entering the lobby is mode 2), so
+	; stack them in front instead: Brock below the player, Misty below Pikachu.
+	ld a, [wCurMap]
+	cp INDIGO_PLATEAU
+	jr z, .indigoPlateauPositioning
+
 	; trail[1] = X+2, Y (Misty: right of Pikachu) or X+1, Y (no Pikachu)
 	ld a, [wSpriteMistyStateData1MovementStatus]
 	and a
@@ -376,7 +385,37 @@ InitializePositionTrail::
 	ld [wPositionTrailX + 3], a
 	ld a, b
 	ld [wPositionTrailY + 3], a
+	jr .clearMovementTypeTrail
 
+.indigoPlateauPositioning:
+; Player (X, Y), Pikachu (X+1, Y). Same per-follower guards as above.
+;   trail[1] = (X+1, Y+1) - Misty, in front of Pikachu
+;              (X+1, Y)   - with no Pikachu, Misty takes his spot instead
+;   trail[2] = (X, Y+1)   - Brock, in front of the player
+	ld a, [wSpriteMistyStateData1MovementStatus]
+	and a
+	jr nz, .skipTrail1Indigo
+	ld a, c
+	inc a
+	ld [wPositionTrailX + 1], a
+	ld a, b
+	sub e ; e = $ff with Pikachu, so this steps down a row
+	ld [wPositionTrailY + 1], a
+.skipTrail1Indigo
+
+	ld a, [wSpriteBrockStateData1MovementStatus]
+	and a
+	jr nz, .skipTrail2Indigo
+	ld a, c
+	ld [wPositionTrailX + 2], a
+	ld a, b
+	inc a
+	ld [wPositionTrailY + 2], a
+.skipTrail2Indigo
+	; trail[3] deliberately left alone: nothing reads it as a live target, and
+	; bank $3F has no room for the extra writes.
+
+.clearMovementTypeTrail
 	; Initialize movement type trail to 0 (walk) for all entries
 	xor a
 	ld [wMovementTypeTrail + 0], a

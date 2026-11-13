@@ -11,7 +11,7 @@ EnterMapAnim::
 	jr nz, .flyAnimation
 	bit BIT_DIG_WITH_DIGLETT, [hl]
 	res BIT_DIG_WITH_DIGLETT, [hl]
-	jr nz, .diglettAnimation
+	jp nz, .diglettAnimation
 	ld a, SFX_TELEPORT_ENTER_1
 	call PlaySound
 	ld hl, wStatusFlags6
@@ -50,6 +50,12 @@ EnterMapAnim::
 	call PlayDefaultMusic
 .done
 	call Func_151d
+	; Every EnterMapAnim path ends here; let the followers back out alongside
+	; Pikachu (set by _LeaveMapAnim).
+	ld hl, wMistyOverworldStateFlags
+	res 7, [hl]
+	ld hl, wBrockOverworldStateFlags
+	res 7, [hl]
 	jp RestoreFacingDirectionAndYScreenPos
 .dungeonWarpAnimation
 	ld c, 50
@@ -133,6 +139,19 @@ PlayerSpinWhileMovingDown:
 
 _LeaveMapAnim::
 	call Func_1510
+	; Func_1510 hides Pikachu for the Fly/Dig/Teleport/Escape Rope/warp pad/hole
+	; animations; hide Misty and Brock the same way. Bit 7 of their state flags
+	; makes ShouldMisty/BrockSpawn hide them on every frame until EnterMapAnim
+	; clears it, and the ImageIndex writes take them off-screen right now (no
+	; spawn pass has to run first). PrepareForSpecialWarp zeroes their movement
+	; status anyway, so they re-spawn fresh on the destination map.
+	ld hl, wMistyOverworldStateFlags
+	set 7, [hl]
+	ld hl, wBrockOverworldStateFlags
+	set 7, [hl]
+	ld a, $ff
+	ld [wSpriteMistyStateData1ImageIndex], a
+	ld [wSpriteBrockStateData1ImageIndex], a
 	call InitFacingDirectionList
 	ld a, [wStatusFlags7]
 	bit BIT_DIG_WITH_DIGLETT, a
