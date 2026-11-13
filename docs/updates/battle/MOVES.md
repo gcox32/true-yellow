@@ -106,7 +106,7 @@ The table is generated - `make` rewrites it (or run `tools/gen_moves_doc.py`) af
 | MEDITATE     | ATTACK_UP1_EFFECT          | 0     | FIGHTING        | 100      | 10 |
 | AGILITY      | SPEED_UP2_EFFECT           | 0     | PSYCHIC_TYPE    | 100      | 20 |
 | QUICK_ATTACK | NO_ADDITIONAL_EFFECT       | 40    | NORMAL          | 100      | 30 |
-| ROLLOUT      | ROLLOUT_EFFECT             | 30    | ROCK            | 95       | 20 |
+| ROLLOUT      | ROLLOUT_EFFECT             | 60    | ROCK            | 95       | 20 |
 | TELEPORT     | SWITCH_AND_TELEPORT_EFFECT | 0     | PSYCHIC_TYPE    | 100      | 10 |
 | NIGHT_SHADE  | NO_ADDITIONAL_EFFECT       | 70    | GHOST           | 100      | 20 |
 | MIMIC        | MIMIC_EFFECT               | 0     | NORMAL          | 100      | 10 |

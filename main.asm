@@ -444,6 +444,11 @@ SECTION "Surf Sprite Select", ROMX
 INCLUDE "engine/overworld/surf_sprite.asm"
 
 
+SECTION "Diglett Dig Animation", ROMX
+
+INCLUDE "engine/overworld/diglett_dig.asm"
+
+
 SECTION "Follower Talk", ROMX
 
 INCLUDE "engine/followers/follower_talk.asm"

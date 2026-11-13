@@ -224,13 +224,26 @@ StartMenu_Pokemon::
 	text_far _FlashLightsAreaText
 	text_end
 .dig
+	; DIGLETT burrows away / pops back up instead of the Escape Rope spin
+	; (engine/overworld/diglett_dig.asm, cleared again by EnterMapAnim)
+	ld hl, wStatusFlags7
+	res BIT_DIG_WITH_DIGLETT, [hl]
+	ld a, [wCurPartySpecies]
+	cp DIGLETT
+	jr nz, .digNotDiglett
+	set BIT_DIG_WITH_DIGLETT, [hl]
+.digNotDiglett
 	ld a, ESCAPE_ROPE
 	ld [wCurItem], a
 	ld [wPseudoItemID], a
 	call UseItem
 	ld a, [wActionResultOrTookBattleTurn]
 	and a
-	jp z, .loop
+	jr nz, .digSucceeded
+	ld hl, wStatusFlags7
+	res BIT_DIG_WITH_DIGLETT, [hl]
+	jp .loop
+.digSucceeded
 	call GBPalWhiteOutWithDelay3
 	jp .goBackToMap
 .teleport

@@ -9,6 +9,9 @@ EnterMapAnim::
 	bit BIT_USED_FLY, [hl]
 	res BIT_USED_FLY, [hl]
 	jr nz, .flyAnimation
+	bit BIT_DIG_WITH_DIGLETT, [hl]
+	res BIT_DIG_WITH_DIGLETT, [hl]
+	jr nz, .diglettAnimation
 	ld a, SFX_TELEPORT_ENTER_1
 	call PlaySound
 	ld hl, wStatusFlags6
@@ -86,6 +89,7 @@ EnterMapAnim::
 	ld [hl], $8 ; wFlyAnimBirdSpriteImageIndex (facing right)
 	ld de, FlyAnimationEnterScreenCoords
 	call DoFlyAnimation
+.landed
 	call LoadPlayerSpriteGraphics
 	ld a, $1
 	ld [wPikachuSpawnState], a
@@ -94,6 +98,10 @@ EnterMapAnim::
 	ld a, 1
 	ld [wFollowerDoorwayMode], a
 	jr .restoreDefaultMusic
+.diglettAnimation
+	pop hl
+	callfar DiglettDigEnterMapAnim
+	jr .landed
 
 FlyAnimationEnterScreenCoords:
 ; y, x pairs
@@ -126,6 +134,9 @@ PlayerSpinWhileMovingDown:
 _LeaveMapAnim::
 	call Func_1510
 	call InitFacingDirectionList
+	ld a, [wStatusFlags7]
+	bit BIT_DIG_WITH_DIGLETT, a
+	jr nz, .diglettAnimation
 	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
 	and a
@@ -151,6 +162,12 @@ _LeaveMapAnim::
 	ld c, 10
 	call DelayFrames
 .playerStandingOnWarpPad
+	call GBFadeOutToWhite
+	jp RestoreFacingDirectionAndYScreenPos
+.diglettAnimation
+	ld a, $4
+	call StopMusic
+	callfar DiglettDigLeaveMapAnim
 	call GBFadeOutToWhite
 	jp RestoreFacingDirectionAndYScreenPos
 .playerNotStandingOnWarpPadOrHole

@@ -140,7 +140,7 @@ DEF NUM_BADGES EQU const_value
 	const BIT_TRAINER_BATTLE     ; 3
 	const BIT_USE_CUR_MAP_SCRIPT ; 4
 	const BIT_FLY_ON_DRAGON      ; 5 ; Fly used by CHARIZARD/DRAGONITE (Gen 2 dragon sprite)
-	const_skip 1                 ; 6 ; unused
+	const BIT_DIG_WITH_DIGLETT   ; 6 ; Dig used by DIGLETT (Diglett burrow/emerge animation)
 	const BIT_USED_FLY           ; 7
 
 ; wElite4Flags

@@ -109,7 +109,7 @@ Moves:
 	move MEDITATE,     ATTACK_UP1_EFFECT,            0,  FIGHTING,       100, 10 ; new effect and pp reduced to 10
 	move AGILITY,      SPEED_UP2_EFFECT,             0,  PSYCHIC_TYPE,   100, 20 ; pp changed from 30 to 20
 	move QUICK_ATTACK, NO_ADDITIONAL_EFFECT,        40,  NORMAL,         100, 30
-	move ROLLOUT,      ROLLOUT_EFFECT,              30,  ROCK,            95, 20 ; was RAGE (60 power DRAGON, ATTACK_UP_SIDE_EFFECT). 5-turn lock-in, 30/60/90/120/150
+	move ROLLOUT,      ROLLOUT_EFFECT,              60,  ROCK,            95, 20 ; was RAGE. 5-turn lock-in, 60/90/120/150/180
 	move TELEPORT,     SWITCH_AND_TELEPORT_EFFECT,   0,  PSYCHIC_TYPE,   100, 10
 	move NIGHT_SHADE,  NO_ADDITIONAL_EFFECT,        70,  GHOST,          100, 20 ; now a normal GHOST type move
 	move MIMIC,        MIMIC_EFFECT,                 0,  NORMAL,         100, 10
