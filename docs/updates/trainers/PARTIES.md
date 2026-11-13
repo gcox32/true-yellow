@@ -5,6 +5,30 @@ Both tables below are generated - `make` rewrites them (or run
 `data/trainers/special_moves.asm`. Hand edits to them will be overwritten; the prose
 around them is preserved.
 
+## Charts
+Both charts are generated alongside the tables (`tools/party_charts.py`), from the same
+reachable parties, with two exceptions. They leave out the Fighting Dojo's training-hall
+teams, whose level byte is an offset from the player's highest level rather than a level. And
+they count each of the Rival's three-version battles once (version 1), since a player only
+ever meets one version.
+
+![How often each species appears](species_frequency.svg)
+
+Each bar is how many species appear that many times across all trainer parties - the left
+end is species that are missing or rare, the right end the ones that are overused. Every
+trainer Pokémon counts, so two of the same species on one team count twice. Species are
+Pokédex species: an alternate form counts as its base species (Brock's Onix as Onix, the
+floating Weezing as Weezing). Hovering a bar, with the SVG opened on its own, lists its
+species. The dashed curve is the normal distribution with the same mean and standard
+deviation, for reference.
+
+![Trainer levels through the game](level_curve.svg)
+
+The x-axis follows the parties table below in the same play order, minus the rows left out
+above. The line is each team's highest level and the pale band runs down to
+its lowest. The order is geography plus the pins described below, so a trainer the
+pins don't cover can still show up as a spike or dip next to places you reach first.
+
 ## Party Updates
 NPC trainer parties are established in `data/trainers/parties.asm`.
 
@@ -42,7 +66,11 @@ Town map order is geography, not progress, so four stops are pinned somewhere el
 keep the table in playing order: Route 11 moves up next to Route 6, Vermilion Gym waits
 until after the S.S. Anne, Viridian Gym drops back to just before the endgame Rival
 battles on Route 22, and the Rival battle on Route 22 that is actually the game's second
-fight moves up behind the one in Oak's lab.
+fight moves up behind the one in Oak's lab. The Route 10 Pokemaniac who can only be
+reached by Surf is fought right after Koga, whose badge stands in for having Surf. One whole stretch moves too: Routes 12 to 18
+and Fuchsia City come straight after Celadon rather than after Saffron, since Koga's badge
+comes before Sabrina's. (`town_map_order.asm` itself is the in-game Town Map's cursor
+order, so it stays geographic; these moves live in the generator.)
 
 **Lv** is one number when every Pokemon on the team shares a level - which is also how
 the asm stores it, as a single leading level byte. Teams built from `$FF` level/species
@@ -163,7 +191,6 @@ level.
 | HIKER         | Rock Tunnel B1F                                                            | 28    | HITMONLEE                                                                          |                                 |
 | JR_TRAINER_F  | Route 10                                                                   | 27    | PIKACHU, CLEFAIRY, EEVEE                                                           |                                 |
 | JR_TRAINER_F  | Route 10                                                                   | 28    | STARYU, PIDGEOTTO                                                                  |                                 |
-| POKEMANIAC    | Route 10                                                                   | 45    | POLIWRATH, ELECTABUZZ                                                              |                                 |
 | POKEMANIAC    | Route 10                                                                   | 28    | CUBONE, SLOWPOKE                                                                   |                                 |
 | HIKER         | Route 10                                                                   | 27    | PSYDUCK, ONIX                                                                      |                                 |
 | HIKER         | Route 10                                                                   | 26    | MAROWAK, GRAVELER                                                                  |                                 |
@@ -214,58 +241,6 @@ level.
 | BEAUTY        | Celadon Gym                                                                | 33    | PARASECT                                                                           |                                 |
 | COOLTRAINER_F | Celadon Gym                                                                | 31    | WEEPINBELL, GLOOM, IVYSAUR                                                         |                                 |
 | ERIKA         | Celadon Gym                                                                | 37-40 | TANGELA 37, WEEPINBELL 37, GLOOM 40                                                |                                 |
-| BLACKBELT     | Fighting Dojo                                                              | 37    | HITMONLEE, HITMONCHAN                                                              |                                 |
-| BLACKBELT     | Fighting Dojo                                                              | 32    | MANKEY, MACHOP, PRIMEAPE                                                           |                                 |
-| BLACKBELT     | Fighting Dojo                                                              | 34    | MANKEY, MACHOKE                                                                    |                                 |
-| BLACKBELT     | Fighting Dojo                                                              | 35    | PRIMEAPE                                                                           |                                 |
-| BLACKBELT     | Fighting Dojo                                                              | 32    | MACHOP, MANKEY, ELECTABUZZ                                                         |                                 |
-| BLACKBELT     | Fighting Dojo (training hall)                                              | 2     | POLIWRATH, ONIX, HITMONCHAN, HITMONLEE, MACHAMP                                    | KARATE MASTER                   |
-| BLACKBELT     | Fighting Dojo (training hall)                                              | -5    | MACHOKE, PRIMEAPE, GRAVELER                                                        |                                 |
-| BLACKBELT     | Fighting Dojo (training hall)                                              | -4    | PRIMEAPE, MACHOKE, POLIWRATH                                                       |                                 |
-| BLACKBELT     | Fighting Dojo (training hall)                                              | -3    | HITMONCHAN, MACHOKE, PINSIR                                                        |                                 |
-| BLACKBELT     | Fighting Dojo (training hall)                                              | -2    | HITMONLEE, PRIMEAPE, FEAROW                                                        |                                 |
-| SCIENTIST     | Silph Co. 2F                                                               | 39    | PARASECT, PORYGON, MAGMAR, WEEZING                                                 |                                 |
-| SCIENTIST     | Silph Co. 2F                                                               | 40    | FLAREON, STARMIE, MAGNETON                                                         |                                 |
-| ROCKET        | Silph Co. 2F                                                               | 42    | CLOYSTER, DUGTRIO                                                                  |                                 |
-| ROCKET        | Silph Co. 2F                                                               | 39    | GOLBAT, SANDSLASH, POLIWRATH, RATICATE, HITMONCHAN                                 |                                 |
-| SCIENTIST     | Silph Co. 3F                                                               | 38    | ELECTRODE, WEEZING                                                                 |                                 |
-| ROCKET        | Silph Co. 3F                                                               | 41    | RATICATE, HYPNO, CHARMELEON                                                        |                                 |
-| SCIENTIST     | Silph Co. 4F                                                               | 39    | DITTO                                                                              |                                 |
-| ROCKET        | Silph Co. 4F                                                               | 42    | ARCANINE, MR_MIME                                                                  |                                 |
-| ROCKET        | Silph Co. 4F                                                               | 40    | GRAVELER, JOLTEON, WARTORTLE                                                       |                                 |
-| JUGGLER       | Silph Co. 5F                                                               | 42    | BUTTERFREE, ALAKAZAM                                                               |                                 |
-| SCIENTIST     | Silph Co. 5F                                                               | 39    | MAGNETON, TENTACRUEL, PORYGON, ELECTRODE                                           |                                 |
-| ROCKET        | Silph Co. 5F                                                               | 45    | HAUNTER                                                                            |                                 |
-| ROCKET        | Silph Co. 5F                                                               | 45    | SNORLAX                                                                            |                                 |
-| SCIENTIST     | Silph Co. 6F                                                               | 38    | ELECTABUZZ, GOLDUCK, MAGNETON, TANGELA, LICKITUNG                                  |                                 |
-| ROCKET        | Silph Co. 6F                                                               | 42    | MACHAMP, VICTREEBEL                                                                |                                 |
-| ROCKET        | Silph Co. 6F                                                               | 41    | DUGTRIO, HYPNO, GOLBAT                                                             |                                 |
-| SCIENTIST     | Silph Co. 7F                                                               | 42    | ELECTRODE, MUK                                                                     |                                 |
-| ROCKET        | Silph Co. 7F                                                               | 40    | SCYTHER, ARBOK, TAUROS, GOLEM                                                      |                                 |
-| ROCKET        | Silph Co. 7F                                                               | 42    | EXEGGUTOR, KINGLER                                                                 |                                 |
-| ROCKET        | Silph Co. 7F                                                               | 42    | RAICHU, SANDSLASH                                                                  |                                 |
-| RIVAL2        | Silph Co. 7F                                                               | 43-47 | ARCANINE 46, GOLEM 46, PINSIR 45, GENGAR 43, JOLTEON 47                            |                                 |
-| RIVAL2        | Silph Co. 7F                                                               | 43-47 | ARCANINE 46, NIDOQUEEN 46, ALAKAZAM 45, AERODACTYL 43, JOLTEON 47                  |                                 |
-| RIVAL2        | Silph Co. 7F                                                               | 43-47 | ARCANINE 46, FEAROW 46, GENGAR 45, ALAKAZAM 43, JOLTEON 47                         |                                 |
-| SCIENTIST     | Silph Co. 8F                                                               | 38    | SLOWBRO, ELECTRODE                                                                 |                                 |
-| ROCKET        | Silph Co. 8F                                                               | 39    | RATICATE, NIDOKING, PRIMEAPE, RAPIDASH                                             |                                 |
-| ROCKET        | Silph Co. 8F                                                               | 41    | HITMONLEE, GOLBAT, HAUNTER                                                         |                                 |
-| SCIENTIST     | Silph Co. 9F                                                               | 40    | DRAGONAIR, JYNX, MAGNETON                                                          |                                 |
-| ROCKET        | Silph Co. 9F                                                               | 41    | VENOMOTH, HITMONCHAN, MAROWAK                                                      |                                 |
-| ROCKET        | Silph Co. 9F                                                               | 41    | RHYDON, SLOWBRO, MACHAMP                                                           |                                 |
-| SCIENTIST     | Silph Co. 10F                                                              | 42    | MAGNETON, PORYGON                                                                  |                                 |
-| ROCKET        | Silph Co. 10F                                                              | 46    | ALAKAZAM                                                                           |                                 |
-| ROCKET        | Silph Co. 11F                                                              | 39    | LICKITUNG, CHARIZARD, GOLEM, MAGMAR, GYARADOS                                      |                                 |
-| ROCKET        | Jessie & James                                                             | 42    | WEEZING, ARBOK, VICTREEBEL, LICKITUNG, MEOWTH                                      | Silph Co. 11F                   |
-| GIOVANNI      | Silph Co. 11F                                                              | 48-51 | NIDOKING 48, KANGASKHAN 49, KINGLER 49, NIDOQUEEN 51                               |                                 |
-| PSYCHIC_TR    | Saffron Gym                                                                | 48    | KADABRA, SLOWPOKE, EXEGGCUTE, EXEGGUTOR                                            |                                 |
-| PSYCHIC_TR    | Saffron Gym                                                                | 50    | MR_MIME, KADABRA                                                                   |                                 |
-| PSYCHIC_TR    | Saffron Gym                                                                | 49    | VENOMOTH, SLOWPOKE, SLOWBRO                                                        |                                 |
-| PSYCHIC_TR    | Saffron Gym                                                                | 52    | STARMIE                                                                            |                                 |
-| CHANNELER     | Saffron Gym                                                                | 50    | HAUNTER, NINETALES                                                                 |                                 |
-| CHANNELER     | Saffron Gym                                                                | 51    | GENGAR                                                                             |                                 |
-| CHANNELER     | Saffron Gym                                                                | 49    | HYPNO, HAUNTER, GOLDUCK                                                            |                                 |
-| SABRINA       | Saffron Gym                                                                | 55    | ABRA, KADABRA, ALAKAZAM                                                            |                                 |
 | JR_TRAINER_M  | Route 12                                                                   | 41    | NIDORINO, NIDORINA                                                                 |                                 |
 | FISHER        | Route 12                                                                   | 27    | GOLDEEN, POLIWAG, TANGELA                                                          |                                 |
 | FISHER        | Route 12                                                                   | 27    | TENTACOOL, TANGELA                                                                 |                                 |
@@ -329,6 +304,59 @@ level.
 | TAMER         | Fuchsia Gym                                                                | 47    | SANDSLASH, ARBOK                                                                   |                                 |
 | TAMER         | Fuchsia Gym                                                                | 46    | VENUSAUR, NIDOQUEEN, ARBOK                                                         |                                 |
 | KOGA          | Fuchsia Gym                                                                | 50-54 | TENTACRUEL 50, MUK 51, VENOMOTH 51, GOLBAT 52, FLOATING_WEEZING 54                 |                                 |
+| POKEMANIAC    | Route 10                                                                   | 45    | POLIWRATH, ELECTABUZZ                                                              |                                 |
+| BLACKBELT     | Fighting Dojo                                                              | 37    | HITMONLEE, HITMONCHAN                                                              |                                 |
+| BLACKBELT     | Fighting Dojo                                                              | 32    | MANKEY, MACHOP, PRIMEAPE                                                           |                                 |
+| BLACKBELT     | Fighting Dojo                                                              | 34    | MANKEY, MACHOKE                                                                    |                                 |
+| BLACKBELT     | Fighting Dojo                                                              | 35    | PRIMEAPE                                                                           |                                 |
+| BLACKBELT     | Fighting Dojo                                                              | 32    | MACHOP, MANKEY, ELECTABUZZ                                                         |                                 |
+| BLACKBELT     | Fighting Dojo (training hall)                                              | 2     | POLIWRATH, ONIX, HITMONCHAN, HITMONLEE, MACHAMP                                    | KARATE MASTER                   |
+| BLACKBELT     | Fighting Dojo (training hall)                                              | -5    | MACHOKE, PRIMEAPE, GRAVELER                                                        |                                 |
+| BLACKBELT     | Fighting Dojo (training hall)                                              | -4    | PRIMEAPE, MACHOKE, POLIWRATH                                                       |                                 |
+| BLACKBELT     | Fighting Dojo (training hall)                                              | -3    | HITMONCHAN, MACHOKE, PINSIR                                                        |                                 |
+| BLACKBELT     | Fighting Dojo (training hall)                                              | -2    | HITMONLEE, PRIMEAPE, FEAROW                                                        |                                 |
+| SCIENTIST     | Silph Co. 2F                                                               | 39    | PARASECT, PORYGON, MAGMAR, WEEZING                                                 |                                 |
+| SCIENTIST     | Silph Co. 2F                                                               | 40    | FLAREON, STARMIE, MAGNETON                                                         |                                 |
+| ROCKET        | Silph Co. 2F                                                               | 42    | CLOYSTER, DUGTRIO                                                                  |                                 |
+| ROCKET        | Silph Co. 2F                                                               | 39    | GOLBAT, SANDSLASH, POLIWRATH, RATICATE, HITMONCHAN                                 |                                 |
+| SCIENTIST     | Silph Co. 3F                                                               | 38    | ELECTRODE, WEEZING                                                                 |                                 |
+| ROCKET        | Silph Co. 3F                                                               | 41    | RATICATE, HYPNO, CHARMELEON                                                        |                                 |
+| SCIENTIST     | Silph Co. 4F                                                               | 39    | DITTO                                                                              |                                 |
+| ROCKET        | Silph Co. 4F                                                               | 42    | ARCANINE, MR_MIME                                                                  |                                 |
+| ROCKET        | Silph Co. 4F                                                               | 40    | GRAVELER, JOLTEON, WARTORTLE                                                       |                                 |
+| JUGGLER       | Silph Co. 5F                                                               | 42    | BUTTERFREE, ALAKAZAM                                                               |                                 |
+| SCIENTIST     | Silph Co. 5F                                                               | 39    | MAGNETON, TENTACRUEL, PORYGON, ELECTRODE                                           |                                 |
+| ROCKET        | Silph Co. 5F                                                               | 45    | HAUNTER                                                                            |                                 |
+| ROCKET        | Silph Co. 5F                                                               | 45    | SNORLAX                                                                            |                                 |
+| SCIENTIST     | Silph Co. 6F                                                               | 38    | ELECTABUZZ, GOLDUCK, MAGNETON, TANGELA, LICKITUNG                                  |                                 |
+| ROCKET        | Silph Co. 6F                                                               | 42    | MACHAMP, VICTREEBEL                                                                |                                 |
+| ROCKET        | Silph Co. 6F                                                               | 41    | DUGTRIO, HYPNO, GOLBAT                                                             |                                 |
+| SCIENTIST     | Silph Co. 7F                                                               | 42    | ELECTRODE, MUK                                                                     |                                 |
+| ROCKET        | Silph Co. 7F                                                               | 40    | SCYTHER, ARBOK, TAUROS, GOLEM                                                      |                                 |
+| ROCKET        | Silph Co. 7F                                                               | 42    | EXEGGUTOR, KINGLER                                                                 |                                 |
+| ROCKET        | Silph Co. 7F                                                               | 42    | RAICHU, SANDSLASH                                                                  |                                 |
+| RIVAL2        | Silph Co. 7F                                                               | 43-47 | ARCANINE 46, GOLEM 46, PINSIR 45, GENGAR 43, JOLTEON 47                            |                                 |
+| RIVAL2        | Silph Co. 7F                                                               | 43-47 | ARCANINE 46, NIDOQUEEN 46, ALAKAZAM 45, AERODACTYL 43, JOLTEON 47                  |                                 |
+| RIVAL2        | Silph Co. 7F                                                               | 43-47 | ARCANINE 46, FEAROW 46, GENGAR 45, ALAKAZAM 43, JOLTEON 47                         |                                 |
+| SCIENTIST     | Silph Co. 8F                                                               | 38    | SLOWBRO, ELECTRODE                                                                 |                                 |
+| ROCKET        | Silph Co. 8F                                                               | 39    | RATICATE, NIDOKING, PRIMEAPE, RAPIDASH                                             |                                 |
+| ROCKET        | Silph Co. 8F                                                               | 41    | HITMONLEE, GOLBAT, HAUNTER                                                         |                                 |
+| SCIENTIST     | Silph Co. 9F                                                               | 40    | DRAGONAIR, JYNX, MAGNETON                                                          |                                 |
+| ROCKET        | Silph Co. 9F                                                               | 41    | VENOMOTH, HITMONCHAN, MAROWAK                                                      |                                 |
+| ROCKET        | Silph Co. 9F                                                               | 41    | RHYDON, SLOWBRO, MACHAMP                                                           |                                 |
+| SCIENTIST     | Silph Co. 10F                                                              | 42    | MAGNETON, PORYGON                                                                  |                                 |
+| ROCKET        | Silph Co. 10F                                                              | 46    | ALAKAZAM                                                                           |                                 |
+| ROCKET        | Silph Co. 11F                                                              | 39    | LICKITUNG, CHARIZARD, GOLEM, MAGMAR, GYARADOS                                      |                                 |
+| ROCKET        | Jessie & James                                                             | 42    | WEEZING, ARBOK, VICTREEBEL, LICKITUNG, MEOWTH                                      | Silph Co. 11F                   |
+| GIOVANNI      | Silph Co. 11F                                                              | 48-51 | NIDOKING 48, KANGASKHAN 49, KINGLER 49, NIDOQUEEN 51                               |                                 |
+| PSYCHIC_TR    | Saffron Gym                                                                | 48    | KADABRA, SLOWPOKE, EXEGGCUTE, EXEGGUTOR                                            |                                 |
+| PSYCHIC_TR    | Saffron Gym                                                                | 50    | MR_MIME, KADABRA                                                                   |                                 |
+| PSYCHIC_TR    | Saffron Gym                                                                | 49    | VENOMOTH, SLOWPOKE, SLOWBRO                                                        |                                 |
+| PSYCHIC_TR    | Saffron Gym                                                                | 52    | STARMIE                                                                            |                                 |
+| CHANNELER     | Saffron Gym                                                                | 50    | HAUNTER, NINETALES                                                                 |                                 |
+| CHANNELER     | Saffron Gym                                                                | 51    | GENGAR                                                                             |                                 |
+| CHANNELER     | Saffron Gym                                                                | 49    | HYPNO, HAUNTER, GOLDUCK                                                            |                                 |
+| SABRINA       | Saffron Gym                                                                | 55    | ABRA, KADABRA, ALAKAZAM                                                            |                                 |
 | SWIMMER       | Route 19 (beach)                                                           | 43    | CLOYSTER, MACHOKE                                                                  |                                 |
 | SWIMMER       | Route 19 (beach)                                                           | 41    | POLIWHIRL, TAUROS, STARMIE                                                         |                                 |
 | SWIMMER       | Route 19 (water)                                                           | 51    | RAICHU, POLIWRATH                                                                  |                                 |
@@ -361,10 +389,10 @@ level.
 | BURGLAR       | Cinnabar Gym                                                               | 53    | PERSIAN, PRIMEAPE, FLAREON                                                         |                                 |
 | BURGLAR       | Cinnabar Gym                                                               | 58    | MAGMAR                                                                             |                                 |
 | BURGLAR       | Cinnabar Gym                                                               | 55    | CHARMELEON, CHARIZARD                                                              |                                 |
-| BLAINE        | Cinnabar Gym                                                               | 59-63 | RHYDON 59, ARCANINE 60, FLAREON 60, RAPIDASH 61, MAGMAR 63                         |                                 |
+| BLAINE        | Cinnabar Gym                                                               | 59-61 | RHYDON 59, ARCANINE 60, FLAREON 60, RAPIDASH 60, MAGMAR 61                         |                                 |
 | FISHER        | Route 21                                                                   | 49    | SEADRA, VICTREEBEL, FEAROW, SEAKING                                                |                                 |
 | FISHER        | Route 21                                                                   | 53    | MAROWAK, CLOYSTER                                                                  |                                 |
-| FISHER        | Route 21                                                                   | 99    | MAGIKARP                                                                           |                                 |
+| FISHER        | Route 21                                                                   | 60    | MAGIKARP                                                                           |                                 |
 | FISHER        | Route 21                                                                   | 52    | SEAKING, FARFETCHD                                                                 |                                 |
 | SWIMMER       | Route 21                                                                   | 52    | OMASTAR, TENTACRUEL                                                                |                                 |
 | SWIMMER       | Route 21                                                                   | 55    | STARMIE                                                                            |                                 |
@@ -379,7 +407,7 @@ level.
 | COOLTRAINER_M | Viridian Gym                                                               | 58    | OMASTAR, NIDOKING                                                                  |                                 |
 | COOLTRAINER_M | Viridian Gym                                                               | 58    | SANDSLASH, DUGTRIO                                                                 |                                 |
 | COOLTRAINER_M | Viridian Gym                                                               | 61    | SNORLAX                                                                            |                                 |
-| GIOVANNI      | Viridian Gym                                                               | 61-70 | KINGLER 62, GOLEM 61, NIDOQUEEN 61, NIDOKING 62, PERSIAN 62, ARMORED_MEWTWO 70     |                                 |
+| GIOVANNI      | Viridian Gym                                                               | 61-63 | KINGLER 62, GOLEM 61, NIDOQUEEN 61, NIDOKING 62, PERSIAN 62, ARMORED_MEWTWO 63     |                                 |
 | RIVAL2        | Route 22                                                                   | 62-65 | ARCANINE 62, PINSIR 62, VICTREEBEL 63, GOLEM 63, ALAKAZAM 63, JOLTEON 65           |                                 |
 | RIVAL2        | Route 22                                                                   | 62-65 | ARCANINE 62, NIDOQUEEN 62, NIDOKING 63, PINSIR 63, AERODACTYL 63, JOLTEON 65       |                                 |
 | RIVAL2        | Route 22                                                                   | 62-65 | ARCANINE 62, FEAROW 62, NIDOKING 63, PINSIR 63, MAGMAR 63, JOLTEON 65              |                                 |

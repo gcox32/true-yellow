@@ -301,8 +301,36 @@ def splice(doc, doc_path, name, table):
 	return pattern.sub(lambda _: replacement, doc, count=1)
 
 
-def main(doc_path, blocks, description):
-	"""blocks: (marker name, headers, build_rows) per generated table in the doc."""
+def sync_files(files, check, quiet):
+	"""Write each (path, build_content) whose file is missing or stale.
+
+	For whole files a generator owns outright - the charts beside a doc - where
+	there's no prose to splice around. --check fails on a stale one instead.
+	"""
+	for file_path, build in files:
+		content = build()
+		rel = os.path.relpath(file_path, ROOT)
+		try:
+			with open(file_path, encoding="utf-8") as f:
+				current = f.read()
+		except FileNotFoundError:
+			current = None
+		if current == content:
+			if not quiet:
+				print("%s is up to date" % rel)
+			continue
+		if check:
+			sys.exit("%s is out of date; `make` regenerates it" % rel)
+		with open(file_path, "w", encoding="utf-8") as f:
+			f.write(content)
+		print("Regenerated %s" % rel)
+
+
+def main(doc_path, blocks, description, files=()):
+	"""blocks: (marker name, headers, build_rows) per generated table in the doc.
+
+	files: (path, build_content) per whole file generated alongside it.
+	"""
 	parser = argparse.ArgumentParser(description=description,
 	                                 formatter_class=argparse.RawDescriptionHelpFormatter)
 	parser.add_argument("--check", action="store_true",
@@ -321,6 +349,8 @@ def main(doc_path, blocks, description):
 	if args.stdout:
 		sys.stdout.write("\n".join(table for _, table, _ in tables))
 		return
+
+	sync_files(files, args.check, args.quiet)
 
 	rel = os.path.relpath(doc_path, ROOT)
 	counts = ", ".join("%s: %d rows" % (name, count) for name, _, count in tables)

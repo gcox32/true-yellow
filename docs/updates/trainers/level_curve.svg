@@ -1,0 +1,453 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="400" viewBox="0 0 960 400" role="img" font-family="system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Trainer levels through the game</title>
+<desc>Line chart of each trainer party's highest level, in play order, over a band from its lowest to highest level, with gym leaders and the Elite Four marked.</desc>
+<style>
+  .surface { fill: #fcfcfb; }
+  .title { fill: #0b0b0b; font-size: 15px; font-weight: 600; }
+  .subtitle, .axis-title { fill: #52514e; font-size: 12px; }
+  .tick { fill: #52514e; font-size: 11px; }
+  .label { fill: #0b0b0b; font-size: 11px; font-weight: 600; }
+  .grid { stroke: #e7e6e2; stroke-width: 1; }
+  .axis { stroke: #a8a7a1; stroke-width: 1; }
+  .marker-line { stroke: #a8a7a1; stroke-width: 1; stroke-dasharray: 2 3; }
+  .bar { fill: #2a78d6; }
+  .band { stroke: #2a78d6; stroke-opacity: 0.35; stroke-width: 2; }
+  .line { fill: none; stroke: #2a78d6; stroke-width: 2; stroke-linejoin: round; }
+  .fit { fill: none; stroke: #eb6834; stroke-width: 2; stroke-dasharray: 6 4; }
+  .dot { fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; }
+  @media (prefers-color-scheme: dark) {
+    .surface { fill: #1a1a19; }
+    .title, .label { fill: #f0efec; }
+    .subtitle, .axis-title, .tick { fill: #c3c2b7; }
+    .grid { stroke: #2e2e2c; }
+    .axis, .marker-line { stroke: #6b6a65; }
+    .bar { fill: #3987e5; }
+    .band { stroke: #3987e5; }
+    .line { stroke: #3987e5; }
+    .fit { stroke: #d95926; }
+    .dot { fill: #3987e5; stroke: #1a1a19; }
+  }
+</style>
+<rect class="surface" width="960" height="400" rx="8"/>
+<text class="title" x="48" y="26">Trainer levels through the game</text>
+<text class="subtitle" x="48" y="44">336 battles in the order the table lists them · line: each team's highest level · band: its lowest to highest</text>
+<line class="grid" x1="48" x2="940" y1="348" y2="348"/>
+<text class="tick" x="42" y="348" text-anchor="end" dominant-baseline="middle">0</text>
+<line class="grid" x1="48" x2="940" y1="303.4" y2="303.4"/>
+<text class="tick" x="42" y="303.4" text-anchor="end" dominant-baseline="middle">20</text>
+<line class="grid" x1="48" x2="940" y1="258.8" y2="258.8"/>
+<text class="tick" x="42" y="258.8" text-anchor="end" dominant-baseline="middle">40</text>
+<line class="grid" x1="48" x2="940" y1="214.2" y2="214.2"/>
+<text class="tick" x="42" y="214.2" text-anchor="end" dominant-baseline="middle">60</text>
+<line class="grid" x1="48" x2="940" y1="169.6" y2="169.6"/>
+<text class="tick" x="42" y="169.6" text-anchor="end" dominant-baseline="middle">80</text>
+<line class="grid" x1="48" x2="940" y1="125" y2="125"/>
+<text class="tick" x="42" y="125" text-anchor="end" dominant-baseline="middle">100</text>
+<text class="axis-title" transform="translate(14 236.5) rotate(-90)" text-anchor="middle">Level</text>
+<line class="axis" x1="48" x2="940" y1="348" y2="348"/>
+<line class="axis" x1="179.4" x2="179.4" y1="348" y2="352"/>
+<text class="tick" x="179.4" y="365" text-anchor="middle">50</text>
+<line class="axis" x1="312.1" x2="312.1" y1="348" y2="352"/>
+<text class="tick" x="312.1" y="365" text-anchor="middle">100</text>
+<line class="axis" x1="444.9" x2="444.9" y1="348" y2="352"/>
+<text class="tick" x="444.9" y="365" text-anchor="middle">150</text>
+<line class="axis" x1="577.6" x2="577.6" y1="348" y2="352"/>
+<text class="tick" x="577.6" y="365" text-anchor="middle">200</text>
+<line class="axis" x1="710.4" x2="710.4" y1="348" y2="352"/>
+<text class="tick" x="710.4" y="365" text-anchor="middle">250</text>
+<line class="axis" x1="843.1" x2="843.1" y1="348" y2="352"/>
+<text class="tick" x="843.1" y="365" text-anchor="middle">300</text>
+<text class="axis-title" x="494" y="390" text-anchor="middle">Battle number</text>
+<line class="marker-line" x1="70.6" x2="70.6" y1="91" y2="348"/>
+<text class="label" x="70.6" y="87" text-anchor="middle">Brock</text>
+<line class="marker-line" x1="139.6" x2="139.6" y1="91" y2="348"/>
+<text class="label" x="139.6" y="87" text-anchor="middle">Misty</text>
+<line class="marker-line" x1="275" x2="275" y1="91" y2="348"/>
+<text class="label" x="275" y="87" text-anchor="middle">Lt. Surge</text>
+<line class="marker-line" x1="468.8" x2="468.8" y1="91" y2="348"/>
+<text class="label" x="468.8" y="87" text-anchor="middle">Erika</text>
+<line class="marker-line" x1="636" x2="636" y1="91" y2="348"/>
+<text class="label" x="636" y="87" text-anchor="middle">Koga</text>
+<line class="marker-line" x1="758.1" x2="758.1" y1="91" y2="348"/>
+<text class="label" x="758.1" y="87" text-anchor="middle">Sabrina</text>
+<line class="marker-line" x1="845.8" x2="845.8" y1="91" y2="348"/>
+<text class="label" x="845.8" y="87" text-anchor="middle">Blaine</text>
+<line class="marker-line" x1="893.5" x2="893.5" y1="104" y2="348"/>
+<text class="label" x="893.5" y="100" text-anchor="middle">Giovanni</text>
+<line class="marker-line" x1="928.1" x2="928.1" y1="117" y2="348"/>
+<text class="label" x="932.1" y="113" text-anchor="end">Elite Four</text>
+<line class="marker-line" x1="938.7" x2="938.7" y1="91" y2="348"/>
+<text class="label" x="942.7" y="87" text-anchor="end">Champion</text>
+<line class="band" x1="52" x2="52" y1="330.2" y2="327.9"/>
+<line class="band" x1="70.6" x2="70.6" y1="321.2" y2="316.8"/>
+<line class="band" x1="129" x2="129" y1="314.6" y2="307.9"/>
+<line class="band" x1="139.6" x2="139.6" y1="298.9" y2="296.7"/>
+<line class="band" x1="267" x2="267" y1="303.4" y2="294.5"/>
+<line class="band" x1="352" x2="352" y1="272.2" y2="267.7"/>
+<line class="band" x1="447.5" x2="447.5" y1="269.9" y2="263.3"/>
+<line class="band" x1="468.8" x2="468.8" y1="265.5" y2="258.8"/>
+<line class="band" x1="636" x2="636" y1="236.5" y2="227.6"/>
+<line class="band" x1="707.7" x2="707.7" y1="252.1" y2="243.2"/>
+<line class="band" x1="736.9" x2="736.9" y1="241" y2="234.3"/>
+<line class="band" x1="845.8" x2="845.8" y1="216.4" y2="212"/>
+<line class="band" x1="893.5" x2="893.5" y1="212" y2="207.5"/>
+<line class="band" x1="896.2" x2="896.2" y1="209.7" y2="203"/>
+<line class="band" x1="928.1" x2="928.1" y1="209.7" y2="200.8"/>
+<line class="band" x1="930.7" x2="930.7" y1="207.5" y2="198.6"/>
+<line class="band" x1="933.4" x2="933.4" y1="207.5" y2="196.4"/>
+<line class="band" x1="936" x2="936" y1="200.8" y2="194.1"/>
+<line class="band" x1="938.7" x2="938.7" y1="196.4" y2="165.1"/>
+<polyline class="line" points="49.3,336.9 52,327.9 54.6,332.4 57.3,334.6 59.9,325.7 62.6,330.2 65.3,334.6 67.9,327.9 70.6,316.8 73.2,323.5 75.9,316.8 78.5,325.7 81.2,327.9 83.8,321.2 86.5,327.9 89.1,325.7 91.8,316.8 94.5,325.7 97.1,323.5 99.8,325.7 102.4,323.5 105.1,316.8 107.7,323.5 110.4,325.7 113,321.2 115.7,319 118.4,323.5 121,321.2 123.7,312.3 126.3,316.8 129,307.9 131.6,310.1 134.3,305.6 136.9,312.3 139.6,296.7 142.2,316.8 144.9,307.9 147.6,312.3 150.2,314.6 152.9,316.8 155.5,307.9 158.2,312.3 160.8,314.6 163.5,310.1 166.1,316.8 168.8,310.1 171.4,312.3 174.1,312.3 176.8,312.3 179.4,310.1 182.1,303.4 184.7,303.4 187.4,312.3 190,312.3 192.7,312.3 195.3,303.4 198,301.2 200.6,305.6 203.3,305.6 206,305.6 208.6,301.2 211.3,307.9 213.9,305.6 216.6,307.9 219.2,305.6 221.9,305.6 224.5,298.9 227.2,298.9 229.9,298.9 232.5,301.2 235.2,303.4 237.8,301.2 240.5,301.2 243.1,301.2 245.8,298.9 248.4,292.2 251.1,301.2 253.7,303.4 256.4,298.9 259.1,303.4 261.7,301.2 264.4,301.2 267,294.5 269.7,294.5 272.3,298.9 275,281.1 277.6,281.1 280.3,294.5 282.9,294.5 285.6,292.2 288.3,296.7 290.9,290 293.6,292.2 296.2,294.5 298.9,292.2 301.5,285.6 304.2,287.8 306.8,290 309.5,287.8 312.1,292.2 314.8,290 317.5,287.8 320.1,287.8 322.8,287.8 325.4,290 328.1,290 330.7,287.8 333.4,290 336,285.6 338.7,287.8 341.4,285.6 344,285.6 346.7,287.8 349.3,290 352,267.7 354.6,276.6 357.3,276.6 359.9,281.1 362.6,274.4 365.2,278.9 367.9,276.6 370.6,272.2 373.2,278.9 375.9,272.2 378.5,272.2 381.2,276.6 383.8,272.2 386.5,274.4 389.1,267.7 391.8,290 394.4,285.6 397.1,290 399.8,292.2 402.4,285.6 405.1,287.8 407.7,287.8 410.4,283.3 413,285.6 415.7,285.6 418.3,278.9 421,278.9 423.6,276.6 426.3,278.9 429,278.9 431.6,276.6 434.3,281.1 436.9,278.9 439.6,276.6 442.2,269.9 444.9,287.8 447.5,263.3 450.2,278.9 452.9,278.9 455.5,281.1 458.2,283.3 460.8,278.9 463.5,274.4 466.1,278.9 468.8,258.8 471.4,256.6 474.1,287.8 476.7,287.8 479.4,283.3 482.1,290 484.7,256.6 487.4,254.3 490,265.5 492.7,256.6 495.3,261 498,258.8 500.6,261 503.3,258.8 505.9,256.6 508.6,256.6 511.3,265.5 513.9,263.3 516.6,256.6 519.2,261 521.9,258.8 524.5,256.6 527.2,238.7 529.8,256.6 532.5,261 535.1,263.3 537.8,256.6 540.5,258.8 543.1,258.8 545.8,254.3 548.4,247.6 551.1,258.8 553.7,261 556.4,256.6 559,254.3 561.7,254.3 564.4,258.8 567,256.6 569.7,261 572.3,256.6 575,263.3 577.6,261 580.3,258.8 582.9,254.3 585.6,261 588.2,256.6 590.9,258.8 593.6,258.8 596.2,265.5 598.9,258.8 601.5,258.8 604.2,232 606.8,263.3 609.5,258.8 612.1,254.3 614.8,252.1 617.4,261 620.1,245.4 622.8,243.2 625.4,236.5 628.1,243.2 630.7,243.2 633.4,245.4 636,227.6 638.7,247.6 641.3,265.5 644,276.6 646.6,272.2 649.3,269.9 652,276.6 654.6,261 657.3,258.8 659.9,254.3 662.6,261 665.2,263.3 667.9,256.6 670.5,261 673.2,254.3 675.9,258.8 678.5,254.3 681.2,261 683.8,247.6 686.5,247.6 689.1,263.3 691.8,254.3 694.4,256.6 697.1,254.3 699.7,258.8 702.4,254.3 705.1,254.3 707.7,243.2 710.4,263.3 713,261 715.7,256.6 718.3,258.8 721,256.6 723.6,256.6 726.3,254.3 728.9,245.4 731.6,261 734.3,254.3 736.9,234.3 739.6,241 742.2,236.5 744.9,238.7 747.5,232 750.2,236.5 752.8,234.3 755.5,238.7 758.1,225.3 760.8,252.1 763.5,256.6 766.1,234.3 768.8,241 771.4,236.5 774.1,234.3 776.7,241 779.4,241 782,232 784.7,236.5 787.4,232 790,236.5 792.7,232 795.3,225.3 798,238.7 800.6,225.3 803.3,234.3 805.9,232 808.6,236.5 811.2,236.5 813.9,229.8 816.6,223.1 819.2,232 821.9,227.6 824.5,225.3 827.2,241 829.8,238.7 832.5,234.3 835.1,243.2 837.8,229.8 840.4,218.7 843.1,225.3 845.8,212 848.4,238.7 851.1,229.8 853.7,214.2 856.4,232 859,232 861.7,225.3 864.3,232 867,236.5 869.6,234.3 872.3,212 875,218.7 877.6,216.4 880.3,212 882.9,218.7 885.6,218.7 888.2,218.7 890.9,212 893.5,207.5 896.2,203 898.9,227.6 901.5,220.9 904.2,223.1 906.8,225.3 909.5,209.7 912.1,220.9 914.8,220.9 917.4,223.1 920.1,223.1 922.7,225.3 925.4,225.3 928.1,200.8 930.7,198.6 933.4,196.4 936,194.1 938.7,165.1"/>
+<circle cx="49.3" cy="336.9" r="6" fill="transparent"><title>#1 RIVAL1, Oak's Lab: L5</title></circle>
+<circle cx="52" cy="327.9" r="6" fill="transparent"><title>#2 RIVAL1, Route 22: L8-9</title></circle>
+<circle cx="54.6" cy="332.4" r="6" fill="transparent"><title>#3 BUG_CATCHER, Viridian Forest: L7</title></circle>
+<circle cx="57.3" cy="334.6" r="6" fill="transparent"><title>#4 BUG_CATCHER, Viridian Forest: L6</title></circle>
+<circle cx="59.9" cy="325.7" r="6" fill="transparent"><title>#5 BUG_CATCHER, Viridian Forest: L10</title></circle>
+<circle cx="62.6" cy="330.2" r="6" fill="transparent"><title>#6 BUG_CATCHER, Viridian Forest: L8</title></circle>
+<circle cx="65.3" cy="334.6" r="6" fill="transparent"><title>#7 LASS, Viridian Forest: L6</title></circle>
+<circle cx="67.9" cy="327.9" r="6" fill="transparent"><title>#8 JR_TRAINER_M, Pewter Gym: L9</title></circle>
+<circle class="dot" cx="70.6" cy="316.8" r="4"/>
+<circle cx="70.6" cy="316.8" r="6" fill="transparent"><title>#9 BROCK, Pewter Gym: L12-14</title></circle>
+<circle cx="73.2" cy="323.5" r="6" fill="transparent"><title>#10 YOUNGSTER, Route 3: L11</title></circle>
+<circle cx="75.9" cy="316.8" r="6" fill="transparent"><title>#11 YOUNGSTER, Route 3: L14</title></circle>
+<circle cx="78.5" cy="325.7" r="6" fill="transparent"><title>#12 BUG_CATCHER, Route 3: L10</title></circle>
+<circle cx="81.2" cy="327.9" r="6" fill="transparent"><title>#13 BUG_CATCHER, Route 3: L9</title></circle>
+<circle cx="83.8" cy="321.2" r="6" fill="transparent"><title>#14 BUG_CATCHER, Route 3: L12</title></circle>
+<circle cx="86.5" cy="327.9" r="6" fill="transparent"><title>#15 LASS, Route 3: L9</title></circle>
+<circle cx="89.1" cy="325.7" r="6" fill="transparent"><title>#16 LASS, Route 3: L10</title></circle>
+<circle cx="91.8" cy="316.8" r="6" fill="transparent"><title>#17 LASS, Route 3: L14</title></circle>
+<circle cx="94.5" cy="325.7" r="6" fill="transparent"><title>#18 YOUNGSTER, Mt. Moon 1F: L10</title></circle>
+<circle cx="97.1" cy="323.5" r="6" fill="transparent"><title>#19 BUG_CATCHER, Mt. Moon 1F: L11</title></circle>
+<circle cx="99.8" cy="325.7" r="6" fill="transparent"><title>#20 BUG_CATCHER, Mt. Moon 1F: L10</title></circle>
+<circle cx="102.4" cy="323.5" r="6" fill="transparent"><title>#21 LASS, Mt. Moon 1F: L11</title></circle>
+<circle cx="105.1" cy="316.8" r="6" fill="transparent"><title>#22 LASS, Mt. Moon 1F: L14</title></circle>
+<circle cx="107.7" cy="323.5" r="6" fill="transparent"><title>#23 SUPER_NERD, Mt. Moon 1F: L11</title></circle>
+<circle cx="110.4" cy="325.7" r="6" fill="transparent"><title>#24 HIKER, Mt. Moon 1F: L10</title></circle>
+<circle cx="113" cy="321.2" r="6" fill="transparent"><title>#25 SUPER_NERD, Mt. Moon B2F: L12</title></circle>
+<circle cx="115.7" cy="319" r="6" fill="transparent"><title>#26 ROCKET, Mt. Moon B2F: L13</title></circle>
+<circle cx="118.4" cy="323.5" r="6" fill="transparent"><title>#27 ROCKET, Mt. Moon B2F: L11</title></circle>
+<circle cx="121" cy="321.2" r="6" fill="transparent"><title>#28 ROCKET, Mt. Moon B2F: L12</title></circle>
+<circle cx="123.7" cy="312.3" r="6" fill="transparent"><title>#29 ROCKET, Jessie &amp; James: L16</title></circle>
+<circle cx="126.3" cy="316.8" r="6" fill="transparent"><title>#30 LASS, Route 4: L14</title></circle>
+<circle cx="129" cy="307.9" r="6" fill="transparent"><title>#31 RIVAL1, Cerulean City: L15-18</title></circle>
+<circle cx="131.6" cy="310.1" r="6" fill="transparent"><title>#32 ROCKET, Cerulean City: L17</title></circle>
+<circle cx="134.3" cy="305.6" r="6" fill="transparent"><title>#33 JR_TRAINER_F, Cerulean Gym: L19</title></circle>
+<circle cx="136.9" cy="312.3" r="6" fill="transparent"><title>#34 SWIMMER, Cerulean Gym: L16</title></circle>
+<circle class="dot" cx="139.6" cy="296.7" r="4"/>
+<circle cx="139.6" cy="296.7" r="6" fill="transparent"><title>#35 MISTY, Cerulean Gym: L22-23</title></circle>
+<circle cx="142.2" cy="316.8" r="6" fill="transparent"><title>#36 YOUNGSTER, Route 24: L14</title></circle>
+<circle cx="144.9" cy="307.9" r="6" fill="transparent"><title>#37 BUG_CATCHER, Route 24: L18</title></circle>
+<circle cx="147.6" cy="312.3" r="6" fill="transparent"><title>#38 LASS, Route 24: L16</title></circle>
+<circle cx="150.2" cy="314.6" r="6" fill="transparent"><title>#39 LASS, Route 24: L15</title></circle>
+<circle cx="152.9" cy="316.8" r="6" fill="transparent"><title>#40 JR_TRAINER_M, Route 24/Route 25: L14</title></circle>
+<circle cx="155.5" cy="307.9" r="6" fill="transparent"><title>#41 JR_TRAINER_M, Route 24: L18</title></circle>
+<circle cx="158.2" cy="312.3" r="6" fill="transparent"><title>#42 ROCKET, Route 24: L16</title></circle>
+<circle cx="160.8" cy="314.6" r="6" fill="transparent"><title>#43 YOUNGSTER, Route 25: L15</title></circle>
+<circle cx="163.5" cy="310.1" r="6" fill="transparent"><title>#44 YOUNGSTER, Route 25: L17</title></circle>
+<circle cx="166.1" cy="316.8" r="6" fill="transparent"><title>#45 YOUNGSTER, Route 25: L14</title></circle>
+<circle cx="168.8" cy="310.1" r="6" fill="transparent"><title>#46 LASS, Route 25: L17</title></circle>
+<circle cx="171.4" cy="312.3" r="6" fill="transparent"><title>#47 LASS, Route 25: L16</title></circle>
+<circle cx="174.1" cy="312.3" r="6" fill="transparent"><title>#48 HIKER, Route 25: L16</title></circle>
+<circle cx="176.8" cy="312.3" r="6" fill="transparent"><title>#49 HIKER, Route 25: L16</title></circle>
+<circle cx="179.4" cy="310.1" r="6" fill="transparent"><title>#50 HIKER, Route 25: L17</title></circle>
+<circle cx="182.1" cy="303.4" r="6" fill="transparent"><title>#51 BUG_CATCHER, Route 6: L20</title></circle>
+<circle cx="184.7" cy="303.4" r="6" fill="transparent"><title>#52 BUG_CATCHER, Route 6: L20</title></circle>
+<circle cx="187.4" cy="312.3" r="6" fill="transparent"><title>#53 JR_TRAINER_M, Route 6: L16</title></circle>
+<circle cx="190" cy="312.3" r="6" fill="transparent"><title>#54 JR_TRAINER_M, Route 6: L16</title></circle>
+<circle cx="192.7" cy="312.3" r="6" fill="transparent"><title>#55 JR_TRAINER_F, Route 6: L16</title></circle>
+<circle cx="195.3" cy="303.4" r="6" fill="transparent"><title>#56 JR_TRAINER_F, Route 6: L20</title></circle>
+<circle cx="198" cy="301.2" r="6" fill="transparent"><title>#57 YOUNGSTER, Route 11: L21</title></circle>
+<circle cx="200.6" cy="305.6" r="6" fill="transparent"><title>#58 YOUNGSTER, Route 11: L19</title></circle>
+<circle cx="203.3" cy="305.6" r="6" fill="transparent"><title>#59 YOUNGSTER, Route 11: L19</title></circle>
+<circle cx="206" cy="305.6" r="6" fill="transparent"><title>#60 YOUNGSTER, Route 11: L19</title></circle>
+<circle cx="208.6" cy="301.2" r="6" fill="transparent"><title>#61 ENGINEER, Route 11: L21</title></circle>
+<circle cx="211.3" cy="307.9" r="6" fill="transparent"><title>#62 ENGINEER, Route 11: L18</title></circle>
+<circle cx="213.9" cy="305.6" r="6" fill="transparent"><title>#63 GAMBLER, Route 11: L19</title></circle>
+<circle cx="216.6" cy="307.9" r="6" fill="transparent"><title>#64 GAMBLER, Route 11: L18</title></circle>
+<circle cx="219.2" cy="305.6" r="6" fill="transparent"><title>#65 GAMBLER, Route 11: L19</title></circle>
+<circle cx="221.9" cy="305.6" r="6" fill="transparent"><title>#66 GAMBLER, Route 11: L19</title></circle>
+<circle cx="224.5" cy="298.9" r="6" fill="transparent"><title>#67 SAILOR, SS Anne Stern: L22</title></circle>
+<circle cx="227.2" cy="298.9" r="6" fill="transparent"><title>#68 SAILOR, SS Anne Stern: L22</title></circle>
+<circle cx="229.9" cy="298.9" r="6" fill="transparent"><title>#69 YOUNGSTER, SS Anne 1F Rooms: L22</title></circle>
+<circle cx="232.5" cy="301.2" r="6" fill="transparent"><title>#70 LASS, SS Anne 1F Rooms: L21</title></circle>
+<circle cx="235.2" cy="303.4" r="6" fill="transparent"><title>#71 GENTLEMAN, SS Anne 1F Rooms: L20</title></circle>
+<circle cx="237.8" cy="301.2" r="6" fill="transparent"><title>#72 GENTLEMAN, SS Anne 1F Rooms: L21</title></circle>
+<circle cx="240.5" cy="301.2" r="6" fill="transparent"><title>#73 LASS, SS Anne 2F Rooms: L21</title></circle>
+<circle cx="243.1" cy="301.2" r="6" fill="transparent"><title>#74 FISHER, SS Anne 2F Rooms: L21</title></circle>
+<circle cx="245.8" cy="298.9" r="6" fill="transparent"><title>#75 GENTLEMAN, SS Anne 2F Rooms/Vermilion Gym: L22</title></circle>
+<circle cx="248.4" cy="292.2" r="6" fill="transparent"><title>#76 GENTLEMAN, SS Anne 2F Rooms (RATICATE traded for player's BUTTERFREE, and back again): L25</title></circle>
+<circle cx="251.1" cy="301.2" r="6" fill="transparent"><title>#77 SAILOR, SS Anne B1F Rooms: L21</title></circle>
+<circle cx="253.7" cy="303.4" r="6" fill="transparent"><title>#78 SAILOR, SS Anne B1F Rooms: L20</title></circle>
+<circle cx="256.4" cy="298.9" r="6" fill="transparent"><title>#79 SAILOR, SS Anne B1F Rooms: L22</title></circle>
+<circle cx="259.1" cy="303.4" r="6" fill="transparent"><title>#80 SAILOR, SS Anne B1F Rooms: L20</title></circle>
+<circle cx="261.7" cy="301.2" r="6" fill="transparent"><title>#81 SAILOR, SS Anne B1F Rooms: L21</title></circle>
+<circle cx="264.4" cy="301.2" r="6" fill="transparent"><title>#82 FISHER, SS Anne B1F Rooms: L21</title></circle>
+<circle cx="267" cy="294.5" r="6" fill="transparent"><title>#83 RIVAL2, SS Anne 2F: L20-24</title></circle>
+<circle cx="269.7" cy="294.5" r="6" fill="transparent"><title>#84 SAILOR, Vermilion Gym: L24</title></circle>
+<circle cx="272.3" cy="298.9" r="6" fill="transparent"><title>#85 ROCKER, Vermilion Gym: L22</title></circle>
+<circle class="dot" cx="275" cy="281.1" r="4"/>
+<circle cx="275" cy="281.1" r="6" fill="transparent"><title>#86 LT_SURGE, Vermilion Gym: L30</title></circle>
+<circle cx="277.6" cy="281.1" r="6" fill="transparent"><title>#87 YOUNGSTER, Route 9: L30</title></circle>
+<circle cx="280.3" cy="294.5" r="6" fill="transparent"><title>#88 BUG_CATCHER, Route 9: L24</title></circle>
+<circle cx="282.9" cy="294.5" r="6" fill="transparent"><title>#89 BUG_CATCHER, Route 9: L24</title></circle>
+<circle cx="285.6" cy="292.2" r="6" fill="transparent"><title>#90 JR_TRAINER_M, Route 9: L25</title></circle>
+<circle cx="288.3" cy="296.7" r="6" fill="transparent"><title>#91 JR_TRAINER_F, Route 9: L23</title></circle>
+<circle cx="290.9" cy="290" r="6" fill="transparent"><title>#92 JR_TRAINER_F, Route 9: L26</title></circle>
+<circle cx="293.6" cy="292.2" r="6" fill="transparent"><title>#93 HIKER, Route 9: L25</title></circle>
+<circle cx="296.2" cy="294.5" r="6" fill="transparent"><title>#94 HIKER, Route 9: L24</title></circle>
+<circle cx="298.9" cy="292.2" r="6" fill="transparent"><title>#95 HIKER, Route 9/Rock Tunnel B1F: L25</title></circle>
+<circle cx="301.5" cy="285.6" r="6" fill="transparent"><title>#96 JR_TRAINER_F, Rock Tunnel 1F: L28</title></circle>
+<circle cx="304.2" cy="287.8" r="6" fill="transparent"><title>#97 JR_TRAINER_F, Rock Tunnel 1F: L27</title></circle>
+<circle cx="306.8" cy="290" r="6" fill="transparent"><title>#98 JR_TRAINER_F, Rock Tunnel 1F: L26</title></circle>
+<circle cx="309.5" cy="287.8" r="6" fill="transparent"><title>#99 POKEMANIAC, Rock Tunnel 1F: L27</title></circle>
+<circle cx="312.1" cy="292.2" r="6" fill="transparent"><title>#100 HIKER, Rock Tunnel 1F: L25</title></circle>
+<circle cx="314.8" cy="290" r="6" fill="transparent"><title>#101 HIKER, Rock Tunnel 1F: L26</title></circle>
+<circle cx="317.5" cy="287.8" r="6" fill="transparent"><title>#102 HIKER, Rock Tunnel 1F: L27</title></circle>
+<circle cx="320.1" cy="287.8" r="6" fill="transparent"><title>#103 JR_TRAINER_F, Rock Tunnel B1F: L27</title></circle>
+<circle cx="322.8" cy="287.8" r="6" fill="transparent"><title>#104 JR_TRAINER_F, Rock Tunnel B1F: L27</title></circle>
+<circle cx="325.4" cy="290" r="6" fill="transparent"><title>#105 POKEMANIAC, Rock Tunnel B1F: L26</title></circle>
+<circle cx="328.1" cy="290" r="6" fill="transparent"><title>#106 POKEMANIAC, Rock Tunnel B1F: L26</title></circle>
+<circle cx="330.7" cy="287.8" r="6" fill="transparent"><title>#107 POKEMANIAC, Rock Tunnel B1F: L27</title></circle>
+<circle cx="333.4" cy="290" r="6" fill="transparent"><title>#108 HIKER, Rock Tunnel B1F: L26</title></circle>
+<circle cx="336" cy="285.6" r="6" fill="transparent"><title>#109 HIKER, Rock Tunnel B1F: L28</title></circle>
+<circle cx="338.7" cy="287.8" r="6" fill="transparent"><title>#110 JR_TRAINER_F, Route 10: L27</title></circle>
+<circle cx="341.4" cy="285.6" r="6" fill="transparent"><title>#111 JR_TRAINER_F, Route 10: L28</title></circle>
+<circle cx="344" cy="285.6" r="6" fill="transparent"><title>#112 POKEMANIAC, Route 10: L28</title></circle>
+<circle cx="346.7" cy="287.8" r="6" fill="transparent"><title>#113 HIKER, Route 10: L27</title></circle>
+<circle cx="349.3" cy="290" r="6" fill="transparent"><title>#114 HIKER, Route 10: L26</title></circle>
+<circle cx="352" cy="267.7" r="6" fill="transparent"><title>#115 RIVAL2, Pokémon Tower 2F: L34-36</title></circle>
+<circle cx="354.6" cy="276.6" r="6" fill="transparent"><title>#116 CHANNELER, Pokémon Tower 3F: L32</title></circle>
+<circle cx="357.3" cy="276.6" r="6" fill="transparent"><title>#117 CHANNELER, Pokémon Tower 3F: L32</title></circle>
+<circle cx="359.9" cy="281.1" r="6" fill="transparent"><title>#118 CHANNELER, Pokémon Tower 3F: L30</title></circle>
+<circle cx="362.6" cy="274.4" r="6" fill="transparent"><title>#119 CHANNELER, Pokémon Tower 4F: L33</title></circle>
+<circle cx="365.2" cy="278.9" r="6" fill="transparent"><title>#120 CHANNELER, Pokémon Tower 4F: L31</title></circle>
+<circle cx="367.9" cy="276.6" r="6" fill="transparent"><title>#121 CHANNELER, Pokémon Tower 4F: L32</title></circle>
+<circle cx="370.6" cy="272.2" r="6" fill="transparent"><title>#122 CHANNELER, Pokémon Tower 5F: L34</title></circle>
+<circle cx="373.2" cy="278.9" r="6" fill="transparent"><title>#123 CHANNELER, Pokémon Tower 5F: L31</title></circle>
+<circle cx="375.9" cy="272.2" r="6" fill="transparent"><title>#124 CHANNELER, Pokémon Tower 5F: L34</title></circle>
+<circle cx="378.5" cy="272.2" r="6" fill="transparent"><title>#125 CHANNELER, Pokémon Tower 5F: L34</title></circle>
+<circle cx="381.2" cy="276.6" r="6" fill="transparent"><title>#126 CHANNELER, Pokémon Tower 6F: L32</title></circle>
+<circle cx="383.8" cy="272.2" r="6" fill="transparent"><title>#127 CHANNELER, Pokémon Tower 6F: L34</title></circle>
+<circle cx="386.5" cy="274.4" r="6" fill="transparent"><title>#128 CHANNELER, Pokémon Tower 6F: L33</title></circle>
+<circle cx="389.1" cy="267.7" r="6" fill="transparent"><title>#129 ROCKET, Jessie &amp; James: L36</title></circle>
+<circle cx="391.8" cy="290" r="6" fill="transparent"><title>#130 BUG_CATCHER, Route 8: L26</title></circle>
+<circle cx="394.4" cy="285.6" r="6" fill="transparent"><title>#131 LASS, Route 8: L28</title></circle>
+<circle cx="397.1" cy="290" r="6" fill="transparent"><title>#132 LASS, Route 8: L26</title></circle>
+<circle cx="399.8" cy="292.2" r="6" fill="transparent"><title>#133 LASS, Route 8: L25</title></circle>
+<circle cx="402.4" cy="285.6" r="6" fill="transparent"><title>#134 LASS, Route 8: L28</title></circle>
+<circle cx="405.1" cy="287.8" r="6" fill="transparent"><title>#135 SUPER_NERD, Route 8: L27</title></circle>
+<circle cx="407.7" cy="287.8" r="6" fill="transparent"><title>#136 SUPER_NERD, Route 8: L27</title></circle>
+<circle cx="410.4" cy="283.3" r="6" fill="transparent"><title>#137 SUPER_NERD, Route 8: L29</title></circle>
+<circle cx="413" cy="285.6" r="6" fill="transparent"><title>#138 GAMBLER, Route 8: L28</title></circle>
+<circle cx="415.7" cy="285.6" r="6" fill="transparent"><title>#139 GAMBLER, Route 8: L28</title></circle>
+<circle cx="418.3" cy="278.9" r="6" fill="transparent"><title>#140 ROCKET, Game Corner: L31</title></circle>
+<circle cx="421" cy="278.9" r="6" fill="transparent"><title>#141 ROCKET, Rocket Hideout B1F: L31</title></circle>
+<circle cx="423.6" cy="276.6" r="6" fill="transparent"><title>#142 ROCKET, Rocket Hideout B1F: L32</title></circle>
+<circle cx="426.3" cy="278.9" r="6" fill="transparent"><title>#143 ROCKET, Rocket Hideout B1F: L31</title></circle>
+<circle cx="429" cy="278.9" r="6" fill="transparent"><title>#144 ROCKET, Rocket Hideout B1F: L31</title></circle>
+<circle cx="431.6" cy="276.6" r="6" fill="transparent"><title>#145 ROCKET, Rocket Hideout B1F: L32</title></circle>
+<circle cx="434.3" cy="281.1" r="6" fill="transparent"><title>#146 ROCKET, Rocket Hideout B2F: L30</title></circle>
+<circle cx="436.9" cy="278.9" r="6" fill="transparent"><title>#147 ROCKET, Rocket Hideout B3F: L31</title></circle>
+<circle cx="439.6" cy="276.6" r="6" fill="transparent"><title>#148 ROCKET, Rocket Hideout B3F: L32</title></circle>
+<circle cx="442.2" cy="269.9" r="6" fill="transparent"><title>#149 ROCKET, Rocket Hideout B4F: L35</title></circle>
+<circle cx="444.9" cy="287.8" r="6" fill="transparent"><title>#150 ROCKET, Jessie &amp; James: L27</title></circle>
+<circle cx="447.5" cy="263.3" r="6" fill="transparent"><title>#151 GIOVANNI, Rocket Hideout B4F: L35-38</title></circle>
+<circle cx="450.2" cy="278.9" r="6" fill="transparent"><title>#152 LASS, Celadon Gym: L31</title></circle>
+<circle cx="452.9" cy="278.9" r="6" fill="transparent"><title>#153 LASS, Celadon Gym: L31</title></circle>
+<circle cx="455.5" cy="281.1" r="6" fill="transparent"><title>#154 JR_TRAINER_F, Celadon Gym: L30</title></circle>
+<circle cx="458.2" cy="283.3" r="6" fill="transparent"><title>#155 BEAUTY, Celadon Gym: L29</title></circle>
+<circle cx="460.8" cy="278.9" r="6" fill="transparent"><title>#156 BEAUTY, Celadon Gym: L31</title></circle>
+<circle cx="463.5" cy="274.4" r="6" fill="transparent"><title>#157 BEAUTY, Celadon Gym: L33</title></circle>
+<circle cx="466.1" cy="278.9" r="6" fill="transparent"><title>#158 COOLTRAINER_F, Celadon Gym: L31</title></circle>
+<circle class="dot" cx="468.8" cy="258.8" r="4"/>
+<circle cx="468.8" cy="258.8" r="6" fill="transparent"><title>#159 ERIKA, Celadon Gym: L37-40</title></circle>
+<circle cx="471.4" cy="256.6" r="6" fill="transparent"><title>#160 JR_TRAINER_M, Route 12: L41</title></circle>
+<circle cx="474.1" cy="287.8" r="6" fill="transparent"><title>#161 FISHER, Route 12: L27</title></circle>
+<circle cx="476.7" cy="287.8" r="6" fill="transparent"><title>#162 FISHER, Route 12: L27</title></circle>
+<circle cx="479.4" cy="283.3" r="6" fill="transparent"><title>#163 FISHER, Route 12: L29</title></circle>
+<circle cx="482.1" cy="290" r="6" fill="transparent"><title>#164 FISHER, Route 12: L26</title></circle>
+<circle cx="484.7" cy="256.6" r="6" fill="transparent"><title>#165 FISHER, Route 12: L41</title></circle>
+<circle cx="487.4" cy="254.3" r="6" fill="transparent"><title>#166 ROCKER, Route 12: L42</title></circle>
+<circle cx="490" cy="265.5" r="6" fill="transparent"><title>#167 JR_TRAINER_F, Route 13: L37</title></circle>
+<circle cx="492.7" cy="256.6" r="6" fill="transparent"><title>#168 JR_TRAINER_F, Route 13: L41</title></circle>
+<circle cx="495.3" cy="261" r="6" fill="transparent"><title>#169 JR_TRAINER_F, Route 13: L39</title></circle>
+<circle cx="498" cy="258.8" r="6" fill="transparent"><title>#170 JR_TRAINER_F, Route 13: L40</title></circle>
+<circle cx="500.6" cy="261" r="6" fill="transparent"><title>#171 BIKER, Route 13: L39</title></circle>
+<circle cx="503.3" cy="258.8" r="6" fill="transparent"><title>#172 BEAUTY, Route 13: L40</title></circle>
+<circle cx="505.9" cy="256.6" r="6" fill="transparent"><title>#173 BEAUTY, Route 13: L41</title></circle>
+<circle cx="508.6" cy="256.6" r="6" fill="transparent"><title>#174 BIRD_KEEPER, Route 13: L41</title></circle>
+<circle cx="511.3" cy="265.5" r="6" fill="transparent"><title>#175 BIRD_KEEPER, Route 13: L37</title></circle>
+<circle cx="513.9" cy="263.3" r="6" fill="transparent"><title>#176 BIRD_KEEPER, Route 13: L38</title></circle>
+<circle cx="516.6" cy="256.6" r="6" fill="transparent"><title>#177 BIKER, Route 14: L41</title></circle>
+<circle cx="519.2" cy="261" r="6" fill="transparent"><title>#178 BIKER, Route 14: L39</title></circle>
+<circle cx="521.9" cy="258.8" r="6" fill="transparent"><title>#179 BIKER, Route 14: L40</title></circle>
+<circle cx="524.5" cy="256.6" r="6" fill="transparent"><title>#180 BIKER, Route 14: L41</title></circle>
+<circle cx="527.2" cy="238.7" r="6" fill="transparent"><title>#181 BIRD_KEEPER, Route 14: L49</title></circle>
+<circle cx="529.8" cy="256.6" r="6" fill="transparent"><title>#182 BIRD_KEEPER, Route 14: L41</title></circle>
+<circle cx="532.5" cy="261" r="6" fill="transparent"><title>#183 BIRD_KEEPER, Route 14: L39</title></circle>
+<circle cx="535.1" cy="263.3" r="6" fill="transparent"><title>#184 BIRD_KEEPER, Route 14: L38</title></circle>
+<circle cx="537.8" cy="256.6" r="6" fill="transparent"><title>#185 BIRD_KEEPER, Route 14: L41</title></circle>
+<circle cx="540.5" cy="258.8" r="6" fill="transparent"><title>#186 BIRD_KEEPER, Route 14: L40</title></circle>
+<circle cx="543.1" cy="258.8" r="6" fill="transparent"><title>#187 JR_TRAINER_F, Route 15: L40</title></circle>
+<circle cx="545.8" cy="254.3" r="6" fill="transparent"><title>#188 JR_TRAINER_F, Route 15: L42</title></circle>
+<circle cx="548.4" cy="247.6" r="6" fill="transparent"><title>#189 JR_TRAINER_F, Route 15: L45</title></circle>
+<circle cx="551.1" cy="258.8" r="6" fill="transparent"><title>#190 JR_TRAINER_F, Route 15: L40</title></circle>
+<circle cx="553.7" cy="261" r="6" fill="transparent"><title>#191 BIKER, Route 15: L39</title></circle>
+<circle cx="556.4" cy="256.6" r="6" fill="transparent"><title>#192 BIKER, Route 15: L41</title></circle>
+<circle cx="559" cy="254.3" r="6" fill="transparent"><title>#193 BEAUTY, Route 15: L42</title></circle>
+<circle cx="561.7" cy="254.3" r="6" fill="transparent"><title>#194 BEAUTY, Route 15: L42</title></circle>
+<circle cx="564.4" cy="258.8" r="6" fill="transparent"><title>#195 BIRD_KEEPER, Route 15: L40</title></circle>
+<circle cx="567" cy="256.6" r="6" fill="transparent"><title>#196 BIRD_KEEPER, Route 15: L41</title></circle>
+<circle cx="569.7" cy="261" r="6" fill="transparent"><title>#197 BIKER, Route 16: L39</title></circle>
+<circle cx="572.3" cy="256.6" r="6" fill="transparent"><title>#198 BIKER, Route 16: L41</title></circle>
+<circle cx="575" cy="263.3" r="6" fill="transparent"><title>#199 BIKER, Route 16: L38</title></circle>
+<circle cx="577.6" cy="261" r="6" fill="transparent"><title>#200 CUE_BALL, Route 16: L39</title></circle>
+<circle cx="580.3" cy="258.8" r="6" fill="transparent"><title>#201 CUE_BALL, Route 16: L40</title></circle>
+<circle cx="582.9" cy="254.3" r="6" fill="transparent"><title>#202 CUE_BALL, Route 16: L42</title></circle>
+<circle cx="585.6" cy="261" r="6" fill="transparent"><title>#203 BIKER, Route 17: L39</title></circle>
+<circle cx="588.2" cy="256.6" r="6" fill="transparent"><title>#204 BIKER, Route 17: L41</title></circle>
+<circle cx="590.9" cy="258.8" r="6" fill="transparent"><title>#205 BIKER, Route 17: L40</title></circle>
+<circle cx="593.6" cy="258.8" r="6" fill="transparent"><title>#206 BIKER, Route 17: L40</title></circle>
+<circle cx="596.2" cy="265.5" r="6" fill="transparent"><title>#207 BIKER, Route 17: L37</title></circle>
+<circle cx="598.9" cy="258.8" r="6" fill="transparent"><title>#208 CUE_BALL, Route 17: L40</title></circle>
+<circle cx="601.5" cy="258.8" r="6" fill="transparent"><title>#209 CUE_BALL, Route 17: L40</title></circle>
+<circle cx="604.2" cy="232" r="6" fill="transparent"><title>#210 CUE_BALL, Route 17: L52</title></circle>
+<circle cx="606.8" cy="263.3" r="6" fill="transparent"><title>#211 CUE_BALL, Route 17: L38</title></circle>
+<circle cx="609.5" cy="258.8" r="6" fill="transparent"><title>#212 CUE_BALL, Route 17: L40</title></circle>
+<circle cx="612.1" cy="254.3" r="6" fill="transparent"><title>#213 BIRD_KEEPER, Route 18: L42</title></circle>
+<circle cx="614.8" cy="252.1" r="6" fill="transparent"><title>#214 BIRD_KEEPER, Route 18: L43</title></circle>
+<circle cx="617.4" cy="261" r="6" fill="transparent"><title>#215 BIRD_KEEPER, Route 18: L39</title></circle>
+<circle cx="620.1" cy="245.4" r="6" fill="transparent"><title>#216 JUGGLER, Fuchsia Gym: L46</title></circle>
+<circle cx="622.8" cy="243.2" r="6" fill="transparent"><title>#217 JUGGLER, Fuchsia Gym: L47</title></circle>
+<circle cx="625.4" cy="236.5" r="6" fill="transparent"><title>#218 JUGGLER, Fuchsia Gym: L50</title></circle>
+<circle cx="628.1" cy="243.2" r="6" fill="transparent"><title>#219 JUGGLER, Fuchsia Gym: L47</title></circle>
+<circle cx="630.7" cy="243.2" r="6" fill="transparent"><title>#220 TAMER, Fuchsia Gym: L47</title></circle>
+<circle cx="633.4" cy="245.4" r="6" fill="transparent"><title>#221 TAMER, Fuchsia Gym: L46</title></circle>
+<circle class="dot" cx="636" cy="227.6" r="4"/>
+<circle cx="636" cy="227.6" r="6" fill="transparent"><title>#222 KOGA, Fuchsia Gym: L50-54</title></circle>
+<circle cx="638.7" cy="247.6" r="6" fill="transparent"><title>#223 POKEMANIAC, Route 10: L45</title></circle>
+<circle cx="641.3" cy="265.5" r="6" fill="transparent"><title>#224 BLACKBELT, Fighting Dojo: L37</title></circle>
+<circle cx="644" cy="276.6" r="6" fill="transparent"><title>#225 BLACKBELT, Fighting Dojo: L32</title></circle>
+<circle cx="646.6" cy="272.2" r="6" fill="transparent"><title>#226 BLACKBELT, Fighting Dojo: L34</title></circle>
+<circle cx="649.3" cy="269.9" r="6" fill="transparent"><title>#227 BLACKBELT, Fighting Dojo: L35</title></circle>
+<circle cx="652" cy="276.6" r="6" fill="transparent"><title>#228 BLACKBELT, Fighting Dojo: L32</title></circle>
+<circle cx="654.6" cy="261" r="6" fill="transparent"><title>#229 SCIENTIST, Silph Co. 2F: L39</title></circle>
+<circle cx="657.3" cy="258.8" r="6" fill="transparent"><title>#230 SCIENTIST, Silph Co. 2F: L40</title></circle>
+<circle cx="659.9" cy="254.3" r="6" fill="transparent"><title>#231 ROCKET, Silph Co. 2F: L42</title></circle>
+<circle cx="662.6" cy="261" r="6" fill="transparent"><title>#232 ROCKET, Silph Co. 2F: L39</title></circle>
+<circle cx="665.2" cy="263.3" r="6" fill="transparent"><title>#233 SCIENTIST, Silph Co. 3F: L38</title></circle>
+<circle cx="667.9" cy="256.6" r="6" fill="transparent"><title>#234 ROCKET, Silph Co. 3F: L41</title></circle>
+<circle cx="670.5" cy="261" r="6" fill="transparent"><title>#235 SCIENTIST, Silph Co. 4F: L39</title></circle>
+<circle cx="673.2" cy="254.3" r="6" fill="transparent"><title>#236 ROCKET, Silph Co. 4F: L42</title></circle>
+<circle cx="675.9" cy="258.8" r="6" fill="transparent"><title>#237 ROCKET, Silph Co. 4F: L40</title></circle>
+<circle cx="678.5" cy="254.3" r="6" fill="transparent"><title>#238 JUGGLER, Silph Co. 5F: L42</title></circle>
+<circle cx="681.2" cy="261" r="6" fill="transparent"><title>#239 SCIENTIST, Silph Co. 5F: L39</title></circle>
+<circle cx="683.8" cy="247.6" r="6" fill="transparent"><title>#240 ROCKET, Silph Co. 5F: L45</title></circle>
+<circle cx="686.5" cy="247.6" r="6" fill="transparent"><title>#241 ROCKET, Silph Co. 5F: L45</title></circle>
+<circle cx="689.1" cy="263.3" r="6" fill="transparent"><title>#242 SCIENTIST, Silph Co. 6F: L38</title></circle>
+<circle cx="691.8" cy="254.3" r="6" fill="transparent"><title>#243 ROCKET, Silph Co. 6F: L42</title></circle>
+<circle cx="694.4" cy="256.6" r="6" fill="transparent"><title>#244 ROCKET, Silph Co. 6F: L41</title></circle>
+<circle cx="697.1" cy="254.3" r="6" fill="transparent"><title>#245 SCIENTIST, Silph Co. 7F: L42</title></circle>
+<circle cx="699.7" cy="258.8" r="6" fill="transparent"><title>#246 ROCKET, Silph Co. 7F: L40</title></circle>
+<circle cx="702.4" cy="254.3" r="6" fill="transparent"><title>#247 ROCKET, Silph Co. 7F: L42</title></circle>
+<circle cx="705.1" cy="254.3" r="6" fill="transparent"><title>#248 ROCKET, Silph Co. 7F: L42</title></circle>
+<circle cx="707.7" cy="243.2" r="6" fill="transparent"><title>#249 RIVAL2, Silph Co. 7F: L43-47</title></circle>
+<circle cx="710.4" cy="263.3" r="6" fill="transparent"><title>#250 SCIENTIST, Silph Co. 8F: L38</title></circle>
+<circle cx="713" cy="261" r="6" fill="transparent"><title>#251 ROCKET, Silph Co. 8F: L39</title></circle>
+<circle cx="715.7" cy="256.6" r="6" fill="transparent"><title>#252 ROCKET, Silph Co. 8F: L41</title></circle>
+<circle cx="718.3" cy="258.8" r="6" fill="transparent"><title>#253 SCIENTIST, Silph Co. 9F: L40</title></circle>
+<circle cx="721" cy="256.6" r="6" fill="transparent"><title>#254 ROCKET, Silph Co. 9F: L41</title></circle>
+<circle cx="723.6" cy="256.6" r="6" fill="transparent"><title>#255 ROCKET, Silph Co. 9F: L41</title></circle>
+<circle cx="726.3" cy="254.3" r="6" fill="transparent"><title>#256 SCIENTIST, Silph Co. 10F: L42</title></circle>
+<circle cx="728.9" cy="245.4" r="6" fill="transparent"><title>#257 ROCKET, Silph Co. 10F: L46</title></circle>
+<circle cx="731.6" cy="261" r="6" fill="transparent"><title>#258 ROCKET, Silph Co. 11F: L39</title></circle>
+<circle cx="734.3" cy="254.3" r="6" fill="transparent"><title>#259 ROCKET, Jessie &amp; James: L42</title></circle>
+<circle cx="736.9" cy="234.3" r="6" fill="transparent"><title>#260 GIOVANNI, Silph Co. 11F: L48-51</title></circle>
+<circle cx="739.6" cy="241" r="6" fill="transparent"><title>#261 PSYCHIC_TR, Saffron Gym: L48</title></circle>
+<circle cx="742.2" cy="236.5" r="6" fill="transparent"><title>#262 PSYCHIC_TR, Saffron Gym: L50</title></circle>
+<circle cx="744.9" cy="238.7" r="6" fill="transparent"><title>#263 PSYCHIC_TR, Saffron Gym: L49</title></circle>
+<circle cx="747.5" cy="232" r="6" fill="transparent"><title>#264 PSYCHIC_TR, Saffron Gym: L52</title></circle>
+<circle cx="750.2" cy="236.5" r="6" fill="transparent"><title>#265 CHANNELER, Saffron Gym: L50</title></circle>
+<circle cx="752.8" cy="234.3" r="6" fill="transparent"><title>#266 CHANNELER, Saffron Gym: L51</title></circle>
+<circle cx="755.5" cy="238.7" r="6" fill="transparent"><title>#267 CHANNELER, Saffron Gym: L49</title></circle>
+<circle class="dot" cx="758.1" cy="225.3" r="4"/>
+<circle cx="758.1" cy="225.3" r="6" fill="transparent"><title>#268 SABRINA, Saffron Gym: L55</title></circle>
+<circle cx="760.8" cy="252.1" r="6" fill="transparent"><title>#269 SWIMMER, Route 19 (beach): L43</title></circle>
+<circle cx="763.5" cy="256.6" r="6" fill="transparent"><title>#270 SWIMMER, Route 19 (beach): L41</title></circle>
+<circle cx="766.1" cy="234.3" r="6" fill="transparent"><title>#271 SWIMMER, Route 19 (water): L51</title></circle>
+<circle cx="768.8" cy="241" r="6" fill="transparent"><title>#272 SWIMMER, Route 19 (water): L48</title></circle>
+<circle cx="771.4" cy="236.5" r="6" fill="transparent"><title>#273 SWIMMER, Route 19 (water): L50</title></circle>
+<circle cx="774.1" cy="234.3" r="6" fill="transparent"><title>#274 SWIMMER, Route 19 (water): L51</title></circle>
+<circle cx="776.7" cy="241" r="6" fill="transparent"><title>#275 SWIMMER, Route 19 (water): L48</title></circle>
+<circle cx="779.4" cy="241" r="6" fill="transparent"><title>#276 BEAUTY, Route 19: L48</title></circle>
+<circle cx="782" cy="232" r="6" fill="transparent"><title>#277 BEAUTY, Route 19: L52</title></circle>
+<circle cx="784.7" cy="236.5" r="6" fill="transparent"><title>#278 BEAUTY, Route 19: L50</title></circle>
+<circle cx="787.4" cy="232" r="6" fill="transparent"><title>#279 JR_TRAINER_F, Route 20: L52</title></circle>
+<circle cx="790" cy="236.5" r="6" fill="transparent"><title>#280 JR_TRAINER_F, Route 20: L50</title></circle>
+<circle cx="792.7" cy="232" r="6" fill="transparent"><title>#281 SWIMMER, Route 20: L52</title></circle>
+<circle cx="795.3" cy="225.3" r="6" fill="transparent"><title>#282 SWIMMER, Route 20: L55</title></circle>
+<circle cx="798" cy="238.7" r="6" fill="transparent"><title>#283 SWIMMER, Route 20: L49</title></circle>
+<circle cx="800.6" cy="225.3" r="6" fill="transparent"><title>#284 BEAUTY, Route 20: L55</title></circle>
+<circle cx="803.3" cy="234.3" r="6" fill="transparent"><title>#285 BEAUTY, Route 20: L51</title></circle>
+<circle cx="805.9" cy="232" r="6" fill="transparent"><title>#286 BEAUTY, Route 20: L52</title></circle>
+<circle cx="808.6" cy="236.5" r="6" fill="transparent"><title>#287 BEAUTY, Route 20: L50</title></circle>
+<circle cx="811.2" cy="236.5" r="6" fill="transparent"><title>#288 BIRD_KEEPER, Route 20: L50</title></circle>
+<circle cx="813.9" cy="229.8" r="6" fill="transparent"><title>#289 BURGLAR, Mansion 2F: L53</title></circle>
+<circle cx="816.6" cy="223.1" r="6" fill="transparent"><title>#290 BURGLAR, Mansion 3F: L56</title></circle>
+<circle cx="819.2" cy="232" r="6" fill="transparent"><title>#291 SCIENTIST, Mansion 3F: L52</title></circle>
+<circle cx="821.9" cy="227.6" r="6" fill="transparent"><title>#292 BURGLAR, Mansion B1F: L54</title></circle>
+<circle cx="824.5" cy="225.3" r="6" fill="transparent"><title>#293 SCIENTIST, Mansion B1F: L55</title></circle>
+<circle cx="827.2" cy="241" r="6" fill="transparent"><title>#294 SUPER_NERD, Cinnabar Gym: L48</title></circle>
+<circle cx="829.8" cy="238.7" r="6" fill="transparent"><title>#295 SUPER_NERD, Cinnabar Gym: L49</title></circle>
+<circle cx="832.5" cy="234.3" r="6" fill="transparent"><title>#296 SUPER_NERD, Cinnabar Gym: L51</title></circle>
+<circle cx="835.1" cy="243.2" r="6" fill="transparent"><title>#297 SUPER_NERD, Cinnabar Gym: L47</title></circle>
+<circle cx="837.8" cy="229.8" r="6" fill="transparent"><title>#298 BURGLAR, Cinnabar Gym: L53</title></circle>
+<circle cx="840.4" cy="218.7" r="6" fill="transparent"><title>#299 BURGLAR, Cinnabar Gym: L58</title></circle>
+<circle cx="843.1" cy="225.3" r="6" fill="transparent"><title>#300 BURGLAR, Cinnabar Gym: L55</title></circle>
+<circle class="dot" cx="845.8" cy="212" r="4"/>
+<circle cx="845.8" cy="212" r="6" fill="transparent"><title>#301 BLAINE, Cinnabar Gym: L59-61</title></circle>
+<circle cx="848.4" cy="238.7" r="6" fill="transparent"><title>#302 FISHER, Route 21: L49</title></circle>
+<circle cx="851.1" cy="229.8" r="6" fill="transparent"><title>#303 FISHER, Route 21: L53</title></circle>
+<circle cx="853.7" cy="214.2" r="6" fill="transparent"><title>#304 FISHER, Route 21: L60</title></circle>
+<circle cx="856.4" cy="232" r="6" fill="transparent"><title>#305 FISHER, Route 21: L52</title></circle>
+<circle cx="859" cy="232" r="6" fill="transparent"><title>#306 SWIMMER, Route 21: L52</title></circle>
+<circle cx="861.7" cy="225.3" r="6" fill="transparent"><title>#307 SWIMMER, Route 21: L55</title></circle>
+<circle cx="864.3" cy="232" r="6" fill="transparent"><title>#308 SWIMMER, Route 21: L52</title></circle>
+<circle cx="867" cy="236.5" r="6" fill="transparent"><title>#309 SWIMMER, Route 21: L50</title></circle>
+<circle cx="869.6" cy="234.3" r="6" fill="transparent"><title>#310 CUE_BALL, Route 21: L51</title></circle>
+<circle cx="872.3" cy="212" r="6" fill="transparent"><title>#311 TAMER, Viridian Gym: L61</title></circle>
+<circle cx="875" cy="218.7" r="6" fill="transparent"><title>#312 TAMER, Viridian Gym: L58</title></circle>
+<circle cx="877.6" cy="216.4" r="6" fill="transparent"><title>#313 BLACKBELT, Viridian Gym: L59</title></circle>
+<circle cx="880.3" cy="212" r="6" fill="transparent"><title>#314 BLACKBELT, Viridian Gym: L61</title></circle>
+<circle cx="882.9" cy="218.7" r="6" fill="transparent"><title>#315 BLACKBELT, Viridian Gym: L58</title></circle>
+<circle cx="885.6" cy="218.7" r="6" fill="transparent"><title>#316 COOLTRAINER_M, Viridian Gym: L58</title></circle>
+<circle cx="888.2" cy="218.7" r="6" fill="transparent"><title>#317 COOLTRAINER_M, Viridian Gym: L58</title></circle>
+<circle cx="890.9" cy="212" r="6" fill="transparent"><title>#318 COOLTRAINER_M, Viridian Gym: L61</title></circle>
+<circle class="dot" cx="893.5" cy="207.5" r="4"/>
+<circle cx="893.5" cy="207.5" r="6" fill="transparent"><title>#319 GIOVANNI, Viridian Gym: L61-63</title></circle>
+<circle cx="896.2" cy="203" r="6" fill="transparent"><title>#320 RIVAL2, Route 22: L62-65</title></circle>
+<circle cx="898.9" cy="227.6" r="6" fill="transparent"><title>#321 COOLTRAINER_M, Victory Road 1F: L54</title></circle>
+<circle cx="901.5" cy="220.9" r="6" fill="transparent"><title>#322 COOLTRAINER_F, Victory Road 1F: L57</title></circle>
+<circle cx="904.2" cy="223.1" r="6" fill="transparent"><title>#323 POKEMANIAC, Victory Road 2F: L56</title></circle>
+<circle cx="906.8" cy="225.3" r="6" fill="transparent"><title>#324 JUGGLER, Victory Road 2F: L55</title></circle>
+<circle cx="909.5" cy="209.7" r="6" fill="transparent"><title>#325 JUGGLER, Victory Road 2F: L62</title></circle>
+<circle cx="912.1" cy="220.9" r="6" fill="transparent"><title>#326 TAMER, Victory Road 2F: L57</title></circle>
+<circle cx="914.8" cy="220.9" r="6" fill="transparent"><title>#327 BLACKBELT, Victory Road 2F: L57</title></circle>
+<circle cx="917.4" cy="223.1" r="6" fill="transparent"><title>#328 COOLTRAINER_M, Victory Road 3F: L56</title></circle>
+<circle cx="920.1" cy="223.1" r="6" fill="transparent"><title>#329 COOLTRAINER_M, Victory Road 3F: L56</title></circle>
+<circle cx="922.7" cy="225.3" r="6" fill="transparent"><title>#330 COOLTRAINER_F, Victory Road 3F: L55</title></circle>
+<circle cx="925.4" cy="225.3" r="6" fill="transparent"><title>#331 COOLTRAINER_F, Victory Road 3F: L55</title></circle>
+<circle class="dot" cx="928.1" cy="200.8" r="4"/>
+<circle cx="928.1" cy="200.8" r="6" fill="transparent"><title>#332 LORELEI, Lorelei's Room: L62-66</title></circle>
+<circle cx="930.7" cy="198.6" r="6" fill="transparent"><title>#333 BRUNO, Bruno's Room: L63-67</title></circle>
+<circle cx="933.4" cy="196.4" r="6" fill="transparent"><title>#334 AGATHA, Agatha's Room: L63-68</title></circle>
+<circle cx="936" cy="194.1" r="6" fill="transparent"><title>#335 LANCE, Lance's Room: L66-69</title></circle>
+<circle class="dot" cx="938.7" cy="165.1" r="4"/>
+<circle cx="938.7" cy="165.1" r="6" fill="transparent"><title>#336 RIVAL3, Champion's Room: L68-82</title></circle>
+<g transform="translate(48 60)"><line class="line" x1="0" x2="16" y1="0" y2="0"/></g>
+<text class="tick" x="70" y="60" dominant-baseline="middle">Highest level on the team</text>
+<g transform="translate(257 60)"><line class="band" x1="8" x2="8" y1="-6" y2="6" style="stroke-width:4"/></g>
+<text class="tick" x="279" y="60" dominant-baseline="middle">Lowest to highest</text>
+<g transform="translate(410 60)"><circle class="dot" cx="8" cy="0" r="4"/></g>
+<text class="tick" x="432" y="60" dominant-baseline="middle">Gym leader / Elite Four</text>
+</svg>

@@ -11,6 +11,9 @@ Regenerate the two tables in docs/updates/trainers/PARTIES.md.
                  assumed from the label's name. Rows are ordered by where the
                  battle happens, following data/maps/town_map_order.asm - see
                  town_map_rank() for how a location comment gets there.
+  charts         species_frequency.svg and level_curve.svg beside the doc,
+                 drawn from the same parties in the same order - see
+                 party_charts.py.
   special-moves  data/trainers/special_moves.asm, joined against the parties so
                  each entry names the Pokemon it's overwriting a move on - the
                  asm only knows it by party slot, which is unreadable on its own.
@@ -29,11 +32,14 @@ import re
 import sys
 
 import docgen
+import party_charts
 
 TRAINER_CONSTANTS_ASM = docgen.path("constants", "trainer_constants.asm")
 PARTIES_ASM = docgen.path("data", "trainers", "parties.asm")
 SPECIAL_MOVES_ASM = docgen.path("data", "trainers", "special_moves.asm")
 PARTIES_DOC = docgen.path("docs", "updates", "trainers", "PARTIES.md")
+SPECIES_FREQUENCY_SVG = docgen.path("docs", "updates", "trainers", "species_frequency.svg")
+LEVEL_CURVE_SVG = docgen.path("docs", "updates", "trainers", "level_curve.svg")
 
 PARTY_COLUMNS = ("Class", "Location", "Lv", "Party", "Notes")
 MOVE_COLUMNS = ("Class", "Party", "Slot", "Pokémon", "Move #", "Move")
@@ -77,6 +83,39 @@ PINNED_LOCATIONS = {
 	"Viridian Gym": ("ROUTE_22", -0.5),
 }
 
+# Whole stretches of town_map_order.asm that are played somewhere else, as
+# (first map, last map, the map they go in front of). The asm list is the in-game
+# Town Map's cursor order, so it stays geographic and the move is made here.
+MOVED_SPANS = (
+	# South from Celadon down the coast to Fuchsia comes before Saffron: Koga's
+	# badge is earned before Sabrina's. (Route 11 is pinned on its own, above.)
+	("ROUTE_12", "FUCHSIA_CITY", "SAFFRON_CITY"),
+)
+
+
+def play_order(maps, rank):
+	"""town_map_order's ranks with MOVED_SPANS applied, renumbered from 0."""
+	spots = sorted(rank, key=rank.get)
+
+	def position(map_name):
+		spot = docgen.town_map_spot(map_name, maps)
+		if spot not in rank:
+			sys.exit("%s isn't in %s - MOVED_SPANS can't use it" %
+			         (map_name, os.path.basename(docgen.TOWN_MAP_ORDER_ASM)))
+		return spots.index(spot)
+
+	for first, last, before in MOVED_SPANS:
+		start, end = position(first), position(last) + 1
+		if start >= end:
+			sys.exit("MOVED_SPANS: %s comes after %s in %s" %
+			         (first, last, os.path.basename(docgen.TOWN_MAP_ORDER_ASM)))
+		span = spots[start:end]
+		del spots[start:end]
+		target = position(before)
+		spots[target:target] = span
+	return {spot: index for index, spot in enumerate(spots)}
+
+
 # Inside one place, locations run in map id order - which walks Silph Co. and the
 # Pokemon Mansion floor by floor - and the gym is always the last stop in its
 # city. These are the stops the map ids get wrong, in the order they should run.
@@ -95,6 +134,9 @@ PINNED_PARTIES = {
 	# Route 22 is otherwise endgame (Rival2), but the Rival1 battle there is the
 	# second fight in the game, right after the one in Oak's lab.
 	("RIVAL1", 2): ("PALLET_TOWN", +0.5),
+	# This Route 10 Pokemaniac stands where only Surf reaches. Koga's badge stands
+	# in for having Surf, so he's fought right after Fuchsia Gym.
+	("POKEMANIAC", 1): ("FUCHSIA_CITY", +0.5),
 }
 
 # Location comments that aren't their map constant's name with the punctuation
@@ -280,8 +322,9 @@ def read_parties():
 	return parties
 
 
-def build_parties(parties, maps, rank):
-	"""Every reachable party, in the order the player walks into them.
+def ordered_parties(parties, maps, rank):
+	"""[(class, party number, Party)] for every reachable party, in the order the
+	player walks into them.
 
 	A place's trainers are grouped by the location they're fought at, so a gym's
 	trainers stay together in front of their leader instead of interleaving with
@@ -309,16 +352,9 @@ def build_parties(parties, maps, rank):
 				where = pinned_rank(pin, maps, rank)
 			if party.location in LATE_LOCATIONS:
 				late.add(party.location)
-			levels = [level for level, _ in party.mons]
-			if min(levels) == max(levels):
-				level = "%d" % levels[0]
-				members = ", ".join(species for _, species in party.mons)
-			else:
-				level = "%d-%d" % (min(levels), max(levels))
-				members = ", ".join("%s %d" % (species, lvl) for lvl, species in party.mons)
 			rows.append(((where, stop_order(party.location, map_name, maps),
 			              name in BOSS_CLASSES),
-			             [name, party.location, level, members, party.note or ""]))
+			             (name, index, party)))
 	if not rows:
 		sys.exit("no parties found in %s" % PARTIES_ASM)
 	stale = [key for key, pin in list(PINNED_LOCATIONS.items()) + list(PINNED_PARTIES.items())
@@ -329,6 +365,21 @@ def build_parties(parties, maps, rank):
 		         (PARTIES_ASM, ", ".join(str(key) for key in stale)))
 	rows.sort(key=lambda row: row[0])
 	return [row for _, row in rows]
+
+
+def build_parties(ordered):
+	"""The parties table: one row per reachable party, in play order."""
+	rows = []
+	for name, _, party in ordered:
+		levels = [level for level, _ in party.mons]
+		if min(levels) == max(levels):
+			level = "%d" % levels[0]
+			members = ", ".join(species for _, species in party.mons)
+		else:
+			level = "%d-%d" % (min(levels), max(levels))
+			members = ", ".join("%s %d" % (species, lvl) for lvl, species in party.mons)
+		rows.append([name, party.location, level, members, party.note or ""])
+	return rows
 
 
 def build_special_moves(parties):
@@ -390,7 +441,11 @@ def build_special_moves(parties):
 if __name__ == "__main__":
 	all_parties = read_parties()
 	town_map, town_map_order = docgen.read_town_map()
+	in_order = ordered_parties(all_parties, town_map, play_order(town_map, town_map_order))
 	docgen.main(PARTIES_DOC, [
-		("parties", PARTY_COLUMNS, lambda: build_parties(all_parties, town_map, town_map_order)),
+		("parties", PARTY_COLUMNS, lambda: build_parties(in_order)),
 		("special-moves", MOVE_COLUMNS, lambda: build_special_moves(all_parties)),
-	], __doc__)
+	], __doc__, files=[
+		(SPECIES_FREQUENCY_SVG, lambda: party_charts.species_frequency(in_order)),
+		(LEVEL_CURVE_SVG, lambda: party_charts.level_curve(in_order)),
+	])
