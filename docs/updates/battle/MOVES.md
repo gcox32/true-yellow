@@ -89,7 +89,7 @@ The table is generated - `make` rewrites it (or run `tools/gen_moves_doc.py`) af
 | SLEEP_POWDER | SLEEP_EFFECT               | 0     | GRASS           | 75       | 15 |
 | PETAL_DANCE  | THRASH_PETAL_DANCE_EFFECT  | 100   | GRASS           | 100      | 20 |
 | STRING_SHOT  | SPEED_DOWN1_EFFECT         | 0     | BUG             | 95       | 25 |
-| DRAGON_RAGE  | NO_ADDITIONAL_EFFECT       | 80    | DRAGON          | 100      | 20 |
+| DRAGON_RAGE  | THRASH_PETAL_DANCE_EFFECT  | 100   | DRAGON          | 100      | 15 |
 | FIRE_SPIN    | TRAPPING_EFFECT            | 15    | FIRE            | 85       | 15 |
 | THUNDERSHOCK | PARALYZE_SIDE_EFFECT1      | 40    | ELECTRIC        | 100      | 30 |
 | THUNDERBOLT  | PARALYZE_SIDE_EFFECT1      | 95    | ELECTRIC        | 100      | 15 |

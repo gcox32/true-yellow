@@ -20,7 +20,7 @@
 - [ ] Investigate EXEGGUTOR usage across trainer parties--use this as the first inspection of any oddities across trainer parties
 - [ ] Better idea for move MIST
 - [ ] Beter idea for move HAZE
-- [ ] Better idea for DRAGON_RAGE
+- [x] Better idea for DRAGON_RAGE (now an Outrage: THRASH_PETAL_DANCE_EFFECT, 100 power, 100 acc, PP 15; locks in 2-3 turns then confuses the user. Data-only. NEEDS IN-GAME TEST.)
 - [ ] Better idea for RAGE (repurpose this mechanic for replacement move ROLLOUT?)
 
 
