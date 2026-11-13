@@ -1434,7 +1434,7 @@ JigglypuffEvosMoves:
 	db 37, DIZZY_PUNCH
 	db 42, DOUBLE_EDGE
 	db 50, EXPLOSION
-	db 60, MINIMIZE
+	db 60, ROLLOUT
 	db 63, SING
 	db 0
 

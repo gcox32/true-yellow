@@ -485,16 +485,19 @@ FireDefrostedText:
 	text_end
 
 ; ADDED: increases defense and speed as a move effect. Used with defense curl.
-DefenseSpeedUpEffect:
+DefenseSpeedUpEffect: ; only Defense Curl uses this effect
 	SetFlag FLAG_SKIPPED_STAT_MODIFIER
 	;values for the enemy's turn
 	ld de, wPlayerMoveEffect
+	ld hl, wPlayerBattleStatus2
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .next
 	; values for the player's turn
 	ld de, wEnemyMoveEffect
+	ld hl, wEnemyBattleStatus2
 .next
+	set DEFENSE_CURLED, [hl] ; ADDED: doubles ROLLOUT until the user leaves battle
 	push de
 	call GetDefensePointers
 	call IsStatMaxed
