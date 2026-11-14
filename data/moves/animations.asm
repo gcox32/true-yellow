@@ -767,7 +767,7 @@ QuickAttackAnim:
 
 RolloutAnim: ; Quick Attack's, with a heavier impact (thud + stationary big star)
 	battle_anim ROLLOUT, SE_SLIDE_MON_OFF ; rolls off toward the foe
-	battle_anim BODY_SLAM, SUBANIM_1_STAR_BIG, 1, 6 ; impact
+	battle_anim BODY_SLAM, SUBANIM_1_STAR_BIG, 1, 8 ; impact
 	battle_anim NO_MOVE, SE_SHOW_MON_PIC ; back in place (SLIDE_MON_OFF leaves it hidden)
 	db -1 ; end
 

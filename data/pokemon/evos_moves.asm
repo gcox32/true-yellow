@@ -1114,7 +1114,7 @@ DragoniteEvosMoves:
 	db 33, MIST
 	db 38, DRAGON_RAGE
 	db 46, WHIRLWIND
-	db 47, SHARPEN
+	db 47, FLY
 	db 52, HYPER_BEAM
 	db 0
 
