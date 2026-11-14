@@ -5,7 +5,6 @@ PriorityMoves:
 	db COMET_PUNCH
 	db FLASH
 	db TRANSFORM
-	db MIRROR_MOVE
 	db SONICBOOM
 	db -1 ; end
 
