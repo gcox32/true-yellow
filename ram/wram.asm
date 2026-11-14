@@ -2191,9 +2191,7 @@ wGrassTile:: db
 
 	ds 4
 
-wNumBoxItems:: db
-; item, quantity
-wBoxItems:: ds PC_ITEM_CAPACITY * 2 + 1
+	ds 102 ; was wNumBoxItems/wBoxItems (old 50-slot PC item list)
 
 ; bits 0-6: box number
 ; bit 7: whether the player has changed boxes before
@@ -2341,10 +2339,14 @@ wRoute23CurScript:: db
 wSeafoamIslandsB4FCurScript:: db
 wRoute18Gate1FCurScript:: db
 wVermilionDockCurScript:: db ; mew-under-the-truck feature
-	ds 77
 wGameProgressFlagsEnd::
 
-	ds 56
+; PC item list lives in the former 133-byte padding gap (see specs/pc-item-capacity.md)
+wNumBoxItems:: db
+; item, quantity
+wBoxItems:: ds PC_ITEM_CAPACITY * 2 + 1
+	ds 133 - (1 + PC_ITEM_CAPACITY * 2 + 1)
+	ASSERT PC_ITEM_CAPACITY <= 65, "PC item list overflows its 133-byte slot"
 
 wObtainedHiddenItemsFlags:: flag_array MAX_HIDDEN_ITEMS
 
