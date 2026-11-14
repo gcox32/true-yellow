@@ -33,12 +33,14 @@ give it away. Nothing in the reachable shops is in that state today.
 that list - the game builds those names from the number - so they're shown the way the
 menu shows them, with the move they teach in brackets.
 
-## Shops nothing can reach
+## ROM0 budget
 
-Two `script_mart` entries have no map pointing at them and are marked `(unused)`:
-`UnusedBikeShopClerkText`, which would sell a bicycle, and `UnusedMartClerkText`. They're
-listed at the end rather than dropped, since the stock is real data and wiring a clerk up
-to one is a one-line change.
+`data/items/marts.asm` is included from `home.asm`, so every shop's stock lives in ROM0,
+which is full: each item added to a list costs one byte there. The two unreferenced
+leftovers (`UnusedBikeShopClerkText` and `UnusedMartClerkText`) were deleted to make room.
+If the lists need to grow past the few bytes of slack left, move each `script_mart` into
+its map's `scripts/` file (the map's bank is switched in when the clerk's text runs) and
+point `tools/gen_marts_doc.py` at those files.
 
 <!-- generated:marts -->
 | Shop                                | Item                | Price        |
@@ -46,25 +48,28 @@ to one is a one-line change.
 | Viridian Mart                       | POKé BALL           | ¥200         |
 | Viridian Mart                       | POTION              | ¥300         |
 | Viridian Mart                       | ANTIDOTE            | ¥100         |
-| Viridian Mart                       | PARLYZ HEAL         | ¥200         |
-| Viridian Mart                       | BURN HEAL           | ¥250         |
+| Viridian Mart                       | REPEL               | ¥350         |
 | Pewter Mart                         | POKé BALL           | ¥200         |
 | Pewter Mart                         | POTION              | ¥300         |
 | Pewter Mart                         | ESCAPE ROPE         | ¥550         |
 | Pewter Mart                         | ANTIDOTE            | ¥100         |
-| Pewter Mart                         | BURN HEAL           | ¥250         |
 | Pewter Mart                         | AWAKENING           | ¥200         |
-| Pewter Mart                         | PARLYZ HEAL         | ¥200         |
+| Pewter Mart                         | REPEL               | ¥350         |
 | Cerulean Mart                       | POKé BALL           | ¥200         |
 | Cerulean Mart                       | POTION              | ¥300         |
 | Cerulean Mart                       | ESCAPE ROPE         | ¥550         |
 | Cerulean Mart                       | REPEL               | ¥350         |
 | Cerulean Mart                       | ANTIDOTE            | ¥100         |
 | Cerulean Mart                       | PARLYZ HEAL         | ¥200         |
+| Cerulean Mart                       | X DEFEND            | ¥550         |
 | Vermilion Mart                      | POKé BALL           | ¥200         |
 | Vermilion Mart                      | SUPER POTION        | ¥700         |
+| Vermilion Mart                      | ANTIDOTE            | ¥100         |
 | Vermilion Mart                      | PARLYZ HEAL         | ¥200         |
 | Vermilion Mart                      | REPEL               | ¥350         |
+| Vermilion Mart                      | ESCAPE ROPE         | ¥550         |
+| Vermilion Mart                      | X SPEED             | ¥350         |
+| Vermilion Mart                      | THUNDERSTONE        | ¥2100        |
 | Lavender Mart                       | GREAT BALL          | ¥600         |
 | Lavender Mart                       | SUPER POTION        | ¥700         |
 | Lavender Mart                       | REVIVE              | ¥1500        |
@@ -72,6 +77,7 @@ to one is a one-line change.
 | Lavender Mart                       | SUPER REPEL         | ¥500         |
 | Lavender Mart                       | AWAKENING           | ¥200         |
 | Lavender Mart                       | PARLYZ HEAL         | ¥200         |
+| Lavender Mart                       | POKé DOLL           | ¥1000        |
 | Celadon Mart 2F (clerk 1)           | RARE CANDY          | ¥3000        |
 | Celadon Mart 2F (clerk 1)           | HP UP               | ¥9800        |
 | Celadon Mart 2F (clerk 1)           | IRON                | ¥9800        |
@@ -79,13 +85,16 @@ to one is a one-line change.
 | Celadon Mart 2F (clerk 1)           | CARBOS              | ¥9800        |
 | Celadon Mart 2F (clerk 1)           | CALCIUM             | ¥9800        |
 | Celadon Mart 2F (clerk 1)           | PP UP               | ¥3000        |
-| Celadon Mart 2F (clerk 2)           | POKé DOLL           | ¥1000        |
-| Celadon Mart 2F (clerk 2)           | GUARD SPEC.         | ¥700         |
-| Celadon Mart 2F (clerk 2)           | X ACCURACY          | ¥950         |
 | Celadon Mart 2F (clerk 2)           | REVIVE              | ¥1500        |
 | Celadon Mart 2F (clerk 2)           | FULL HEAL           | ¥600         |
-| Celadon Mart 2F (clerk 2)           | FULL RESTORE        | ¥3000        |
-| Celadon Mart 2F (clerk 2)           | HYPER POTION        | ¥1500        |
+| Celadon Mart 2F (clerk 2)           | SUPER POTION        | ¥700         |
+| Celadon Mart 2F (clerk 2)           | GUARD SPEC.         | ¥700         |
+| Celadon Mart 2F (clerk 2)           | X ACCURACY          | ¥950         |
+| Celadon Mart 2F (clerk 2)           | X ATTACK            | ¥500         |
+| Celadon Mart 2F (clerk 2)           | X DEFEND            | ¥550         |
+| Celadon Mart 2F (clerk 2)           | X SPEED             | ¥350         |
+| Celadon Mart 2F (clerk 2)           | X SPECIAL           | ¥350         |
+| Celadon Mart 2F (clerk 2)           | DIRE HIT            | ¥650         |
 | Celadon Mart 4F                     | MOON STONE          | not for sale |
 | Celadon Mart 4F                     | FIRE STONE          | ¥2100        |
 | Celadon Mart 4F                     | THUNDERSTONE        | ¥2100        |
@@ -128,25 +137,32 @@ to one is a one-line change.
 | Saffron Mart                        | ESCAPE ROPE         | ¥550         |
 | Saffron Mart                        | FULL HEAL           | ¥600         |
 | Saffron Mart                        | REVIVE              | ¥1500        |
+| Saffron Mart                        | X SPECIAL           | ¥350         |
+| Saffron Mart                        | DIRE HIT            | ¥650         |
 | Fuchsia Mart                        | ULTRA BALL          | ¥1200        |
 | Fuchsia Mart                        | GREAT BALL          | ¥600         |
 | Fuchsia Mart                        | HYPER POTION        | ¥1500        |
 | Fuchsia Mart                        | REVIVE              | ¥1500        |
+| Fuchsia Mart                        | ANTIDOTE            | ¥100         |
 | Fuchsia Mart                        | FULL HEAL           | ¥600         |
 | Fuchsia Mart                        | SUPER REPEL         | ¥500         |
+| Fuchsia Mart                        | X ATTACK            | ¥500         |
+| Fuchsia Mart                        | LEAF STONE          | ¥2100        |
 | Cinnabar Mart                       | ULTRA BALL          | ¥1200        |
-| Cinnabar Mart                       | GREAT BALL          | ¥600         |
+| Cinnabar Mart                       | SUPER POTION        | ¥700         |
 | Cinnabar Mart                       | HYPER POTION        | ¥1500        |
 | Cinnabar Mart                       | MAX REPEL           | ¥700         |
 | Cinnabar Mart                       | ESCAPE ROPE         | ¥550         |
+| Cinnabar Mart                       | BURN HEAL           | ¥250         |
 | Cinnabar Mart                       | FULL HEAL           | ¥600         |
 | Cinnabar Mart                       | REVIVE              | ¥1500        |
+| Cinnabar Mart                       | FIRE STONE          | ¥2100        |
+| Indigo Plateau Lobby                | ULTRA BALL          | ¥1200        |
+| Indigo Plateau Lobby                | ESCAPE ROPE         | ¥550         |
 | Indigo Plateau Lobby                | FULL HEAL           | ¥600         |
 | Indigo Plateau Lobby                | HYPER POTION        | ¥1500        |
 | Indigo Plateau Lobby                | MAX POTION          | ¥2500        |
 | Indigo Plateau Lobby                | FULL RESTORE        | ¥3000        |
 | Indigo Plateau Lobby                | REVIVE              | ¥1500        |
 | Indigo Plateau Lobby                | MAX REVIVE          | ¥4000        |
-| Bike Shop (unused)                  | BICYCLE             | not for sale |
-| Mart (unused)                       | GREAT BALL          | ¥600         |
 <!-- /generated:marts -->

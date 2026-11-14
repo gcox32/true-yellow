@@ -403,7 +403,7 @@ BlaineAI:
 SabrinaAI:
 	cp 25 percent + 1
 	ret nc
-	jp AIUseXDefend
+	jp AIUseXSpecial
 
 Rival2AI:
 	cp 13 percent - 1
