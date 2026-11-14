@@ -102,6 +102,9 @@ to one is a one-line change.
 | Celadon Mart 5F (clerk 1)           | TM19 (SEISMIC TOSS) | ¥3000        |
 | Celadon Mart 5F (clerk 1)           | TM28 (DIG)          | ¥2000        |
 | Celadon Mart 5F (clerk 1)           | TM08 (BODY SLAM)    | ¥4000        |
+| Celadon Mart 5F (clerk 1)           | TM26 (EARTHQUAKE)   | ¥5000        |
+| Celadon Mart 5F (clerk 1)           | TM47 (EXPLOSION)    | ¥4000        |
+| Celadon Mart 5F (clerk 1)           | TM43 (SKY ATTACK)   | ¥6000        |
 | Celadon Mart 5F (clerk 2)           | TM16 (PAY DAY)      | ¥5000        |
 | Celadon Mart 5F (clerk 2)           | TM17 (SUBMISSION)   | ¥3000        |
 | Celadon Mart 5F (clerk 2)           | TM20 (ROLLOUT)      | ¥2000        |
@@ -114,6 +117,8 @@ to one is a one-line change.
 | Celadon Mart 5F (clerk 2)           | TM45 (THUNDER WAVE) | ¥2000        |
 | Celadon Mart 5F (clerk 2)           | TM30 (TELEPORT)     | ¥1000        |
 | Celadon Mart 5F (clerk 2)           | TM32 (DOUBLE TEAM)  | ¥1000        |
+| Celadon Mart 5F (clerk 2)           | TM14 (BLIZZARD)     | ¥6000        |
+| Celadon Mart 5F (clerk 2)           | TM25 (THUNDER)      | ¥6000        |
 | Celadon Mart Roof (vending machine) | FRESH WATER         | ¥50          |
 | Celadon Mart Roof (vending machine) | SODA POP            | ¥50          |
 | Celadon Mart Roof (vending machine) | LEMONADE            | ¥50          |
@@ -142,11 +147,6 @@ to one is a one-line change.
 | Indigo Plateau Lobby                | FULL RESTORE        | ¥3000        |
 | Indigo Plateau Lobby                | REVIVE              | ¥1500        |
 | Indigo Plateau Lobby                | MAX REVIVE          | ¥4000        |
-| Indigo Plateau Lobby                | TM47 (EXPLOSION)    | ¥3000        |
-| Indigo Plateau Lobby                | TM14 (BLIZZARD)     | ¥5000        |
-| Indigo Plateau Lobby                | TM25 (THUNDER)      | ¥5000        |
-| Indigo Plateau Lobby                | TM26 (EARTHQUAKE)   | ¥4000        |
-| Indigo Plateau Lobby                | TM43 (SKY ATTACK)   | ¥5000        |
 | Bike Shop (unused)                  | BICYCLE             | not for sale |
 | Mart (unused)                       | GREAT BALL          | ¥600         |
 <!-- /generated:marts -->
