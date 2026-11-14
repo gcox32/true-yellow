@@ -62,6 +62,18 @@ LancesRoomDefaultScript:
 	ld a, [wCoordIndex]
 	cp $3  ; Is player standing next to Lance's sprite?
 	jr nc, .notStandingNextToLance
+; face each other before he speaks: (5,1) is beside him, (6,2) below him
+	dec a
+	ld a, PLAYER_DIR_UP
+	jr nz, .setPlayerFacing ; (6,2): Lance already faces down
+	ld a, LANCESROOM_LANCE
+	ldh [hSpriteIndex], a
+	ld a, SPRITE_FACING_LEFT
+	ldh [hSpriteFacingDirection], a
+	call SetSpriteFacingDirectionAndDelay
+	ld a, PLAYER_DIR_RIGHT
+.setPlayerFacing
+	ld [wPlayerMovingDirection], a
 	ld a, TEXT_LANCESROOM_LANCE
 	ldh [hTextID], a
 	jp DisplayTextID
