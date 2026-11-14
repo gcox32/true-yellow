@@ -340,7 +340,9 @@ CeruleanCaveHS:
 	db CERULEAN_CAVE_1F, CERULEANCAVE1F_RARE_CANDY, SHOW
 	db CERULEAN_CAVE_1F, CERULEANCAVE1F_MAX_ELIXER, SHOW
 	db CERULEAN_CAVE_1F, CERULEANCAVE1F_MAX_REVIVE, SHOW
-	db CERULEAN_CAVE_1F, CERULEANCAVE1F_ULTRA_BALL, SHOW
+; was the Ultra Ball at (18,3), now OAK's spot. The slot is kept so later HS
+; indices don't shift (saves); its map byte ends the 1F scan so it's never loaded.
+	db -2, 0, SHOW ; unused placeholder
 PokemonTower2FHS:
 	db POKEMON_TOWER_2F, POKEMONTOWER2F_RIVAL, SHOW
 PokemonTower3FHS:

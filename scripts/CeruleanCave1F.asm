@@ -1,5 +1,9 @@
 CeruleanCave1F_Script:
 	call EnableAutoTextBoxDrawing
+	ld hl, wCurrentMapScriptFlags
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
+	call nz, CeruleanCave1FHideUninvitedOak
 	ld hl, CeruleanCave1F_ScriptPointers
 	ld a, [wCeruleanCave1FCurScript]
 	jp CallFunctionInTable
@@ -12,8 +16,20 @@ CeruleanCave1F_ScriptPointers:
 CeruleanCave1FDefaultScript:
 	ret
 
-; OAK blocks the way in (24,15) while invited (see OaksLabOak1Text); beating him
-; hides him again until the next invitation, so the cycle repeats forever
+; OAK's HS flag alone can't be trusted: saves from before the HS entry existed
+; have it clear, which would show him uninvited. EVENT_OAK_WAITING_IN_CERULEAN_CAVE
+; is the source of truth. His ledge at (18,3) is far off-screen from the
+; entrance, so hiding him here on load is never visible. (The loaded bit also
+; fires after battles; hiding again then is harmless.)
+CeruleanCave1FHideUninvitedOak:
+	CheckEvent EVENT_OAK_WAITING_IN_CERULEAN_CAVE
+	ret nz
+	ld a, HS_CERULEAN_CAVE_1F_OAK
+	ld [wMissableObjectIndex], a
+	predef_jump HideObject
+
+; OAK waits on the raised ledge at (18,3) while invited (see OaksLabOak1Text);
+; beating him hides him again until the next invitation, so the cycle repeats forever
 CeruleanCave1FOakAfterBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
@@ -23,6 +39,7 @@ CeruleanCave1FOakAfterBattleScript:
 	ld a, TEXT_CERULEANCAVE1F_OAK_AFTER_BATTLE
 	ldh [hTextID], a
 	call DisplayTextID
+	ResetEvent EVENT_OAK_WAITING_IN_CERULEAN_CAVE
 	call GBFadeOutToBlack
 	ld a, HS_CERULEAN_CAVE_1F_OAK
 	ld [wMissableObjectIndex], a
@@ -41,7 +58,6 @@ CeruleanCave1F_TextPointers:
 	dw_const PickUpItemText,                  TEXT_CERULEANCAVE1F_RARE_CANDY
 	dw_const PickUpItemText,                  TEXT_CERULEANCAVE1F_MAX_ELIXER
 	dw_const PickUpItemText,                  TEXT_CERULEANCAVE1F_MAX_REVIVE
-	dw_const PickUpItemText,                  TEXT_CERULEANCAVE1F_ULTRA_BALL
 	dw_const CeruleanCave1FOakText,           TEXT_CERULEANCAVE1F_OAK
 	dw_const CeruleanCave1FOakAfterBattleText, TEXT_CERULEANCAVE1F_OAK_AFTER_BATTLE
 

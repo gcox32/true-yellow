@@ -825,6 +825,7 @@ OaksLabOak1Text:
 ; invite the player to battle: OAK waits in Cerulean Cave 1F until beaten
 	ld hl, .MeetMeInCeruleanCaveText
 	call PrintText
+	SetEvent EVENT_OAK_WAITING_IN_CERULEAN_CAVE
 	ld a, HS_CERULEAN_CAVE_1F_OAK
 	ld [wMissableObjectIndex], a
 	predef ShowObject

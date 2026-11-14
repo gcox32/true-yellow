@@ -63,7 +63,7 @@ DEF SHOW EQU $15
 	const HS_CERULEAN_CAVE_1F_ITEM_1       ; 35
 	const HS_CERULEAN_CAVE_1F_ITEM_2       ; 36
 	const HS_CERULEAN_CAVE_1F_ITEM_3       ; 37
-	const HS_CERULEAN_CAVE_1F_ITEM_4       ; 38
+	const HS_CERULEAN_CAVE_1F_ITEM_4       ; 38 (unused: Ultra Ball removed, slot kept for saves)
 	const HS_POKEMON_TOWER_2F_RIVAL        ; 39
 	const HS_POKEMON_TOWER_3F_ITEM         ; 3A
 	const HS_POKEMON_TOWER_4F_ITEM_1       ; 3B

@@ -733,6 +733,7 @@
 	const_next $8C0
 	const_skip
 	const EVENT_BEAT_MEWTWO
+	const EVENT_OAK_WAITING_IN_CERULEAN_CAVE ; invited in Oak's Lab, cleared when beaten
 
 ; Indigo Plateau events
 	const_next $8E0
