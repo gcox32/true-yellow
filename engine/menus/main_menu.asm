@@ -120,6 +120,12 @@ MainMenu:
 	ld hl, wStatusFlags6
 	set BIT_FLY_OR_DUNGEON_WARP, [hl]
 	call PrepareForSpecialWarp
+	; Continuing after the Hall of Fame lands us in front of our house in Pallet,
+	; but like a blackout it never runs EnterMapAnim (BIT_FLY_WARP isn't set), so
+	; the followers resolved via .normalPositioning: facing down, that stacked
+	; Misty and Brock on the house roof and left Pikachu at a stale Hall of Fame
+	; coordinate. Use the same side-by-side landing as a blackout.
+	call SeedSideBySideFollowerSpawn
 	jp SpecialEnterMap
 
 InitOptions:
@@ -182,8 +188,20 @@ SpecialEnterMap::
 	; wFollowerDoorwayMode, so the followers would instead resolve via
 	; InitializePositionTrail.normalPositioning - lining up 2 and 3 tiles behind the player
 	; in the direction they're facing, trailing back into the Pokemon Center wall.
-	; Seed it here by hand so we get the same horizontal arrangement the special-warp
-	; landing uses: Brock - Player - Pikachu - Misty.
+	; Seed it here by hand so we get the same horizontal arrangement.
+	call SeedSideBySideFollowerSpawn
+.notBlackoutWarp
+	ld c, 20
+	call DelayFrames
+	call Func_5cc1
+	ld a, [wEnteringCableClub]
+	and a
+	ret nz
+	jp EnterMap
+
+; Blackout and post-Hall-of-Fame landings: spawn followers in the same horizontal
+; arrangement as a special-warp landing (Brock - Player - Pikachu - Misty).
+SeedSideBySideFollowerSpawn:
 	ld a, $1
 	ld [wPikachuSpawnState], a
 	ld a, 1
@@ -196,14 +214,7 @@ SpecialEnterMap::
 	; target on the player's first step, and leaving wPikachuSpawnState above unconsumed.
 	xor a
 	ld [wSpritePikachuStateData1MovementStatus], a
-.notBlackoutWarp
-	ld c, 20
-	call DelayFrames
-	call Func_5cc1
-	ld a, [wEnteringCableClub]
-	and a
-	ret nz
-	jp EnterMap
+	ret
 
 ContinueText:
 	db "CONTINUE"

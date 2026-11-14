@@ -389,6 +389,12 @@ also has to clear **Pikachu's** `MovementStatus`: Pikachu is sprite struct
 `trail[0]` write in `.doorwayPositioning`, letting an old-map coordinate
 rotate into Misty's target on the player's first step.
 
+The **post-Hall-of-Fame continue** (main menu, `wCurMap == HALL_OF_FAME`) has
+the same problem: it lands in front of the player's house in Pallet via
+`PrepareForSpecialWarp` without `EnterMapAnim`, so Misty and Brock stacked up
+on the house roof (2-3 tiles "behind" a down-facing player). Both branches now
+call the shared `SeedSideBySideFollowerSpawn`.
+
 **Exiting buildings, or taking a ladder** (`wFollowerDoorwayMode = 2, 3, 4`):
 - `SetPikachuSpawnWarpPad` (`engine/pikachu/pikachu_follow.asm`) sets mode 2
   for any plain warp between two non-outside maps - this covers ladders

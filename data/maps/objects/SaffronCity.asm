@@ -51,8 +51,11 @@ SaffronCity_Object:
 	object_event  8, 14, SPRITE_SCIENTIST, WALK, ANY_DIR, TEXT_SAFFRONCITY_SCIENTIST
 	object_event 23, 23, SPRITE_SILPH_WORKER_M, STAY, NONE, TEXT_SAFFRONCITY_SILPH_WORKER_M
 	object_event 17, 30, SPRITE_SILPH_WORKER_F, WALK, LEFT_RIGHT, TEXT_SAFFRONCITY_SILPH_WORKER_F
-	object_event 30, 12, SPRITE_GENTLEMAN, STAY, DOWN, TEXT_SAFFRONCITY_GENTLEMAN
-	object_event 31, 12, SPRITE_BIRD, STAY, DOWN, TEXT_SAFFRONCITY_PIDGEOT
+	; Stacked in one column (not side by side on the sidewalk) so a row never holds both:
+	; the 4-character party plus two NPCs on one row is 12 sprite tiles per scanline,
+	; over the hardware's 10, and Pikachu (drawn last) vanished.
+	object_event 30, 15, SPRITE_GENTLEMAN, STAY, DOWN, TEXT_SAFFRONCITY_GENTLEMAN
+	object_event 30, 14, SPRITE_BIRD, STAY, DOWN, TEXT_SAFFRONCITY_PIDGEOT
 	object_event 18,  8, SPRITE_SILPH_WORKER_M, STAY, UP, TEXT_SAFFRONCITY_ROCKER
 	object_event 18, 22, SPRITE_ROCKET, STAY, DOWN, TEXT_SAFFRONCITY_ROCKET8
 
