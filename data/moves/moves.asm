@@ -139,7 +139,7 @@ Moves:
 	move FIRE_BLAST,   BURN_SIDE_EFFECT2,          120,  FIRE,            85, 10
 	move WATERFALL,    FLINCH_SIDE_EFFECT2,         80,  WATER,          100, 15 ; add flinching side effect
 	move CLAMP,        TRAPPING_EFFECT,             35,  WATER,           85, 10 ; accuracy changed from 75 to 85
-	move SWIFT,        SWIFT_EFFECT,                60,  ICE,            100, 20 ; priority move (and ICE)
+	move SWIFT,        SWIFT_EFFECT,                60,  ICE,            100, 20 ; never misses (and ICE)
 	move SKULL_BASH,   RECOIL_EFFECT,              100,  ROCK,           100, 15
 	move SPIKE_CANNON, TWO_TO_FIVE_ATTACKS_EFFECT,  20,  NORMAL,         100, 15
 	move CONSTRICT,    PARALYZE_SIDE_EFFECT1,       60,  ELECTRIC,       100, 20 ; power changed from 10 to 60, pp from 35 to 20, ELECTRIC move

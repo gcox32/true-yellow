@@ -3,9 +3,7 @@
 PriorityMoves:
 	db QUICK_ATTACK
 	db COMET_PUNCH
-	db WING_ATTACK
 	db FLASH
-	db SWIFT
 	db TRANSFORM
 	db MIRROR_MOVE
 	db SONICBOOM
