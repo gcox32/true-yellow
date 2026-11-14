@@ -820,7 +820,10 @@ OaksLabOak1Text:
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	predef DisplayDexRating
-	CheckEvent EVENT_BEAT_CHAMPION_RIVAL
+; EVENT_BEAT_CHAMPION_RIVAL is no good here: the Hall of Fame resets the whole
+; Indigo Plateau event range. BIT_BEAT_ELITE_4 is set there and persists.
+	ld a, [wElite4Flags]
+	bit BIT_BEAT_ELITE_4, a
 	jp z, .done
 ; invite the player to battle: OAK waits in Cerulean Cave 1F until beaten
 	ld hl, .MeetMeInCeruleanCaveText

@@ -26,9 +26,16 @@ FollowerTalk_PrintLine::
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
-	ld d, a ; de = event flag (or NO_BEAT)
-	inc a ; NO_BEAT is $ffff; real flags are < $a00
-	jr z, .flagOk
+	ld d, a ; de = event flag (or NO_BEAT / BEAT_ELITE_4)
+	inc a ; NO_BEAT is $ffff, BEAT_ELITE_4 $fffe; real flags are < $a00
+	jr nz, .eventFlag
+	inc e
+	jr z, .flagOk ; NO_BEAT
+	ld a, [wElite4Flags] ; BEAT_ELITE_4
+	bit BIT_BEAT_ELITE_4, a
+	jr z, .skip4
+	jr .flagOk
+.eventFlag
 	push hl
 	call .CheckEventDE
 	pop hl

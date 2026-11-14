@@ -14,6 +14,8 @@
 ;   aren't always consecutive, e.g. SILPH_CO_*, SEAFOAM_ISLANDS_*).
 ; - BEAT: an event flag that must be set (EVENT_BEAT_MISTY, ...), or NO_BEAT.
 ;   Any EVENT_* from constants/event_constants.asm works, including new ones.
+;   BEAT_ELITE_4 = beaten the Elite 4. Don't use EVENT_BEAT_CHAMPION_RIVAL or
+;   other Indigo Plateau events: the Hall of Fame resets that whole range.
 ; - A text label, or 0 to have that follower skip this entry and keep looking.
 ;
 ; Nothing matched -> FollowerDefaultMistyText / FollowerDefaultBrockText.
@@ -25,6 +27,7 @@
 
 DEF ANYWHERE EQU -1
 DEF NO_BEAT  EQU -1
+DEF BEAT_ELITE_4 EQU -2 ; wElite4Flags BIT_BEAT_ELITE_4 (survives the Hall of Fame)
 DEF FOLLOWER_LINES_END EQU $ff
 
 MACRO follower_line
@@ -75,7 +78,7 @@ FollowerLines:
 	follower_line SAFFRON_POKECENTER,     NO_BEAT, .MistyNurseJoy,      .BrockNurseJoy
 
 ; --- story beats, newest first ---
-	follower_line ANYWHERE, EVENT_BEAT_CHAMPION_RIVAL,      .MistyChampion,  .BrockChampion
+	follower_line ANYWHERE, BEAT_ELITE_4,                   .MistyChampion,  .BrockChampion
 	follower_line ANYWHERE, EVENT_BEAT_SILPH_CO_GIOVANNI,   .MistySilphDone, .BrockSilphDone
 	follower_line ANYWHERE, EVENT_RESCUED_MR_FUJI,          0,               .BrockMrFuji
 	follower_line ANYWHERE, EVENT_GOT_BICYCLE,              .MistyBike,      0

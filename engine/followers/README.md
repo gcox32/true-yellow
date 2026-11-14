@@ -578,7 +578,8 @@ Players can talk to followers by pressing A while facing them.
 
 **What they say** comes from the table in `data/followers/follower_lines.asm`
 (format documented at the top of that file). Each entry is a map or map range
-(or `ANYWHERE`), an optional event flag that must be set (or `NO_BEAT`), and a
+(or `ANYWHERE`), an optional event flag that must be set (or `NO_BEAT`, or
+`BEAT_ELITE_4` for the post-Hall-of-Fame bit, which Indigo events can't give), and a
 line for each follower (0 = skip). `FollowerTalk_PrintLine`
 (`engine/followers/follower_talk.asm`) uses the first matching entry per
 follower, falling back to `FollowerDefaultMistyText` / `FollowerDefaultBrockText`.
