@@ -61,16 +61,10 @@ to one is a one-line change.
 | Cerulean Mart                       | REPEL               | ¥350         |
 | Cerulean Mart                       | ANTIDOTE            | ¥100         |
 | Cerulean Mart                       | PARLYZ HEAL         | ¥200         |
-| Cerulean Mart                       | TM34 (BIDE)         | ¥2000        |
-| Cerulean Mart                       | TM01 (MEGA PUNCH)   | ¥3000        |
-| Cerulean Mart                       | TM12 (WATER GUN)    | ¥1000        |
 | Vermilion Mart                      | POKé BALL           | ¥200         |
 | Vermilion Mart                      | SUPER POTION        | ¥700         |
 | Vermilion Mart                      | PARLYZ HEAL         | ¥200         |
 | Vermilion Mart                      | REPEL               | ¥350         |
-| Vermilion Mart                      | TM19 (SEISMIC TOSS) | ¥3000        |
-| Vermilion Mart                      | TM45 (THUNDER WAVE) | ¥2000        |
-| Vermilion Mart                      | TM11 (BUBBLEBEAM)   | ¥2000        |
 | Lavender Mart                       | GREAT BALL          | ¥600         |
 | Lavender Mart                       | SUPER POTION        | ¥700         |
 | Lavender Mart                       | REVIVE              | ¥1500        |
@@ -78,39 +72,48 @@ to one is a one-line change.
 | Lavender Mart                       | SUPER REPEL         | ¥500         |
 | Lavender Mart                       | AWAKENING           | ¥200         |
 | Lavender Mart                       | PARLYZ HEAL         | ¥200         |
-| Lavender Mart                       | TM28 (DIG)          | ¥2000        |
-| Lavender Mart                       | TM30 (TELEPORT)     | ¥1000        |
-| Lavender Mart                       | TM24 (THUNDERBOLT)  | ¥2000        |
-| Celadon Mart 2F (clerk 1)           | TM16 (PAY DAY)      | ¥5000        |
-| Celadon Mart 2F (clerk 1)           | TM17 (SUBMISSION)   | ¥3000        |
-| Celadon Mart 2F (clerk 1)           | TM20 (ROLLOUT)      | ¥2000        |
-| Celadon Mart 2F (clerk 1)           | TM22 (SOLARBEAM)    | ¥5000        |
-| Celadon Mart 2F (clerk 1)           | TM33 (REFLECT)      | ¥1000        |
-| Celadon Mart 2F (clerk 1)           | TM37 (EGG BOMB)     | ¥2000        |
-| Celadon Mart 2F (clerk 1)           | TM40 (SKULL BASH)   | ¥4000        |
-| Celadon Mart 2F (clerk 1)           | TM44 (REST)         | ¥2000        |
-| Celadon Mart 2F (clerk 2)           | TM02 (RAZOR WIND)   | ¥2000        |
-| Celadon Mart 2F (clerk 2)           | TM03 (SWORDS DANCE) | ¥2000        |
-| Celadon Mart 2F (clerk 2)           | TM04 (WHIRLWIND)    | ¥1000        |
-| Celadon Mart 2F (clerk 2)           | TM05 (MEGA KICK)    | ¥3000        |
-| Celadon Mart 2F (clerk 2)           | TM07 (HORN DRILL)   | ¥2000        |
-| Celadon Mart 2F (clerk 2)           | TM09 (TAKE DOWN)    | ¥3000        |
-| Celadon Mart 2F (clerk 2)           | TM10 (DOUBLE EDGE)  | ¥4000        |
+| Celadon Mart 2F (clerk 1)           | RARE CANDY          | ¥3000        |
+| Celadon Mart 2F (clerk 1)           | HP UP               | ¥9800        |
+| Celadon Mart 2F (clerk 1)           | IRON                | ¥9800        |
+| Celadon Mart 2F (clerk 1)           | PROTEIN             | ¥9800        |
+| Celadon Mart 2F (clerk 1)           | CARBOS              | ¥9800        |
+| Celadon Mart 2F (clerk 1)           | CALCIUM             | ¥9800        |
+| Celadon Mart 2F (clerk 1)           | PP UP               | ¥3000        |
+| Celadon Mart 2F (clerk 2)           | POKé DOLL           | ¥1000        |
+| Celadon Mart 2F (clerk 2)           | GUARD SPEC.         | ¥700         |
+| Celadon Mart 2F (clerk 2)           | X ACCURACY          | ¥950         |
+| Celadon Mart 2F (clerk 2)           | REVIVE              | ¥1500        |
+| Celadon Mart 2F (clerk 2)           | FULL HEAL           | ¥600         |
+| Celadon Mart 2F (clerk 2)           | FULL RESTORE        | ¥3000        |
+| Celadon Mart 2F (clerk 2)           | HYPER POTION        | ¥1500        |
 | Celadon Mart 4F                     | MOON STONE          | not for sale |
 | Celadon Mart 4F                     | FIRE STONE          | ¥2100        |
 | Celadon Mart 4F                     | THUNDERSTONE        | ¥2100        |
 | Celadon Mart 4F                     | WATER STONE         | ¥2100        |
 | Celadon Mart 4F                     | LEAF STONE          | ¥2100        |
-| Celadon Mart 5F (clerk 1)           | RARE CANDY          | ¥3000        |
-| Celadon Mart 5F (clerk 1)           | POKé DOLL           | ¥1000        |
-| Celadon Mart 5F (clerk 1)           | GUARD SPEC.         | ¥700         |
-| Celadon Mart 5F (clerk 1)           | X ACCURACY          | ¥950         |
-| Celadon Mart 5F (clerk 2)           | HP UP               | ¥9800        |
-| Celadon Mart 5F (clerk 2)           | IRON                | ¥9800        |
-| Celadon Mart 5F (clerk 2)           | PROTEIN             | ¥9800        |
-| Celadon Mart 5F (clerk 2)           | CARBOS              | ¥9800        |
-| Celadon Mart 5F (clerk 2)           | CALCIUM             | ¥9800        |
-| Celadon Mart 5F (clerk 2)           | PP UP               | ¥3000        |
+| Celadon Mart 5F (clerk 1)           | TM02 (RAZOR WIND)   | ¥2000        |
+| Celadon Mart 5F (clerk 1)           | TM03 (SWORDS DANCE) | ¥2000        |
+| Celadon Mart 5F (clerk 1)           | TM04 (WHIRLWIND)    | ¥1000        |
+| Celadon Mart 5F (clerk 1)           | TM05 (MEGA KICK)    | ¥3000        |
+| Celadon Mart 5F (clerk 1)           | TM07 (HORN DRILL)   | ¥2000        |
+| Celadon Mart 5F (clerk 1)           | TM09 (TAKE DOWN)    | ¥3000        |
+| Celadon Mart 5F (clerk 1)           | TM10 (DOUBLE EDGE)  | ¥4000        |
+| Celadon Mart 5F (clerk 1)           | TM01 (MEGA PUNCH)   | ¥3000        |
+| Celadon Mart 5F (clerk 1)           | TM19 (SEISMIC TOSS) | ¥3000        |
+| Celadon Mart 5F (clerk 1)           | TM28 (DIG)          | ¥2000        |
+| Celadon Mart 5F (clerk 1)           | TM08 (BODY SLAM)    | ¥4000        |
+| Celadon Mart 5F (clerk 2)           | TM16 (PAY DAY)      | ¥5000        |
+| Celadon Mart 5F (clerk 2)           | TM17 (SUBMISSION)   | ¥3000        |
+| Celadon Mart 5F (clerk 2)           | TM20 (ROLLOUT)      | ¥2000        |
+| Celadon Mart 5F (clerk 2)           | TM22 (SOLARBEAM)    | ¥5000        |
+| Celadon Mart 5F (clerk 2)           | TM33 (REFLECT)      | ¥1000        |
+| Celadon Mart 5F (clerk 2)           | TM37 (EGG BOMB)     | ¥2000        |
+| Celadon Mart 5F (clerk 2)           | TM40 (SKULL BASH)   | ¥4000        |
+| Celadon Mart 5F (clerk 2)           | TM44 (REST)         | ¥2000        |
+| Celadon Mart 5F (clerk 2)           | TM12 (WATER GUN)    | ¥1000        |
+| Celadon Mart 5F (clerk 2)           | TM45 (THUNDER WAVE) | ¥2000        |
+| Celadon Mart 5F (clerk 2)           | TM30 (TELEPORT)     | ¥1000        |
+| Celadon Mart 5F (clerk 2)           | TM32 (DOUBLE TEAM)  | ¥1000        |
 | Celadon Mart Roof (vending machine) | FRESH WATER         | ¥50          |
 | Celadon Mart Roof (vending machine) | SODA POP            | ¥50          |
 | Celadon Mart Roof (vending machine) | LEMONADE            | ¥50          |
@@ -126,9 +129,6 @@ to one is a one-line change.
 | Fuchsia Mart                        | REVIVE              | ¥1500        |
 | Fuchsia Mart                        | FULL HEAL           | ¥600         |
 | Fuchsia Mart                        | SUPER REPEL         | ¥500         |
-| Fuchsia Mart                        | TM21 (MEGA DRAIN)   | ¥5000        |
-| Fuchsia Mart                        | TM32 (DOUBLE TEAM)  | ¥1000        |
-| Fuchsia Mart                        | TM08 (BODY SLAM)    | ¥4000        |
 | Cinnabar Mart                       | ULTRA BALL          | ¥1200        |
 | Cinnabar Mart                       | GREAT BALL          | ¥600         |
 | Cinnabar Mart                       | HYPER POTION        | ¥1500        |
@@ -136,8 +136,6 @@ to one is a one-line change.
 | Cinnabar Mart                       | ESCAPE ROPE         | ¥550         |
 | Cinnabar Mart                       | FULL HEAL           | ¥600         |
 | Cinnabar Mart                       | REVIVE              | ¥1500        |
-| Cinnabar Mart                       | TM43 (SKY ATTACK)   | ¥5000        |
-| Cinnabar Mart                       | TM06 (TOXIC)        | ¥4000        |
 | Indigo Plateau Lobby                | FULL HEAL           | ¥600         |
 | Indigo Plateau Lobby                | HYPER POTION        | ¥1500        |
 | Indigo Plateau Lobby                | MAX POTION          | ¥2500        |
@@ -146,8 +144,9 @@ to one is a one-line change.
 | Indigo Plateau Lobby                | MAX REVIVE          | ¥4000        |
 | Indigo Plateau Lobby                | TM47 (EXPLOSION)    | ¥3000        |
 | Indigo Plateau Lobby                | TM14 (BLIZZARD)     | ¥5000        |
-| Indigo Plateau Lobby                | TM38 (FIRE BLAST)   | ¥5000        |
 | Indigo Plateau Lobby                | TM25 (THUNDER)      | ¥5000        |
+| Indigo Plateau Lobby                | TM26 (EARTHQUAKE)   | ¥4000        |
+| Indigo Plateau Lobby                | TM43 (SKY ATTACK)   | ¥5000        |
 | Bike Shop (unused)                  | BICYCLE             | not for sale |
 | Mart (unused)                       | GREAT BALL          | ¥600         |
 <!-- /generated:marts -->
