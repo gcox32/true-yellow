@@ -35,3 +35,5 @@
 
 # env
 .env
+# generated map grids (tools/map_grid.py)
+docs/maps/

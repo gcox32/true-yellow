@@ -148,6 +148,22 @@ def parse_blockset_files():
 	return files
 
 
+def block_file(map_name):
+	"""Map name -> .blk path, from maps.asm. Several houses share one .blk via
+	stacked labels (CeruleanMelaniesHouse_Blocks: ... INCBIN ViridianNicknameHouse)."""
+	pending = []
+	for line in read("maps.asm").splitlines():
+		m = re.match(r'\s*(\w+)_Blocks:+\s*(?:INCBIN\s+"([^"]+)")?', strip_comment(line))
+		if not m:
+			continue
+		pending.append(m.group(1))
+		if m.group(2):
+			if map_name in pending:
+				return m.group(2)
+			pending = []
+	return os.path.join("maps", map_name + ".blk")
+
+
 def parse_objects(map_name):
 	"""-> (warps, objects); coords are map coords."""
 	src = read("data", "maps", "objects", map_name + ".asm")
@@ -308,7 +324,7 @@ class MapGrid:
 		passable = parse_collision_sets()[tileset]
 		with open(path(parse_blockset_files()[tileset]), "rb") as f:
 			blockset = f.read()
-		with open(path("maps", map_name + ".blk"), "rb") as f:
+		with open(path(block_file(map_name)), "rb") as f:
 			blocks = f.read()
 
 		self.warps, self.objects, border = parse_objects(map_name)
