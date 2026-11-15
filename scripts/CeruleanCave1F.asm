@@ -29,11 +29,18 @@ CeruleanCave1FHideUninvitedOak:
 	predef_jump HideObject
 
 ; OAK waits on the raised ledge at (18,3) while invited (see OaksLabOak1Text);
-; beating him hides him again until the next invitation, so the cycle repeats forever
+; win or lose, he leaves until the next invitation, so the cycle repeats forever
 CeruleanCave1FOakAfterBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
-	jr z, .reset ; lost: the player blacked out
+	jr nz, .won
+; lost: runs from AllPokemonFainted just before the blackout warp, so no fade
+	ResetEvent EVENT_OAK_WAITING_IN_CERULEAN_CAVE
+	ld a, HS_CERULEAN_CAVE_1F_OAK
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	jr .reset
+.won
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, TEXT_CERULEANCAVE1F_OAK_AFTER_BATTLE

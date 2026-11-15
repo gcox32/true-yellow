@@ -1074,6 +1074,8 @@ HandlePlayerBlackOut:
 	jr .notRival1Battle
 .profOakBattle
 	call .ShowTrainerForLossText
+	ld a, 1 ; a double faint reaches here with wBattleResult still 0 (won)
+	ld [wBattleResult], a
 	call PrintEndBattleText ; OAK gloats before you black out
 .notRival1Battle
 	ld b, SET_PAL_BATTLE_BLACK
