@@ -37,3 +37,5 @@
 .env
 # generated map grids (tools/map_grid.py)
 docs/maps/
+# anime transcripts for follower quotes (docs/anime/fetch.py)
+docs/anime/

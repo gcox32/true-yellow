@@ -577,13 +577,27 @@ Players can talk to followers by pressing A while facing them.
 5. Clean up via `CleanupFollowerTextBox` (restore sprites, reload graphics)
 
 **What they say** comes from the table in `data/followers/follower_lines.asm`
-(format documented at the top of that file). Each entry is a map or map range
-(or `ANYWHERE`), an optional event flag that must be set (or `NO_BEAT`, or
-`BEAT_ELITE_4` for the post-Hall-of-Fame bit, which Indigo events can't give), and a
-line for each follower (0 = skip). `FollowerTalk_PrintLine`
-(`engine/followers/follower_talk.asm`) uses the first matching entry per
-follower, falling back to `FollowerDefaultMistyText` / `FollowerDefaultBrockText`.
-The engine, table and text share one floating ROMX section ("Follower Talk").
+(format documented at the top of that file). Each entry has:
+
+- a map, map range, or `ANYWHERE`
+- a WHEN condition that must hold and an UNLESS condition that must not. Each is
+  an event flag, `HAS_BADGES + n`, `DEX_OWNED + n`, `BEAT_ELITE_4`, or
+  `ALWAYS` / `NEVER`. `BEAT_ELITE_4` is the post-Hall-of-Fame bit, which
+  Indigo events can't give.
+- a percent chance; on a miss the search keeps going
+- a line or `follower_pool` (one picked at random) for each follower (0 = skip)
+
+`FollowerTalk_PrintLine` (`engine/followers/follower_talk.asm`) uses the first
+entry that passes per follower. Story lines look ahead to the next goal and use
+UNLESS to expire once it's done, so they don't go stale.
+
+Lines tagged `; EPxxx` are exact Indigo League dub quotes. Run
+`python3 tools/follower_lines_check.py` after editing: it checks the 18-tile
+width and verifies quotes against `docs/anime/` (gitignored; rebuild with
+`docs/anime/fetch.py` + `build.py`).
+
+The engine, table and text share the "Follower Talk" section, pinned to bank
+$3B in `layout.link` (about 5 KB of the bank is still free).
 
 ## WRAM Variables
 
