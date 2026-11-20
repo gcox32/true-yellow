@@ -1376,7 +1376,7 @@ SandshrewEvosMoves:
 	db 17, PIN_MISSILE
 	db 20, DIG
 	db 24, SLASH
-	db 29, FURY_ATTACK
+	db 29, FURY_SWIPES
 	db 35, EARTHQUAKE
 	db 43, SWORDS_DANCE
 	db 48, TWINEEDLE
@@ -1390,7 +1390,7 @@ SandslashEvosMoves:
 	db 17, PIN_MISSILE
 	db 20, DIG
 	db 24, SLASH
-	db 29, FURY_ATTACK
+	db 29, FURY_SWIPES
 	db 35, EARTHQUAKE
 	db 43, SWORDS_DANCE
 	db 48, TWINEEDLE

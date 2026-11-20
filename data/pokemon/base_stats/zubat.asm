@@ -15,8 +15,8 @@
 
 	; tm/hm learnset
 	tmhm RAZOR_WIND,   WHIRLWIND,    TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  \
-	     MEGA_DRAIN,   MIMIC,        DOUBLE_TEAM,  BIDE,         SWIFT,        \
-	     REST,         SUBSTITUTE
+	     MEGA_DRAIN,   MIMIC,        DOUBLE_TEAM,  BIDE,         REST,         \
+	     SUBSTITUTE
 	; end
 
 	db 0 ; padding

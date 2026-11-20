@@ -20,8 +20,8 @@
 	     TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   SUBMISSION,   COUNTER,      \
 	     SEISMIC_TOSS, DRAGON_RAGE,  EARTHQUAKE,   FISSURE,      DIG,          \
 	     MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         FIRE_BLAST,   \
-	     SWIFT,        SKULL_BASH,   REST,         SUBSTITUTE,   CUT,          \
-	     FLY,          STRENGTH,     ROCK_SLIDE,   SKY_ATTACK
+	     SKULL_BASH,   REST,         SUBSTITUTE,   CUT,          FLY,          \
+	     STRENGTH,     ROCK_SLIDE,   SKY_ATTACK
 	; end
 
 	db 0 ; padding
