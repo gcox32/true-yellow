@@ -2,7 +2,7 @@ CeruleanCave1FWildMons:
 	def_grass_wildmons 10 ; encounter rate
 	db 58, GOLBAT
 	db 60, HYPNO
-	db 62, STARMIE
+	db 62, GOLEM
 	db 60, JYNX
 	db 60, KADABRA
 	db 62, KINGLER

@@ -278,7 +278,7 @@ ClefairyEvosMoves:
 	db 45, SKY_ATTACK
 	db 54, DREAM_EATER
 	db 54, LOVELY_KISS
-	db 59, MIST
+	db 59, METRONOME
 	db 65, MINIMIZE
 	db 0
 
@@ -1927,7 +1927,7 @@ ClefableEvosMoves:
 	db 45, SKY_ATTACK
 	db 54, DREAM_EATER
 	db 54, LOVELY_KISS
-	db 59, MIST
+	db 59, METRONOME
 	db 65, MINIMIZE
 	db 0
 

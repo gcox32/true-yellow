@@ -149,6 +149,7 @@ FollowerLines:
 	follower_line VICTORY_ROAD_1F,   ALWAYS, NEVER, 100, .MistyVictoryRoad, .BrockVictoryRoad
 	follower_line VICTORY_ROAD_2F,   ALWAYS, NEVER, 100, .MistyVictoryRoad, .BrockVictoryRoad
 	follower_line VICTORY_ROAD_3F,   ALWAYS, NEVER, 100, .MistyVictoryRoad, .BrockVictoryRoad
+	follower_line CERULEAN_CAVE_2F, CERULEAN_CAVE_1F, ALWAYS, NEVER, 100, .MistyCeruleanCaveInside, .BrockCeruleanCaveInside
 
 ; --- every #MON CENTER ---
 	pokecenter_lines EVENT_BEAT_BROCK, NEVER, 70, .MistyNurseJoyPool, .BrockNurseJoyPool
@@ -156,6 +157,11 @@ FollowerLines:
 
 ; ===================== story, newest first =====================
 ; Each line looks ahead to the next goal and expires (UNLESS) once it's done.
+; Brock at 100% so his "visit OAK" line below never shows while OAK's waiting
+	follower_line ANYWHERE, EVENT_OAK_WAITING_IN_CERULEAN_CAVE, NEVER, 70, .MistyOakWaiting, 0
+	follower_line ANYWHERE, EVENT_OAK_WAITING_IN_CERULEAN_CAVE, NEVER, 100, 0, .BrockOakWaiting
+	follower_line ANYWHERE, BEAT_ELITE_4, EVENT_BEAT_MEWTWO, 50, .MistyCeruleanNudge, 0
+	follower_line ANYWHERE, BEAT_ELITE_4, EVENT_BEAT_PROF_OAK, 50, 0, .BrockVisitOak
 	follower_line ANYWHERE, BEAT_ELITE_4, NEVER, 100, .MistyChampionPool, .BrockChampionPool
 	follower_line ANYWHERE, HAS_BADGES + 8, NEVER, 70, .MistyEightBadges, .BrockEightBadges
 	follower_line ANYWHERE, HAS_BADGES + 7, EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI, 70, .MistyLastGym, .BrockLastGym
@@ -853,6 +859,21 @@ FollowerLines:
 	cont "this place."
 	done
 
+.MistyCeruleanCaveInside:
+	text "MISTY: This cave"
+	line "was off-limits"
+	cont "my whole life."
+	para "It gives me the"
+	line "creeps!"
+	done
+
+.BrockCeruleanCaveInside:
+	text "BROCK: The #MON"
+	line "in here are way"
+	cont "tougher. Stay"
+	cont "sharp!"
+	done
+
 .MistyVictoryRoad:
 	text "MISTY: The LEAGUE"
 	line "is right past"
@@ -939,6 +960,40 @@ FollowerLines:
 	para "a world-class"
 	line "breeder. That's"
 	cont "us!"
+	done
+
+.MistyCeruleanNudge:
+	text "MISTY: Let's go"
+	line "back to CERULEAN"
+	cont "CITY sometime."
+	para "I've got a funny"
+	line "feeling about it."
+	done
+
+.BrockVisitOak:
+	text "BROCK: We should"
+	line "check in with"
+	cont "PROF.OAK in"
+	cont "PALLET TOWN."
+	para "He'll want to hear"
+	line "all about this!"
+	done
+
+.MistyOakWaiting:
+	text "MISTY: PROF.OAK"
+	line "in CERULEAN CAVE?"
+	para "What's he doing"
+	line "in a place like"
+	cont "that?"
+	done
+
+.BrockOakWaiting:
+	text "BROCK: PROF.OAK"
+	line "said to meet him"
+	cont "in CERULEAN CAVE."
+	para "Something tells me"
+	line "it's not about"
+	cont "your #DEX."
 	done
 
 .MistyEightBadges:

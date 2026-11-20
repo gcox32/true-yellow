@@ -558,7 +558,7 @@
 <rect class="cell" x="781.5" y="1025" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>TANGELA - Route 21: Grass 55.1%</title></rect>
 <text class="row-label" x="86" y="1037.5" text-anchor="end" dominant-baseline="middle">STARMIE</text>
 <rect class="cell" x="547.5" y="1034" width="7" height="7" rx="1.5" fill-opacity="0.4"><title>STARMIE - Route 13: Water 1.2%</title></rect>
-<rect class="cell" x="871.5" y="1034" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>STARMIE - Cerulean Cave: Grass 15.2%, Water 15.2%, Water 9.8%</title></rect>
+<rect class="cell" x="871.5" y="1034" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>STARMIE - Cerulean Cave: Water 15.2%, Water 9.8%</title></rect>
 <text class="row-label" x="86" y="1046.5" text-anchor="end" dominant-baseline="middle">WIGGLYTUFF</text>
 <rect class="cell" x="565.5" y="1043" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>WIGGLYTUFF - Route 14: Grass 19.5%</title></rect>
 <rect class="cell" x="871.5" y="1043" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>WIGGLYTUFF - Cerulean Cave: Grass 9.8%</title></rect>
@@ -667,6 +667,7 @@
 <rect class="cell" x="835.5" y="1358" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>MACHAMP - Victory Road: Grass 1.2%, Grass 21.1%</title></rect>
 <text class="row-label" x="86" y="1370.5" text-anchor="end" dominant-baseline="middle">GOLEM</text>
 <rect class="cell" x="835.5" y="1367" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>GOLEM - Victory Road: Grass 1.2%, Grass 19.9%</title></rect>
+<rect class="cell" x="871.5" y="1367" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>GOLEM - Cerulean Cave: Grass 15.2%</title></rect>
 <text class="row-label" x="86" y="1379.5" text-anchor="end" dominant-baseline="middle">MOLTRES</text>
 <circle class="ring" cx="839" cy="1379.5" r="2.6"><title>MOLTRES - Victory Road: Static</title></circle>
 <text class="row-label" x="86" y="1388.5" text-anchor="end" dominant-baseline="middle">RAICHU</text>

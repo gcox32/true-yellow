@@ -420,6 +420,7 @@ they're listed rather than quietly dropped.
 | GRAVELER   | Victory Road 1F            | Grass     | 39     | 19.9%  |                                                               |
 | GOLEM      | Victory Road 2F            | Grass     | 48     | 1.2%   |                                                               |
 | GOLEM      | Victory Road 3F            | Grass     | 46     | 19.9%  |                                                               |
+| GOLEM      | Cerulean Cave 1F           | Grass     | 62     | 15.2%  |                                                               |
 | PONYTA     | Route 9                    | Grass     | 16-19  | 25.0%  |                                                               |
 | PONYTA     | Route 11                   | Grass     | 17     | 1.2%   |                                                               |
 | PONYTA     | Route 17                   | Grass     | 26-28  | 55.1%  |                                                               |
@@ -659,7 +660,6 @@ they're listed rather than quietly dropped.
 | STARYU     | Route 21                   | Super Rod | 20     | 29.7%  | slot 2                                                        |
 | STARMIE    | Route 13                   | Water     | 35     | 1.2%   |                                                               |
 | STARMIE    | Cerulean Cave B1F          | Water     | 80     | 9.8%   |                                                               |
-| STARMIE    | Cerulean Cave 1F           | Grass     | 62     | 15.2%  |                                                               |
 | STARMIE    | Cerulean Cave 1F           | Water     | 60     | 15.2%  |                                                               |
 | MR_MIME    | Route 2 Trade House        | Trade     | yours  | —      | trade a CLEFAIRY; arrives as MILES                            |
 | MR_MIME    | Route 21                   | Grass     | 28-32  | 6.2%   |                                                               |

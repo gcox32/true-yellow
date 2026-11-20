@@ -47,6 +47,7 @@ CeruleanCave1FOakAfterBattleScript:
 	ldh [hTextID], a
 	call DisplayTextID
 	ResetEvent EVENT_OAK_WAITING_IN_CERULEAN_CAVE
+	SetEvent EVENT_BEAT_PROF_OAK
 	call GBFadeOutToBlack
 	ld a, HS_CERULEAN_CAVE_1F_OAK
 	ld [wMissableObjectIndex], a

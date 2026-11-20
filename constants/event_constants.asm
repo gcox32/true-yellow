@@ -734,6 +734,7 @@
 	const_skip
 	const EVENT_BEAT_MEWTWO
 	const EVENT_OAK_WAITING_IN_CERULEAN_CAVE ; invited in Oak's Lab, cleared when beaten
+	const EVENT_BEAT_PROF_OAK ; first win in Cerulean Cave 1F; never cleared
 
 ; Indigo Plateau events
 	const_next $8E0
