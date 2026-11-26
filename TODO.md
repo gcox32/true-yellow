@@ -1,4 +1,12 @@
 # TODO
+
+- [ ] Turn Misty and Brock facing up after OAK walks in after defeating rival
+- [ ] Re-imagine Oak's text after defeating rival
+- [ ] Reconsider first plot sequence to better mirror anime (character oversleep, doesn't interact with rival meaningfully etc)
+      - borrow and trash misty's bike?
+- [ ] Brock's father in pewter somewhere
+
+
 - [x] Make Pokemon Center at Rock Tunnel Entrance, Route 10, a FLYable desination (also Mt. Moon Pokemon Center, Seafoam Islands NW entrance, Route 12 fishing house, Sea Cottage; flags are wTownVisitedFlag bits 11-15 (full), menu order in FlyLocationsOrder. NEEDS IN-GAME TEST for the two new ones.)
 - [x] Set SET (vs SWITCH) as default OPTION in OPTIONS (InitOptions in engine/menus/main_menu.asm; existing saves keep their stored setting)
 - [x] More LAPRAS-y overworld sprite for surfing _if_ it's LAPRAS surfing (Gen 2 surf sprite from pokecrystal as gfx/sprites/lapras.png; wd472 mode 3; selector moved to ROMX in engine/overworld/surf_sprite.asm, freeing 18 ROM0 bytes. NEEDS IN-GAME TEST.)
