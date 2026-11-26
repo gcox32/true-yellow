@@ -8,15 +8,17 @@ _CeruleanCave1FOakShallWeText::
 	para "Shall we?"
 	done
 
+; the end-battle engine prefixes "PROF.OAK: " (10 chars) to line 1
 _CeruleanCave1FOakDefeatedText::
-	text "Remarkable..."
-	line "Truly remarkable!"
+	text_start
+	line "Remarkable..."
+	cont "Truly remarkable!"
 	prompt
 
 _CeruleanCave1FOakVictoryText::
-	text "Did you think the"
-	line "rules applied to"
-	cont "me?"
+	text "Did you"
+	line "think the rules"
+	cont "applied to me?"
 	prompt
 
 _CeruleanCave1FOakAfterBattleText::
