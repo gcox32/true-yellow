@@ -2,8 +2,9 @@ _RedsHouse1FMomWakeUpText::
 	text "MOM: <PLAYER>!"
 	line "You're finally up!"
 
-	para "PROF.OAK is giving"
-	line "out #MON today."
+	para "PROF.OAK is"
+	line "giving out"
+	cont "#MON today."
 
 	para "Hurry, or they'll"
 	line "all be gone!"
@@ -14,7 +15,8 @@ _RedsHouse2FWakeUpText::
 
 	para "..."
 
-	para "<PLAYER> overslept!"
+	para "<PLAYER>"
+	line "overslept!"
 	done
 
 _RedsHouse1FMomYouShouldRestText::

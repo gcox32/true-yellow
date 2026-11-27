@@ -46,11 +46,13 @@ _FightingDojoKarateMasterStayAndTrainWithUsText::
 	done
 
 _FightingDojoKarateMasterTrainingText::
-	text "Ho! Back to train?"
+	text "Ho! Back to"
+	line "train?"
 
 	para "My students and I"
 	line "will match your"
-	cont "strongest #MON!"
+	cont "strongest"
+	cont "#MON!"
 
 	para "Show me what you"
 	line "have learned!"

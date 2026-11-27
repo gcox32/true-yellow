@@ -142,12 +142,13 @@ they're listed rather than quietly dropped.
 | WARTORTLE  | Route 23                   | Water     | 45     | 4.3%   |                                                               |
 | BLASTOISE  | Cerulean Cave B1F          | Water     | 78-85  | 25.0%  |                                                               |
 | BLASTOISE  | Cerulean Cave 1F           | Water     | 64     | 1.2%   |                                                               |
-| CATERPIE   | Viridian Forest            | Grass     | 4-5    | 29.7%  |                                                               |
+| CATERPIE   | Viridian Forest            | Grass     | 5-6    | 35.2%  |                                                               |
+| METAPOD    | Viridian Forest            | Grass     | 6      | 5.1%   |                                                               |
 | METAPOD    | Route 25                   | Grass     | 10     | 5.1%   |                                                               |
 | BUTTERFREE | S.S. Anne 2F Rooms         | Trade     | yours  | —      | trade a RATICATE; arrives as BUTTERFREE                       |
 | BUTTERFREE | Route 13                   | Grass     | 27-30  | 44.9%  |                                                               |
-| WEEDLE     | Viridian Forest            | Grass     | 4-5    | 35.2%  |                                                               |
-| KAKUNA     | Viridian Forest            | Grass     | 4-6    | 14.8%  |                                                               |
+| WEEDLE     | Viridian Forest            | Grass     | 4-5    | 29.7%  |                                                               |
+| KAKUNA     | Viridian Forest            | Grass     | 4      | 9.8%   |                                                               |
 | BEEDRILL   | Viridian Forest            | Grass     | 9-10   | 5.5%   |                                                               |
 | BEEDRILL   | Route 13                   | Grass     | 28-35  | 39.5%  |                                                               |
 | PIDGEY     | Route 2                    | Grass     | 4-7    | 24.2%  |                                                               |

@@ -112,12 +112,12 @@ _SilphCo5FArmorMachineHumText::
 	cont "reads:"
 	cont "PROJECT ARMOR."
 
-	para "The restraints are"
-	line "sized for one"
+	para "The restraints"
+	line "are sized for one"
 	cont "#MON only."
 
-	para "Place a #MON in"
-	line "the machine?"
+	para "Place a #MON"
+	line "in the machine?"
 	prompt
 
 _SilphCo5FArmorMachineWrongMonText::
@@ -127,8 +127,9 @@ _SilphCo5FArmorMachineWrongMonText::
 	done
 
 _SilphCo5FArmorMachineSuccessText::
-	text "Restraints clamped"
-	line "shut around"
+	text "Restraints"
+	line "clamped shut"
+	cont "around"
 	cont "@"
 	text_ram wNameBuffer
 	text "!"

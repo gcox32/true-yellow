@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Check data/followers/follower_lines.asm.
 
-- Every text/line/cont/para string fits the 18-tile text box
+- Every text/line/cont/para string fits in 17 tiles (the 18-tile text box
+  minus the column the "more text" arrow is drawn in)
   (<PLAYER>/<RIVAL> counted as 7, "#" as 4 for POKé).
 - No "--" in dialogue.
 - Every text tagged "; EPxxx" is an exact line by that speaker in that
@@ -19,11 +20,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 ASM = ROOT / "data/followers/follower_lines.asm"
 TSV = ROOT / "docs/anime/lines.tsv"
-WIDTH = 18
+WIDTH = 17  # 18 tiles, minus 1 for the "more text" arrow
 TYPO_FIXES = {"disguisting": "disgusting"}
 
 # multi-character tiles (constants/charmap.asm)
-TOKENS = [("<PLAYER>", 7), ("<RIVAL>", 7), ("#", 4),
+TOKENS = [("<PLAYER>", 7), ("<RIVAL>", 7), ("<TM>", 2), ("#", 4),
           ("'d", 1), ("'l", 1), ("'s", 1), ("'t", 1), ("'v", 1), ("'r", 1), ("'m", 1)]
 
 

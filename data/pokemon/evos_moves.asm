@@ -1372,13 +1372,13 @@ SandshrewEvosMoves:
 ; Learnset
 	db 10, SAND_ATTACK
 	db 12, POISON_STING
-	db 14, SHARPEN
+	db 14, ROLLOUT
 	db 17, PIN_MISSILE
 	db 20, DIG
 	db 24, SLASH
 	db 29, FURY_SWIPES
 	db 35, EARTHQUAKE
-	db 43, SWORDS_DANCE
+	db 43, SHARPEN
 	db 48, TWINEEDLE
 	db 0
 
@@ -1386,13 +1386,13 @@ SandslashEvosMoves:
 ; Evolutions
 	db 0
 ; Learnset
-	db 14, SHARPEN
+	db 14, ROLLOUT
 	db 17, PIN_MISSILE
 	db 20, DIG
 	db 24, SLASH
 	db 29, FURY_SWIPES
 	db 35, EARTHQUAKE
-	db 43, SWORDS_DANCE
+	db 43, SHARPEN
 	db 48, TWINEEDLE
 	db 0
 

@@ -194,133 +194,134 @@
 <circle class="ring" cx="155" cy="263.5" r="2.6"><title>MR_MIME - Route 2: Trade</title></circle>
 <rect class="cell" x="781.5" y="260" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>MR_MIME - Route 21: Grass 6.2%</title></rect>
 <text class="row-label" x="86" y="272.5" text-anchor="end" dominant-baseline="middle">CATERPIE</text>
-<rect class="cell" x="169.5" y="269" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>CATERPIE - Viridian Forest: Grass 29.7%</title></rect>
-<text class="row-label" x="86" y="281.5" text-anchor="end" dominant-baseline="middle">WEEDLE</text>
-<rect class="cell" x="169.5" y="278" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>WEEDLE - Viridian Forest: Grass 35.2%</title></rect>
-<text class="row-label" x="86" y="290.5" text-anchor="end" dominant-baseline="middle">KAKUNA</text>
-<rect class="cell" x="169.5" y="287" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>KAKUNA - Viridian Forest: Grass 14.8%</title></rect>
-<text class="row-label" x="86" y="299.5" text-anchor="end" dominant-baseline="middle">BEEDRILL</text>
-<rect class="cell" x="169.5" y="296" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>BEEDRILL - Viridian Forest: Grass 5.5%</title></rect>
-<rect class="cell" x="547.5" y="296" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>BEEDRILL - Route 13: Grass 39.5%</title></rect>
-<text class="row-label" x="86" y="308.5" text-anchor="end" dominant-baseline="middle">PIDGEOTTO</text>
-<rect class="cell" x="169.5" y="305" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PIDGEOTTO - Viridian Forest: Grass 5.1%</title></rect>
-<rect class="cell" x="313.5" y="305" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PIDGEOTTO - Route 5: Grass 5.1%</title></rect>
-<rect class="cell" x="331.5" y="305" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PIDGEOTTO - Route 6: Grass 5.1%</title></rect>
-<rect class="cell" x="349.5" y="305" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PIDGEOTTO - Route 11: Grass 5.1%</title></rect>
-<rect class="cell" x="493.5" y="305" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PIDGEOTTO - Route 7: Grass 9.8%</title></rect>
-<rect class="cell" x="529.5" y="305" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PIDGEOTTO - Route 12: Grass 9.8%</title></rect>
-<text class="row-label" x="86" y="317.5" text-anchor="end" dominant-baseline="middle">DIGLETT</text>
-<rect class="cell" x="187.5" y="314" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>DIGLETT - Diglett's Cave: Grass 89.5%</title></rect>
-<rect class="cell" x="421.5" y="314" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>DIGLETT - Rock Tunnel: Grass 5.1%</title></rect>
-<text class="row-label" x="86" y="326.5" text-anchor="end" dominant-baseline="middle">DUGTRIO</text>
-<rect class="cell" x="187.5" y="323" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>DUGTRIO - Diglett's Cave: Grass 9.4%</title></rect>
-<circle class="ring" cx="353" cy="326.5" r="2.6"><title>DUGTRIO - Route 11: Trade</title></circle>
-<rect class="cell" x="835.5" y="323" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>DUGTRIO - Victory Road: Grass 19.9%</title></rect>
-<text class="row-label" x="86" y="335.5" text-anchor="end" dominant-baseline="middle">ONIX</text>
-<rect class="cell" x="187.5" y="332" width="7" height="7" rx="1.5" fill-opacity="0.4"><title>ONIX - Diglett's Cave: Grass 1.2%</title></rect>
-<rect class="cell" x="421.5" y="332" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>ONIX - Rock Tunnel: Grass 5.1%, Grass 5.1%</title></rect>
-<rect class="cell" x="835.5" y="332" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>ONIX - Victory Road: Grass 9.8%, Grass 15.2%</title></rect>
-<text class="row-label" x="86" y="344.5" text-anchor="end" dominant-baseline="middle">EKANS</text>
-<rect class="cell" x="205.5" y="341" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>EKANS - Route 3: Grass 24.2%</title></rect>
-<rect class="cell" x="241.5" y="341" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>EKANS - Route 4: Grass 24.2%</title></rect>
-<rect class="cell" x="529.5" y="341" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>EKANS - Route 12: Grass 19.9%</title></rect>
-<rect class="cell" x="583.5" y="341" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>EKANS - Route 15: Grass 19.9%</title></rect>
-<text class="row-label" x="86" y="353.5" text-anchor="end" dominant-baseline="middle">SANDSHREW</text>
-<rect class="cell" x="205.5" y="350" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>SANDSHREW - Route 3: Grass 14.8%</title></rect>
-<rect class="cell" x="223.5" y="350" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>SANDSHREW - Mt. Moon: Grass 9.8%, Grass 9.8%, Grass 9.8%</title></rect>
-<rect class="cell" x="241.5" y="350" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>SANDSHREW - Route 4: Grass 14.8%</title></rect>
-<rect class="cell" x="583.5" y="350" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>SANDSHREW - Route 15: Grass 19.9%</title></rect>
-<text class="row-label" x="86" y="362.5" text-anchor="end" dominant-baseline="middle">CLEFAIRY</text>
-<rect class="cell" x="223.5" y="359" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>CLEFAIRY - Mt. Moon: Grass 20.7%, Grass 5.5%, Grass 10.5%</title></rect>
-<text class="row-label" x="86" y="371.5" text-anchor="end" dominant-baseline="middle">ZUBAT</text>
-<rect class="cell" x="223.5" y="368" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>ZUBAT - Mt. Moon: Grass 19.9%, Grass 19.9%, Grass 29.7%</title></rect>
-<rect class="cell" x="421.5" y="368" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>ZUBAT - Rock Tunnel: Grass 19.9%, Grass 35.2%</title></rect>
-<rect class="cell" x="727.5" y="368" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>ZUBAT - Seafoam Islands: Grass 9.8%</title></rect>
-<text class="row-label" x="86" y="380.5" text-anchor="end" dominant-baseline="middle">ODDISH</text>
-<rect class="cell" x="223.5" y="377" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>ODDISH - Mt. Moon: Grass 19.9%, Grass 19.9%, Grass 9.8%</title></rect>
-<rect class="cell" x="349.5" y="377" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>ODDISH - Route 11: Grass 9.8%</title></rect>
-<rect class="cell" x="583.5" y="377" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>ODDISH - Route 15: Grass 9.8%</title></rect>
-<text class="row-label" x="86" y="389.5" text-anchor="end" dominant-baseline="middle">PARAS</text>
-<rect class="cell" x="223.5" y="386" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PARAS - Mt. Moon: Grass 14.8%, Grass 14.8%, Grass 5.1%</title></rect>
-<rect class="cell" x="421.5" y="386" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PARAS - Rock Tunnel: Grass 9.8%</title></rect>
-<rect class="cell" x="691.5" y="386" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>PARAS - Safari Zone: Grass 19.9%</title></rect>
-<text class="row-label" x="86" y="398.5" text-anchor="end" dominant-baseline="middle">GEODUDE</text>
-<rect class="cell" x="223.5" y="395" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GEODUDE - Mt. Moon: Grass 14.8%, Grass 30.1%, Grass 35.2%</title></rect>
-<rect class="cell" x="421.5" y="395" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>GEODUDE - Rock Tunnel: Grass 25.0%, Grass 29.7%</title></rect>
-<text class="row-label" x="86" y="407.5" text-anchor="end" dominant-baseline="middle">MAGIKARP</text>
-<circle class="ring" cx="227" cy="407.5" r="2.6"><title>MAGIKARP - Mt. Moon: Gift</title></circle>
-<rect class="cell" x="295.5" y="404" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>MAGIKARP - Route 25: Water 25.0%</title></rect>
-<rect class="cell" x="367.5" y="404" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>MAGIKARP - Vermilion: Old Rod 100.0%</title></rect>
-<rect class="cell" x="655.5" y="404" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>MAGIKARP - Fuchsia: Super Rod 89.5%</title></rect>
-<rect class="cell" x="691.5" y="404" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>MAGIKARP - Safari Zone: Water 29.7%, Super Rod 69.5%, Super Rod 89.5%, Super Rod 89.5%, Super Rod 89.5%</title></rect>
-<rect class="cell" x="709.5" y="404" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>MAGIKARP - Route 19: Water 5.1%</title></rect>
-<rect class="cell" x="745.5" y="404" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>MAGIKARP - Route 20: Water 5.1%</title></rect>
-<text class="row-label" x="86" y="416.5" text-anchor="end" dominant-baseline="middle">GOLDEEN</text>
-<rect class="cell" x="241.5" y="413" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Route 4: Super Rod 89.5%</title></rect>
-<rect class="cell" x="259.5" y="413" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Cerulean: Super Rod 69.5%</title></rect>
-<rect class="cell" x="277.5" y="413" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Route 24: Water 19.9%, Super Rod 89.5%</title></rect>
-<rect class="cell" x="331.5" y="413" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Route 6: Water 25.0%, Super Rod 100.0%</title></rect>
-<rect class="cell" x="511.5" y="413" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Celadon: Super Rod 100.0%</title></rect>
-<rect class="cell" x="655.5" y="413" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Fuchsia: Good Rod 50.0%</title></rect>
-<rect class="cell" x="691.5" y="413" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Safari Zone: Water 35.2%, Water 19.9%, Water 19.9%, Water 9.8%</title></rect>
-<rect class="cell" x="781.5" y="413" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Route 21: Water 55.1%</title></rect>
-<rect class="cell" x="799.5" y="413" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>GOLDEEN - Route 22: Water 19.9%</title></rect>
-<rect class="cell" x="871.5" y="413" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Cerulean Cave: Super Rod 39.8%, Super Rod 39.8%</title></rect>
-<text class="row-label" x="86" y="425.5" text-anchor="end" dominant-baseline="middle">SEAKING</text>
-<rect class="cell" x="241.5" y="422" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>SEAKING - Route 4: Super Rod 10.5%</title></rect>
-<rect class="cell" x="259.5" y="422" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>SEAKING - Cerulean: Super Rod 30.5%</title></rect>
-<rect class="cell" x="277.5" y="422" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>SEAKING - Route 24: Water 19.5%, Super Rod 10.5%</title></rect>
-<rect class="cell" x="691.5" y="422" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>SEAKING - Safari Zone: Water 16.0%, Water 5.1%, Water 9.8%, Water 5.1%</title></rect>
-<rect class="cell" x="781.5" y="422" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>SEAKING - Route 21: Water 14.8%</title></rect>
-<rect class="cell" x="799.5" y="422" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>SEAKING - Route 22: Water 19.5%</title></rect>
-<rect class="cell" x="817.5" y="422" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>SEAKING - Route 23: Water 14.8%</title></rect>
-<rect class="cell" x="871.5" y="422" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>SEAKING - Cerulean Cave: Super Rod 60.2%, Super Rod 60.2%</title></rect>
-<text class="row-label" x="86" y="434.5" text-anchor="end" dominant-baseline="middle">BULBASAUR</text>
-<circle class="ring" cx="263" cy="434.5" r="2.6"><title>BULBASAUR - Cerulean: Gift</title></circle>
-<text class="row-label" x="86" y="443.5" text-anchor="end" dominant-baseline="middle">CHARMANDER</text>
-<circle class="ring" cx="281" cy="443.5" r="2.6"><title>CHARMANDER - Route 24: Gift</title></circle>
-<rect class="cell" x="403.5" y="440" width="7" height="7" rx="1.5" fill-opacity="0.4"><title>CHARMANDER - Route 9: Grass 4.3%</title></rect>
-<rect class="cell" x="763.5" y="440" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>CHARMANDER - Cinnabar / Mansion: Grass 9.8%</title></rect>
-<text class="row-label" x="86" y="452.5" text-anchor="end" dominant-baseline="middle">SQUIRTLE</text>
-<rect class="cell" x="277.5" y="449" width="7" height="7" rx="1.5" fill-opacity="0.4"><title>SQUIRTLE - Route 24: Grass 4.3%</title></rect>
-<circle class="ring" cx="371" cy="452.5" r="2.6"><title>SQUIRTLE - Vermilion: Gift</title></circle>
-<text class="row-label" x="86" y="461.5" text-anchor="end" dominant-baseline="middle">PSYDUCK</text>
-<rect class="cell" x="277.5" y="458" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PSYDUCK - Route 24: Water 9.8%</title></rect>
-<rect class="cell" x="331.5" y="458" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>PSYDUCK - Route 6: Water 55.5%</title></rect>
-<rect class="cell" x="691.5" y="458" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>PSYDUCK - Safari Zone: Water 9.8%, Water 9.8%, Water 44.9%</title></rect>
-<rect class="cell" x="727.5" y="458" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>PSYDUCK - Seafoam Islands: Grass 19.9%, Grass 9.8%, Grass 9.8%</title></rect>
-<rect class="cell" x="799.5" y="458" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PSYDUCK - Route 22: Grass 5.1%, Water 9.8%</title></rect>
-<text class="row-label" x="86" y="470.5" text-anchor="end" dominant-baseline="middle">GOLDUCK</text>
-<rect class="cell" x="277.5" y="467" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>GOLDUCK - Route 24: Water 10.5%</title></rect>
-<rect class="cell" x="691.5" y="467" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>GOLDUCK - Safari Zone: Water 4.3%, Water 4.3%, Water 10.5%</title></rect>
-<rect class="cell" x="727.5" y="467" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>GOLDUCK - Seafoam Islands: Grass 5.1%, Grass 5.1%, Grass 9.8%</title></rect>
-<rect class="cell" x="799.5" y="467" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>GOLDUCK - Route 22: Water 10.5%</title></rect>
-<text class="row-label" x="86" y="479.5" text-anchor="end" dominant-baseline="middle">POLIWHIRL</text>
-<rect class="cell" x="277.5" y="476" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>POLIWHIRL - Route 24: Water 20.3%</title></rect>
-<rect class="cell" x="331.5" y="476" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>POLIWHIRL - Route 6: Water 9.8%</title></rect>
-<rect class="cell" x="691.5" y="476" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>POLIWHIRL - Safari Zone: Water 5.1%, Water 19.5%, Water 5.1%</title></rect>
-<rect class="cell" x="799.5" y="476" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>POLIWHIRL - Route 22: Water 20.3%, Super Rod 10.5%</title></rect>
-<rect class="cell" x="817.5" y="476" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>POLIWHIRL - Route 23: Water 14.8%, Super Rod 30.5%</title></rect>
-<text class="row-label" x="86" y="488.5" text-anchor="end" dominant-baseline="middle">ABRA</text>
-<rect class="cell" x="277.5" y="485" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>ABRA - Route 24: Grass 25.0%</title></rect>
-<rect class="cell" x="295.5" y="485" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>ABRA - Route 25: Grass 44.9%</title></rect>
-<rect class="cell" x="313.5" y="485" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>ABRA - Route 5: Grass 25.0%</title></rect>
-<rect class="cell" x="331.5" y="485" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>ABRA - Route 6: Grass 25.0%</title></rect>
-<rect class="cell" x="493.5" y="485" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>ABRA - Route 7: Grass 9.8%</title></rect>
-<circle class="ring" cx="515" cy="488.5" r="2.6"><title>ABRA - Celadon: Prize</title></circle>
-<text class="row-label" x="86" y="497.5" text-anchor="end" dominant-baseline="middle">KRABBY</text>
-<rect class="cell" x="277.5" y="494" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>KRABBY - Route 24: Grass 24.6%</title></rect>
-<rect class="cell" x="295.5" y="494" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>KRABBY - Route 25: Super Rod 69.5%</title></rect>
-<rect class="cell" x="439.5" y="494" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>KRABBY - Route 10: Super Rod 69.5%</title></rect>
-<rect class="cell" x="529.5" y="494" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>KRABBY - Route 12: Water 9.8%</title></rect>
-<rect class="cell" x="547.5" y="494" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>KRABBY - Route 13: Water 19.9%</title></rect>
-<rect class="cell" x="637.5" y="494" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>KRABBY - Route 18: Grass 5.1%</title></rect>
-<rect class="cell" x="727.5" y="494" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>KRABBY - Seafoam Islands: Grass 9.8%, Grass 5.1%, Super Rod 39.8%, Super Rod 39.8%</title></rect>
-<text class="row-label" x="86" y="506.5" text-anchor="end" dominant-baseline="middle">LICKITUNG</text>
-<rect class="cell" x="277.5" y="503" width="7" height="7" rx="1.5" fill-opacity="0.4"><title>LICKITUNG - Route 24: Grass 1.2%</title></rect>
-<rect class="cell" x="871.5" y="503" width="7" height="7" rx="1.5" fill-opacity="0.4"><title>LICKITUNG - Cerulean Cave: Grass 4.3%</title></rect>
-<text class="row-label" x="86" y="515.5" text-anchor="end" dominant-baseline="middle">METAPOD</text>
-<rect class="cell" x="295.5" y="512" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>METAPOD - Route 25: Grass 5.1%</title></rect>
+<rect class="cell" x="169.5" y="269" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>CATERPIE - Viridian Forest: Grass 35.2%</title></rect>
+<text class="row-label" x="86" y="281.5" text-anchor="end" dominant-baseline="middle">METAPOD</text>
+<rect class="cell" x="169.5" y="278" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>METAPOD - Viridian Forest: Grass 5.1%</title></rect>
+<rect class="cell" x="295.5" y="278" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>METAPOD - Route 25: Grass 5.1%</title></rect>
+<text class="row-label" x="86" y="290.5" text-anchor="end" dominant-baseline="middle">WEEDLE</text>
+<rect class="cell" x="169.5" y="287" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>WEEDLE - Viridian Forest: Grass 29.7%</title></rect>
+<text class="row-label" x="86" y="299.5" text-anchor="end" dominant-baseline="middle">KAKUNA</text>
+<rect class="cell" x="169.5" y="296" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>KAKUNA - Viridian Forest: Grass 9.8%</title></rect>
+<text class="row-label" x="86" y="308.5" text-anchor="end" dominant-baseline="middle">BEEDRILL</text>
+<rect class="cell" x="169.5" y="305" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>BEEDRILL - Viridian Forest: Grass 5.5%</title></rect>
+<rect class="cell" x="547.5" y="305" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>BEEDRILL - Route 13: Grass 39.5%</title></rect>
+<text class="row-label" x="86" y="317.5" text-anchor="end" dominant-baseline="middle">PIDGEOTTO</text>
+<rect class="cell" x="169.5" y="314" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PIDGEOTTO - Viridian Forest: Grass 5.1%</title></rect>
+<rect class="cell" x="313.5" y="314" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PIDGEOTTO - Route 5: Grass 5.1%</title></rect>
+<rect class="cell" x="331.5" y="314" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PIDGEOTTO - Route 6: Grass 5.1%</title></rect>
+<rect class="cell" x="349.5" y="314" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PIDGEOTTO - Route 11: Grass 5.1%</title></rect>
+<rect class="cell" x="493.5" y="314" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PIDGEOTTO - Route 7: Grass 9.8%</title></rect>
+<rect class="cell" x="529.5" y="314" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PIDGEOTTO - Route 12: Grass 9.8%</title></rect>
+<text class="row-label" x="86" y="326.5" text-anchor="end" dominant-baseline="middle">DIGLETT</text>
+<rect class="cell" x="187.5" y="323" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>DIGLETT - Diglett's Cave: Grass 89.5%</title></rect>
+<rect class="cell" x="421.5" y="323" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>DIGLETT - Rock Tunnel: Grass 5.1%</title></rect>
+<text class="row-label" x="86" y="335.5" text-anchor="end" dominant-baseline="middle">DUGTRIO</text>
+<rect class="cell" x="187.5" y="332" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>DUGTRIO - Diglett's Cave: Grass 9.4%</title></rect>
+<circle class="ring" cx="353" cy="335.5" r="2.6"><title>DUGTRIO - Route 11: Trade</title></circle>
+<rect class="cell" x="835.5" y="332" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>DUGTRIO - Victory Road: Grass 19.9%</title></rect>
+<text class="row-label" x="86" y="344.5" text-anchor="end" dominant-baseline="middle">ONIX</text>
+<rect class="cell" x="187.5" y="341" width="7" height="7" rx="1.5" fill-opacity="0.4"><title>ONIX - Diglett's Cave: Grass 1.2%</title></rect>
+<rect class="cell" x="421.5" y="341" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>ONIX - Rock Tunnel: Grass 5.1%, Grass 5.1%</title></rect>
+<rect class="cell" x="835.5" y="341" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>ONIX - Victory Road: Grass 9.8%, Grass 15.2%</title></rect>
+<text class="row-label" x="86" y="353.5" text-anchor="end" dominant-baseline="middle">EKANS</text>
+<rect class="cell" x="205.5" y="350" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>EKANS - Route 3: Grass 24.2%</title></rect>
+<rect class="cell" x="241.5" y="350" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>EKANS - Route 4: Grass 24.2%</title></rect>
+<rect class="cell" x="529.5" y="350" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>EKANS - Route 12: Grass 19.9%</title></rect>
+<rect class="cell" x="583.5" y="350" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>EKANS - Route 15: Grass 19.9%</title></rect>
+<text class="row-label" x="86" y="362.5" text-anchor="end" dominant-baseline="middle">SANDSHREW</text>
+<rect class="cell" x="205.5" y="359" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>SANDSHREW - Route 3: Grass 14.8%</title></rect>
+<rect class="cell" x="223.5" y="359" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>SANDSHREW - Mt. Moon: Grass 9.8%, Grass 9.8%, Grass 9.8%</title></rect>
+<rect class="cell" x="241.5" y="359" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>SANDSHREW - Route 4: Grass 14.8%</title></rect>
+<rect class="cell" x="583.5" y="359" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>SANDSHREW - Route 15: Grass 19.9%</title></rect>
+<text class="row-label" x="86" y="371.5" text-anchor="end" dominant-baseline="middle">CLEFAIRY</text>
+<rect class="cell" x="223.5" y="368" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>CLEFAIRY - Mt. Moon: Grass 20.7%, Grass 5.5%, Grass 10.5%</title></rect>
+<text class="row-label" x="86" y="380.5" text-anchor="end" dominant-baseline="middle">ZUBAT</text>
+<rect class="cell" x="223.5" y="377" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>ZUBAT - Mt. Moon: Grass 19.9%, Grass 19.9%, Grass 29.7%</title></rect>
+<rect class="cell" x="421.5" y="377" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>ZUBAT - Rock Tunnel: Grass 19.9%, Grass 35.2%</title></rect>
+<rect class="cell" x="727.5" y="377" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>ZUBAT - Seafoam Islands: Grass 9.8%</title></rect>
+<text class="row-label" x="86" y="389.5" text-anchor="end" dominant-baseline="middle">ODDISH</text>
+<rect class="cell" x="223.5" y="386" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>ODDISH - Mt. Moon: Grass 19.9%, Grass 19.9%, Grass 9.8%</title></rect>
+<rect class="cell" x="349.5" y="386" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>ODDISH - Route 11: Grass 9.8%</title></rect>
+<rect class="cell" x="583.5" y="386" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>ODDISH - Route 15: Grass 9.8%</title></rect>
+<text class="row-label" x="86" y="398.5" text-anchor="end" dominant-baseline="middle">PARAS</text>
+<rect class="cell" x="223.5" y="395" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PARAS - Mt. Moon: Grass 14.8%, Grass 14.8%, Grass 5.1%</title></rect>
+<rect class="cell" x="421.5" y="395" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PARAS - Rock Tunnel: Grass 9.8%</title></rect>
+<rect class="cell" x="691.5" y="395" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>PARAS - Safari Zone: Grass 19.9%</title></rect>
+<text class="row-label" x="86" y="407.5" text-anchor="end" dominant-baseline="middle">GEODUDE</text>
+<rect class="cell" x="223.5" y="404" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GEODUDE - Mt. Moon: Grass 14.8%, Grass 30.1%, Grass 35.2%</title></rect>
+<rect class="cell" x="421.5" y="404" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>GEODUDE - Rock Tunnel: Grass 25.0%, Grass 29.7%</title></rect>
+<text class="row-label" x="86" y="416.5" text-anchor="end" dominant-baseline="middle">MAGIKARP</text>
+<circle class="ring" cx="227" cy="416.5" r="2.6"><title>MAGIKARP - Mt. Moon: Gift</title></circle>
+<rect class="cell" x="295.5" y="413" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>MAGIKARP - Route 25: Water 25.0%</title></rect>
+<rect class="cell" x="367.5" y="413" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>MAGIKARP - Vermilion: Old Rod 100.0%</title></rect>
+<rect class="cell" x="655.5" y="413" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>MAGIKARP - Fuchsia: Super Rod 89.5%</title></rect>
+<rect class="cell" x="691.5" y="413" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>MAGIKARP - Safari Zone: Water 29.7%, Super Rod 69.5%, Super Rod 89.5%, Super Rod 89.5%, Super Rod 89.5%</title></rect>
+<rect class="cell" x="709.5" y="413" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>MAGIKARP - Route 19: Water 5.1%</title></rect>
+<rect class="cell" x="745.5" y="413" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>MAGIKARP - Route 20: Water 5.1%</title></rect>
+<text class="row-label" x="86" y="425.5" text-anchor="end" dominant-baseline="middle">GOLDEEN</text>
+<rect class="cell" x="241.5" y="422" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Route 4: Super Rod 89.5%</title></rect>
+<rect class="cell" x="259.5" y="422" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Cerulean: Super Rod 69.5%</title></rect>
+<rect class="cell" x="277.5" y="422" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Route 24: Water 19.9%, Super Rod 89.5%</title></rect>
+<rect class="cell" x="331.5" y="422" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Route 6: Water 25.0%, Super Rod 100.0%</title></rect>
+<rect class="cell" x="511.5" y="422" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Celadon: Super Rod 100.0%</title></rect>
+<rect class="cell" x="655.5" y="422" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Fuchsia: Good Rod 50.0%</title></rect>
+<rect class="cell" x="691.5" y="422" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Safari Zone: Water 35.2%, Water 19.9%, Water 19.9%, Water 9.8%</title></rect>
+<rect class="cell" x="781.5" y="422" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Route 21: Water 55.1%</title></rect>
+<rect class="cell" x="799.5" y="422" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>GOLDEEN - Route 22: Water 19.9%</title></rect>
+<rect class="cell" x="871.5" y="422" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>GOLDEEN - Cerulean Cave: Super Rod 39.8%, Super Rod 39.8%</title></rect>
+<text class="row-label" x="86" y="434.5" text-anchor="end" dominant-baseline="middle">SEAKING</text>
+<rect class="cell" x="241.5" y="431" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>SEAKING - Route 4: Super Rod 10.5%</title></rect>
+<rect class="cell" x="259.5" y="431" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>SEAKING - Cerulean: Super Rod 30.5%</title></rect>
+<rect class="cell" x="277.5" y="431" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>SEAKING - Route 24: Water 19.5%, Super Rod 10.5%</title></rect>
+<rect class="cell" x="691.5" y="431" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>SEAKING - Safari Zone: Water 16.0%, Water 5.1%, Water 9.8%, Water 5.1%</title></rect>
+<rect class="cell" x="781.5" y="431" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>SEAKING - Route 21: Water 14.8%</title></rect>
+<rect class="cell" x="799.5" y="431" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>SEAKING - Route 22: Water 19.5%</title></rect>
+<rect class="cell" x="817.5" y="431" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>SEAKING - Route 23: Water 14.8%</title></rect>
+<rect class="cell" x="871.5" y="431" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>SEAKING - Cerulean Cave: Super Rod 60.2%, Super Rod 60.2%</title></rect>
+<text class="row-label" x="86" y="443.5" text-anchor="end" dominant-baseline="middle">BULBASAUR</text>
+<circle class="ring" cx="263" cy="443.5" r="2.6"><title>BULBASAUR - Cerulean: Gift</title></circle>
+<text class="row-label" x="86" y="452.5" text-anchor="end" dominant-baseline="middle">CHARMANDER</text>
+<circle class="ring" cx="281" cy="452.5" r="2.6"><title>CHARMANDER - Route 24: Gift</title></circle>
+<rect class="cell" x="403.5" y="449" width="7" height="7" rx="1.5" fill-opacity="0.4"><title>CHARMANDER - Route 9: Grass 4.3%</title></rect>
+<rect class="cell" x="763.5" y="449" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>CHARMANDER - Cinnabar / Mansion: Grass 9.8%</title></rect>
+<text class="row-label" x="86" y="461.5" text-anchor="end" dominant-baseline="middle">SQUIRTLE</text>
+<rect class="cell" x="277.5" y="458" width="7" height="7" rx="1.5" fill-opacity="0.4"><title>SQUIRTLE - Route 24: Grass 4.3%</title></rect>
+<circle class="ring" cx="371" cy="461.5" r="2.6"><title>SQUIRTLE - Vermilion: Gift</title></circle>
+<text class="row-label" x="86" y="470.5" text-anchor="end" dominant-baseline="middle">PSYDUCK</text>
+<rect class="cell" x="277.5" y="467" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PSYDUCK - Route 24: Water 9.8%</title></rect>
+<rect class="cell" x="331.5" y="467" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>PSYDUCK - Route 6: Water 55.5%</title></rect>
+<rect class="cell" x="691.5" y="467" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>PSYDUCK - Safari Zone: Water 9.8%, Water 9.8%, Water 44.9%</title></rect>
+<rect class="cell" x="727.5" y="467" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>PSYDUCK - Seafoam Islands: Grass 19.9%, Grass 9.8%, Grass 9.8%</title></rect>
+<rect class="cell" x="799.5" y="467" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>PSYDUCK - Route 22: Grass 5.1%, Water 9.8%</title></rect>
+<text class="row-label" x="86" y="479.5" text-anchor="end" dominant-baseline="middle">GOLDUCK</text>
+<rect class="cell" x="277.5" y="476" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>GOLDUCK - Route 24: Water 10.5%</title></rect>
+<rect class="cell" x="691.5" y="476" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>GOLDUCK - Safari Zone: Water 4.3%, Water 4.3%, Water 10.5%</title></rect>
+<rect class="cell" x="727.5" y="476" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>GOLDUCK - Seafoam Islands: Grass 5.1%, Grass 5.1%, Grass 9.8%</title></rect>
+<rect class="cell" x="799.5" y="476" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>GOLDUCK - Route 22: Water 10.5%</title></rect>
+<text class="row-label" x="86" y="488.5" text-anchor="end" dominant-baseline="middle">POLIWHIRL</text>
+<rect class="cell" x="277.5" y="485" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>POLIWHIRL - Route 24: Water 20.3%</title></rect>
+<rect class="cell" x="331.5" y="485" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>POLIWHIRL - Route 6: Water 9.8%</title></rect>
+<rect class="cell" x="691.5" y="485" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>POLIWHIRL - Safari Zone: Water 5.1%, Water 19.5%, Water 5.1%</title></rect>
+<rect class="cell" x="799.5" y="485" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>POLIWHIRL - Route 22: Water 20.3%, Super Rod 10.5%</title></rect>
+<rect class="cell" x="817.5" y="485" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>POLIWHIRL - Route 23: Water 14.8%, Super Rod 30.5%</title></rect>
+<text class="row-label" x="86" y="497.5" text-anchor="end" dominant-baseline="middle">ABRA</text>
+<rect class="cell" x="277.5" y="494" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>ABRA - Route 24: Grass 25.0%</title></rect>
+<rect class="cell" x="295.5" y="494" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>ABRA - Route 25: Grass 44.9%</title></rect>
+<rect class="cell" x="313.5" y="494" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>ABRA - Route 5: Grass 25.0%</title></rect>
+<rect class="cell" x="331.5" y="494" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>ABRA - Route 6: Grass 25.0%</title></rect>
+<rect class="cell" x="493.5" y="494" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>ABRA - Route 7: Grass 9.8%</title></rect>
+<circle class="ring" cx="515" cy="497.5" r="2.6"><title>ABRA - Celadon: Prize</title></circle>
+<text class="row-label" x="86" y="506.5" text-anchor="end" dominant-baseline="middle">KRABBY</text>
+<rect class="cell" x="277.5" y="503" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>KRABBY - Route 24: Grass 24.6%</title></rect>
+<rect class="cell" x="295.5" y="503" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>KRABBY - Route 25: Super Rod 69.5%</title></rect>
+<rect class="cell" x="439.5" y="503" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>KRABBY - Route 10: Super Rod 69.5%</title></rect>
+<rect class="cell" x="529.5" y="503" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>KRABBY - Route 12: Water 9.8%</title></rect>
+<rect class="cell" x="547.5" y="503" width="7" height="7" rx="1.5" fill-opacity="0.8"><title>KRABBY - Route 13: Water 19.9%</title></rect>
+<rect class="cell" x="637.5" y="503" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>KRABBY - Route 18: Grass 5.1%</title></rect>
+<rect class="cell" x="727.5" y="503" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>KRABBY - Seafoam Islands: Grass 9.8%, Grass 5.1%, Super Rod 39.8%, Super Rod 39.8%</title></rect>
+<text class="row-label" x="86" y="515.5" text-anchor="end" dominant-baseline="middle">LICKITUNG</text>
+<rect class="cell" x="277.5" y="512" width="7" height="7" rx="1.5" fill-opacity="0.4"><title>LICKITUNG - Route 24: Grass 1.2%</title></rect>
+<rect class="cell" x="871.5" y="512" width="7" height="7" rx="1.5" fill-opacity="0.4"><title>LICKITUNG - Cerulean Cave: Grass 4.3%</title></rect>
 <text class="row-label" x="86" y="524.5" text-anchor="end" dominant-baseline="middle">BELLSPROUT</text>
 <rect class="cell" x="295.5" y="521" width="7" height="7" rx="1.5" fill-opacity="1.0"><title>BELLSPROUT - Route 25: Grass 44.5%</title></rect>
 <rect class="cell" x="349.5" y="521" width="7" height="7" rx="1.5" fill-opacity="0.6"><title>BELLSPROUT - Route 11: Grass 5.1%</title></rect>

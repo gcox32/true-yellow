@@ -114,7 +114,8 @@ _ChampionsRoomOakDisappointedWithRivalText::
 	line "Truly, I am."
 
 	para "But do you know"
-	line "why you lost here?"
+	line "why you lost"
+	cont "here?"
 
 	para "A #MON isn't"
 	line "just a tool to"

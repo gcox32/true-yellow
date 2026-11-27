@@ -9,9 +9,9 @@ _PowerPlantZapdosBattleText::
 _PowerPlantMagnetHumText::
 	text "A colossal"
 	line "electromagnet"
-	cont "fills the room. It"
-	cont "hums with stored"
-	cont "charge."
+	cont "fills the room."
+	cont "It hums with"
+	cont "stored charge."
 
 	para "Expose a #MON"
 	line "to the magnetic"
@@ -19,8 +19,9 @@ _PowerPlantMagnetHumText::
 	prompt
 
 _PowerPlantMagnetWrongMonText::
-	text "The magnetic field"
-	line "didn't affect this"
+	text "The magnetic"
+	line "field didn't"
+	cont "affect this"
 	cont "#MON."
 	done
 

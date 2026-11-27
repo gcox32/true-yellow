@@ -29,8 +29,9 @@
 ; The ANYWHERE / ALWAYS pools at the bottom catch everything, so the defaults
 ; only show if those are removed.
 ;
-; Text box is 18 characters wide. "#" prints as POKé (4 chars), <PLAYER> can be
-; up to 7. Lines end with "done" (the caller waits for the button press).
+; Keep lines to 17 characters: the box is 18 wide, but the last column is
+; where the "more text" arrow goes. "#" prints as POKé (4 chars), <PLAYER> can
+; be up to 7. Lines end with "done" (the caller waits for the button press).
 ; No "--" in dialogue.
 ;
 ; Anime quotes (marked ; EPxx) are exact English-dub lines from the Indigo
@@ -256,8 +257,8 @@ FollowerLines:
 	done
 
 .BrockLostToYou: ; EP005
-	text "BROCK: Nah. I lost"
-	line "to you."
+	text "BROCK: Nah. I"
+	line "lost to you."
 	para "You beat me in"
 	line "battle and in"
 	cont "being kind to all"
@@ -290,7 +291,8 @@ FollowerLines:
 .MistyNicerThanCerulean: ; EP007
 	text "MISTY: It's much"
 	line "nicer than that"
-	cont "old CERULEAN CITY,"
+	cont "old CERULEAN"
+	cont "CITY,"
 	para "so let's get"
 	line "going!"
 	done
@@ -364,10 +366,11 @@ FollowerLines:
 	done
 
 .MistyWeirdRoom: ; EP032
-	text "MISTY: Hey, BROCK."
-	line "Do you notice"
-	cont "anything weird"
-	cont "about this room?"
+	text "MISTY: Hey,"
+	line "BROCK. Do you"
+	cont "notice anything"
+	cont "weird about this"
+	cont "room?"
 	done
 
 .MistyNinja: ; EP032
@@ -425,13 +428,15 @@ FollowerLines:
 	text "BROCK: A volcano"
 	line "island? This GYM"
 	para "is gonna be HOT."
-	line "Bring WATER types."
+	line "Bring WATER"
+	cont "types."
 	done
 
 .MistyCinnabarGym:
-	text "MISTY: FIRE types?"
-	line "Ha! Just leave"
-	cont "this one to me."
+	text "MISTY: FIRE"
+	line "types? Ha! Just"
+	cont "leave this one to"
+	cont "me."
 	done
 
 .BrockCinnabarGym:
@@ -442,9 +447,10 @@ FollowerLines:
 
 .MistyViridianGym:
 	text "MISTY: This GYM's"
-	line "been shut all this"
-	para "time. Who's the"
-	line "LEADER, anyway?"
+	line "been shut all"
+	para "this time. Who's"
+	line "the LEADER,"
+	cont "anyway?"
 	done
 
 .BrockViridianGym:
@@ -463,9 +469,9 @@ FollowerLines:
 
 .MistyBugOff: ; EP004
 	text "MISTY: This whole"
-	line "forest is crawling"
-	cont "with slimy,"
-	cont "disgusting"
+	line "forest is"
+	cont "crawling with"
+	cont "slimy, disgusting"
 	cont "#MON."
 	para "I wish they'd all"
 	line "just bug off."
@@ -479,9 +485,10 @@ FollowerLines:
 
 .MistyBugsDisgusting: ; EP002
 	text "MISTY: Even if it"
-	line "is a #MON, bugs"
-	cont "are disgusting and"
-	cont "I don't like them."
+	line "is a #MON,"
+	cont "bugs are"
+	cont "disgusting and I"
+	cont "don't like them."
 	para "Do something."
 	done
 
@@ -515,9 +522,9 @@ FollowerLines:
 	text "MISTY: The air's"
 	line "so fresh, and the"
 	cont "water's beautiful."
-	para "What a great place"
-	line "this is for a"
-	cont "rest."
+	para "What a great"
+	line "place this is for"
+	cont "a rest."
 	done
 
 .BrockRoute25:
@@ -533,9 +540,9 @@ FollowerLines:
 	line "can't go one step"
 	cont "further."
 	para "We've been looking"
-	line "for VERMILION CITY"
-	cont "for ten whole"
-	cont "days!"
+	line "for VERMILION"
+	cont "CITY for ten"
+	cont "whole days!"
 	done
 
 .MistyStAnne:
@@ -551,8 +558,9 @@ FollowerLines:
 	done
 
 .MistySSAnne:
-	text "MISTY: Look at all"
-	line "these rich folks."
+	text "MISTY: Look at"
+	line "all these rich"
+	cont "folks."
 	para "Did anyone bring"
 	line "a nice dress?"
 	cont "...No? Figures."
@@ -689,8 +697,8 @@ FollowerLines:
 
 .BrockGameCorner:
 	text "BROCK: I've got a"
-	line "system! ...Lend me"
-	para "some coins?"
+	line "system! ...Lend"
+	para "me some coins?"
 	done
 
 .MistyHideout: ; EP026
@@ -715,9 +723,9 @@ FollowerLines:
 	line "right. Now I"
 	cont "remember."
 	para "I heard once that"
-	line "you play a"
-	cont "# FLUTE to wake"
-	cont "up a SNORLAX."
+	line "you play a #"
+	cont "FLUTE to wake up"
+	cont "a SNORLAX."
 	done
 
 .BrockSnorlax:
@@ -739,16 +747,17 @@ FollowerLines:
 	done
 
 .BrockSafari:
-	text "BROCK: Toss a ROCK"
-	line "first to keep it"
-	para "from running."
+	text "BROCK: Toss a"
+	line "ROCK first to"
+	para "keep it from"
+	line "running."
 	line "...Or BAIT. Hmm."
 	done
 
 .MistyDaycare:
 	text "MISTY: BROCK, you"
-	line "look right at home"
-	cont "here."
+	line "look right at"
+	cont "home here."
 	done
 
 .BrockBreeder: ; EP042
@@ -767,11 +776,11 @@ FollowerLines:
 	done
 
 .BrockDojo: ; EP029
-	text "BROCK: And I've got"
-	line "GEODUDE."
+	text "BROCK: And I've"
+	line "got GEODUDE."
 	para "We'll both enter"
-	line "the tournament and"
-	cont "defeat that"
+	line "the tournament"
+	cont "and defeat that"
 	cont "HITMONCHAN."
 	done
 
@@ -784,8 +793,8 @@ FollowerLines:
 	text "BROCK: Very good,"
 	line "but she doesn't"
 	cont "capture the more"
-	para "adult charm of the"
-	line "real JOY and"
+	para "adult charm of"
+	line "the real JOY and"
 	cont "JENNY."
 	done
 
@@ -806,17 +815,18 @@ FollowerLines:
 	done
 
 .BrockSilph:
-	text "BROCK: TEAM ROCKET"
-	line "took the whole"
-	para "building? Let's"
-	line "clear 'em out!"
+	text "BROCK: TEAM"
+	line "ROCKET took the"
+	para "whole building?"
+	line "Let's clear 'em"
+	cont "out!"
 	done
 
 .BrockNoDoors: ; EP022
 	text "BROCK: There"
 	line "aren't any doors"
-	cont "or windows in this"
-	cont "room."
+	cont "or windows in"
+	cont "this room."
 	done
 
 .MistyCinnabarAhead: ; EP058
@@ -855,8 +865,8 @@ FollowerLines:
 .BrockMansion: ; EP048
 	text "BROCK: Mm-hm. I've"
 	line "seen shopping"
-	cont "malls smaller than"
-	cont "this place."
+	cont "malls smaller"
+	cont "than this place."
 	done
 
 .MistyCeruleanCaveInside:
@@ -868,10 +878,10 @@ FollowerLines:
 	done
 
 .BrockCeruleanCaveInside:
-	text "BROCK: The #MON"
-	line "in here are way"
-	cont "tougher. Stay"
-	cont "sharp!"
+	text "BROCK: The"
+	line "#MON in here"
+	cont "are way tougher."
+	cont "Stay sharp!"
 	done
 
 .MistyVictoryRoad:
@@ -901,10 +911,11 @@ FollowerLines:
 
 .MistyAllTheJoys: ; EP011
 	text "MISTY: What are"
-	line "you talking about?"
+	line "you talking"
+	cont "about?"
 	para "She looks just"
-	line "like all the other"
-	cont "JOYs."
+	line "like all the"
+	cont "other JOYs."
 	done
 
 .MistyTiredOfWalking: ; EP058
@@ -938,18 +949,20 @@ FollowerLines:
 	text "MISTY: CHAMPION"
 	line "<PLAYER>! Wow!"
 	para "...You still owe"
-	line "me a bike, though."
+	line "me a bike,"
+	cont "though."
 	done
 
 .MistyStillOweBike: ; EP046
 	text "MISTY: Don't"
 	line "forget you still"
-	cont "owe me a new bike."
+	cont "owe me a new"
+	cont "bike."
 	done
 
 .BrockChampion:
-	text "BROCK: You did it!"
-	line "I'm so proud."
+	text "BROCK: You did"
+	line "it! I'm so proud."
 	para "Let's celebrate."
 	line "I'll cook!"
 	done
@@ -991,8 +1004,8 @@ FollowerLines:
 	text "BROCK: PROF.OAK"
 	line "said to meet him"
 	cont "in CERULEAN CAVE."
-	para "Something tells me"
-	line "it's not about"
+	para "Something tells"
+	line "me it's not about"
 	cont "your #DEX."
 	done
 
@@ -1011,10 +1024,11 @@ FollowerLines:
 	done
 
 .MistyLastGym:
-	text "MISTY: Seven down!"
-	line "Just VIRIDIAN's"
-	para "GYM left. Back"
-	line "where we started!"
+	text "MISTY: Seven"
+	line "down! Just"
+	para "VIRIDIAN's GYM"
+	line "left. Back where"
+	cont "we started!"
 	done
 
 .BrockLastGym:
@@ -1025,8 +1039,9 @@ FollowerLines:
 	done
 
 .MistySilphDone:
-	text "MISTY: TEAM ROCKET"
-	line "is finished!"
+	text "MISTY: TEAM"
+	line "ROCKET is"
+	cont "finished!"
 	para "...Right? RIGHT?"
 	done
 
@@ -1055,10 +1070,11 @@ FollowerLines:
 	done
 
 .MistySaffronTakenOver:
-	text "MISTY: TEAM ROCKET"
-	line "took over all of"
-	para "SAFFRON? Somebody"
-	line "has to stop them!"
+	text "MISTY: TEAM"
+	line "ROCKET took over"
+	para "all of SAFFRON?"
+	line "Somebody has to"
+	cont "stop them!"
 	done
 
 .BrockMrFuji:
@@ -1076,9 +1092,10 @@ FollowerLines:
 	done
 
 .MistySixBadges:
-	text "MISTY: Six BADGEs!"
-	line "Two more and it's"
-	cont "the LEAGUE!"
+	text "MISTY: Six"
+	line "BADGEs! Two more"
+	cont "and it's the"
+	cont "LEAGUE!"
 	done
 
 .BrockSixBadges:
@@ -1088,10 +1105,10 @@ FollowerLines:
 	done
 
 .MistyFiveBadges:
-	text "MISTY: Five BADGEs"
-	line "already? Don't let"
-	cont "it go to your"
-	cont "head."
+	text "MISTY: Five"
+	line "BADGEs already?"
+	cont "Don't let it go to"
+	cont "your head."
 	done
 
 .BrockFiveBadges:
@@ -1112,7 +1129,8 @@ FollowerLines:
 	text "BROCK: With that"
 	line "SILPH SCOPE, we"
 	para "can climb the"
-	line "TOWER in LAVENDER."
+	line "TOWER in"
+	cont "LAVENDER."
 	done
 
 .MistyGameCornerShady:
@@ -1124,9 +1142,10 @@ FollowerLines:
 
 .BrockLavenderTrouble:
 	text "BROCK: Something's"
-	line "wrong at the TOWER"
-	para "in LAVENDER, and"
-	line "TEAM ROCKET's in"
+	line "wrong at the"
+	para "TOWER in"
+	line "LAVENDER, and"
+	cont "TEAM ROCKET's in"
 	cont "on it."
 	done
 
@@ -1138,15 +1157,16 @@ FollowerLines:
 	done
 
 .BrockCeladonNext:
-	text "BROCK: Three down."
-	line "CELADON's GYM"
-	para "uses GRASS types."
-	line "Plan ahead."
+	text "BROCK: Three"
+	line "down. CELADON's"
+	para "GYM uses GRASS"
+	line "types. Plan"
+	cont "ahead."
 	done
 
 .MistyCruise:
-	text "MISTY: A cruise on"
-	line "the ST. ANNE?"
+	text "MISTY: A cruise"
+	line "on the ST. ANNE?"
 	para "...With you two?"
 	line "Fine."
 	done
@@ -1174,31 +1194,33 @@ FollowerLines:
 .MistyIfTeamRocket: ; EP007
 	text "MISTY: If TEAM"
 	line "ROCKET hadn't"
-	cont "busted in, I would"
-	cont "have destroyed"
-	cont "you."
+	cont "busted in, I"
+	cont "would have"
+	cont "destroyed you."
 	done
 
 .MistyWarmingUp: ; EP002
-	text "MISTY: You know as"
-	line "well as I do that"
-	cont "a water #MON"
-	cont "can't battle on"
-	cont "land."
-	para "I was just warming"
-	line "up."
+	text "MISTY: You know"
+	line "as well as I do"
+	cont "that a water"
+	cont "#MON can't"
+	cont "battle on land."
+	para "I was just"
+	line "warming up."
 	done
 
 .BrockBillNext:
 	text "BROCK: Two BADGEs"
 	line "down. Six to go!"
 	para "Let's see if BILL"
-	line "up north can help."
+	line "up north can"
+	cont "help."
 	done
 
 .MistyBrockJoined:
 	text "MISTY: So BROCK's"
-	line "tagging along now?"
+	line "tagging along"
+	cont "now?"
 	para "Ugh. Fine."
 	done
 
@@ -1206,7 +1228,8 @@ FollowerLines:
 	text "MISTY: MT.MOON,"
 	line "then CERULEAN."
 	para "...Yes, that's my"
-	line "hometown. So what?"
+	line "hometown. So"
+	cont "what?"
 	done
 
 .BrockJoined:
@@ -1251,7 +1274,8 @@ FollowerLines:
 .MistyLameExcuses: ; EP002
 	text "MISTY: I don't"
 	line "want any of your"
-	cont "lame excuses, kid."
+	cont "lame excuses,"
+	cont "kid."
 	para "I just want a new"
 	line "bike right now!"
 	done
@@ -1330,31 +1354,32 @@ FollowerLines:
 
 .MistyDex20:
 	text "MISTY: Your"
-	line "#DEX is filling"
-	cont "up!"
+	line "#DEX is"
+	cont "filling up!"
 	para "Don't skip the"
 	line "WATER types!"
 	done
 
 .BrockDex20:
-	text "BROCK: Try fishing"
-	line "or new grass. Each"
+	text "BROCK: Try"
+	line "fishing or new"
+	cont "grass. Each"
 	para "spot has its own"
 	line "#MON."
 	done
 
 .MistyDexLow:
 	text "MISTY: That"
-	line "#DEX is looking"
-	cont "pretty empty,"
-	cont "<PLAYER>."
+	line "#DEX is"
+	cont "looking pretty"
+	cont "empty, <PLAYER>."
 	done
 
 .BrockDexLow:
-	text "BROCK: Weaken them"
-	line "first, then throw"
-	para "the BALL. That's"
-	line "the trick."
+	text "BROCK: Weaken"
+	line "them first, then"
+	para "throw the BALL."
+	line "That's the trick."
 	done
 
 ; =====================================================================
@@ -1369,18 +1394,19 @@ FollowerLines:
 
 .MistyNotLettingYouGo: ; EP009
 	text "MISTY: I'm not"
-	line "letting you out of"
-	cont "my sight,"
+	line "letting you out"
+	cont "of my sight,"
 	cont "<PLAYER>,"
 	para "until you pay for"
 	line "my broken bike."
 	done
 
 .MistyPsyduck: ; EP032
-	text "MISTY: Sometimes I"
-	line "just look at that"
-	cont "PSYDUCK face and"
-	cont "I get a headache."
+	text "MISTY: Sometimes"
+	line "I just look at"
+	cont "that PSYDUCK face"
+	cont "and I get a"
+	cont "headache."
 	done
 
 .MistyCallItADay: ; EP058
@@ -1417,8 +1443,8 @@ FollowerDefaultMistyText:
 	done
 
 FollowerDefaultBrockText:
-	text "BROCK: Stay alert,"
-	line "<PLAYER>."
+	text "BROCK: Stay"
+	line "alert, <PLAYER>."
 	para "I've got your"
 	line "back!"
 	done

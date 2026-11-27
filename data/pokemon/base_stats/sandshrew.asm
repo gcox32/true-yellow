@@ -17,7 +17,7 @@
 	tmhm SWORDS_DANCE, TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
 	     SUBMISSION,   SEISMIC_TOSS, EARTHQUAKE,   FISSURE,      DIG,          \
 	     MIMIC,        DOUBLE_TEAM,  BIDE,         SKULL_BASH,   REST,         \
-	     ROCK_SLIDE,   SUBSTITUTE,   CUT,          STRENGTH
+	     ROCK_SLIDE,   SUBSTITUTE,   CUT,          STRENGTH,     ROLLOUT
 	; end
 
 	db 0 ; padding

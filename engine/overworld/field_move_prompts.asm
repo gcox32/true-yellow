@@ -223,8 +223,9 @@ FindPartyMonWithMove:
 	ret
 
 FieldMovePromptSurfText:
-	text "The water is calm."
-	line "Want to SURF?"
+	text "The water is"
+	line "calm. Want to"
+	cont "SURF?"
 	done
 
 FieldMovePromptCutText:
@@ -234,5 +235,6 @@ FieldMovePromptCutText:
 
 FieldMovePromptStrengthText:
 	text "Use STRENGTH to"
-	line "move this boulder?"
+	line "move this"
+	cont "boulder?"
 	done

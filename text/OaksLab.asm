@@ -1,6 +1,6 @@
 _OaksLabRivalText::
-	text "<RIVAL>: Smell you"
-	line "later!"
+	text "<RIVAL>: Smell"
+	line "you later!"
 	done
 
 _OaksLabEmptyPokeballText::
@@ -25,7 +25,8 @@ _OaksLabOak1HowIsYourPokedexComingText::
 _OaksLabOak1MeetMeInCeruleanCaveText::
 	text "Was there"
 	line "something else"
-	cont "you wanted to ask?"
+	cont "you wanted to"
+	cont "ask?"
 
 	para "..."
 
@@ -86,8 +87,8 @@ _OaksLabOakShowUpAfterAllText::
 	para "..."
 
 	para "I think I should"
-	line "warn you, there is"
-	cont "a problem with"
+	line "warn you, there"
+	cont "is a problem with"
 	cont "this last one."
 
 	para "..."
@@ -167,9 +168,9 @@ _OaksLabOakPokedexExplanationText::
 	line "at it and try to"
 	cont "catch it!"
 
-	para "#MON around the"
-	line "world wait for"
-	cont "you, <PLAYER>!"
+	para "#MON around"
+	line "the world wait"
+	cont "for you, <PLAYER>!"
 	done
 
 _OaksLabPlayerThankText::
