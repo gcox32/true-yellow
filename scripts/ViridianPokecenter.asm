@@ -83,9 +83,23 @@ ViridianPokecenterMistyText:
 	; the swap is invisible: her object_event (data/maps/objects/
 	; ViridianPokecenter.asm) is X=2, Y=7, and MapY/MapX carry a +4 offset
 	; (see object_event in macros/scripts/maps.asm).
+	;
+	; Unlike the gym joins, this one happens on the door mat, so the
+	; building-entry cascade (wFollowerDoorwayMode 2/3, see
+	; RecordPlayerStepForFollowers) is still running: ShouldMistySpawn hides
+	; her through modes 2-3 and, once the text box closes, SpawnMisty_ wipes
+	; her and lets her re-emerge from the door 2 steps later. She's already
+	; inside and standing beside the player, so call the cascade off.
+	xor a
+	ld [wFollowerDoorwayMode], a
 	ld d, 7 + 4
 	ld e, 2 + 4
 	farcall JoinMistyFollowerInPlace
+	; We're still inside the text box, and CloseTextDisplay restores every
+	; sprite's FacingDirection from OrigFacingDirection - Misty's included,
+	; which the join just zeroed (= down). Keep her looking at the player.
+	ld a, [wSpriteMistyStateData1FacingDirection]
+	ld [wSpriteMistyStateData2OrigFacingDirection], a
 	; with Misty along, Viridian's old man wakes up and the road north opens
 	; (this used to happen when OAK handed over the #DEX)
 	ld a, SCRIPT_VIRIDIANCITY_AFTER_POKEDEX

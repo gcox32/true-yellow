@@ -2273,8 +2273,9 @@ JoinMistyFollowerInPlace::
 	ld [wMistyOverworldStateFlags], a
 	; This path never consults the stored door tile, so make sure a stale one
 	; can't leak into some later fresh spawn. Safe to clear unconditionally:
-	; a join always happens standing still after a conversation, never during
-	; the 3-step doorway cascade that owns these.
+	; a join always happens standing still after a conversation. The one join
+	; that lands mid-cascade (Viridian #MON CENTER's door mat) cancels the
+	; cascade itself before calling in - see scripts/ViridianPokecenter.asm.
 	ld [wExitDoorwayY], a
 	ld [wExitDoorwayX], a
 

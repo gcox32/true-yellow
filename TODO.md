@@ -10,7 +10,7 @@
       the road north until she does. Route 22 alone picks the rival's EEVEE: win JOLTEON, lose VAPOREON, skip FLAREON.
       NEEDS IN-GAME TEST.)
       - borrow and trash misty's bike? (still open: Route 1 chase / bike scene)
-- [ ] Brock's father in pewter somewhere
+- [x] Brock's father in pewter somewhere
 
 
 - [x] Make Pokemon Center at Rock Tunnel Entrance, Route 10, a FLYable desination (also Mt. Moon Pokemon Center, Seafoam Islands NW entrance, Route 12 fishing house, Sea Cottage; flags are wTownVisitedFlag bits 11-15 (full), menu order in FlyLocationsOrder. NEEDS IN-GAME TEST for the two new ones.)
