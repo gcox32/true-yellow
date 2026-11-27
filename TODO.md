@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] Turn Misty and Brock facing up after OAK walks in after defeating rival
+- [x] Turn Misty and Brock facing up after OAK walks in after defeating rival
 - [ ] Re-imagine Oak's text after defeating rival
 - [ ] Reconsider first plot sequence to better mirror anime (character oversleep, doesn't interact with rival meaningfully etc)
       - borrow and trash misty's bike?

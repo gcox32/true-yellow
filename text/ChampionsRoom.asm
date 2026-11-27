@@ -104,29 +104,26 @@ _ChampionsRoomOakCongratulatesPlayerText::
 	done
 
 _ChampionsRoomOakDisappointedWithRivalText::
-	text "OAK: <RIVAL>! I'm"
-	line "disappointed!"
+	text "OAK: <RIVAL>..."
 
-	para "I came when I"
-	line "heard you beat"
+	para "I came as soon as"
+	line "I heard you beat"
 	cont "the ELITE FOUR!"
 
-	para "But, when I got"
-	line "here, you had"
-	cont "already lost!"
+	para "I'm proud of you."
+	line "Truly, I am."
 
-	para "<RIVAL>! Do you"
-	line "understand why"
-	cont "you lost?"
+	para "But do you know"
+	line "why you lost here?"
 
-	para "You have forgotten"
-	line "to treat your"
-	cont "#MON with"
-	cont "trust and love!"
+	para "A #MON isn't"
+	line "just a tool to"
+	cont "win with."
 
-	para "Without them, you"
-	line "will never become"
-	cont "a champ again!"
+	para "Treat yours with"
+	line "trust and love,"
+	cont "and you'll be a"
+	cont "champ again!"
 	done
 
 _ChampionsRoomOakComeWithMeText::

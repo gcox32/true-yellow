@@ -24,6 +24,8 @@ ChampionsRoom_ScriptPointers:
 	dw_const ChampionsRoomOakExitsScript,                 SCRIPT_CHAMPIONSROOM_OAK_EXITS
 	dw_const ChampionsRoomPlayerFollowsOakScript,         SCRIPT_CHAMPIONSROOM_PLAYER_FOLLOWS_OAK
 	dw_const ChampionsRoomCleanupScript,                  SCRIPT_CHAMPIONSROOM_CLEANUP_SCRIPT
+	; appended rather than slotted in after OAK_ARRIVES so existing indices stay put
+	dw_const ChampionsRoomOakWalksInScript,               SCRIPT_CHAMPIONSROOM_OAK_WALKS_IN
 
 ChampionsRoomDefaultScript:
 	ret
@@ -108,6 +110,22 @@ ChampionsRoomOakArrivesScript:
 	call SetSpriteMovementBytesToFF
 ; Step the followers out of the column he walks up; see chain_follow.asm.
 	park_followers ChampionsRoomOakParkTable
+	ld a, SCRIPT_CHAMPIONSROOM_OAK_WALKS_IN
+	ld [wChampionsRoomCurScript], a
+	ret
+
+ChampionsRoomOakWalksInScript:
+; Hold Oak back until both followers have finished stepping aside.
+	ld hl, wSpriteMistyStateData1MovementStatus
+	ld de, wSpriteMistyStateData2MapY
+	ld bc, MISTY_TRAIL_SLOT
+	call ChampionsRoomIsFollowerSettled
+	ret nz
+	ld hl, wSpriteBrockStateData1MovementStatus
+	ld de, wSpriteBrockStateData2MapY
+	ld bc, BROCK_TRAIL_SLOT
+	call ChampionsRoomIsFollowerSettled
+	ret nz
 
 	ld de, OakEntranceAfterVictoryMovement
 	ld a, CHAMPIONSROOM_OAK
@@ -118,6 +136,29 @@ ChampionsRoomOakArrivesScript:
 	predef ShowObject
 	ld a, SCRIPT_CHAMPIONSROOM_OAK_CONGRATULATES_PLAYER
 	ld [wChampionsRoomCurScript], a
+	ret
+
+ChampionsRoomIsFollowerSettled:
+; hl = follower's MovementStatus, de = its MapY (MapX follows), bc = trail slot.
+; Returns z when the follower isn't spawned, or is standing idle on its trail
+; target. Idle alone isn't enough: on the first frame after parking the
+; follower hasn't ticked yet, so it's still idle on its old tile.
+	ld a, [hl]
+	and a
+	ret z                    ; not spawned
+	and $7f
+	cp 1
+	ret nz                   ; mid-step
+	ld hl, wPositionTrailY
+	add hl, bc
+	ld a, [de]
+	cp [hl]
+	ret nz
+	inc de                   ; MapX
+	ld hl, wPositionTrailX
+	add hl, bc
+	ld a, [de]
+	cp [hl]
 	ret
 
 OakEntranceAfterVictoryMovement:
@@ -132,6 +173,13 @@ ChampionsRoomOakCongratulatesPlayerScript:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
+; Oak's five steps outlast the followers' one-step sidestep, so they've
+; arrived; face them up for the rest of the scene.
+; Writing the facing of an unspawned follower is harmless - the struct is
+; reinitialized on spawn - so no spawned check is needed.
+	ld a, SPRITE_FACING_UP
+	ld [wSpriteMistyStateData1FacingDirection], a
+	ld [wSpriteBrockStateData1FacingDirection], a
 	ld a, PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection], a
 	ld a, CHAMPIONSROOM_RIVAL
