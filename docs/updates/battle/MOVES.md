@@ -118,7 +118,7 @@ The table is generated - `make` rewrites it (or run `tools/gen_moves_doc.py`) af
 | SMOKESCREEN  | ACCURACY_DOWN1_EFFECT      | 0     | POISON          | 100      | 20 |
 | CONFUSE_RAY  | CONFUSION_EFFECT           | 0     | GHOST           | 100      | 10 |
 | WITHDRAW     | WITHDRAW_EFFECT            | 0     | NORMAL          | 100      | 10 |
-| DEFENSE_CURL | DEFENSE_SPEED_UP1_EFFECT   | 0     | FIGHTING        | 100      | 30 |
+| DEFENSE_CURL | DEFENSE_SPEED_UP1_EFFECT   | 0     | ROCK            | 100      | 30 |
 | BARRIER      | DEFENSE_UP2_EFFECT         | 0     | PSYCHIC_TYPE    | 100      | 30 |
 | LIGHT_SCREEN | LIGHT_SCREEN_EFFECT        | 0     | PSYCHIC_TYPE    | 100      | 30 |
 | HAZE         | HAZE_EFFECT                | 0     | POISON          | 100      | 30 |
