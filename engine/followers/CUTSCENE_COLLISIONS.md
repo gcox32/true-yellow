@@ -157,6 +157,10 @@ Tiles listed are where that follower can be standing *on the NPC's path*.
 | GameCorner - direct route | (8,6) | clear | (10,5) |
 | GameCorner - walk around | (8,6) | (10,6) | (9,6) (11,6) |
 | **SilphCo11F - Jessie + James** | (6,13) | **clear** | **clear** |
+| Pewter FLINT - straight, player left | (25,25) | (26,26) | (26,27) (25,28); no Pikachu (26,26) |
+| Pewter FLINT - straight, player right | (27,25) | (26,26) | (26,27); no Pikachu (26,26) |
+| Pewter FLINT - straight, player above | (26,24) | clear | clear |
+| Pewter FLINT - around left, player below | (26,26) | (25,25) (24,26) | (24,25) (24,27) (25,28); no Pikachu (25,25) (24,26) |
 
 This settles the open "Team rocket cut scenes with similar issue?" under
 "Cut scene collisions" in the repo-root `TODO.md`: yes for

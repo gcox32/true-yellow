@@ -588,5 +588,6 @@ ExtraMissableObjects::
 	assert (@ - MissableObjects) / 3 == FIRST_EXTRA_HS_OBJECT
 	db CERULEAN_CAVE_1F, CERULEANCAVE1F_OAK, HIDE
 	db VIRIDIAN_POKECENTER, VIRIDIANPOKECENTER_MISTY, HIDE ; shown on the door mat until she joins
+	db PEWTER_CITY, PEWTERCITY_FLINT, SHOW ; walks home once BROCK has joined
 	assert_table_length NUM_HS_OBJECTS
 	db -1, 1, SHOW ; end

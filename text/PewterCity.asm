@@ -45,21 +45,98 @@ _PewterCitySuperNerd1ItsRightHereText::
 	cont "See you around!"
 	done
 
-_PewterCitySuperNerd2DoYouKnowWhatImDoingText::
-	text "Psssst!"
-	line "Do you know what"
-	cont "I'm doing?"
+_PewterCityFlintFamousForStoneText::
+	text "PEWTER CITY is"
+	line "gray, the color"
+	cont "of stone."
+
+	para "This town has"
+	line "always been famous"
+	cont "for stone."
+
+	para "The name's FLINT."
+
+	para "Don't tell me you"
+	line "plan on"
+	cont "challenging BROCK,"
+	cont "the PEWTER CITY"
+	cont "GYM LEADER."
+
+	para "BROCK is very"
+	line "good. His own"
+	cont "talents could take"
+	cont "him much further"
+	cont "than simply being"
+	cont "the local GYM"
+	cont "LEADER."
+
+	para "He has his"
+	line "reasons."
+
+	para "BROCK has ten"
+	line "little brothers"
+	cont "and sisters to"
+	cont "take care of so he"
+	cont "could never leave"
+	cont "town for regional"
+	cont "championships."
+
+	para "His"
+	line "good-for-nothing"
+	cont "father left the"
+	cont "family to become"
+	cont "a #MON trainer"
+	cont "and they never"
+	cont "heard from him"
+	cont "again."
 	done
 
-_PewterCitySuperNerd2ThatsRightText::
-	text "That's right!"
-	line "It's hard work!"
-	done
+_PewterCityFlintFollowYourOwnDreamsText::
+	text "FLINT: BROCK, you"
+	line "go follow your"
+	cont "own dreams."
 
-_PewterCitySuperNerd2ImSprayingRepelText::
-	text "I'm spraying REPEL"
-	line "to keep #MON"
-	cont "out of my garden!"
+	para "BROCK: My father."
+
+	para "FLINT: That's"
+	line "right. It was me."
+
+	para "I couldn't become"
+	line "the great #MON"
+	cont "trainer I wanted"
+	cont "to and because I"
+	cont "was such a"
+	cont "failure, I was too"
+	cont "embarrassed and"
+	cont "ashamed to go back"
+	cont "to my family."
+
+	para "It's time I"
+	line "started taking"
+	cont "care of my family."
+
+	para "You go fulfill"
+	line "your dreams and"
+	cont "mine."
+
+	para "BROCK: First,"
+	line "there are some"
+	cont "things I have to"
+	cont "tell you."
+
+	para "SUZY always rips"
+	line "her dresses so you"
+	cont "better learn how"
+	cont "to sew."
+
+	para "And TIMMY only"
+	line "eats cold"
+	cont "spaghetti for"
+	cont "breakfast."
+
+	para "FLINT: Slow down,"
+	line "slow down. I can't"
+	cont "write that fast!"
 	done
 
 _PewterCityYoungsterYoureATrainerFollowMeText::

@@ -715,6 +715,32 @@ PARKED_SCENES = [
 		"npc_paths": [((14, 5), "PokemonTower2FRivalRightThenDownMovement")],
 		"table": "PokemonTower2FRivalBelowParkTable",
 	},
+	# Brock follows from the Boulder Badge on and Misty since Viridian, so both
+	# can be here. The talk tile picks the walk: facing up means he's below.
+	{
+		"name": "Pewter City - FLINT walks home (player left)",
+		"map": "PewterCity", "trigger": (25, 25), "forced": [],
+		"npc_paths": [((26, 25), "MovementData_FlintWalksHome")],
+		"table": "PewterCityFlintStraightParkTable",
+	},
+	{
+		"name": "Pewter City - FLINT walks home (player right)",
+		"map": "PewterCity", "trigger": (27, 25), "forced": [],
+		"npc_paths": [((26, 25), "MovementData_FlintWalksHome")],
+		"table": "PewterCityFlintStraightParkTable",
+	},
+	{
+		"name": "Pewter City - FLINT walks home (player above)",
+		"map": "PewterCity", "trigger": (26, 24), "forced": [],
+		"npc_paths": [((26, 25), "MovementData_FlintWalksHome")],
+		"table": "PewterCityFlintStraightParkTable",
+	},
+	{
+		"name": "Pewter City - FLINT walks home around the player (player below)",
+		"map": "PewterCity", "trigger": (26, 26), "forced": [],
+		"npc_paths": [((26, 25), "MovementData_FlintWalksHomeAroundPlayer")],
+		"table": "PewterCityFlintAroundParkTable",
+	},
 ]
 
 SLOT_NAMES = {"MISTY_TRAIL_SLOT": "Misty", "BROCK_TRAIL_SLOT": "Brock"}

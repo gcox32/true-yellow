@@ -16,6 +16,8 @@ PewterCity_ScriptPointers:
 	dw_const PewterCityYoungsterShowsPlayerGymScript,     SCRIPT_PEWTERCITY_YOUNGSTER_SHOWS_PLAYER_GYM
 	dw_const PewterCityHideYoungsterScript,               SCRIPT_PEWTERCITY_HIDE_YOUNGSTER
 	dw_const PewterCityResetYoungsterScript,              SCRIPT_PEWTERCITY_RESET_YOUNGSTER
+	dw_const PewterCityFlintWalksHomeScript,              SCRIPT_PEWTERCITY_FLINT_WALKS_HOME
+	dw_const PewterCityHideFlintScript,                   SCRIPT_PEWTERCITY_HIDE_FLINT
 
 PewterCityDefaultScript:
 	xor a
@@ -224,12 +226,71 @@ PewterCityResetYoungsterScript:
 	ld [wPewterCityCurScript], a
 	ret
 
+; Episode 5: once BROCK has joined, FLINT owns up to being his father and
+; heads home to look after the family. He's STAY at (26,25) in the garden;
+; walk him out through the gap in its south fence at (25,29) and off the
+; bottom of the screen. If the player is standing right below him (so
+; facing up), go around them on the left first. Misty and Brock are walked
+; out of his way first; the tables are checked by `make verify-parks`.
+PewterCityFlintWalksHomeScript:
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	cp SPRITE_FACING_UP
+	jr z, .aroundPlayer
+	park_followers PewterCityFlintStraightParkTable
+	ld de, MovementData_FlintWalksHome
+	jr .gotPath
+.aroundPlayer
+	park_followers PewterCityFlintAroundParkTable
+	ld de, MovementData_FlintWalksHomeAroundPlayer
+.gotPath
+	ld a, PEWTERCITY_FLINT
+	ldh [hSpriteIndex], a
+	call MoveSprite
+	ld a, SCRIPT_PEWTERCITY_HIDE_FLINT
+	ld [wPewterCityCurScript], a
+	ret
+
+MovementData_FlintWalksHome:
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
+
+MovementData_FlintWalksHomeAroundPlayer:
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
+
+PewterCityHideFlintScript:
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
+	ret nz
+	ld a, HS_PEWTER_CITY_FLINT
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	xor a
+	ld [wJoyIgnore], a
+	ld a, SCRIPT_PEWTERCITY_DEFAULT
+	ld [wPewterCityCurScript], a
+	ret
+
 PewterCity_TextPointers:
 	def_text_pointers
 	dw_const PewterCityCooltrainerFText,           TEXT_PEWTERCITY_COOLTRAINER_F
 	dw_const PewterCityCooltrainerMText,           TEXT_PEWTERCITY_COOLTRAINER_M
 	dw_const PewterCitySuperNerd1Text,             TEXT_PEWTERCITY_SUPER_NERD1
-	dw_const PewterCitySuperNerd2Text,             TEXT_PEWTERCITY_SUPER_NERD2
+	dw_const PewterCityFlintText,                  TEXT_PEWTERCITY_FLINT
 	dw_const PewterCityYoungsterText,              TEXT_PEWTERCITY_YOUNGSTER
 	dw_const PewterCityTrainerTipsText,            TEXT_PEWTERCITY_TRAINER_TIPS
 	dw_const PewterCityPoliceNoticeSignText,       TEXT_PEWTERCITY_POLICE_NOTICE_SIGN
@@ -295,33 +356,28 @@ PewterCitySuperNerd1ItsRightHereText:
 	text_far _PewterCitySuperNerd1ItsRightHereText
 	text_end
 
-PewterCitySuperNerd2Text:
+PewterCityFlintText:
 	text_asm
-	ld hl, .DoYouKnowWhatImDoingText
+	CheckEvent EVENT_BEAT_BROCK
+	jr nz, .brockJoined
+	ld hl, .FamousForStoneText
 	call PrintText
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	cp $0
-	jr nz, .playerDoesNotKnow
-	ld hl, .ThatsRightText
+	jp TextScriptEnd
+.brockJoined
+	ld hl, .FollowYourOwnDreamsText
 	call PrintText
-	jr .done
-.playerDoesNotKnow
-	ld hl, .ImSprayingRepelText
-	call PrintText
-.done
+	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
+	ld [wJoyIgnore], a
+	ld a, SCRIPT_PEWTERCITY_FLINT_WALKS_HOME
+	ld [wPewterCityCurScript], a
 	jp TextScriptEnd
 
-.DoYouKnowWhatImDoingText:
-	text_far _PewterCitySuperNerd2DoYouKnowWhatImDoingText
+.FamousForStoneText:
+	text_far _PewterCityFlintFamousForStoneText
 	text_end
 
-.ThatsRightText:
-	text_far _PewterCitySuperNerd2ThatsRightText
-	text_end
-
-.ImSprayingRepelText:
-	text_far _PewterCitySuperNerd2ImSprayingRepelText
+.FollowYourOwnDreamsText:
+	text_far _PewterCityFlintFollowYourOwnDreamsText
 	text_end
 
 PewterCityYoungsterText:

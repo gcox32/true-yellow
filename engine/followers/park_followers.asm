@@ -390,3 +390,32 @@ ChampionsRoomOakParkTable::
 	; no Pikachu: the line is a step closer
 	park_follower BROCK_TRAIL_SLOT,  3, 4,    2, 4
 	park_followers_end
+
+; Pewter City - FLINT walks home out of the garden after BROCK has joined. He
+; is STAY at (26,25), so the player talks to him from one of four tiles. From
+; (25,25), (27,25) or (26,24) he walks straight down column 26 and out the
+; fence gap at (25,29); from (26,26), with the player in that column, he goes
+; around the left via column 24 instead. Not the right: Pikachu can be on
+; (27,26) there and can't be parked. From (26,24) nobody is ever in the way, so
+; the straight table only has entries for the two side tiles.
+
+PewterCityFlintStraightParkTable::
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,  26,26,   27,27
+	park_follower BROCK_TRAIL_SLOT,  26,27,   27,28
+	park_follower BROCK_TRAIL_SLOT,  25,28,   24,28
+	; no Pikachu: the line is a step closer
+	park_follower BROCK_TRAIL_SLOT,  26,26,   27,27
+	park_followers_end
+
+PewterCityFlintAroundParkTable::
+	;              slot              danger  destination
+	park_follower MISTY_TRAIL_SLOT,  25,25,   26,24
+	park_follower MISTY_TRAIL_SLOT,  24,26,   23,27
+	park_follower BROCK_TRAIL_SLOT,  24,25,   23,25
+	park_follower BROCK_TRAIL_SLOT,  24,27,   23,28
+	park_follower BROCK_TRAIL_SLOT,  25,28,   27,28
+	; no Pikachu: the line is a step closer
+	park_follower BROCK_TRAIL_SLOT,  25,25,   26,24
+	park_follower BROCK_TRAIL_SLOT,  24,26,   23,27
+	park_followers_end
