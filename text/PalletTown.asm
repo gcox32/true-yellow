@@ -1,32 +1,40 @@
-_PalletTownOakHeyWaitDontGoOutText::
-	text "OAK: Hey! Wait!"
-	line "Don't go out!@"
-	text_end
+_PalletTownGoToLabText::
+	text "Not that way!"
 
-_PalletTownOakThatWasCloseText::
-	text "OAK: That was"
-	line "close!"
-
-	para "Wild #MON live"
-	line "in tall grass!"
+	para "PROF.OAK's LAB is"
+	line "south of town!"
 	done
 
-_PalletTownOakWhewText::
-	text "OAK: Whew..."
-	done
+; Episode 1, verbatim from the dub (docs/anime), Ash -> <PLAYER>
+_PalletTownRivalSnoozeYouLoseText::
+	text "<RIVAL>: Hey,"
+	line "watch where you're"
+	cont "going."
 
-_PalletTownOakComeWithMe::
-	text "OAK: A #MON can"
-	line "appear anytime in"
-	cont "tall grass."
+	para "Better late than"
+	line "never I guess."
 
-	para "You need your own"
-	line "#MON for your"
-	cont "protection."
-	cont "I know!"
+	para "Well <PLAYER>, you"
+	line "snooze you lose"
+	cont "and you're way"
+	cont "behind right from"
+	cont "the start."
 
-	para "Here, come with"
-	line "me!"
+	para "I've got a #MON"
+	line "and you don't!"
+
+	para "If you showed up"
+	line "on time, you"
+	cont "would've seen that"
+	cont "I got the best"
+	cont "#MON from"
+	cont "PROFESSOR OAK,"
+
+	para "it's good to have"
+	line "a grandfather in"
+	cont "the #MON"
+	cont "business, isn't"
+	cont "it?"
 	done
 
 _PalletTownGirlText::
@@ -65,18 +73,4 @@ _PalletTownPlayersHouseSignText::
 
 _PalletTownRivalsHouseSignText::
 	text "<RIVAL>'s house "
-	done
-
-_PalletTownMistyJoinsText::
-	text "MISTY: You're"
-	line "gonna pay for"
-	
-	para "what you did"
-	line "to my bike!"
-	done
-
-_PalletTownMistyAlreadyFollowingText::
-	text "MISTY: I'm already"
-	line "following you!"
-	cont "Let's go!"
 	done

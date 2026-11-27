@@ -199,7 +199,6 @@ they're listed rather than quietly dropped.
 | ARBOK      | Route 23                   | Grass     | 40     | 15.2%  |                                                               |
 | ARBOK      | Victory Road 3F            | Grass     | 48     | 5.1%   |                                                               |
 | ARBOK      | Cerulean Cave 2F           | Grass     | 60     | 9.8%   |                                                               |
-| PIKACHU    | Pallet Town                | Static    | 5      | —      | cutscene - Oak catches it for you                             |
 | PIKACHU    | Power Plant                | Grass     | 30     | 19.9%  |                                                               |
 | RAICHU     | Power Plant                | Grass     | 28     | 9.8%   |                                                               |
 | RAICHU     | Cerulean Cave B1F          | Grass     | 84     | 15.2%  |                                                               |

@@ -1,12 +1,20 @@
 _RedsHouse1FMomWakeUpText::
-	text "MOM: Right."
-	line "All boys leave"
-	cont "home someday."
-	cont "It said so on TV."
+	text "MOM: <PLAYER>!"
+	line "You're finally up!"
 
-	para "PROF.OAK, next"
-	line "door, is looking"
-	cont "for you."
+	para "PROF.OAK is giving"
+	line "out #MON today."
+
+	para "Hurry, or they'll"
+	line "all be gone!"
+	done
+
+_RedsHouse2FWakeUpText::
+	text "Zzz..."
+
+	para "..."
+
+	para "<PLAYER> overslept!"
 	done
 
 _RedsHouse1FMomYouShouldRestText::

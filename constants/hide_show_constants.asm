@@ -7,7 +7,7 @@ DEF SHOW EQU $15
 
 	const_def
 	const HS_PALLET_TOWN_OAK               ; 00
-	const HS_PALLET_TOWN_MISTY             ; 01
+	const HS_PALLET_TOWN_RIVAL             ; 01
 	const HS_LYING_OLD_MAN                 ; 02
 	const HS_OLD_MAN_1                     ; 02
 	const HS_OLD_MAN_2                     ; 03
@@ -246,4 +246,5 @@ DEF SHOW EQU $15
 ; extra objects (see ExtraMissableObjects in data/maps/hide_show_data.asm)
 DEF FIRST_EXTRA_HS_OBJECT EQU const_value
 	const HS_CERULEAN_CAVE_1F_OAK          ; F0
+	const HS_VIRIDIAN_POKECENTER_MISTY     ; F1
 DEF NUM_HS_OBJECTS EQU const_value

@@ -145,15 +145,20 @@ Route22Rival1VictoryText:
 	text_end
 
 Route22Rival1AfterBattleScript:
+	; With the Oak's Lab battle gone, this battle alone picks how the rival's
+	; EEVEE evolves: win -> JOLTEON, lose (and never win a rematch) ->
+	; VAPOREON, skip it -> FLAREON (set in scripts/OaksLab.asm).
+	; AllPokemonFainted runs this script with wIsInBattle = $ff before the
+	; blackout.
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, Route22SetDefaultScript
-	ld a, [wRivalStarter]
-	cp RIVAL_STARTER_FLAREON
-	jr nz, .keep_rival_starter
+	jr nz, .won
+	ld a, RIVAL_STARTER_VAPOREON
+	ld [wRivalStarter], a
+	jp Route22SetDefaultScript
+.won
 	ld a, RIVAL_STARTER_JOLTEON
 	ld [wRivalStarter], a
-.keep_rival_starter
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
 	jr nz, .not_facing_down

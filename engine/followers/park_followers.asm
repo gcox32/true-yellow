@@ -347,8 +347,9 @@ SilphCo11FGiovanniPlayerRightParkTable::
 ; column 19 otherwise.
 ;
 ; Misty only. This is the earliest scene in the game where a follower exists at
-; all - EVENT_MISTY_FOLLOWING_PLAYER is set back in Pallet Town
-; (scripts/PalletTown.asm) - while Brock needs the Boulder Badge from Pewter,
+; all - EVENT_MISTY_FOLLOWING_PLAYER is set in the Viridian #MON CENTER
+; (scripts/ViridianPokecenter.asm), and this old man stays asleep across the
+; road until it is - while Brock needs the Boulder Badge from Pewter,
 ; which is several towns later. No joint constraint, so one entry per tile.
 ;
 ; He can only be approached from below or from the right; he gates the route

@@ -3,39 +3,20 @@ PalletTown_Script:
 	jr z, .next
 	SetEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS
 .next
-	; Show Misty after getting pokedex (if not already following)
-	CheckEvent EVENT_GOT_POKEDEX
-	jr z, .skipMisty
-	CheckEvent EVENT_MISTY_FOLLOWING_PLAYER
-	jr nz, .skipMisty
-	; Pokedex obtained but Misty not yet following - show her
-	ld a, HS_PALLET_TOWN_MISTY
-	ld [wMissableObjectIndex], a
-	predef ShowObject
-	; Check if player is at trigger coord (runs before any script state)
-	ld hl, .MistyInteractionCoords
-	call ArePlayerCoordsInArray
-	jr nc, .skipMisty
-	; Player is at trigger coordinate - start Misty interaction
-	xor a
-	ldh [hJoyHeld], a
-	ld a, PAD_CTRL_PAD
-	ld [wJoyIgnore], a
-	ld a, PLAYER_DIR_RIGHT
-	ld [wPlayerMovingDirection], a
-	; Turn Misty to face left (toward player)
-	ld a, SPRITE_FACING_LEFT
-	ldh [hSpriteFacingDirection], a
-	ld a, PALLETTOWN_MISTY
-	ldh [hSpriteIndex], a
-	call SetSpriteFacingDirectionAndDelay
-	ld a, SCRIPT_PALLETTOWN_MISTY_INTERACTION
+	; After the lab, Pallet only ever runs the Daisy script. This also moves
+	; saves made under the old script table (Daisy was index 8) onto it, and
+	; tidies away the rival, whose HS slot used to be Misty's.
+	ld a, [wStatusFlags4]
+	bit BIT_GOT_STARTER, a
+	jr z, .runScript
+	ld a, [wPalletTownCurScript]
+	cp SCRIPT_PALLETTOWN_DAISY
+	jr z, .runScript
+	ld a, SCRIPT_PALLETTOWN_DAISY
 	ld [wPalletTownCurScript], a
-	jr .runScript  ; continue to execute the script, don't return early
-.MistyInteractionCoords
-	dbmapcoord 10, 2  ; Player steps on 10,2 to trigger (Misty is at 11,2)
-	db -1 ; end
-.skipMisty
+	ld a, HS_PALLET_TOWN_RIVAL
+	ld [wMissableObjectIndex], a
+	predef HideObject
 .runScript
 	call EnableAutoTextBoxDrawing
 	ld hl, PalletTown_ScriptPointers
@@ -44,195 +25,135 @@ PalletTown_Script:
 
 PalletTown_ScriptPointers:
 	def_script_pointers
-	dw_const PalletTownDefaultScript,              SCRIPT_PALLETTOWN_DEFAULT
-	dw_const PalletTownOakHeyWaitScript,           SCRIPT_PALLETTOWN_OAK_HEY_WAIT
-	dw_const PalletTownOakWalksToPlayerScript,     SCRIPT_PALLETTOWN_OAK_WALKS_TO_PLAYER
-	dw_const PalletTownOakGreetsPlayerScript,      SCRIPT_PALLETTOWN_OAK_GREETS_PLAYER
-	dw_const PalletTownPikachuBattleScript,        SCRIPT_PALLETTOWN_PIKACHU_BATTLE
-	dw_const PalletTownAfterPikachuBattleScript,   SCRIPT_PALLETTOWN_AFTER_PIKACHU_BATTLE
-	dw_const PalletTownOakNotSafeComeWithMeScript, SCRIPT_PALLETTOWN_OAK_NOT_SAFE_COME_WITH_ME
-	dw_const PalletTownPlayerFollowsOakScript,     SCRIPT_PALLETTOWN_PLAYER_FOLLOWS_OAK
-	dw_const PalletTownDaisyScript,                SCRIPT_PALLETTOWN_DAISY
-	dw_const PalletTownNoopScript,                 SCRIPT_PALLETTOWN_NOOP
-	dw_const PalletTownMistyInteractionScript,     SCRIPT_PALLETTOWN_MISTY_INTERACTION
+	dw_const PalletTownDefaultScript,           SCRIPT_PALLETTOWN_DEFAULT
+	dw_const PalletTownPlayerPushedBackScript,  SCRIPT_PALLETTOWN_PLAYER_PUSHED_BACK
+	dw_const PalletTownRivalLeavesScript,       SCRIPT_PALLETTOWN_RIVAL_LEAVES
+	dw_const PalletTownDaisyScript,             SCRIPT_PALLETTOWN_DAISY
 
+; Episode 1: no OAK in the tall grass. The player overslept, and has to get
+; to the lab on their own before <RIVAL> rubs it in and the road opens.
 PalletTownDefaultScript:
-	; Oak intro check (only runs in default script state, before EVENT_FOLLOWED_OAK_INTO_LAB)
-	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB
-	ret nz
 	ld a, [wYCoord]
-	cp 0 ; is player at north exit?
-	ret nz
-	ResetEvent EVENT_PLAYER_AT_RIGHT_EXIT_TO_PALLET_TOWN
-	ld a, [wXCoord]
-	cp 10
-	jr z, .asm_18e40
-	SetEventReuseHL EVENT_PLAYER_AT_RIGHT_EXIT_TO_PALLET_TOWN
-.asm_18e40
-	xor a
-	ldh [hJoyHeld], a
-	ld a, PAD_BUTTONS | PAD_CTRL_PAD
-	ld [wJoyIgnore], a
-	ld a, PLAYER_DIR_UP
-	ld [wPlayerMovingDirection], a
-	call StopAllMusic
-	ld a, BANK(Music_MeetProfOak)
-	ld c, a
-	ld a, MUSIC_MEET_PROF_OAK ; "oak appears" music
-	call PlayMusic
-	SetEvent EVENT_OAK_APPEARED_IN_PALLET
-
-	; trigger the next script
-	ld a, SCRIPT_PALLETTOWN_OAK_HEY_WAIT
-	ld [wPalletTownCurScript], a
-	ret
-
-PalletTownOakHeyWaitScript:
-	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
-	ld [wJoyIgnore], a
-	xor a
-	ld [wOakWalkedToPlayer], a
-	ld a, TEXT_PALLETTOWN_OAK
+	and a ; at the north exit?
+	jr nz, .checkRival
+	ld a, TEXT_PALLETTOWN_GO_TO_LAB
 	ldh [hTextID], a
 	call DisplayTextID
-	ld a, PAD_BUTTONS | PAD_CTRL_PAD
+	call StartSimulatingJoypadStates
+	ld a, $1
+	ld [wSimulatedJoypadStatesIndex], a
+	ld a, PAD_DOWN
+	ld [wSimulatedJoypadStatesEnd], a
+	xor a
+	ld [wSpritePlayerStateData1FacingDirection], a
 	ld [wJoyIgnore], a
-	ld hl, wSprite01StateData2MapY
-	ld a, 8
-	ld [hli], a ; SPRITESTATEDATA2_MAPY
-	ld a, 14
-	ld [hl], a ; SPRITESTATEDATA2_MAPX
-	ld a, HS_PALLET_TOWN_OAK
-	ld [wMissableObjectIndex], a
-	predef ShowObject
-	ld a, $2
-	ld [wSprite01StateData1MovementStatus], a
-	ld a, SPRITE_FACING_UP
-	ld [wSprite01StateData1FacingDirection], a
-
-	; trigger the next script
-	ld a, SCRIPT_PALLETTOWN_OAK_WALKS_TO_PLAYER
+	ldh [hJoyHeld], a
+	ld a, SCRIPT_PALLETTOWN_PLAYER_PUSHED_BACK
 	ld [wPalletTownCurScript], a
 	ret
 
-PalletTownOakWalksToPlayerScript:
-	call Delay3
-	ld a, 0
-	ld [wYCoord], a
-	ld a, 1
-	ldh [hNPCPlayerRelativePosPerspective], a
-	ld a, 1
-	swap a
-	ldh [hNPCSpriteOffset], a
-	predef CalcPositionOfPlayerRelativeToNPC
-	ld hl, hNPCPlayerYDistance
-	dec [hl]
-	predef FindPathToPlayer ; load Oak's movement into wNPCMovementDirections2
-	ld de, wNPCMovementDirections2
-	ld a, PALLETTOWN_OAK
+.checkRival
+	CheckEvent EVENT_RIVAL_TAUNTED_OUTSIDE_LAB
+	ret nz
+	; The lab door (12,11) is only reachable along row 12, past one of these.
+	ld hl, .RivalTauntCoords
+	call ArePlayerCoordsInArray
+	ret nc
+	SetEvent EVENT_RIVAL_TAUNTED_OUTSIDE_LAB
+	xor a
+	ldh [hJoyHeld], a
+	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
+	ld [wJoyIgnore], a
+	; He's a STAY DOWN object: whenever his movement delay runs out, the engine's
+	; "random movement" turns him back to face down. Park him in the delay state
+	; with the longest delay, so he holds the turn through the "!" bubble; the
+	; text box and then MoveSprite take over from there.
+	ld a, $2
+	ld [wSprite04StateData1MovementStatus], a
+	ld a, $ff
+	ld [wSprite04StateData2MovementDelay], a
+	; face each other across row 12: a = rival's facing, b/c = player's
+	ld a, [wXCoord]
+	cp 12
+	ld a, SPRITE_FACING_LEFT
+	lb bc, SPRITE_FACING_RIGHT, PLAYER_DIR_RIGHT
+	jr c, .gotFacings
+	ld a, SPRITE_FACING_RIGHT
+	lb bc, SPRITE_FACING_LEFT, PLAYER_DIR_LEFT
+.gotFacings
+	ldh [hSpriteFacingDirection], a
+	ld a, b
+	ld [wSpritePlayerStateData1FacingDirection], a
+	ld a, c
+	ld [wPlayerMovingDirection], a
+	ld a, PALLETTOWN_RIVAL
+	ldh [hSpriteIndex], a
+	call SetSpriteFacingDirectionAndDelay
+	ld c, BANK(Music_MeetRival)
+	ld a, MUSIC_MEET_RIVAL
+	call PlayMusic
+	ld a, PALLETTOWN_RIVAL
+	ld [wEmotionBubbleSpriteIndex], a
+	xor a ; EXCLAMATION_BUBBLE
+	ld [wWhichEmotionBubble], a
+	predef EmotionBubble
+	ld a, TEXT_PALLETTOWN_RIVAL
+	ldh [hTextID], a
+	call DisplayTextID
+	farcall Music_RivalAlternateStart
+	; walk off the far side of the screen, away from the player
+	ld de, .RivalWalksRight
+	ld a, [wXCoord]
+	cp 12
+	jr c, .moveRival
+	ld de, .RivalWalksLeft
+.moveRival
+	ld a, PALLETTOWN_RIVAL
 	ldh [hSpriteIndex], a
 	call MoveSprite
-
-	; trigger the next script
-	ld a, SCRIPT_PALLETTOWN_OAK_GREETS_PLAYER
+	ld a, SCRIPT_PALLETTOWN_RIVAL_LEAVES
 	ld [wPalletTownCurScript], a
 	ret
 
-PalletTownOakGreetsPlayerScript:
+.RivalTauntCoords
+	dbmapcoord  9, 12
+	dbmapcoord 16, 12
+	db -1 ; end
+
+.RivalWalksRight
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db -1 ; end
+
+.RivalWalksLeft
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
+	db -1 ; end
+
+PalletTownPlayerPushedBackScript:
+	ld a, [wSimulatedJoypadStatesIndex]
+	and a
+	ret nz
+	call Delay3
+	ld a, SCRIPT_PALLETTOWN_DEFAULT
+	ld [wPalletTownCurScript], a
+	ret
+
+PalletTownRivalLeavesScript:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
-	ld [wJoyIgnore], a
-	ld a, 1
-	ld [wOakWalkedToPlayer], a
-	ld a, $2
-	ld [wSprite01StateData1MovementStatus], a
-	ld a, SPRITE_FACING_UP
-	ld [wSprite01StateData1FacingDirection], a
-	ld a, TEXT_PALLETTOWN_OAK
-	ldh [hTextID], a
-	call DisplayTextID
-	; oak faces the horizontally adjacent patch of grass to face pikachu
-	ld a, PAD_BUTTONS | PAD_CTRL_PAD
-	ld [wJoyIgnore], a
-	ld a, $2
-	ld [wSprite01StateData1MovementStatus], a
-	CheckEvent EVENT_PLAYER_AT_RIGHT_EXIT_TO_PALLET_TOWN
-	ld a, SPRITE_FACING_RIGHT
-	jr z, .asm_18f01
-	ld a, SPRITE_FACING_LEFT
-.asm_18f01
-	ld [wSprite01StateData1FacingDirection], a
-
-	; trigger the next script
-	ld a, SCRIPT_PALLETTOWN_PIKACHU_BATTLE
-	ld [wPalletTownCurScript], a
-	ret
-
-PalletTownPikachuBattleScript:
-	; start the pikachu battle
-	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
-	ld [wJoyIgnore], a
+	ld a, HS_PALLET_TOWN_RIVAL
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	call PlayDefaultMusic
 	xor a
-	ld [wListScrollOffset], a
-	ld a, BATTLE_TYPE_PIKACHU
-	ld [wBattleType], a
-	ld a, STARTER_PIKACHU
-	ld [wCurOpponent], a
-	ld a, 5
-	ld [wCurEnemyLevel], a
-
-	; trigger the next script
-	ld a, SCRIPT_PALLETTOWN_AFTER_PIKACHU_BATTLE
-	ld [wPalletTownCurScript], a
-	ret
-
-PalletTownAfterPikachuBattleScript:
-	ld a, 2
-	ld [wOakWalkedToPlayer], a
-	ld a, TEXT_PALLETTOWN_OAK
-	ldh [hTextID], a
-	call DisplayTextID
-	ld a, $2
-	ld [wSprite01StateData1MovementStatus], a
-	ld a, SPRITE_FACING_UP
-	ld [wSprite01StateData1FacingDirection], a
-	ld a, TEXT_PALLETTOWN_OAK_COME_WITH_ME
-	ldh [hTextID], a
-	call DisplayTextID
-	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
-
-	; trigger the next script
-	ld a, SCRIPT_PALLETTOWN_OAK_NOT_SAFE_COME_WITH_ME
-	ld [wPalletTownCurScript], a
-	ret
-
-PalletTownOakNotSafeComeWithMeScript:
-	xor a
-	ld [wSpritePlayerStateData1FacingDirection], a
-	ld a, PALLETTOWN_OAK
-	ld [wSpriteIndex], a
-	xor a
-	ld [wNPCMovementScriptFunctionNum], a
-	ld a, 1
-	ld [wNPCMovementScriptPointerTableNum], a
-	ldh a, [hLoadedROMBank]
-	ld [wNPCMovementScriptBank], a
-
-	; trigger the next script
-	ld a, SCRIPT_PALLETTOWN_PLAYER_FOLLOWS_OAK
-	ld [wPalletTownCurScript], a
-	ret
-
-PalletTownPlayerFollowsOakScript:
-	ld a, [wNPCMovementScriptPointerTableNum]
-	and a ; is the movement script over?
-	ret nz
-
-	; trigger the next script
-	ld a, SCRIPT_PALLETTOWN_DAISY
+	ld a, SCRIPT_PALLETTOWN_DEFAULT
 	ld [wPalletTownCurScript], a
 	ret
 
@@ -252,7 +173,6 @@ PalletTownDaisyScript:
 	CheckEvent EVENT_GOT_POKEBALLS_FROM_OAK
 	ret z
 	SetEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
-PalletTownNoopScript:
 	ret
 
 PalletTown_TextPointers:
@@ -260,57 +180,24 @@ PalletTown_TextPointers:
 	dw_const PalletTownOakText,              TEXT_PALLETTOWN_OAK
 	dw_const PalletTownGirlText,             TEXT_PALLETTOWN_GIRL
 	dw_const PalletTownFisherText,           TEXT_PALLETTOWN_FISHER
-	dw_const PalletTownMistyText,            TEXT_PALLETTOWN_MISTY
+	dw_const PalletTownRivalText,            TEXT_PALLETTOWN_RIVAL
 	dw_const PalletTownOaksLabSignText,      TEXT_PALLETTOWN_OAKSLAB_SIGN
 	dw_const PalletTownSignText,             TEXT_PALLETTOWN_SIGN
 	dw_const PalletTownPlayersHouseSignText, TEXT_PALLETTOWN_PLAYERSHOUSE_SIGN
 	dw_const PalletTownRivalsHouseSignText,  TEXT_PALLETTOWN_RIVALSHOUSE_SIGN
-	dw_const PalletTownOakComeWithMe,        TEXT_PALLETTOWN_OAK_COME_WITH_ME
+	dw_const PalletTownGoToLabText,          TEXT_PALLETTOWN_GO_TO_LAB
 
+; this object is never shown any more (see data/maps/objects/PalletTown.asm)
 PalletTownOakText:
-	text_asm
-	ld a, [wOakWalkedToPlayer]
-	and a
-	jr nz, .next
-	ld a, 1
-	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, .HeyWaitDontGoOutText
-	jr .done
-.next
-	dec a
-	jr nz, .whew
-	ld hl, .ThatWasCloseText
-	jr .done
-.whew
-	ld hl, .WhewText
-.done
-	call PrintText
-	jp TextScriptEnd
-
-.HeyWaitDontGoOutText:
-	text_far _PalletTownOakHeyWaitDontGoOutText
-	text_asm
-	ld c, 10
-	call DelayFrames
-	ld a, PLAYER_DIR_DOWN
-	ld [wPlayerMovingDirection], a
-	ld a, 0
-	ld [wEmotionBubbleSpriteIndex], a ; player's sprite
-	ld a, EXCLAMATION_BUBBLE
-	ld [wWhichEmotionBubble], a
-	predef EmotionBubble
-	jp TextScriptEnd
-
-.ThatWasCloseText:
-	text_far _PalletTownOakThatWasCloseText
+	text_far _PalletTownGoToLabText
 	text_end
 
-.WhewText:
-	text_far _PalletTownOakWhewText
+PalletTownRivalText:
+	text_far _PalletTownRivalSnoozeYouLoseText
 	text_end
 
-PalletTownOakComeWithMe:
-	text_far _PalletTownOakComeWithMe
+PalletTownGoToLabText:
+	text_far _PalletTownGoToLabText
 	text_end
 
 PalletTownGirlText:
@@ -350,60 +237,4 @@ PalletTownPlayersHouseSignText:
 
 PalletTownRivalsHouseSignText:
 	text_far _PalletTownRivalsHouseSignText
-	text_end
-
-PalletTownMistyInteractionScript:
-	; Face player toward Misty
-	ld a, PLAYER_DIR_RIGHT
-	ld [wPlayerMovingDirection], a
-	; Display text (the text handler does the event/hide/initialize)
-	ld a, TEXT_PALLETTOWN_MISTY
-	ldh [hTextID], a
-	call DisplayTextID
-	; Return to default script
-	xor a
-	ld [wJoyIgnore], a
-	ld a, SCRIPT_PALLETTOWN_DEFAULT
-	ld [wPalletTownCurScript], a
-	ret
-
-PalletTownMistyText:
-	text_asm
-	; This is the fallback text interaction (when talking directly to Misty)
-	; Check if already following
-	CheckEvent EVENT_MISTY_FOLLOWING_PLAYER
-	jr nz, .alreadyFollowing
-	; Display text first (NPC stays visible during dialogue)
-	ld hl, .MistyJoinsText
-	call PrintText
-	; Now set the event flag so Misty follows from now on
-	SetEvent EVENT_MISTY_FOLLOWING_PLAYER
-	; Hide this NPC object (she becomes a follower sprite instead)
-	ld a, HS_PALLET_TOWN_MISTY
-	ld [wMissableObjectIndex], a
-	predef HideObject
-	; Hand her follower sprite the exact tile and facing the NPC object we
-	; just hid was using, so the swap is invisible: she stays put on (11,2)
-	; still looking left at the player, and only steps into the chain once
-	; the player actually moves. Hardcoded (rather than read from
-	; wSprite04StateData2) because she's a STAY-type NPC at a fixed spot -
-	; her object_event position (data/maps/objects/PalletTown.asm) is X=11,
-	; Y=2, and MapY/MapX carry a +4 offset (see object_event in
-	; macros/scripts/maps.asm), giving MapY=6, MapX=15.
-	ld d, 2 + 4
-	ld e, 11 + 4
-	farcall JoinMistyFollowerInPlace
-	jp TextScriptEnd
-
-.alreadyFollowing
-	ld hl, .MistyAlreadyFollowingText
-	call PrintText
-	jp TextScriptEnd
-
-.MistyJoinsText:
-	text_far _PalletTownMistyJoinsText
-	text_end
-
-.MistyAlreadyFollowingText:
-	text_far _PalletTownMistyAlreadyFollowingText
 	text_end

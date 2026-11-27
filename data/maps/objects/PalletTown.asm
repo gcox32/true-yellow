@@ -2,7 +2,7 @@
 	const_export PALLETTOWN_OAK
 	const_export PALLETTOWN_GIRL
 	const_export PALLETTOWN_FISHER
-	const_export PALLETTOWN_MISTY
+	const_export PALLETTOWN_RIVAL
 
 PalletTown_Object:
 	db $b ; border block
@@ -19,9 +19,9 @@ PalletTown_Object:
 	bg_event 11,  5, TEXT_PALLETTOWN_RIVALSHOUSE_SIGN
 
 	def_object_events
-	object_event 10,  4, SPRITE_OAK, STAY, NONE, TEXT_PALLETTOWN_OAK
+	object_event 10,  4, SPRITE_OAK, STAY, NONE, TEXT_PALLETTOWN_OAK ; unused since the grass rescue was cut; kept so HS indices don't shift
 	object_event  3,  8, SPRITE_GIRL, WALK, ANY_DIR, TEXT_PALLETTOWN_GIRL
 	object_event 11, 14, SPRITE_FISHER, WALK, ANY_DIR, TEXT_PALLETTOWN_FISHER
-	object_event  11,  2, SPRITE_MISTY, STAY, DOWN, TEXT_PALLETTOWN_MISTY
+	object_event 12, 12, SPRITE_BLUE, STAY, DOWN, TEXT_PALLETTOWN_RIVAL ; in front of OAK's LAB
 
 	def_warps_to PALLET_TOWN

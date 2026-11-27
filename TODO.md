@@ -1,9 +1,15 @@
 # TODO
 
 - [x] Turn Misty and Brock facing up after OAK walks in after defeating rival
-- [ ] Re-imagine Oak's text after defeating rival
-- [ ] Reconsider first plot sequence to better mirror anime (character oversleep, doesn't interact with rival meaningfully etc)
-      - borrow and trash misty's bike?
+- [x] Re-imagine Oak's text after defeating rival (moot: the lab rival battle is gone)
+- [x] Reconsider first plot sequence to better mirror anime (Episode 1: dream + "What time is it?!" on new game
+      (RedsHouse2F), MOM "you're finally up", north exit blocked until you have PIKACHU, no OAK grass rescue / PIKACHU
+      catch battle, <RIVAL> waits outside the lab door and taunts with his dub lines, then leaves; OAK waits at his desk,
+      EEVEE ball empty, PIKACHU is "the last one", refuses its ball, zaps everyone; #DEX + 5 # BALLs right away, no
+      parcel errand. Misty joins at the Viridian #MON CENTER door (Episode 2 lines); Viridian's sleeping old man blocks
+      the road north until she does. Route 22 alone picks the rival's EEVEE: win JOLTEON, lose VAPOREON, skip FLAREON.
+      NEEDS IN-GAME TEST.)
+      - borrow and trash misty's bike? (still open: Route 1 chase / bike scene)
 - [ ] Brock's father in pewter somewhere
 
 

@@ -265,7 +265,7 @@ MissableObjects:
 
 PalletTownHS:
 	db PALLET_TOWN, PALLETTOWN_OAK, HIDE
-	db PALLET_TOWN, PALLETTOWN_MISTY, HIDE ; shown after EVENT_GOT_POKEDEX
+	db PALLET_TOWN, PALLETTOWN_RIVAL, SHOW ; leaves after taunting the player outside the lab (was Misty's slot)
 ViridianCityHS:
 	db VIRIDIAN_CITY, VIRIDIANCITY_OLD_MAN_SLEEPY, SHOW
 	db VIRIDIAN_CITY, VIRIDIANCITY_OLD_MAN,        HIDE
@@ -323,11 +323,11 @@ BluesHouseHS:
 	db BLUES_HOUSE, BLUESHOUSE_DAISY2,   HIDE
 	db BLUES_HOUSE, BLUESHOUSE_TOWN_MAP, SHOW
 OaksLabHS:
-	db OAKS_LAB, OAKSLAB_RIVAL,                SHOW
+	db OAKS_LAB, OAKSLAB_RIVAL,                HIDE ; already gone when the player arrives
 	db OAKS_LAB, OAKSLAB_EEVEE_POKE_BALL,      SHOW
-	db OAKS_LAB, OAKSLAB_OAK1,                 HIDE
+	db OAKS_LAB, OAKSLAB_OAK1,                 SHOW ; waiting at his desk
 	db OAKS_LAB, OAKSLAB_POKEDEX1,             SHOW
-	db OAKS_LAB, OAKSLAB_POKEDEX2,             SHOW
+	db OAKS_LAB, OAKSLAB_POKEDEX2,             HIDE ; <RIVAL> took his
 	db OAKS_LAB, OAKSLAB_OAK2,                 HIDE
 ViridianGymHS:
 	db VIRIDIAN_GYM, VIRIDIANGYM_GIOVANNI, SHOW
@@ -587,5 +587,6 @@ ExtraMissableObjects::
 ; entry into this section.
 	assert (@ - MissableObjects) / 3 == FIRST_EXTRA_HS_OBJECT
 	db CERULEAN_CAVE_1F, CERULEANCAVE1F_OAK, HIDE
+	db VIRIDIAN_POKECENTER, VIRIDIANPOKECENTER_MISTY, HIDE ; shown on the door mat until she joins
 	assert_table_length NUM_HS_OBJECTS
 	db -1, 1, SHOW ; end
