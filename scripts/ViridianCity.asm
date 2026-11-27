@@ -249,6 +249,16 @@ ViridianCityOldManMovingDownScript:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
+; His six steps outlast Misty's one-step sidestep, so she has arrived. If
+; ViridianCityOldManParkTable stepped her right to column 20, turn her back
+; left to face the player. Harmless if she isn't spawned (struct is
+; reinitialized on spawn).
+	ld a, [wPositionTrailX + MISTY_TRAIL_SLOT]
+	cp 20 + 4
+	jr nz, .doneMisty
+	ld a, SPRITE_FACING_LEFT
+	ld [wSpriteMistyStateData1FacingDirection], a
+.doneMisty
 	ld a, HS_OLD_MAN_2
 	ld [wMissableObjectIndex], a
 	predef HideObject
